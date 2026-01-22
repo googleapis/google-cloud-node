@@ -205,6 +205,16 @@ function main(nodeVersion, imageType) {
    *  node pool to the specified boot disk config.
    */
   // const bootDisk = {}
+  /**
+   *  The desired node drain configuration for nodes in the node pool.
+   */
+  // const nodeDrainConfig = {}
+  /**
+   *  Consolidation delay defines duration after which the Cluster Autoscaler can
+   *  scale down underutilized nodes. If not set, nodes are scaled down by
+   *  default behavior, i.e. according to the chosen autoscaling profile.
+   */
+  // const consolidationDelay = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

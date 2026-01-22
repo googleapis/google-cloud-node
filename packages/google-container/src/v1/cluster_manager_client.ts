@@ -183,6 +183,9 @@ export class ClusterManagerClient {
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      subnetworkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/subnetworks/{subnetwork}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -929,6 +932,12 @@ export class ClusterManagerClient {
  *   The desired boot disk config for nodes in the node pool.
  *   Initiates an upgrade operation that migrates the nodes in the
  *   node pool to the specified boot disk config.
+ * @param {google.container.v1.NodePool.NodeDrainConfig} request.nodeDrainConfig
+ *   The desired node drain configuration for nodes in the node pool.
+ * @param {google.protobuf.Duration} request.consolidationDelay
+ *   Consolidation delay defines duration after which the Cluster Autoscaler can
+ *   scale down underutilized nodes. If not set, nodes are scaled down by
+ *   default behavior, i.e. according to the chosen autoscaling profile.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -4723,6 +4732,55 @@ export class ClusterManagerClient {
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified subnetwork resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} subnetwork
+   * @returns {string} Resource name string.
+   */
+  subnetworkPath(project:string,region:string,subnetwork:string) {
+    return this.pathTemplates.subnetworkPathTemplate.render({
+      project: project,
+      region: region,
+      subnetwork: subnetwork,
+    });
+  }
+
+  /**
+   * Parse the project from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).project;
+  }
+
+  /**
+   * Parse the region from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).region;
+  }
+
+  /**
+   * Parse the subnetwork from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the subnetwork.
+   */
+  matchSubnetworkFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).subnetwork;
   }
 
   /**

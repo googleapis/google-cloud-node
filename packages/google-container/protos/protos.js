@@ -1291,6 +1291,7 @@
                      * @property {google.container.v1.LinuxNodeConfig.IHugepagesConfig|null} [hugepages] LinuxNodeConfig hugepages
                      * @property {google.container.v1.LinuxNodeConfig.TransparentHugepageEnabled|null} [transparentHugepageEnabled] LinuxNodeConfig transparentHugepageEnabled
                      * @property {google.container.v1.LinuxNodeConfig.TransparentHugepageDefrag|null} [transparentHugepageDefrag] LinuxNodeConfig transparentHugepageDefrag
+                     * @property {google.container.v1.LinuxNodeConfig.ISwapConfig|null} [swapConfig] LinuxNodeConfig swapConfig
                      * @property {google.container.v1.LinuxNodeConfig.INodeKernelModuleLoading|null} [nodeKernelModuleLoading] LinuxNodeConfig nodeKernelModuleLoading
                      */
     
@@ -1351,6 +1352,14 @@
                     LinuxNodeConfig.prototype.transparentHugepageDefrag = 0;
     
                     /**
+                     * LinuxNodeConfig swapConfig.
+                     * @member {google.container.v1.LinuxNodeConfig.ISwapConfig|null|undefined} swapConfig
+                     * @memberof google.container.v1.LinuxNodeConfig
+                     * @instance
+                     */
+                    LinuxNodeConfig.prototype.swapConfig = null;
+    
+                    /**
                      * LinuxNodeConfig nodeKernelModuleLoading.
                      * @member {google.container.v1.LinuxNodeConfig.INodeKernelModuleLoading|null|undefined} nodeKernelModuleLoading
                      * @memberof google.container.v1.LinuxNodeConfig
@@ -1364,6 +1373,12 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(LinuxNodeConfig.prototype, "_hugepages", {
                         get: $util.oneOfGetter($oneOfFields = ["hugepages"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(LinuxNodeConfig.prototype, "_swapConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["swapConfig"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -1402,6 +1417,8 @@
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.transparentHugepageEnabled);
                         if (message.transparentHugepageDefrag != null && Object.hasOwnProperty.call(message, "transparentHugepageDefrag"))
                             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.transparentHugepageDefrag);
+                        if (message.swapConfig != null && Object.hasOwnProperty.call(message, "swapConfig"))
+                            $root.google.container.v1.LinuxNodeConfig.SwapConfig.encode(message.swapConfig, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         if (message.nodeKernelModuleLoading != null && Object.hasOwnProperty.call(message, "nodeKernelModuleLoading"))
                             $root.google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading.encode(message.nodeKernelModuleLoading, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
@@ -1477,6 +1494,10 @@
                                 }
                             case 5: {
                                     message.transparentHugepageDefrag = reader.int32();
+                                    break;
+                                }
+                            case 12: {
+                                    message.swapConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 13: {
@@ -1566,6 +1587,14 @@
                             case 5:
                                 break;
                             }
+                        if (message.swapConfig != null && message.hasOwnProperty("swapConfig")) {
+                            properties._swapConfig = 1;
+                            {
+                                var error = $root.google.container.v1.LinuxNodeConfig.SwapConfig.verify(message.swapConfig);
+                                if (error)
+                                    return "swapConfig." + error;
+                            }
+                        }
                         if (message.nodeKernelModuleLoading != null && message.hasOwnProperty("nodeKernelModuleLoading")) {
                             var error = $root.google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading.verify(message.nodeKernelModuleLoading);
                             if (error)
@@ -1674,6 +1703,11 @@
                             message.transparentHugepageDefrag = 5;
                             break;
                         }
+                        if (object.swapConfig != null) {
+                            if (typeof object.swapConfig !== "object")
+                                throw TypeError(".google.container.v1.LinuxNodeConfig.swapConfig: object expected");
+                            message.swapConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.fromObject(object.swapConfig);
+                        }
                         if (object.nodeKernelModuleLoading != null) {
                             if (typeof object.nodeKernelModuleLoading !== "object")
                                 throw TypeError(".google.container.v1.LinuxNodeConfig.nodeKernelModuleLoading: object expected");
@@ -1720,6 +1754,11 @@
                             object.transparentHugepageEnabled = options.enums === String ? $root.google.container.v1.LinuxNodeConfig.TransparentHugepageEnabled[message.transparentHugepageEnabled] === undefined ? message.transparentHugepageEnabled : $root.google.container.v1.LinuxNodeConfig.TransparentHugepageEnabled[message.transparentHugepageEnabled] : message.transparentHugepageEnabled;
                         if (message.transparentHugepageDefrag != null && message.hasOwnProperty("transparentHugepageDefrag"))
                             object.transparentHugepageDefrag = options.enums === String ? $root.google.container.v1.LinuxNodeConfig.TransparentHugepageDefrag[message.transparentHugepageDefrag] === undefined ? message.transparentHugepageDefrag : $root.google.container.v1.LinuxNodeConfig.TransparentHugepageDefrag[message.transparentHugepageDefrag] : message.transparentHugepageDefrag;
+                        if (message.swapConfig != null && message.hasOwnProperty("swapConfig")) {
+                            object.swapConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.toObject(message.swapConfig, options);
+                            if (options.oneofs)
+                                object._swapConfig = "swapConfig";
+                        }
                         if (message.nodeKernelModuleLoading != null && message.hasOwnProperty("nodeKernelModuleLoading"))
                             object.nodeKernelModuleLoading = $root.google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading.toObject(message.nodeKernelModuleLoading, options);
                         return object;
@@ -2056,6 +2095,1338 @@
                         values[valuesById[4] = "TRANSPARENT_HUGEPAGE_DEFRAG_MADVISE"] = 4;
                         values[valuesById[5] = "TRANSPARENT_HUGEPAGE_DEFRAG_NEVER"] = 5;
                         return values;
+                    })();
+    
+                    LinuxNodeConfig.SwapConfig = (function() {
+    
+                        /**
+                         * Properties of a SwapConfig.
+                         * @memberof google.container.v1.LinuxNodeConfig
+                         * @interface ISwapConfig
+                         * @property {boolean|null} [enabled] SwapConfig enabled
+                         * @property {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig|null} [encryptionConfig] SwapConfig encryptionConfig
+                         * @property {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile|null} [bootDiskProfile] SwapConfig bootDiskProfile
+                         * @property {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile|null} [ephemeralLocalSsdProfile] SwapConfig ephemeralLocalSsdProfile
+                         * @property {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile|null} [dedicatedLocalSsdProfile] SwapConfig dedicatedLocalSsdProfile
+                         */
+    
+                        /**
+                         * Constructs a new SwapConfig.
+                         * @memberof google.container.v1.LinuxNodeConfig
+                         * @classdesc Represents a SwapConfig.
+                         * @implements ISwapConfig
+                         * @constructor
+                         * @param {google.container.v1.LinuxNodeConfig.ISwapConfig=} [properties] Properties to set
+                         */
+                        function SwapConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SwapConfig enabled.
+                         * @member {boolean|null|undefined} enabled
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        SwapConfig.prototype.enabled = null;
+    
+                        /**
+                         * SwapConfig encryptionConfig.
+                         * @member {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig|null|undefined} encryptionConfig
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        SwapConfig.prototype.encryptionConfig = null;
+    
+                        /**
+                         * SwapConfig bootDiskProfile.
+                         * @member {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile|null|undefined} bootDiskProfile
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        SwapConfig.prototype.bootDiskProfile = null;
+    
+                        /**
+                         * SwapConfig ephemeralLocalSsdProfile.
+                         * @member {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile|null|undefined} ephemeralLocalSsdProfile
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        SwapConfig.prototype.ephemeralLocalSsdProfile = null;
+    
+                        /**
+                         * SwapConfig dedicatedLocalSsdProfile.
+                         * @member {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile|null|undefined} dedicatedLocalSsdProfile
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        SwapConfig.prototype.dedicatedLocalSsdProfile = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SwapConfig.prototype, "_enabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SwapConfig.prototype, "_encryptionConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["encryptionConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SwapConfig performanceProfile.
+                         * @member {"bootDiskProfile"|"ephemeralLocalSsdProfile"|"dedicatedLocalSsdProfile"|undefined} performanceProfile
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         */
+                        Object.defineProperty(SwapConfig.prototype, "performanceProfile", {
+                            get: $util.oneOfGetter($oneOfFields = ["bootDiskProfile", "ephemeralLocalSsdProfile", "dedicatedLocalSsdProfile"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SwapConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {google.container.v1.LinuxNodeConfig.ISwapConfig=} [properties] Properties to set
+                         * @returns {google.container.v1.LinuxNodeConfig.SwapConfig} SwapConfig instance
+                         */
+                        SwapConfig.create = function create(properties) {
+                            return new SwapConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SwapConfig message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {google.container.v1.LinuxNodeConfig.ISwapConfig} message SwapConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SwapConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            if (message.encryptionConfig != null && Object.hasOwnProperty.call(message, "encryptionConfig"))
+                                $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.encode(message.encryptionConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.bootDiskProfile != null && Object.hasOwnProperty.call(message, "bootDiskProfile"))
+                                $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.encode(message.bootDiskProfile, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.ephemeralLocalSsdProfile != null && Object.hasOwnProperty.call(message, "ephemeralLocalSsdProfile"))
+                                $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.encode(message.ephemeralLocalSsdProfile, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.dedicatedLocalSsdProfile != null && Object.hasOwnProperty.call(message, "dedicatedLocalSsdProfile"))
+                                $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.encode(message.dedicatedLocalSsdProfile, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SwapConfig message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {google.container.v1.LinuxNodeConfig.ISwapConfig} message SwapConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SwapConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SwapConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.LinuxNodeConfig.SwapConfig} SwapConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SwapConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.encryptionConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.bootDiskProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ephemeralLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.dedicatedLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SwapConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.LinuxNodeConfig.SwapConfig} SwapConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SwapConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SwapConfig message.
+                         * @function verify
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SwapConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                properties._enabled = 1;
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            }
+                            if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig")) {
+                                properties._encryptionConfig = 1;
+                                {
+                                    var error = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.verify(message.encryptionConfig);
+                                    if (error)
+                                        return "encryptionConfig." + error;
+                                }
+                            }
+                            if (message.bootDiskProfile != null && message.hasOwnProperty("bootDiskProfile")) {
+                                properties.performanceProfile = 1;
+                                {
+                                    var error = $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.verify(message.bootDiskProfile);
+                                    if (error)
+                                        return "bootDiskProfile." + error;
+                                }
+                            }
+                            if (message.ephemeralLocalSsdProfile != null && message.hasOwnProperty("ephemeralLocalSsdProfile")) {
+                                if (properties.performanceProfile === 1)
+                                    return "performanceProfile: multiple values";
+                                properties.performanceProfile = 1;
+                                {
+                                    var error = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.verify(message.ephemeralLocalSsdProfile);
+                                    if (error)
+                                        return "ephemeralLocalSsdProfile." + error;
+                                }
+                            }
+                            if (message.dedicatedLocalSsdProfile != null && message.hasOwnProperty("dedicatedLocalSsdProfile")) {
+                                if (properties.performanceProfile === 1)
+                                    return "performanceProfile: multiple values";
+                                properties.performanceProfile = 1;
+                                {
+                                    var error = $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.verify(message.dedicatedLocalSsdProfile);
+                                    if (error)
+                                        return "dedicatedLocalSsdProfile." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SwapConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.LinuxNodeConfig.SwapConfig} SwapConfig
+                         */
+                        SwapConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.LinuxNodeConfig.SwapConfig)
+                                return object;
+                            var message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.encryptionConfig != null) {
+                                if (typeof object.encryptionConfig !== "object")
+                                    throw TypeError(".google.container.v1.LinuxNodeConfig.SwapConfig.encryptionConfig: object expected");
+                                message.encryptionConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.fromObject(object.encryptionConfig);
+                            }
+                            if (object.bootDiskProfile != null) {
+                                if (typeof object.bootDiskProfile !== "object")
+                                    throw TypeError(".google.container.v1.LinuxNodeConfig.SwapConfig.bootDiskProfile: object expected");
+                                message.bootDiskProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.fromObject(object.bootDiskProfile);
+                            }
+                            if (object.ephemeralLocalSsdProfile != null) {
+                                if (typeof object.ephemeralLocalSsdProfile !== "object")
+                                    throw TypeError(".google.container.v1.LinuxNodeConfig.SwapConfig.ephemeralLocalSsdProfile: object expected");
+                                message.ephemeralLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.fromObject(object.ephemeralLocalSsdProfile);
+                            }
+                            if (object.dedicatedLocalSsdProfile != null) {
+                                if (typeof object.dedicatedLocalSsdProfile !== "object")
+                                    throw TypeError(".google.container.v1.LinuxNodeConfig.SwapConfig.dedicatedLocalSsdProfile: object expected");
+                                message.dedicatedLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.fromObject(object.dedicatedLocalSsdProfile);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SwapConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {google.container.v1.LinuxNodeConfig.SwapConfig} message SwapConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SwapConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                object.enabled = message.enabled;
+                                if (options.oneofs)
+                                    object._enabled = "enabled";
+                            }
+                            if (message.encryptionConfig != null && message.hasOwnProperty("encryptionConfig")) {
+                                object.encryptionConfig = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.toObject(message.encryptionConfig, options);
+                                if (options.oneofs)
+                                    object._encryptionConfig = "encryptionConfig";
+                            }
+                            if (message.bootDiskProfile != null && message.hasOwnProperty("bootDiskProfile")) {
+                                object.bootDiskProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.toObject(message.bootDiskProfile, options);
+                                if (options.oneofs)
+                                    object.performanceProfile = "bootDiskProfile";
+                            }
+                            if (message.ephemeralLocalSsdProfile != null && message.hasOwnProperty("ephemeralLocalSsdProfile")) {
+                                object.ephemeralLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.toObject(message.ephemeralLocalSsdProfile, options);
+                                if (options.oneofs)
+                                    object.performanceProfile = "ephemeralLocalSsdProfile";
+                            }
+                            if (message.dedicatedLocalSsdProfile != null && message.hasOwnProperty("dedicatedLocalSsdProfile")) {
+                                object.dedicatedLocalSsdProfile = $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.toObject(message.dedicatedLocalSsdProfile, options);
+                                if (options.oneofs)
+                                    object.performanceProfile = "dedicatedLocalSsdProfile";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SwapConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SwapConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SwapConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SwapConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1.LinuxNodeConfig.SwapConfig";
+                        };
+    
+                        SwapConfig.EncryptionConfig = (function() {
+    
+                            /**
+                             * Properties of an EncryptionConfig.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @interface IEncryptionConfig
+                             * @property {boolean|null} [disabled] EncryptionConfig disabled
+                             */
+    
+                            /**
+                             * Constructs a new EncryptionConfig.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @classdesc Represents an EncryptionConfig.
+                             * @implements IEncryptionConfig
+                             * @constructor
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig=} [properties] Properties to set
+                             */
+                            function EncryptionConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EncryptionConfig disabled.
+                             * @member {boolean|null|undefined} disabled
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @instance
+                             */
+                            EncryptionConfig.prototype.disabled = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(EncryptionConfig.prototype, "_disabled", {
+                                get: $util.oneOfGetter($oneOfFields = ["disabled"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new EncryptionConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig=} [properties] Properties to set
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig} EncryptionConfig instance
+                             */
+                            EncryptionConfig.create = function create(properties) {
+                                return new EncryptionConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig} message EncryptionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.disabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEncryptionConfig} message EncryptionConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EncryptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EncryptionConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig} EncryptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.disabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig} EncryptionConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EncryptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EncryptionConfig message.
+                             * @function verify
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EncryptionConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.disabled != null && message.hasOwnProperty("disabled")) {
+                                    properties._disabled = 1;
+                                    if (typeof message.disabled !== "boolean")
+                                        return "disabled: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig} EncryptionConfig
+                             */
+                            EncryptionConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig)
+                                    return object;
+                                var message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig();
+                                if (object.disabled != null)
+                                    message.disabled = Boolean(object.disabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig} message EncryptionConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EncryptionConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.disabled != null && message.hasOwnProperty("disabled")) {
+                                    object.disabled = message.disabled;
+                                    if (options.oneofs)
+                                        object._disabled = "disabled";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EncryptionConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EncryptionConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EncryptionConfig
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EncryptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig";
+                            };
+    
+                            return EncryptionConfig;
+                        })();
+    
+                        SwapConfig.BootDiskProfile = (function() {
+    
+                            /**
+                             * Properties of a BootDiskProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @interface IBootDiskProfile
+                             * @property {number|Long|null} [swapSizeGib] BootDiskProfile swapSizeGib
+                             * @property {number|null} [swapSizePercent] BootDiskProfile swapSizePercent
+                             */
+    
+                            /**
+                             * Constructs a new BootDiskProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @classdesc Represents a BootDiskProfile.
+                             * @implements IBootDiskProfile
+                             * @constructor
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile=} [properties] Properties to set
+                             */
+                            function BootDiskProfile(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BootDiskProfile swapSizeGib.
+                             * @member {number|Long|null|undefined} swapSizeGib
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @instance
+                             */
+                            BootDiskProfile.prototype.swapSizeGib = null;
+    
+                            /**
+                             * BootDiskProfile swapSizePercent.
+                             * @member {number|null|undefined} swapSizePercent
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @instance
+                             */
+                            BootDiskProfile.prototype.swapSizePercent = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * BootDiskProfile swapSize.
+                             * @member {"swapSizeGib"|"swapSizePercent"|undefined} swapSize
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @instance
+                             */
+                            Object.defineProperty(BootDiskProfile.prototype, "swapSize", {
+                                get: $util.oneOfGetter($oneOfFields = ["swapSizeGib", "swapSizePercent"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new BootDiskProfile instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile=} [properties] Properties to set
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile} BootDiskProfile instance
+                             */
+                            BootDiskProfile.create = function create(properties) {
+                                return new BootDiskProfile(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BootDiskProfile message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile} message BootDiskProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BootDiskProfile.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.swapSizeGib != null && Object.hasOwnProperty.call(message, "swapSizeGib"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.swapSizeGib);
+                                if (message.swapSizePercent != null && Object.hasOwnProperty.call(message, "swapSizePercent"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.swapSizePercent);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BootDiskProfile message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IBootDiskProfile} message BootDiskProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BootDiskProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BootDiskProfile message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile} BootDiskProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BootDiskProfile.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.swapSizeGib = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.swapSizePercent = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BootDiskProfile message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile} BootDiskProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BootDiskProfile.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BootDiskProfile message.
+                             * @function verify
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BootDiskProfile.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.swapSizeGib != null && message.hasOwnProperty("swapSizeGib")) {
+                                    properties.swapSize = 1;
+                                    if (!$util.isInteger(message.swapSizeGib) && !(message.swapSizeGib && $util.isInteger(message.swapSizeGib.low) && $util.isInteger(message.swapSizeGib.high)))
+                                        return "swapSizeGib: integer|Long expected";
+                                }
+                                if (message.swapSizePercent != null && message.hasOwnProperty("swapSizePercent")) {
+                                    if (properties.swapSize === 1)
+                                        return "swapSize: multiple values";
+                                    properties.swapSize = 1;
+                                    if (!$util.isInteger(message.swapSizePercent))
+                                        return "swapSizePercent: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BootDiskProfile message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile} BootDiskProfile
+                             */
+                            BootDiskProfile.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile)
+                                    return object;
+                                var message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile();
+                                if (object.swapSizeGib != null)
+                                    if ($util.Long)
+                                        (message.swapSizeGib = $util.Long.fromValue(object.swapSizeGib)).unsigned = false;
+                                    else if (typeof object.swapSizeGib === "string")
+                                        message.swapSizeGib = parseInt(object.swapSizeGib, 10);
+                                    else if (typeof object.swapSizeGib === "number")
+                                        message.swapSizeGib = object.swapSizeGib;
+                                    else if (typeof object.swapSizeGib === "object")
+                                        message.swapSizeGib = new $util.LongBits(object.swapSizeGib.low >>> 0, object.swapSizeGib.high >>> 0).toNumber();
+                                if (object.swapSizePercent != null)
+                                    message.swapSizePercent = object.swapSizePercent | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BootDiskProfile message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile} message BootDiskProfile
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BootDiskProfile.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.swapSizeGib != null && message.hasOwnProperty("swapSizeGib")) {
+                                    if (typeof message.swapSizeGib === "number")
+                                        object.swapSizeGib = options.longs === String ? String(message.swapSizeGib) : message.swapSizeGib;
+                                    else
+                                        object.swapSizeGib = options.longs === String ? $util.Long.prototype.toString.call(message.swapSizeGib) : options.longs === Number ? new $util.LongBits(message.swapSizeGib.low >>> 0, message.swapSizeGib.high >>> 0).toNumber() : message.swapSizeGib;
+                                    if (options.oneofs)
+                                        object.swapSize = "swapSizeGib";
+                                }
+                                if (message.swapSizePercent != null && message.hasOwnProperty("swapSizePercent")) {
+                                    object.swapSizePercent = message.swapSizePercent;
+                                    if (options.oneofs)
+                                        object.swapSize = "swapSizePercent";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BootDiskProfile to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BootDiskProfile.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BootDiskProfile
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BootDiskProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile";
+                            };
+    
+                            return BootDiskProfile;
+                        })();
+    
+                        SwapConfig.EphemeralLocalSsdProfile = (function() {
+    
+                            /**
+                             * Properties of an EphemeralLocalSsdProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @interface IEphemeralLocalSsdProfile
+                             * @property {number|Long|null} [swapSizeGib] EphemeralLocalSsdProfile swapSizeGib
+                             * @property {number|null} [swapSizePercent] EphemeralLocalSsdProfile swapSizePercent
+                             */
+    
+                            /**
+                             * Constructs a new EphemeralLocalSsdProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @classdesc Represents an EphemeralLocalSsdProfile.
+                             * @implements IEphemeralLocalSsdProfile
+                             * @constructor
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile=} [properties] Properties to set
+                             */
+                            function EphemeralLocalSsdProfile(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EphemeralLocalSsdProfile swapSizeGib.
+                             * @member {number|Long|null|undefined} swapSizeGib
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @instance
+                             */
+                            EphemeralLocalSsdProfile.prototype.swapSizeGib = null;
+    
+                            /**
+                             * EphemeralLocalSsdProfile swapSizePercent.
+                             * @member {number|null|undefined} swapSizePercent
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @instance
+                             */
+                            EphemeralLocalSsdProfile.prototype.swapSizePercent = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * EphemeralLocalSsdProfile swapSize.
+                             * @member {"swapSizeGib"|"swapSizePercent"|undefined} swapSize
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @instance
+                             */
+                            Object.defineProperty(EphemeralLocalSsdProfile.prototype, "swapSize", {
+                                get: $util.oneOfGetter($oneOfFields = ["swapSizeGib", "swapSizePercent"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new EphemeralLocalSsdProfile instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile=} [properties] Properties to set
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile} EphemeralLocalSsdProfile instance
+                             */
+                            EphemeralLocalSsdProfile.create = function create(properties) {
+                                return new EphemeralLocalSsdProfile(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EphemeralLocalSsdProfile message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile} message EphemeralLocalSsdProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EphemeralLocalSsdProfile.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.swapSizeGib != null && Object.hasOwnProperty.call(message, "swapSizeGib"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.swapSizeGib);
+                                if (message.swapSizePercent != null && Object.hasOwnProperty.call(message, "swapSizePercent"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.swapSizePercent);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EphemeralLocalSsdProfile message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IEphemeralLocalSsdProfile} message EphemeralLocalSsdProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EphemeralLocalSsdProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EphemeralLocalSsdProfile message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile} EphemeralLocalSsdProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EphemeralLocalSsdProfile.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.swapSizeGib = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.swapSizePercent = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EphemeralLocalSsdProfile message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile} EphemeralLocalSsdProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EphemeralLocalSsdProfile.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EphemeralLocalSsdProfile message.
+                             * @function verify
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EphemeralLocalSsdProfile.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.swapSizeGib != null && message.hasOwnProperty("swapSizeGib")) {
+                                    properties.swapSize = 1;
+                                    if (!$util.isInteger(message.swapSizeGib) && !(message.swapSizeGib && $util.isInteger(message.swapSizeGib.low) && $util.isInteger(message.swapSizeGib.high)))
+                                        return "swapSizeGib: integer|Long expected";
+                                }
+                                if (message.swapSizePercent != null && message.hasOwnProperty("swapSizePercent")) {
+                                    if (properties.swapSize === 1)
+                                        return "swapSize: multiple values";
+                                    properties.swapSize = 1;
+                                    if (!$util.isInteger(message.swapSizePercent))
+                                        return "swapSizePercent: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EphemeralLocalSsdProfile message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile} EphemeralLocalSsdProfile
+                             */
+                            EphemeralLocalSsdProfile.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile)
+                                    return object;
+                                var message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile();
+                                if (object.swapSizeGib != null)
+                                    if ($util.Long)
+                                        (message.swapSizeGib = $util.Long.fromValue(object.swapSizeGib)).unsigned = false;
+                                    else if (typeof object.swapSizeGib === "string")
+                                        message.swapSizeGib = parseInt(object.swapSizeGib, 10);
+                                    else if (typeof object.swapSizeGib === "number")
+                                        message.swapSizeGib = object.swapSizeGib;
+                                    else if (typeof object.swapSizeGib === "object")
+                                        message.swapSizeGib = new $util.LongBits(object.swapSizeGib.low >>> 0, object.swapSizeGib.high >>> 0).toNumber();
+                                if (object.swapSizePercent != null)
+                                    message.swapSizePercent = object.swapSizePercent | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EphemeralLocalSsdProfile message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile} message EphemeralLocalSsdProfile
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EphemeralLocalSsdProfile.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.swapSizeGib != null && message.hasOwnProperty("swapSizeGib")) {
+                                    if (typeof message.swapSizeGib === "number")
+                                        object.swapSizeGib = options.longs === String ? String(message.swapSizeGib) : message.swapSizeGib;
+                                    else
+                                        object.swapSizeGib = options.longs === String ? $util.Long.prototype.toString.call(message.swapSizeGib) : options.longs === Number ? new $util.LongBits(message.swapSizeGib.low >>> 0, message.swapSizeGib.high >>> 0).toNumber() : message.swapSizeGib;
+                                    if (options.oneofs)
+                                        object.swapSize = "swapSizeGib";
+                                }
+                                if (message.swapSizePercent != null && message.hasOwnProperty("swapSizePercent")) {
+                                    object.swapSizePercent = message.swapSizePercent;
+                                    if (options.oneofs)
+                                        object.swapSize = "swapSizePercent";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EphemeralLocalSsdProfile to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EphemeralLocalSsdProfile.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EphemeralLocalSsdProfile
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EphemeralLocalSsdProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile";
+                            };
+    
+                            return EphemeralLocalSsdProfile;
+                        })();
+    
+                        SwapConfig.DedicatedLocalSsdProfile = (function() {
+    
+                            /**
+                             * Properties of a DedicatedLocalSsdProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @interface IDedicatedLocalSsdProfile
+                             * @property {number|Long|null} [diskCount] DedicatedLocalSsdProfile diskCount
+                             */
+    
+                            /**
+                             * Constructs a new DedicatedLocalSsdProfile.
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig
+                             * @classdesc Represents a DedicatedLocalSsdProfile.
+                             * @implements IDedicatedLocalSsdProfile
+                             * @constructor
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile=} [properties] Properties to set
+                             */
+                            function DedicatedLocalSsdProfile(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DedicatedLocalSsdProfile diskCount.
+                             * @member {number|Long} diskCount
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @instance
+                             */
+                            DedicatedLocalSsdProfile.prototype.diskCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new DedicatedLocalSsdProfile instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile=} [properties] Properties to set
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile} DedicatedLocalSsdProfile instance
+                             */
+                            DedicatedLocalSsdProfile.create = function create(properties) {
+                                return new DedicatedLocalSsdProfile(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DedicatedLocalSsdProfile message. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile} message DedicatedLocalSsdProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DedicatedLocalSsdProfile.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.diskCount != null && Object.hasOwnProperty.call(message, "diskCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.diskCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DedicatedLocalSsdProfile message, length delimited. Does not implicitly {@link google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.IDedicatedLocalSsdProfile} message DedicatedLocalSsdProfile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DedicatedLocalSsdProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DedicatedLocalSsdProfile message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile} DedicatedLocalSsdProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DedicatedLocalSsdProfile.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.diskCount = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DedicatedLocalSsdProfile message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile} DedicatedLocalSsdProfile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DedicatedLocalSsdProfile.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DedicatedLocalSsdProfile message.
+                             * @function verify
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DedicatedLocalSsdProfile.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.diskCount != null && message.hasOwnProperty("diskCount"))
+                                    if (!$util.isInteger(message.diskCount) && !(message.diskCount && $util.isInteger(message.diskCount.low) && $util.isInteger(message.diskCount.high)))
+                                        return "diskCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DedicatedLocalSsdProfile message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile} DedicatedLocalSsdProfile
+                             */
+                            DedicatedLocalSsdProfile.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile)
+                                    return object;
+                                var message = new $root.google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile();
+                                if (object.diskCount != null)
+                                    if ($util.Long)
+                                        (message.diskCount = $util.Long.fromValue(object.diskCount)).unsigned = false;
+                                    else if (typeof object.diskCount === "string")
+                                        message.diskCount = parseInt(object.diskCount, 10);
+                                    else if (typeof object.diskCount === "number")
+                                        message.diskCount = object.diskCount;
+                                    else if (typeof object.diskCount === "object")
+                                        message.diskCount = new $util.LongBits(object.diskCount.low >>> 0, object.diskCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DedicatedLocalSsdProfile message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile} message DedicatedLocalSsdProfile
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DedicatedLocalSsdProfile.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.diskCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.diskCount = options.longs === String ? "0" : 0;
+                                if (message.diskCount != null && message.hasOwnProperty("diskCount"))
+                                    if (typeof message.diskCount === "number")
+                                        object.diskCount = options.longs === String ? String(message.diskCount) : message.diskCount;
+                                    else
+                                        object.diskCount = options.longs === String ? $util.Long.prototype.toString.call(message.diskCount) : options.longs === Number ? new $util.LongBits(message.diskCount.low >>> 0, message.diskCount.high >>> 0).toNumber() : message.diskCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DedicatedLocalSsdProfile to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DedicatedLocalSsdProfile.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DedicatedLocalSsdProfile
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DedicatedLocalSsdProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile";
+                            };
+    
+                            return DedicatedLocalSsdProfile;
+                        })();
+    
+                        return SwapConfig;
                     })();
     
                     LinuxNodeConfig.NodeKernelModuleLoading = (function() {
@@ -2577,6 +3948,8 @@
                      * @property {number|null} [evictionMaxPodGracePeriodSeconds] NodeKubeletConfig evictionMaxPodGracePeriodSeconds
                      * @property {number|null} [maxParallelImagePulls] NodeKubeletConfig maxParallelImagePulls
                      * @property {boolean|null} [singleProcessOomKill] NodeKubeletConfig singleProcessOomKill
+                     * @property {number|null} [shutdownGracePeriodSeconds] NodeKubeletConfig shutdownGracePeriodSeconds
+                     * @property {number|null} [shutdownGracePeriodCriticalPodsSeconds] NodeKubeletConfig shutdownGracePeriodCriticalPodsSeconds
                      */
     
                     /**
@@ -2755,6 +4128,22 @@
                      */
                     NodeKubeletConfig.prototype.singleProcessOomKill = null;
     
+                    /**
+                     * NodeKubeletConfig shutdownGracePeriodSeconds.
+                     * @member {number|null|undefined} shutdownGracePeriodSeconds
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.shutdownGracePeriodSeconds = null;
+    
+                    /**
+                     * NodeKubeletConfig shutdownGracePeriodCriticalPodsSeconds.
+                     * @member {number|null|undefined} shutdownGracePeriodCriticalPodsSeconds
+                     * @memberof google.container.v1.NodeKubeletConfig
+                     * @instance
+                     */
+                    NodeKubeletConfig.prototype.shutdownGracePeriodCriticalPodsSeconds = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -2767,6 +4156,18 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(NodeKubeletConfig.prototype, "_singleProcessOomKill", {
                         get: $util.oneOfGetter($oneOfFields = ["singleProcessOomKill"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(NodeKubeletConfig.prototype, "_shutdownGracePeriodSeconds", {
+                        get: $util.oneOfGetter($oneOfFields = ["shutdownGracePeriodSeconds"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(NodeKubeletConfig.prototype, "_shutdownGracePeriodCriticalPodsSeconds", {
+                        get: $util.oneOfGetter($oneOfFields = ["shutdownGracePeriodCriticalPodsSeconds"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -2835,6 +4236,10 @@
                             writer.uint32(/* id 21, wireType 0 =*/168).int32(message.maxParallelImagePulls);
                         if (message.singleProcessOomKill != null && Object.hasOwnProperty.call(message, "singleProcessOomKill"))
                             writer.uint32(/* id 22, wireType 0 =*/176).bool(message.singleProcessOomKill);
+                        if (message.shutdownGracePeriodSeconds != null && Object.hasOwnProperty.call(message, "shutdownGracePeriodSeconds"))
+                            writer.uint32(/* id 26, wireType 0 =*/208).int32(message.shutdownGracePeriodSeconds);
+                        if (message.shutdownGracePeriodCriticalPodsSeconds != null && Object.hasOwnProperty.call(message, "shutdownGracePeriodCriticalPodsSeconds"))
+                            writer.uint32(/* id 27, wireType 0 =*/216).int32(message.shutdownGracePeriodCriticalPodsSeconds);
                         return writer;
                     };
     
@@ -2953,6 +4358,14 @@
                                     message.singleProcessOomKill = reader.bool();
                                     break;
                                 }
+                            case 26: {
+                                    message.shutdownGracePeriodSeconds = reader.int32();
+                                    break;
+                                }
+                            case 27: {
+                                    message.shutdownGracePeriodCriticalPodsSeconds = reader.int32();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -3069,6 +4482,16 @@
                             if (typeof message.singleProcessOomKill !== "boolean")
                                 return "singleProcessOomKill: boolean expected";
                         }
+                        if (message.shutdownGracePeriodSeconds != null && message.hasOwnProperty("shutdownGracePeriodSeconds")) {
+                            properties._shutdownGracePeriodSeconds = 1;
+                            if (!$util.isInteger(message.shutdownGracePeriodSeconds))
+                                return "shutdownGracePeriodSeconds: integer expected";
+                        }
+                        if (message.shutdownGracePeriodCriticalPodsSeconds != null && message.hasOwnProperty("shutdownGracePeriodCriticalPodsSeconds")) {
+                            properties._shutdownGracePeriodCriticalPodsSeconds = 1;
+                            if (!$util.isInteger(message.shutdownGracePeriodCriticalPodsSeconds))
+                                return "shutdownGracePeriodCriticalPodsSeconds: integer expected";
+                        }
                         return null;
                     };
     
@@ -3154,6 +4577,10 @@
                             message.maxParallelImagePulls = object.maxParallelImagePulls | 0;
                         if (object.singleProcessOomKill != null)
                             message.singleProcessOomKill = Boolean(object.singleProcessOomKill);
+                        if (object.shutdownGracePeriodSeconds != null)
+                            message.shutdownGracePeriodSeconds = object.shutdownGracePeriodSeconds | 0;
+                        if (object.shutdownGracePeriodCriticalPodsSeconds != null)
+                            message.shutdownGracePeriodCriticalPodsSeconds = object.shutdownGracePeriodCriticalPodsSeconds | 0;
                         return message;
                     };
     
@@ -3246,6 +4673,16 @@
                             object.singleProcessOomKill = message.singleProcessOomKill;
                             if (options.oneofs)
                                 object._singleProcessOomKill = "singleProcessOomKill";
+                        }
+                        if (message.shutdownGracePeriodSeconds != null && message.hasOwnProperty("shutdownGracePeriodSeconds")) {
+                            object.shutdownGracePeriodSeconds = message.shutdownGracePeriodSeconds;
+                            if (options.oneofs)
+                                object._shutdownGracePeriodSeconds = "shutdownGracePeriodSeconds";
+                        }
+                        if (message.shutdownGracePeriodCriticalPodsSeconds != null && message.hasOwnProperty("shutdownGracePeriodCriticalPodsSeconds")) {
+                            object.shutdownGracePeriodCriticalPodsSeconds = message.shutdownGracePeriodCriticalPodsSeconds;
+                            if (options.oneofs)
+                                object._shutdownGracePeriodCriticalPodsSeconds = "shutdownGracePeriodCriticalPodsSeconds";
                         }
                         return object;
                     };
@@ -4722,11 +6159,13 @@
                      * @property {Array.<google.container.v1.ISecondaryBootDisk>|null} [secondaryBootDisks] NodeConfig secondaryBootDisks
                      * @property {Array.<string>|null} [storagePools] NodeConfig storagePools
                      * @property {google.container.v1.ISecondaryBootDiskUpdateStrategy|null} [secondaryBootDiskUpdateStrategy] NodeConfig secondaryBootDiskUpdateStrategy
+                     * @property {google.container.v1.IGPUDirectConfig|null} [gpuDirectConfig] NodeConfig gpuDirectConfig
                      * @property {google.protobuf.IDuration|null} [maxRunDuration] NodeConfig maxRunDuration
                      * @property {google.container.v1.NodeConfig.LocalSsdEncryptionMode|null} [localSsdEncryptionMode] NodeConfig localSsdEncryptionMode
                      * @property {google.container.v1.NodeConfig.EffectiveCgroupMode|null} [effectiveCgroupMode] NodeConfig effectiveCgroupMode
                      * @property {boolean|null} [flexStart] NodeConfig flexStart
                      * @property {google.container.v1.IBootDisk|null} [bootDisk] NodeConfig bootDisk
+                     * @property {google.protobuf.IDuration|null} [consolidationDelay] NodeConfig consolidationDelay
                      */
     
                     /**
@@ -5074,6 +6513,14 @@
                     NodeConfig.prototype.secondaryBootDiskUpdateStrategy = null;
     
                     /**
+                     * NodeConfig gpuDirectConfig.
+                     * @member {google.container.v1.IGPUDirectConfig|null|undefined} gpuDirectConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.gpuDirectConfig = null;
+    
+                    /**
                      * NodeConfig maxRunDuration.
                      * @member {google.protobuf.IDuration|null|undefined} maxRunDuration
                      * @memberof google.container.v1.NodeConfig
@@ -5113,6 +6560,14 @@
                      */
                     NodeConfig.prototype.bootDisk = null;
     
+                    /**
+                     * NodeConfig consolidationDelay.
+                     * @member {google.protobuf.IDuration|null|undefined} consolidationDelay
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.consolidationDelay = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -5125,6 +6580,12 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(NodeConfig.prototype, "_secondaryBootDiskUpdateStrategy", {
                         get: $util.oneOfGetter($oneOfFields = ["secondaryBootDiskUpdateStrategy"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(NodeConfig.prototype, "_gpuDirectConfig", {
+                        get: $util.oneOfGetter($oneOfFields = ["gpuDirectConfig"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -5253,6 +6714,8 @@
                                 writer.uint32(/* id 49, wireType 2 =*/394).string(message.storagePools[i]);
                         if (message.secondaryBootDiskUpdateStrategy != null && Object.hasOwnProperty.call(message, "secondaryBootDiskUpdateStrategy"))
                             $root.google.container.v1.SecondaryBootDiskUpdateStrategy.encode(message.secondaryBootDiskUpdateStrategy, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
+                        if (message.gpuDirectConfig != null && Object.hasOwnProperty.call(message, "gpuDirectConfig"))
+                            $root.google.container.v1.GPUDirectConfig.encode(message.gpuDirectConfig, writer.uint32(/* id 51, wireType 2 =*/410).fork()).ldelim();
                         if (message.maxRunDuration != null && Object.hasOwnProperty.call(message, "maxRunDuration"))
                             $root.google.protobuf.Duration.encode(message.maxRunDuration, writer.uint32(/* id 53, wireType 2 =*/426).fork()).ldelim();
                         if (message.localSsdEncryptionMode != null && Object.hasOwnProperty.call(message, "localSsdEncryptionMode"))
@@ -5263,6 +6726,8 @@
                             writer.uint32(/* id 56, wireType 0 =*/448).bool(message.flexStart);
                         if (message.bootDisk != null && Object.hasOwnProperty.call(message, "bootDisk"))
                             $root.google.container.v1.BootDisk.encode(message.bootDisk, writer.uint32(/* id 57, wireType 2 =*/458).fork()).ldelim();
+                        if (message.consolidationDelay != null && Object.hasOwnProperty.call(message, "consolidationDelay"))
+                            $root.google.protobuf.Duration.encode(message.consolidationDelay, writer.uint32(/* id 60, wireType 2 =*/482).fork()).ldelim();
                         return writer;
                     };
     
@@ -5528,6 +6993,10 @@
                                     message.secondaryBootDiskUpdateStrategy = $root.google.container.v1.SecondaryBootDiskUpdateStrategy.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 51: {
+                                    message.gpuDirectConfig = $root.google.container.v1.GPUDirectConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 53: {
                                     message.maxRunDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
@@ -5546,6 +7015,10 @@
                                 }
                             case 57: {
                                     message.bootDisk = $root.google.container.v1.BootDisk.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 60: {
+                                    message.consolidationDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -5793,6 +7266,14 @@
                                     return "secondaryBootDiskUpdateStrategy." + error;
                             }
                         }
+                        if (message.gpuDirectConfig != null && message.hasOwnProperty("gpuDirectConfig")) {
+                            properties._gpuDirectConfig = 1;
+                            {
+                                var error = $root.google.container.v1.GPUDirectConfig.verify(message.gpuDirectConfig);
+                                if (error)
+                                    return "gpuDirectConfig." + error;
+                            }
+                        }
                         if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration")) {
                             var error = $root.google.protobuf.Duration.verify(message.maxRunDuration);
                             if (error)
@@ -5827,6 +7308,11 @@
                             var error = $root.google.container.v1.BootDisk.verify(message.bootDisk);
                             if (error)
                                 return "bootDisk." + error;
+                        }
+                        if (message.consolidationDelay != null && message.hasOwnProperty("consolidationDelay")) {
+                            var error = $root.google.protobuf.Duration.verify(message.consolidationDelay);
+                            if (error)
+                                return "consolidationDelay." + error;
                         }
                         return null;
                     };
@@ -6034,6 +7520,11 @@
                                 throw TypeError(".google.container.v1.NodeConfig.secondaryBootDiskUpdateStrategy: object expected");
                             message.secondaryBootDiskUpdateStrategy = $root.google.container.v1.SecondaryBootDiskUpdateStrategy.fromObject(object.secondaryBootDiskUpdateStrategy);
                         }
+                        if (object.gpuDirectConfig != null) {
+                            if (typeof object.gpuDirectConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.gpuDirectConfig: object expected");
+                            message.gpuDirectConfig = $root.google.container.v1.GPUDirectConfig.fromObject(object.gpuDirectConfig);
+                        }
                         if (object.maxRunDuration != null) {
                             if (typeof object.maxRunDuration !== "object")
                                 throw TypeError(".google.container.v1.NodeConfig.maxRunDuration: object expected");
@@ -6085,6 +7576,11 @@
                             if (typeof object.bootDisk !== "object")
                                 throw TypeError(".google.container.v1.NodeConfig.bootDisk: object expected");
                             message.bootDisk = $root.google.container.v1.BootDisk.fromObject(object.bootDisk);
+                        }
+                        if (object.consolidationDelay != null) {
+                            if (typeof object.consolidationDelay !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.consolidationDelay: object expected");
+                            message.consolidationDelay = $root.google.protobuf.Duration.fromObject(object.consolidationDelay);
                         }
                         return message;
                     };
@@ -6148,6 +7644,7 @@
                             object.maxRunDuration = null;
                             object.effectiveCgroupMode = options.enums === String ? "EFFECTIVE_CGROUP_MODE_UNSPECIFIED" : 0;
                             object.bootDisk = null;
+                            object.consolidationDelay = null;
                         }
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
@@ -6263,6 +7760,11 @@
                             if (options.oneofs)
                                 object._secondaryBootDiskUpdateStrategy = "secondaryBootDiskUpdateStrategy";
                         }
+                        if (message.gpuDirectConfig != null && message.hasOwnProperty("gpuDirectConfig")) {
+                            object.gpuDirectConfig = $root.google.container.v1.GPUDirectConfig.toObject(message.gpuDirectConfig, options);
+                            if (options.oneofs)
+                                object._gpuDirectConfig = "gpuDirectConfig";
+                        }
                         if (message.maxRunDuration != null && message.hasOwnProperty("maxRunDuration"))
                             object.maxRunDuration = $root.google.protobuf.Duration.toObject(message.maxRunDuration, options);
                         if (message.localSsdEncryptionMode != null && message.hasOwnProperty("localSsdEncryptionMode")) {
@@ -6279,6 +7781,8 @@
                         }
                         if (message.bootDisk != null && message.hasOwnProperty("bootDisk"))
                             object.bootDisk = $root.google.container.v1.BootDisk.toObject(message.bootDisk, options);
+                        if (message.consolidationDelay != null && message.hasOwnProperty("consolidationDelay"))
+                            object.consolidationDelay = $root.google.protobuf.Duration.toObject(message.consolidationDelay, options);
                         return object;
                     };
     
@@ -9524,6 +11028,7 @@
                      * @interface IContainerdConfig
                      * @property {google.container.v1.ContainerdConfig.IPrivateRegistryAccessConfig|null} [privateRegistryAccessConfig] ContainerdConfig privateRegistryAccessConfig
                      * @property {google.container.v1.ContainerdConfig.IWritableCgroups|null} [writableCgroups] ContainerdConfig writableCgroups
+                     * @property {Array.<google.container.v1.ContainerdConfig.IRegistryHostConfig>|null} [registryHosts] ContainerdConfig registryHosts
                      */
     
                     /**
@@ -9535,6 +11040,7 @@
                      * @param {google.container.v1.IContainerdConfig=} [properties] Properties to set
                      */
                     function ContainerdConfig(properties) {
+                        this.registryHosts = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -9556,6 +11062,14 @@
                      * @instance
                      */
                     ContainerdConfig.prototype.writableCgroups = null;
+    
+                    /**
+                     * ContainerdConfig registryHosts.
+                     * @member {Array.<google.container.v1.ContainerdConfig.IRegistryHostConfig>} registryHosts
+                     * @memberof google.container.v1.ContainerdConfig
+                     * @instance
+                     */
+                    ContainerdConfig.prototype.registryHosts = $util.emptyArray;
     
                     /**
                      * Creates a new ContainerdConfig instance using the specified properties.
@@ -9585,6 +11099,9 @@
                             $root.google.container.v1.ContainerdConfig.PrivateRegistryAccessConfig.encode(message.privateRegistryAccessConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.writableCgroups != null && Object.hasOwnProperty.call(message, "writableCgroups"))
                             $root.google.container.v1.ContainerdConfig.WritableCgroups.encode(message.writableCgroups, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.registryHosts != null && message.registryHosts.length)
+                            for (var i = 0; i < message.registryHosts.length; ++i)
+                                $root.google.container.v1.ContainerdConfig.RegistryHostConfig.encode(message.registryHosts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -9627,6 +11144,12 @@
                                 }
                             case 2: {
                                     message.writableCgroups = $root.google.container.v1.ContainerdConfig.WritableCgroups.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.registryHosts && message.registryHosts.length))
+                                        message.registryHosts = [];
+                                    message.registryHosts.push($root.google.container.v1.ContainerdConfig.RegistryHostConfig.decode(reader, reader.uint32()));
                                     break;
                                 }
                             default:
@@ -9674,6 +11197,15 @@
                             if (error)
                                 return "writableCgroups." + error;
                         }
+                        if (message.registryHosts != null && message.hasOwnProperty("registryHosts")) {
+                            if (!Array.isArray(message.registryHosts))
+                                return "registryHosts: array expected";
+                            for (var i = 0; i < message.registryHosts.length; ++i) {
+                                var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.verify(message.registryHosts[i]);
+                                if (error)
+                                    return "registryHosts." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -9699,6 +11231,16 @@
                                 throw TypeError(".google.container.v1.ContainerdConfig.writableCgroups: object expected");
                             message.writableCgroups = $root.google.container.v1.ContainerdConfig.WritableCgroups.fromObject(object.writableCgroups);
                         }
+                        if (object.registryHosts) {
+                            if (!Array.isArray(object.registryHosts))
+                                throw TypeError(".google.container.v1.ContainerdConfig.registryHosts: array expected");
+                            message.registryHosts = [];
+                            for (var i = 0; i < object.registryHosts.length; ++i) {
+                                if (typeof object.registryHosts[i] !== "object")
+                                    throw TypeError(".google.container.v1.ContainerdConfig.registryHosts: object expected");
+                                message.registryHosts[i] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.fromObject(object.registryHosts[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -9715,6 +11257,8 @@
                         if (!options)
                             options = {};
                         var object = {};
+                        if (options.arrays || options.defaults)
+                            object.registryHosts = [];
                         if (options.defaults) {
                             object.privateRegistryAccessConfig = null;
                             object.writableCgroups = null;
@@ -9723,6 +11267,11 @@
                             object.privateRegistryAccessConfig = $root.google.container.v1.ContainerdConfig.PrivateRegistryAccessConfig.toObject(message.privateRegistryAccessConfig, options);
                         if (message.writableCgroups != null && message.hasOwnProperty("writableCgroups"))
                             object.writableCgroups = $root.google.container.v1.ContainerdConfig.WritableCgroups.toObject(message.writableCgroups, options);
+                        if (message.registryHosts && message.registryHosts.length) {
+                            object.registryHosts = [];
+                            for (var j = 0; j < message.registryHosts.length; ++j)
+                                object.registryHosts[j] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.toObject(message.registryHosts[j], options);
+                        }
                         return object;
                     };
     
@@ -10679,6 +12228,1448 @@
                         };
     
                         return WritableCgroups;
+                    })();
+    
+                    ContainerdConfig.RegistryHostConfig = (function() {
+    
+                        /**
+                         * Properties of a RegistryHostConfig.
+                         * @memberof google.container.v1.ContainerdConfig
+                         * @interface IRegistryHostConfig
+                         * @property {string|null} [server] RegistryHostConfig server
+                         * @property {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig>|null} [hosts] RegistryHostConfig hosts
+                         */
+    
+                        /**
+                         * Constructs a new RegistryHostConfig.
+                         * @memberof google.container.v1.ContainerdConfig
+                         * @classdesc Represents a RegistryHostConfig.
+                         * @implements IRegistryHostConfig
+                         * @constructor
+                         * @param {google.container.v1.ContainerdConfig.IRegistryHostConfig=} [properties] Properties to set
+                         */
+                        function RegistryHostConfig(properties) {
+                            this.hosts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RegistryHostConfig server.
+                         * @member {string} server
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @instance
+                         */
+                        RegistryHostConfig.prototype.server = "";
+    
+                        /**
+                         * RegistryHostConfig hosts.
+                         * @member {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig>} hosts
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @instance
+                         */
+                        RegistryHostConfig.prototype.hosts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RegistryHostConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {google.container.v1.ContainerdConfig.IRegistryHostConfig=} [properties] Properties to set
+                         * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig} RegistryHostConfig instance
+                         */
+                        RegistryHostConfig.create = function create(properties) {
+                            return new RegistryHostConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RegistryHostConfig message. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {google.container.v1.ContainerdConfig.IRegistryHostConfig} message RegistryHostConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegistryHostConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.server != null && Object.hasOwnProperty.call(message, "server"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.server);
+                            if (message.hosts != null && message.hosts.length)
+                                for (var i = 0; i < message.hosts.length; ++i)
+                                    $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.encode(message.hosts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RegistryHostConfig message, length delimited. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {google.container.v1.ContainerdConfig.IRegistryHostConfig} message RegistryHostConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RegistryHostConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RegistryHostConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig} RegistryHostConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegistryHostConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.server = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.hosts && message.hosts.length))
+                                            message.hosts = [];
+                                        message.hosts.push($root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RegistryHostConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig} RegistryHostConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RegistryHostConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RegistryHostConfig message.
+                         * @function verify
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RegistryHostConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.server != null && message.hasOwnProperty("server"))
+                                if (!$util.isString(message.server))
+                                    return "server: string expected";
+                            if (message.hosts != null && message.hasOwnProperty("hosts")) {
+                                if (!Array.isArray(message.hosts))
+                                    return "hosts: array expected";
+                                for (var i = 0; i < message.hosts.length; ++i) {
+                                    var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.verify(message.hosts[i]);
+                                    if (error)
+                                        return "hosts." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RegistryHostConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig} RegistryHostConfig
+                         */
+                        RegistryHostConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.ContainerdConfig.RegistryHostConfig)
+                                return object;
+                            var message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig();
+                            if (object.server != null)
+                                message.server = String(object.server);
+                            if (object.hosts) {
+                                if (!Array.isArray(object.hosts))
+                                    throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.hosts: array expected");
+                                message.hosts = [];
+                                for (var i = 0; i < object.hosts.length; ++i) {
+                                    if (typeof object.hosts[i] !== "object")
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.hosts: object expected");
+                                    message.hosts[i] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.fromObject(object.hosts[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RegistryHostConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {google.container.v1.ContainerdConfig.RegistryHostConfig} message RegistryHostConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RegistryHostConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hosts = [];
+                            if (options.defaults)
+                                object.server = "";
+                            if (message.server != null && message.hasOwnProperty("server"))
+                                object.server = message.server;
+                            if (message.hosts && message.hosts.length) {
+                                object.hosts = [];
+                                for (var j = 0; j < message.hosts.length; ++j)
+                                    object.hosts[j] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.toObject(message.hosts[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RegistryHostConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RegistryHostConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RegistryHostConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RegistryHostConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1.ContainerdConfig.RegistryHostConfig";
+                        };
+    
+                        RegistryHostConfig.CertificateConfig = (function() {
+    
+                            /**
+                             * Properties of a CertificateConfig.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @interface ICertificateConfig
+                             * @property {string|null} [gcpSecretManagerSecretUri] CertificateConfig gcpSecretManagerSecretUri
+                             */
+    
+                            /**
+                             * Constructs a new CertificateConfig.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @classdesc Represents a CertificateConfig.
+                             * @implements ICertificateConfig
+                             * @constructor
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig=} [properties] Properties to set
+                             */
+                            function CertificateConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateConfig gcpSecretManagerSecretUri.
+                             * @member {string|null|undefined} gcpSecretManagerSecretUri
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @instance
+                             */
+                            CertificateConfig.prototype.gcpSecretManagerSecretUri = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CertificateConfig certificate.
+                             * @member {"gcpSecretManagerSecretUri"|undefined} certificate
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateConfig.prototype, "certificate", {
+                                get: $util.oneOfGetter($oneOfFields = ["gcpSecretManagerSecretUri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CertificateConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig=} [properties] Properties to set
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig} CertificateConfig instance
+                             */
+                            CertificateConfig.create = function create(properties) {
+                                return new CertificateConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateConfig message. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig} message CertificateConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gcpSecretManagerSecretUri != null && Object.hasOwnProperty.call(message, "gcpSecretManagerSecretUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcpSecretManagerSecretUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateConfig message, length delimited. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig} message CertificateConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig} CertificateConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.gcpSecretManagerSecretUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig} CertificateConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateConfig message.
+                             * @function verify
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.gcpSecretManagerSecretUri != null && message.hasOwnProperty("gcpSecretManagerSecretUri")) {
+                                    properties.certificate = 1;
+                                    if (!$util.isString(message.gcpSecretManagerSecretUri))
+                                        return "gcpSecretManagerSecretUri: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig} CertificateConfig
+                             */
+                            CertificateConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig)
+                                    return object;
+                                var message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig();
+                                if (object.gcpSecretManagerSecretUri != null)
+                                    message.gcpSecretManagerSecretUri = String(object.gcpSecretManagerSecretUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig} message CertificateConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.gcpSecretManagerSecretUri != null && message.hasOwnProperty("gcpSecretManagerSecretUri")) {
+                                    object.gcpSecretManagerSecretUri = message.gcpSecretManagerSecretUri;
+                                    if (options.oneofs)
+                                        object.certificate = "gcpSecretManagerSecretUri";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateConfig
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig";
+                            };
+    
+                            return CertificateConfig;
+                        })();
+    
+                        RegistryHostConfig.CertificateConfigPair = (function() {
+    
+                            /**
+                             * Properties of a CertificateConfigPair.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @interface ICertificateConfigPair
+                             * @property {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null} [cert] CertificateConfigPair cert
+                             * @property {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null} [key] CertificateConfigPair key
+                             */
+    
+                            /**
+                             * Constructs a new CertificateConfigPair.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @classdesc Represents a CertificateConfigPair.
+                             * @implements ICertificateConfigPair
+                             * @constructor
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair=} [properties] Properties to set
+                             */
+                            function CertificateConfigPair(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateConfigPair cert.
+                             * @member {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null|undefined} cert
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @instance
+                             */
+                            CertificateConfigPair.prototype.cert = null;
+    
+                            /**
+                             * CertificateConfigPair key.
+                             * @member {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null|undefined} key
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @instance
+                             */
+                            CertificateConfigPair.prototype.key = null;
+    
+                            /**
+                             * Creates a new CertificateConfigPair instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair=} [properties] Properties to set
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair} CertificateConfigPair instance
+                             */
+                            CertificateConfigPair.create = function create(properties) {
+                                return new CertificateConfigPair(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateConfigPair message. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair} message CertificateConfigPair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateConfigPair.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.cert != null && Object.hasOwnProperty.call(message, "cert"))
+                                    $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.encode(message.cert, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.encode(message.key, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateConfigPair message, length delimited. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair} message CertificateConfigPair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateConfigPair.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateConfigPair message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair} CertificateConfigPair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateConfigPair.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.cert = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.key = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateConfigPair message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair} CertificateConfigPair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateConfigPair.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateConfigPair message.
+                             * @function verify
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateConfigPair.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.cert != null && message.hasOwnProperty("cert")) {
+                                    var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify(message.cert);
+                                    if (error)
+                                        return "cert." + error;
+                                }
+                                if (message.key != null && message.hasOwnProperty("key")) {
+                                    var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify(message.key);
+                                    if (error)
+                                        return "key." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateConfigPair message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair} CertificateConfigPair
+                             */
+                            CertificateConfigPair.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair)
+                                    return object;
+                                var message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair();
+                                if (object.cert != null) {
+                                    if (typeof object.cert !== "object")
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.cert: object expected");
+                                    message.cert = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.fromObject(object.cert);
+                                }
+                                if (object.key != null) {
+                                    if (typeof object.key !== "object")
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.key: object expected");
+                                    message.key = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.fromObject(object.key);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateConfigPair message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair} message CertificateConfigPair
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateConfigPair.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.cert = null;
+                                    object.key = null;
+                                }
+                                if (message.cert != null && message.hasOwnProperty("cert"))
+                                    object.cert = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.toObject(message.cert, options);
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.toObject(message.key, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateConfigPair to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateConfigPair.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateConfigPair
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateConfigPair.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair";
+                            };
+    
+                            return CertificateConfigPair;
+                        })();
+    
+                        RegistryHostConfig.RegistryHeader = (function() {
+    
+                            /**
+                             * Properties of a RegistryHeader.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @interface IRegistryHeader
+                             * @property {string|null} [key] RegistryHeader key
+                             * @property {Array.<string>|null} [value] RegistryHeader value
+                             */
+    
+                            /**
+                             * Constructs a new RegistryHeader.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @classdesc Represents a RegistryHeader.
+                             * @implements IRegistryHeader
+                             * @constructor
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader=} [properties] Properties to set
+                             */
+                            function RegistryHeader(properties) {
+                                this.value = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegistryHeader key.
+                             * @member {string} key
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @instance
+                             */
+                            RegistryHeader.prototype.key = "";
+    
+                            /**
+                             * RegistryHeader value.
+                             * @member {Array.<string>} value
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @instance
+                             */
+                            RegistryHeader.prototype.value = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RegistryHeader instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader=} [properties] Properties to set
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader} RegistryHeader instance
+                             */
+                            RegistryHeader.create = function create(properties) {
+                                return new RegistryHeader(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegistryHeader message. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader} message RegistryHeader message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegistryHeader.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                                if (message.value != null && message.value.length)
+                                    for (var i = 0; i < message.value.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.value[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegistryHeader message, length delimited. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader} message RegistryHeader message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegistryHeader.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegistryHeader message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader} RegistryHeader
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegistryHeader.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.key = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.value && message.value.length))
+                                                message.value = [];
+                                            message.value.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegistryHeader message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader} RegistryHeader
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegistryHeader.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegistryHeader message.
+                             * @function verify
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegistryHeader.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    if (!$util.isString(message.key))
+                                        return "key: string expected";
+                                if (message.value != null && message.hasOwnProperty("value")) {
+                                    if (!Array.isArray(message.value))
+                                        return "value: array expected";
+                                    for (var i = 0; i < message.value.length; ++i)
+                                        if (!$util.isString(message.value[i]))
+                                            return "value: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegistryHeader message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader} RegistryHeader
+                             */
+                            RegistryHeader.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader)
+                                    return object;
+                                var message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader();
+                                if (object.key != null)
+                                    message.key = String(object.key);
+                                if (object.value) {
+                                    if (!Array.isArray(object.value))
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.value: array expected");
+                                    message.value = [];
+                                    for (var i = 0; i < object.value.length; ++i)
+                                        message.value[i] = String(object.value[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegistryHeader message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader} message RegistryHeader
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegistryHeader.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.value = [];
+                                if (options.defaults)
+                                    object.key = "";
+                                if (message.key != null && message.hasOwnProperty("key"))
+                                    object.key = message.key;
+                                if (message.value && message.value.length) {
+                                    object.value = [];
+                                    for (var j = 0; j < message.value.length; ++j)
+                                        object.value[j] = message.value[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegistryHeader to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegistryHeader.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegistryHeader
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegistryHeader.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader";
+                            };
+    
+                            return RegistryHeader;
+                        })();
+    
+                        /**
+                         * HostCapability enum.
+                         * @name google.container.v1.ContainerdConfig.RegistryHostConfig.HostCapability
+                         * @enum {number}
+                         * @property {number} HOST_CAPABILITY_UNSPECIFIED=0 HOST_CAPABILITY_UNSPECIFIED value
+                         * @property {number} HOST_CAPABILITY_PULL=1 HOST_CAPABILITY_PULL value
+                         * @property {number} HOST_CAPABILITY_RESOLVE=2 HOST_CAPABILITY_RESOLVE value
+                         * @property {number} HOST_CAPABILITY_PUSH=3 HOST_CAPABILITY_PUSH value
+                         */
+                        RegistryHostConfig.HostCapability = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HOST_CAPABILITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HOST_CAPABILITY_PULL"] = 1;
+                            values[valuesById[2] = "HOST_CAPABILITY_RESOLVE"] = 2;
+                            values[valuesById[3] = "HOST_CAPABILITY_PUSH"] = 3;
+                            return values;
+                        })();
+    
+                        RegistryHostConfig.HostConfig = (function() {
+    
+                            /**
+                             * Properties of a HostConfig.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @interface IHostConfig
+                             * @property {string|null} [host] HostConfig host
+                             * @property {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.HostCapability>|null} [capabilities] HostConfig capabilities
+                             * @property {boolean|null} [overridePath] HostConfig overridePath
+                             * @property {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader>|null} [header] HostConfig header
+                             * @property {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig>|null} [ca] HostConfig ca
+                             * @property {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair>|null} [client] HostConfig client
+                             * @property {google.protobuf.IDuration|null} [dialTimeout] HostConfig dialTimeout
+                             */
+    
+                            /**
+                             * Constructs a new HostConfig.
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig
+                             * @classdesc Represents a HostConfig.
+                             * @implements IHostConfig
+                             * @constructor
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig=} [properties] Properties to set
+                             */
+                            function HostConfig(properties) {
+                                this.capabilities = [];
+                                this.header = [];
+                                this.ca = [];
+                                this.client = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * HostConfig host.
+                             * @member {string} host
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.host = "";
+    
+                            /**
+                             * HostConfig capabilities.
+                             * @member {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.HostCapability>} capabilities
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.capabilities = $util.emptyArray;
+    
+                            /**
+                             * HostConfig overridePath.
+                             * @member {boolean} overridePath
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.overridePath = false;
+    
+                            /**
+                             * HostConfig header.
+                             * @member {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.IRegistryHeader>} header
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.header = $util.emptyArray;
+    
+                            /**
+                             * HostConfig ca.
+                             * @member {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfig>} ca
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.ca = $util.emptyArray;
+    
+                            /**
+                             * HostConfig client.
+                             * @member {Array.<google.container.v1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair>} client
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.client = $util.emptyArray;
+    
+                            /**
+                             * HostConfig dialTimeout.
+                             * @member {google.protobuf.IDuration|null|undefined} dialTimeout
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             */
+                            HostConfig.prototype.dialTimeout = null;
+    
+                            /**
+                             * Creates a new HostConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig=} [properties] Properties to set
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig} HostConfig instance
+                             */
+                            HostConfig.create = function create(properties) {
+                                return new HostConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified HostConfig message. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig} message HostConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HostConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.host != null && Object.hasOwnProperty.call(message, "host"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.host);
+                                if (message.capabilities != null && message.capabilities.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.capabilities.length; ++i)
+                                        writer.int32(message.capabilities[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.overridePath != null && Object.hasOwnProperty.call(message, "overridePath"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.overridePath);
+                                if (message.header != null && message.header.length)
+                                    for (var i = 0; i < message.header.length; ++i)
+                                        $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.encode(message.header[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.ca != null && message.ca.length)
+                                    for (var i = 0; i < message.ca.length; ++i)
+                                        $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.encode(message.ca[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.client != null && message.client.length)
+                                    for (var i = 0; i < message.client.length; ++i)
+                                        $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.encode(message.client[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.dialTimeout != null && Object.hasOwnProperty.call(message, "dialTimeout"))
+                                    $root.google.protobuf.Duration.encode(message.dialTimeout, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified HostConfig message, length delimited. Does not implicitly {@link google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.IHostConfig} message HostConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            HostConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a HostConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig} HostConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HostConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.host = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.capabilities && message.capabilities.length))
+                                                message.capabilities = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.capabilities.push(reader.int32());
+                                            } else
+                                                message.capabilities.push(reader.int32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.overridePath = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.header && message.header.length))
+                                                message.header = [];
+                                            message.header.push($root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.ca && message.ca.length))
+                                                message.ca = [];
+                                            message.ca.push($root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.client && message.client.length))
+                                                message.client = [];
+                                            message.client.push($root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.dialTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a HostConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig} HostConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            HostConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a HostConfig message.
+                             * @function verify
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            HostConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.host != null && message.hasOwnProperty("host"))
+                                    if (!$util.isString(message.host))
+                                        return "host: string expected";
+                                if (message.capabilities != null && message.hasOwnProperty("capabilities")) {
+                                    if (!Array.isArray(message.capabilities))
+                                        return "capabilities: array expected";
+                                    for (var i = 0; i < message.capabilities.length; ++i)
+                                        switch (message.capabilities[i]) {
+                                        default:
+                                            return "capabilities: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                }
+                                if (message.overridePath != null && message.hasOwnProperty("overridePath"))
+                                    if (typeof message.overridePath !== "boolean")
+                                        return "overridePath: boolean expected";
+                                if (message.header != null && message.hasOwnProperty("header")) {
+                                    if (!Array.isArray(message.header))
+                                        return "header: array expected";
+                                    for (var i = 0; i < message.header.length; ++i) {
+                                        var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.verify(message.header[i]);
+                                        if (error)
+                                            return "header." + error;
+                                    }
+                                }
+                                if (message.ca != null && message.hasOwnProperty("ca")) {
+                                    if (!Array.isArray(message.ca))
+                                        return "ca: array expected";
+                                    for (var i = 0; i < message.ca.length; ++i) {
+                                        var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify(message.ca[i]);
+                                        if (error)
+                                            return "ca." + error;
+                                    }
+                                }
+                                if (message.client != null && message.hasOwnProperty("client")) {
+                                    if (!Array.isArray(message.client))
+                                        return "client: array expected";
+                                    for (var i = 0; i < message.client.length; ++i) {
+                                        var error = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.verify(message.client[i]);
+                                        if (error)
+                                            return "client." + error;
+                                    }
+                                }
+                                if (message.dialTimeout != null && message.hasOwnProperty("dialTimeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.dialTimeout);
+                                    if (error)
+                                        return "dialTimeout." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a HostConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig} HostConfig
+                             */
+                            HostConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig)
+                                    return object;
+                                var message = new $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig();
+                                if (object.host != null)
+                                    message.host = String(object.host);
+                                if (object.capabilities) {
+                                    if (!Array.isArray(object.capabilities))
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.capabilities: array expected");
+                                    message.capabilities = [];
+                                    for (var i = 0; i < object.capabilities.length; ++i)
+                                        switch (object.capabilities[i]) {
+                                        default:
+                                            if (typeof object.capabilities[i] === "number") {
+                                                message.capabilities[i] = object.capabilities[i];
+                                                break;
+                                            }
+                                        case "HOST_CAPABILITY_UNSPECIFIED":
+                                        case 0:
+                                            message.capabilities[i] = 0;
+                                            break;
+                                        case "HOST_CAPABILITY_PULL":
+                                        case 1:
+                                            message.capabilities[i] = 1;
+                                            break;
+                                        case "HOST_CAPABILITY_RESOLVE":
+                                        case 2:
+                                            message.capabilities[i] = 2;
+                                            break;
+                                        case "HOST_CAPABILITY_PUSH":
+                                        case 3:
+                                            message.capabilities[i] = 3;
+                                            break;
+                                        }
+                                }
+                                if (object.overridePath != null)
+                                    message.overridePath = Boolean(object.overridePath);
+                                if (object.header) {
+                                    if (!Array.isArray(object.header))
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.header: array expected");
+                                    message.header = [];
+                                    for (var i = 0; i < object.header.length; ++i) {
+                                        if (typeof object.header[i] !== "object")
+                                            throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.header: object expected");
+                                        message.header[i] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.fromObject(object.header[i]);
+                                    }
+                                }
+                                if (object.ca) {
+                                    if (!Array.isArray(object.ca))
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.ca: array expected");
+                                    message.ca = [];
+                                    for (var i = 0; i < object.ca.length; ++i) {
+                                        if (typeof object.ca[i] !== "object")
+                                            throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.ca: object expected");
+                                        message.ca[i] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.fromObject(object.ca[i]);
+                                    }
+                                }
+                                if (object.client) {
+                                    if (!Array.isArray(object.client))
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.client: array expected");
+                                    message.client = [];
+                                    for (var i = 0; i < object.client.length; ++i) {
+                                        if (typeof object.client[i] !== "object")
+                                            throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.client: object expected");
+                                        message.client[i] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.fromObject(object.client[i]);
+                                    }
+                                }
+                                if (object.dialTimeout != null) {
+                                    if (typeof object.dialTimeout !== "object")
+                                        throw TypeError(".google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig.dialTimeout: object expected");
+                                    message.dialTimeout = $root.google.protobuf.Duration.fromObject(object.dialTimeout);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a HostConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig} message HostConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            HostConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.capabilities = [];
+                                    object.header = [];
+                                    object.ca = [];
+                                    object.client = [];
+                                }
+                                if (options.defaults) {
+                                    object.host = "";
+                                    object.overridePath = false;
+                                    object.dialTimeout = null;
+                                }
+                                if (message.host != null && message.hasOwnProperty("host"))
+                                    object.host = message.host;
+                                if (message.capabilities && message.capabilities.length) {
+                                    object.capabilities = [];
+                                    for (var j = 0; j < message.capabilities.length; ++j)
+                                        object.capabilities[j] = options.enums === String ? $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostCapability[message.capabilities[j]] === undefined ? message.capabilities[j] : $root.google.container.v1.ContainerdConfig.RegistryHostConfig.HostCapability[message.capabilities[j]] : message.capabilities[j];
+                                }
+                                if (message.overridePath != null && message.hasOwnProperty("overridePath"))
+                                    object.overridePath = message.overridePath;
+                                if (message.header && message.header.length) {
+                                    object.header = [];
+                                    for (var j = 0; j < message.header.length; ++j)
+                                        object.header[j] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.RegistryHeader.toObject(message.header[j], options);
+                                }
+                                if (message.ca && message.ca.length) {
+                                    object.ca = [];
+                                    for (var j = 0; j < message.ca.length; ++j)
+                                        object.ca[j] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfig.toObject(message.ca[j], options);
+                                }
+                                if (message.client && message.client.length) {
+                                    object.client = [];
+                                    for (var j = 0; j < message.client.length; ++j)
+                                        object.client[j] = $root.google.container.v1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.toObject(message.client[j], options);
+                                }
+                                if (message.dialTimeout != null && message.hasOwnProperty("dialTimeout"))
+                                    object.dialTimeout = $root.google.protobuf.Duration.toObject(message.dialTimeout, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this HostConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            HostConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for HostConfig
+                             * @function getTypeUrl
+                             * @memberof google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            HostConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.container.v1.ContainerdConfig.RegistryHostConfig.HostConfig";
+                            };
+    
+                            return HostConfig;
+                        })();
+    
+                        return RegistryHostConfig;
                     })();
     
                     return ContainerdConfig;
@@ -12463,6 +15454,7 @@
                      * @property {google.container.v1.IRayOperatorConfig|null} [rayOperatorConfig] AddonsConfig rayOperatorConfig
                      * @property {google.container.v1.IHighScaleCheckpointingConfig|null} [highScaleCheckpointingConfig] AddonsConfig highScaleCheckpointingConfig
                      * @property {google.container.v1.ILustreCsiDriverConfig|null} [lustreCsiDriverConfig] AddonsConfig lustreCsiDriverConfig
+                     * @property {google.container.v1.ISliceControllerConfig|null} [sliceControllerConfig] AddonsConfig sliceControllerConfig
                      */
     
                     /**
@@ -12609,6 +15601,14 @@
                     AddonsConfig.prototype.lustreCsiDriverConfig = null;
     
                     /**
+                     * AddonsConfig sliceControllerConfig.
+                     * @member {google.container.v1.ISliceControllerConfig|null|undefined} sliceControllerConfig
+                     * @memberof google.container.v1.AddonsConfig
+                     * @instance
+                     */
+                    AddonsConfig.prototype.sliceControllerConfig = null;
+    
+                    /**
                      * Creates a new AddonsConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AddonsConfig
@@ -12664,6 +15664,8 @@
                             $root.google.container.v1.HighScaleCheckpointingConfig.encode(message.highScaleCheckpointingConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                         if (message.lustreCsiDriverConfig != null && Object.hasOwnProperty.call(message, "lustreCsiDriverConfig"))
                             $root.google.container.v1.LustreCsiDriverConfig.encode(message.lustreCsiDriverConfig, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        if (message.sliceControllerConfig != null && Object.hasOwnProperty.call(message, "sliceControllerConfig"))
+                            $root.google.container.v1.SliceControllerConfig.encode(message.sliceControllerConfig, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                         return writer;
                     };
     
@@ -12762,6 +15764,10 @@
                                 }
                             case 23: {
                                     message.lustreCsiDriverConfig = $root.google.container.v1.LustreCsiDriverConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 26: {
+                                    message.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -12879,6 +15885,11 @@
                             if (error)
                                 return "lustreCsiDriverConfig." + error;
                         }
+                        if (message.sliceControllerConfig != null && message.hasOwnProperty("sliceControllerConfig")) {
+                            var error = $root.google.container.v1.SliceControllerConfig.verify(message.sliceControllerConfig);
+                            if (error)
+                                return "sliceControllerConfig." + error;
+                        }
                         return null;
                     };
     
@@ -12974,6 +15985,11 @@
                                 throw TypeError(".google.container.v1.AddonsConfig.lustreCsiDriverConfig: object expected");
                             message.lustreCsiDriverConfig = $root.google.container.v1.LustreCsiDriverConfig.fromObject(object.lustreCsiDriverConfig);
                         }
+                        if (object.sliceControllerConfig != null) {
+                            if (typeof object.sliceControllerConfig !== "object")
+                                throw TypeError(".google.container.v1.AddonsConfig.sliceControllerConfig: object expected");
+                            message.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.fromObject(object.sliceControllerConfig);
+                        }
                         return message;
                     };
     
@@ -13007,6 +16023,7 @@
                             object.rayOperatorConfig = null;
                             object.highScaleCheckpointingConfig = null;
                             object.lustreCsiDriverConfig = null;
+                            object.sliceControllerConfig = null;
                         }
                         if (message.httpLoadBalancing != null && message.hasOwnProperty("httpLoadBalancing"))
                             object.httpLoadBalancing = $root.google.container.v1.HttpLoadBalancing.toObject(message.httpLoadBalancing, options);
@@ -13040,6 +16057,8 @@
                             object.highScaleCheckpointingConfig = $root.google.container.v1.HighScaleCheckpointingConfig.toObject(message.highScaleCheckpointingConfig, options);
                         if (message.lustreCsiDriverConfig != null && message.hasOwnProperty("lustreCsiDriverConfig"))
                             object.lustreCsiDriverConfig = $root.google.container.v1.LustreCsiDriverConfig.toObject(message.lustreCsiDriverConfig, options);
+                        if (message.sliceControllerConfig != null && message.hasOwnProperty("sliceControllerConfig"))
+                            object.sliceControllerConfig = $root.google.container.v1.SliceControllerConfig.toObject(message.sliceControllerConfig, options);
                         return object;
                     };
     
@@ -16631,6 +19650,211 @@
                     return LustreCsiDriverConfig;
                 })();
     
+                v1.SliceControllerConfig = (function() {
+    
+                    /**
+                     * Properties of a SliceControllerConfig.
+                     * @memberof google.container.v1
+                     * @interface ISliceControllerConfig
+                     * @property {boolean|null} [enabled] SliceControllerConfig enabled
+                     */
+    
+                    /**
+                     * Constructs a new SliceControllerConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a SliceControllerConfig.
+                     * @implements ISliceControllerConfig
+                     * @constructor
+                     * @param {google.container.v1.ISliceControllerConfig=} [properties] Properties to set
+                     */
+                    function SliceControllerConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SliceControllerConfig enabled.
+                     * @member {boolean} enabled
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @instance
+                     */
+                    SliceControllerConfig.prototype.enabled = false;
+    
+                    /**
+                     * Creates a new SliceControllerConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {google.container.v1.ISliceControllerConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.SliceControllerConfig} SliceControllerConfig instance
+                     */
+                    SliceControllerConfig.create = function create(properties) {
+                        return new SliceControllerConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SliceControllerConfig message. Does not implicitly {@link google.container.v1.SliceControllerConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {google.container.v1.ISliceControllerConfig} message SliceControllerConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SliceControllerConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SliceControllerConfig message, length delimited. Does not implicitly {@link google.container.v1.SliceControllerConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {google.container.v1.ISliceControllerConfig} message SliceControllerConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SliceControllerConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SliceControllerConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.SliceControllerConfig} SliceControllerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SliceControllerConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.SliceControllerConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.enabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SliceControllerConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.SliceControllerConfig} SliceControllerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SliceControllerConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SliceControllerConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SliceControllerConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SliceControllerConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.SliceControllerConfig} SliceControllerConfig
+                     */
+                    SliceControllerConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.SliceControllerConfig)
+                            return object;
+                        var message = new $root.google.container.v1.SliceControllerConfig();
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SliceControllerConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {google.container.v1.SliceControllerConfig} message SliceControllerConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SliceControllerConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.enabled = false;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SliceControllerConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SliceControllerConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SliceControllerConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.SliceControllerConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SliceControllerConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.SliceControllerConfig";
+                    };
+    
+                    return SliceControllerConfig;
+                })();
+    
                 v1.RayOperatorConfig = (function() {
     
                     /**
@@ -19679,6 +22903,7 @@
                      * @property {google.container.v1.IRBACBindingConfig|null} [rbacBindingConfig] Cluster rbacBindingConfig
                      * @property {google.container.v1.IGkeAutoUpgradeConfig|null} [gkeAutoUpgradeConfig] Cluster gkeAutoUpgradeConfig
                      * @property {google.container.v1.IAnonymousAuthenticationConfig|null} [anonymousAuthenticationConfig] Cluster anonymousAuthenticationConfig
+                     * @property {google.container.v1.IManagedOpenTelemetryConfig|null} [managedOpentelemetryConfig] Cluster managedOpentelemetryConfig
                      */
     
                     /**
@@ -20326,6 +23551,14 @@
                      */
                     Cluster.prototype.anonymousAuthenticationConfig = null;
     
+                    /**
+                     * Cluster managedOpentelemetryConfig.
+                     * @member {google.container.v1.IManagedOpenTelemetryConfig|null|undefined} managedOpentelemetryConfig
+                     * @memberof google.container.v1.Cluster
+                     * @instance
+                     */
+                    Cluster.prototype.managedOpentelemetryConfig = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -20545,6 +23778,8 @@
                             $root.google.container.v1.GkeAutoUpgradeConfig.encode(message.gkeAutoUpgradeConfig, writer.uint32(/* id 163, wireType 2 =*/1306).fork()).ldelim();
                         if (message.anonymousAuthenticationConfig != null && Object.hasOwnProperty.call(message, "anonymousAuthenticationConfig"))
                             $root.google.container.v1.AnonymousAuthenticationConfig.encode(message.anonymousAuthenticationConfig, writer.uint32(/* id 164, wireType 2 =*/1314).fork()).ldelim();
+                        if (message.managedOpentelemetryConfig != null && Object.hasOwnProperty.call(message, "managedOpentelemetryConfig"))
+                            $root.google.container.v1.ManagedOpenTelemetryConfig.encode(message.managedOpentelemetryConfig, writer.uint32(/* id 168, wireType 2 =*/1346).fork()).ldelim();
                         return writer;
                     };
     
@@ -20920,6 +24155,10 @@
                                 }
                             case 164: {
                                     message.anonymousAuthenticationConfig = $root.google.container.v1.AnonymousAuthenticationConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 168: {
+                                    message.managedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -21328,6 +24567,11 @@
                             if (error)
                                 return "anonymousAuthenticationConfig." + error;
                         }
+                        if (message.managedOpentelemetryConfig != null && message.hasOwnProperty("managedOpentelemetryConfig")) {
+                            var error = $root.google.container.v1.ManagedOpenTelemetryConfig.verify(message.managedOpentelemetryConfig);
+                            if (error)
+                                return "managedOpentelemetryConfig." + error;
+                        }
                         return null;
                     };
     
@@ -21695,6 +24939,11 @@
                                 throw TypeError(".google.container.v1.Cluster.anonymousAuthenticationConfig: object expected");
                             message.anonymousAuthenticationConfig = $root.google.container.v1.AnonymousAuthenticationConfig.fromObject(object.anonymousAuthenticationConfig);
                         }
+                        if (object.managedOpentelemetryConfig != null) {
+                            if (typeof object.managedOpentelemetryConfig !== "object")
+                                throw TypeError(".google.container.v1.Cluster.managedOpentelemetryConfig: object expected");
+                            message.managedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.fromObject(object.managedOpentelemetryConfig);
+                        }
                         return message;
                     };
     
@@ -21788,6 +25037,7 @@
                             object.compliancePostureConfig = null;
                             object.gkeAutoUpgradeConfig = null;
                             object.anonymousAuthenticationConfig = null;
+                            object.managedOpentelemetryConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -21979,6 +25229,8 @@
                             object.gkeAutoUpgradeConfig = $root.google.container.v1.GkeAutoUpgradeConfig.toObject(message.gkeAutoUpgradeConfig, options);
                         if (message.anonymousAuthenticationConfig != null && message.hasOwnProperty("anonymousAuthenticationConfig"))
                             object.anonymousAuthenticationConfig = $root.google.container.v1.AnonymousAuthenticationConfig.toObject(message.anonymousAuthenticationConfig, options);
+                        if (message.managedOpentelemetryConfig != null && message.hasOwnProperty("managedOpentelemetryConfig"))
+                            object.managedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.toObject(message.managedOpentelemetryConfig, options);
                         return object;
                     };
     
@@ -22299,6 +25551,7 @@
                      * @property {Array.<string>|null} [serviceAccountVerificationKeys] UserManagedKeysConfig serviceAccountVerificationKeys
                      * @property {string|null} [aggregationCa] UserManagedKeysConfig aggregationCa
                      * @property {string|null} [controlPlaneDiskEncryptionKey] UserManagedKeysConfig controlPlaneDiskEncryptionKey
+                     * @property {Array.<string>|null} [controlPlaneDiskEncryptionKeyVersions] UserManagedKeysConfig controlPlaneDiskEncryptionKeyVersions
                      * @property {string|null} [gkeopsEtcdBackupEncryptionKey] UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey
                      */
     
@@ -22313,6 +25566,7 @@
                     function UserManagedKeysConfig(properties) {
                         this.serviceAccountSigningKeys = [];
                         this.serviceAccountVerificationKeys = [];
+                        this.controlPlaneDiskEncryptionKeyVersions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -22376,6 +25630,14 @@
                     UserManagedKeysConfig.prototype.controlPlaneDiskEncryptionKey = "";
     
                     /**
+                     * UserManagedKeysConfig controlPlaneDiskEncryptionKeyVersions.
+                     * @member {Array.<string>} controlPlaneDiskEncryptionKeyVersions
+                     * @memberof google.container.v1.UserManagedKeysConfig
+                     * @instance
+                     */
+                    UserManagedKeysConfig.prototype.controlPlaneDiskEncryptionKeyVersions = $util.emptyArray;
+    
+                    /**
                      * UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey.
                      * @member {string} gkeopsEtcdBackupEncryptionKey
                      * @memberof google.container.v1.UserManagedKeysConfig
@@ -22425,6 +25687,9 @@
                             writer.uint32(/* id 16, wireType 2 =*/130).string(message.controlPlaneDiskEncryptionKey);
                         if (message.gkeopsEtcdBackupEncryptionKey != null && Object.hasOwnProperty.call(message, "gkeopsEtcdBackupEncryptionKey"))
                             writer.uint32(/* id 17, wireType 2 =*/138).string(message.gkeopsEtcdBackupEncryptionKey);
+                        if (message.controlPlaneDiskEncryptionKeyVersions != null && message.controlPlaneDiskEncryptionKeyVersions.length)
+                            for (var i = 0; i < message.controlPlaneDiskEncryptionKeyVersions.length; ++i)
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.controlPlaneDiskEncryptionKeyVersions[i]);
                         return writer;
                     };
     
@@ -22491,6 +25756,12 @@
                                 }
                             case 16: {
                                     message.controlPlaneDiskEncryptionKey = reader.string();
+                                    break;
+                                }
+                            case 18: {
+                                    if (!(message.controlPlaneDiskEncryptionKeyVersions && message.controlPlaneDiskEncryptionKeyVersions.length))
+                                        message.controlPlaneDiskEncryptionKeyVersions = [];
+                                    message.controlPlaneDiskEncryptionKeyVersions.push(reader.string());
                                     break;
                                 }
                             case 17: {
@@ -22561,6 +25832,13 @@
                         if (message.controlPlaneDiskEncryptionKey != null && message.hasOwnProperty("controlPlaneDiskEncryptionKey"))
                             if (!$util.isString(message.controlPlaneDiskEncryptionKey))
                                 return "controlPlaneDiskEncryptionKey: string expected";
+                        if (message.controlPlaneDiskEncryptionKeyVersions != null && message.hasOwnProperty("controlPlaneDiskEncryptionKeyVersions")) {
+                            if (!Array.isArray(message.controlPlaneDiskEncryptionKeyVersions))
+                                return "controlPlaneDiskEncryptionKeyVersions: array expected";
+                            for (var i = 0; i < message.controlPlaneDiskEncryptionKeyVersions.length; ++i)
+                                if (!$util.isString(message.controlPlaneDiskEncryptionKeyVersions[i]))
+                                    return "controlPlaneDiskEncryptionKeyVersions: string[] expected";
+                        }
                         if (message.gkeopsEtcdBackupEncryptionKey != null && message.hasOwnProperty("gkeopsEtcdBackupEncryptionKey"))
                             if (!$util.isString(message.gkeopsEtcdBackupEncryptionKey))
                                 return "gkeopsEtcdBackupEncryptionKey: string expected";
@@ -22603,6 +25881,13 @@
                             message.aggregationCa = String(object.aggregationCa);
                         if (object.controlPlaneDiskEncryptionKey != null)
                             message.controlPlaneDiskEncryptionKey = String(object.controlPlaneDiskEncryptionKey);
+                        if (object.controlPlaneDiskEncryptionKeyVersions) {
+                            if (!Array.isArray(object.controlPlaneDiskEncryptionKeyVersions))
+                                throw TypeError(".google.container.v1.UserManagedKeysConfig.controlPlaneDiskEncryptionKeyVersions: array expected");
+                            message.controlPlaneDiskEncryptionKeyVersions = [];
+                            for (var i = 0; i < object.controlPlaneDiskEncryptionKeyVersions.length; ++i)
+                                message.controlPlaneDiskEncryptionKeyVersions[i] = String(object.controlPlaneDiskEncryptionKeyVersions[i]);
+                        }
                         if (object.gkeopsEtcdBackupEncryptionKey != null)
                             message.gkeopsEtcdBackupEncryptionKey = String(object.gkeopsEtcdBackupEncryptionKey);
                         return message;
@@ -22624,6 +25909,7 @@
                         if (options.arrays || options.defaults) {
                             object.serviceAccountSigningKeys = [];
                             object.serviceAccountVerificationKeys = [];
+                            object.controlPlaneDiskEncryptionKeyVersions = [];
                         }
                         if (options.defaults) {
                             object.clusterCa = "";
@@ -22655,6 +25941,11 @@
                             object.controlPlaneDiskEncryptionKey = message.controlPlaneDiskEncryptionKey;
                         if (message.gkeopsEtcdBackupEncryptionKey != null && message.hasOwnProperty("gkeopsEtcdBackupEncryptionKey"))
                             object.gkeopsEtcdBackupEncryptionKey = message.gkeopsEtcdBackupEncryptionKey;
+                        if (message.controlPlaneDiskEncryptionKeyVersions && message.controlPlaneDiskEncryptionKeyVersions.length) {
+                            object.controlPlaneDiskEncryptionKeyVersions = [];
+                            for (var j = 0; j < message.controlPlaneDiskEncryptionKeyVersions.length; ++j)
+                                object.controlPlaneDiskEncryptionKeyVersions[j] = message.controlPlaneDiskEncryptionKeyVersions[j];
+                        }
                         return object;
                     };
     
@@ -24897,6 +28188,8 @@
                      * @property {google.container.v1.IAnonymousAuthenticationConfig|null} [desiredAnonymousAuthenticationConfig] ClusterUpdate desiredAnonymousAuthenticationConfig
                      * @property {google.container.v1.IGkeAutoUpgradeConfig|null} [gkeAutoUpgradeConfig] ClusterUpdate gkeAutoUpgradeConfig
                      * @property {google.container.v1.INetworkTierConfig|null} [desiredNetworkTierConfig] ClusterUpdate desiredNetworkTierConfig
+                     * @property {google.container.v1.IPrivilegedAdmissionConfig|null} [desiredPrivilegedAdmissionConfig] ClusterUpdate desiredPrivilegedAdmissionConfig
+                     * @property {google.container.v1.IManagedOpenTelemetryConfig|null} [desiredManagedOpentelemetryConfig] ClusterUpdate desiredManagedOpentelemetryConfig
                      */
     
                     /**
@@ -25491,6 +28784,22 @@
                      */
                     ClusterUpdate.prototype.desiredNetworkTierConfig = null;
     
+                    /**
+                     * ClusterUpdate desiredPrivilegedAdmissionConfig.
+                     * @member {google.container.v1.IPrivilegedAdmissionConfig|null|undefined} desiredPrivilegedAdmissionConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredPrivilegedAdmissionConfig = null;
+    
+                    /**
+                     * ClusterUpdate desiredManagedOpentelemetryConfig.
+                     * @member {google.container.v1.IManagedOpenTelemetryConfig|null|undefined} desiredManagedOpentelemetryConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredManagedOpentelemetryConfig = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -25723,6 +29032,10 @@
                             $root.google.container.v1.NetworkTierConfig.encode(message.desiredNetworkTierConfig, writer.uint32(/* id 155, wireType 2 =*/1242).fork()).ldelim();
                         if (message.desiredAnonymousAuthenticationConfig != null && Object.hasOwnProperty.call(message, "desiredAnonymousAuthenticationConfig"))
                             $root.google.container.v1.AnonymousAuthenticationConfig.encode(message.desiredAnonymousAuthenticationConfig, writer.uint32(/* id 156, wireType 2 =*/1250).fork()).ldelim();
+                        if (message.desiredPrivilegedAdmissionConfig != null && Object.hasOwnProperty.call(message, "desiredPrivilegedAdmissionConfig"))
+                            $root.google.container.v1.PrivilegedAdmissionConfig.encode(message.desiredPrivilegedAdmissionConfig, writer.uint32(/* id 159, wireType 2 =*/1274).fork()).ldelim();
+                        if (message.desiredManagedOpentelemetryConfig != null && Object.hasOwnProperty.call(message, "desiredManagedOpentelemetryConfig"))
+                            $root.google.container.v1.ManagedOpenTelemetryConfig.encode(message.desiredManagedOpentelemetryConfig, writer.uint32(/* id 163, wireType 2 =*/1306).fork()).ldelim();
                         return writer;
                     };
     
@@ -26047,6 +29360,14 @@
                                 }
                             case 155: {
                                     message.desiredNetworkTierConfig = $root.google.container.v1.NetworkTierConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 159: {
+                                    message.desiredPrivilegedAdmissionConfig = $root.google.container.v1.PrivilegedAdmissionConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 163: {
+                                    message.desiredManagedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -26461,6 +29782,16 @@
                             if (error)
                                 return "desiredNetworkTierConfig." + error;
                         }
+                        if (message.desiredPrivilegedAdmissionConfig != null && message.hasOwnProperty("desiredPrivilegedAdmissionConfig")) {
+                            var error = $root.google.container.v1.PrivilegedAdmissionConfig.verify(message.desiredPrivilegedAdmissionConfig);
+                            if (error)
+                                return "desiredPrivilegedAdmissionConfig." + error;
+                        }
+                        if (message.desiredManagedOpentelemetryConfig != null && message.hasOwnProperty("desiredManagedOpentelemetryConfig")) {
+                            var error = $root.google.container.v1.ManagedOpenTelemetryConfig.verify(message.desiredManagedOpentelemetryConfig);
+                            if (error)
+                                return "desiredManagedOpentelemetryConfig." + error;
+                        }
                         return null;
                     };
     
@@ -26863,6 +30194,16 @@
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredNetworkTierConfig: object expected");
                             message.desiredNetworkTierConfig = $root.google.container.v1.NetworkTierConfig.fromObject(object.desiredNetworkTierConfig);
                         }
+                        if (object.desiredPrivilegedAdmissionConfig != null) {
+                            if (typeof object.desiredPrivilegedAdmissionConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredPrivilegedAdmissionConfig: object expected");
+                            message.desiredPrivilegedAdmissionConfig = $root.google.container.v1.PrivilegedAdmissionConfig.fromObject(object.desiredPrivilegedAdmissionConfig);
+                        }
+                        if (object.desiredManagedOpentelemetryConfig != null) {
+                            if (typeof object.desiredManagedOpentelemetryConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredManagedOpentelemetryConfig: object expected");
+                            message.desiredManagedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.fromObject(object.desiredManagedOpentelemetryConfig);
+                        }
                         return message;
                     };
     
@@ -26943,6 +30284,8 @@
                             object.gkeAutoUpgradeConfig = null;
                             object.desiredNetworkTierConfig = null;
                             object.desiredAnonymousAuthenticationConfig = null;
+                            object.desiredPrivilegedAdmissionConfig = null;
+                            object.desiredManagedOpentelemetryConfig = null;
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
                             object.desiredNodeVersion = message.desiredNodeVersion;
@@ -27121,6 +30464,10 @@
                             object.desiredNetworkTierConfig = $root.google.container.v1.NetworkTierConfig.toObject(message.desiredNetworkTierConfig, options);
                         if (message.desiredAnonymousAuthenticationConfig != null && message.hasOwnProperty("desiredAnonymousAuthenticationConfig"))
                             object.desiredAnonymousAuthenticationConfig = $root.google.container.v1.AnonymousAuthenticationConfig.toObject(message.desiredAnonymousAuthenticationConfig, options);
+                        if (message.desiredPrivilegedAdmissionConfig != null && message.hasOwnProperty("desiredPrivilegedAdmissionConfig"))
+                            object.desiredPrivilegedAdmissionConfig = $root.google.container.v1.PrivilegedAdmissionConfig.toObject(message.desiredPrivilegedAdmissionConfig, options);
+                        if (message.desiredManagedOpentelemetryConfig != null && message.hasOwnProperty("desiredManagedOpentelemetryConfig"))
+                            object.desiredManagedOpentelemetryConfig = $root.google.container.v1.ManagedOpenTelemetryConfig.toObject(message.desiredManagedOpentelemetryConfig, options);
                         return object;
                     };
     
@@ -27427,6 +30774,7 @@
                      * @interface IAdditionalIPRangesConfig
                      * @property {string|null} [subnetwork] AdditionalIPRangesConfig subnetwork
                      * @property {Array.<string>|null} [podIpv4RangeNames] AdditionalIPRangesConfig podIpv4RangeNames
+                     * @property {google.container.v1.AdditionalIPRangesConfig.Status|null} [status] AdditionalIPRangesConfig status
                      */
     
                     /**
@@ -27462,6 +30810,14 @@
                     AdditionalIPRangesConfig.prototype.podIpv4RangeNames = $util.emptyArray;
     
                     /**
+                     * AdditionalIPRangesConfig status.
+                     * @member {google.container.v1.AdditionalIPRangesConfig.Status} status
+                     * @memberof google.container.v1.AdditionalIPRangesConfig
+                     * @instance
+                     */
+                    AdditionalIPRangesConfig.prototype.status = 0;
+    
+                    /**
                      * Creates a new AdditionalIPRangesConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AdditionalIPRangesConfig
@@ -27490,6 +30846,8 @@
                         if (message.podIpv4RangeNames != null && message.podIpv4RangeNames.length)
                             for (var i = 0; i < message.podIpv4RangeNames.length; ++i)
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.podIpv4RangeNames[i]);
+                        if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.status);
                         return writer;
                     };
     
@@ -27534,6 +30892,10 @@
                                     if (!(message.podIpv4RangeNames && message.podIpv4RangeNames.length))
                                         message.podIpv4RangeNames = [];
                                     message.podIpv4RangeNames.push(reader.string());
+                                    break;
+                                }
+                            case 3: {
+                                    message.status = reader.int32();
                                     break;
                                 }
                             default:
@@ -27581,6 +30943,15 @@
                                 if (!$util.isString(message.podIpv4RangeNames[i]))
                                     return "podIpv4RangeNames: string[] expected";
                         }
+                        if (message.status != null && message.hasOwnProperty("status"))
+                            switch (message.status) {
+                            default:
+                                return "status: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -27605,6 +30976,26 @@
                             for (var i = 0; i < object.podIpv4RangeNames.length; ++i)
                                 message.podIpv4RangeNames[i] = String(object.podIpv4RangeNames[i]);
                         }
+                        switch (object.status) {
+                        default:
+                            if (typeof object.status === "number") {
+                                message.status = object.status;
+                                break;
+                            }
+                            break;
+                        case "STATUS_UNSPECIFIED":
+                        case 0:
+                            message.status = 0;
+                            break;
+                        case "ACTIVE":
+                        case 1:
+                            message.status = 1;
+                            break;
+                        case "DRAINING":
+                        case 2:
+                            message.status = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -27623,8 +31014,10 @@
                         var object = {};
                         if (options.arrays || options.defaults)
                             object.podIpv4RangeNames = [];
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.subnetwork = "";
+                            object.status = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
+                        }
                         if (message.subnetwork != null && message.hasOwnProperty("subnetwork"))
                             object.subnetwork = message.subnetwork;
                         if (message.podIpv4RangeNames && message.podIpv4RangeNames.length) {
@@ -27632,6 +31025,8 @@
                             for (var j = 0; j < message.podIpv4RangeNames.length; ++j)
                                 object.podIpv4RangeNames[j] = message.podIpv4RangeNames[j];
                         }
+                        if (message.status != null && message.hasOwnProperty("status"))
+                            object.status = options.enums === String ? $root.google.container.v1.AdditionalIPRangesConfig.Status[message.status] === undefined ? message.status : $root.google.container.v1.AdditionalIPRangesConfig.Status[message.status] : message.status;
                         return object;
                     };
     
@@ -27660,6 +31055,22 @@
                         }
                         return typeUrlPrefix + "/google.container.v1.AdditionalIPRangesConfig";
                     };
+    
+                    /**
+                     * Status enum.
+                     * @name google.container.v1.AdditionalIPRangesConfig.Status
+                     * @enum {number}
+                     * @property {number} STATUS_UNSPECIFIED=0 STATUS_UNSPECIFIED value
+                     * @property {number} ACTIVE=1 ACTIVE value
+                     * @property {number} DRAINING=2 DRAINING value
+                     */
+                    AdditionalIPRangesConfig.Status = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATUS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ACTIVE"] = 1;
+                        values[valuesById[2] = "DRAINING"] = 2;
+                        return values;
+                    })();
     
                     return AdditionalIPRangesConfig;
                 })();
@@ -30921,6 +34332,8 @@
                      * @property {google.protobuf.IDuration|null} [maxRunDuration] UpdateNodePoolRequest maxRunDuration
                      * @property {boolean|null} [flexStart] UpdateNodePoolRequest flexStart
                      * @property {google.container.v1.IBootDisk|null} [bootDisk] UpdateNodePoolRequest bootDisk
+                     * @property {google.container.v1.NodePool.INodeDrainConfig|null} [nodeDrainConfig] UpdateNodePoolRequest nodeDrainConfig
+                     * @property {google.protobuf.IDuration|null} [consolidationDelay] UpdateNodePoolRequest consolidationDelay
                      */
     
                     /**
@@ -31221,6 +34634,22 @@
                      */
                     UpdateNodePoolRequest.prototype.bootDisk = null;
     
+                    /**
+                     * UpdateNodePoolRequest nodeDrainConfig.
+                     * @member {google.container.v1.NodePool.INodeDrainConfig|null|undefined} nodeDrainConfig
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.nodeDrainConfig = null;
+    
+                    /**
+                     * UpdateNodePoolRequest consolidationDelay.
+                     * @member {google.protobuf.IDuration|null|undefined} consolidationDelay
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.consolidationDelay = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -31327,6 +34756,10 @@
                             writer.uint32(/* id 46, wireType 0 =*/368).bool(message.flexStart);
                         if (message.bootDisk != null && Object.hasOwnProperty.call(message, "bootDisk"))
                             $root.google.container.v1.BootDisk.encode(message.bootDisk, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
+                        if (message.nodeDrainConfig != null && Object.hasOwnProperty.call(message, "nodeDrainConfig"))
+                            $root.google.container.v1.NodePool.NodeDrainConfig.encode(message.nodeDrainConfig, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                        if (message.consolidationDelay != null && Object.hasOwnProperty.call(message, "consolidationDelay"))
+                            $root.google.protobuf.Duration.encode(message.consolidationDelay, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                         return writer;
                     };
     
@@ -31507,6 +34940,14 @@
                                 }
                             case 47: {
                                     message.bootDisk = $root.google.container.v1.BootDisk.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 48: {
+                                    message.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 49: {
+                                    message.consolidationDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -31706,6 +35147,16 @@
                             if (error)
                                 return "bootDisk." + error;
                         }
+                        if (message.nodeDrainConfig != null && message.hasOwnProperty("nodeDrainConfig")) {
+                            var error = $root.google.container.v1.NodePool.NodeDrainConfig.verify(message.nodeDrainConfig);
+                            if (error)
+                                return "nodeDrainConfig." + error;
+                        }
+                        if (message.consolidationDelay != null && message.hasOwnProperty("consolidationDelay")) {
+                            var error = $root.google.protobuf.Duration.verify(message.consolidationDelay);
+                            if (error)
+                                return "consolidationDelay." + error;
+                        }
                         return null;
                     };
     
@@ -31876,6 +35327,16 @@
                                 throw TypeError(".google.container.v1.UpdateNodePoolRequest.bootDisk: object expected");
                             message.bootDisk = $root.google.container.v1.BootDisk.fromObject(object.bootDisk);
                         }
+                        if (object.nodeDrainConfig != null) {
+                            if (typeof object.nodeDrainConfig !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.nodeDrainConfig: object expected");
+                            message.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.fromObject(object.nodeDrainConfig);
+                        }
+                        if (object.consolidationDelay != null) {
+                            if (typeof object.consolidationDelay !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.consolidationDelay: object expected");
+                            message.consolidationDelay = $root.google.protobuf.Duration.fromObject(object.consolidationDelay);
+                        }
                         return message;
                     };
     
@@ -31933,6 +35394,8 @@
                             object.queuedProvisioning = null;
                             object.maxRunDuration = null;
                             object.bootDisk = null;
+                            object.nodeDrainConfig = null;
+                            object.consolidationDelay = null;
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
@@ -32019,6 +35482,10 @@
                         }
                         if (message.bootDisk != null && message.hasOwnProperty("bootDisk"))
                             object.bootDisk = $root.google.container.v1.BootDisk.toObject(message.bootDisk, options);
+                        if (message.nodeDrainConfig != null && message.hasOwnProperty("nodeDrainConfig"))
+                            object.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.toObject(message.nodeDrainConfig, options);
+                        if (message.consolidationDelay != null && message.hasOwnProperty("consolidationDelay"))
+                            object.consolidationDelay = $root.google.protobuf.Duration.toObject(message.consolidationDelay, options);
                         return object;
                     };
     
@@ -39098,6 +42565,7 @@
                      * @property {string|null} [etag] NodePool etag
                      * @property {google.container.v1.NodePool.IQueuedProvisioning|null} [queuedProvisioning] NodePool queuedProvisioning
                      * @property {google.container.v1.IBestEffortProvisioning|null} [bestEffortProvisioning] NodePool bestEffortProvisioning
+                     * @property {google.container.v1.NodePool.INodeDrainConfig|null} [nodeDrainConfig] NodePool nodeDrainConfig
                      */
     
                     /**
@@ -39287,6 +42755,14 @@
                     NodePool.prototype.bestEffortProvisioning = null;
     
                     /**
+                     * NodePool nodeDrainConfig.
+                     * @member {google.container.v1.NodePool.INodeDrainConfig|null|undefined} nodeDrainConfig
+                     * @memberof google.container.v1.NodePool
+                     * @instance
+                     */
+                    NodePool.prototype.nodeDrainConfig = null;
+    
+                    /**
                      * Creates a new NodePool instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.NodePool
@@ -39355,6 +42831,8 @@
                             $root.google.container.v1.NodePool.QueuedProvisioning.encode(message.queuedProvisioning, writer.uint32(/* id 112, wireType 2 =*/898).fork()).ldelim();
                         if (message.bestEffortProvisioning != null && Object.hasOwnProperty.call(message, "bestEffortProvisioning"))
                             $root.google.container.v1.BestEffortProvisioning.encode(message.bestEffortProvisioning, writer.uint32(/* id 113, wireType 2 =*/906).fork()).ldelim();
+                        if (message.nodeDrainConfig != null && Object.hasOwnProperty.call(message, "nodeDrainConfig"))
+                            $root.google.container.v1.NodePool.NodeDrainConfig.encode(message.nodeDrainConfig, writer.uint32(/* id 116, wireType 2 =*/930).fork()).ldelim();
                         return writer;
                     };
     
@@ -39479,6 +42957,10 @@
                                 }
                             case 113: {
                                     message.bestEffortProvisioning = $root.google.container.v1.BestEffortProvisioning.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 116: {
+                                    message.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -39623,6 +43105,11 @@
                             if (error)
                                 return "bestEffortProvisioning." + error;
                         }
+                        if (message.nodeDrainConfig != null && message.hasOwnProperty("nodeDrainConfig")) {
+                            var error = $root.google.container.v1.NodePool.NodeDrainConfig.verify(message.nodeDrainConfig);
+                            if (error)
+                                return "nodeDrainConfig." + error;
+                        }
                         return null;
                     };
     
@@ -39762,6 +43249,11 @@
                                 throw TypeError(".google.container.v1.NodePool.bestEffortProvisioning: object expected");
                             message.bestEffortProvisioning = $root.google.container.v1.BestEffortProvisioning.fromObject(object.bestEffortProvisioning);
                         }
+                        if (object.nodeDrainConfig != null) {
+                            if (typeof object.nodeDrainConfig !== "object")
+                                throw TypeError(".google.container.v1.NodePool.nodeDrainConfig: object expected");
+                            message.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.fromObject(object.nodeDrainConfig);
+                        }
                         return message;
                     };
     
@@ -39802,6 +43294,7 @@
                             object.etag = "";
                             object.queuedProvisioning = null;
                             object.bestEffortProvisioning = null;
+                            object.nodeDrainConfig = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -39854,6 +43347,8 @@
                             object.queuedProvisioning = $root.google.container.v1.NodePool.QueuedProvisioning.toObject(message.queuedProvisioning, options);
                         if (message.bestEffortProvisioning != null && message.hasOwnProperty("bestEffortProvisioning"))
                             object.bestEffortProvisioning = $root.google.container.v1.BestEffortProvisioning.toObject(message.bestEffortProvisioning, options);
+                        if (message.nodeDrainConfig != null && message.hasOwnProperty("nodeDrainConfig"))
+                            object.nodeDrainConfig = $root.google.container.v1.NodePool.NodeDrainConfig.toObject(message.nodeDrainConfig, options);
                         return object;
                     };
     
@@ -40091,6 +43586,7 @@
                                 case 0:
                                 case 2:
                                 case 3:
+                                case 5:
                                     break;
                                 }
                             }
@@ -40139,6 +43635,10 @@
                             case "SURGE":
                             case 3:
                                 message.strategy = 3;
+                                break;
+                            case "SHORT_LIVED":
+                            case 5:
+                                message.strategy = 5;
                                 break;
                             }
                             if (object.blueGreenSettings != null) {
@@ -41341,6 +44841,224 @@
                         };
     
                         return QueuedProvisioning;
+                    })();
+    
+                    NodePool.NodeDrainConfig = (function() {
+    
+                        /**
+                         * Properties of a NodeDrainConfig.
+                         * @memberof google.container.v1.NodePool
+                         * @interface INodeDrainConfig
+                         * @property {boolean|null} [respectPdbDuringNodePoolDeletion] NodeDrainConfig respectPdbDuringNodePoolDeletion
+                         */
+    
+                        /**
+                         * Constructs a new NodeDrainConfig.
+                         * @memberof google.container.v1.NodePool
+                         * @classdesc Represents a NodeDrainConfig.
+                         * @implements INodeDrainConfig
+                         * @constructor
+                         * @param {google.container.v1.NodePool.INodeDrainConfig=} [properties] Properties to set
+                         */
+                        function NodeDrainConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeDrainConfig respectPdbDuringNodePoolDeletion.
+                         * @member {boolean|null|undefined} respectPdbDuringNodePoolDeletion
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @instance
+                         */
+                        NodeDrainConfig.prototype.respectPdbDuringNodePoolDeletion = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(NodeDrainConfig.prototype, "_respectPdbDuringNodePoolDeletion", {
+                            get: $util.oneOfGetter($oneOfFields = ["respectPdbDuringNodePoolDeletion"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NodeDrainConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {google.container.v1.NodePool.INodeDrainConfig=} [properties] Properties to set
+                         * @returns {google.container.v1.NodePool.NodeDrainConfig} NodeDrainConfig instance
+                         */
+                        NodeDrainConfig.create = function create(properties) {
+                            return new NodeDrainConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeDrainConfig message. Does not implicitly {@link google.container.v1.NodePool.NodeDrainConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {google.container.v1.NodePool.INodeDrainConfig} message NodeDrainConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeDrainConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.respectPdbDuringNodePoolDeletion != null && Object.hasOwnProperty.call(message, "respectPdbDuringNodePoolDeletion"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.respectPdbDuringNodePoolDeletion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeDrainConfig message, length delimited. Does not implicitly {@link google.container.v1.NodePool.NodeDrainConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {google.container.v1.NodePool.INodeDrainConfig} message NodeDrainConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeDrainConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeDrainConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.NodePool.NodeDrainConfig} NodeDrainConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeDrainConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodePool.NodeDrainConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.respectPdbDuringNodePoolDeletion = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeDrainConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.NodePool.NodeDrainConfig} NodeDrainConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeDrainConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeDrainConfig message.
+                         * @function verify
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeDrainConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.respectPdbDuringNodePoolDeletion != null && message.hasOwnProperty("respectPdbDuringNodePoolDeletion")) {
+                                properties._respectPdbDuringNodePoolDeletion = 1;
+                                if (typeof message.respectPdbDuringNodePoolDeletion !== "boolean")
+                                    return "respectPdbDuringNodePoolDeletion: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeDrainConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.NodePool.NodeDrainConfig} NodeDrainConfig
+                         */
+                        NodeDrainConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.NodePool.NodeDrainConfig)
+                                return object;
+                            var message = new $root.google.container.v1.NodePool.NodeDrainConfig();
+                            if (object.respectPdbDuringNodePoolDeletion != null)
+                                message.respectPdbDuringNodePoolDeletion = Boolean(object.respectPdbDuringNodePoolDeletion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeDrainConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {google.container.v1.NodePool.NodeDrainConfig} message NodeDrainConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeDrainConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.respectPdbDuringNodePoolDeletion != null && message.hasOwnProperty("respectPdbDuringNodePoolDeletion")) {
+                                object.respectPdbDuringNodePoolDeletion = message.respectPdbDuringNodePoolDeletion;
+                                if (options.oneofs)
+                                    object._respectPdbDuringNodePoolDeletion = "respectPdbDuringNodePoolDeletion";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeDrainConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeDrainConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NodeDrainConfig
+                         * @function getTypeUrl
+                         * @memberof google.container.v1.NodePool.NodeDrainConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NodeDrainConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1.NodePool.NodeDrainConfig";
+                        };
+    
+                        return NodeDrainConfig;
                     })();
     
                     return NodePool;
@@ -45088,6 +48806,7 @@
                      * @property {google.container.v1.IAutoprovisioningNodePoolDefaults|null} [autoprovisioningNodePoolDefaults] ClusterAutoscaling autoprovisioningNodePoolDefaults
                      * @property {Array.<string>|null} [autoprovisioningLocations] ClusterAutoscaling autoprovisioningLocations
                      * @property {google.container.v1.IDefaultComputeClassConfig|null} [defaultComputeClassConfig] ClusterAutoscaling defaultComputeClassConfig
+                     * @property {google.container.v1.ClusterAutoscaling.AutopilotGeneralProfile|null} [autopilotGeneralProfile] ClusterAutoscaling autopilotGeneralProfile
                      */
     
                     /**
@@ -45156,6 +48875,14 @@
                     ClusterAutoscaling.prototype.defaultComputeClassConfig = null;
     
                     /**
+                     * ClusterAutoscaling autopilotGeneralProfile.
+                     * @member {google.container.v1.ClusterAutoscaling.AutopilotGeneralProfile} autopilotGeneralProfile
+                     * @memberof google.container.v1.ClusterAutoscaling
+                     * @instance
+                     */
+                    ClusterAutoscaling.prototype.autopilotGeneralProfile = 0;
+    
+                    /**
                      * Creates a new ClusterAutoscaling instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.ClusterAutoscaling
@@ -45193,6 +48920,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.autoprovisioningLocations[i]);
                         if (message.defaultComputeClassConfig != null && Object.hasOwnProperty.call(message, "defaultComputeClassConfig"))
                             $root.google.container.v1.DefaultComputeClassConfig.encode(message.defaultComputeClassConfig, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.autopilotGeneralProfile != null && Object.hasOwnProperty.call(message, "autopilotGeneralProfile"))
+                            writer.uint32(/* id 14, wireType 0 =*/112).int32(message.autopilotGeneralProfile);
                         return writer;
                     };
     
@@ -45255,6 +48984,10 @@
                                 }
                             case 9: {
                                     message.defaultComputeClassConfig = $root.google.container.v1.DefaultComputeClassConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 14: {
+                                    message.autopilotGeneralProfile = reader.int32();
                                     break;
                                 }
                             default:
@@ -45330,6 +49063,14 @@
                             if (error)
                                 return "defaultComputeClassConfig." + error;
                         }
+                        if (message.autopilotGeneralProfile != null && message.hasOwnProperty("autopilotGeneralProfile"))
+                            switch (message.autopilotGeneralProfile) {
+                            default:
+                                return "autopilotGeneralProfile: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
                         return null;
                     };
     
@@ -45394,6 +49135,22 @@
                                 throw TypeError(".google.container.v1.ClusterAutoscaling.defaultComputeClassConfig: object expected");
                             message.defaultComputeClassConfig = $root.google.container.v1.DefaultComputeClassConfig.fromObject(object.defaultComputeClassConfig);
                         }
+                        switch (object.autopilotGeneralProfile) {
+                        default:
+                            if (typeof object.autopilotGeneralProfile === "number") {
+                                message.autopilotGeneralProfile = object.autopilotGeneralProfile;
+                                break;
+                            }
+                            break;
+                        case "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED":
+                        case 0:
+                            message.autopilotGeneralProfile = 0;
+                            break;
+                        case "NO_PERFORMANCE":
+                        case 1:
+                            message.autopilotGeneralProfile = 1;
+                            break;
+                        }
                         return message;
                     };
     
@@ -45419,6 +49176,7 @@
                             object.autoscalingProfile = options.enums === String ? "PROFILE_UNSPECIFIED" : 0;
                             object.autoprovisioningNodePoolDefaults = null;
                             object.defaultComputeClassConfig = null;
+                            object.autopilotGeneralProfile = options.enums === String ? "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED" : 0;
                         }
                         if (message.enableNodeAutoprovisioning != null && message.hasOwnProperty("enableNodeAutoprovisioning"))
                             object.enableNodeAutoprovisioning = message.enableNodeAutoprovisioning;
@@ -45438,6 +49196,8 @@
                         }
                         if (message.defaultComputeClassConfig != null && message.hasOwnProperty("defaultComputeClassConfig"))
                             object.defaultComputeClassConfig = $root.google.container.v1.DefaultComputeClassConfig.toObject(message.defaultComputeClassConfig, options);
+                        if (message.autopilotGeneralProfile != null && message.hasOwnProperty("autopilotGeneralProfile"))
+                            object.autopilotGeneralProfile = options.enums === String ? $root.google.container.v1.ClusterAutoscaling.AutopilotGeneralProfile[message.autopilotGeneralProfile] === undefined ? message.autopilotGeneralProfile : $root.google.container.v1.ClusterAutoscaling.AutopilotGeneralProfile[message.autopilotGeneralProfile] : message.autopilotGeneralProfile;
                         return object;
                     };
     
@@ -45480,6 +49240,20 @@
                         values[valuesById[0] = "PROFILE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "OPTIMIZE_UTILIZATION"] = 1;
                         values[valuesById[2] = "BALANCED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * AutopilotGeneralProfile enum.
+                     * @name google.container.v1.ClusterAutoscaling.AutopilotGeneralProfile
+                     * @enum {number}
+                     * @property {number} AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED=0 AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED value
+                     * @property {number} NO_PERFORMANCE=1 NO_PERFORMANCE value
+                     */
+                    ClusterAutoscaling.AutopilotGeneralProfile = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NO_PERFORMANCE"] = 1;
                         return values;
                     })();
     
@@ -59627,6 +63401,257 @@
                     return FastSocket;
                 })();
     
+                v1.GPUDirectConfig = (function() {
+    
+                    /**
+                     * Properties of a GPUDirectConfig.
+                     * @memberof google.container.v1
+                     * @interface IGPUDirectConfig
+                     * @property {google.container.v1.GPUDirectConfig.GPUDirectStrategy|null} [gpuDirectStrategy] GPUDirectConfig gpuDirectStrategy
+                     */
+    
+                    /**
+                     * Constructs a new GPUDirectConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a GPUDirectConfig.
+                     * @implements IGPUDirectConfig
+                     * @constructor
+                     * @param {google.container.v1.IGPUDirectConfig=} [properties] Properties to set
+                     */
+                    function GPUDirectConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GPUDirectConfig gpuDirectStrategy.
+                     * @member {google.container.v1.GPUDirectConfig.GPUDirectStrategy|null|undefined} gpuDirectStrategy
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @instance
+                     */
+                    GPUDirectConfig.prototype.gpuDirectStrategy = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(GPUDirectConfig.prototype, "_gpuDirectStrategy", {
+                        get: $util.oneOfGetter($oneOfFields = ["gpuDirectStrategy"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new GPUDirectConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {google.container.v1.IGPUDirectConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.GPUDirectConfig} GPUDirectConfig instance
+                     */
+                    GPUDirectConfig.create = function create(properties) {
+                        return new GPUDirectConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GPUDirectConfig message. Does not implicitly {@link google.container.v1.GPUDirectConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {google.container.v1.IGPUDirectConfig} message GPUDirectConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GPUDirectConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.gpuDirectStrategy != null && Object.hasOwnProperty.call(message, "gpuDirectStrategy"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.gpuDirectStrategy);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GPUDirectConfig message, length delimited. Does not implicitly {@link google.container.v1.GPUDirectConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {google.container.v1.IGPUDirectConfig} message GPUDirectConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GPUDirectConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GPUDirectConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.GPUDirectConfig} GPUDirectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GPUDirectConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.GPUDirectConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.gpuDirectStrategy = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GPUDirectConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.GPUDirectConfig} GPUDirectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GPUDirectConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GPUDirectConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GPUDirectConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.gpuDirectStrategy != null && message.hasOwnProperty("gpuDirectStrategy")) {
+                            properties._gpuDirectStrategy = 1;
+                            switch (message.gpuDirectStrategy) {
+                            default:
+                                return "gpuDirectStrategy: enum value expected";
+                            case 0:
+                            case 2:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GPUDirectConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.GPUDirectConfig} GPUDirectConfig
+                     */
+                    GPUDirectConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.GPUDirectConfig)
+                            return object;
+                        var message = new $root.google.container.v1.GPUDirectConfig();
+                        switch (object.gpuDirectStrategy) {
+                        default:
+                            if (typeof object.gpuDirectStrategy === "number") {
+                                message.gpuDirectStrategy = object.gpuDirectStrategy;
+                                break;
+                            }
+                            break;
+                        case "GPU_DIRECT_STRATEGY_UNSPECIFIED":
+                        case 0:
+                            message.gpuDirectStrategy = 0;
+                            break;
+                        case "RDMA":
+                        case 2:
+                            message.gpuDirectStrategy = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GPUDirectConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {google.container.v1.GPUDirectConfig} message GPUDirectConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GPUDirectConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.gpuDirectStrategy != null && message.hasOwnProperty("gpuDirectStrategy")) {
+                            object.gpuDirectStrategy = options.enums === String ? $root.google.container.v1.GPUDirectConfig.GPUDirectStrategy[message.gpuDirectStrategy] === undefined ? message.gpuDirectStrategy : $root.google.container.v1.GPUDirectConfig.GPUDirectStrategy[message.gpuDirectStrategy] : message.gpuDirectStrategy;
+                            if (options.oneofs)
+                                object._gpuDirectStrategy = "gpuDirectStrategy";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GPUDirectConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GPUDirectConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GPUDirectConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.GPUDirectConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GPUDirectConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.GPUDirectConfig";
+                    };
+    
+                    /**
+                     * GPUDirectStrategy enum.
+                     * @name google.container.v1.GPUDirectConfig.GPUDirectStrategy
+                     * @enum {number}
+                     * @property {number} GPU_DIRECT_STRATEGY_UNSPECIFIED=0 GPU_DIRECT_STRATEGY_UNSPECIFIED value
+                     * @property {number} RDMA=2 RDMA value
+                     */
+                    GPUDirectConfig.GPUDirectStrategy = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GPU_DIRECT_STRATEGY_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "RDMA"] = 2;
+                        return values;
+                    })();
+    
+                    return GPUDirectConfig;
+                })();
+    
                 /**
                  * PrivateIPv6GoogleAccess enum.
                  * @name google.container.v1.PrivateIPv6GoogleAccess
@@ -61055,6 +65080,7 @@
                      * @property {google.protobuf.ITimestamp|null} [extendedSupportEndTime] UpgradeInfoEvent extendedSupportEndTime
                      * @property {string|null} [description] UpgradeInfoEvent description
                      * @property {google.container.v1.UpgradeInfoEvent.EventType|null} [eventType] UpgradeInfoEvent eventType
+                     * @property {google.container.v1.IDisruptionEvent|null} [disruptionEvent] UpgradeInfoEvent disruptionEvent
                      */
     
                     /**
@@ -61168,6 +65194,14 @@
                      */
                     UpgradeInfoEvent.prototype.eventType = 0;
     
+                    /**
+                     * UpgradeInfoEvent disruptionEvent.
+                     * @member {google.container.v1.IDisruptionEvent|null|undefined} disruptionEvent
+                     * @memberof google.container.v1.UpgradeInfoEvent
+                     * @instance
+                     */
+                    UpgradeInfoEvent.prototype.disruptionEvent = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -61180,6 +65214,12 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(UpgradeInfoEvent.prototype, "_extendedSupportEndTime", {
                         get: $util.oneOfGetter($oneOfFields = ["extendedSupportEndTime"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(UpgradeInfoEvent.prototype, "_disruptionEvent", {
+                        get: $util.oneOfGetter($oneOfFields = ["disruptionEvent"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -61231,6 +65271,8 @@
                             writer.uint32(/* id 11, wireType 2 =*/90).string(message.description);
                         if (message.eventType != null && Object.hasOwnProperty.call(message, "eventType"))
                             writer.uint32(/* id 12, wireType 0 =*/96).int32(message.eventType);
+                        if (message.disruptionEvent != null && Object.hasOwnProperty.call(message, "disruptionEvent"))
+                            $root.google.container.v1.DisruptionEvent.encode(message.disruptionEvent, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                         return writer;
                     };
     
@@ -61313,6 +65355,10 @@
                                 }
                             case 12: {
                                     message.eventType = reader.int32();
+                                    break;
+                                }
+                            case 14: {
+                                    message.disruptionEvent = $root.google.container.v1.DisruptionEvent.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -61420,8 +65466,17 @@
                             case 1:
                             case 2:
                             case 3:
+                            case 4:
                                 break;
                             }
+                        if (message.disruptionEvent != null && message.hasOwnProperty("disruptionEvent")) {
+                            properties._disruptionEvent = 1;
+                            {
+                                var error = $root.google.container.v1.DisruptionEvent.verify(message.disruptionEvent);
+                                if (error)
+                                    return "disruptionEvent." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -61538,6 +65593,15 @@
                         case 3:
                             message.eventType = 3;
                             break;
+                        case "DISRUPTION_EVENT":
+                        case 4:
+                            message.eventType = 4;
+                            break;
+                        }
+                        if (object.disruptionEvent != null) {
+                            if (typeof object.disruptionEvent !== "object")
+                                throw TypeError(".google.container.v1.UpgradeInfoEvent.disruptionEvent: object expected");
+                            message.disruptionEvent = $root.google.container.v1.DisruptionEvent.fromObject(object.disruptionEvent);
                         }
                         return message;
                     };
@@ -61597,6 +65661,11 @@
                             object.description = message.description;
                         if (message.eventType != null && message.hasOwnProperty("eventType"))
                             object.eventType = options.enums === String ? $root.google.container.v1.UpgradeInfoEvent.EventType[message.eventType] === undefined ? message.eventType : $root.google.container.v1.UpgradeInfoEvent.EventType[message.eventType] : message.eventType;
+                        if (message.disruptionEvent != null && message.hasOwnProperty("disruptionEvent")) {
+                            object.disruptionEvent = $root.google.container.v1.DisruptionEvent.toObject(message.disruptionEvent, options);
+                            if (options.oneofs)
+                                object._disruptionEvent = "disruptionEvent";
+                        }
                         return object;
                     };
     
@@ -61654,6 +65723,7 @@
                      * @property {number} END_OF_SUPPORT=1 END_OF_SUPPORT value
                      * @property {number} COS_MILESTONE_VERSION_UPDATE=2 COS_MILESTONE_VERSION_UPDATE value
                      * @property {number} UPGRADE_LIFECYCLE=3 UPGRADE_LIFECYCLE value
+                     * @property {number} DISRUPTION_EVENT=4 DISRUPTION_EVENT value
                      */
                     UpgradeInfoEvent.EventType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -61661,10 +65731,597 @@
                         values[valuesById[1] = "END_OF_SUPPORT"] = 1;
                         values[valuesById[2] = "COS_MILESTONE_VERSION_UPDATE"] = 2;
                         values[valuesById[3] = "UPGRADE_LIFECYCLE"] = 3;
+                        values[valuesById[4] = "DISRUPTION_EVENT"] = 4;
                         return values;
                     })();
     
                     return UpgradeInfoEvent;
+                })();
+    
+                v1.DisruptionEvent = (function() {
+    
+                    /**
+                     * Properties of a DisruptionEvent.
+                     * @memberof google.container.v1
+                     * @interface IDisruptionEvent
+                     * @property {google.container.v1.DisruptionEvent.DisruptionType|null} [disruptionType] DisruptionEvent disruptionType
+                     * @property {string|null} [pdbBlockedNode] DisruptionEvent pdbBlockedNode
+                     * @property {Array.<google.container.v1.DisruptionEvent.IPdbBlockedPod>|null} [pdbBlockedPod] DisruptionEvent pdbBlockedPod
+                     * @property {google.protobuf.IDuration|null} [pdbViolationTimeout] DisruptionEvent pdbViolationTimeout
+                     */
+    
+                    /**
+                     * Constructs a new DisruptionEvent.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a DisruptionEvent.
+                     * @implements IDisruptionEvent
+                     * @constructor
+                     * @param {google.container.v1.IDisruptionEvent=} [properties] Properties to set
+                     */
+                    function DisruptionEvent(properties) {
+                        this.pdbBlockedPod = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DisruptionEvent disruptionType.
+                     * @member {google.container.v1.DisruptionEvent.DisruptionType} disruptionType
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @instance
+                     */
+                    DisruptionEvent.prototype.disruptionType = 0;
+    
+                    /**
+                     * DisruptionEvent pdbBlockedNode.
+                     * @member {string} pdbBlockedNode
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @instance
+                     */
+                    DisruptionEvent.prototype.pdbBlockedNode = "";
+    
+                    /**
+                     * DisruptionEvent pdbBlockedPod.
+                     * @member {Array.<google.container.v1.DisruptionEvent.IPdbBlockedPod>} pdbBlockedPod
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @instance
+                     */
+                    DisruptionEvent.prototype.pdbBlockedPod = $util.emptyArray;
+    
+                    /**
+                     * DisruptionEvent pdbViolationTimeout.
+                     * @member {google.protobuf.IDuration|null|undefined} pdbViolationTimeout
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @instance
+                     */
+                    DisruptionEvent.prototype.pdbViolationTimeout = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(DisruptionEvent.prototype, "_pdbViolationTimeout", {
+                        get: $util.oneOfGetter($oneOfFields = ["pdbViolationTimeout"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new DisruptionEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {google.container.v1.IDisruptionEvent=} [properties] Properties to set
+                     * @returns {google.container.v1.DisruptionEvent} DisruptionEvent instance
+                     */
+                    DisruptionEvent.create = function create(properties) {
+                        return new DisruptionEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DisruptionEvent message. Does not implicitly {@link google.container.v1.DisruptionEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {google.container.v1.IDisruptionEvent} message DisruptionEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DisruptionEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.disruptionType != null && Object.hasOwnProperty.call(message, "disruptionType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.disruptionType);
+                        if (message.pdbBlockedNode != null && Object.hasOwnProperty.call(message, "pdbBlockedNode"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pdbBlockedNode);
+                        if (message.pdbBlockedPod != null && message.pdbBlockedPod.length)
+                            for (var i = 0; i < message.pdbBlockedPod.length; ++i)
+                                $root.google.container.v1.DisruptionEvent.PdbBlockedPod.encode(message.pdbBlockedPod[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.pdbViolationTimeout != null && Object.hasOwnProperty.call(message, "pdbViolationTimeout"))
+                            $root.google.protobuf.Duration.encode(message.pdbViolationTimeout, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DisruptionEvent message, length delimited. Does not implicitly {@link google.container.v1.DisruptionEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {google.container.v1.IDisruptionEvent} message DisruptionEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DisruptionEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DisruptionEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.DisruptionEvent} DisruptionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DisruptionEvent.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.DisruptionEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.disruptionType = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pdbBlockedNode = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.pdbBlockedPod && message.pdbBlockedPod.length))
+                                        message.pdbBlockedPod = [];
+                                    message.pdbBlockedPod.push($root.google.container.v1.DisruptionEvent.PdbBlockedPod.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 4: {
+                                    message.pdbViolationTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DisruptionEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.DisruptionEvent} DisruptionEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DisruptionEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DisruptionEvent message.
+                     * @function verify
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DisruptionEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.disruptionType != null && message.hasOwnProperty("disruptionType"))
+                            switch (message.disruptionType) {
+                            default:
+                                return "disruptionType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.pdbBlockedNode != null && message.hasOwnProperty("pdbBlockedNode"))
+                            if (!$util.isString(message.pdbBlockedNode))
+                                return "pdbBlockedNode: string expected";
+                        if (message.pdbBlockedPod != null && message.hasOwnProperty("pdbBlockedPod")) {
+                            if (!Array.isArray(message.pdbBlockedPod))
+                                return "pdbBlockedPod: array expected";
+                            for (var i = 0; i < message.pdbBlockedPod.length; ++i) {
+                                var error = $root.google.container.v1.DisruptionEvent.PdbBlockedPod.verify(message.pdbBlockedPod[i]);
+                                if (error)
+                                    return "pdbBlockedPod." + error;
+                            }
+                        }
+                        if (message.pdbViolationTimeout != null && message.hasOwnProperty("pdbViolationTimeout")) {
+                            properties._pdbViolationTimeout = 1;
+                            {
+                                var error = $root.google.protobuf.Duration.verify(message.pdbViolationTimeout);
+                                if (error)
+                                    return "pdbViolationTimeout." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DisruptionEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.DisruptionEvent} DisruptionEvent
+                     */
+                    DisruptionEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.DisruptionEvent)
+                            return object;
+                        var message = new $root.google.container.v1.DisruptionEvent();
+                        switch (object.disruptionType) {
+                        default:
+                            if (typeof object.disruptionType === "number") {
+                                message.disruptionType = object.disruptionType;
+                                break;
+                            }
+                            break;
+                        case "DISRUPTION_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.disruptionType = 0;
+                            break;
+                        case "POD_NOT_ENOUGH_PDB":
+                        case 1:
+                            message.disruptionType = 1;
+                            break;
+                        case "POD_PDB_VIOLATION":
+                        case 2:
+                            message.disruptionType = 2;
+                            break;
+                        }
+                        if (object.pdbBlockedNode != null)
+                            message.pdbBlockedNode = String(object.pdbBlockedNode);
+                        if (object.pdbBlockedPod) {
+                            if (!Array.isArray(object.pdbBlockedPod))
+                                throw TypeError(".google.container.v1.DisruptionEvent.pdbBlockedPod: array expected");
+                            message.pdbBlockedPod = [];
+                            for (var i = 0; i < object.pdbBlockedPod.length; ++i) {
+                                if (typeof object.pdbBlockedPod[i] !== "object")
+                                    throw TypeError(".google.container.v1.DisruptionEvent.pdbBlockedPod: object expected");
+                                message.pdbBlockedPod[i] = $root.google.container.v1.DisruptionEvent.PdbBlockedPod.fromObject(object.pdbBlockedPod[i]);
+                            }
+                        }
+                        if (object.pdbViolationTimeout != null) {
+                            if (typeof object.pdbViolationTimeout !== "object")
+                                throw TypeError(".google.container.v1.DisruptionEvent.pdbViolationTimeout: object expected");
+                            message.pdbViolationTimeout = $root.google.protobuf.Duration.fromObject(object.pdbViolationTimeout);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DisruptionEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {google.container.v1.DisruptionEvent} message DisruptionEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DisruptionEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.pdbBlockedPod = [];
+                        if (options.defaults) {
+                            object.disruptionType = options.enums === String ? "DISRUPTION_TYPE_UNSPECIFIED" : 0;
+                            object.pdbBlockedNode = "";
+                        }
+                        if (message.disruptionType != null && message.hasOwnProperty("disruptionType"))
+                            object.disruptionType = options.enums === String ? $root.google.container.v1.DisruptionEvent.DisruptionType[message.disruptionType] === undefined ? message.disruptionType : $root.google.container.v1.DisruptionEvent.DisruptionType[message.disruptionType] : message.disruptionType;
+                        if (message.pdbBlockedNode != null && message.hasOwnProperty("pdbBlockedNode"))
+                            object.pdbBlockedNode = message.pdbBlockedNode;
+                        if (message.pdbBlockedPod && message.pdbBlockedPod.length) {
+                            object.pdbBlockedPod = [];
+                            for (var j = 0; j < message.pdbBlockedPod.length; ++j)
+                                object.pdbBlockedPod[j] = $root.google.container.v1.DisruptionEvent.PdbBlockedPod.toObject(message.pdbBlockedPod[j], options);
+                        }
+                        if (message.pdbViolationTimeout != null && message.hasOwnProperty("pdbViolationTimeout")) {
+                            object.pdbViolationTimeout = $root.google.protobuf.Duration.toObject(message.pdbViolationTimeout, options);
+                            if (options.oneofs)
+                                object._pdbViolationTimeout = "pdbViolationTimeout";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DisruptionEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DisruptionEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DisruptionEvent
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.DisruptionEvent
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DisruptionEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.DisruptionEvent";
+                    };
+    
+                    /**
+                     * DisruptionType enum.
+                     * @name google.container.v1.DisruptionEvent.DisruptionType
+                     * @enum {number}
+                     * @property {number} DISRUPTION_TYPE_UNSPECIFIED=0 DISRUPTION_TYPE_UNSPECIFIED value
+                     * @property {number} POD_NOT_ENOUGH_PDB=1 POD_NOT_ENOUGH_PDB value
+                     * @property {number} POD_PDB_VIOLATION=2 POD_PDB_VIOLATION value
+                     */
+                    DisruptionEvent.DisruptionType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DISRUPTION_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "POD_NOT_ENOUGH_PDB"] = 1;
+                        values[valuesById[2] = "POD_PDB_VIOLATION"] = 2;
+                        return values;
+                    })();
+    
+                    DisruptionEvent.PdbBlockedPod = (function() {
+    
+                        /**
+                         * Properties of a PdbBlockedPod.
+                         * @memberof google.container.v1.DisruptionEvent
+                         * @interface IPdbBlockedPod
+                         * @property {string|null} [namespace] PdbBlockedPod namespace
+                         * @property {string|null} [name] PdbBlockedPod name
+                         */
+    
+                        /**
+                         * Constructs a new PdbBlockedPod.
+                         * @memberof google.container.v1.DisruptionEvent
+                         * @classdesc Represents a PdbBlockedPod.
+                         * @implements IPdbBlockedPod
+                         * @constructor
+                         * @param {google.container.v1.DisruptionEvent.IPdbBlockedPod=} [properties] Properties to set
+                         */
+                        function PdbBlockedPod(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PdbBlockedPod namespace.
+                         * @member {string} namespace
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @instance
+                         */
+                        PdbBlockedPod.prototype.namespace = "";
+    
+                        /**
+                         * PdbBlockedPod name.
+                         * @member {string} name
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @instance
+                         */
+                        PdbBlockedPod.prototype.name = "";
+    
+                        /**
+                         * Creates a new PdbBlockedPod instance using the specified properties.
+                         * @function create
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {google.container.v1.DisruptionEvent.IPdbBlockedPod=} [properties] Properties to set
+                         * @returns {google.container.v1.DisruptionEvent.PdbBlockedPod} PdbBlockedPod instance
+                         */
+                        PdbBlockedPod.create = function create(properties) {
+                            return new PdbBlockedPod(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PdbBlockedPod message. Does not implicitly {@link google.container.v1.DisruptionEvent.PdbBlockedPod.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {google.container.v1.DisruptionEvent.IPdbBlockedPod} message PdbBlockedPod message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PdbBlockedPod.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespace);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PdbBlockedPod message, length delimited. Does not implicitly {@link google.container.v1.DisruptionEvent.PdbBlockedPod.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {google.container.v1.DisruptionEvent.IPdbBlockedPod} message PdbBlockedPod message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PdbBlockedPod.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PdbBlockedPod message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.container.v1.DisruptionEvent.PdbBlockedPod} PdbBlockedPod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PdbBlockedPod.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.DisruptionEvent.PdbBlockedPod();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.namespace = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PdbBlockedPod message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.container.v1.DisruptionEvent.PdbBlockedPod} PdbBlockedPod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PdbBlockedPod.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PdbBlockedPod message.
+                         * @function verify
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PdbBlockedPod.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                if (!$util.isString(message.namespace))
+                                    return "namespace: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PdbBlockedPod message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.container.v1.DisruptionEvent.PdbBlockedPod} PdbBlockedPod
+                         */
+                        PdbBlockedPod.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.container.v1.DisruptionEvent.PdbBlockedPod)
+                                return object;
+                            var message = new $root.google.container.v1.DisruptionEvent.PdbBlockedPod();
+                            if (object.namespace != null)
+                                message.namespace = String(object.namespace);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PdbBlockedPod message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {google.container.v1.DisruptionEvent.PdbBlockedPod} message PdbBlockedPod
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PdbBlockedPod.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.namespace = "";
+                                object.name = "";
+                            }
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                object.namespace = message.namespace;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PdbBlockedPod to JSON.
+                         * @function toJSON
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PdbBlockedPod.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PdbBlockedPod
+                         * @function getTypeUrl
+                         * @memberof google.container.v1.DisruptionEvent.PdbBlockedPod
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PdbBlockedPod.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.container.v1.DisruptionEvent.PdbBlockedPod";
+                        };
+    
+                        return PdbBlockedPod;
+                    })();
+    
+                    return DisruptionEvent;
                 })();
     
                 v1.UpgradeAvailableEvent = (function() {
@@ -65549,12 +70206,14 @@
                  * @property {number} NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED=0 NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED value
                  * @property {number} BLUE_GREEN=2 BLUE_GREEN value
                  * @property {number} SURGE=3 SURGE value
+                 * @property {number} SHORT_LIVED=5 SHORT_LIVED value
                  */
                 v1.NodePoolUpdateStrategy = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[0] = "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED"] = 0;
                     values[valuesById[2] = "BLUE_GREEN"] = 2;
                     values[valuesById[3] = "SURGE"] = 3;
+                    values[valuesById[5] = "SHORT_LIVED"] = 5;
                     return values;
                 })();
     
@@ -72345,6 +77004,264 @@
                     })();
     
                     return NetworkTierConfig;
+                })();
+    
+                v1.ManagedOpenTelemetryConfig = (function() {
+    
+                    /**
+                     * Properties of a ManagedOpenTelemetryConfig.
+                     * @memberof google.container.v1
+                     * @interface IManagedOpenTelemetryConfig
+                     * @property {google.container.v1.ManagedOpenTelemetryConfig.Scope|null} [scope] ManagedOpenTelemetryConfig scope
+                     */
+    
+                    /**
+                     * Constructs a new ManagedOpenTelemetryConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a ManagedOpenTelemetryConfig.
+                     * @implements IManagedOpenTelemetryConfig
+                     * @constructor
+                     * @param {google.container.v1.IManagedOpenTelemetryConfig=} [properties] Properties to set
+                     */
+                    function ManagedOpenTelemetryConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ManagedOpenTelemetryConfig scope.
+                     * @member {google.container.v1.ManagedOpenTelemetryConfig.Scope|null|undefined} scope
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @instance
+                     */
+                    ManagedOpenTelemetryConfig.prototype.scope = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(ManagedOpenTelemetryConfig.prototype, "_scope", {
+                        get: $util.oneOfGetter($oneOfFields = ["scope"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new ManagedOpenTelemetryConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {google.container.v1.IManagedOpenTelemetryConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.ManagedOpenTelemetryConfig} ManagedOpenTelemetryConfig instance
+                     */
+                    ManagedOpenTelemetryConfig.create = function create(properties) {
+                        return new ManagedOpenTelemetryConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ManagedOpenTelemetryConfig message. Does not implicitly {@link google.container.v1.ManagedOpenTelemetryConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {google.container.v1.IManagedOpenTelemetryConfig} message ManagedOpenTelemetryConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ManagedOpenTelemetryConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scope);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ManagedOpenTelemetryConfig message, length delimited. Does not implicitly {@link google.container.v1.ManagedOpenTelemetryConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {google.container.v1.IManagedOpenTelemetryConfig} message ManagedOpenTelemetryConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ManagedOpenTelemetryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ManagedOpenTelemetryConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.ManagedOpenTelemetryConfig} ManagedOpenTelemetryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ManagedOpenTelemetryConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.ManagedOpenTelemetryConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.scope = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ManagedOpenTelemetryConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.ManagedOpenTelemetryConfig} ManagedOpenTelemetryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ManagedOpenTelemetryConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ManagedOpenTelemetryConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ManagedOpenTelemetryConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.scope != null && message.hasOwnProperty("scope")) {
+                            properties._scope = 1;
+                            switch (message.scope) {
+                            default:
+                                return "scope: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ManagedOpenTelemetryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.ManagedOpenTelemetryConfig} ManagedOpenTelemetryConfig
+                     */
+                    ManagedOpenTelemetryConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.ManagedOpenTelemetryConfig)
+                            return object;
+                        var message = new $root.google.container.v1.ManagedOpenTelemetryConfig();
+                        switch (object.scope) {
+                        default:
+                            if (typeof object.scope === "number") {
+                                message.scope = object.scope;
+                                break;
+                            }
+                            break;
+                        case "SCOPE_UNSPECIFIED":
+                        case 0:
+                            message.scope = 0;
+                            break;
+                        case "NONE":
+                        case 1:
+                            message.scope = 1;
+                            break;
+                        case "COLLECTION_AND_INSTRUMENTATION_COMPONENTS":
+                        case 2:
+                            message.scope = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ManagedOpenTelemetryConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {google.container.v1.ManagedOpenTelemetryConfig} message ManagedOpenTelemetryConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ManagedOpenTelemetryConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.scope != null && message.hasOwnProperty("scope")) {
+                            object.scope = options.enums === String ? $root.google.container.v1.ManagedOpenTelemetryConfig.Scope[message.scope] === undefined ? message.scope : $root.google.container.v1.ManagedOpenTelemetryConfig.Scope[message.scope] : message.scope;
+                            if (options.oneofs)
+                                object._scope = "scope";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ManagedOpenTelemetryConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ManagedOpenTelemetryConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ManagedOpenTelemetryConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.ManagedOpenTelemetryConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ManagedOpenTelemetryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.ManagedOpenTelemetryConfig";
+                    };
+    
+                    /**
+                     * Scope enum.
+                     * @name google.container.v1.ManagedOpenTelemetryConfig.Scope
+                     * @enum {number}
+                     * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                     * @property {number} NONE=1 NONE value
+                     * @property {number} COLLECTION_AND_INSTRUMENTATION_COMPONENTS=2 COLLECTION_AND_INSTRUMENTATION_COMPONENTS value
+                     */
+                    ManagedOpenTelemetryConfig.Scope = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NONE"] = 1;
+                        values[valuesById[2] = "COLLECTION_AND_INSTRUMENTATION_COMPONENTS"] = 2;
+                        return values;
+                    })();
+    
+                    return ManagedOpenTelemetryConfig;
                 })();
     
                 return v1;

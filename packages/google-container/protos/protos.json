@@ -13,8 +13,8 @@
                 "java_package": "com.google.container.v1",
                 "php_namespace": "Google\\Cloud\\Container\\V1",
                 "ruby_package": "Google::Cloud::Container::V1",
-                "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
-                "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+                "(google.api.resource_definition).type": "compute.googleapis.com/Subnetwork",
+                "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/subnetworks/{subnetwork}"
               },
               "nested": {
                 "ClusterManager": {
@@ -929,6 +929,11 @@
                       "oneof": [
                         "hugepages"
                       ]
+                    },
+                    "_swapConfig": {
+                      "oneof": [
+                        "swapConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -961,6 +966,14 @@
                       "id": 5,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "swapConfig": {
+                      "type": "SwapConfig",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
                       }
                     },
                     "nodeKernelModuleLoading": {
@@ -1029,6 +1042,126 @@
                         "TRANSPARENT_HUGEPAGE_DEFRAG_NEVER": 5
                       }
                     },
+                    "SwapConfig": {
+                      "oneofs": {
+                        "_enabled": {
+                          "oneof": [
+                            "enabled"
+                          ]
+                        },
+                        "_encryptionConfig": {
+                          "oneof": [
+                            "encryptionConfig"
+                          ]
+                        },
+                        "performanceProfile": {
+                          "oneof": [
+                            "bootDiskProfile",
+                            "ephemeralLocalSsdProfile",
+                            "dedicatedLocalSsdProfile"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "bootDiskProfile": {
+                          "type": "BootDiskProfile",
+                          "id": 3
+                        },
+                        "ephemeralLocalSsdProfile": {
+                          "type": "EphemeralLocalSsdProfile",
+                          "id": 4
+                        },
+                        "dedicatedLocalSsdProfile": {
+                          "type": "DedicatedLocalSsdProfile",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "EncryptionConfig": {
+                          "oneofs": {
+                            "_disabled": {
+                              "oneof": [
+                                "disabled"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "disabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "BootDiskProfile": {
+                          "oneofs": {
+                            "swapSize": {
+                              "oneof": [
+                                "swapSizeGib",
+                                "swapSizePercent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "swapSizeGib": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "swapSizePercent": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "EphemeralLocalSsdProfile": {
+                          "oneofs": {
+                            "swapSize": {
+                              "oneof": [
+                                "swapSizeGib",
+                                "swapSizePercent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "swapSizeGib": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "swapSizePercent": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DedicatedLocalSsdProfile": {
+                          "fields": {
+                            "diskCount": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
                     "NodeKernelModuleLoading": {
                       "fields": {
                         "policy": {
@@ -1075,6 +1208,16 @@
                     "_singleProcessOomKill": {
                       "oneof": [
                         "singleProcessOomKill"
+                      ]
+                    },
+                    "_shutdownGracePeriodSeconds": {
+                      "oneof": [
+                        "shutdownGracePeriodSeconds"
+                      ]
+                    },
+                    "_shutdownGracePeriodCriticalPodsSeconds": {
+                      "oneof": [
+                        "shutdownGracePeriodCriticalPodsSeconds"
                       ]
                     }
                   },
@@ -1204,6 +1347,22 @@
                     "singleProcessOomKill": {
                       "type": "bool",
                       "id": 22,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    },
+                    "shutdownGracePeriodSeconds": {
+                      "type": "int32",
+                      "id": 26,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
+                    },
+                    "shutdownGracePeriodCriticalPodsSeconds": {
+                      "type": "int32",
+                      "id": 27,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL",
                         "proto3_optional": true
@@ -1379,6 +1538,11 @@
                     "_secondaryBootDiskUpdateStrategy": {
                       "oneof": [
                         "secondaryBootDiskUpdateStrategy"
+                      ]
+                    },
+                    "_gpuDirectConfig": {
+                      "oneof": [
+                        "gpuDirectConfig"
                       ]
                     },
                     "_localSsdEncryptionMode": {
@@ -1571,6 +1735,13 @@
                         "proto3_optional": true
                       }
                     },
+                    "gpuDirectConfig": {
+                      "type": "GPUDirectConfig",
+                      "id": 51,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
                     "maxRunDuration": {
                       "type": "google.protobuf.Duration",
                       "id": 53
@@ -1599,6 +1770,10 @@
                     "bootDisk": {
                       "type": "BootDisk",
                       "id": 57
+                    },
+                    "consolidationDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 60
                     }
                   },
                   "nested": {
@@ -1738,7 +1913,8 @@
                       "type": "string",
                       "id": 19,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
                       }
                     },
                     "networkTierConfig": {
@@ -1943,6 +2119,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "registryHosts": {
+                      "rule": "repeated",
+                      "type": "RegistryHostConfig",
+                      "id": 3
                     }
                   },
                   "nested": {
@@ -1998,6 +2179,105 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RegistryHostConfig": {
+                      "fields": {
+                        "server": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "hosts": {
+                          "rule": "repeated",
+                          "type": "HostConfig",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CertificateConfig": {
+                          "oneofs": {
+                            "certificate": {
+                              "oneof": [
+                                "gcpSecretManagerSecretUri"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcpSecretManagerSecretUri": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CertificateConfigPair": {
+                          "fields": {
+                            "cert": {
+                              "type": "CertificateConfig",
+                              "id": 1
+                            },
+                            "key": {
+                              "type": "CertificateConfig",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RegistryHeader": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "HostCapability": {
+                          "values": {
+                            "HOST_CAPABILITY_UNSPECIFIED": 0,
+                            "HOST_CAPABILITY_PULL": 1,
+                            "HOST_CAPABILITY_RESOLVE": 2,
+                            "HOST_CAPABILITY_PUSH": 3
+                          }
+                        },
+                        "HostConfig": {
+                          "fields": {
+                            "host": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "capabilities": {
+                              "rule": "repeated",
+                              "type": "HostCapability",
+                              "id": 2
+                            },
+                            "overridePath": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "header": {
+                              "rule": "repeated",
+                              "type": "RegistryHeader",
+                              "id": 4
+                            },
+                            "ca": {
+                              "rule": "repeated",
+                              "type": "CertificateConfig",
+                              "id": 5
+                            },
+                            "client": {
+                              "rule": "repeated",
+                              "type": "CertificateConfigPair",
+                              "id": 6
+                            },
+                            "dialTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 7
+                            }
                           }
                         }
                       }
@@ -2191,6 +2471,13 @@
                     "lustreCsiDriverConfig": {
                       "type": "LustreCsiDriverConfig",
                       "id": 23
+                    },
+                    "sliceControllerConfig": {
+                      "type": "SliceControllerConfig",
+                      "id": 26,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -2393,6 +2680,17 @@
                       "id": 3,
                       "options": {
                         "deprecated": true
+                      }
+                    }
+                  }
+                },
+                "SliceControllerConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }
@@ -3107,6 +3405,10 @@
                     "anonymousAuthenticationConfig": {
                       "type": "AnonymousAuthenticationConfig",
                       "id": 164
+                    },
+                    "managedOpentelemetryConfig": {
+                      "type": "ManagedOpenTelemetryConfig",
+                      "id": 168
                     }
                   },
                   "nested": {
@@ -3204,6 +3506,14 @@
                       "id": 16,
                       "options": {
                         "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                      }
+                    },
+                    "controlPlaneDiskEncryptionKeyVersions": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "gkeopsEtcdBackupEncryptionKey": {
@@ -3775,6 +4085,14 @@
                     "desiredNetworkTierConfig": {
                       "type": "NetworkTierConfig",
                       "id": 155
+                    },
+                    "desiredPrivilegedAdmissionConfig": {
+                      "type": "PrivilegedAdmissionConfig",
+                      "id": 159
+                    },
+                    "desiredManagedOpentelemetryConfig": {
+                      "type": "ManagedOpenTelemetryConfig",
+                      "id": 163
                     }
                   }
                 },
@@ -3805,6 +4123,19 @@
                       "rule": "repeated",
                       "type": "string",
                       "id": 2
+                    },
+                    "status": {
+                      "type": "Status",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Status": {
+                      "values": {
+                        "STATUS_UNSPECIFIED": 0,
+                        "ACTIVE": 1,
+                        "DRAINING": 2
+                      }
                     }
                   }
                 },
@@ -4356,6 +4687,14 @@
                     "bootDisk": {
                       "type": "BootDisk",
                       "id": 47
+                    },
+                    "nodeDrainConfig": {
+                      "type": "NodePool.NodeDrainConfig",
+                      "id": 48
+                    },
+                    "consolidationDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 49
                     }
                   }
                 },
@@ -5193,6 +5532,10 @@
                     "bestEffortProvisioning": {
                       "type": "BestEffortProvisioning",
                       "id": 113
+                    },
+                    "nodeDrainConfig": {
+                      "type": "NodeDrainConfig",
+                      "id": 116
                     }
                   },
                   "nested": {
@@ -5327,6 +5670,24 @@
                         "enabled": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "NodeDrainConfig": {
+                      "oneofs": {
+                        "_respectPdbDuringNodePoolDeletion": {
+                          "oneof": [
+                            "respectPdbDuringNodePoolDeletion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "respectPdbDuringNodePoolDeletion": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     }
@@ -5662,6 +6023,10 @@
                     "defaultComputeClassConfig": {
                       "type": "DefaultComputeClassConfig",
                       "id": 9
+                    },
+                    "autopilotGeneralProfile": {
+                      "type": "AutopilotGeneralProfile",
+                      "id": 14
                     }
                   },
                   "nested": {
@@ -5670,6 +6035,12 @@
                         "PROFILE_UNSPECIFIED": 0,
                         "OPTIMIZE_UTILIZATION": 1,
                         "BALANCED": 2
+                      }
+                    },
+                    "AutopilotGeneralProfile": {
+                      "values": {
+                        "AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED": 0,
+                        "NO_PERFORMANCE": 1
                       }
                     }
                   }
@@ -6879,6 +7250,32 @@
                     }
                   }
                 },
+                "GPUDirectConfig": {
+                  "oneofs": {
+                    "_gpuDirectStrategy": {
+                      "oneof": [
+                        "gpuDirectStrategy"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "gpuDirectStrategy": {
+                      "type": "GPUDirectStrategy",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "GPUDirectStrategy": {
+                      "values": {
+                        "GPU_DIRECT_STRATEGY_UNSPECIFIED": 0,
+                        "RDMA": 2
+                      }
+                    }
+                  }
+                },
                 "PrivateIPv6GoogleAccess": {
                   "values": {
                     "PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED": 0,
@@ -7002,6 +7399,11 @@
                       "oneof": [
                         "extendedSupportEndTime"
                       ]
+                    },
+                    "_disruptionEvent": {
+                      "oneof": [
+                        "disruptionEvent"
+                      ]
                     }
                   },
                   "fields": {
@@ -7061,6 +7463,13 @@
                     "eventType": {
                       "type": "EventType",
                       "id": 12
+                    },
+                    "disruptionEvent": {
+                      "type": "DisruptionEvent",
+                      "id": 14,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -7078,7 +7487,60 @@
                         "EVENT_TYPE_UNSPECIFIED": 0,
                         "END_OF_SUPPORT": 1,
                         "COS_MILESTONE_VERSION_UPDATE": 2,
-                        "UPGRADE_LIFECYCLE": 3
+                        "UPGRADE_LIFECYCLE": 3,
+                        "DISRUPTION_EVENT": 4
+                      }
+                    }
+                  }
+                },
+                "DisruptionEvent": {
+                  "oneofs": {
+                    "_pdbViolationTimeout": {
+                      "oneof": [
+                        "pdbViolationTimeout"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "disruptionType": {
+                      "type": "DisruptionType",
+                      "id": 1
+                    },
+                    "pdbBlockedNode": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "pdbBlockedPod": {
+                      "rule": "repeated",
+                      "type": "PdbBlockedPod",
+                      "id": 3
+                    },
+                    "pdbViolationTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "DisruptionType": {
+                      "values": {
+                        "DISRUPTION_TYPE_UNSPECIFIED": 0,
+                        "POD_NOT_ENOUGH_PDB": 1,
+                        "POD_PDB_VIOLATION": 2
+                      }
+                    },
+                    "PdbBlockedPod": {
+                      "fields": {
+                        "namespace": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        }
                       }
                     }
                   }
@@ -7376,7 +7838,8 @@
                   "values": {
                     "NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED": 0,
                     "BLUE_GREEN": 2,
-                    "SURGE": 3
+                    "SURGE": 3,
+                    "SHORT_LIVED": 5
                   }
                 },
                 "ManagedPrometheusConfig": {
@@ -8086,6 +8549,33 @@
                         "NETWORK_TIER_DEFAULT": 1,
                         "NETWORK_TIER_PREMIUM": 2,
                         "NETWORK_TIER_STANDARD": 3
+                      }
+                    }
+                  }
+                },
+                "ManagedOpenTelemetryConfig": {
+                  "oneofs": {
+                    "_scope": {
+                      "oneof": [
+                        "scope"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "scope": {
+                      "type": "Scope",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Scope": {
+                      "values": {
+                        "SCOPE_UNSPECIFIED": 0,
+                        "NONE": 1,
+                        "COLLECTION_AND_INSTRUMENTATION_COMPONENTS": 2
                       }
                     }
                   }
