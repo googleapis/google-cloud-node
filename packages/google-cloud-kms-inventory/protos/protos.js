@@ -3481,6 +3481,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -3571,6 +3572,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -4794,6 +4799,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -4988,6 +4994,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -5976,6 +5986,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
@@ -6217,6 +6228,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             switch (object.publicKeyFormat) {
                             default:
@@ -6358,6 +6373,7 @@
                          * @property {google.cloud.kms.v1.ImportJob.ImportJobState|null} [state] ImportJob state
                          * @property {google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null} [publicKey] ImportJob publicKey
                          * @property {google.cloud.kms.v1.IKeyOperationAttestation|null} [attestation] ImportJob attestation
+                         * @property {string|null} [cryptoKeyBackend] ImportJob cryptoKeyBackend
                          */
     
                         /**
@@ -6456,6 +6472,14 @@
                         ImportJob.prototype.attestation = null;
     
                         /**
+                         * ImportJob cryptoKeyBackend.
+                         * @member {string} cryptoKeyBackend
+                         * @memberof google.cloud.kms.v1.ImportJob
+                         * @instance
+                         */
+                        ImportJob.prototype.cryptoKeyBackend = "";
+    
+                        /**
                          * Creates a new ImportJob instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.ImportJob
@@ -6499,6 +6523,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.protectionLevel);
                             if (message.expireEventTime != null && Object.hasOwnProperty.call(message, "expireEventTime"))
                                 $root.google.protobuf.Timestamp.encode(message.expireEventTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyBackend);
                             return writer;
                         };
     
@@ -6575,6 +6601,10 @@
                                         message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        message.cryptoKeyBackend = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6635,6 +6665,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -6677,6 +6708,9 @@
                                 if (error)
                                     return "attestation." + error;
                             }
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                if (!$util.isString(message.cryptoKeyBackend))
+                                    return "cryptoKeyBackend: string expected";
                             return null;
                         };
     
@@ -6757,6 +6791,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -6812,6 +6850,8 @@
                                     throw TypeError(".google.cloud.kms.v1.ImportJob.attestation: object expected");
                                 message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.fromObject(object.attestation);
                             }
+                            if (object.cryptoKeyBackend != null)
+                                message.cryptoKeyBackend = String(object.cryptoKeyBackend);
                             return message;
                         };
     
@@ -6839,6 +6879,7 @@
                                 object.attestation = null;
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                                 object.expireEventTime = null;
+                                object.cryptoKeyBackend = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6860,6 +6901,8 @@
                                 object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             if (message.expireEventTime != null && message.hasOwnProperty("expireEventTime"))
                                 object.expireEventTime = $root.google.protobuf.Timestamp.toObject(message.expireEventTime, options);
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                object.cryptoKeyBackend = message.cryptoKeyBackend;
                             return object;
                         };
     
@@ -7675,6 +7718,7 @@
                      * @property {number} HSM=2 HSM value
                      * @property {number} EXTERNAL=3 EXTERNAL value
                      * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
+                     * @property {number} HSM_SINGLE_TENANT=5 HSM_SINGLE_TENANT value
                      */
                     v1.ProtectionLevel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -7683,6 +7727,7 @@
                         values[valuesById[2] = "HSM"] = 2;
                         values[valuesById[3] = "EXTERNAL"] = 3;
                         values[valuesById[4] = "EXTERNAL_VPC"] = 4;
+                        values[valuesById[5] = "HSM_SINGLE_TENANT"] = 5;
                         return values;
                     })();
     
