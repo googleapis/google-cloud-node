@@ -5,6 +5,218 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "7792cae7282a9254f8bf6e1200a2ec53bdaa00cc",
+          "message": "[cloudbuild] Added backup retention days in BDRBackupRestoreJobLog",
+          "issues": [
+            "7012"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "215815d8-9b2f-492f-b4ed-94e4d1230880",
+      "createTime": "2026-01-22T01:42:47.006Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "4.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "5172f594-2d45-47f4-809a-970e29198865",
+      "createTime": "2026-01-22T01:42:46.976Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fb18caf3fe06da838684f4a4bf67332cfdf81aa8",
+          "message": "[run] add instances client library",
+          "issues": [
+            "7010"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "333fc916-ed73-4027-a56d-7676a8134aae",
+      "createTime": "2026-01-22T01:42:46.944Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "96e231b4-db97-4710-a99d-37092748411f",
+      "createTime": "2026-01-22T01:42:46.912Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "b2bb5f4f-b47e-4f0c-8eeb-ecf3e5ae97f9",
+      "createTime": "2026-01-22T01:42:46.877Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "edeb409b0538dbd59a9cba75c07e6bb56b35ab1a",
+          "message": "[inventory] add the SingleTenantHsm functionality including the management API and resource types",
+          "issues": [
+            "7015"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "e239b859-e200-447c-a14e-765e27cbe6a4",
+      "createTime": "2026-01-22T01:42:46.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f390001010c45be6131b04f2127106624f7940fa",
+          "message": "[kms] add the SingleTenantHsm functionality including the management API and resource types",
+          "issues": [
+            "7014"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "b29ffb85-0de5-4e62-82fa-00ba26906527",
+      "createTime": "2026-01-22T01:42:46.813Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abccd1b4e58cd733ff7416f1e554ceedd84a23c2",
+          "message": "[cx] updated v3 dialogflow client libraries",
+          "issues": [
+            "7005"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "16b4afb7-cd9e-486f-91da-0471320433e4",
+      "createTime": "2026-01-22T01:42:46.785Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "771d418a-bd9d-43ce-886b-6d6dc79bff75",
+      "createTime": "2026-01-22T01:42:46.754Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2273e3c0a7dc15bcdccd295851272ae75c14180e",
+          "message": "RAG - add mode config to RagEngineConfig with Spanner and Serverless",
+          "issues": [
+            "7016"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "1179ffba-660f-428d-801d-4a6d8123287d",
+      "createTime": "2026-01-22T01:42:46.727Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6698e2ed3c19a577e81843d7c3a5062bfbcd3c6a",
+          "message": "[chat] updated v3 dialogflow client libraries",
+          "issues": [
+            "7006"
+          ]
+        }
+      ],
+      "version": "0.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "90724b84-7d28-4ba0-8d62-1fe54a5d5363",
+      "createTime": "2026-01-22T01:42:46.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0dbd123f45ccc049dbc6697655cd861d1200bf07",
+          "message": "[Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior",
+          "issues": [
+            "7013"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "715cbf61-1eec-4478-a7ec-c587e14e31d1",
+      "createTime": "2026-01-22T01:42:46.668Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "04130369a1e730a90e456ea2d33b1320de67f03b",
           "message": "[containeranalysis] A new message `File` is added",
           "issues": [
@@ -67686,5 +67898,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-01-16T00:08:39.016Z"
+  "updateTime": "2026-01-22T01:42:47.006Z"
 }

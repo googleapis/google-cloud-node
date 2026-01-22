@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.6.0...artifact-registry-v4.7.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
 ## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v4.5.0...artifact-registry-v4.6.0) (2026-01-12)
 
 
