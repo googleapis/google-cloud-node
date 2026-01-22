@@ -889,6 +889,109 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ContainerStatus. */
+                interface IContainerStatus {
+
+                    /** ContainerStatus name */
+                    name?: (string|null);
+
+                    /** ContainerStatus imageDigest */
+                    imageDigest?: (string|null);
+                }
+
+                /** Represents a ContainerStatus. */
+                class ContainerStatus implements IContainerStatus {
+
+                    /**
+                     * Constructs a new ContainerStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IContainerStatus);
+
+                    /** ContainerStatus name. */
+                    public name: string;
+
+                    /** ContainerStatus imageDigest. */
+                    public imageDigest: string;
+
+                    /**
+                     * Creates a new ContainerStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContainerStatus instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IContainerStatus): google.cloud.run.v2.ContainerStatus;
+
+                    /**
+                     * Encodes the specified ContainerStatus message. Does not implicitly {@link google.cloud.run.v2.ContainerStatus.verify|verify} messages.
+                     * @param message ContainerStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IContainerStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContainerStatus message, length delimited. Does not implicitly {@link google.cloud.run.v2.ContainerStatus.verify|verify} messages.
+                     * @param message ContainerStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IContainerStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContainerStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContainerStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ContainerStatus;
+
+                    /**
+                     * Decodes a ContainerStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContainerStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ContainerStatus;
+
+                    /**
+                     * Verifies a ContainerStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContainerStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContainerStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ContainerStatus;
+
+                    /**
+                     * Creates a plain object from a ContainerStatus message. Also converts values to other types if specified.
+                     * @param message ContainerStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ContainerStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContainerStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContainerStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an Executions */
                 class Executions extends $protobuf.rpc.Service {
 
@@ -1982,6 +2085,9 @@ export namespace google {
                     /** Container startupProbe */
                     startupProbe?: (google.cloud.run.v2.IProbe|null);
 
+                    /** Container readinessProbe */
+                    readinessProbe?: (google.cloud.run.v2.IProbe|null);
+
                     /** Container dependsOn */
                     dependsOn?: (string[]|null);
 
@@ -2036,6 +2142,9 @@ export namespace google {
 
                     /** Container startupProbe. */
                     public startupProbe?: (google.cloud.run.v2.IProbe|null);
+
+                    /** Container readinessProbe. */
+                    public readinessProbe?: (google.cloud.run.v2.IProbe|null);
 
                     /** Container dependsOn. */
                     public dependsOn: string[];
@@ -5537,6 +5646,1226 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ExecutionTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents an Instances */
+                class Instances extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Instances service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Instances service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Instances;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createInstance(request: google.cloud.run.v2.ICreateInstanceRequest, callback: google.cloud.run.v2.Instances.CreateInstanceCallback): void;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createInstance(request: google.cloud.run.v2.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteInstance(request: google.cloud.run.v2.IDeleteInstanceRequest, callback: google.cloud.run.v2.Instances.DeleteInstanceCallback): void;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteInstance(request: google.cloud.run.v2.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Instance
+                     */
+                    public getInstance(request: google.cloud.run.v2.IGetInstanceRequest, callback: google.cloud.run.v2.Instances.GetInstanceCallback): void;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInstance(request: google.cloud.run.v2.IGetInstanceRequest): Promise<google.cloud.run.v2.Instance>;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInstancesResponse
+                     */
+                    public listInstances(request: google.cloud.run.v2.IListInstancesRequest, callback: google.cloud.run.v2.Instances.ListInstancesCallback): void;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInstances(request: google.cloud.run.v2.IListInstancesRequest): Promise<google.cloud.run.v2.ListInstancesResponse>;
+
+                    /**
+                     * Calls StopInstance.
+                     * @param request StopInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public stopInstance(request: google.cloud.run.v2.IStopInstanceRequest, callback: google.cloud.run.v2.Instances.StopInstanceCallback): void;
+
+                    /**
+                     * Calls StopInstance.
+                     * @param request StopInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopInstance(request: google.cloud.run.v2.IStopInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartInstance.
+                     * @param request StartInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startInstance(request: google.cloud.run.v2.IStartInstanceRequest, callback: google.cloud.run.v2.Instances.StartInstanceCallback): void;
+
+                    /**
+                     * Calls StartInstance.
+                     * @param request StartInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startInstance(request: google.cloud.run.v2.IStartInstanceRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace Instances {
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|createInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|deleteInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|getInstance}.
+                     * @param error Error, if any
+                     * @param [response] Instance
+                     */
+                    type GetInstanceCallback = (error: (Error|null), response?: google.cloud.run.v2.Instance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|listInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListInstancesResponse
+                     */
+                    type ListInstancesCallback = (error: (Error|null), response?: google.cloud.run.v2.ListInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|stopInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StopInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Instances|startInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a CreateInstanceRequest. */
+                interface ICreateInstanceRequest {
+
+                    /** CreateInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateInstanceRequest instance */
+                    instance?: (google.cloud.run.v2.IInstance|null);
+
+                    /** CreateInstanceRequest instanceId */
+                    instanceId?: (string|null);
+
+                    /** CreateInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateInstanceRequest. */
+                class CreateInstanceRequest implements ICreateInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ICreateInstanceRequest);
+
+                    /** CreateInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateInstanceRequest instance. */
+                    public instance?: (google.cloud.run.v2.IInstance|null);
+
+                    /** CreateInstanceRequest instanceId. */
+                    public instanceId: string;
+
+                    /** CreateInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ICreateInstanceRequest): google.cloud.run.v2.CreateInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.CreateInstanceRequest;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.CreateInstanceRequest;
+
+                    /**
+                     * Verifies a CreateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.CreateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.CreateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetInstanceRequest. */
+                interface IGetInstanceRequest {
+
+                    /** GetInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInstanceRequest. */
+                class GetInstanceRequest implements IGetInstanceRequest {
+
+                    /**
+                     * Constructs a new GetInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IGetInstanceRequest);
+
+                    /** GetInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IGetInstanceRequest): google.cloud.run.v2.GetInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.GetInstanceRequest;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.GetInstanceRequest;
+
+                    /**
+                     * Verifies a GetInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.GetInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.GetInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteInstanceRequest. */
+                interface IDeleteInstanceRequest {
+
+                    /** DeleteInstanceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteInstanceRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteInstanceRequest. */
+                class DeleteInstanceRequest implements IDeleteInstanceRequest {
+
+                    /**
+                     * Constructs a new DeleteInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IDeleteInstanceRequest);
+
+                    /** DeleteInstanceRequest name. */
+                    public name: string;
+
+                    /** DeleteInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteInstanceRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IDeleteInstanceRequest): google.cloud.run.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Verifies a DeleteInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.DeleteInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInstancesRequest. */
+                interface IListInstancesRequest {
+
+                    /** ListInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInstancesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListInstancesRequest showDeleted */
+                    showDeleted?: (boolean|null);
+                }
+
+                /** Represents a ListInstancesRequest. */
+                class ListInstancesRequest implements IListInstancesRequest {
+
+                    /**
+                     * Constructs a new ListInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IListInstancesRequest);
+
+                    /** ListInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListInstancesRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /**
+                     * Creates a new ListInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IListInstancesRequest): google.cloud.run.v2.ListInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message. Does not implicitly {@link google.cloud.run.v2.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ListInstancesRequest;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ListInstancesRequest;
+
+                    /**
+                     * Verifies a ListInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ListInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ListInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInstancesResponse. */
+                interface IListInstancesResponse {
+
+                    /** ListInstancesResponse instances */
+                    instances?: (google.cloud.run.v2.IInstance[]|null);
+
+                    /** ListInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListInstancesResponse. */
+                class ListInstancesResponse implements IListInstancesResponse {
+
+                    /**
+                     * Constructs a new ListInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IListInstancesResponse);
+
+                    /** ListInstancesResponse instances. */
+                    public instances: google.cloud.run.v2.IInstance[];
+
+                    /** ListInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IListInstancesResponse): google.cloud.run.v2.ListInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message. Does not implicitly {@link google.cloud.run.v2.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.run.v2.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ListInstancesResponse;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ListInstancesResponse;
+
+                    /**
+                     * Verifies a ListInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ListInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ListInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopInstanceRequest. */
+                interface IStopInstanceRequest {
+
+                    /** StopInstanceRequest name */
+                    name?: (string|null);
+
+                    /** StopInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** StopInstanceRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a StopInstanceRequest. */
+                class StopInstanceRequest implements IStopInstanceRequest {
+
+                    /**
+                     * Constructs a new StopInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IStopInstanceRequest);
+
+                    /** StopInstanceRequest name. */
+                    public name: string;
+
+                    /** StopInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** StopInstanceRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new StopInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IStopInstanceRequest): google.cloud.run.v2.StopInstanceRequest;
+
+                    /**
+                     * Encodes the specified StopInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.StopInstanceRequest.verify|verify} messages.
+                     * @param message StopInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IStopInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.StopInstanceRequest.verify|verify} messages.
+                     * @param message StopInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IStopInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.StopInstanceRequest;
+
+                    /**
+                     * Decodes a StopInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.StopInstanceRequest;
+
+                    /**
+                     * Verifies a StopInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.StopInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a StopInstanceRequest message. Also converts values to other types if specified.
+                     * @param message StopInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.StopInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartInstanceRequest. */
+                interface IStartInstanceRequest {
+
+                    /** StartInstanceRequest name */
+                    name?: (string|null);
+
+                    /** StartInstanceRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** StartInstanceRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a StartInstanceRequest. */
+                class StartInstanceRequest implements IStartInstanceRequest {
+
+                    /**
+                     * Constructs a new StartInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IStartInstanceRequest);
+
+                    /** StartInstanceRequest name. */
+                    public name: string;
+
+                    /** StartInstanceRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** StartInstanceRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new StartInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IStartInstanceRequest): google.cloud.run.v2.StartInstanceRequest;
+
+                    /**
+                     * Encodes the specified StartInstanceRequest message. Does not implicitly {@link google.cloud.run.v2.StartInstanceRequest.verify|verify} messages.
+                     * @param message StartInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IStartInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.StartInstanceRequest.verify|verify} messages.
+                     * @param message StartInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IStartInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.StartInstanceRequest;
+
+                    /**
+                     * Decodes a StartInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.StartInstanceRequest;
+
+                    /**
+                     * Verifies a StartInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.StartInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a StartInstanceRequest message. Also converts values to other types if specified.
+                     * @param message StartInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.StartInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Instance. */
+                interface IInstance {
+
+                    /** Instance name */
+                    name?: (string|null);
+
+                    /** Instance description */
+                    description?: (string|null);
+
+                    /** Instance uid */
+                    uid?: (string|null);
+
+                    /** Instance generation */
+                    generation?: (number|Long|string|null);
+
+                    /** Instance labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Instance annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Instance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance creator */
+                    creator?: (string|null);
+
+                    /** Instance lastModifier */
+                    lastModifier?: (string|null);
+
+                    /** Instance client */
+                    client?: (string|null);
+
+                    /** Instance clientVersion */
+                    clientVersion?: (string|null);
+
+                    /** Instance launchStage */
+                    launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+                    /** Instance binaryAuthorization */
+                    binaryAuthorization?: (google.cloud.run.v2.IBinaryAuthorization|null);
+
+                    /** Instance vpcAccess */
+                    vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** Instance serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** Instance containers */
+                    containers?: (google.cloud.run.v2.IContainer[]|null);
+
+                    /** Instance volumes */
+                    volumes?: (google.cloud.run.v2.IVolume[]|null);
+
+                    /** Instance encryptionKey */
+                    encryptionKey?: (string|null);
+
+                    /** Instance encryptionKeyRevocationAction */
+                    encryptionKeyRevocationAction?: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction|null);
+
+                    /** Instance encryptionKeyShutdownDuration */
+                    encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
+                    /** Instance nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** Instance gpuZonalRedundancyDisabled */
+                    gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Instance ingress */
+                    ingress?: (google.cloud.run.v2.IngressTraffic|keyof typeof google.cloud.run.v2.IngressTraffic|null);
+
+                    /** Instance invokerIamDisabled */
+                    invokerIamDisabled?: (boolean|null);
+
+                    /** Instance iapEnabled */
+                    iapEnabled?: (boolean|null);
+
+                    /** Instance observedGeneration */
+                    observedGeneration?: (number|Long|string|null);
+
+                    /** Instance logUri */
+                    logUri?: (string|null);
+
+                    /** Instance terminalCondition */
+                    terminalCondition?: (google.cloud.run.v2.ICondition|null);
+
+                    /** Instance conditions */
+                    conditions?: (google.cloud.run.v2.ICondition[]|null);
+
+                    /** Instance containerStatuses */
+                    containerStatuses?: (google.cloud.run.v2.IContainerStatus[]|null);
+
+                    /** Instance satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Instance urls */
+                    urls?: (string[]|null);
+
+                    /** Instance reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** Instance etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an Instance. */
+                class Instance implements IInstance {
+
+                    /**
+                     * Constructs a new Instance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IInstance);
+
+                    /** Instance name. */
+                    public name: string;
+
+                    /** Instance description. */
+                    public description: string;
+
+                    /** Instance uid. */
+                    public uid: string;
+
+                    /** Instance generation. */
+                    public generation: (number|Long|string);
+
+                    /** Instance labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Instance annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Instance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance creator. */
+                    public creator: string;
+
+                    /** Instance lastModifier. */
+                    public lastModifier: string;
+
+                    /** Instance client. */
+                    public client: string;
+
+                    /** Instance clientVersion. */
+                    public clientVersion: string;
+
+                    /** Instance launchStage. */
+                    public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+                    /** Instance binaryAuthorization. */
+                    public binaryAuthorization?: (google.cloud.run.v2.IBinaryAuthorization|null);
+
+                    /** Instance vpcAccess. */
+                    public vpcAccess?: (google.cloud.run.v2.IVpcAccess|null);
+
+                    /** Instance serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** Instance containers. */
+                    public containers: google.cloud.run.v2.IContainer[];
+
+                    /** Instance volumes. */
+                    public volumes: google.cloud.run.v2.IVolume[];
+
+                    /** Instance encryptionKey. */
+                    public encryptionKey: string;
+
+                    /** Instance encryptionKeyRevocationAction. */
+                    public encryptionKeyRevocationAction: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction);
+
+                    /** Instance encryptionKeyShutdownDuration. */
+                    public encryptionKeyShutdownDuration?: (google.protobuf.IDuration|null);
+
+                    /** Instance nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
+
+                    /** Instance gpuZonalRedundancyDisabled. */
+                    public gpuZonalRedundancyDisabled?: (boolean|null);
+
+                    /** Instance ingress. */
+                    public ingress: (google.cloud.run.v2.IngressTraffic|keyof typeof google.cloud.run.v2.IngressTraffic);
+
+                    /** Instance invokerIamDisabled. */
+                    public invokerIamDisabled: boolean;
+
+                    /** Instance iapEnabled. */
+                    public iapEnabled: boolean;
+
+                    /** Instance observedGeneration. */
+                    public observedGeneration: (number|Long|string);
+
+                    /** Instance logUri. */
+                    public logUri: string;
+
+                    /** Instance terminalCondition. */
+                    public terminalCondition?: (google.cloud.run.v2.ICondition|null);
+
+                    /** Instance conditions. */
+                    public conditions: google.cloud.run.v2.ICondition[];
+
+                    /** Instance containerStatuses. */
+                    public containerStatuses: google.cloud.run.v2.IContainerStatus[];
+
+                    /** Instance satisfiesPzs. */
+                    public satisfiesPzs: boolean;
+
+                    /** Instance urls. */
+                    public urls: string[];
+
+                    /** Instance reconciling. */
+                    public reconciling: boolean;
+
+                    /** Instance etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new Instance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Instance instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IInstance): google.cloud.run.v2.Instance;
+
+                    /**
+                     * Encodes the specified Instance message. Does not implicitly {@link google.cloud.run.v2.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Instance message, length delimited. Does not implicitly {@link google.cloud.run.v2.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.Instance;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.Instance;
+
+                    /**
+                     * Verifies an Instance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Instance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Instance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.Instance;
+
+                    /**
+                     * Creates a plain object from an Instance message. Also converts values to other types if specified.
+                     * @param message Instance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.Instance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Instance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Instance
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -44,6 +44,14 @@ body:
         - label: "Check the API's issue tracker:
             https://cloud.google.com/support/docs/issue-trackers"
           required: true
+  - type: input
+    attributes:
+      label: Library Name
+      description: |
+        Which library is this issue for? (e.g. @google-cloud/storage, @google-cloud/datastore, etc.)
+        The library name can be found in its `package.json` or by using the directory name (e.g., `google-cloud-storage`).
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: >
