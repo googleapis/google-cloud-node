@@ -30055,6 +30055,20 @@ export namespace google {
                  * @returns Promise
                  */
                 public fetchNodePoolUpgradeInfo(request: google.container.v1beta1.IFetchNodePoolUpgradeInfoRequest): Promise<google.container.v1beta1.NodePoolUpgradeInfo>;
+
+                /**
+                 * Calls CompleteControlPlaneUpgrade.
+                 * @param request CompleteControlPlaneUpgradeRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Operation
+                 */
+                public completeControlPlaneUpgrade(request: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest, callback: google.container.v1beta1.ClusterManager.CompleteControlPlaneUpgradeCallback): void;
+
+                /**
+                 * Calls CompleteControlPlaneUpgrade.
+                 * @param request CompleteControlPlaneUpgradeRequest message or plain object
+                 * @returns Promise
+                 */
+                public completeControlPlaneUpgrade(request: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest): Promise<google.container.v1beta1.Operation>;
             }
 
             namespace ClusterManager {
@@ -30317,6 +30331,116 @@ export namespace google {
                  * @param [response] NodePoolUpgradeInfo
                  */
                 type FetchNodePoolUpgradeInfoCallback = (error: (Error|null), response?: google.container.v1beta1.NodePoolUpgradeInfo) => void;
+
+                /**
+                 * Callback as used by {@link google.container.v1beta1.ClusterManager|completeControlPlaneUpgrade}.
+                 * @param error Error, if any
+                 * @param [response] Operation
+                 */
+                type CompleteControlPlaneUpgradeCallback = (error: (Error|null), response?: google.container.v1beta1.Operation) => void;
+            }
+
+            /** Properties of a CompleteControlPlaneUpgradeRequest. */
+            interface ICompleteControlPlaneUpgradeRequest {
+
+                /** CompleteControlPlaneUpgradeRequest name */
+                name?: (string|null);
+
+                /** CompleteControlPlaneUpgradeRequest version */
+                version?: (string|null);
+            }
+
+            /** Represents a CompleteControlPlaneUpgradeRequest. */
+            class CompleteControlPlaneUpgradeRequest implements ICompleteControlPlaneUpgradeRequest {
+
+                /**
+                 * Constructs a new CompleteControlPlaneUpgradeRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest);
+
+                /** CompleteControlPlaneUpgradeRequest name. */
+                public name: string;
+
+                /** CompleteControlPlaneUpgradeRequest version. */
+                public version: string;
+
+                /**
+                 * Creates a new CompleteControlPlaneUpgradeRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CompleteControlPlaneUpgradeRequest instance
+                 */
+                public static create(properties?: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest): google.container.v1beta1.CompleteControlPlaneUpgradeRequest;
+
+                /**
+                 * Encodes the specified CompleteControlPlaneUpgradeRequest message. Does not implicitly {@link google.container.v1beta1.CompleteControlPlaneUpgradeRequest.verify|verify} messages.
+                 * @param message CompleteControlPlaneUpgradeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CompleteControlPlaneUpgradeRequest message, length delimited. Does not implicitly {@link google.container.v1beta1.CompleteControlPlaneUpgradeRequest.verify|verify} messages.
+                 * @param message CompleteControlPlaneUpgradeRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ICompleteControlPlaneUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CompleteControlPlaneUpgradeRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CompleteControlPlaneUpgradeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.CompleteControlPlaneUpgradeRequest;
+
+                /**
+                 * Decodes a CompleteControlPlaneUpgradeRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CompleteControlPlaneUpgradeRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.CompleteControlPlaneUpgradeRequest;
+
+                /**
+                 * Verifies a CompleteControlPlaneUpgradeRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CompleteControlPlaneUpgradeRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CompleteControlPlaneUpgradeRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.CompleteControlPlaneUpgradeRequest;
+
+                /**
+                 * Creates a plain object from a CompleteControlPlaneUpgradeRequest message. Also converts values to other types if specified.
+                 * @param message CompleteControlPlaneUpgradeRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.CompleteControlPlaneUpgradeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CompleteControlPlaneUpgradeRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CompleteControlPlaneUpgradeRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a LinuxNodeConfig. */
@@ -31392,6 +31516,12 @@ export namespace google {
 
                 /** NodeKubeletConfig singleProcessOomKill */
                 singleProcessOomKill?: (boolean|null);
+
+                /** NodeKubeletConfig shutdownGracePeriodSeconds */
+                shutdownGracePeriodSeconds?: (number|null);
+
+                /** NodeKubeletConfig shutdownGracePeriodCriticalPodsSeconds */
+                shutdownGracePeriodCriticalPodsSeconds?: (number|null);
             }
 
             /** Represents a NodeKubeletConfig. */
@@ -31462,6 +31592,12 @@ export namespace google {
 
                 /** NodeKubeletConfig singleProcessOomKill. */
                 public singleProcessOomKill?: (boolean|null);
+
+                /** NodeKubeletConfig shutdownGracePeriodSeconds. */
+                public shutdownGracePeriodSeconds?: (number|null);
+
+                /** NodeKubeletConfig shutdownGracePeriodCriticalPodsSeconds. */
+                public shutdownGracePeriodCriticalPodsSeconds?: (number|null);
 
                 /**
                  * Creates a new NodeKubeletConfig instance using the specified properties.
@@ -32251,6 +32387,9 @@ export namespace google {
                 /** NodeConfig secondaryBootDiskUpdateStrategy */
                 secondaryBootDiskUpdateStrategy?: (google.container.v1beta1.ISecondaryBootDiskUpdateStrategy|null);
 
+                /** NodeConfig gpuDirectConfig */
+                gpuDirectConfig?: (google.container.v1beta1.IGPUDirectConfig|null);
+
                 /** NodeConfig maxRunDuration */
                 maxRunDuration?: (google.protobuf.IDuration|null);
 
@@ -32265,6 +32404,9 @@ export namespace google {
 
                 /** NodeConfig bootDisk */
                 bootDisk?: (google.container.v1beta1.IBootDisk|null);
+
+                /** NodeConfig consolidationDelay */
+                consolidationDelay?: (google.protobuf.IDuration|null);
             }
 
             /** Represents a NodeConfig. */
@@ -32402,6 +32544,9 @@ export namespace google {
                 /** NodeConfig secondaryBootDiskUpdateStrategy. */
                 public secondaryBootDiskUpdateStrategy?: (google.container.v1beta1.ISecondaryBootDiskUpdateStrategy|null);
 
+                /** NodeConfig gpuDirectConfig. */
+                public gpuDirectConfig?: (google.container.v1beta1.IGPUDirectConfig|null);
+
                 /** NodeConfig maxRunDuration. */
                 public maxRunDuration?: (google.protobuf.IDuration|null);
 
@@ -32416,6 +32561,9 @@ export namespace google {
 
                 /** NodeConfig bootDisk. */
                 public bootDisk?: (google.container.v1beta1.IBootDisk|null);
+
+                /** NodeConfig consolidationDelay. */
+                public consolidationDelay?: (google.protobuf.IDuration|null);
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -34084,6 +34232,9 @@ export namespace google {
 
                 /** ContainerdConfig writableCgroups */
                 writableCgroups?: (google.container.v1beta1.ContainerdConfig.IWritableCgroups|null);
+
+                /** ContainerdConfig registryHosts */
+                registryHosts?: (google.container.v1beta1.ContainerdConfig.IRegistryHostConfig[]|null);
             }
 
             /** Represents a ContainerdConfig. */
@@ -34100,6 +34251,9 @@ export namespace google {
 
                 /** ContainerdConfig writableCgroups. */
                 public writableCgroups?: (google.container.v1beta1.ContainerdConfig.IWritableCgroups|null);
+
+                /** ContainerdConfig registryHosts. */
+                public registryHosts: google.container.v1beta1.ContainerdConfig.IRegistryHostConfig[];
 
                 /**
                  * Creates a new ContainerdConfig instance using the specified properties.
@@ -34588,6 +34742,559 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RegistryHostConfig. */
+                interface IRegistryHostConfig {
+
+                    /** RegistryHostConfig server */
+                    server?: (string|null);
+
+                    /** RegistryHostConfig hosts */
+                    hosts?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig[]|null);
+                }
+
+                /** Represents a RegistryHostConfig. */
+                class RegistryHostConfig implements IRegistryHostConfig {
+
+                    /**
+                     * Constructs a new RegistryHostConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.ContainerdConfig.IRegistryHostConfig);
+
+                    /** RegistryHostConfig server. */
+                    public server: string;
+
+                    /** RegistryHostConfig hosts. */
+                    public hosts: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig[];
+
+                    /**
+                     * Creates a new RegistryHostConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegistryHostConfig instance
+                     */
+                    public static create(properties?: google.container.v1beta1.ContainerdConfig.IRegistryHostConfig): google.container.v1beta1.ContainerdConfig.RegistryHostConfig;
+
+                    /**
+                     * Encodes the specified RegistryHostConfig message. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.verify|verify} messages.
+                     * @param message RegistryHostConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.ContainerdConfig.IRegistryHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegistryHostConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.verify|verify} messages.
+                     * @param message RegistryHostConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.ContainerdConfig.IRegistryHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegistryHostConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegistryHostConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ContainerdConfig.RegistryHostConfig;
+
+                    /**
+                     * Decodes a RegistryHostConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegistryHostConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ContainerdConfig.RegistryHostConfig;
+
+                    /**
+                     * Verifies a RegistryHostConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegistryHostConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegistryHostConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ContainerdConfig.RegistryHostConfig;
+
+                    /**
+                     * Creates a plain object from a RegistryHostConfig message. Also converts values to other types if specified.
+                     * @param message RegistryHostConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegistryHostConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegistryHostConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RegistryHostConfig {
+
+                    /** Properties of a CertificateConfig. */
+                    interface ICertificateConfig {
+
+                        /** CertificateConfig gcpSecretManagerSecretUri */
+                        gcpSecretManagerSecretUri?: (string|null);
+                    }
+
+                    /** Represents a CertificateConfig. */
+                    class CertificateConfig implements ICertificateConfig {
+
+                        /**
+                         * Constructs a new CertificateConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig);
+
+                        /** CertificateConfig gcpSecretManagerSecretUri. */
+                        public gcpSecretManagerSecretUri?: (string|null);
+
+                        /** CertificateConfig certificate. */
+                        public certificate?: "gcpSecretManagerSecretUri";
+
+                        /**
+                         * Creates a new CertificateConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateConfig instance
+                         */
+                        public static create(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig;
+
+                        /**
+                         * Encodes the specified CertificateConfig message. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify|verify} messages.
+                         * @param message CertificateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig.verify|verify} messages.
+                         * @param message CertificateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig;
+
+                        /**
+                         * Decodes a CertificateConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig;
+
+                        /**
+                         * Verifies a CertificateConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig;
+
+                        /**
+                         * Creates a plain object from a CertificateConfig message. Also converts values to other types if specified.
+                         * @param message CertificateConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CertificateConfigPair. */
+                    interface ICertificateConfigPair {
+
+                        /** CertificateConfigPair cert */
+                        cert?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null);
+
+                        /** CertificateConfigPair key */
+                        key?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null);
+                    }
+
+                    /** Represents a CertificateConfigPair. */
+                    class CertificateConfigPair implements ICertificateConfigPair {
+
+                        /**
+                         * Constructs a new CertificateConfigPair.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair);
+
+                        /** CertificateConfigPair cert. */
+                        public cert?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null);
+
+                        /** CertificateConfigPair key. */
+                        public key?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig|null);
+
+                        /**
+                         * Creates a new CertificateConfigPair instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateConfigPair instance
+                         */
+                        public static create(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair;
+
+                        /**
+                         * Encodes the specified CertificateConfigPair message. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.verify|verify} messages.
+                         * @param message CertificateConfigPair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateConfigPair message, length delimited. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair.verify|verify} messages.
+                         * @param message CertificateConfigPair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateConfigPair message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateConfigPair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair;
+
+                        /**
+                         * Decodes a CertificateConfigPair message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateConfigPair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair;
+
+                        /**
+                         * Verifies a CertificateConfigPair message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateConfigPair message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateConfigPair
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair;
+
+                        /**
+                         * Creates a plain object from a CertificateConfigPair message. Also converts values to other types if specified.
+                         * @param message CertificateConfigPair
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.CertificateConfigPair, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateConfigPair to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateConfigPair
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RegistryHeader. */
+                    interface IRegistryHeader {
+
+                        /** RegistryHeader key */
+                        key?: (string|null);
+
+                        /** RegistryHeader value */
+                        value?: (string[]|null);
+                    }
+
+                    /** Represents a RegistryHeader. */
+                    class RegistryHeader implements IRegistryHeader {
+
+                        /**
+                         * Constructs a new RegistryHeader.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader);
+
+                        /** RegistryHeader key. */
+                        public key: string;
+
+                        /** RegistryHeader value. */
+                        public value: string[];
+
+                        /**
+                         * Creates a new RegistryHeader instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RegistryHeader instance
+                         */
+                        public static create(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader;
+
+                        /**
+                         * Encodes the specified RegistryHeader message. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader.verify|verify} messages.
+                         * @param message RegistryHeader message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RegistryHeader message, length delimited. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader.verify|verify} messages.
+                         * @param message RegistryHeader message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RegistryHeader message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RegistryHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader;
+
+                        /**
+                         * Decodes a RegistryHeader message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RegistryHeader
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader;
+
+                        /**
+                         * Verifies a RegistryHeader message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RegistryHeader message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RegistryHeader
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader;
+
+                        /**
+                         * Creates a plain object from a RegistryHeader message. Also converts values to other types if specified.
+                         * @param message RegistryHeader
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.RegistryHeader, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RegistryHeader to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RegistryHeader
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** HostCapability enum. */
+                    enum HostCapability {
+                        HOST_CAPABILITY_UNSPECIFIED = 0,
+                        HOST_CAPABILITY_PULL = 1,
+                        HOST_CAPABILITY_RESOLVE = 2,
+                        HOST_CAPABILITY_PUSH = 3
+                    }
+
+                    /** Properties of a HostConfig. */
+                    interface IHostConfig {
+
+                        /** HostConfig host */
+                        host?: (string|null);
+
+                        /** HostConfig capabilities */
+                        capabilities?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostCapability[]|null);
+
+                        /** HostConfig overridePath */
+                        overridePath?: (boolean|null);
+
+                        /** HostConfig header */
+                        header?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader[]|null);
+
+                        /** HostConfig ca */
+                        ca?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig[]|null);
+
+                        /** HostConfig client */
+                        client?: (google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair[]|null);
+
+                        /** HostConfig dialTimeout */
+                        dialTimeout?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a HostConfig. */
+                    class HostConfig implements IHostConfig {
+
+                        /**
+                         * Constructs a new HostConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig);
+
+                        /** HostConfig host. */
+                        public host: string;
+
+                        /** HostConfig capabilities. */
+                        public capabilities: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostCapability[];
+
+                        /** HostConfig overridePath. */
+                        public overridePath: boolean;
+
+                        /** HostConfig header. */
+                        public header: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IRegistryHeader[];
+
+                        /** HostConfig ca. */
+                        public ca: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfig[];
+
+                        /** HostConfig client. */
+                        public client: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.ICertificateConfigPair[];
+
+                        /** HostConfig dialTimeout. */
+                        public dialTimeout?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new HostConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HostConfig instance
+                         */
+                        public static create(properties?: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig;
+
+                        /**
+                         * Encodes the specified HostConfig message. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig.verify|verify} messages.
+                         * @param message HostConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HostConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig.verify|verify} messages.
+                         * @param message HostConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.IHostConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HostConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HostConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig;
+
+                        /**
+                         * Decodes a HostConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HostConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig;
+
+                        /**
+                         * Verifies a HostConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HostConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HostConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig;
+
+                        /**
+                         * Creates a plain object from a HostConfig message. Also converts values to other types if specified.
+                         * @param message HostConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.container.v1beta1.ContainerdConfig.RegistryHostConfig.HostConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HostConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HostConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
             }
 
@@ -35604,6 +36311,12 @@ export namespace google {
 
                 /** AddonsConfig lustreCsiDriverConfig */
                 lustreCsiDriverConfig?: (google.container.v1beta1.ILustreCsiDriverConfig|null);
+
+                /** AddonsConfig podSnapshotConfig */
+                podSnapshotConfig?: (google.container.v1beta1.IPodSnapshotConfig|null);
+
+                /** AddonsConfig sliceControllerConfig */
+                sliceControllerConfig?: (google.container.v1beta1.ISliceControllerConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -35668,6 +36381,12 @@ export namespace google {
 
                 /** AddonsConfig lustreCsiDriverConfig. */
                 public lustreCsiDriverConfig?: (google.container.v1beta1.ILustreCsiDriverConfig|null);
+
+                /** AddonsConfig podSnapshotConfig. */
+                public podSnapshotConfig?: (google.container.v1beta1.IPodSnapshotConfig|null);
+
+                /** AddonsConfig sliceControllerConfig. */
+                public sliceControllerConfig?: (google.container.v1beta1.ISliceControllerConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -37202,6 +37921,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for LustreCsiDriverConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SliceControllerConfig. */
+            interface ISliceControllerConfig {
+
+                /** SliceControllerConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a SliceControllerConfig. */
+            class SliceControllerConfig implements ISliceControllerConfig {
+
+                /**
+                 * Constructs a new SliceControllerConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ISliceControllerConfig);
+
+                /** SliceControllerConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new SliceControllerConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SliceControllerConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.ISliceControllerConfig): google.container.v1beta1.SliceControllerConfig;
+
+                /**
+                 * Encodes the specified SliceControllerConfig message. Does not implicitly {@link google.container.v1beta1.SliceControllerConfig.verify|verify} messages.
+                 * @param message SliceControllerConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ISliceControllerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SliceControllerConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.SliceControllerConfig.verify|verify} messages.
+                 * @param message SliceControllerConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ISliceControllerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SliceControllerConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SliceControllerConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.SliceControllerConfig;
+
+                /**
+                 * Decodes a SliceControllerConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SliceControllerConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.SliceControllerConfig;
+
+                /**
+                 * Verifies a SliceControllerConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SliceControllerConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SliceControllerConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.SliceControllerConfig;
+
+                /**
+                 * Creates a plain object from a SliceControllerConfig message. Also converts values to other types if specified.
+                 * @param message SliceControllerConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.SliceControllerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SliceControllerConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SliceControllerConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -39239,6 +40055,12 @@ export namespace google {
                 /** Cluster currentMasterVersion */
                 currentMasterVersion?: (string|null);
 
+                /** Cluster currentEmulatedVersion */
+                currentEmulatedVersion?: (string|null);
+
+                /** Cluster rollbackSafeUpgrade */
+                rollbackSafeUpgrade?: (google.container.v1beta1.IRollbackSafeUpgrade|null);
+
                 /** Cluster currentNodeVersion */
                 currentNodeVersion?: (string|null);
 
@@ -39349,6 +40171,9 @@ export namespace google {
 
                 /** Cluster secretSyncConfig */
                 secretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
+
+                /** Cluster managedOpentelemetryConfig */
+                managedOpentelemetryConfig?: (google.container.v1beta1.IManagedOpenTelemetryConfig|null);
             }
 
             /** Represents a Cluster. */
@@ -39513,6 +40338,12 @@ export namespace google {
                 /** Cluster currentMasterVersion. */
                 public currentMasterVersion: string;
 
+                /** Cluster currentEmulatedVersion. */
+                public currentEmulatedVersion: string;
+
+                /** Cluster rollbackSafeUpgrade. */
+                public rollbackSafeUpgrade?: (google.container.v1beta1.IRollbackSafeUpgrade|null);
+
                 /** Cluster currentNodeVersion. */
                 public currentNodeVersion: string;
 
@@ -39623,6 +40454,9 @@ export namespace google {
 
                 /** Cluster secretSyncConfig. */
                 public secretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
+
+                /** Cluster managedOpentelemetryConfig. */
+                public managedOpentelemetryConfig?: (google.container.v1beta1.IManagedOpenTelemetryConfig|null);
 
                 /**
                  * Creates a new Cluster instance using the specified properties.
@@ -39843,6 +40677,9 @@ export namespace google {
                 /** UserManagedKeysConfig controlPlaneDiskEncryptionKey */
                 controlPlaneDiskEncryptionKey?: (string|null);
 
+                /** UserManagedKeysConfig controlPlaneDiskEncryptionKeyVersions */
+                controlPlaneDiskEncryptionKeyVersions?: (string[]|null);
+
                 /** UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey */
                 gkeopsEtcdBackupEncryptionKey?: (string|null);
             }
@@ -39876,6 +40713,9 @@ export namespace google {
 
                 /** UserManagedKeysConfig controlPlaneDiskEncryptionKey. */
                 public controlPlaneDiskEncryptionKey: string;
+
+                /** UserManagedKeysConfig controlPlaneDiskEncryptionKeyVersions. */
+                public controlPlaneDiskEncryptionKeyVersions: string[];
 
                 /** UserManagedKeysConfig gkeopsEtcdBackupEncryptionKey. */
                 public gkeopsEtcdBackupEncryptionKey: string;
@@ -41297,6 +42137,15 @@ export namespace google {
 
                 /** ClusterUpdate desiredSecretSyncConfig */
                 desiredSecretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
+
+                /** ClusterUpdate desiredPrivilegedAdmissionConfig */
+                desiredPrivilegedAdmissionConfig?: (google.container.v1beta1.IPrivilegedAdmissionConfig|null);
+
+                /** ClusterUpdate desiredRollbackSafeUpgrade */
+                desiredRollbackSafeUpgrade?: (google.container.v1beta1.IRollbackSafeUpgrade|null);
+
+                /** ClusterUpdate desiredManagedOpentelemetryConfig */
+                desiredManagedOpentelemetryConfig?: (google.container.v1beta1.IManagedOpenTelemetryConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -41554,6 +42403,15 @@ export namespace google {
                 /** ClusterUpdate desiredSecretSyncConfig. */
                 public desiredSecretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
 
+                /** ClusterUpdate desiredPrivilegedAdmissionConfig. */
+                public desiredPrivilegedAdmissionConfig?: (google.container.v1beta1.IPrivilegedAdmissionConfig|null);
+
+                /** ClusterUpdate desiredRollbackSafeUpgrade. */
+                public desiredRollbackSafeUpgrade?: (google.container.v1beta1.IRollbackSafeUpgrade|null);
+
+                /** ClusterUpdate desiredManagedOpentelemetryConfig. */
+                public desiredManagedOpentelemetryConfig?: (google.container.v1beta1.IManagedOpenTelemetryConfig|null);
+
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
                  * @param [properties] Properties to set
@@ -41743,6 +42601,9 @@ export namespace google {
 
                 /** AdditionalIPRangesConfig podIpv4RangeNames */
                 podIpv4RangeNames?: (string[]|null);
+
+                /** AdditionalIPRangesConfig status */
+                status?: (google.container.v1beta1.AdditionalIPRangesConfig.Status|keyof typeof google.container.v1beta1.AdditionalIPRangesConfig.Status|null);
             }
 
             /** Represents an AdditionalIPRangesConfig. */
@@ -41759,6 +42620,9 @@ export namespace google {
 
                 /** AdditionalIPRangesConfig podIpv4RangeNames. */
                 public podIpv4RangeNames: string[];
+
+                /** AdditionalIPRangesConfig status. */
+                public status: (google.container.v1beta1.AdditionalIPRangesConfig.Status|keyof typeof google.container.v1beta1.AdditionalIPRangesConfig.Status);
 
                 /**
                  * Creates a new AdditionalIPRangesConfig instance using the specified properties.
@@ -41836,6 +42700,16 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AdditionalIPRangesConfig {
+
+                /** Status enum. */
+                enum Status {
+                    STATUS_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    DRAINING = 2
+                }
             }
 
             /** Properties of a DesiredAdditionalIPRangesConfig. */
@@ -43142,6 +44016,12 @@ export namespace google {
 
                 /** UpdateNodePoolRequest bootDisk */
                 bootDisk?: (google.container.v1beta1.IBootDisk|null);
+
+                /** UpdateNodePoolRequest nodeDrainConfig */
+                nodeDrainConfig?: (google.container.v1beta1.NodePool.INodeDrainConfig|null);
+
+                /** UpdateNodePoolRequest consolidationDelay */
+                consolidationDelay?: (google.protobuf.IDuration|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -43257,6 +44137,12 @@ export namespace google {
 
                 /** UpdateNodePoolRequest bootDisk. */
                 public bootDisk?: (google.container.v1beta1.IBootDisk|null);
+
+                /** UpdateNodePoolRequest nodeDrainConfig. */
+                public nodeDrainConfig?: (google.container.v1beta1.NodePool.INodeDrainConfig|null);
+
+                /** UpdateNodePoolRequest consolidationDelay. */
+                public consolidationDelay?: (google.protobuf.IDuration|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -46626,6 +47512,9 @@ export namespace google {
 
                 /** NodePool bestEffortProvisioning */
                 bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
+
+                /** NodePool nodeDrainConfig */
+                nodeDrainConfig?: (google.container.v1beta1.NodePool.INodeDrainConfig|null);
             }
 
             /** Represents a NodePool. */
@@ -46699,6 +47588,9 @@ export namespace google {
 
                 /** NodePool bestEffortProvisioning. */
                 public bestEffortProvisioning?: (google.container.v1beta1.IBestEffortProvisioning|null);
+
+                /** NodePool nodeDrainConfig. */
+                public nodeDrainConfig?: (google.container.v1beta1.NodePool.INodeDrainConfig|null);
 
                 /**
                  * Creates a new NodePool instance using the specified properties.
@@ -47352,6 +48244,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for QueuedProvisioning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NodeDrainConfig. */
+                interface INodeDrainConfig {
+
+                    /** NodeDrainConfig respectPdbDuringNodePoolDeletion */
+                    respectPdbDuringNodePoolDeletion?: (boolean|null);
+                }
+
+                /** Represents a NodeDrainConfig. */
+                class NodeDrainConfig implements INodeDrainConfig {
+
+                    /**
+                     * Constructs a new NodeDrainConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.NodePool.INodeDrainConfig);
+
+                    /** NodeDrainConfig respectPdbDuringNodePoolDeletion. */
+                    public respectPdbDuringNodePoolDeletion?: (boolean|null);
+
+                    /**
+                     * Creates a new NodeDrainConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeDrainConfig instance
+                     */
+                    public static create(properties?: google.container.v1beta1.NodePool.INodeDrainConfig): google.container.v1beta1.NodePool.NodeDrainConfig;
+
+                    /**
+                     * Encodes the specified NodeDrainConfig message. Does not implicitly {@link google.container.v1beta1.NodePool.NodeDrainConfig.verify|verify} messages.
+                     * @param message NodeDrainConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.NodePool.INodeDrainConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeDrainConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.NodePool.NodeDrainConfig.verify|verify} messages.
+                     * @param message NodeDrainConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.NodePool.INodeDrainConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeDrainConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeDrainConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.NodePool.NodeDrainConfig;
+
+                    /**
+                     * Decodes a NodeDrainConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeDrainConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.NodePool.NodeDrainConfig;
+
+                    /**
+                     * Verifies a NodeDrainConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeDrainConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeDrainConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.NodePool.NodeDrainConfig;
+
+                    /**
+                     * Creates a plain object from a NodeDrainConfig message. Also converts values to other types if specified.
+                     * @param message NodeDrainConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.NodePool.NodeDrainConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeDrainConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeDrainConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -48818,6 +49807,9 @@ export namespace google {
 
                 /** ClusterAutoscaling defaultComputeClassConfig */
                 defaultComputeClassConfig?: (google.container.v1beta1.IDefaultComputeClassConfig|null);
+
+                /** ClusterAutoscaling autopilotGeneralProfile */
+                autopilotGeneralProfile?: (google.container.v1beta1.ClusterAutoscaling.AutopilotGeneralProfile|keyof typeof google.container.v1beta1.ClusterAutoscaling.AutopilotGeneralProfile|null);
             }
 
             /** Represents a ClusterAutoscaling. */
@@ -48846,6 +49838,9 @@ export namespace google {
 
                 /** ClusterAutoscaling defaultComputeClassConfig. */
                 public defaultComputeClassConfig?: (google.container.v1beta1.IDefaultComputeClassConfig|null);
+
+                /** ClusterAutoscaling autopilotGeneralProfile. */
+                public autopilotGeneralProfile: (google.container.v1beta1.ClusterAutoscaling.AutopilotGeneralProfile|keyof typeof google.container.v1beta1.ClusterAutoscaling.AutopilotGeneralProfile);
 
                 /**
                  * Creates a new ClusterAutoscaling instance using the specified properties.
@@ -48932,6 +49927,12 @@ export namespace google {
                     PROFILE_UNSPECIFIED = 0,
                     OPTIMIZE_UTILIZATION = 1,
                     BALANCED = 2
+                }
+
+                /** AutopilotGeneralProfile enum. */
+                enum AutopilotGeneralProfile {
+                    AUTOPILOT_GENERAL_PROFILE_UNSPECIFIED = 0,
+                    NO_PERFORMANCE = 1
                 }
             }
 
@@ -54123,6 +55124,112 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a GPUDirectConfig. */
+            interface IGPUDirectConfig {
+
+                /** GPUDirectConfig gpuDirectStrategy */
+                gpuDirectStrategy?: (google.container.v1beta1.GPUDirectConfig.GPUDirectStrategy|keyof typeof google.container.v1beta1.GPUDirectConfig.GPUDirectStrategy|null);
+            }
+
+            /** Represents a GPUDirectConfig. */
+            class GPUDirectConfig implements IGPUDirectConfig {
+
+                /**
+                 * Constructs a new GPUDirectConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IGPUDirectConfig);
+
+                /** GPUDirectConfig gpuDirectStrategy. */
+                public gpuDirectStrategy?: (google.container.v1beta1.GPUDirectConfig.GPUDirectStrategy|keyof typeof google.container.v1beta1.GPUDirectConfig.GPUDirectStrategy|null);
+
+                /**
+                 * Creates a new GPUDirectConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GPUDirectConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IGPUDirectConfig): google.container.v1beta1.GPUDirectConfig;
+
+                /**
+                 * Encodes the specified GPUDirectConfig message. Does not implicitly {@link google.container.v1beta1.GPUDirectConfig.verify|verify} messages.
+                 * @param message GPUDirectConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IGPUDirectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GPUDirectConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.GPUDirectConfig.verify|verify} messages.
+                 * @param message GPUDirectConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IGPUDirectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GPUDirectConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GPUDirectConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.GPUDirectConfig;
+
+                /**
+                 * Decodes a GPUDirectConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GPUDirectConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.GPUDirectConfig;
+
+                /**
+                 * Verifies a GPUDirectConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GPUDirectConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GPUDirectConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.GPUDirectConfig;
+
+                /**
+                 * Creates a plain object from a GPUDirectConfig message. Also converts values to other types if specified.
+                 * @param message GPUDirectConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.GPUDirectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GPUDirectConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GPUDirectConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace GPUDirectConfig {
+
+                /** GPUDirectStrategy enum. */
+                enum GPUDirectStrategy {
+                    GPU_DIRECT_STRATEGY_UNSPECIFIED = 0,
+                    RDMA = 2
+                }
+            }
+
             /** Properties of a GetOpenIDConfigRequest. */
             interface IGetOpenIDConfigRequest {
 
@@ -55355,6 +56462,9 @@ export namespace google {
 
             /** Properties of a Master. */
             interface IMaster {
+
+                /** Master compatibilityStatus */
+                compatibilityStatus?: (google.container.v1beta1.ICompatibilityStatus|null);
             }
 
             /** Represents a Master. */
@@ -55365,6 +56475,9 @@ export namespace google {
                  * @param [properties] Properties to set
                  */
                 constructor(properties?: google.container.v1beta1.IMaster);
+
+                /** Master compatibilityStatus. */
+                public compatibilityStatus?: (google.container.v1beta1.ICompatibilityStatus|null);
 
                 /**
                  * Creates a new Master instance using the specified properties.
@@ -55438,6 +56551,206 @@ export namespace google {
 
                 /**
                  * Gets the default type url for Master
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CompatibilityStatus. */
+            interface ICompatibilityStatus {
+
+                /** CompatibilityStatus downgradableVersion */
+                downgradableVersion?: (string|null);
+
+                /** CompatibilityStatus emulatedVersionTime */
+                emulatedVersionTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a CompatibilityStatus. */
+            class CompatibilityStatus implements ICompatibilityStatus {
+
+                /**
+                 * Constructs a new CompatibilityStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ICompatibilityStatus);
+
+                /** CompatibilityStatus downgradableVersion. */
+                public downgradableVersion: string;
+
+                /** CompatibilityStatus emulatedVersionTime. */
+                public emulatedVersionTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new CompatibilityStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CompatibilityStatus instance
+                 */
+                public static create(properties?: google.container.v1beta1.ICompatibilityStatus): google.container.v1beta1.CompatibilityStatus;
+
+                /**
+                 * Encodes the specified CompatibilityStatus message. Does not implicitly {@link google.container.v1beta1.CompatibilityStatus.verify|verify} messages.
+                 * @param message CompatibilityStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CompatibilityStatus message, length delimited. Does not implicitly {@link google.container.v1beta1.CompatibilityStatus.verify|verify} messages.
+                 * @param message CompatibilityStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ICompatibilityStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CompatibilityStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CompatibilityStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.CompatibilityStatus;
+
+                /**
+                 * Decodes a CompatibilityStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CompatibilityStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.CompatibilityStatus;
+
+                /**
+                 * Verifies a CompatibilityStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CompatibilityStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CompatibilityStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.CompatibilityStatus;
+
+                /**
+                 * Creates a plain object from a CompatibilityStatus message. Also converts values to other types if specified.
+                 * @param message CompatibilityStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.CompatibilityStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CompatibilityStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CompatibilityStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RollbackSafeUpgrade. */
+            interface IRollbackSafeUpgrade {
+
+                /** RollbackSafeUpgrade controlPlaneSoakDuration */
+                controlPlaneSoakDuration?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a RollbackSafeUpgrade. */
+            class RollbackSafeUpgrade implements IRollbackSafeUpgrade {
+
+                /**
+                 * Constructs a new RollbackSafeUpgrade.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IRollbackSafeUpgrade);
+
+                /** RollbackSafeUpgrade controlPlaneSoakDuration. */
+                public controlPlaneSoakDuration?: (google.protobuf.IDuration|null);
+
+                /**
+                 * Creates a new RollbackSafeUpgrade instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RollbackSafeUpgrade instance
+                 */
+                public static create(properties?: google.container.v1beta1.IRollbackSafeUpgrade): google.container.v1beta1.RollbackSafeUpgrade;
+
+                /**
+                 * Encodes the specified RollbackSafeUpgrade message. Does not implicitly {@link google.container.v1beta1.RollbackSafeUpgrade.verify|verify} messages.
+                 * @param message RollbackSafeUpgrade message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IRollbackSafeUpgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RollbackSafeUpgrade message, length delimited. Does not implicitly {@link google.container.v1beta1.RollbackSafeUpgrade.verify|verify} messages.
+                 * @param message RollbackSafeUpgrade message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IRollbackSafeUpgrade, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RollbackSafeUpgrade message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RollbackSafeUpgrade
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.RollbackSafeUpgrade;
+
+                /**
+                 * Decodes a RollbackSafeUpgrade message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RollbackSafeUpgrade
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.RollbackSafeUpgrade;
+
+                /**
+                 * Verifies a RollbackSafeUpgrade message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RollbackSafeUpgrade message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RollbackSafeUpgrade
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.RollbackSafeUpgrade;
+
+                /**
+                 * Creates a plain object from a RollbackSafeUpgrade message. Also converts values to other types if specified.
+                 * @param message RollbackSafeUpgrade
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.RollbackSafeUpgrade, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RollbackSafeUpgrade to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RollbackSafeUpgrade
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -56484,6 +57797,9 @@ export namespace google {
 
                 /** UpgradeInfoEvent eventType */
                 eventType?: (google.container.v1beta1.UpgradeInfoEvent.EventType|keyof typeof google.container.v1beta1.UpgradeInfoEvent.EventType|null);
+
+                /** UpgradeInfoEvent disruptionEvent */
+                disruptionEvent?: (google.container.v1beta1.IDisruptionEvent|null);
             }
 
             /** Represents an UpgradeInfoEvent. */
@@ -56536,6 +57852,9 @@ export namespace google {
 
                 /** UpgradeInfoEvent eventType. */
                 public eventType: (google.container.v1beta1.UpgradeInfoEvent.EventType|keyof typeof google.container.v1beta1.UpgradeInfoEvent.EventType);
+
+                /** UpgradeInfoEvent disruptionEvent. */
+                public disruptionEvent?: (google.container.v1beta1.IDisruptionEvent|null);
 
                 /**
                  * Creates a new UpgradeInfoEvent instance using the specified properties.
@@ -56631,7 +57950,236 @@ export namespace google {
                     EVENT_TYPE_UNSPECIFIED = 0,
                     END_OF_SUPPORT = 1,
                     COS_MILESTONE_VERSION_UPDATE = 2,
-                    UPGRADE_LIFECYCLE = 3
+                    UPGRADE_LIFECYCLE = 3,
+                    DISRUPTION_EVENT = 4
+                }
+            }
+
+            /** Properties of a DisruptionEvent. */
+            interface IDisruptionEvent {
+
+                /** DisruptionEvent disruptionType */
+                disruptionType?: (google.container.v1beta1.DisruptionEvent.DisruptionType|keyof typeof google.container.v1beta1.DisruptionEvent.DisruptionType|null);
+
+                /** DisruptionEvent pdbBlockedNode */
+                pdbBlockedNode?: (string|null);
+
+                /** DisruptionEvent pdbBlockedPod */
+                pdbBlockedPod?: (google.container.v1beta1.DisruptionEvent.IPdbBlockedPod[]|null);
+
+                /** DisruptionEvent pdbViolationTimeout */
+                pdbViolationTimeout?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a DisruptionEvent. */
+            class DisruptionEvent implements IDisruptionEvent {
+
+                /**
+                 * Constructs a new DisruptionEvent.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IDisruptionEvent);
+
+                /** DisruptionEvent disruptionType. */
+                public disruptionType: (google.container.v1beta1.DisruptionEvent.DisruptionType|keyof typeof google.container.v1beta1.DisruptionEvent.DisruptionType);
+
+                /** DisruptionEvent pdbBlockedNode. */
+                public pdbBlockedNode: string;
+
+                /** DisruptionEvent pdbBlockedPod. */
+                public pdbBlockedPod: google.container.v1beta1.DisruptionEvent.IPdbBlockedPod[];
+
+                /** DisruptionEvent pdbViolationTimeout. */
+                public pdbViolationTimeout?: (google.protobuf.IDuration|null);
+
+                /**
+                 * Creates a new DisruptionEvent instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DisruptionEvent instance
+                 */
+                public static create(properties?: google.container.v1beta1.IDisruptionEvent): google.container.v1beta1.DisruptionEvent;
+
+                /**
+                 * Encodes the specified DisruptionEvent message. Does not implicitly {@link google.container.v1beta1.DisruptionEvent.verify|verify} messages.
+                 * @param message DisruptionEvent message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IDisruptionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DisruptionEvent message, length delimited. Does not implicitly {@link google.container.v1beta1.DisruptionEvent.verify|verify} messages.
+                 * @param message DisruptionEvent message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IDisruptionEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DisruptionEvent message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DisruptionEvent
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.DisruptionEvent;
+
+                /**
+                 * Decodes a DisruptionEvent message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DisruptionEvent
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.DisruptionEvent;
+
+                /**
+                 * Verifies a DisruptionEvent message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DisruptionEvent message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DisruptionEvent
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.DisruptionEvent;
+
+                /**
+                 * Creates a plain object from a DisruptionEvent message. Also converts values to other types if specified.
+                 * @param message DisruptionEvent
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.DisruptionEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DisruptionEvent to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DisruptionEvent
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace DisruptionEvent {
+
+                /** DisruptionType enum. */
+                enum DisruptionType {
+                    DISRUPTION_TYPE_UNSPECIFIED = 0,
+                    POD_NOT_ENOUGH_PDB = 1,
+                    POD_PDB_VIOLATION = 2
+                }
+
+                /** Properties of a PdbBlockedPod. */
+                interface IPdbBlockedPod {
+
+                    /** PdbBlockedPod namespace */
+                    namespace?: (string|null);
+
+                    /** PdbBlockedPod name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PdbBlockedPod. */
+                class PdbBlockedPod implements IPdbBlockedPod {
+
+                    /**
+                     * Constructs a new PdbBlockedPod.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.DisruptionEvent.IPdbBlockedPod);
+
+                    /** PdbBlockedPod namespace. */
+                    public namespace: string;
+
+                    /** PdbBlockedPod name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PdbBlockedPod instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PdbBlockedPod instance
+                     */
+                    public static create(properties?: google.container.v1beta1.DisruptionEvent.IPdbBlockedPod): google.container.v1beta1.DisruptionEvent.PdbBlockedPod;
+
+                    /**
+                     * Encodes the specified PdbBlockedPod message. Does not implicitly {@link google.container.v1beta1.DisruptionEvent.PdbBlockedPod.verify|verify} messages.
+                     * @param message PdbBlockedPod message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.DisruptionEvent.IPdbBlockedPod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PdbBlockedPod message, length delimited. Does not implicitly {@link google.container.v1beta1.DisruptionEvent.PdbBlockedPod.verify|verify} messages.
+                     * @param message PdbBlockedPod message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.DisruptionEvent.IPdbBlockedPod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PdbBlockedPod message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PdbBlockedPod
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.DisruptionEvent.PdbBlockedPod;
+
+                    /**
+                     * Decodes a PdbBlockedPod message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PdbBlockedPod
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.DisruptionEvent.PdbBlockedPod;
+
+                    /**
+                     * Verifies a PdbBlockedPod message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PdbBlockedPod message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PdbBlockedPod
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.DisruptionEvent.PdbBlockedPod;
+
+                    /**
+                     * Creates a plain object from a PdbBlockedPod message. Also converts values to other types if specified.
+                     * @param message PdbBlockedPod
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.DisruptionEvent.PdbBlockedPod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PdbBlockedPod to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PdbBlockedPod
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -57014,7 +58562,8 @@ export namespace google {
             enum NodePoolUpdateStrategy {
                 NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0,
                 BLUE_GREEN = 2,
-                SURGE = 3
+                SURGE = 3,
+                SHORT_LIVED = 5
             }
 
             /** Properties of a LoggingConfig. */
@@ -59443,6 +60992,9 @@ export namespace google {
 
                 /** ClusterUpgradeInfo endOfExtendedSupportTimestamp */
                 endOfExtendedSupportTimestamp?: (string|null);
+
+                /** ClusterUpgradeInfo rollbackSafeUpgradeStatus */
+                rollbackSafeUpgradeStatus?: (google.container.v1beta1.IRollbackSafeUpgradeStatus|null);
             }
 
             /** Represents a ClusterUpgradeInfo. */
@@ -59474,6 +61026,9 @@ export namespace google {
 
                 /** ClusterUpgradeInfo endOfExtendedSupportTimestamp. */
                 public endOfExtendedSupportTimestamp?: (string|null);
+
+                /** ClusterUpgradeInfo rollbackSafeUpgradeStatus. */
+                public rollbackSafeUpgradeStatus?: (google.container.v1beta1.IRollbackSafeUpgradeStatus|null);
 
                 /**
                  * Creates a new ClusterUpgradeInfo instance using the specified properties.
@@ -59575,6 +61130,124 @@ export namespace google {
                 }
             }
 
+            /** Properties of a RollbackSafeUpgradeStatus. */
+            interface IRollbackSafeUpgradeStatus {
+
+                /** RollbackSafeUpgradeStatus mode */
+                mode?: (google.container.v1beta1.RollbackSafeUpgradeStatus.Mode|keyof typeof google.container.v1beta1.RollbackSafeUpgradeStatus.Mode|null);
+
+                /** RollbackSafeUpgradeStatus controlPlaneUpgradeRollbackEndTime */
+                controlPlaneUpgradeRollbackEndTime?: (google.protobuf.ITimestamp|null);
+
+                /** RollbackSafeUpgradeStatus previousVersion */
+                previousVersion?: (string|null);
+            }
+
+            /** Represents a RollbackSafeUpgradeStatus. */
+            class RollbackSafeUpgradeStatus implements IRollbackSafeUpgradeStatus {
+
+                /**
+                 * Constructs a new RollbackSafeUpgradeStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IRollbackSafeUpgradeStatus);
+
+                /** RollbackSafeUpgradeStatus mode. */
+                public mode: (google.container.v1beta1.RollbackSafeUpgradeStatus.Mode|keyof typeof google.container.v1beta1.RollbackSafeUpgradeStatus.Mode);
+
+                /** RollbackSafeUpgradeStatus controlPlaneUpgradeRollbackEndTime. */
+                public controlPlaneUpgradeRollbackEndTime?: (google.protobuf.ITimestamp|null);
+
+                /** RollbackSafeUpgradeStatus previousVersion. */
+                public previousVersion: string;
+
+                /**
+                 * Creates a new RollbackSafeUpgradeStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RollbackSafeUpgradeStatus instance
+                 */
+                public static create(properties?: google.container.v1beta1.IRollbackSafeUpgradeStatus): google.container.v1beta1.RollbackSafeUpgradeStatus;
+
+                /**
+                 * Encodes the specified RollbackSafeUpgradeStatus message. Does not implicitly {@link google.container.v1beta1.RollbackSafeUpgradeStatus.verify|verify} messages.
+                 * @param message RollbackSafeUpgradeStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IRollbackSafeUpgradeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RollbackSafeUpgradeStatus message, length delimited. Does not implicitly {@link google.container.v1beta1.RollbackSafeUpgradeStatus.verify|verify} messages.
+                 * @param message RollbackSafeUpgradeStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IRollbackSafeUpgradeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RollbackSafeUpgradeStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RollbackSafeUpgradeStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.RollbackSafeUpgradeStatus;
+
+                /**
+                 * Decodes a RollbackSafeUpgradeStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RollbackSafeUpgradeStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.RollbackSafeUpgradeStatus;
+
+                /**
+                 * Verifies a RollbackSafeUpgradeStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RollbackSafeUpgradeStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RollbackSafeUpgradeStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.RollbackSafeUpgradeStatus;
+
+                /**
+                 * Creates a plain object from a RollbackSafeUpgradeStatus message. Also converts values to other types if specified.
+                 * @param message RollbackSafeUpgradeStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.RollbackSafeUpgradeStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RollbackSafeUpgradeStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RollbackSafeUpgradeStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace RollbackSafeUpgradeStatus {
+
+                /** Mode enum. */
+                enum Mode {
+                    MODE_UNSPECIFIED = 0,
+                    KCP_MINOR_UPGRADE_ROLLBACK_SAFE_MODE = 1
+                }
+            }
+
             /** Properties of an UpgradeDetails. */
             interface IUpgradeDetails {
 
@@ -59595,6 +61268,12 @@ export namespace google {
 
                 /** UpgradeDetails startType */
                 startType?: (google.container.v1beta1.UpgradeDetails.StartType|keyof typeof google.container.v1beta1.UpgradeDetails.StartType|null);
+
+                /** UpgradeDetails initialEmulatedVersion */
+                initialEmulatedVersion?: (string|null);
+
+                /** UpgradeDetails targetEmulatedVersion */
+                targetEmulatedVersion?: (string|null);
             }
 
             /** Represents an UpgradeDetails. */
@@ -59623,6 +61302,12 @@ export namespace google {
 
                 /** UpgradeDetails startType. */
                 public startType: (google.container.v1beta1.UpgradeDetails.StartType|keyof typeof google.container.v1beta1.UpgradeDetails.StartType);
+
+                /** UpgradeDetails initialEmulatedVersion. */
+                public initialEmulatedVersion: string;
+
+                /** UpgradeDetails targetEmulatedVersion. */
+                public targetEmulatedVersion: string;
 
                 /**
                  * Creates a new UpgradeDetails instance using the specified properties.
@@ -60398,6 +62083,210 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** Properties of a ManagedOpenTelemetryConfig. */
+            interface IManagedOpenTelemetryConfig {
+
+                /** ManagedOpenTelemetryConfig scope */
+                scope?: (google.container.v1beta1.ManagedOpenTelemetryConfig.Scope|keyof typeof google.container.v1beta1.ManagedOpenTelemetryConfig.Scope|null);
+            }
+
+            /** Represents a ManagedOpenTelemetryConfig. */
+            class ManagedOpenTelemetryConfig implements IManagedOpenTelemetryConfig {
+
+                /**
+                 * Constructs a new ManagedOpenTelemetryConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IManagedOpenTelemetryConfig);
+
+                /** ManagedOpenTelemetryConfig scope. */
+                public scope?: (google.container.v1beta1.ManagedOpenTelemetryConfig.Scope|keyof typeof google.container.v1beta1.ManagedOpenTelemetryConfig.Scope|null);
+
+                /**
+                 * Creates a new ManagedOpenTelemetryConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ManagedOpenTelemetryConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IManagedOpenTelemetryConfig): google.container.v1beta1.ManagedOpenTelemetryConfig;
+
+                /**
+                 * Encodes the specified ManagedOpenTelemetryConfig message. Does not implicitly {@link google.container.v1beta1.ManagedOpenTelemetryConfig.verify|verify} messages.
+                 * @param message ManagedOpenTelemetryConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IManagedOpenTelemetryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ManagedOpenTelemetryConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.ManagedOpenTelemetryConfig.verify|verify} messages.
+                 * @param message ManagedOpenTelemetryConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IManagedOpenTelemetryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ManagedOpenTelemetryConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ManagedOpenTelemetryConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.ManagedOpenTelemetryConfig;
+
+                /**
+                 * Decodes a ManagedOpenTelemetryConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ManagedOpenTelemetryConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.ManagedOpenTelemetryConfig;
+
+                /**
+                 * Verifies a ManagedOpenTelemetryConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ManagedOpenTelemetryConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ManagedOpenTelemetryConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.ManagedOpenTelemetryConfig;
+
+                /**
+                 * Creates a plain object from a ManagedOpenTelemetryConfig message. Also converts values to other types if specified.
+                 * @param message ManagedOpenTelemetryConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.ManagedOpenTelemetryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ManagedOpenTelemetryConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ManagedOpenTelemetryConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ManagedOpenTelemetryConfig {
+
+                /** Scope enum. */
+                enum Scope {
+                    SCOPE_UNSPECIFIED = 0,
+                    NONE = 1,
+                    COLLECTION_AND_INSTRUMENTATION_COMPONENTS = 2
+                }
+            }
+
+            /** Properties of a PodSnapshotConfig. */
+            interface IPodSnapshotConfig {
+
+                /** PodSnapshotConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a PodSnapshotConfig. */
+            class PodSnapshotConfig implements IPodSnapshotConfig {
+
+                /**
+                 * Constructs a new PodSnapshotConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.IPodSnapshotConfig);
+
+                /** PodSnapshotConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new PodSnapshotConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PodSnapshotConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.IPodSnapshotConfig): google.container.v1beta1.PodSnapshotConfig;
+
+                /**
+                 * Encodes the specified PodSnapshotConfig message. Does not implicitly {@link google.container.v1beta1.PodSnapshotConfig.verify|verify} messages.
+                 * @param message PodSnapshotConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.IPodSnapshotConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PodSnapshotConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.PodSnapshotConfig.verify|verify} messages.
+                 * @param message PodSnapshotConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.IPodSnapshotConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PodSnapshotConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PodSnapshotConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.PodSnapshotConfig;
+
+                /**
+                 * Decodes a PodSnapshotConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PodSnapshotConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.PodSnapshotConfig;
+
+                /**
+                 * Verifies a PodSnapshotConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PodSnapshotConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PodSnapshotConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.PodSnapshotConfig;
+
+                /**
+                 * Creates a plain object from a PodSnapshotConfig message. Also converts values to other types if specified.
+                 * @param message PodSnapshotConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.PodSnapshotConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PodSnapshotConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PodSnapshotConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
     }
