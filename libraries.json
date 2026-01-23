@@ -1497,7 +1497,7 @@
     "repo": "googleapis/nodejs-logging-winston",
     "distribution_name": "@google-cloud/logging-winston",
     "api_id": "logging.googleapis.com",
-    "codeowner_team": "@googleapis/api-logging",
+    "codeowner_team": "@googleapis/yoshi-nodejs",
     "api_shortname": "logging-winston",
     "library_type": "OTHER",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-logging-winston",
@@ -2885,6 +2885,24 @@
     "support_documentation": "https://cloud.google.com/apigee/docs/getting-support"
   },
   {
+    "name": "cloudapiregistry",
+    "name_pretty": "API Registry API",
+    "product_documentation": "https://docs.cloud.google.com/api-registry/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudapiregistry/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/apiregistry",
+    "api_id": "cloudapiregistry.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "cloudapiregistry",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apiregistry",
+    "support_documentation": "https://docs.cloud.google.com/api-registry/docs/getting-support"
+  },
+  {
     "name": "apigeeregistry",
     "name_pretty": "Apigee Registry API",
     "product_documentation": "https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api",
@@ -3314,6 +3332,24 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkeconnect-gateway",
     "support_documentation": "https://cloud.google.com/anthos/multicluster-management/gateway/docs/getting-support"
+  },
+  {
+    "name": "gkerecommender",
+    "name_pretty": "GKE Recommender API",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference-quickstart",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gkerecommender/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/gkerecommender",
+    "api_id": "gkerecommender.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "gkerecommender",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkerecommender",
+    "support_documentation": "https://cloud.google.com/kubernetes-engine/docs/getting-support"
   },
   {
     "name": "admanager",
