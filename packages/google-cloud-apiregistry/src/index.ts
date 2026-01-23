@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const CloudApiRegistryClient = v1beta.CloudApiRegistryClient;
-type CloudApiRegistryClient = v1beta.CloudApiRegistryClient;
+const CloudApiRegistryClient = v1.CloudApiRegistryClient;
+type CloudApiRegistryClient = v1.CloudApiRegistryClient;
 
-export {v1beta, CloudApiRegistryClient};
-export default {v1beta, CloudApiRegistryClient};
+export {v1, v1beta, CloudApiRegistryClient};
+export default {v1, v1beta, CloudApiRegistryClient};
 import * as protos from '../protos/protos';
 export {protos};

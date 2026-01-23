@@ -23,6 +23,1039 @@ export namespace google {
         /** Namespace apiregistry. */
         namespace apiregistry {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ENABLED = 1,
+                    DISABLED = 2
+                }
+
+                /** Properties of a McpServer. */
+                interface IMcpServer {
+
+                    /** McpServer name */
+                    name?: (string|null);
+
+                    /** McpServer displayName */
+                    displayName?: (string|null);
+
+                    /** McpServer description */
+                    description?: (string|null);
+
+                    /** McpServer urls */
+                    urls?: (string[]|null);
+
+                    /** McpServer capabilities */
+                    capabilities?: (google.protobuf.IStruct|null);
+
+                    /** McpServer state */
+                    state?: (google.cloud.apiregistry.v1.State|keyof typeof google.cloud.apiregistry.v1.State|null);
+                }
+
+                /** Represents a McpServer. */
+                class McpServer implements IMcpServer {
+
+                    /**
+                     * Constructs a new McpServer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IMcpServer);
+
+                    /** McpServer name. */
+                    public name: string;
+
+                    /** McpServer displayName. */
+                    public displayName: string;
+
+                    /** McpServer description. */
+                    public description: string;
+
+                    /** McpServer urls. */
+                    public urls: string[];
+
+                    /** McpServer capabilities. */
+                    public capabilities?: (google.protobuf.IStruct|null);
+
+                    /** McpServer state. */
+                    public state: (google.cloud.apiregistry.v1.State|keyof typeof google.cloud.apiregistry.v1.State);
+
+                    /**
+                     * Creates a new McpServer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpServer instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IMcpServer): google.cloud.apiregistry.v1.McpServer;
+
+                    /**
+                     * Encodes the specified McpServer message. Does not implicitly {@link google.cloud.apiregistry.v1.McpServer.verify|verify} messages.
+                     * @param message McpServer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IMcpServer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpServer message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.McpServer.verify|verify} messages.
+                     * @param message McpServer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IMcpServer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpServer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpServer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.McpServer;
+
+                    /**
+                     * Decodes a McpServer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpServer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.McpServer;
+
+                    /**
+                     * Verifies a McpServer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpServer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpServer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.McpServer;
+
+                    /**
+                     * Creates a plain object from a McpServer message. Also converts values to other types if specified.
+                     * @param message McpServer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.McpServer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpServer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpServer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a McpTool. */
+                interface IMcpTool {
+
+                    /** McpTool name */
+                    name?: (string|null);
+
+                    /** McpTool displayName */
+                    displayName?: (string|null);
+
+                    /** McpTool description */
+                    description?: (string|null);
+
+                    /** McpTool mcpServerUrls */
+                    mcpServerUrls?: (string[]|null);
+
+                    /** McpTool inputSchema */
+                    inputSchema?: (google.protobuf.IStruct|null);
+
+                    /** McpTool outputSchema */
+                    outputSchema?: (google.protobuf.IStruct|null);
+
+                    /** McpTool annotations */
+                    annotations?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a McpTool. */
+                class McpTool implements IMcpTool {
+
+                    /**
+                     * Constructs a new McpTool.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IMcpTool);
+
+                    /** McpTool name. */
+                    public name: string;
+
+                    /** McpTool displayName. */
+                    public displayName: string;
+
+                    /** McpTool description. */
+                    public description: string;
+
+                    /** McpTool mcpServerUrls. */
+                    public mcpServerUrls: string[];
+
+                    /** McpTool inputSchema. */
+                    public inputSchema?: (google.protobuf.IStruct|null);
+
+                    /** McpTool outputSchema. */
+                    public outputSchema?: (google.protobuf.IStruct|null);
+
+                    /** McpTool annotations. */
+                    public annotations?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new McpTool instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpTool instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IMcpTool): google.cloud.apiregistry.v1.McpTool;
+
+                    /**
+                     * Encodes the specified McpTool message. Does not implicitly {@link google.cloud.apiregistry.v1.McpTool.verify|verify} messages.
+                     * @param message McpTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IMcpTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpTool message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.McpTool.verify|verify} messages.
+                     * @param message McpTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IMcpTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpTool message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.McpTool;
+
+                    /**
+                     * Decodes a McpTool message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.McpTool;
+
+                    /**
+                     * Verifies a McpTool message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpTool message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpTool
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.McpTool;
+
+                    /**
+                     * Creates a plain object from a McpTool message. Also converts values to other types if specified.
+                     * @param message McpTool
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.McpTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpTool to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpTool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CloudApiRegistry */
+                class CloudApiRegistry extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudApiRegistry service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudApiRegistry service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudApiRegistry;
+
+                    /**
+                     * Calls GetMcpServer.
+                     * @param request GetMcpServerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and McpServer
+                     */
+                    public getMcpServer(request: google.cloud.apiregistry.v1.IGetMcpServerRequest, callback: google.cloud.apiregistry.v1.CloudApiRegistry.GetMcpServerCallback): void;
+
+                    /**
+                     * Calls GetMcpServer.
+                     * @param request GetMcpServerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMcpServer(request: google.cloud.apiregistry.v1.IGetMcpServerRequest): Promise<google.cloud.apiregistry.v1.McpServer>;
+
+                    /**
+                     * Calls ListMcpServers.
+                     * @param request ListMcpServersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMcpServersResponse
+                     */
+                    public listMcpServers(request: google.cloud.apiregistry.v1.IListMcpServersRequest, callback: google.cloud.apiregistry.v1.CloudApiRegistry.ListMcpServersCallback): void;
+
+                    /**
+                     * Calls ListMcpServers.
+                     * @param request ListMcpServersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMcpServers(request: google.cloud.apiregistry.v1.IListMcpServersRequest): Promise<google.cloud.apiregistry.v1.ListMcpServersResponse>;
+
+                    /**
+                     * Calls GetMcpTool.
+                     * @param request GetMcpToolRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and McpTool
+                     */
+                    public getMcpTool(request: google.cloud.apiregistry.v1.IGetMcpToolRequest, callback: google.cloud.apiregistry.v1.CloudApiRegistry.GetMcpToolCallback): void;
+
+                    /**
+                     * Calls GetMcpTool.
+                     * @param request GetMcpToolRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMcpTool(request: google.cloud.apiregistry.v1.IGetMcpToolRequest): Promise<google.cloud.apiregistry.v1.McpTool>;
+
+                    /**
+                     * Calls ListMcpTools.
+                     * @param request ListMcpToolsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMcpToolsResponse
+                     */
+                    public listMcpTools(request: google.cloud.apiregistry.v1.IListMcpToolsRequest, callback: google.cloud.apiregistry.v1.CloudApiRegistry.ListMcpToolsCallback): void;
+
+                    /**
+                     * Calls ListMcpTools.
+                     * @param request ListMcpToolsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMcpTools(request: google.cloud.apiregistry.v1.IListMcpToolsRequest): Promise<google.cloud.apiregistry.v1.ListMcpToolsResponse>;
+                }
+
+                namespace CloudApiRegistry {
+
+                    /**
+                     * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|getMcpServer}.
+                     * @param error Error, if any
+                     * @param [response] McpServer
+                     */
+                    type GetMcpServerCallback = (error: (Error|null), response?: google.cloud.apiregistry.v1.McpServer) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|listMcpServers}.
+                     * @param error Error, if any
+                     * @param [response] ListMcpServersResponse
+                     */
+                    type ListMcpServersCallback = (error: (Error|null), response?: google.cloud.apiregistry.v1.ListMcpServersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|getMcpTool}.
+                     * @param error Error, if any
+                     * @param [response] McpTool
+                     */
+                    type GetMcpToolCallback = (error: (Error|null), response?: google.cloud.apiregistry.v1.McpTool) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|listMcpTools}.
+                     * @param error Error, if any
+                     * @param [response] ListMcpToolsResponse
+                     */
+                    type ListMcpToolsCallback = (error: (Error|null), response?: google.cloud.apiregistry.v1.ListMcpToolsResponse) => void;
+                }
+
+                /** Properties of a GetMcpServerRequest. */
+                interface IGetMcpServerRequest {
+
+                    /** GetMcpServerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMcpServerRequest. */
+                class GetMcpServerRequest implements IGetMcpServerRequest {
+
+                    /**
+                     * Constructs a new GetMcpServerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IGetMcpServerRequest);
+
+                    /** GetMcpServerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMcpServerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMcpServerRequest instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IGetMcpServerRequest): google.cloud.apiregistry.v1.GetMcpServerRequest;
+
+                    /**
+                     * Encodes the specified GetMcpServerRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpServerRequest.verify|verify} messages.
+                     * @param message GetMcpServerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IGetMcpServerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMcpServerRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpServerRequest.verify|verify} messages.
+                     * @param message GetMcpServerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IGetMcpServerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMcpServerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMcpServerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.GetMcpServerRequest;
+
+                    /**
+                     * Decodes a GetMcpServerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMcpServerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.GetMcpServerRequest;
+
+                    /**
+                     * Verifies a GetMcpServerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMcpServerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMcpServerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.GetMcpServerRequest;
+
+                    /**
+                     * Creates a plain object from a GetMcpServerRequest message. Also converts values to other types if specified.
+                     * @param message GetMcpServerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.GetMcpServerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMcpServerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMcpServerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMcpServersRequest. */
+                interface IListMcpServersRequest {
+
+                    /** ListMcpServersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMcpServersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMcpServersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMcpServersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListMcpServersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListMcpServersRequest. */
+                class ListMcpServersRequest implements IListMcpServersRequest {
+
+                    /**
+                     * Constructs a new ListMcpServersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IListMcpServersRequest);
+
+                    /** ListMcpServersRequest parent. */
+                    public parent: string;
+
+                    /** ListMcpServersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMcpServersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMcpServersRequest filter. */
+                    public filter: string;
+
+                    /** ListMcpServersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListMcpServersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMcpServersRequest instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IListMcpServersRequest): google.cloud.apiregistry.v1.ListMcpServersRequest;
+
+                    /**
+                     * Encodes the specified ListMcpServersRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersRequest.verify|verify} messages.
+                     * @param message ListMcpServersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IListMcpServersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMcpServersRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersRequest.verify|verify} messages.
+                     * @param message ListMcpServersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IListMcpServersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMcpServersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMcpServersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.ListMcpServersRequest;
+
+                    /**
+                     * Decodes a ListMcpServersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMcpServersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.ListMcpServersRequest;
+
+                    /**
+                     * Verifies a ListMcpServersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMcpServersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMcpServersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.ListMcpServersRequest;
+
+                    /**
+                     * Creates a plain object from a ListMcpServersRequest message. Also converts values to other types if specified.
+                     * @param message ListMcpServersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.ListMcpServersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMcpServersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMcpServersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMcpServersResponse. */
+                interface IListMcpServersResponse {
+
+                    /** ListMcpServersResponse mcpServers */
+                    mcpServers?: (google.cloud.apiregistry.v1.IMcpServer[]|null);
+
+                    /** ListMcpServersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMcpServersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMcpServersResponse. */
+                class ListMcpServersResponse implements IListMcpServersResponse {
+
+                    /**
+                     * Constructs a new ListMcpServersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IListMcpServersResponse);
+
+                    /** ListMcpServersResponse mcpServers. */
+                    public mcpServers: google.cloud.apiregistry.v1.IMcpServer[];
+
+                    /** ListMcpServersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMcpServersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMcpServersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMcpServersResponse instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IListMcpServersResponse): google.cloud.apiregistry.v1.ListMcpServersResponse;
+
+                    /**
+                     * Encodes the specified ListMcpServersResponse message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersResponse.verify|verify} messages.
+                     * @param message ListMcpServersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IListMcpServersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMcpServersResponse message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersResponse.verify|verify} messages.
+                     * @param message ListMcpServersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IListMcpServersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMcpServersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMcpServersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.ListMcpServersResponse;
+
+                    /**
+                     * Decodes a ListMcpServersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMcpServersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.ListMcpServersResponse;
+
+                    /**
+                     * Verifies a ListMcpServersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMcpServersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMcpServersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.ListMcpServersResponse;
+
+                    /**
+                     * Creates a plain object from a ListMcpServersResponse message. Also converts values to other types if specified.
+                     * @param message ListMcpServersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.ListMcpServersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMcpServersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMcpServersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMcpToolRequest. */
+                interface IGetMcpToolRequest {
+
+                    /** GetMcpToolRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMcpToolRequest. */
+                class GetMcpToolRequest implements IGetMcpToolRequest {
+
+                    /**
+                     * Constructs a new GetMcpToolRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IGetMcpToolRequest);
+
+                    /** GetMcpToolRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMcpToolRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMcpToolRequest instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IGetMcpToolRequest): google.cloud.apiregistry.v1.GetMcpToolRequest;
+
+                    /**
+                     * Encodes the specified GetMcpToolRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpToolRequest.verify|verify} messages.
+                     * @param message GetMcpToolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IGetMcpToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMcpToolRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpToolRequest.verify|verify} messages.
+                     * @param message GetMcpToolRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IGetMcpToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMcpToolRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMcpToolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.GetMcpToolRequest;
+
+                    /**
+                     * Decodes a GetMcpToolRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMcpToolRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.GetMcpToolRequest;
+
+                    /**
+                     * Verifies a GetMcpToolRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMcpToolRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMcpToolRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.GetMcpToolRequest;
+
+                    /**
+                     * Creates a plain object from a GetMcpToolRequest message. Also converts values to other types if specified.
+                     * @param message GetMcpToolRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.GetMcpToolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMcpToolRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMcpToolRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMcpToolsRequest. */
+                interface IListMcpToolsRequest {
+
+                    /** ListMcpToolsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMcpToolsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMcpToolsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMcpToolsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListMcpToolsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListMcpToolsRequest. */
+                class ListMcpToolsRequest implements IListMcpToolsRequest {
+
+                    /**
+                     * Constructs a new ListMcpToolsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IListMcpToolsRequest);
+
+                    /** ListMcpToolsRequest parent. */
+                    public parent: string;
+
+                    /** ListMcpToolsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMcpToolsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMcpToolsRequest filter. */
+                    public filter: string;
+
+                    /** ListMcpToolsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListMcpToolsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMcpToolsRequest instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IListMcpToolsRequest): google.cloud.apiregistry.v1.ListMcpToolsRequest;
+
+                    /**
+                     * Encodes the specified ListMcpToolsRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsRequest.verify|verify} messages.
+                     * @param message ListMcpToolsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IListMcpToolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMcpToolsRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsRequest.verify|verify} messages.
+                     * @param message ListMcpToolsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IListMcpToolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMcpToolsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMcpToolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.ListMcpToolsRequest;
+
+                    /**
+                     * Decodes a ListMcpToolsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMcpToolsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.ListMcpToolsRequest;
+
+                    /**
+                     * Verifies a ListMcpToolsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMcpToolsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMcpToolsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.ListMcpToolsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMcpToolsRequest message. Also converts values to other types if specified.
+                     * @param message ListMcpToolsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.ListMcpToolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMcpToolsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMcpToolsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMcpToolsResponse. */
+                interface IListMcpToolsResponse {
+
+                    /** ListMcpToolsResponse mcpTools */
+                    mcpTools?: (google.cloud.apiregistry.v1.IMcpTool[]|null);
+
+                    /** ListMcpToolsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMcpToolsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMcpToolsResponse. */
+                class ListMcpToolsResponse implements IListMcpToolsResponse {
+
+                    /**
+                     * Constructs a new ListMcpToolsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apiregistry.v1.IListMcpToolsResponse);
+
+                    /** ListMcpToolsResponse mcpTools. */
+                    public mcpTools: google.cloud.apiregistry.v1.IMcpTool[];
+
+                    /** ListMcpToolsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMcpToolsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMcpToolsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMcpToolsResponse instance
+                     */
+                    public static create(properties?: google.cloud.apiregistry.v1.IListMcpToolsResponse): google.cloud.apiregistry.v1.ListMcpToolsResponse;
+
+                    /**
+                     * Encodes the specified ListMcpToolsResponse message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsResponse.verify|verify} messages.
+                     * @param message ListMcpToolsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apiregistry.v1.IListMcpToolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMcpToolsResponse message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsResponse.verify|verify} messages.
+                     * @param message ListMcpToolsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apiregistry.v1.IListMcpToolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMcpToolsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMcpToolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apiregistry.v1.ListMcpToolsResponse;
+
+                    /**
+                     * Decodes a ListMcpToolsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMcpToolsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apiregistry.v1.ListMcpToolsResponse;
+
+                    /**
+                     * Verifies a ListMcpToolsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMcpToolsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMcpToolsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apiregistry.v1.ListMcpToolsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMcpToolsResponse message. Also converts values to other types if specified.
+                     * @param message ListMcpToolsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apiregistry.v1.ListMcpToolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMcpToolsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMcpToolsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 

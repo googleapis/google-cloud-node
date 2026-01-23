@@ -57,6 +57,2530 @@
                  */
                 var apiregistry = {};
     
+                apiregistry.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.apiregistry
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    /**
+                     * State enum.
+                     * @name google.cloud.apiregistry.v1.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} ENABLED=1 ENABLED value
+                     * @property {number} DISABLED=2 DISABLED value
+                     */
+                    v1.State = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ENABLED"] = 1;
+                        values[valuesById[2] = "DISABLED"] = 2;
+                        return values;
+                    })();
+    
+                    v1.McpServer = (function() {
+    
+                        /**
+                         * Properties of a McpServer.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IMcpServer
+                         * @property {string|null} [name] McpServer name
+                         * @property {string|null} [displayName] McpServer displayName
+                         * @property {string|null} [description] McpServer description
+                         * @property {Array.<string>|null} [urls] McpServer urls
+                         * @property {google.protobuf.IStruct|null} [capabilities] McpServer capabilities
+                         * @property {google.cloud.apiregistry.v1.State|null} [state] McpServer state
+                         */
+    
+                        /**
+                         * Constructs a new McpServer.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a McpServer.
+                         * @implements IMcpServer
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IMcpServer=} [properties] Properties to set
+                         */
+                        function McpServer(properties) {
+                            this.urls = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * McpServer name.
+                         * @member {string} name
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.name = "";
+    
+                        /**
+                         * McpServer displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.displayName = "";
+    
+                        /**
+                         * McpServer description.
+                         * @member {string} description
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.description = "";
+    
+                        /**
+                         * McpServer urls.
+                         * @member {Array.<string>} urls
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.urls = $util.emptyArray;
+    
+                        /**
+                         * McpServer capabilities.
+                         * @member {google.protobuf.IStruct|null|undefined} capabilities
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.capabilities = null;
+    
+                        /**
+                         * McpServer state.
+                         * @member {google.cloud.apiregistry.v1.State} state
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         */
+                        McpServer.prototype.state = 0;
+    
+                        /**
+                         * Creates a new McpServer instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpServer=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.McpServer} McpServer instance
+                         */
+                        McpServer.create = function create(properties) {
+                            return new McpServer(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified McpServer message. Does not implicitly {@link google.cloud.apiregistry.v1.McpServer.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpServer} message McpServer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpServer.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.urls != null && message.urls.length)
+                                for (var i = 0; i < message.urls.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.urls[i]);
+                            if (message.capabilities != null && Object.hasOwnProperty.call(message, "capabilities"))
+                                $root.google.protobuf.Struct.encode(message.capabilities, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified McpServer message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.McpServer.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpServer} message McpServer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpServer.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a McpServer message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.McpServer} McpServer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpServer.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.McpServer();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.urls && message.urls.length))
+                                            message.urls = [];
+                                        message.urls.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.capabilities = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a McpServer message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.McpServer} McpServer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpServer.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a McpServer message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        McpServer.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.urls != null && message.hasOwnProperty("urls")) {
+                                if (!Array.isArray(message.urls))
+                                    return "urls: array expected";
+                                for (var i = 0; i < message.urls.length; ++i)
+                                    if (!$util.isString(message.urls[i]))
+                                        return "urls: string[] expected";
+                            }
+                            if (message.capabilities != null && message.hasOwnProperty("capabilities")) {
+                                var error = $root.google.protobuf.Struct.verify(message.capabilities);
+                                if (error)
+                                    return "capabilities." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a McpServer message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.McpServer} McpServer
+                         */
+                        McpServer.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.McpServer)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.McpServer();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.urls) {
+                                if (!Array.isArray(object.urls))
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpServer.urls: array expected");
+                                message.urls = [];
+                                for (var i = 0; i < object.urls.length; ++i)
+                                    message.urls[i] = String(object.urls[i]);
+                            }
+                            if (object.capabilities != null) {
+                                if (typeof object.capabilities !== "object")
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpServer.capabilities: object expected");
+                                message.capabilities = $root.google.protobuf.Struct.fromObject(object.capabilities);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a McpServer message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.McpServer} message McpServer
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        McpServer.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.urls = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.capabilities = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.urls && message.urls.length) {
+                                object.urls = [];
+                                for (var j = 0; j < message.urls.length; ++j)
+                                    object.urls[j] = message.urls[j];
+                            }
+                            if (message.capabilities != null && message.hasOwnProperty("capabilities"))
+                                object.capabilities = $root.google.protobuf.Struct.toObject(message.capabilities, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.apiregistry.v1.State[message.state] === undefined ? message.state : $root.google.cloud.apiregistry.v1.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this McpServer to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        McpServer.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for McpServer
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.McpServer
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        McpServer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.McpServer";
+                        };
+    
+                        return McpServer;
+                    })();
+    
+                    v1.McpTool = (function() {
+    
+                        /**
+                         * Properties of a McpTool.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IMcpTool
+                         * @property {string|null} [name] McpTool name
+                         * @property {string|null} [displayName] McpTool displayName
+                         * @property {string|null} [description] McpTool description
+                         * @property {Array.<string>|null} [mcpServerUrls] McpTool mcpServerUrls
+                         * @property {google.protobuf.IStruct|null} [inputSchema] McpTool inputSchema
+                         * @property {google.protobuf.IStruct|null} [outputSchema] McpTool outputSchema
+                         * @property {google.protobuf.IStruct|null} [annotations] McpTool annotations
+                         */
+    
+                        /**
+                         * Constructs a new McpTool.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a McpTool.
+                         * @implements IMcpTool
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IMcpTool=} [properties] Properties to set
+                         */
+                        function McpTool(properties) {
+                            this.mcpServerUrls = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * McpTool name.
+                         * @member {string} name
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.name = "";
+    
+                        /**
+                         * McpTool displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.displayName = "";
+    
+                        /**
+                         * McpTool description.
+                         * @member {string} description
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.description = "";
+    
+                        /**
+                         * McpTool mcpServerUrls.
+                         * @member {Array.<string>} mcpServerUrls
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.mcpServerUrls = $util.emptyArray;
+    
+                        /**
+                         * McpTool inputSchema.
+                         * @member {google.protobuf.IStruct|null|undefined} inputSchema
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.inputSchema = null;
+    
+                        /**
+                         * McpTool outputSchema.
+                         * @member {google.protobuf.IStruct|null|undefined} outputSchema
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.outputSchema = null;
+    
+                        /**
+                         * McpTool annotations.
+                         * @member {google.protobuf.IStruct|null|undefined} annotations
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         */
+                        McpTool.prototype.annotations = null;
+    
+                        /**
+                         * Creates a new McpTool instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpTool=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.McpTool} McpTool instance
+                         */
+                        McpTool.create = function create(properties) {
+                            return new McpTool(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified McpTool message. Does not implicitly {@link google.cloud.apiregistry.v1.McpTool.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpTool} message McpTool message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpTool.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.mcpServerUrls != null && message.mcpServerUrls.length)
+                                for (var i = 0; i < message.mcpServerUrls.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.mcpServerUrls[i]);
+                            if (message.inputSchema != null && Object.hasOwnProperty.call(message, "inputSchema"))
+                                $root.google.protobuf.Struct.encode(message.inputSchema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.outputSchema != null && Object.hasOwnProperty.call(message, "outputSchema"))
+                                $root.google.protobuf.Struct.encode(message.outputSchema, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                $root.google.protobuf.Struct.encode(message.annotations, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified McpTool message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.McpTool.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IMcpTool} message McpTool message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        McpTool.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a McpTool message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.McpTool} McpTool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpTool.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.McpTool();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.mcpServerUrls && message.mcpServerUrls.length))
+                                            message.mcpServerUrls = [];
+                                        message.mcpServerUrls.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.inputSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.outputSchema = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.annotations = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a McpTool message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.McpTool} McpTool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        McpTool.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a McpTool message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        McpTool.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.mcpServerUrls != null && message.hasOwnProperty("mcpServerUrls")) {
+                                if (!Array.isArray(message.mcpServerUrls))
+                                    return "mcpServerUrls: array expected";
+                                for (var i = 0; i < message.mcpServerUrls.length; ++i)
+                                    if (!$util.isString(message.mcpServerUrls[i]))
+                                        return "mcpServerUrls: string[] expected";
+                            }
+                            if (message.inputSchema != null && message.hasOwnProperty("inputSchema")) {
+                                var error = $root.google.protobuf.Struct.verify(message.inputSchema);
+                                if (error)
+                                    return "inputSchema." + error;
+                            }
+                            if (message.outputSchema != null && message.hasOwnProperty("outputSchema")) {
+                                var error = $root.google.protobuf.Struct.verify(message.outputSchema);
+                                if (error)
+                                    return "outputSchema." + error;
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                var error = $root.google.protobuf.Struct.verify(message.annotations);
+                                if (error)
+                                    return "annotations." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a McpTool message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.McpTool} McpTool
+                         */
+                        McpTool.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.McpTool)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.McpTool();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.mcpServerUrls) {
+                                if (!Array.isArray(object.mcpServerUrls))
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpTool.mcpServerUrls: array expected");
+                                message.mcpServerUrls = [];
+                                for (var i = 0; i < object.mcpServerUrls.length; ++i)
+                                    message.mcpServerUrls[i] = String(object.mcpServerUrls[i]);
+                            }
+                            if (object.inputSchema != null) {
+                                if (typeof object.inputSchema !== "object")
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpTool.inputSchema: object expected");
+                                message.inputSchema = $root.google.protobuf.Struct.fromObject(object.inputSchema);
+                            }
+                            if (object.outputSchema != null) {
+                                if (typeof object.outputSchema !== "object")
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpTool.outputSchema: object expected");
+                                message.outputSchema = $root.google.protobuf.Struct.fromObject(object.outputSchema);
+                            }
+                            if (object.annotations != null) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.apiregistry.v1.McpTool.annotations: object expected");
+                                message.annotations = $root.google.protobuf.Struct.fromObject(object.annotations);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a McpTool message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.McpTool} message McpTool
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        McpTool.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.mcpServerUrls = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.inputSchema = null;
+                                object.outputSchema = null;
+                                object.annotations = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.mcpServerUrls && message.mcpServerUrls.length) {
+                                object.mcpServerUrls = [];
+                                for (var j = 0; j < message.mcpServerUrls.length; ++j)
+                                    object.mcpServerUrls[j] = message.mcpServerUrls[j];
+                            }
+                            if (message.inputSchema != null && message.hasOwnProperty("inputSchema"))
+                                object.inputSchema = $root.google.protobuf.Struct.toObject(message.inputSchema, options);
+                            if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
+                                object.outputSchema = $root.google.protobuf.Struct.toObject(message.outputSchema, options);
+                            if (message.annotations != null && message.hasOwnProperty("annotations"))
+                                object.annotations = $root.google.protobuf.Struct.toObject(message.annotations, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this McpTool to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        McpTool.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for McpTool
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.McpTool
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        McpTool.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.McpTool";
+                        };
+    
+                        return McpTool;
+                    })();
+    
+                    v1.CloudApiRegistry = (function() {
+    
+                        /**
+                         * Constructs a new CloudApiRegistry service.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a CloudApiRegistry
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudApiRegistry(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudApiRegistry.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudApiRegistry;
+    
+                        /**
+                         * Creates new CloudApiRegistry service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudApiRegistry} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudApiRegistry.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|getMcpServer}.
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @typedef GetMcpServerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.apiregistry.v1.McpServer} [response] McpServer
+                         */
+    
+                        /**
+                         * Calls GetMcpServer.
+                         * @function getMcpServer
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest} request GetMcpServerRequest message or plain object
+                         * @param {google.cloud.apiregistry.v1.CloudApiRegistry.GetMcpServerCallback} callback Node-style callback called with the error, if any, and McpServer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudApiRegistry.prototype.getMcpServer = function getMcpServer(request, callback) {
+                            return this.rpcCall(getMcpServer, $root.google.cloud.apiregistry.v1.GetMcpServerRequest, $root.google.cloud.apiregistry.v1.McpServer, request, callback);
+                        }, "name", { value: "GetMcpServer" });
+    
+                        /**
+                         * Calls GetMcpServer.
+                         * @function getMcpServer
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest} request GetMcpServerRequest message or plain object
+                         * @returns {Promise<google.cloud.apiregistry.v1.McpServer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|listMcpServers}.
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @typedef ListMcpServersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.apiregistry.v1.ListMcpServersResponse} [response] ListMcpServersResponse
+                         */
+    
+                        /**
+                         * Calls ListMcpServers.
+                         * @function listMcpServers
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest} request ListMcpServersRequest message or plain object
+                         * @param {google.cloud.apiregistry.v1.CloudApiRegistry.ListMcpServersCallback} callback Node-style callback called with the error, if any, and ListMcpServersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudApiRegistry.prototype.listMcpServers = function listMcpServers(request, callback) {
+                            return this.rpcCall(listMcpServers, $root.google.cloud.apiregistry.v1.ListMcpServersRequest, $root.google.cloud.apiregistry.v1.ListMcpServersResponse, request, callback);
+                        }, "name", { value: "ListMcpServers" });
+    
+                        /**
+                         * Calls ListMcpServers.
+                         * @function listMcpServers
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest} request ListMcpServersRequest message or plain object
+                         * @returns {Promise<google.cloud.apiregistry.v1.ListMcpServersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|getMcpTool}.
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @typedef GetMcpToolCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.apiregistry.v1.McpTool} [response] McpTool
+                         */
+    
+                        /**
+                         * Calls GetMcpTool.
+                         * @function getMcpTool
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest} request GetMcpToolRequest message or plain object
+                         * @param {google.cloud.apiregistry.v1.CloudApiRegistry.GetMcpToolCallback} callback Node-style callback called with the error, if any, and McpTool
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudApiRegistry.prototype.getMcpTool = function getMcpTool(request, callback) {
+                            return this.rpcCall(getMcpTool, $root.google.cloud.apiregistry.v1.GetMcpToolRequest, $root.google.cloud.apiregistry.v1.McpTool, request, callback);
+                        }, "name", { value: "GetMcpTool" });
+    
+                        /**
+                         * Calls GetMcpTool.
+                         * @function getMcpTool
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest} request GetMcpToolRequest message or plain object
+                         * @returns {Promise<google.cloud.apiregistry.v1.McpTool>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.apiregistry.v1.CloudApiRegistry|listMcpTools}.
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @typedef ListMcpToolsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.apiregistry.v1.ListMcpToolsResponse} [response] ListMcpToolsResponse
+                         */
+    
+                        /**
+                         * Calls ListMcpTools.
+                         * @function listMcpTools
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest} request ListMcpToolsRequest message or plain object
+                         * @param {google.cloud.apiregistry.v1.CloudApiRegistry.ListMcpToolsCallback} callback Node-style callback called with the error, if any, and ListMcpToolsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudApiRegistry.prototype.listMcpTools = function listMcpTools(request, callback) {
+                            return this.rpcCall(listMcpTools, $root.google.cloud.apiregistry.v1.ListMcpToolsRequest, $root.google.cloud.apiregistry.v1.ListMcpToolsResponse, request, callback);
+                        }, "name", { value: "ListMcpTools" });
+    
+                        /**
+                         * Calls ListMcpTools.
+                         * @function listMcpTools
+                         * @memberof google.cloud.apiregistry.v1.CloudApiRegistry
+                         * @instance
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest} request ListMcpToolsRequest message or plain object
+                         * @returns {Promise<google.cloud.apiregistry.v1.ListMcpToolsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudApiRegistry;
+                    })();
+    
+                    v1.GetMcpServerRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMcpServerRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IGetMcpServerRequest
+                         * @property {string|null} [name] GetMcpServerRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMcpServerRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a GetMcpServerRequest.
+                         * @implements IGetMcpServerRequest
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest=} [properties] Properties to set
+                         */
+                        function GetMcpServerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMcpServerRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @instance
+                         */
+                        GetMcpServerRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMcpServerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.GetMcpServerRequest} GetMcpServerRequest instance
+                         */
+                        GetMcpServerRequest.create = function create(properties) {
+                            return new GetMcpServerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMcpServerRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpServerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest} message GetMcpServerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMcpServerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMcpServerRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpServerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpServerRequest} message GetMcpServerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMcpServerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMcpServerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.GetMcpServerRequest} GetMcpServerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMcpServerRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.GetMcpServerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMcpServerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.GetMcpServerRequest} GetMcpServerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMcpServerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMcpServerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMcpServerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMcpServerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.GetMcpServerRequest} GetMcpServerRequest
+                         */
+                        GetMcpServerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.GetMcpServerRequest)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.GetMcpServerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMcpServerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.GetMcpServerRequest} message GetMcpServerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMcpServerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMcpServerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMcpServerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMcpServerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.GetMcpServerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMcpServerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.GetMcpServerRequest";
+                        };
+    
+                        return GetMcpServerRequest;
+                    })();
+    
+                    v1.ListMcpServersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMcpServersRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IListMcpServersRequest
+                         * @property {string|null} [parent] ListMcpServersRequest parent
+                         * @property {number|null} [pageSize] ListMcpServersRequest pageSize
+                         * @property {string|null} [pageToken] ListMcpServersRequest pageToken
+                         * @property {string|null} [filter] ListMcpServersRequest filter
+                         * @property {string|null} [orderBy] ListMcpServersRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListMcpServersRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a ListMcpServersRequest.
+                         * @implements IListMcpServersRequest
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest=} [properties] Properties to set
+                         */
+                        function ListMcpServersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMcpServersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         */
+                        ListMcpServersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMcpServersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         */
+                        ListMcpServersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMcpServersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         */
+                        ListMcpServersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMcpServersRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         */
+                        ListMcpServersRequest.prototype.filter = "";
+    
+                        /**
+                         * ListMcpServersRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         */
+                        ListMcpServersRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListMcpServersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersRequest} ListMcpServersRequest instance
+                         */
+                        ListMcpServersRequest.create = function create(properties) {
+                            return new ListMcpServersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpServersRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest} message ListMcpServersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpServersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpServersRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersRequest} message ListMcpServersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpServersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMcpServersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersRequest} ListMcpServersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpServersRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.ListMcpServersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMcpServersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersRequest} ListMcpServersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpServersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMcpServersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMcpServersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMcpServersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersRequest} ListMcpServersRequest
+                         */
+                        ListMcpServersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.ListMcpServersRequest)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.ListMcpServersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMcpServersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.ListMcpServersRequest} message ListMcpServersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMcpServersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMcpServersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMcpServersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMcpServersRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMcpServersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.ListMcpServersRequest";
+                        };
+    
+                        return ListMcpServersRequest;
+                    })();
+    
+                    v1.ListMcpServersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMcpServersResponse.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IListMcpServersResponse
+                         * @property {Array.<google.cloud.apiregistry.v1.IMcpServer>|null} [mcpServers] ListMcpServersResponse mcpServers
+                         * @property {string|null} [nextPageToken] ListMcpServersResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMcpServersResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMcpServersResponse.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a ListMcpServersResponse.
+                         * @implements IListMcpServersResponse
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersResponse=} [properties] Properties to set
+                         */
+                        function ListMcpServersResponse(properties) {
+                            this.mcpServers = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMcpServersResponse mcpServers.
+                         * @member {Array.<google.cloud.apiregistry.v1.IMcpServer>} mcpServers
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @instance
+                         */
+                        ListMcpServersResponse.prototype.mcpServers = $util.emptyArray;
+    
+                        /**
+                         * ListMcpServersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @instance
+                         */
+                        ListMcpServersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMcpServersResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @instance
+                         */
+                        ListMcpServersResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMcpServersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersResponse} ListMcpServersResponse instance
+                         */
+                        ListMcpServersResponse.create = function create(properties) {
+                            return new ListMcpServersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpServersResponse message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersResponse} message ListMcpServersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpServersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mcpServers != null && message.mcpServers.length)
+                                for (var i = 0; i < message.mcpServers.length; ++i)
+                                    $root.google.cloud.apiregistry.v1.McpServer.encode(message.mcpServers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpServersResponse message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpServersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpServersResponse} message ListMcpServersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpServersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMcpServersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersResponse} ListMcpServersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpServersResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.ListMcpServersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.mcpServers && message.mcpServers.length))
+                                            message.mcpServers = [];
+                                        message.mcpServers.push($root.google.cloud.apiregistry.v1.McpServer.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMcpServersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersResponse} ListMcpServersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpServersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMcpServersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMcpServersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mcpServers != null && message.hasOwnProperty("mcpServers")) {
+                                if (!Array.isArray(message.mcpServers))
+                                    return "mcpServers: array expected";
+                                for (var i = 0; i < message.mcpServers.length; ++i) {
+                                    var error = $root.google.cloud.apiregistry.v1.McpServer.verify(message.mcpServers[i]);
+                                    if (error)
+                                        return "mcpServers." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMcpServersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.ListMcpServersResponse} ListMcpServersResponse
+                         */
+                        ListMcpServersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.ListMcpServersResponse)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.ListMcpServersResponse();
+                            if (object.mcpServers) {
+                                if (!Array.isArray(object.mcpServers))
+                                    throw TypeError(".google.cloud.apiregistry.v1.ListMcpServersResponse.mcpServers: array expected");
+                                message.mcpServers = [];
+                                for (var i = 0; i < object.mcpServers.length; ++i) {
+                                    if (typeof object.mcpServers[i] !== "object")
+                                        throw TypeError(".google.cloud.apiregistry.v1.ListMcpServersResponse.mcpServers: object expected");
+                                    message.mcpServers[i] = $root.google.cloud.apiregistry.v1.McpServer.fromObject(object.mcpServers[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.apiregistry.v1.ListMcpServersResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMcpServersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.ListMcpServersResponse} message ListMcpServersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMcpServersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.mcpServers = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.mcpServers && message.mcpServers.length) {
+                                object.mcpServers = [];
+                                for (var j = 0; j < message.mcpServers.length; ++j)
+                                    object.mcpServers[j] = $root.google.cloud.apiregistry.v1.McpServer.toObject(message.mcpServers[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMcpServersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMcpServersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMcpServersResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.ListMcpServersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMcpServersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.ListMcpServersResponse";
+                        };
+    
+                        return ListMcpServersResponse;
+                    })();
+    
+                    v1.GetMcpToolRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMcpToolRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IGetMcpToolRequest
+                         * @property {string|null} [name] GetMcpToolRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMcpToolRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a GetMcpToolRequest.
+                         * @implements IGetMcpToolRequest
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest=} [properties] Properties to set
+                         */
+                        function GetMcpToolRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMcpToolRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @instance
+                         */
+                        GetMcpToolRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMcpToolRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.GetMcpToolRequest} GetMcpToolRequest instance
+                         */
+                        GetMcpToolRequest.create = function create(properties) {
+                            return new GetMcpToolRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMcpToolRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpToolRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest} message GetMcpToolRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMcpToolRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMcpToolRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.GetMcpToolRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IGetMcpToolRequest} message GetMcpToolRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMcpToolRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMcpToolRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.GetMcpToolRequest} GetMcpToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMcpToolRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.GetMcpToolRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMcpToolRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.GetMcpToolRequest} GetMcpToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMcpToolRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMcpToolRequest message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMcpToolRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMcpToolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.GetMcpToolRequest} GetMcpToolRequest
+                         */
+                        GetMcpToolRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.GetMcpToolRequest)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.GetMcpToolRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMcpToolRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.GetMcpToolRequest} message GetMcpToolRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMcpToolRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMcpToolRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMcpToolRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMcpToolRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.GetMcpToolRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMcpToolRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.GetMcpToolRequest";
+                        };
+    
+                        return GetMcpToolRequest;
+                    })();
+    
+                    v1.ListMcpToolsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMcpToolsRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IListMcpToolsRequest
+                         * @property {string|null} [parent] ListMcpToolsRequest parent
+                         * @property {number|null} [pageSize] ListMcpToolsRequest pageSize
+                         * @property {string|null} [pageToken] ListMcpToolsRequest pageToken
+                         * @property {string|null} [filter] ListMcpToolsRequest filter
+                         * @property {string|null} [orderBy] ListMcpToolsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListMcpToolsRequest.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a ListMcpToolsRequest.
+                         * @implements IListMcpToolsRequest
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest=} [properties] Properties to set
+                         */
+                        function ListMcpToolsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMcpToolsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         */
+                        ListMcpToolsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMcpToolsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         */
+                        ListMcpToolsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMcpToolsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         */
+                        ListMcpToolsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMcpToolsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         */
+                        ListMcpToolsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListMcpToolsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         */
+                        ListMcpToolsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListMcpToolsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsRequest} ListMcpToolsRequest instance
+                         */
+                        ListMcpToolsRequest.create = function create(properties) {
+                            return new ListMcpToolsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpToolsRequest message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest} message ListMcpToolsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpToolsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpToolsRequest message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsRequest} message ListMcpToolsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpToolsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMcpToolsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsRequest} ListMcpToolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpToolsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.ListMcpToolsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMcpToolsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsRequest} ListMcpToolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpToolsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMcpToolsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMcpToolsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMcpToolsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsRequest} ListMcpToolsRequest
+                         */
+                        ListMcpToolsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.ListMcpToolsRequest)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.ListMcpToolsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMcpToolsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.ListMcpToolsRequest} message ListMcpToolsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMcpToolsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMcpToolsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMcpToolsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMcpToolsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMcpToolsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.ListMcpToolsRequest";
+                        };
+    
+                        return ListMcpToolsRequest;
+                    })();
+    
+                    v1.ListMcpToolsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMcpToolsResponse.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @interface IListMcpToolsResponse
+                         * @property {Array.<google.cloud.apiregistry.v1.IMcpTool>|null} [mcpTools] ListMcpToolsResponse mcpTools
+                         * @property {string|null} [nextPageToken] ListMcpToolsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMcpToolsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMcpToolsResponse.
+                         * @memberof google.cloud.apiregistry.v1
+                         * @classdesc Represents a ListMcpToolsResponse.
+                         * @implements IListMcpToolsResponse
+                         * @constructor
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsResponse=} [properties] Properties to set
+                         */
+                        function ListMcpToolsResponse(properties) {
+                            this.mcpTools = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMcpToolsResponse mcpTools.
+                         * @member {Array.<google.cloud.apiregistry.v1.IMcpTool>} mcpTools
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @instance
+                         */
+                        ListMcpToolsResponse.prototype.mcpTools = $util.emptyArray;
+    
+                        /**
+                         * ListMcpToolsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @instance
+                         */
+                        ListMcpToolsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMcpToolsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @instance
+                         */
+                        ListMcpToolsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMcpToolsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsResponse} ListMcpToolsResponse instance
+                         */
+                        ListMcpToolsResponse.create = function create(properties) {
+                            return new ListMcpToolsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpToolsResponse message. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsResponse} message ListMcpToolsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpToolsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mcpTools != null && message.mcpTools.length)
+                                for (var i = 0; i < message.mcpTools.length; ++i)
+                                    $root.google.cloud.apiregistry.v1.McpTool.encode(message.mcpTools[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMcpToolsResponse message, length delimited. Does not implicitly {@link google.cloud.apiregistry.v1.ListMcpToolsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.IListMcpToolsResponse} message ListMcpToolsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMcpToolsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMcpToolsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsResponse} ListMcpToolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpToolsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.apiregistry.v1.ListMcpToolsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.mcpTools && message.mcpTools.length))
+                                            message.mcpTools = [];
+                                        message.mcpTools.push($root.google.cloud.apiregistry.v1.McpTool.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMcpToolsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsResponse} ListMcpToolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMcpToolsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMcpToolsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMcpToolsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mcpTools != null && message.hasOwnProperty("mcpTools")) {
+                                if (!Array.isArray(message.mcpTools))
+                                    return "mcpTools: array expected";
+                                for (var i = 0; i < message.mcpTools.length; ++i) {
+                                    var error = $root.google.cloud.apiregistry.v1.McpTool.verify(message.mcpTools[i]);
+                                    if (error)
+                                        return "mcpTools." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMcpToolsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.apiregistry.v1.ListMcpToolsResponse} ListMcpToolsResponse
+                         */
+                        ListMcpToolsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.apiregistry.v1.ListMcpToolsResponse)
+                                return object;
+                            var message = new $root.google.cloud.apiregistry.v1.ListMcpToolsResponse();
+                            if (object.mcpTools) {
+                                if (!Array.isArray(object.mcpTools))
+                                    throw TypeError(".google.cloud.apiregistry.v1.ListMcpToolsResponse.mcpTools: array expected");
+                                message.mcpTools = [];
+                                for (var i = 0; i < object.mcpTools.length; ++i) {
+                                    if (typeof object.mcpTools[i] !== "object")
+                                        throw TypeError(".google.cloud.apiregistry.v1.ListMcpToolsResponse.mcpTools: object expected");
+                                    message.mcpTools[i] = $root.google.cloud.apiregistry.v1.McpTool.fromObject(object.mcpTools[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.apiregistry.v1.ListMcpToolsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMcpToolsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {google.cloud.apiregistry.v1.ListMcpToolsResponse} message ListMcpToolsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMcpToolsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.mcpTools = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.mcpTools && message.mcpTools.length) {
+                                object.mcpTools = [];
+                                for (var j = 0; j < message.mcpTools.length; ++j)
+                                    object.mcpTools[j] = $root.google.cloud.apiregistry.v1.McpTool.toObject(message.mcpTools[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMcpToolsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMcpToolsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMcpToolsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.apiregistry.v1.ListMcpToolsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMcpToolsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.apiregistry.v1.ListMcpToolsResponse";
+                        };
+    
+                        return ListMcpToolsResponse;
+                    })();
+    
+                    return v1;
+                })();
+    
                 apiregistry.v1beta = (function() {
     
                     /**
