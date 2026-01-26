@@ -19713,6 +19713,7 @@
                  * @property {grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null} [sbomStatus] DiscoveryOccurrence sbomStatus
                  * @property {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null} [vulnerabilityAttestation] DiscoveryOccurrence vulnerabilityAttestation
                  * @property {Array.<grafeas.v1.DiscoveryOccurrence.IFile>|null} [files] DiscoveryOccurrence files
+                 * @property {google.protobuf.ITimestamp|null} [lastVulnerabilityUpdateTime] DiscoveryOccurrence lastVulnerabilityUpdateTime
                  */
     
                 /**
@@ -19821,6 +19822,14 @@
                 DiscoveryOccurrence.prototype.files = $util.emptyArray;
     
                 /**
+                 * DiscoveryOccurrence lastVulnerabilityUpdateTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} lastVulnerabilityUpdateTime
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.lastVulnerabilityUpdateTime = null;
+    
+                /**
                  * Creates a new DiscoveryOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.DiscoveryOccurrence
@@ -19868,6 +19877,8 @@
                     if (message.files != null && message.files.length)
                         for (var i = 0; i < message.files.length; ++i)
                             $root.grafeas.v1.DiscoveryOccurrence.File.encode(message.files[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                    if (message.lastVulnerabilityUpdateTime != null && Object.hasOwnProperty.call(message, "lastVulnerabilityUpdateTime"))
+                        $root.google.protobuf.Timestamp.encode(message.lastVulnerabilityUpdateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     return writer;
                 };
     
@@ -19950,6 +19961,10 @@
                                 if (!(message.files && message.files.length))
                                     message.files = [];
                                 message.files.push($root.grafeas.v1.DiscoveryOccurrence.File.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 12: {
+                                message.lastVulnerabilityUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -20059,6 +20074,11 @@
                             if (error)
                                 return "files." + error;
                         }
+                    }
+                    if (message.lastVulnerabilityUpdateTime != null && message.hasOwnProperty("lastVulnerabilityUpdateTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.lastVulnerabilityUpdateTime);
+                        if (error)
+                            return "lastVulnerabilityUpdateTime." + error;
                     }
                     return null;
                 };
@@ -20183,6 +20203,11 @@
                             message.files[i] = $root.grafeas.v1.DiscoveryOccurrence.File.fromObject(object.files[i]);
                         }
                     }
+                    if (object.lastVulnerabilityUpdateTime != null) {
+                        if (typeof object.lastVulnerabilityUpdateTime !== "object")
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.lastVulnerabilityUpdateTime: object expected");
+                        message.lastVulnerabilityUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastVulnerabilityUpdateTime);
+                    }
                     return message;
                 };
     
@@ -20213,6 +20238,7 @@
                         object.analysisCompleted = null;
                         object.sbomStatus = null;
                         object.vulnerabilityAttestation = null;
+                        object.lastVulnerabilityUpdateTime = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
                         object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] === undefined ? message.continuousAnalysis : $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
@@ -20242,6 +20268,8 @@
                         for (var j = 0; j < message.files.length; ++j)
                             object.files[j] = $root.grafeas.v1.DiscoveryOccurrence.File.toObject(message.files[j], options);
                     }
+                    if (message.lastVulnerabilityUpdateTime != null && message.hasOwnProperty("lastVulnerabilityUpdateTime"))
+                        object.lastVulnerabilityUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastVulnerabilityUpdateTime, options);
                     return object;
                 };
     

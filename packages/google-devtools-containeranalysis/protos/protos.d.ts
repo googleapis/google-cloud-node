@@ -7546,6 +7546,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence files */
             files?: (grafeas.v1.DiscoveryOccurrence.IFile[]|null);
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime */
+            lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -7589,6 +7592,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence files. */
             public files: grafeas.v1.DiscoveryOccurrence.IFile[];
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime. */
+            public lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
