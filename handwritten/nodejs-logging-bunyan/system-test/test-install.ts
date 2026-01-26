@@ -12,11 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as check from 'post-install-check';
+import {packNTest} from 'pack-n-play';
+import {describe, it} from 'mocha';
 
-const TS_CODE_ARRAY: check.CodeSample[] = [
-  {
-    code: `import * as lb from '@google-cloud/logging-bunyan';
+describe('📦 pack-n-play test', () => {
+  const TS_CODE_ARRAY = [
+    {
+      code: `import * as lb from '@google-cloud/logging-bunyan';
 import * as bunyan from 'bunyan';
 
 const loggingBunyan = new lb.LoggingBunyan();
@@ -29,12 +31,12 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description: 'imports the module using * syntax',
-    dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan'],
-  },
-  {
-    code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
+      description: 'imports the module using * syntax',
+      dependencies: ['bunyan'],
+      devDependencies: ['@types/bunyan'],
+    },
+    {
+      code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
 import * as bunyan from 'bunyan';
 
 const loggingBunyan = new LoggingBunyan();
@@ -47,12 +49,12 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description: 'imports the module with {} syntax',
-    dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan'],
-  },
-  {
-    code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
+      description: 'imports the module with {} syntax',
+      dependencies: ['bunyan'],
+      devDependencies: ['@types/bunyan'],
+    },
+    {
+      code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
 import * as bunyan from 'bunyan';
 
 const loggingBunyan = new LoggingBunyan({
@@ -69,13 +71,13 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description:
-      'imports the module and starts with a partial `serviceContext`',
-    dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan'],
-  },
-  {
-    code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
+      description:
+        'imports the module and starts with a partial `serviceContext`',
+      dependencies: ['bunyan'],
+      devDependencies: ['@types/bunyan'],
+    },
+    {
+      code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
 import * as bunyan from 'bunyan';
 
 const loggingBunyan = new LoggingBunyan({
@@ -94,13 +96,13 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description:
-      'imports the module and starts with a complete `serviceContext`',
-    dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan'],
-  },
-  {
-    code: `import * as lb from '@google-cloud/logging-bunyan';
+      description:
+        'imports the module and starts with a complete `serviceContext`',
+      dependencies: ['bunyan'],
+      devDependencies: ['@types/bunyan'],
+    },
+    {
+      code: `import * as lb from '@google-cloud/logging-bunyan';
 import * as express from 'express';
 
 async function main() {
@@ -108,15 +110,15 @@ async function main() {
   const app = express();
   app.use(mw);
 }`,
-    description: 'can be used with express',
-    dependencies: ['express', 'bunyan'],
-    devDependencies: ['@types/bunyan', '@types/express'],
-  },
-];
+      description: 'can be used with express',
+      dependencies: ['express', 'bunyan'],
+      devDependencies: ['@types/bunyan', '@types/express'],
+    },
+  ];
 
-const JS_CODE_ARRAY: check.CodeSample[] = [
-  {
-    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+  const JS_CODE_ARRAY = [
+    {
+      code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan();
@@ -129,12 +131,12 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description: 'requires the module using Node 4+ syntax',
-    dependencies: ['bunyan'],
-    devDependencies: [],
-  },
-  {
-    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+      description: 'requires the module using Node 4+ syntax',
+      dependencies: ['bunyan'],
+      devDependencies: [],
+    },
+    {
+      code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan({
@@ -151,13 +153,13 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description:
-      'requires the module and starts with a partial `serviceContext`',
-    dependencies: ['bunyan'],
-    devDependencies: [],
-  },
-  {
-    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+      description:
+        'requires the module and starts with a partial `serviceContext`',
+      dependencies: ['bunyan'],
+      devDependencies: [],
+    },
+    {
+      code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan({
@@ -176,13 +178,13 @@ bunyan.createLogger({
     loggingBunyan.stream('info'),
   ],
 });`,
-    description:
-      'requires the module and starts with a complete `serviceContext`',
-    dependencies: ['bunyan'],
-    devDependencies: [],
-  },
-  {
-    code: `const lb = require('@google-cloud/logging-bunyan');
+      description:
+        'requires the module and starts with a complete `serviceContext`',
+      dependencies: ['bunyan'],
+      devDependencies: [],
+    },
+    {
+      code: `const lb = require('@google-cloud/logging-bunyan');
 const express = require('express');
 
 async function main() {
@@ -194,10 +196,41 @@ async function main() {
     process.exit(1);
   });
 }`,
-    description: 'can be used with express',
-    dependencies: ['express', 'bunyan'],
-    devDependencies: [],
-  },
-];
+      description: 'can be used with express',
+      dependencies: ['express', 'bunyan'],
+      devDependencies: [],
+    },
+  ];
 
-check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {timeout: 5 * 60 * 1000});
+  TS_CODE_ARRAY.forEach(sample => {
+    it(`TypeScript code: ${sample.description}`, async function() {
+      this.timeout(300000);
+      const options = {
+        packageDir: process.cwd(),
+        sample: {
+          description: sample.description,
+          ts: sample.code,
+          dependencies: sample.dependencies,
+          devDependencies: sample.devDependencies,
+        },
+      };
+      await packNTest(options);
+    });
+  });
+
+  JS_CODE_ARRAY.forEach(sample => {
+    it(`JavaScript code: ${sample.description}`, async function() {
+      this.timeout(300000);
+      const options = {
+        packageDir: process.cwd(),
+        sample: {
+          description: sample.description,
+          cjs: sample.code,
+          dependencies: sample.dependencies,
+          devDependencies: sample.devDependencies,
+        },
+      };
+      await packNTest(options);
+    });
+  });
+});
