@@ -183,6 +183,9 @@ export class ClusterManagerClient {
       cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      subnetworkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/regions/{region}/subnetworks/{subnetwork}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -236,7 +239,7 @@ export class ClusterManagerClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const clusterManagerStubMethods =
-        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'updateNodePool', 'setNodePoolAutoscaling', 'setLoggingService', 'setMonitoringService', 'setAddonsConfig', 'setLocations', 'updateMaster', 'setMasterAuth', 'deleteCluster', 'listOperations', 'getOperation', 'cancelOperation', 'getServerConfig', 'getJsonWebKeys', 'listNodePools', 'getNodePool', 'createNodePool', 'deleteNodePool', 'completeNodePoolUpgrade', 'rollbackNodePoolUpgrade', 'setNodePoolManagement', 'setLabels', 'setLegacyAbac', 'startIpRotation', 'completeIpRotation', 'setNodePoolSize', 'setNetworkPolicy', 'setMaintenancePolicy', 'listUsableSubnetworks', 'checkAutopilotCompatibility', 'listLocations', 'fetchClusterUpgradeInfo', 'fetchNodePoolUpgradeInfo'];
+        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'updateNodePool', 'setNodePoolAutoscaling', 'setLoggingService', 'setMonitoringService', 'setAddonsConfig', 'setLocations', 'updateMaster', 'setMasterAuth', 'deleteCluster', 'listOperations', 'getOperation', 'cancelOperation', 'getServerConfig', 'getJsonWebKeys', 'listNodePools', 'getNodePool', 'createNodePool', 'deleteNodePool', 'completeNodePoolUpgrade', 'rollbackNodePoolUpgrade', 'setNodePoolManagement', 'setLabels', 'setLegacyAbac', 'startIpRotation', 'completeIpRotation', 'setNodePoolSize', 'setNetworkPolicy', 'setMaintenancePolicy', 'listUsableSubnetworks', 'checkAutopilotCompatibility', 'listLocations', 'fetchClusterUpgradeInfo', 'fetchNodePoolUpgradeInfo', 'completeControlPlaneUpgrade'];
     for (const methodName of clusterManagerStubMethods) {
       const callPromise = this.clusterManagerStub.then(
         stub => (...args: Array<{}>) => {
@@ -926,6 +929,12 @@ export class ClusterManagerClient {
  *   The desired boot disk config for nodes in the node pool.
  *   Initiates an upgrade operation that migrates the nodes in the
  *   node pool to the specified boot disk config.
+ * @param {google.container.v1beta1.NodePool.NodeDrainConfig} request.nodeDrainConfig
+ *   The desired node drain configuration for nodes in the node pool.
+ * @param {google.protobuf.Duration} request.consolidationDelay
+ *   Consolidation delay defines duration after which the Cluster Autoscaler can
+ *   scale down underutilized nodes. If not set, nodes are scaled down by
+ *   default behavior, i.e. according to the chosen autoscaling profile.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -4467,6 +4476,104 @@ export class ClusterManagerClient {
         throw error;
       });
   }
+/**
+ * CompleteControlPlaneUpgrade completes the rollback-safe upgrade by
+ * performing the step two upgrade for a specific cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The name (project, location, cluster) of the cluster to complete upgrade.
+ *   Specified in the format `projects/* /locations/* /clusters/*`.
+ * @param {string} request.version
+ *   API request version that initiates this operation.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/cluster_manager.complete_control_plane_upgrade.js</caption>
+ * region_tag:container_v1beta1_generated_ClusterManager_CompleteControlPlaneUpgrade_async
+ */
+  completeControlPlaneUpgrade(
+      request?: protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.container.v1beta1.IOperation,
+        protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|undefined, {}|undefined
+      ]>;
+  completeControlPlaneUpgrade(
+      request: protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeControlPlaneUpgrade(
+      request: protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest,
+      callback: Callback<
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|null|undefined,
+          {}|null|undefined>): void;
+  completeControlPlaneUpgrade(
+      request?: protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.container.v1beta1.IOperation,
+        protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('completeControlPlaneUpgrade request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.container.v1beta1.IOperation,
+        protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeControlPlaneUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.completeControlPlaneUpgrade(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.container.v1beta1.IOperation,
+        protos.google.container.v1beta1.ICompleteControlPlaneUpgradeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('completeControlPlaneUpgrade response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * Lists subnetworks that can be used for creating clusters in a project.
@@ -4815,6 +4922,55 @@ export class ClusterManagerClient {
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified subnetwork resource name string.
+   *
+   * @param {string} project
+   * @param {string} region
+   * @param {string} subnetwork
+   * @returns {string} Resource name string.
+   */
+  subnetworkPath(project:string,region:string,subnetwork:string) {
+    return this.pathTemplates.subnetworkPathTemplate.render({
+      project: project,
+      region: region,
+      subnetwork: subnetwork,
+    });
+  }
+
+  /**
+   * Parse the project from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).project;
+  }
+
+  /**
+   * Parse the region from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the region.
+   */
+  matchRegionFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).region;
+  }
+
+  /**
+   * Parse the subnetwork from Subnetwork resource.
+   *
+   * @param {string} subnetworkName
+   *   A fully-qualified path representing Subnetwork resource.
+   * @returns {string} A string representing the subnetwork.
+   */
+  matchSubnetworkFromSubnetworkName(subnetworkName: string) {
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).subnetwork;
   }
 
   /**

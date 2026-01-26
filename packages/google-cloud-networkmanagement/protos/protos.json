@@ -195,6 +195,10 @@
                           "type": "string",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "string",
+                          "id": 21
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
                           "id": 10
@@ -225,7 +229,8 @@
                           "values": {
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
-                            "NON_GCP_NETWORK": 2
+                            "NON_GCP_NETWORK": 2,
+                            "INTERNET": 3
                           }
                         },
                         "ForwardingRuleTarget": {
@@ -467,6 +472,8 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
+                            "gkePod",
+                            "ipMasqueradingSkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -581,6 +588,14 @@
                           "type": "GKEMasterInfo",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "GkePodInfo",
+                          "id": 37
+                        },
+                        "ipMasqueradingSkipped": {
+                          "type": "IpMasqueradingSkippedInfo",
+                          "id": 38
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -644,6 +659,7 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_GKE_POD": 39,
                             "START_FROM_REDIS_INSTANCE": 32,
                             "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
@@ -669,6 +685,7 @@
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
                             "NAT": 14,
+                            "SKIP_GKE_POD_IP_MASQUERADING": 40,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -834,6 +851,8 @@
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "SYSTEM_NETWORK_FIREWALL_POLICY_RULE": 7,
+                            "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE": 8,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
                             "TRACKING_STATE": 101,
                             "ANALYSIS_SKIPPED": 102
@@ -1416,7 +1435,8 @@
                             "CLOUD_RUN_REVISION": 14,
                             "GOOGLE_MANAGED_SERVICE": 15,
                             "REDIS_INSTANCE": 16,
-                            "REDIS_CLUSTER": 17
+                            "REDIS_CLUSTER": 17,
+                            "GKE_POD": 19
                           }
                         },
                         "GoogleServiceType": {
@@ -1544,6 +1564,9 @@
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
                             "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
+                            "NO_SOURCE_GCP_NETWORK_LOCATION": 42,
+                            "NO_SOURCE_NON_GCP_NETWORK_LOCATION": 43,
+                            "NO_SOURCE_INTERNET_LOCATION": 44,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
                             "INTERNAL_ERROR": 10,
@@ -1558,6 +1581,7 @@
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT": 39,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED": 45,
                             "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
                             "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
@@ -1565,7 +1589,8 @@
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
                             "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
                             "NO_SERVERLESS_IP_RANGES": 37,
-                            "IP_VERSION_PROTOCOL_MISMATCH": 40
+                            "IP_VERSION_PROTOCOL_MISMATCH": 40,
+                            "GKE_POD_UNKNOWN_ENDPOINT_LOCATION": 41
                           }
                         }
                       }
@@ -1619,6 +1644,7 @@
                             "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED": 52,
                             "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID": 53,
                             "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS": 44,
+                            "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS": 109,
                             "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS": 98,
                             "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH": 45,
                             "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH": 46,
@@ -1633,6 +1659,7 @@
                             "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
+                            "GKE_POD_NOT_RUNNING": 103,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
                             "REDIS_INSTANCE_NOT_RUNNING": 68,
                             "REDIS_CLUSTER_NOT_RUNNING": 69,
@@ -1695,6 +1722,7 @@
                             "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88,
                             "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED": 89,
                             "NO_MATCHING_NAT64_GATEWAY": 90,
+                            "NO_CONFIGURED_PRIVATE_NAT64_RULE": 107,
                             "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH": 96,
                             "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97,
                             "CLOUD_NAT_PROTOCOL_UNSUPPORTED": 99,
@@ -1702,7 +1730,8 @@
                             "L2_INTERCONNECT_UNSUPPORTED_PORT": 101,
                             "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
                             "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
-                            "HYBRID_SUBNET_REGION_MISMATCH": 105
+                            "HYBRID_SUBNET_REGION_MISMATCH": 105,
+                            "HYBRID_SUBNET_NO_ROUTE": 106
                           }
                         }
                       }
@@ -1728,6 +1757,51 @@
                         "dnsEndpoint": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "GkePodInfo": {
+                      "fields": {
+                        "podUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IpMasqueradingSkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        },
+                        "nonMasqueradeRange": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE": 1,
+                            "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE": 2,
+                            "DESTINATION_ON_SAME_NODE": 3,
+                            "DEFAULT_SNAT_DISABLED": 4,
+                            "NO_MASQUERADING_FOR_IPV6": 5,
+                            "POD_USES_NODE_NETWORK_NAMESPACE": 6,
+                            "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
                         }
                       }
                     },
@@ -1991,6 +2065,10 @@
                         "natGatewayName": {
                           "type": "string",
                           "id": 13
+                        },
+                        "cloudNatGatewayType": {
+                          "type": "CloudNatGatewayType",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -2002,6 +2080,16 @@
                             "CLOUD_NAT": 3,
                             "PRIVATE_SERVICE_CONNECT": 4,
                             "GKE_POD_IP_MASQUERADING": 5
+                          }
+                        },
+                        "CloudNatGatewayType": {
+                          "values": {
+                            "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_NAT44": 1,
+                            "PUBLIC_NAT64": 2,
+                            "PRIVATE_NAT_NCC": 3,
+                            "PRIVATE_NAT_HYBRID": 4,
+                            "PRIVATE_NAT64": 5
                           }
                         }
                       }
@@ -3513,6 +3601,10 @@
                           "type": "string",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "string",
+                          "id": 21
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
                           "id": 10
@@ -3543,7 +3635,8 @@
                           "values": {
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
-                            "NON_GCP_NETWORK": 2
+                            "NON_GCP_NETWORK": 2,
+                            "INTERNET": 3
                           }
                         },
                         "ForwardingRuleTarget": {
@@ -3785,6 +3878,8 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
+                            "gkePod",
+                            "ipMasqueradingSkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -3899,6 +3994,14 @@
                           "type": "GKEMasterInfo",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "GkePodInfo",
+                          "id": 37
+                        },
+                        "ipMasqueradingSkipped": {
+                          "type": "IpMasqueradingSkippedInfo",
+                          "id": 38
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -3962,6 +4065,7 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_GKE_POD": 39,
                             "START_FROM_REDIS_INSTANCE": 32,
                             "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
@@ -3987,6 +4091,7 @@
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
                             "NAT": 14,
+                            "SKIP_GKE_POD_IP_MASQUERADING": 40,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -4152,6 +4257,8 @@
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "SYSTEM_NETWORK_FIREWALL_POLICY_RULE": 7,
+                            "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE": 8,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
                             "TRACKING_STATE": 101,
                             "ANALYSIS_SKIPPED": 102
@@ -4734,7 +4841,8 @@
                             "CLOUD_RUN_REVISION": 14,
                             "GOOGLE_MANAGED_SERVICE": 15,
                             "REDIS_INSTANCE": 16,
-                            "REDIS_CLUSTER": 17
+                            "REDIS_CLUSTER": 17,
+                            "GKE_POD": 19
                           }
                         },
                         "GoogleServiceType": {
@@ -4862,6 +4970,9 @@
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
                             "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
+                            "NO_SOURCE_GCP_NETWORK_LOCATION": 42,
+                            "NO_SOURCE_NON_GCP_NETWORK_LOCATION": 43,
+                            "NO_SOURCE_INTERNET_LOCATION": 44,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
                             "INTERNAL_ERROR": 10,
@@ -4876,6 +4987,7 @@
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT": 39,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED": 45,
                             "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
                             "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
@@ -4883,7 +4995,8 @@
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
                             "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
                             "NO_SERVERLESS_IP_RANGES": 37,
-                            "IP_VERSION_PROTOCOL_MISMATCH": 40
+                            "IP_VERSION_PROTOCOL_MISMATCH": 40,
+                            "GKE_POD_UNKNOWN_ENDPOINT_LOCATION": 41
                           }
                         }
                       }
@@ -4937,6 +5050,7 @@
                             "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED": 52,
                             "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID": 53,
                             "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS": 44,
+                            "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS": 109,
                             "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS": 98,
                             "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH": 45,
                             "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH": 46,
@@ -4951,6 +5065,7 @@
                             "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
+                            "GKE_POD_NOT_RUNNING": 103,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
                             "REDIS_INSTANCE_NOT_RUNNING": 68,
                             "REDIS_CLUSTER_NOT_RUNNING": 69,
@@ -5013,6 +5128,7 @@
                             "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88,
                             "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED": 89,
                             "NO_MATCHING_NAT64_GATEWAY": 90,
+                            "NO_CONFIGURED_PRIVATE_NAT64_RULE": 107,
                             "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH": 96,
                             "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97,
                             "CLOUD_NAT_PROTOCOL_UNSUPPORTED": 99,
@@ -5020,7 +5136,8 @@
                             "L2_INTERCONNECT_UNSUPPORTED_PORT": 101,
                             "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
                             "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
-                            "HYBRID_SUBNET_REGION_MISMATCH": 105
+                            "HYBRID_SUBNET_REGION_MISMATCH": 105,
+                            "HYBRID_SUBNET_NO_ROUTE": 106
                           }
                         }
                       }
@@ -5046,6 +5163,51 @@
                         "dnsEndpoint": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "GkePodInfo": {
+                      "fields": {
+                        "podUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IpMasqueradingSkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        },
+                        "nonMasqueradeRange": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE": 1,
+                            "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE": 2,
+                            "DESTINATION_ON_SAME_NODE": 3,
+                            "DEFAULT_SNAT_DISABLED": 4,
+                            "NO_MASQUERADING_FOR_IPV6": 5,
+                            "POD_USES_NODE_NETWORK_NAMESPACE": 6,
+                            "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
                         }
                       }
                     },
@@ -5309,6 +5471,10 @@
                         "natGatewayName": {
                           "type": "string",
                           "id": 13
+                        },
+                        "cloudNatGatewayType": {
+                          "type": "CloudNatGatewayType",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -5320,6 +5486,16 @@
                             "CLOUD_NAT": 3,
                             "PRIVATE_SERVICE_CONNECT": 4,
                             "GKE_POD_IP_MASQUERADING": 5
+                          }
+                        },
+                        "CloudNatGatewayType": {
+                          "values": {
+                            "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_NAT44": 1,
+                            "PUBLIC_NAT64": 2,
+                            "PRIVATE_NAT_NCC": 3,
+                            "PRIVATE_NAT_HYBRID": 4,
+                            "PRIVATE_NAT64": 5
                           }
                         }
                       }

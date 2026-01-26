@@ -230,7 +230,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 224,
+          "end": 234,
           "type": "FULL"
         }
       ],
@@ -378,6 +378,14 @@
           {
             "name": "boot_disk",
             "type": ".google.container.v1beta1.BootDisk"
+          },
+          {
+            "name": "node_drain_config",
+            "type": ".google.container.v1beta1.NodePool.NodeDrainConfig"
+          },
+          {
+            "name": "consolidation_delay",
+            "type": ".google.protobuf.Duration"
           }
         ],
         "resultType": ".google.container.v1beta1.Operation",
@@ -2076,6 +2084,50 @@
         "method": {
           "shortName": "FetchNodePoolUpgradeInfo",
           "fullName": "google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfo",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CompleteControlPlaneUpgrade_async",
+      "title": "ClusterManager completeControlPlaneUpgrade Sample",
+      "origin": "API_DEFINITION",
+      "description": " CompleteControlPlaneUpgrade completes the rollback-safe upgrade by performing the step two upgrade for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.complete_control_plane_upgrade.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteControlPlaneUpgrade",
+        "fullName": "google.container.v1beta1.ClusterManager.CompleteControlPlaneUpgrade",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CompleteControlPlaneUpgrade",
+          "fullName": "google.container.v1beta1.ClusterManager.CompleteControlPlaneUpgrade",
           "service": {
             "shortName": "ClusterManager",
             "fullName": "google.container.v1beta1.ClusterManager"

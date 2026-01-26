@@ -227,10 +227,10 @@ export class OrganizationVpcFlowLogsServiceClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}',}],
       },{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=organizations/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/global}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/connectivityTests/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/global/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/global/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/global/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/global/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/global/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/global}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/global}/operations',}],
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -895,7 +895,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1006,7 +1006,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1066,7 +1066,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`

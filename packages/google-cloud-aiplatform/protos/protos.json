@@ -45909,6 +45909,12 @@
                             "basic",
                             "unprovisioned"
                           ]
+                        },
+                        "mode": {
+                          "oneof": [
+                            "serverless",
+                            "spanner"
+                          ]
                         }
                       },
                       "fields": {
@@ -45921,15 +45927,32 @@
                         },
                         "scaled": {
                           "type": "Scaled",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "basic": {
                           "type": "Basic",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "unprovisioned": {
                           "type": "Unprovisioned",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "serverless": {
+                          "type": "Serverless",
+                          "id": 5
+                        },
+                        "spanner": {
+                          "type": "Spanner",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -45946,6 +45969,34 @@
                           "fields": {}
                         },
                         "Unprovisioned": {
+                          "fields": {}
+                        },
+                        "Spanner": {
+                          "oneofs": {
+                            "tier": {
+                              "oneof": [
+                                "scaled",
+                                "basic",
+                                "unprovisioned"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "scaled": {
+                              "type": "Scaled",
+                              "id": 1
+                            },
+                            "basic": {
+                              "type": "Basic",
+                              "id": 2
+                            },
+                            "unprovisioned": {
+                              "type": "Unprovisioned",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Serverless": {
                           "fields": {}
                         }
                       }

@@ -170849,6 +170849,12 @@ export namespace google {
 
                     /** RagManagedDbConfig unprovisioned */
                     unprovisioned?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IUnprovisioned|null);
+
+                    /** RagManagedDbConfig serverless */
+                    serverless?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless|null);
+
+                    /** RagManagedDbConfig spanner */
+                    spanner?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner|null);
                 }
 
                 /** Represents a RagManagedDbConfig. */
@@ -170872,8 +170878,17 @@ export namespace google {
                     /** RagManagedDbConfig unprovisioned. */
                     public unprovisioned?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IUnprovisioned|null);
 
+                    /** RagManagedDbConfig serverless. */
+                    public serverless?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless|null);
+
+                    /** RagManagedDbConfig spanner. */
+                    public spanner?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner|null);
+
                     /** RagManagedDbConfig tier. */
                     public tier?: ("enterprise"|"scaled"|"basic"|"unprovisioned");
+
+                    /** RagManagedDbConfig mode. */
+                    public mode?: ("serverless"|"spanner");
 
                     /**
                      * Creates a new RagManagedDbConfig instance using the specified properties.
@@ -171313,6 +171328,209 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Unprovisioned
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Spanner. */
+                    interface ISpanner {
+
+                        /** Spanner scaled */
+                        scaled?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IScaled|null);
+
+                        /** Spanner basic */
+                        basic?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IBasic|null);
+
+                        /** Spanner unprovisioned */
+                        unprovisioned?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IUnprovisioned|null);
+                    }
+
+                    /** Represents a Spanner. */
+                    class Spanner implements ISpanner {
+
+                        /**
+                         * Constructs a new Spanner.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner);
+
+                        /** Spanner scaled. */
+                        public scaled?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IScaled|null);
+
+                        /** Spanner basic. */
+                        public basic?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IBasic|null);
+
+                        /** Spanner unprovisioned. */
+                        public unprovisioned?: (google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IUnprovisioned|null);
+
+                        /** Spanner tier. */
+                        public tier?: ("scaled"|"basic"|"unprovisioned");
+
+                        /**
+                         * Creates a new Spanner instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Spanner instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner;
+
+                        /**
+                         * Encodes the specified Spanner message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner.verify|verify} messages.
+                         * @param message Spanner message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Spanner message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner.verify|verify} messages.
+                         * @param message Spanner message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.ISpanner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Spanner message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Spanner
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner;
+
+                        /**
+                         * Decodes a Spanner message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Spanner
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner;
+
+                        /**
+                         * Verifies a Spanner message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Spanner message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Spanner
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner;
+
+                        /**
+                         * Creates a plain object from a Spanner message. Also converts values to other types if specified.
+                         * @param message Spanner
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Spanner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Spanner to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Spanner
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Serverless. */
+                    interface IServerless {
+                    }
+
+                    /** Represents a Serverless. */
+                    class Serverless implements IServerless {
+
+                        /**
+                         * Constructs a new Serverless.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless);
+
+                        /**
+                         * Creates a new Serverless instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Serverless instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless;
+
+                        /**
+                         * Encodes the specified Serverless message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless.verify|verify} messages.
+                         * @param message Serverless message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Serverless message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless.verify|verify} messages.
+                         * @param message Serverless message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.IServerless, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Serverless message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Serverless
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless;
+
+                        /**
+                         * Decodes a Serverless message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Serverless
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless;
+
+                        /**
+                         * Verifies a Serverless message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Serverless message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Serverless
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless;
+
+                        /**
+                         * Creates a plain object from a Serverless message. Also converts values to other types if specified.
+                         * @param message Serverless
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.RagManagedDbConfig.Serverless, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Serverless to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Serverless
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

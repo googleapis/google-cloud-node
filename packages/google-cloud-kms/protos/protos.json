@@ -854,6 +854,914 @@
                     "VerifyConnectivityResponse": {
                       "fields": {}
                     },
+                    "HsmManagement": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "ListSingleTenantHsmInstances": {
+                          "requestType": "ListSingleTenantHsmInstancesRequest",
+                          "responseType": "ListSingleTenantHsmInstancesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetSingleTenantHsmInstance": {
+                          "requestType": "GetSingleTenantHsmInstanceRequest",
+                          "responseType": "SingleTenantHsmInstance",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSingleTenantHsmInstance": {
+                          "requestType": "CreateSingleTenantHsmInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                            "(google.api.http).body": "single_tenant_hsm_instance",
+                            "(google.api.method_signature)": "parent,single_tenant_hsm_instance,single_tenant_hsm_instance_id",
+                            "(google.longrunning.operation_info).response_type": "SingleTenantHsmInstance",
+                            "(google.longrunning.operation_info).metadata_type": "CreateSingleTenantHsmInstanceMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                                "body": "single_tenant_hsm_instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,single_tenant_hsm_instance,single_tenant_hsm_instance_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SingleTenantHsmInstance",
+                                "metadata_type": "CreateSingleTenantHsmInstanceMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateSingleTenantHsmInstanceProposal": {
+                          "requestType": "CreateSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                            "(google.api.http).body": "single_tenant_hsm_instance_proposal",
+                            "(google.api.method_signature)": "parent,single_tenant_hsm_instance_proposal,single_tenant_hsm_instance_proposal_id",
+                            "(google.longrunning.operation_info).response_type": "SingleTenantHsmInstanceProposal",
+                            "(google.longrunning.operation_info).metadata_type": "CreateSingleTenantHsmInstanceProposalMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                                "body": "single_tenant_hsm_instance_proposal"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,single_tenant_hsm_instance_proposal,single_tenant_hsm_instance_proposal_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SingleTenantHsmInstanceProposal",
+                                "metadata_type": "CreateSingleTenantHsmInstanceProposalMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ApproveSingleTenantHsmInstanceProposal": {
+                          "requestType": "ApproveSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "ApproveSingleTenantHsmInstanceProposalResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:approve",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,quorum_reply"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:approve",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,quorum_reply"
+                            }
+                          ]
+                        },
+                        "ExecuteSingleTenantHsmInstanceProposal": {
+                          "requestType": "ExecuteSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:execute",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "ExecuteSingleTenantHsmInstanceProposalResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExecuteSingleTenantHsmInstanceProposalMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:execute",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExecuteSingleTenantHsmInstanceProposalResponse",
+                                "metadata_type": "ExecuteSingleTenantHsmInstanceProposalMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetSingleTenantHsmInstanceProposal": {
+                          "requestType": "GetSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "SingleTenantHsmInstanceProposal",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSingleTenantHsmInstanceProposals": {
+                          "requestType": "ListSingleTenantHsmInstanceProposalsRequest",
+                          "responseType": "ListSingleTenantHsmInstanceProposalsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteSingleTenantHsmInstanceProposal": {
+                          "requestType": "DeleteSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SingleTenantHsmInstance": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/SingleTenantHsmInstance",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}",
+                        "(google.api.resource).plural": "singleTenantHsmInstances",
+                        "(google.api.resource).singular": "singleTenantHsmInstance"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quorumAuth": {
+                          "type": "QuorumAuth",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unrefreshedDurationUntilDisable": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disableTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "PENDING_TWO_FACTOR_AUTH_REGISTRATION": 2,
+                            "ACTIVE": 3,
+                            "DISABLING": 4,
+                            "DISABLED": 5,
+                            "DELETING": 6,
+                            "DELETED": 7,
+                            "FAILED": 8
+                          }
+                        },
+                        "QuorumAuth": {
+                          "fields": {
+                            "totalApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "twoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SingleTenantHsmInstanceProposal": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}/proposals/{proposal}",
+                        "(google.api.resource).plural": "singleTenantHsmInstanceProposals",
+                        "(google.api.resource).singular": "singleTenantHsmInstanceProposal"
+                      },
+                      "oneofs": {
+                        "approvalParameters": {
+                          "oneof": [
+                            "quorumParameters",
+                            "requiredActionQuorumParameters"
+                          ]
+                        },
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        },
+                        "operation": {
+                          "oneof": [
+                            "registerTwoFactorAuthKeys",
+                            "disableSingleTenantHsmInstance",
+                            "enableSingleTenantHsmInstance",
+                            "deleteSingleTenantHsmInstance",
+                            "addQuorumMember",
+                            "removeQuorumMember",
+                            "refreshSingleTenantHsmInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failureReason": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quorumParameters": {
+                          "type": "QuorumParameters",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requiredActionQuorumParameters": {
+                          "type": "RequiredActionQuorumParameters",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "purgeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "registerTwoFactorAuthKeys": {
+                          "type": "RegisterTwoFactorAuthKeys",
+                          "id": 8
+                        },
+                        "disableSingleTenantHsmInstance": {
+                          "type": "DisableSingleTenantHsmInstance",
+                          "id": 9
+                        },
+                        "enableSingleTenantHsmInstance": {
+                          "type": "EnableSingleTenantHsmInstance",
+                          "id": 10
+                        },
+                        "deleteSingleTenantHsmInstance": {
+                          "type": "DeleteSingleTenantHsmInstance",
+                          "id": 11
+                        },
+                        "addQuorumMember": {
+                          "type": "AddQuorumMember",
+                          "id": 12
+                        },
+                        "removeQuorumMember": {
+                          "type": "RemoveQuorumMember",
+                          "id": 13
+                        },
+                        "refreshSingleTenantHsmInstance": {
+                          "type": "RefreshSingleTenantHsmInstance",
+                          "id": 17
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "PENDING": 2,
+                            "APPROVED": 3,
+                            "RUNNING": 4,
+                            "SUCCEEDED": 5,
+                            "FAILED": 6,
+                            "DELETED": 7
+                          }
+                        },
+                        "QuorumParameters": {
+                          "fields": {
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "challenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "approvedTwoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "RequiredActionQuorumParameters": {
+                          "fields": {
+                            "requiredChallenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "quorumChallenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "approvedTwoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "RegisterTwoFactorAuthKeys": {
+                          "fields": {
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "twoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DisableSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "EnableSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "DeleteSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "AddQuorumMember": {
+                          "fields": {
+                            "twoFactorPublicKeyPem": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RemoveQuorumMember": {
+                          "fields": {
+                            "twoFactorPublicKeyPem": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RefreshSingleTenantHsmInstance": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "Challenge": {
+                      "fields": {
+                        "challenge": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "publicKeyPem": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ChallengeReply": {
+                      "fields": {
+                        "signedChallenge": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "publicKeyPem": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstancesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstancesResponse": {
+                      "fields": {
+                        "singleTenantHsmInstances": {
+                          "rule": "repeated",
+                          "type": "SingleTenantHsmInstance",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetSingleTenantHsmInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "singleTenantHsmInstanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleTenantHsmInstance": {
+                          "type": "SingleTenantHsmInstance",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceMetadata": {
+                      "fields": {}
+                    },
+                    "CreateSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        },
+                        "singleTenantHsmInstanceProposalId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleTenantHsmInstanceProposal": {
+                          "type": "SingleTenantHsmInstanceProposal",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceProposalMetadata": {
+                      "fields": {}
+                    },
+                    "GetSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ApproveSingleTenantHsmInstanceProposalRequest": {
+                      "oneofs": {
+                        "approvalPayload": {
+                          "oneof": [
+                            "quorumReply",
+                            "requiredActionQuorumReply"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        },
+                        "quorumReply": {
+                          "type": "QuorumReply",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requiredActionQuorumReply": {
+                          "type": "RequiredActionQuorumReply",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "QuorumReply": {
+                          "fields": {
+                            "challengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RequiredActionQuorumReply": {
+                          "fields": {
+                            "requiredChallengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "quorumChallengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ApproveSingleTenantHsmInstanceProposalResponse": {
+                      "fields": {}
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalResponse": {
+                      "fields": {}
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalMetadata": {
+                      "fields": {}
+                    },
+                    "ListSingleTenantHsmInstanceProposalsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstanceProposalsResponse": {
+                      "fields": {
+                        "singleTenantHsmInstanceProposals": {
+                          "rule": "repeated",
+                          "type": "SingleTenantHsmInstanceProposal",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
                     "KeyRing": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
@@ -1362,6 +2270,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cryptoKeyBackend": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "*"
+                          }
                         }
                       },
                       "nested": {
@@ -1421,7 +2337,8 @@
                         "SOFTWARE": 1,
                         "HSM": 2,
                         "EXTERNAL": 3,
-                        "EXTERNAL_VPC": 4
+                        "EXTERNAL_VPC": 4,
+                        "HSM_SINGLE_TENANT": 5
                       }
                     },
                     "AccessReason": {
@@ -3204,6 +4121,10 @@
                         "ekmAvailable": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "hsmSingleTenantAvailable": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     }

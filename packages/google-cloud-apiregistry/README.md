@@ -57,6 +57,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| get mcp server | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.get_mcp_server.js) |
+| get mcp tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.get_mcp_tool.js) |
+| list mcp servers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.list_mcp_servers.js) |
+| list mcp tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.list_mcp_tools.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/snippet_metadata_google.cloud.apiregistry.v1.json) |
 | get mcp server | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.get_mcp_server.js) |
 | get mcp tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.get_mcp_tool.js) |
 | list mcp servers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.list_mcp_servers.js) |

@@ -6,6 +6,346 @@
           "nested": {
             "apiregistry": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.ApiRegistry.V1",
+                    "go_package": "cloud.google.com/go/apiregistry/apiv1/apiregistrypb;apiregistrypb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ServiceProto",
+                    "java_package": "com.google.cloud.apiregistry.v1",
+                    "php_namespace": "Google\\Cloud\\ApiRegistry\\V1",
+                    "ruby_package": "Google::Cloud::ApiRegistry::V1",
+                    "(google.api.resource_definition).type": "cloudapiregistry.googleapis.com/ApiNamespace",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/apiNamespaces/{api_namespace}"
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "ENABLED": 1,
+                        "DISABLED": 2
+                      }
+                    },
+                    "McpServer": {
+                      "options": {
+                        "(google.api.resource).type": "cloudapiregistry.googleapis.com/McpServer",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/mcpServers/{mcp_server}",
+                        "(google.api.resource).plural": "mcpServers",
+                        "(google.api.resource).singular": "mcpServer"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "urls": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "capabilities": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "McpTool": {
+                      "options": {
+                        "(google.api.resource).type": "cloudapiregistry.googleapis.com/McpTool",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/mcpServers/{mcp_server}/mcpTools/{mcp_tool}",
+                        "(google.api.resource).plural": "mcpTools",
+                        "(google.api.resource).singular": "mcpTool"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "mcpServerUrls": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "inputSchema": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5
+                        },
+                        "outputSchema": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        },
+                        "annotations": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "CloudApiRegistry": {
+                      "options": {
+                        "(google.api.default_host)": "cloudapiregistry.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetMcpServer": {
+                          "requestType": "GetMcpServerRequest",
+                          "responseType": "McpServer",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/mcpServers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/mcpServers/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMcpServers": {
+                          "requestType": "ListMcpServersRequest",
+                          "responseType": "ListMcpServersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/mcpServers",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/mcpServers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMcpTool": {
+                          "requestType": "GetMcpToolRequest",
+                          "responseType": "McpTool",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/mcpServers/*/mcpTools/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/mcpServers/*/mcpTools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMcpTools": {
+                          "requestType": "ListMcpToolsRequest",
+                          "responseType": "ListMcpToolsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/mcpServers/*}/mcpTools",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/mcpServers/*}/mcpTools"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetMcpServerRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudapiregistry.googleapis.com/McpServer"
+                          }
+                        }
+                      }
+                    },
+                    "ListMcpServersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMcpServersResponse": {
+                      "fields": {
+                        "mcpServers": {
+                          "rule": "repeated",
+                          "type": "McpServer",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "GetMcpToolRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudapiregistry.googleapis.com/McpTool"
+                          }
+                        }
+                      }
+                    },
+                    "ListMcpToolsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudapiregistry.googleapis.com/McpTool"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMcpToolsResponse": {
+                      "fields": {
+                        "mcpTools": {
+                          "rule": "repeated",
+                          "type": "McpTool",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.ApiRegistry.V1Beta",

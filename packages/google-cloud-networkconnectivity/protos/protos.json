@@ -5169,11 +5169,17 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "labels": {
                           "keyType": "string",
