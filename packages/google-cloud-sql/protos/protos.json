@@ -10320,6 +10320,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "application": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -11761,7 +11768,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "connectionType": {
                           "type": "ConnectionType",
@@ -11773,6 +11783,13 @@
                         "dnsScope": {
                           "type": "DnsScope",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "recordManager": {
+                          "type": "RecordManager",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11790,7 +11807,15 @@
                         "DnsScope": {
                           "values": {
                             "DNS_SCOPE_UNSPECIFIED": 0,
-                            "INSTANCE": 1
+                            "INSTANCE": 1,
+                            "CLUSTER": 2
+                          }
+                        },
+                        "RecordManager": {
+                          "values": {
+                            "RECORD_MANAGER_UNSPECIFIED": 0,
+                            "CUSTOMER": 1,
+                            "CLOUD_SQL_AUTOMATION": 2
                           }
                         }
                       }
@@ -14942,6 +14967,7 @@
                         "MYSQL_8_0_45": 555,
                         "MYSQL_8_0_46": 556,
                         "MYSQL_8_4": 398,
+                        "MYSQL_9_7": 654,
                         "SQLSERVER_2017_STANDARD": 11,
                         "SQLSERVER_2017_ENTERPRISE": 14,
                         "SQLSERVER_2017_EXPRESS": 15,

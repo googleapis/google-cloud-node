@@ -91700,6 +91700,7 @@
                          * @property {boolean|null} [autoIamAuthn] ExecuteSqlPayload autoIamAuthn
                          * @property {number|Long|null} [rowLimit] ExecuteSqlPayload rowLimit
                          * @property {google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode|null} [partialResultMode] ExecuteSqlPayload partialResultMode
+                         * @property {string|null} [application] ExecuteSqlPayload application
                          */
     
                         /**
@@ -91765,6 +91766,14 @@
                          */
                         ExecuteSqlPayload.prototype.partialResultMode = 0;
     
+                        /**
+                         * ExecuteSqlPayload application.
+                         * @member {string} application
+                         * @memberof google.cloud.sql.v1beta4.ExecuteSqlPayload
+                         * @instance
+                         */
+                        ExecuteSqlPayload.prototype.application = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -91815,6 +91824,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.autoIamAuthn);
                             if (message.partialResultMode != null && Object.hasOwnProperty.call(message, "partialResultMode"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.partialResultMode);
+                            if (message.application != null && Object.hasOwnProperty.call(message, "application"))
+                                writer.uint32(/* id 16, wireType 2 =*/130).string(message.application);
                             return writer;
                         };
     
@@ -91873,6 +91884,10 @@
                                     }
                                 case 13: {
                                         message.partialResultMode = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.application = reader.string();
                                         break;
                                     }
                                 default:
@@ -91937,6 +91952,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.application != null && message.hasOwnProperty("application"))
+                                if (!$util.isString(message.application))
+                                    return "application: string expected";
                             return null;
                         };
     
@@ -91989,6 +92007,8 @@
                                 message.partialResultMode = 2;
                                 break;
                             }
+                            if (object.application != null)
+                                message.application = String(object.application);
                             return message;
                         };
     
@@ -92015,6 +92035,7 @@
                                 } else
                                     object.rowLimit = options.longs === String ? "0" : 0;
                                 object.partialResultMode = options.enums === String ? "PARTIAL_RESULT_MODE_UNSPECIFIED" : 0;
+                                object.application = "";
                             }
                             if (message.user != null && message.hasOwnProperty("user"))
                                 object.user = message.user;
@@ -92034,6 +92055,8 @@
                             }
                             if (message.partialResultMode != null && message.hasOwnProperty("partialResultMode"))
                                 object.partialResultMode = options.enums === String ? $root.google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode[message.partialResultMode] === undefined ? message.partialResultMode : $root.google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode[message.partialResultMode] : message.partialResultMode;
+                            if (message.application != null && message.hasOwnProperty("application"))
+                                object.application = message.application;
                             return object;
                         };
     
@@ -96826,6 +96849,7 @@
                                 case 555:
                                 case 556:
                                 case 398:
+                                case 654:
                                 case 11:
                                 case 14:
                                 case 15:
@@ -97122,6 +97146,10 @@
                             case "MYSQL_8_4":
                             case 398:
                                 message.databaseVersion = 398;
+                                break;
+                            case "MYSQL_9_7":
+                            case 654:
+                                message.databaseVersion = 654;
                                 break;
                             case "SQLSERVER_2017_STANDARD":
                             case 11:
@@ -97972,6 +98000,7 @@
                                 case 555:
                                 case 556:
                                 case 398:
+                                case 654:
                                 case 11:
                                 case 14:
                                 case 15:
@@ -98279,6 +98308,10 @@
                             case "MYSQL_8_4":
                             case 398:
                                 message.databaseVersion = 398;
+                                break;
+                            case "MYSQL_9_7":
+                            case 654:
+                                message.databaseVersion = 654;
                                 break;
                             case "SQLSERVER_2017_STANDARD":
                             case 11:
@@ -102287,6 +102320,7 @@
                                 case 555:
                                 case 556:
                                 case 398:
+                                case 654:
                                 case 11:
                                 case 14:
                                 case 15:
@@ -102767,6 +102801,10 @@
                             case "MYSQL_8_4":
                             case 398:
                                 message.databaseVersion = 398;
+                                break;
+                            case "MYSQL_9_7":
+                            case 654:
+                                message.databaseVersion = 654;
                                 break;
                             case "SQLSERVER_2017_STANDARD":
                             case 11:
@@ -104820,6 +104858,7 @@
                          * @property {string|null} [name] DnsNameMapping name
                          * @property {google.cloud.sql.v1beta4.DnsNameMapping.ConnectionType|null} [connectionType] DnsNameMapping connectionType
                          * @property {google.cloud.sql.v1beta4.DnsNameMapping.DnsScope|null} [dnsScope] DnsNameMapping dnsScope
+                         * @property {google.cloud.sql.v1beta4.DnsNameMapping.RecordManager|null} [recordManager] DnsNameMapping recordManager
                          */
     
                         /**
@@ -104862,6 +104901,14 @@
                         DnsNameMapping.prototype.dnsScope = 0;
     
                         /**
+                         * DnsNameMapping recordManager.
+                         * @member {google.cloud.sql.v1beta4.DnsNameMapping.RecordManager} recordManager
+                         * @memberof google.cloud.sql.v1beta4.DnsNameMapping
+                         * @instance
+                         */
+                        DnsNameMapping.prototype.recordManager = 0;
+    
+                        /**
                          * Creates a new DnsNameMapping instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.sql.v1beta4.DnsNameMapping
@@ -104891,6 +104938,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.connectionType);
                             if (message.dnsScope != null && Object.hasOwnProperty.call(message, "dnsScope"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dnsScope);
+                            if (message.recordManager != null && Object.hasOwnProperty.call(message, "recordManager"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.recordManager);
                             return writer;
                         };
     
@@ -104937,6 +104986,10 @@
                                     }
                                 case 3: {
                                         message.dnsScope = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.recordManager = reader.int32();
                                         break;
                                     }
                                 default:
@@ -104993,6 +105046,16 @@
                                     return "dnsScope: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.recordManager != null && message.hasOwnProperty("recordManager"))
+                                switch (message.recordManager) {
+                                default:
+                                    return "recordManager: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -105051,6 +105114,30 @@
                             case 1:
                                 message.dnsScope = 1;
                                 break;
+                            case "CLUSTER":
+                            case 2:
+                                message.dnsScope = 2;
+                                break;
+                            }
+                            switch (object.recordManager) {
+                            default:
+                                if (typeof object.recordManager === "number") {
+                                    message.recordManager = object.recordManager;
+                                    break;
+                                }
+                                break;
+                            case "RECORD_MANAGER_UNSPECIFIED":
+                            case 0:
+                                message.recordManager = 0;
+                                break;
+                            case "CUSTOMER":
+                            case 1:
+                                message.recordManager = 1;
+                                break;
+                            case "CLOUD_SQL_AUTOMATION":
+                            case 2:
+                                message.recordManager = 2;
+                                break;
                             }
                             return message;
                         };
@@ -105072,6 +105159,7 @@
                                 object.name = "";
                                 object.connectionType = options.enums === String ? "CONNECTION_TYPE_UNSPECIFIED" : 0;
                                 object.dnsScope = options.enums === String ? "DNS_SCOPE_UNSPECIFIED" : 0;
+                                object.recordManager = options.enums === String ? "RECORD_MANAGER_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -105079,6 +105167,8 @@
                                 object.connectionType = options.enums === String ? $root.google.cloud.sql.v1beta4.DnsNameMapping.ConnectionType[message.connectionType] === undefined ? message.connectionType : $root.google.cloud.sql.v1beta4.DnsNameMapping.ConnectionType[message.connectionType] : message.connectionType;
                             if (message.dnsScope != null && message.hasOwnProperty("dnsScope"))
                                 object.dnsScope = options.enums === String ? $root.google.cloud.sql.v1beta4.DnsNameMapping.DnsScope[message.dnsScope] === undefined ? message.dnsScope : $root.google.cloud.sql.v1beta4.DnsNameMapping.DnsScope[message.dnsScope] : message.dnsScope;
+                            if (message.recordManager != null && message.hasOwnProperty("recordManager"))
+                                object.recordManager = options.enums === String ? $root.google.cloud.sql.v1beta4.DnsNameMapping.RecordManager[message.recordManager] === undefined ? message.recordManager : $root.google.cloud.sql.v1beta4.DnsNameMapping.RecordManager[message.recordManager] : message.recordManager;
                             return object;
                         };
     
@@ -105132,11 +105222,29 @@
                          * @enum {number}
                          * @property {number} DNS_SCOPE_UNSPECIFIED=0 DNS_SCOPE_UNSPECIFIED value
                          * @property {number} INSTANCE=1 INSTANCE value
+                         * @property {number} CLUSTER=2 CLUSTER value
                          */
                         DnsNameMapping.DnsScope = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DNS_SCOPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "INSTANCE"] = 1;
+                            values[valuesById[2] = "CLUSTER"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * RecordManager enum.
+                         * @name google.cloud.sql.v1beta4.DnsNameMapping.RecordManager
+                         * @enum {number}
+                         * @property {number} RECORD_MANAGER_UNSPECIFIED=0 RECORD_MANAGER_UNSPECIFIED value
+                         * @property {number} CUSTOMER=1 CUSTOMER value
+                         * @property {number} CLOUD_SQL_AUTOMATION=2 CLOUD_SQL_AUTOMATION value
+                         */
+                        DnsNameMapping.RecordManager = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RECORD_MANAGER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CUSTOMER"] = 1;
+                            values[valuesById[2] = "CLOUD_SQL_AUTOMATION"] = 2;
                             return values;
                         })();
     
@@ -110361,6 +110469,7 @@
                                     case 555:
                                     case 556:
                                     case 398:
+                                    case 654:
                                     case 11:
                                     case 14:
                                     case 15:
@@ -110626,6 +110735,10 @@
                                     case "MYSQL_8_4":
                                     case 398:
                                         message.appliesTo[i] = 398;
+                                        break;
+                                    case "MYSQL_9_7":
+                                    case 654:
+                                        message.appliesTo[i] = 654;
                                         break;
                                     case "SQLSERVER_2017_STANDARD":
                                     case 11:
@@ -118828,6 +118941,7 @@
                                 case 555:
                                 case 556:
                                 case 398:
+                                case 654:
                                 case 11:
                                 case 14:
                                 case 15:
@@ -118997,6 +119111,10 @@
                             case "MYSQL_8_4":
                             case 398:
                                 message.targetDatabaseVersion = 398;
+                                break;
+                            case "MYSQL_9_7":
+                            case 654:
+                                message.targetDatabaseVersion = 654;
                                 break;
                             case "SQLSERVER_2017_STANDARD":
                             case 11:
@@ -136173,6 +136291,7 @@
                      * @property {number} MYSQL_8_0_45=555 MYSQL_8_0_45 value
                      * @property {number} MYSQL_8_0_46=556 MYSQL_8_0_46 value
                      * @property {number} MYSQL_8_4=398 MYSQL_8_4 value
+                     * @property {number} MYSQL_9_7=654 MYSQL_9_7 value
                      * @property {number} SQLSERVER_2017_STANDARD=11 SQLSERVER_2017_STANDARD value
                      * @property {number} SQLSERVER_2017_ENTERPRISE=14 SQLSERVER_2017_ENTERPRISE value
                      * @property {number} SQLSERVER_2017_EXPRESS=15 SQLSERVER_2017_EXPRESS value
@@ -136226,6 +136345,7 @@
                         values[valuesById[555] = "MYSQL_8_0_45"] = 555;
                         values[valuesById[556] = "MYSQL_8_0_46"] = 556;
                         values[valuesById[398] = "MYSQL_8_4"] = 398;
+                        values[valuesById[654] = "MYSQL_9_7"] = 654;
                         values[valuesById[11] = "SQLSERVER_2017_STANDARD"] = 11;
                         values[valuesById[14] = "SQLSERVER_2017_ENTERPRISE"] = 14;
                         values[valuesById[15] = "SQLSERVER_2017_EXPRESS"] = 15;
@@ -137498,6 +137618,7 @@
                                 case 555:
                                 case 556:
                                 case 398:
+                                case 654:
                                 case 11:
                                 case 14:
                                 case 15:
@@ -137742,6 +137863,10 @@
                             case "MYSQL_8_4":
                             case 398:
                                 message.databaseVersion = 398;
+                                break;
+                            case "MYSQL_9_7":
+                            case 654:
+                                message.databaseVersion = 654;
                                 break;
                             case "SQLSERVER_2017_STANDARD":
                             case 11:

@@ -36415,6 +36415,9 @@ export namespace google {
 
                     /** ExecuteSqlPayload partialResultMode */
                     partialResultMode?: (google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode|keyof typeof google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode|null);
+
+                    /** ExecuteSqlPayload application */
+                    application?: (string|null);
                 }
 
                 /** Represents an ExecuteSqlPayload. */
@@ -36443,6 +36446,9 @@ export namespace google {
 
                     /** ExecuteSqlPayload partialResultMode. */
                     public partialResultMode: (google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode|keyof typeof google.cloud.sql.v1beta4.ExecuteSqlPayload.PartialResultMode);
+
+                    /** ExecuteSqlPayload application. */
+                    public application: string;
 
                     /** ExecuteSqlPayload userPassword. */
                     public userPassword?: "autoIamAuthn";
@@ -40624,6 +40630,9 @@ export namespace google {
 
                     /** DnsNameMapping dnsScope */
                     dnsScope?: (google.cloud.sql.v1beta4.DnsNameMapping.DnsScope|keyof typeof google.cloud.sql.v1beta4.DnsNameMapping.DnsScope|null);
+
+                    /** DnsNameMapping recordManager */
+                    recordManager?: (google.cloud.sql.v1beta4.DnsNameMapping.RecordManager|keyof typeof google.cloud.sql.v1beta4.DnsNameMapping.RecordManager|null);
                 }
 
                 /** Represents a DnsNameMapping. */
@@ -40643,6 +40652,9 @@ export namespace google {
 
                     /** DnsNameMapping dnsScope. */
                     public dnsScope: (google.cloud.sql.v1beta4.DnsNameMapping.DnsScope|keyof typeof google.cloud.sql.v1beta4.DnsNameMapping.DnsScope);
+
+                    /** DnsNameMapping recordManager. */
+                    public recordManager: (google.cloud.sql.v1beta4.DnsNameMapping.RecordManager|keyof typeof google.cloud.sql.v1beta4.DnsNameMapping.RecordManager);
 
                     /**
                      * Creates a new DnsNameMapping instance using the specified properties.
@@ -40735,7 +40747,15 @@ export namespace google {
                     /** DnsScope enum. */
                     enum DnsScope {
                         DNS_SCOPE_UNSPECIFIED = 0,
-                        INSTANCE = 1
+                        INSTANCE = 1,
+                        CLUSTER = 2
+                    }
+
+                    /** RecordManager enum. */
+                    enum RecordManager {
+                        RECORD_MANAGER_UNSPECIFIED = 0,
+                        CUSTOMER = 1,
+                        CLOUD_SQL_AUTOMATION = 2
                     }
                 }
 
@@ -52132,6 +52152,7 @@ export namespace google {
                     MYSQL_8_0_45 = 555,
                     MYSQL_8_0_46 = 556,
                     MYSQL_8_4 = 398,
+                    MYSQL_9_7 = 654,
                     SQLSERVER_2017_STANDARD = 11,
                     SQLSERVER_2017_ENTERPRISE = 14,
                     SQLSERVER_2017_EXPRESS = 15,
