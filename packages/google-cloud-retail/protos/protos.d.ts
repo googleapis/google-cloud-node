@@ -60369,6 +60369,200 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a StringList. */
+                interface IStringList {
+
+                    /** StringList values */
+                    values?: (string[]|null);
+                }
+
+                /** Represents a StringList. */
+                class StringList implements IStringList {
+
+                    /**
+                     * Constructs a new StringList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IStringList);
+
+                    /** StringList values. */
+                    public values: string[];
+
+                    /**
+                     * Creates a new StringList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StringList instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IStringList): google.cloud.retail.v2beta.StringList;
+
+                    /**
+                     * Encodes the specified StringList message. Does not implicitly {@link google.cloud.retail.v2beta.StringList.verify|verify} messages.
+                     * @param message StringList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StringList message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.StringList.verify|verify} messages.
+                     * @param message StringList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IStringList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StringList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StringList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.StringList;
+
+                    /**
+                     * Decodes a StringList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StringList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.StringList;
+
+                    /**
+                     * Verifies a StringList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StringList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StringList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.StringList;
+
+                    /**
+                     * Creates a plain object from a StringList message. Also converts values to other types if specified.
+                     * @param message StringList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.StringList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StringList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StringList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DoubleList. */
+                interface IDoubleList {
+
+                    /** DoubleList values */
+                    values?: (number[]|null);
+                }
+
+                /** Represents a DoubleList. */
+                class DoubleList implements IDoubleList {
+
+                    /**
+                     * Constructs a new DoubleList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IDoubleList);
+
+                    /** DoubleList values. */
+                    public values: number[];
+
+                    /**
+                     * Creates a new DoubleList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DoubleList instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IDoubleList): google.cloud.retail.v2beta.DoubleList;
+
+                    /**
+                     * Encodes the specified DoubleList message. Does not implicitly {@link google.cloud.retail.v2beta.DoubleList.verify|verify} messages.
+                     * @param message DoubleList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IDoubleList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DoubleList message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.DoubleList.verify|verify} messages.
+                     * @param message DoubleList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IDoubleList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DoubleList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DoubleList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.DoubleList;
+
+                    /**
+                     * Decodes a DoubleList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DoubleList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.DoubleList;
+
+                    /**
+                     * Verifies a DoubleList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DoubleList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DoubleList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.DoubleList;
+
+                    /**
+                     * Creates a plain object from a DoubleList message. Also converts values to other types if specified.
+                     * @param message DoubleList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.DoubleList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DoubleList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DoubleList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GcsSource. */
                 interface IGcsSource {
 
@@ -66126,6 +66320,9 @@ export namespace google {
 
                     /** SearchRequest placeId */
                     placeId?: (string|null);
+
+                    /** SearchRequest userAttributes */
+                    userAttributes?: ({ [k: string]: google.cloud.retail.v2beta.IStringList }|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -66217,6 +66414,9 @@ export namespace google {
 
                     /** SearchRequest placeId. */
                     public placeId: string;
+
+                    /** SearchRequest userAttributes. */
+                    public userAttributes: { [k: string]: google.cloud.retail.v2beta.IStringList };
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -67836,6 +68036,9 @@ export namespace google {
 
                         /** SearchResult personalLabels */
                         personalLabels?: (string[]|null);
+
+                        /** SearchResult modelScores */
+                        modelScores?: ({ [k: string]: google.cloud.retail.v2beta.IDoubleList }|null);
                     }
 
                     /** Represents a SearchResult. */
@@ -67864,6 +68067,9 @@ export namespace google {
 
                         /** SearchResult personalLabels. */
                         public personalLabels: string[];
+
+                        /** SearchResult modelScores. */
+                        public modelScores: { [k: string]: google.cloud.retail.v2beta.IDoubleList };
 
                         /**
                          * Creates a new SearchResult instance using the specified properties.
