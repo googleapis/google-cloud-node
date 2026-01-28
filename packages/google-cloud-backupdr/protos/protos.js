@@ -17803,6 +17803,7 @@
                          * @property {string|null} [type] DataSourceGcpResource type
                          * @property {google.cloud.backupdr.v1.IComputeInstanceDataSourceProperties|null} [computeInstanceDatasourceProperties] DataSourceGcpResource computeInstanceDatasourceProperties
                          * @property {google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties|null} [cloudSqlInstanceDatasourceProperties] DataSourceGcpResource cloudSqlInstanceDatasourceProperties
+                         * @property {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties|null} [alloyDbClusterDatasourceProperties] DataSourceGcpResource alloyDbClusterDatasourceProperties
                          * @property {google.cloud.backupdr.v1.IDiskDataSourceProperties|null} [diskDatasourceProperties] DataSourceGcpResource diskDatasourceProperties
                          */
     
@@ -17862,6 +17863,14 @@
                         DataSourceGcpResource.prototype.cloudSqlInstanceDatasourceProperties = null;
     
                         /**
+                         * DataSourceGcpResource alloyDbClusterDatasourceProperties.
+                         * @member {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties|null|undefined} alloyDbClusterDatasourceProperties
+                         * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
+                         * @instance
+                         */
+                        DataSourceGcpResource.prototype.alloyDbClusterDatasourceProperties = null;
+    
+                        /**
                          * DataSourceGcpResource diskDatasourceProperties.
                          * @member {google.cloud.backupdr.v1.IDiskDataSourceProperties|null|undefined} diskDatasourceProperties
                          * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
@@ -17874,12 +17883,12 @@
     
                         /**
                          * DataSourceGcpResource gcpResourceProperties.
-                         * @member {"computeInstanceDatasourceProperties"|"cloudSqlInstanceDatasourceProperties"|"diskDatasourceProperties"|undefined} gcpResourceProperties
+                         * @member {"computeInstanceDatasourceProperties"|"cloudSqlInstanceDatasourceProperties"|"alloyDbClusterDatasourceProperties"|"diskDatasourceProperties"|undefined} gcpResourceProperties
                          * @memberof google.cloud.backupdr.v1.DataSourceGcpResource
                          * @instance
                          */
                         Object.defineProperty(DataSourceGcpResource.prototype, "gcpResourceProperties", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceDatasourceProperties", "cloudSqlInstanceDatasourceProperties", "diskDatasourceProperties"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceDatasourceProperties", "cloudSqlInstanceDatasourceProperties", "alloyDbClusterDatasourceProperties", "diskDatasourceProperties"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17917,6 +17926,8 @@
                                 $root.google.cloud.backupdr.v1.ComputeInstanceDataSourceProperties.encode(message.computeInstanceDatasourceProperties, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.cloudSqlInstanceDatasourceProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceDatasourceProperties"))
                                 $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.encode(message.cloudSqlInstanceDatasourceProperties, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.alloyDbClusterDatasourceProperties != null && Object.hasOwnProperty.call(message, "alloyDbClusterDatasourceProperties"))
+                                $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.encode(message.alloyDbClusterDatasourceProperties, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.diskDatasourceProperties != null && Object.hasOwnProperty.call(message, "diskDatasourceProperties"))
                                 $root.google.cloud.backupdr.v1.DiskDataSourceProperties.encode(message.diskDatasourceProperties, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
@@ -17973,6 +17984,10 @@
                                     }
                                 case 5: {
                                         message.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.alloyDbClusterDatasourceProperties = $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -18042,6 +18057,16 @@
                                         return "cloudSqlInstanceDatasourceProperties." + error;
                                 }
                             }
+                            if (message.alloyDbClusterDatasourceProperties != null && message.hasOwnProperty("alloyDbClusterDatasourceProperties")) {
+                                if (properties.gcpResourceProperties === 1)
+                                    return "gcpResourceProperties: multiple values";
+                                properties.gcpResourceProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.verify(message.alloyDbClusterDatasourceProperties);
+                                    if (error)
+                                        return "alloyDbClusterDatasourceProperties." + error;
+                                }
+                            }
                             if (message.diskDatasourceProperties != null && message.hasOwnProperty("diskDatasourceProperties")) {
                                 if (properties.gcpResourceProperties === 1)
                                     return "gcpResourceProperties: multiple values";
@@ -18082,6 +18107,11 @@
                                 if (typeof object.cloudSqlInstanceDatasourceProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResource.cloudSqlInstanceDatasourceProperties: object expected");
                                 message.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.fromObject(object.cloudSqlInstanceDatasourceProperties);
+                            }
+                            if (object.alloyDbClusterDatasourceProperties != null) {
+                                if (typeof object.alloyDbClusterDatasourceProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.DataSourceGcpResource.alloyDbClusterDatasourceProperties: object expected");
+                                message.alloyDbClusterDatasourceProperties = $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.fromObject(object.alloyDbClusterDatasourceProperties);
                             }
                             if (object.diskDatasourceProperties != null) {
                                 if (typeof object.diskDatasourceProperties !== "object")
@@ -18124,6 +18154,11 @@
                                 object.cloudSqlInstanceDatasourceProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceDataSourceProperties.toObject(message.cloudSqlInstanceDatasourceProperties, options);
                                 if (options.oneofs)
                                     object.gcpResourceProperties = "cloudSqlInstanceDatasourceProperties";
+                            }
+                            if (message.alloyDbClusterDatasourceProperties != null && message.hasOwnProperty("alloyDbClusterDatasourceProperties")) {
+                                object.alloyDbClusterDatasourceProperties = $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.toObject(message.alloyDbClusterDatasourceProperties, options);
+                                if (options.oneofs)
+                                    object.gcpResourceProperties = "alloyDbClusterDatasourceProperties";
                             }
                             if (message.diskDatasourceProperties != null && message.hasOwnProperty("diskDatasourceProperties")) {
                                 object.diskDatasourceProperties = $root.google.cloud.backupdr.v1.DiskDataSourceProperties.toObject(message.diskDatasourceProperties, options);
@@ -19444,6 +19479,7 @@
                          * @property {google.cloud.backupdr.v1.IComputeInstanceBackupProperties|null} [computeInstanceBackupProperties] Backup computeInstanceBackupProperties
                          * @property {google.cloud.backupdr.v1.ICloudSqlInstanceBackupProperties|null} [cloudSqlInstanceBackupProperties] Backup cloudSqlInstanceBackupProperties
                          * @property {google.cloud.backupdr.v1.IBackupApplianceBackupProperties|null} [backupApplianceBackupProperties] Backup backupApplianceBackupProperties
+                         * @property {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties|null} [alloyDbBackupProperties] Backup alloyDbBackupProperties
                          * @property {google.cloud.backupdr.v1.IDiskBackupProperties|null} [diskBackupProperties] Backup diskBackupProperties
                          * @property {google.cloud.backupdr.v1.Backup.BackupType|null} [backupType] Backup backupType
                          * @property {google.cloud.backupdr.v1.Backup.IGCPBackupPlanInfo|null} [gcpBackupPlanInfo] Backup gcpBackupPlanInfo
@@ -19602,6 +19638,14 @@
                         Backup.prototype.backupApplianceBackupProperties = null;
     
                         /**
+                         * Backup alloyDbBackupProperties.
+                         * @member {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties|null|undefined} alloyDbBackupProperties
+                         * @memberof google.cloud.backupdr.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.alloyDbBackupProperties = null;
+    
+                        /**
                          * Backup diskBackupProperties.
                          * @member {google.cloud.backupdr.v1.IDiskBackupProperties|null|undefined} diskBackupProperties
                          * @memberof google.cloud.backupdr.v1.Backup
@@ -19718,12 +19762,12 @@
     
                         /**
                          * Backup backupProperties.
-                         * @member {"computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"diskBackupProperties"|undefined} backupProperties
+                         * @member {"computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"alloyDbBackupProperties"|"diskBackupProperties"|undefined} backupProperties
                          * @memberof google.cloud.backupdr.v1.Backup
                          * @instance
                          */
                         Object.defineProperty(Backup.prototype, "backupProperties", {
-                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceBackupProperties", "cloudSqlInstanceBackupProperties", "backupApplianceBackupProperties", "diskBackupProperties"]),
+                            get: $util.oneOfGetter($oneOfFields = ["computeInstanceBackupProperties", "cloudSqlInstanceBackupProperties", "backupApplianceBackupProperties", "alloyDbBackupProperties", "diskBackupProperties"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -19828,6 +19872,8 @@
                                 writer.uint32(/* id 25, wireType 0 =*/200).bool(message.satisfiesPzi);
                             if (message.cloudSqlInstanceBackupProperties != null && Object.hasOwnProperty.call(message, "cloudSqlInstanceBackupProperties"))
                                 $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.encode(message.cloudSqlInstanceBackupProperties, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.alloyDbBackupProperties != null && Object.hasOwnProperty.call(message, "alloyDbBackupProperties"))
+                                $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.encode(message.alloyDbBackupProperties, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             if (message.diskBackupProperties != null && Object.hasOwnProperty.call(message, "diskBackupProperties"))
                                 $root.google.cloud.backupdr.v1.DiskBackupProperties.encode(message.diskBackupProperties, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             if (message.backupRetentionInheritance != null && Object.hasOwnProperty.call(message, "backupRetentionInheritance"))
@@ -19958,6 +20004,10 @@
                                     }
                                 case 21: {
                                         message.backupApplianceBackupProperties = $root.google.cloud.backupdr.v1.BackupApplianceBackupProperties.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.alloyDbBackupProperties = $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 28: {
@@ -20160,6 +20210,16 @@
                                         return "backupApplianceBackupProperties." + error;
                                 }
                             }
+                            if (message.alloyDbBackupProperties != null && message.hasOwnProperty("alloyDbBackupProperties")) {
+                                if (properties.backupProperties === 1)
+                                    return "backupProperties: multiple values";
+                                properties.backupProperties = 1;
+                                {
+                                    var error = $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.verify(message.alloyDbBackupProperties);
+                                    if (error)
+                                        return "alloyDbBackupProperties." + error;
+                                }
+                            }
                             if (message.diskBackupProperties != null && message.hasOwnProperty("diskBackupProperties")) {
                                 if (properties.backupProperties === 1)
                                     return "backupProperties: multiple values";
@@ -20356,6 +20416,11 @@
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.backupApplianceBackupProperties: object expected");
                                 message.backupApplianceBackupProperties = $root.google.cloud.backupdr.v1.BackupApplianceBackupProperties.fromObject(object.backupApplianceBackupProperties);
                             }
+                            if (object.alloyDbBackupProperties != null) {
+                                if (typeof object.alloyDbBackupProperties !== "object")
+                                    throw TypeError(".google.cloud.backupdr.v1.Backup.alloyDbBackupProperties: object expected");
+                                message.alloyDbBackupProperties = $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.fromObject(object.alloyDbBackupProperties);
+                            }
                             if (object.diskBackupProperties != null) {
                                 if (typeof object.diskBackupProperties !== "object")
                                     throw TypeError(".google.cloud.backupdr.v1.Backup.diskBackupProperties: object expected");
@@ -20539,6 +20604,11 @@
                                 object.cloudSqlInstanceBackupProperties = $root.google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties.toObject(message.cloudSqlInstanceBackupProperties, options);
                                 if (options.oneofs)
                                     object.backupProperties = "cloudSqlInstanceBackupProperties";
+                            }
+                            if (message.alloyDbBackupProperties != null && message.hasOwnProperty("alloyDbBackupProperties")) {
+                                object.alloyDbBackupProperties = $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.toObject(message.alloyDbBackupProperties, options);
+                                if (options.oneofs)
+                                    object.backupProperties = "alloyDbBackupProperties";
                             }
                             if (message.diskBackupProperties != null && message.hasOwnProperty("diskBackupProperties")) {
                                 object.diskBackupProperties = $root.google.cloud.backupdr.v1.DiskBackupProperties.toObject(message.diskBackupProperties, options);
@@ -27890,6 +27960,514 @@
                         values[valuesById[1] = "BACKUP_VAULT_VIEW_BASIC"] = 1;
                         values[valuesById[2] = "BACKUP_VAULT_VIEW_FULL"] = 2;
                         return values;
+                    })();
+    
+                    v1.AlloyDBClusterDataSourceProperties = (function() {
+    
+                        /**
+                         * Properties of an AlloyDBClusterDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IAlloyDBClusterDataSourceProperties
+                         * @property {string|null} [name] AlloyDBClusterDataSourceProperties name
+                         */
+    
+                        /**
+                         * Constructs a new AlloyDBClusterDataSourceProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an AlloyDBClusterDataSourceProperties.
+                         * @implements IAlloyDBClusterDataSourceProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties=} [properties] Properties to set
+                         */
+                        function AlloyDBClusterDataSourceProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlloyDBClusterDataSourceProperties name.
+                         * @member {string} name
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @instance
+                         */
+                        AlloyDBClusterDataSourceProperties.prototype.name = "";
+    
+                        /**
+                         * Creates a new AlloyDBClusterDataSourceProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties} AlloyDBClusterDataSourceProperties instance
+                         */
+                        AlloyDBClusterDataSourceProperties.create = function create(properties) {
+                            return new AlloyDBClusterDataSourceProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDBClusterDataSourceProperties message. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties} message AlloyDBClusterDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDBClusterDataSourceProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDBClusterDataSourceProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties} message AlloyDBClusterDataSourceProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDBClusterDataSourceProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlloyDBClusterDataSourceProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties} AlloyDBClusterDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDBClusterDataSourceProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlloyDBClusterDataSourceProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties} AlloyDBClusterDataSourceProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDBClusterDataSourceProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlloyDBClusterDataSourceProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlloyDBClusterDataSourceProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlloyDBClusterDataSourceProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties} AlloyDBClusterDataSourceProperties
+                         */
+                        AlloyDBClusterDataSourceProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlloyDBClusterDataSourceProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties} message AlloyDBClusterDataSourceProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlloyDBClusterDataSourceProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlloyDBClusterDataSourceProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlloyDBClusterDataSourceProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlloyDBClusterDataSourceProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlloyDBClusterDataSourceProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties";
+                        };
+    
+                        return AlloyDBClusterDataSourceProperties;
+                    })();
+    
+                    v1.AlloyDbClusterBackupProperties = (function() {
+    
+                        /**
+                         * Properties of an AlloyDbClusterBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @interface IAlloyDbClusterBackupProperties
+                         * @property {string|null} [description] AlloyDbClusterBackupProperties description
+                         * @property {number|Long|null} [storedBytes] AlloyDbClusterBackupProperties storedBytes
+                         * @property {string|null} [chainId] AlloyDbClusterBackupProperties chainId
+                         * @property {string|null} [databaseVersion] AlloyDbClusterBackupProperties databaseVersion
+                         */
+    
+                        /**
+                         * Constructs a new AlloyDbClusterBackupProperties.
+                         * @memberof google.cloud.backupdr.v1
+                         * @classdesc Represents an AlloyDbClusterBackupProperties.
+                         * @implements IAlloyDbClusterBackupProperties
+                         * @constructor
+                         * @param {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties=} [properties] Properties to set
+                         */
+                        function AlloyDbClusterBackupProperties(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AlloyDbClusterBackupProperties description.
+                         * @member {string|null|undefined} description
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @instance
+                         */
+                        AlloyDbClusterBackupProperties.prototype.description = null;
+    
+                        /**
+                         * AlloyDbClusterBackupProperties storedBytes.
+                         * @member {number|Long} storedBytes
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @instance
+                         */
+                        AlloyDbClusterBackupProperties.prototype.storedBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * AlloyDbClusterBackupProperties chainId.
+                         * @member {string} chainId
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @instance
+                         */
+                        AlloyDbClusterBackupProperties.prototype.chainId = "";
+    
+                        /**
+                         * AlloyDbClusterBackupProperties databaseVersion.
+                         * @member {string} databaseVersion
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @instance
+                         */
+                        AlloyDbClusterBackupProperties.prototype.databaseVersion = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AlloyDbClusterBackupProperties.prototype, "_description", {
+                            get: $util.oneOfGetter($oneOfFields = ["description"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AlloyDbClusterBackupProperties instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties=} [properties] Properties to set
+                         * @returns {google.cloud.backupdr.v1.AlloyDbClusterBackupProperties} AlloyDbClusterBackupProperties instance
+                         */
+                        AlloyDbClusterBackupProperties.create = function create(properties) {
+                            return new AlloyDbClusterBackupProperties(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbClusterBackupProperties message. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties} message AlloyDbClusterBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbClusterBackupProperties.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                            if (message.storedBytes != null && Object.hasOwnProperty.call(message, "storedBytes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.storedBytes);
+                            if (message.chainId != null && Object.hasOwnProperty.call(message, "chainId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.chainId);
+                            if (message.databaseVersion != null && Object.hasOwnProperty.call(message, "databaseVersion"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.databaseVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AlloyDbClusterBackupProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties} message AlloyDbClusterBackupProperties message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AlloyDbClusterBackupProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbClusterBackupProperties message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.backupdr.v1.AlloyDbClusterBackupProperties} AlloyDbClusterBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbClusterBackupProperties.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.storedBytes = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.chainId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.databaseVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AlloyDbClusterBackupProperties message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.backupdr.v1.AlloyDbClusterBackupProperties} AlloyDbClusterBackupProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AlloyDbClusterBackupProperties.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AlloyDbClusterBackupProperties message.
+                         * @function verify
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AlloyDbClusterBackupProperties.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                properties._description = 1;
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            }
+                            if (message.storedBytes != null && message.hasOwnProperty("storedBytes"))
+                                if (!$util.isInteger(message.storedBytes) && !(message.storedBytes && $util.isInteger(message.storedBytes.low) && $util.isInteger(message.storedBytes.high)))
+                                    return "storedBytes: integer|Long expected";
+                            if (message.chainId != null && message.hasOwnProperty("chainId"))
+                                if (!$util.isString(message.chainId))
+                                    return "chainId: string expected";
+                            if (message.databaseVersion != null && message.hasOwnProperty("databaseVersion"))
+                                if (!$util.isString(message.databaseVersion))
+                                    return "databaseVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AlloyDbClusterBackupProperties message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.backupdr.v1.AlloyDbClusterBackupProperties} AlloyDbClusterBackupProperties
+                         */
+                        AlloyDbClusterBackupProperties.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties)
+                                return object;
+                            var message = new $root.google.cloud.backupdr.v1.AlloyDbClusterBackupProperties();
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.storedBytes != null)
+                                if ($util.Long)
+                                    (message.storedBytes = $util.Long.fromValue(object.storedBytes)).unsigned = false;
+                                else if (typeof object.storedBytes === "string")
+                                    message.storedBytes = parseInt(object.storedBytes, 10);
+                                else if (typeof object.storedBytes === "number")
+                                    message.storedBytes = object.storedBytes;
+                                else if (typeof object.storedBytes === "object")
+                                    message.storedBytes = new $util.LongBits(object.storedBytes.low >>> 0, object.storedBytes.high >>> 0).toNumber();
+                            if (object.chainId != null)
+                                message.chainId = String(object.chainId);
+                            if (object.databaseVersion != null)
+                                message.databaseVersion = String(object.databaseVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AlloyDbClusterBackupProperties message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {google.cloud.backupdr.v1.AlloyDbClusterBackupProperties} message AlloyDbClusterBackupProperties
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AlloyDbClusterBackupProperties.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.storedBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.storedBytes = options.longs === String ? "0" : 0;
+                                object.chainId = "";
+                                object.databaseVersion = "";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                object.description = message.description;
+                                if (options.oneofs)
+                                    object._description = "description";
+                            }
+                            if (message.storedBytes != null && message.hasOwnProperty("storedBytes"))
+                                if (typeof message.storedBytes === "number")
+                                    object.storedBytes = options.longs === String ? String(message.storedBytes) : message.storedBytes;
+                                else
+                                    object.storedBytes = options.longs === String ? $util.Long.prototype.toString.call(message.storedBytes) : options.longs === Number ? new $util.LongBits(message.storedBytes.low >>> 0, message.storedBytes.high >>> 0).toNumber() : message.storedBytes;
+                            if (message.chainId != null && message.hasOwnProperty("chainId"))
+                                object.chainId = message.chainId;
+                            if (message.databaseVersion != null && message.hasOwnProperty("databaseVersion"))
+                                object.databaseVersion = message.databaseVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AlloyDbClusterBackupProperties to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AlloyDbClusterBackupProperties.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AlloyDbClusterBackupProperties
+                         * @function getTypeUrl
+                         * @memberof google.cloud.backupdr.v1.AlloyDbClusterBackupProperties
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AlloyDbClusterBackupProperties.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.backupdr.v1.AlloyDbClusterBackupProperties";
+                        };
+    
+                        return AlloyDbClusterBackupProperties;
                     })();
     
                     v1.BackupApplianceBackupProperties = (function() {

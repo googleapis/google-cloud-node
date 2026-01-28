@@ -6917,6 +6917,9 @@ export namespace google {
                     /** DataSourceGcpResource cloudSqlInstanceDatasourceProperties */
                     cloudSqlInstanceDatasourceProperties?: (google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties|null);
 
+                    /** DataSourceGcpResource alloyDbClusterDatasourceProperties */
+                    alloyDbClusterDatasourceProperties?: (google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties|null);
+
                     /** DataSourceGcpResource diskDatasourceProperties */
                     diskDatasourceProperties?: (google.cloud.backupdr.v1.IDiskDataSourceProperties|null);
                 }
@@ -6945,11 +6948,14 @@ export namespace google {
                     /** DataSourceGcpResource cloudSqlInstanceDatasourceProperties. */
                     public cloudSqlInstanceDatasourceProperties?: (google.cloud.backupdr.v1.ICloudSqlInstanceDataSourceProperties|null);
 
+                    /** DataSourceGcpResource alloyDbClusterDatasourceProperties. */
+                    public alloyDbClusterDatasourceProperties?: (google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties|null);
+
                     /** DataSourceGcpResource diskDatasourceProperties. */
                     public diskDatasourceProperties?: (google.cloud.backupdr.v1.IDiskDataSourceProperties|null);
 
                     /** DataSourceGcpResource gcpResourceProperties. */
-                    public gcpResourceProperties?: ("computeInstanceDatasourceProperties"|"cloudSqlInstanceDatasourceProperties"|"diskDatasourceProperties");
+                    public gcpResourceProperties?: ("computeInstanceDatasourceProperties"|"cloudSqlInstanceDatasourceProperties"|"alloyDbClusterDatasourceProperties"|"diskDatasourceProperties");
 
                     /**
                      * Creates a new DataSourceGcpResource instance using the specified properties.
@@ -7552,6 +7558,9 @@ export namespace google {
                     /** Backup backupApplianceBackupProperties */
                     backupApplianceBackupProperties?: (google.cloud.backupdr.v1.IBackupApplianceBackupProperties|null);
 
+                    /** Backup alloyDbBackupProperties */
+                    alloyDbBackupProperties?: (google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties|null);
+
                     /** Backup diskBackupProperties */
                     diskBackupProperties?: (google.cloud.backupdr.v1.IDiskBackupProperties|null);
 
@@ -7634,6 +7643,9 @@ export namespace google {
                     /** Backup backupApplianceBackupProperties. */
                     public backupApplianceBackupProperties?: (google.cloud.backupdr.v1.IBackupApplianceBackupProperties|null);
 
+                    /** Backup alloyDbBackupProperties. */
+                    public alloyDbBackupProperties?: (google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties|null);
+
                     /** Backup diskBackupProperties. */
                     public diskBackupProperties?: (google.cloud.backupdr.v1.IDiskBackupProperties|null);
 
@@ -7659,7 +7671,7 @@ export namespace google {
                     public kmsKeyVersions: string[];
 
                     /** Backup backupProperties. */
-                    public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"diskBackupProperties");
+                    public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"alloyDbBackupProperties"|"diskBackupProperties");
 
                     /** Backup planInfo. */
                     public planInfo?: "gcpBackupPlanInfo";
@@ -10639,6 +10651,218 @@ export namespace google {
                     BACKUP_VAULT_VIEW_UNSPECIFIED = 0,
                     BACKUP_VAULT_VIEW_BASIC = 1,
                     BACKUP_VAULT_VIEW_FULL = 2
+                }
+
+                /** Properties of an AlloyDBClusterDataSourceProperties. */
+                interface IAlloyDBClusterDataSourceProperties {
+
+                    /** AlloyDBClusterDataSourceProperties name */
+                    name?: (string|null);
+                }
+
+                /** Represents an AlloyDBClusterDataSourceProperties. */
+                class AlloyDBClusterDataSourceProperties implements IAlloyDBClusterDataSourceProperties {
+
+                    /**
+                     * Constructs a new AlloyDBClusterDataSourceProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties);
+
+                    /** AlloyDBClusterDataSourceProperties name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new AlloyDBClusterDataSourceProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDBClusterDataSourceProperties instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties): google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties;
+
+                    /**
+                     * Encodes the specified AlloyDBClusterDataSourceProperties message. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.verify|verify} messages.
+                     * @param message AlloyDBClusterDataSourceProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDBClusterDataSourceProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties.verify|verify} messages.
+                     * @param message AlloyDBClusterDataSourceProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAlloyDBClusterDataSourceProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDBClusterDataSourceProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDBClusterDataSourceProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties;
+
+                    /**
+                     * Decodes an AlloyDBClusterDataSourceProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDBClusterDataSourceProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties;
+
+                    /**
+                     * Verifies an AlloyDBClusterDataSourceProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDBClusterDataSourceProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDBClusterDataSourceProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties;
+
+                    /**
+                     * Creates a plain object from an AlloyDBClusterDataSourceProperties message. Also converts values to other types if specified.
+                     * @param message AlloyDBClusterDataSourceProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AlloyDBClusterDataSourceProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDBClusterDataSourceProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDBClusterDataSourceProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AlloyDbClusterBackupProperties. */
+                interface IAlloyDbClusterBackupProperties {
+
+                    /** AlloyDbClusterBackupProperties description */
+                    description?: (string|null);
+
+                    /** AlloyDbClusterBackupProperties storedBytes */
+                    storedBytes?: (number|Long|string|null);
+
+                    /** AlloyDbClusterBackupProperties chainId */
+                    chainId?: (string|null);
+
+                    /** AlloyDbClusterBackupProperties databaseVersion */
+                    databaseVersion?: (string|null);
+                }
+
+                /** Represents an AlloyDbClusterBackupProperties. */
+                class AlloyDbClusterBackupProperties implements IAlloyDbClusterBackupProperties {
+
+                    /**
+                     * Constructs a new AlloyDbClusterBackupProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties);
+
+                    /** AlloyDbClusterBackupProperties description. */
+                    public description?: (string|null);
+
+                    /** AlloyDbClusterBackupProperties storedBytes. */
+                    public storedBytes: (number|Long|string);
+
+                    /** AlloyDbClusterBackupProperties chainId. */
+                    public chainId: string;
+
+                    /** AlloyDbClusterBackupProperties databaseVersion. */
+                    public databaseVersion: string;
+
+                    /**
+                     * Creates a new AlloyDbClusterBackupProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlloyDbClusterBackupProperties instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties): google.cloud.backupdr.v1.AlloyDbClusterBackupProperties;
+
+                    /**
+                     * Encodes the specified AlloyDbClusterBackupProperties message. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.verify|verify} messages.
+                     * @param message AlloyDbClusterBackupProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlloyDbClusterBackupProperties message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.AlloyDbClusterBackupProperties.verify|verify} messages.
+                     * @param message AlloyDbClusterBackupProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IAlloyDbClusterBackupProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlloyDbClusterBackupProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlloyDbClusterBackupProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.AlloyDbClusterBackupProperties;
+
+                    /**
+                     * Decodes an AlloyDbClusterBackupProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlloyDbClusterBackupProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.AlloyDbClusterBackupProperties;
+
+                    /**
+                     * Verifies an AlloyDbClusterBackupProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlloyDbClusterBackupProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlloyDbClusterBackupProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.AlloyDbClusterBackupProperties;
+
+                    /**
+                     * Creates a plain object from an AlloyDbClusterBackupProperties message. Also converts values to other types if specified.
+                     * @param message AlloyDbClusterBackupProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.AlloyDbClusterBackupProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlloyDbClusterBackupProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AlloyDbClusterBackupProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BackupApplianceBackupProperties. */
