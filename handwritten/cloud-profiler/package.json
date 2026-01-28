@@ -2,7 +2,11 @@
   "name": "@google-cloud/profiler",
   "version": "6.0.3",
   "description": "Adds support for Cloud Profiler to Node.js applications",
-  "repository": "googleapis/cloud-profiler-nodejs",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/cloud-profiler",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "scripts": {
@@ -80,5 +84,6 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler"
 }
