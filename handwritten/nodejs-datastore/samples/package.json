@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-docs-samples-datastore",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC.",
+  "files": [
+    "*.js"
+  ],
+  "repository": "googleapis/nodejs-datastore",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "mocha --timeout=600000"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^10.0.1",
+    "sinon": "^18.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
