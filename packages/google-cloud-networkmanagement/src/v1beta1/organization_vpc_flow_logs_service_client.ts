@@ -895,7 +895,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1006,7 +1006,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`
@@ -1066,7 +1066,7 @@ export class OrganizationVpcFlowLogsServiceClient {
  *   Required. The parent resource of the VpcFlowLogsConfig,
  *   in one of the following formats:
  *
- *   - For project-level resourcs: `projects/{project_id}/locations/global`
+ *   - For project-level resources: `projects/{project_id}/locations/global`
  *
  *   - For organization-level resources:
  *   `organizations/{organization_id}/locations/global`

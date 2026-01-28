@@ -230,7 +230,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 227,
+          "end": 237,
           "type": "FULL"
         }
       ],
@@ -378,6 +378,14 @@
           {
             "name": "boot_disk",
             "type": ".google.container.v1.BootDisk"
+          },
+          {
+            "name": "node_drain_config",
+            "type": ".google.container.v1.NodePool.NodeDrainConfig"
+          },
+          {
+            "name": "consolidation_delay",
+            "type": ".google.protobuf.Duration"
           }
         ],
         "resultType": ".google.container.v1.Operation",

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient} from '@google-cloud/dialogflow-cx';
+import {AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient} from '@google-cloud/dialogflow-cx';
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
@@ -34,6 +34,9 @@ function doStuffWithEntityTypesClient(client: EntityTypesClient) {
 function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
   client.close();
 }
+function doStuffWithExamplesClient(client: ExamplesClient) {
+  client.close();
+}
 function doStuffWithExperimentsClient(client: ExperimentsClient) {
   client.close();
 }
@@ -49,6 +52,9 @@ function doStuffWithIntentsClient(client: IntentsClient) {
 function doStuffWithPagesClient(client: PagesClient) {
   client.close();
 }
+function doStuffWithPlaybooksClient(client: PlaybooksClient) {
+  client.close();
+}
 function doStuffWithSecuritySettingsServiceClient(client: SecuritySettingsServiceClient) {
   client.close();
 }
@@ -59,6 +65,9 @@ function doStuffWithSessionsClient(client: SessionsClient) {
   client.close();
 }
 function doStuffWithTestCasesClient(client: TestCasesClient) {
+  client.close();
+}
+function doStuffWithToolsClient(client: ToolsClient) {
   client.close();
 }
 function doStuffWithTransitionRouteGroupsClient(client: TransitionRouteGroupsClient) {
@@ -88,6 +97,9 @@ function main() {
   const environmentsClient = new EnvironmentsClient();
   doStuffWithEnvironmentsClient(environmentsClient);
   // check that the client instance can be created
+  const examplesClient = new ExamplesClient();
+  doStuffWithExamplesClient(examplesClient);
+  // check that the client instance can be created
   const experimentsClient = new ExperimentsClient();
   doStuffWithExperimentsClient(experimentsClient);
   // check that the client instance can be created
@@ -103,6 +115,9 @@ function main() {
   const pagesClient = new PagesClient();
   doStuffWithPagesClient(pagesClient);
   // check that the client instance can be created
+  const playbooksClient = new PlaybooksClient();
+  doStuffWithPlaybooksClient(playbooksClient);
+  // check that the client instance can be created
   const securitySettingsServiceClient = new SecuritySettingsServiceClient();
   doStuffWithSecuritySettingsServiceClient(securitySettingsServiceClient);
   // check that the client instance can be created
@@ -114,6 +129,9 @@ function main() {
   // check that the client instance can be created
   const testCasesClient = new TestCasesClient();
   doStuffWithTestCasesClient(testCasesClient);
+  // check that the client instance can be created
+  const toolsClient = new ToolsClient();
+  doStuffWithToolsClient(toolsClient);
   // check that the client instance can be created
   const transitionRouteGroupsClient = new TransitionRouteGroupsClient();
   doStuffWithTransitionRouteGroupsClient(transitionRouteGroupsClient);

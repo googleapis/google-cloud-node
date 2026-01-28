@@ -108,6 +108,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | container | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1/snippet_metadata_google.container.v1.json) |
 | cancel operation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.cancel_operation.js) |
 | check autopilot compatibility | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js) |
+| complete control plane upgrade | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_control_plane_upgrade.js) |
 | complete i p rotation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_i_p_rotation.js) |
 | complete node pool upgrade | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.complete_node_pool_upgrade.js) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-container/samples/generated/v1beta1/cluster_manager.create_cluster.js) |

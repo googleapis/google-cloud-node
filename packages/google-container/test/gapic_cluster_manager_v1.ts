@@ -5517,5 +5517,51 @@ describe('v1.ClusterManagerClient', () => {
                     .getCall(-1).calledWith(fakePath));
             });
         });
+
+        describe('subnetwork', async () => {
+            const fakePath = "/rendered/path/subnetwork";
+            const expectedParameters = {
+                project: "projectValue",
+                region: "regionValue",
+                subnetwork: "subnetworkValue",
+            };
+            const client = new clustermanagerModule.v1.ClusterManagerClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.subnetworkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.subnetworkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('subnetworkPath', () => {
+                const result = client.subnetworkPath("projectValue", "regionValue", "subnetworkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.subnetworkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSubnetworkName', () => {
+                const result = client.matchProjectFromSubnetworkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.subnetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRegionFromSubnetworkName', () => {
+                const result = client.matchRegionFromSubnetworkName(fakePath);
+                assert.strictEqual(result, "regionValue");
+                assert((client.pathTemplates.subnetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSubnetworkFromSubnetworkName', () => {
+                const result = client.matchSubnetworkFromSubnetworkName(fakePath);
+                assert.strictEqual(result, "subnetworkValue");
+                assert((client.pathTemplates.subnetworkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
     });
 });

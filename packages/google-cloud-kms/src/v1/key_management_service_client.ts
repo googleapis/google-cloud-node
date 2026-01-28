@@ -227,6 +227,12 @@ export class KeyManagementServiceClient {
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
       ),
+      singleTenantHsmInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}'
+      ),
+      singleTenantHsmInstanceProposalPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}/proposals/{proposal}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -5174,6 +5180,117 @@ export class KeyManagementServiceClient {
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
     return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified singleTenantHsmInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} single_tenant_hsm_instance
+   * @returns {string} Resource name string.
+   */
+  singleTenantHsmInstancePath(project:string,location:string,singleTenantHsmInstance:string) {
+    return this.pathTemplates.singleTenantHsmInstancePathTemplate.render({
+      project: project,
+      location: location,
+      single_tenant_hsm_instance: singleTenantHsmInstance,
+    });
+  }
+
+  /**
+   * Parse the project from SingleTenantHsmInstance resource.
+   *
+   * @param {string} singleTenantHsmInstanceName
+   *   A fully-qualified path representing SingleTenantHsmInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSingleTenantHsmInstanceName(singleTenantHsmInstanceName: string) {
+    return this.pathTemplates.singleTenantHsmInstancePathTemplate.match(singleTenantHsmInstanceName).project;
+  }
+
+  /**
+   * Parse the location from SingleTenantHsmInstance resource.
+   *
+   * @param {string} singleTenantHsmInstanceName
+   *   A fully-qualified path representing SingleTenantHsmInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSingleTenantHsmInstanceName(singleTenantHsmInstanceName: string) {
+    return this.pathTemplates.singleTenantHsmInstancePathTemplate.match(singleTenantHsmInstanceName).location;
+  }
+
+  /**
+   * Parse the single_tenant_hsm_instance from SingleTenantHsmInstance resource.
+   *
+   * @param {string} singleTenantHsmInstanceName
+   *   A fully-qualified path representing SingleTenantHsmInstance resource.
+   * @returns {string} A string representing the single_tenant_hsm_instance.
+   */
+  matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceName(singleTenantHsmInstanceName: string) {
+    return this.pathTemplates.singleTenantHsmInstancePathTemplate.match(singleTenantHsmInstanceName).single_tenant_hsm_instance;
+  }
+
+  /**
+   * Return a fully-qualified singleTenantHsmInstanceProposal resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} single_tenant_hsm_instance
+   * @param {string} proposal
+   * @returns {string} Resource name string.
+   */
+  singleTenantHsmInstanceProposalPath(project:string,location:string,singleTenantHsmInstance:string,proposal:string) {
+    return this.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.render({
+      project: project,
+      location: location,
+      single_tenant_hsm_instance: singleTenantHsmInstance,
+      proposal: proposal,
+    });
+  }
+
+  /**
+   * Parse the project from SingleTenantHsmInstanceProposal resource.
+   *
+   * @param {string} singleTenantHsmInstanceProposalName
+   *   A fully-qualified path representing SingleTenantHsmInstanceProposal resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSingleTenantHsmInstanceProposalName(singleTenantHsmInstanceProposalName: string) {
+    return this.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match(singleTenantHsmInstanceProposalName).project;
+  }
+
+  /**
+   * Parse the location from SingleTenantHsmInstanceProposal resource.
+   *
+   * @param {string} singleTenantHsmInstanceProposalName
+   *   A fully-qualified path representing SingleTenantHsmInstanceProposal resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSingleTenantHsmInstanceProposalName(singleTenantHsmInstanceProposalName: string) {
+    return this.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match(singleTenantHsmInstanceProposalName).location;
+  }
+
+  /**
+   * Parse the single_tenant_hsm_instance from SingleTenantHsmInstanceProposal resource.
+   *
+   * @param {string} singleTenantHsmInstanceProposalName
+   *   A fully-qualified path representing SingleTenantHsmInstanceProposal resource.
+   * @returns {string} A string representing the single_tenant_hsm_instance.
+   */
+  matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceProposalName(singleTenantHsmInstanceProposalName: string) {
+    return this.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match(singleTenantHsmInstanceProposalName).single_tenant_hsm_instance;
+  }
+
+  /**
+   * Parse the proposal from SingleTenantHsmInstanceProposal resource.
+   *
+   * @param {string} singleTenantHsmInstanceProposalName
+   *   A fully-qualified path representing SingleTenantHsmInstanceProposal resource.
+   * @returns {string} A string representing the proposal.
+   */
+  matchProposalFromSingleTenantHsmInstanceProposalName(singleTenantHsmInstanceProposalName: string) {
+    return this.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match(singleTenantHsmInstanceProposalName).proposal;
   }
 
   /**

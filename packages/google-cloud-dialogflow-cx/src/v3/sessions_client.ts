@@ -211,6 +211,9 @@ export class SessionsClient {
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}'
       ),
+      examplePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}'
+      ),
       experimentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}'
       ),
@@ -228,6 +231,12 @@ export class SessionsClient {
       ),
       pagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}'
+      ),
+      playbookPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}'
+      ),
+      playbookVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}'
       ),
       projectLocationAgentEnvironmentSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}'
@@ -261,6 +270,12 @@ export class SessionsClient {
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
+      ),
+      toolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+      ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -487,6 +502,10 @@ export class SessionsClient {
  *   Required. The input specification.
  * @param {google.cloud.dialogflow.cx.v3.OutputAudioConfig} request.outputAudioConfig
  *   Instructs the speech synthesizer how to generate the output audio.
+ * @param {google.cloud.dialogflow.cx.v3.DetectIntentResponseView} [request.responseView]
+ *   Optional. Specifies which fields in the
+ *   {@link protos.google.cloud.dialogflow.cx.v3.QueryResult|QueryResult} to return. If not
+ *   set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -929,6 +948,10 @@ export class SessionsClient {
  *   Required. The input specification.
  * @param {google.cloud.dialogflow.cx.v3.OutputAudioConfig} request.outputAudioConfig
  *   Instructs the speech synthesizer how to generate the output audio.
+ * @param {google.cloud.dialogflow.cx.v3.DetectIntentResponseView} [request.responseView]
+ *   Optional. Specifies which fields in the
+ *   {@link protos.google.cloud.dialogflow.cx.v3.QueryResult|QueryResult} to return. If not
+ *   set, the default is DETECT_INTENT_RESPONSE_VIEW_FULL.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1774,6 +1797,81 @@ export class SessionsClient {
   }
 
   /**
+   * Return a fully-qualified example resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @param {string} example
+   * @returns {string} Resource name string.
+   */
+  examplePath(project:string,location:string,agent:string,playbook:string,example:string) {
+    return this.pathTemplates.examplePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+      example: example,
+    });
+  }
+
+  /**
+   * Parse the project from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).project;
+  }
+
+  /**
+   * Parse the location from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).location;
+  }
+
+  /**
+   * Parse the agent from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).agent;
+  }
+
+  /**
+   * Parse the playbook from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).playbook;
+  }
+
+  /**
+   * Parse the example from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the example.
+   */
+  matchExampleFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).example;
+  }
+
+  /**
    * Return a fully-qualified experiment resource name string.
    *
    * @param {string} project
@@ -2169,6 +2267,143 @@ export class SessionsClient {
    */
   matchPageFromPageName(pageName: string) {
     return this.pathTemplates.pagePathTemplate.match(pageName).page;
+  }
+
+  /**
+   * Return a fully-qualified playbook resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @returns {string} Resource name string.
+   */
+  playbookPath(project:string,location:string,agent:string,playbook:string) {
+    return this.pathTemplates.playbookPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+    });
+  }
+
+  /**
+   * Parse the project from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).project;
+  }
+
+  /**
+   * Parse the location from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).location;
+  }
+
+  /**
+   * Parse the agent from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).agent;
+  }
+
+  /**
+   * Parse the playbook from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).playbook;
+  }
+
+  /**
+   * Return a fully-qualified playbookVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  playbookVersionPath(project:string,location:string,agent:string,playbook:string,version:string) {
+    return this.pathTemplates.playbookVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).project;
+  }
+
+  /**
+   * Parse the location from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).location;
+  }
+
+  /**
+   * Parse the agent from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).agent;
+  }
+
+  /**
+   * Parse the playbook from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).playbook;
+  }
+
+  /**
+   * Parse the version from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).version;
   }
 
   /**
@@ -2903,6 +3138,143 @@ export class SessionsClient {
    */
   matchResultFromTestCaseResultName(testCaseResultName: string) {
     return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).result;
+  }
+
+  /**
+   * Return a fully-qualified tool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @returns {string} Resource name string.
+   */
+  toolPath(project:string,location:string,agent:string,tool:string) {
+    return this.pathTemplates.toolPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+    });
+  }
+
+  /**
+   * Parse the project from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).project;
+  }
+
+  /**
+   * Parse the location from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).location;
+  }
+
+  /**
+   * Parse the agent from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).agent;
+  }
+
+  /**
+   * Parse the tool from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).tool;
+  }
+
+  /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(project:string,location:string,agent:string,tool:string,version:string) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).version;
   }
 
   /**

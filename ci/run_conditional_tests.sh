@@ -85,6 +85,10 @@ tests_with_credentials="packages/google-analytics-admin/ packages/google-area120
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
+        if [ -f "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null; then
+            echo "Skipping ${d} (explicitly ignored in ignore.json)"
+            continue
+        fi
         should_test=false
         if [ -n "${GIT_DIFF_ARG}" ]; then
             echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"

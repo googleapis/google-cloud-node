@@ -190,6 +190,11 @@
                 "fetchNodePoolUpgradeInfo"
               ]
             },
+            "CompleteControlPlaneUpgrade": {
+              "methods": [
+                "completeControlPlaneUpgrade"
+              ]
+            },
             "ListUsableSubnetworks": {
               "methods": [
                 "listUsableSubnetworks",
@@ -380,6 +385,11 @@
             "FetchNodePoolUpgradeInfo": {
               "methods": [
                 "fetchNodePoolUpgradeInfo"
+              ]
+            },
+            "CompleteControlPlaneUpgrade": {
+              "methods": [
+                "completeControlPlaneUpgrade"
               ]
             },
             "ListUsableSubnetworks": {
