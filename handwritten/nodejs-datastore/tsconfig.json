@@ -3,6 +3,9 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
+    "types": [
+      "long"
+    ],
     "resolveJsonModule": true,
     "lib": [
       "es2018",
