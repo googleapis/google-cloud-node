@@ -127,12 +127,15 @@ mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 # update repo name in .kokoro files from SPLIT_REPO to PACKAGE_PATH
 KOKORO_DIR="${PACKAGE_PATH}/.kokoro"
+PACKAGE_PATH_REPLACEMENT="google-cloud-node/${PACKAGE_PATH}"
 if [[ -d "${KOKORO_DIR}" ]]; then
   echo "Updating repo name in .kokoro files..."
-  find "${KOKORO_DIR}" -type f -print0 | while IFS= read -r -d '' file; do
-    echo "Processing ${file}"
-    gsed -i "s|${SPLIT_REPO}|${PACKAGE_PATH}|g" "${file}"
-  done
+  if [[ -n "${SPLIT_REPO}" ]]; then
+    find "${KOKORO_DIR}" -type f -print0 | while IFS= read -r -d '' file; do
+      echo "Processing ${file}"
+      gsed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
+    done
+  fi
 fi
  
 # add changes to local git directory
