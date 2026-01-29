@@ -25,9 +25,6 @@ describe('📦 pack-n-play test', () => {
     this.timeout(300000);
     const options = {
       packageDir: process.cwd(),
-      additionalNpmDependencies: [
-        '@types/long@4.0.0',
-      ],
       sample: {
         description: 'TypeScript user can use the type definitions',
         ts: readFileSync(
