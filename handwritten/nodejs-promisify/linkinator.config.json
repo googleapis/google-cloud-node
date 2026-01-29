@@ -1,0 +1,11 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io",
+    "docs/js/menu-wc_es5.js"
+  ],
+  "silent": true,
+  "concurrency": 10
+}
