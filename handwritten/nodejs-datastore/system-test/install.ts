@@ -30,6 +30,9 @@ describe('📦 pack-n-play test', () => {
         ts: readFileSync(
           './system-test/fixtures/sample/src/index.ts',
         ).toString(),
+        dependencies: [
+          '@types/long@^4.0.0',
+        ],
       },
     };
     await packNTest(options);
