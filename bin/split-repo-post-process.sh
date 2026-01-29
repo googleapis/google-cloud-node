@@ -90,7 +90,57 @@ docker run --rm \
   -e "DEFAULT_BRANCH=main" \
   "${IMAGE}"
 fi
- 
+
+# If migrated package uses kokoro, inject diff check
+if [ -d "${PACKAGE_PATH}/.kokoro" ]; then
+    echo "Found .kokoro directory. Injecting conditional test logic."
+    
+    TRAMPOLINE_SCRIPT=""
+    if [ -f "${PACKAGE_PATH}/.kokoro/trampoline_v2.sh" ]; then
+        TRAMPOLINE_SCRIPT="${PACKAGE_PATH}/.kokoro/trampoline_v2.sh"
+    elif [ -f "${PACKAGE_PATH}/.kokoro/trampoline.sh" ]; then
+        TRAMPOLINE_SCRIPT="${PACKAGE_PATH}/.kokoro/trampoline.sh"
+    fi
+
+    if [ -n "${TRAMPOLINE_SCRIPT}" ]; then
+        echo "Found trampoline script: ${TRAMPOLINE_SCRIPT}. Patching it."
+# Diff check:
+        cat << EOF > conditional_check_logic.sh
+
+# Auto-injected conditional check
+# Check if the package directory has changes. If not, skip tests.
+if [[ "\${RUNNING_IN_CI:-}" == "true" ]]; then
+    # The package path is hardcoded during migration
+    RELATIVE_PKG_PATH="${PACKAGE_PATH}"
+    
+    echo "Checking for changes in \${RELATIVE_PKG_PATH}..."
+    
+    # Determine the diff range based on the CI system/event
+    # Safe default: HEAD~1..HEAD
+    DIFF_RANGE="HEAD~1..HEAD"
+
+    if git diff --quiet "\${DIFF_RANGE}" -- "\${RELATIVE_PKG_PATH}"; then
+        echo "No changes detected in \${RELATIVE_PKG_PATH}. Skipping tests."
+        exit 0
+    else
+        echo "Changes detected in \${RELATIVE_PKG_PATH}. Proceeding with tests."
+    fi
+fi
+EOF
+        # Insert the check after 'cd "${PROJECT_ROOT}"' (standard v2) or at the top of the file (v1/legacy).
+        if grep -q 'cd "${PROJECT_ROOT}"' "${TRAMPOLINE_SCRIPT}"; then
+             sed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+        else
+             sed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+        fi
+        rm conditional_check_logic.sh
+    else
+        echo "No trampoline script found in .kokoro. Skipping test optimization."
+    fi
+else
+    echo "No .kokoro directory found. Skipping test optimization."
+fi
+
 # add changes to local git directory
 git add .
 git commit -am "build: add release-please config, fix owlbot-config"

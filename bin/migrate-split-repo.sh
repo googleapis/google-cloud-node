@@ -37,7 +37,7 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/google-cloud-node" \
   "" \
   "${PACKAGE_PATH}" \
-  ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json" \
+  ".github,.trampolinerc,SECURITY.md,renovate.json" \
   ".github/.OwlBot.yaml,system-test/test/quickstart.js,system-test/test/quickstart.test.js"
  
 # run the script to update the split repo and either delete all the samples or just update the README
