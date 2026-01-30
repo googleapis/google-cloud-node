@@ -357,7 +357,7 @@ export class QuotaAdjusterSettingsManagerClient {
   // -- Service calls --
   // -------------------
 /**
- * RPC Method for updating QuotaAdjusterSettings based on the request
+ * Updates the QuotaAdjusterSettings for the specified resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -457,7 +457,7 @@ export class QuotaAdjusterSettingsManagerClient {
       });
   }
 /**
- * RPC Method for getting QuotaAdjusterSettings based on the request
+ * Gets the QuotaAdjusterSettings for the specified resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
