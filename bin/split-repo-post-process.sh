@@ -63,25 +63,25 @@ mv "${PACKAGE_PATH}/.github/.OwlBot.yaml" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 echo "Fixing format of ${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `docker:` line
-gsed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+sed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `image:` line
-gsed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+sed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 if grep -q "/owl-bot-staging/\$1/\$2" "${PACKAGE_PATH}/.OwlBot.yaml"
 then
   echo "OwlBot config is copying each folder"
-  gsed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
-  gsed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  sed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
+  sed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
 else
-  gsed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
  
 echo "fixing owlbot.py file"
  
 if test -f "${PACKAGE_PATH}/owlbot.py"; then
-  gsed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
-  echo gsed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
-  gsed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
+  sed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
+  echo sed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
+  sed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
 fi
  
 # update .repo and .issue_tracker in .repo-metadata.json
@@ -107,11 +107,11 @@ jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/$
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
 
-   # remove .github folder from package
-  if [[ -d "${PACKAGE_PATH}/.github" ]]; then
-    echo "Removing ${PACKAGE_PATH}/.github"
-    rm -rf "${PACKAGE_PATH}/.github"
-  fi
+# remove .github folder from package
+if [[ -d "${PACKAGE_PATH}/.github" ]]; then
+  echo "Removing ${PACKAGE_PATH}/.github"
+  rm -rf "${PACKAGE_PATH}/.github"
+fi
 
 
 # update repo name in .kokoro files from SPLIT_REPO to PACKAGE_PATH
@@ -122,13 +122,13 @@ if [[ -d "${KOKORO_DIR}" ]]; then
   if [[ -n "${SPLIT_REPO}" ]]; then
     find "${KOKORO_DIR}" -type f -print0 | while IFS= read -r -d '' file; do
       echo "Processing ${file}"
-      gsed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
+      sed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
     done
   fi
 fi
 
 echo "Fixing .trampolinerc for populate-secrets.sh"
-gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' .trampolinerc
+sed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' .trampolinerc
  
 # add changes to local git directory
 git add .
