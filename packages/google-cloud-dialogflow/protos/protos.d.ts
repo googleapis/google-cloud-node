@@ -60205,6 +60205,9 @@ export namespace google {
                     /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply */
                     enablePartialAutomatedAgentReply?: (boolean|null);
 
+                    /** StreamingAnalyzeContentRequest outputMultipleUtterances */
+                    outputMultipleUtterances?: (boolean|null);
+
                     /** StreamingAnalyzeContentRequest enableDebuggingInfo */
                     enableDebuggingInfo?: (boolean|null);
                 }
@@ -60262,6 +60265,9 @@ export namespace google {
 
                     /** StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply. */
                     public enablePartialAutomatedAgentReply: boolean;
+
+                    /** StreamingAnalyzeContentRequest outputMultipleUtterances. */
+                    public outputMultipleUtterances: boolean;
 
                     /** StreamingAnalyzeContentRequest enableDebuggingInfo. */
                     public enableDebuggingInfo: boolean;

@@ -4206,7 +4206,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 168,
+          "end": 174,
           "type": "FULL"
         }
       ],
@@ -4273,6 +4273,10 @@
           },
           {
             "name": "enable_partial_automated_agent_reply",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "output_multiple_utterances",
             "type": "TYPE_BOOL"
           },
           {
