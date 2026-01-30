@@ -14,15 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/bash
-set -ex
-echo "--- STARTED samples-test.sh ---"
-echo "Initial CWD: $(pwd)"
-
-# Navigate to the package directory
-cd handwritten/cloud-profiler
-echo "New CWD: $(pwd)"
-
 export NPM_CONFIG_PREFIX=${HOME}/.npm-global
 
 # Setup service account credentials.
