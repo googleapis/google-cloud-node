@@ -112,22 +112,11 @@ mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
     echo "Removing ${PACKAGE_PATH}/.github"
     rm -rf "${PACKAGE_PATH}/.github"
   fi
-   
-# if !(test -f "${PACKAGE_PATH}/owlbot.py"); then
-# IMAGE="gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest"
-# echo "Running post-processor: ${IMAGE}"
-# docker pull "${IMAGE}"
-# docker run --rm \
-#   --user $(id -u):$(id -g) \
-#   -v $(pwd):/workspace/google-cloud-node \
-#   -w /workspace/google-cloud-node \
-#   -e "DEFAULT_BRANCH=main" \
-#   "${IMAGE}"
-# fi
- 
+
+
 # update repo name in .kokoro files from SPLIT_REPO to PACKAGE_PATH
 KOKORO_DIR="${PACKAGE_PATH}/.kokoro"
-PACKAGE_PATH_REPLACEMENT="google-cloud-node/${PACKAGE_PATH}"
+PACKAGE_PATH_REPLACEMENT="${SPLIT_REPO}/${PACKAGE_PATH}"
 if [[ -d "${KOKORO_DIR}" ]]; then
   echo "Updating repo name in .kokoro files..."
   if [[ -n "${SPLIT_REPO}" ]]; then
@@ -137,6 +126,9 @@ if [[ -d "${KOKORO_DIR}" ]]; then
     done
   fi
 fi
+
+echo "Fixing .trampolinerc for populate-secrets.sh"
+gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' .trampolinerc
  
 # add changes to local git directory
 git add .
