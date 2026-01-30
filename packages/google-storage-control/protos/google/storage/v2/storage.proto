@@ -357,6 +357,9 @@ service Storage {
   rpc RestoreObject(RestoreObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
+    };
+    option (google.api.method_signature) = "bucket,object,generation";
+  }
 
   // Cancels an in-progress resumable upload.
   //
@@ -389,7 +392,11 @@ service Storage {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
     };
     option (google.api.method_signature) = "bucket,object";
+    option (google.api.method_signature) = "bucket,object,generation";
   }
+
+  // Retrieves object data.
+  //
   // **IAM Permissions**:
   //
   // Requires `storage.objects.get` IAM permission on the bucket.
@@ -403,13 +410,12 @@ service Storage {
 
   // Reads an object's data.
   //
-  // This bi-directional API reads data from an object, allowing you to
-  // request multiple data ranges within a single stream, even across
-  // several messages. If an error occurs with any request, the stream
-  // closes with a relevant error code. Since you can have multiple
-  // outstanding requests, the error response includes a
-  // `BidiReadObjectRangesError` field detailing the specific error for
-  // each pending `read_id`.
+  // This bi-directional API reads data from an object, allowing you to request
+  // multiple data ranges within a single stream, even across several messages.
+  // If an error occurs with any request, the stream closes with a relevant
+  // error code. Since you can have multiple outstanding requests, the error
+  // response includes a `BidiReadObjectError` proto in its `details` field,
+  // reporting the specific error, if any, for each pending `read_id`.
   //
   // **IAM Permissions**:
   //
@@ -616,6 +622,9 @@ service Storage {
   //   object)
   rpc MoveObject(MoveObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
+      routing_parameters { field: "bucket" path_template: "{bucket=**}" }
+    };
+    option (google.api.method_signature) =
         "bucket,source_object,destination_object";
   }
 }
@@ -873,6 +882,9 @@ message ComposeObjectRequest {
   // the combined checksums of the component objects.
   ObjectChecksums object_checksums = 10
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Whether the source objects should be deleted in the compose request.
+  optional bool delete_source_objects = 11;
 }
 
 // Request message for deleting an object.
@@ -1286,16 +1298,16 @@ message ReadRange {
   // length is 15 bytes, a `ReadObjectRequest` with `read_offset` = -5 and
   // `read_length` = 3 would return bytes 10 through 12 of the object.
   // Requesting a negative offset with magnitude larger than the size of the
-  // object returns the entire object. A `read_offset` larger than the size
-  // of the object results in an `OutOfRange` error.
+  // object is equivalent to `read_offset` = 0. A `read_offset` larger than the
+  // size of the object results in an `OutOfRange` error.
   int64 read_offset = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The maximum number of data bytes the server is allowed to return
   // across all response messages with the same `read_id`. A `read_length` of
   // zero indicates to read until the resource end, and a negative `read_length`
-  // causes an error. If the stream returns fewer bytes than allowed by the
-  // `read_length` and no error occurred, the stream includes all data from the
-  // `read_offset` to the resource end.
+  // causes an `OutOfRange` error. If the stream returns fewer bytes than
+  // allowed by the `read_length` and no error occurred, the stream includes all
+  // data from the `read_offset` to the resource end.
   int64 read_length = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. Read identifier provided by the client. When the client issues
@@ -1449,6 +1461,9 @@ message WriteObjectResponse {
     // the upload has finalized.
     StorageObject resource = 2;
   }
+}
+
+// Describes an attempt to append to an object, possibly over multiple requests.
 message AppendObjectSpec {
   // Required. The name of the bucket containing the object to write.
   string bucket = 1 [
@@ -2384,6 +2399,9 @@ message Bucket {
 
   // StorageObject Retention related properties of a bucket.
   message ObjectRetention {
+    // Optional. Output only. If true, object retention is enabled for the
+    // bucket.
+    bool enabled = 1 [
       (google.api.field_behavior) = OPTIONAL,
       (google.api.field_behavior) = OUTPUT_ONLY
     ];
@@ -2427,7 +2445,11 @@ message Bucket {
     bool enabled = 1 [(google.api.field_behavior) = OPTIONAL];
   }
 
+  // Properties of a bucket related to accessing the contents as a static
   // website. For details, see [hosting a static website using Cloud
+  // Storage](https://cloud.google.com/storage/docs/hosting-static-website).
+  message Website {
+    // Optional. If the requested object path is missing, the service ensures
     // the path has a trailing '/', append this suffix, and attempt to retrieve
     // the resulting object. This allows the creation of `index.html` objects to
     // represent directory pages.
@@ -2805,6 +2827,9 @@ message ObjectCustomContextPayload {
 // All contexts of an object grouped by type.
 message ObjectContexts {
   // Optional. User-defined object contexts.
+  // The maximum key or value size is `256` characters.
+  // The maximum number of entries is `50`.
+  // The maximum total serialized size of all entries is `25KiB`.
   map<string, ObjectCustomContextPayload> custom = 1
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -2825,9 +2850,13 @@ message StorageObject {
   // Specifies retention parameters of the object. Objects under retention
   // cannot be deleted or overwritten until their retention expires.
   message Retention {
+    // Retention mode values.
     enum Mode {
       // No specified mode. StorageObject is not under retention.
       MODE_UNSPECIFIED = 0;
+
+      // Retention period might be decreased or increased.
+      // The Retention configuration might be removed.
       // The mode might be changed to locked.
       UNLOCKED = 1;
 
@@ -2951,6 +2980,9 @@ message StorageObject {
   // on behalf of a requester, such as changing the storage class based on an
   // StorageObject Lifecycle Configuration.
   google.protobuf.Timestamp update_time = 17
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Cloud KMS Key used to encrypt this object, if the object is
   // encrypted by such a key.
   string kms_key = 18 [
     (google.api.field_behavior) = OPTIONAL,
@@ -3099,7 +3131,11 @@ message ListObjectsResponse {
   repeated string prefixes = 2;
 
   // The continuation token, used to page through large result sets. Provide
+  // this value in a subsequent request to return the next page of results.
   string next_page_token = 3;
+}
+
+// Represents the Viewers, Editors, or Owners of a given project.
 message ProjectTeam {
   // Optional. The project number.
   string project_number = 1 [(google.api.field_behavior) = OPTIONAL];
