@@ -2394,7 +2394,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 337,
+          "end": 359,
           "type": "FULL"
         }
       ],
@@ -2510,6 +2510,10 @@
           {
             "name": "place_id",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_attributes",
+            "type": "TYPE_MESSAGE[]"
           }
         ],
         "resultType": ".google.cloud.retail.v2beta.SearchResponse",
