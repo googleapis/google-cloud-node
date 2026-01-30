@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright 2022 Google LLC
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licengsed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -63,25 +63,25 @@ mv "${PACKAGE_PATH}/.github/.OwlBot.yaml" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 echo "Fixing format of ${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `docker:` line
-sed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+gsed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `image:` line
-sed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+gsed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 if grep -q "/owl-bot-staging/\$1/\$2" "${PACKAGE_PATH}/.OwlBot.yaml"
 then
   echo "OwlBot config is copying each folder"
-  sed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
-  sed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
 else
-  sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
  
 echo "fixing owlbot.py file"
  
 if test -f "${PACKAGE_PATH}/owlbot.py"; then
-  sed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
-  echo sed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
-  sed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
+  gsed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
+  echo gsed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
+  gsed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
 fi
  
 # update .repo and .issue_tracker in .repo-metadata.json
@@ -122,13 +122,13 @@ if [[ -d "${KOKORO_DIR}" ]]; then
   if [[ -n "${SPLIT_REPO}" ]]; then
     find "${KOKORO_DIR}" -type f -print0 | while IFS= read -r -d '' file; do
       echo "Processing ${file}"
-      sed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
+      gsed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
     done
   fi
 fi
 
 echo "Fixing .trampolinerc for populate-secrets.sh"
-sed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' .trampolinerc
+gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' "${PACKAGE_PATH}"/.trampolinerc
  
 # add changes to local git directory
 git add .
