@@ -38,7 +38,8 @@ function main(collection) {
    *  The following fields support update: `display_name`, `description`,
    *  `labels`, `data_schema`, `vector_schema`.
    *  For `data_schema` and `vector_schema`, fields can only be added, not
-   *  modified or deleted.
+   *  deleted, but `vertex_embedding_config` in `vector_schema` can be added or
+   *  removed.
    *  Partial updates for `data_schema` and `vector_schema` are also supported
    *  by using sub-field paths in `update_mask`, e.g.
    *  `data_schema.properties.foo` or `vector_schema.my_vector_field`.

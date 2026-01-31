@@ -24,14 +24,16 @@
                     "DataObject": {
                       "options": {
                         "(google.api.resource).type": "vectorsearch.googleapis.com/DataObject",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}",
+                        "(google.api.resource).plural": "dataObjects",
+                        "(google.api.resource).singular": "dataObject"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "dataObjectId": {
@@ -251,11 +253,17 @@
                       "fields": {
                         "useIndex": {
                           "type": "IndexHint",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "useKnn": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -357,7 +365,7 @@
                           }
                         },
                         "distanceMetric": {
-                          "type": "DistanceMetric",
+                          "type": "google.cloud.vectorsearch.v1beta.DistanceMetric",
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -416,6 +424,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "searchHint": {
+                          "type": "SearchHint",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -456,6 +471,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "filter": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1371,6 +1393,30 @@
                               }
                             }
                           ]
+                        },
+                        "ExportDataObjects": {
+                          "requestType": "ExportDataObjectsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "ExportDataObjectsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataObjectsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/collections/*}:exportDataObjects",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportDataObjectsResponse",
+                                "metadata_type": "ExportDataObjectsMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1693,7 +1739,7 @@
                           }
                         },
                         "distanceMetric": {
-                          "type": "DistanceMetric",
+                          "type": "google.cloud.vectorsearch.v1beta.DistanceMetric",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -1934,6 +1980,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "outputUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -1966,6 +2019,72 @@
                           "id": 1
                         }
                       }
+                    },
+                    "ExportDataObjectsRequest": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsExportDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsExportDestination": {
+                          "fields": {
+                            "exportUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "format": {
+                              "type": "Format",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Format": {
+                              "values": {
+                                "FORMAT_UNSPECIFIED": 0,
+                                "JSON": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportDataObjectsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExportDataObjectsResponse": {
+                      "fields": {}
                     }
                   }
                 }
