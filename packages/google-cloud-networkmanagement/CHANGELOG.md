@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.1.1...network-management-v5.2.0) (2026-01-31)
+
+
+### Features
+
+* [networkmanagement] add fields and messages for GKE Pods and IP masquerading ([#7033](https://github.com/googleapis/google-cloud-node/issues/7033)) ([dc98c2c](https://github.com/googleapis/google-cloud-node/commit/dc98c2c8746e22b661f95d1d0dcade1a9741b7ab))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/network-management-v5.1.0...network-management-v5.1.1) (2025-10-13)
 
 

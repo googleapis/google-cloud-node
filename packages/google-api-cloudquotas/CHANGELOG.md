@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v2.2.1...cloudquotas-v2.3.0) (2026-01-31)
+
+
+### Features
+
+* [cloudquotas] Hierarchical Quota Adjuster ([#7072](https://github.com/googleapis/google-cloud-node/issues/7072)) ([6e061e2](https://github.com/googleapis/google-cloud-node/commit/6e061e236a21034834b5e2e75aeff0304d30b317))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v2.2.0...cloudquotas-v2.2.1) (2025-10-13)
 
 

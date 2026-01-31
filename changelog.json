@@ -5,6 +5,184 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "460c16e6c9a744902cf4a2c3474108e172d17024",
+          "message": "[control] Added a new field `ComposeObjectRequest.delete_source_objects` field",
+          "issues": [
+            "7069"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "1cef129c-5d79-4ba5-9d1e-26fad83cbc70",
+      "createTime": "2026-01-31T00:22:25.104Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c56f26b50db6cfce1183931d19314764423ff0db",
+          "message": "[containeranalysis] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence`",
+          "issues": [
+            "7039"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "18ae9db2-1c7c-4627-b44a-87c88a96b41e",
+      "createTime": "2026-01-31T00:22:25.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "eda043cff45893b011a9c5f7ee157f265dad098b",
+          "message": "[container] Add GPUDirectConfig to configure GPU Direct for node pools",
+          "issues": [
+            "7035"
+          ]
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a334107b-4e15-4bb4-9edd-02e6ffde8115",
+      "createTime": "2026-01-31T00:22:25.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f470c6f96c8a82666a61dd2dfb64c3d95bc4d32f",
+          "message": "[retail] add a user_attributes field in SearchRequest that can be used for personalization",
+          "issues": [
+            "7041"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "f66fe586-76d4-4208-93d4-d4f062c41d16",
+      "createTime": "2026-01-31T00:22:25.009Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dc98c2c8746e22b661f95d1d0dcade1a9741b7ab",
+          "message": "[networkmanagement] add fields and messages for GKE Pods and IP masquerading",
+          "issues": [
+            "7033"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "e0d21214-4d9e-4293-a4b0-94a9460cf8cc",
+      "createTime": "2026-01-31T00:22:24.962Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6b96607a9b998d4572c8671adcbec50994ffc52a",
+          "message": "[dialogflow] added a new field StreamingAnalyzeContentRequest.output_multiple_utterances",
+          "issues": [
+            "7065"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "4ade4048-bca0-4832-a1d1-917ad7f5a903",
+      "createTime": "2026-01-31T00:22:24.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2dabb7ab19e4dd1cc955ea51791ab5c4f4fa80dc",
+          "message": "[binaryauthorization] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence`",
+          "issues": [
+            "7040"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "7950fcba-a8cc-4eac-9aff-4c0f48307799",
+      "createTime": "2026-01-31T00:22:24.890Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a18491688b779f910a20a65b8725db519ede1ebb",
+          "message": "[backupdr] Add support for AlloyDB backup and restore",
+          "issues": [
+            "7050"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "53cbd874-e3af-4e4d-b107-38c484cea757",
+      "createTime": "2026-01-31T00:22:24.861Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d092c8a3164fc0271ba44d5f4f8cf453e39607db",
+          "message": "[apiregistry] added version v1 for cloudapiregistry (BETA Release Stage)",
+          "issues": [
+            "7036"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "5b20ea039eb919e96f19ac5b9895282b20902cf3",
+          "message": "[apiregistry] add fields and messages for GKE Pods and IP masquerading",
+          "issues": [
+            "7034"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apiregistry",
+      "id": "50d615d8-2f41-4159-9d03-afc3f930c7c3",
+      "createTime": "2026-01-31T00:22:24.824Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6e061e236a21034834b5e2e75aeff0304d30b317",
+          "message": "[cloudquotas] Hierarchical Quota Adjuster",
+          "issues": [
+            "7072"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "796a684e-75f9-422d-a1b2-2ec885be437c",
+      "createTime": "2026-01-31T00:22:24.795Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7792cae7282a9254f8bf6e1200a2ec53bdaa00cc",
           "message": "[cloudbuild] Added backup retention days in BDRBackupRestoreJobLog",
           "issues": [
@@ -67898,5 +68076,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-01-22T01:42:47.006Z"
+  "updateTime": "2026-01-31T00:22:25.104Z"
 }
