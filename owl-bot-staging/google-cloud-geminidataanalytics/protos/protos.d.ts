@@ -19459,6 +19459,9 @@ export namespace google {
                     /** SystemMessage exampleQueries */
                     exampleQueries?: (google.cloud.geminidataanalytics.v1beta.IExampleQueries|null);
 
+                    /** SystemMessage clarification */
+                    clarification?: (google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null);
+
                     /** SystemMessage groupId */
                     groupId?: (number|null);
                 }
@@ -19493,11 +19496,14 @@ export namespace google {
                     /** SystemMessage exampleQueries. */
                     public exampleQueries?: (google.cloud.geminidataanalytics.v1beta.IExampleQueries|null);
 
+                    /** SystemMessage clarification. */
+                    public clarification?: (google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null);
+
                     /** SystemMessage groupId. */
                     public groupId?: (number|null);
 
                     /** SystemMessage kind. */
-                    public kind?: ("text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries");
+                    public kind?: ("text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification");
 
                     /**
                      * Creates a new SystemMessage instance using the specified properties.
@@ -19585,6 +19591,9 @@ export namespace google {
 
                     /** TextMessage textType */
                     textType?: (google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|keyof typeof google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|null);
+
+                    /** TextMessage thoughtSignature */
+                    thoughtSignature?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a TextMessage. */
@@ -19601,6 +19610,9 @@ export namespace google {
 
                     /** TextMessage textType. */
                     public textType: (google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|keyof typeof google.cloud.geminidataanalytics.v1beta.TextMessage.TextType);
+
+                    /** TextMessage thoughtSignature. */
+                    public thoughtSignature: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new TextMessage instance using the specified properties.
@@ -20244,6 +20256,9 @@ export namespace google {
 
                     /** DataResult data */
                     data?: (google.protobuf.IStruct[]|null);
+
+                    /** DataResult formattedData */
+                    formattedData?: (google.protobuf.IStruct[]|null);
                 }
 
                 /** Represents a DataResult. */
@@ -20263,6 +20278,9 @@ export namespace google {
 
                     /** DataResult data. */
                     public data: google.protobuf.IStruct[];
+
+                    /** DataResult formattedData. */
+                    public formattedData: google.protobuf.IStruct[];
 
                     /**
                      * Creates a new DataResult instance using the specified properties.
@@ -21229,6 +21247,235 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ErrorMessage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ClarificationQuestion. */
+                interface IClarificationQuestion {
+
+                    /** ClarificationQuestion question */
+                    question?: (string|null);
+
+                    /** ClarificationQuestion selectionMode */
+                    selectionMode?: (google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode|keyof typeof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode|null);
+
+                    /** ClarificationQuestion options */
+                    options?: (string[]|null);
+
+                    /** ClarificationQuestion clarificationQuestionType */
+                    clarificationQuestionType?: (google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType|keyof typeof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType|null);
+                }
+
+                /** Represents a ClarificationQuestion. */
+                class ClarificationQuestion implements IClarificationQuestion {
+
+                    /**
+                     * Constructs a new ClarificationQuestion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IClarificationQuestion);
+
+                    /** ClarificationQuestion question. */
+                    public question: string;
+
+                    /** ClarificationQuestion selectionMode. */
+                    public selectionMode: (google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode|keyof typeof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode);
+
+                    /** ClarificationQuestion options. */
+                    public options: string[];
+
+                    /** ClarificationQuestion clarificationQuestionType. */
+                    public clarificationQuestionType: (google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType|keyof typeof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType);
+
+                    /**
+                     * Creates a new ClarificationQuestion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClarificationQuestion instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IClarificationQuestion): google.cloud.geminidataanalytics.v1beta.ClarificationQuestion;
+
+                    /**
+                     * Encodes the specified ClarificationQuestion message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                     * @param message ClarificationQuestion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IClarificationQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClarificationQuestion message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                     * @param message ClarificationQuestion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IClarificationQuestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClarificationQuestion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClarificationQuestion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.ClarificationQuestion;
+
+                    /**
+                     * Decodes a ClarificationQuestion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClarificationQuestion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.ClarificationQuestion;
+
+                    /**
+                     * Verifies a ClarificationQuestion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClarificationQuestion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClarificationQuestion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.ClarificationQuestion;
+
+                    /**
+                     * Creates a plain object from a ClarificationQuestion message. Also converts values to other types if specified.
+                     * @param message ClarificationQuestion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.ClarificationQuestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClarificationQuestion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClarificationQuestion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClarificationQuestion {
+
+                    /** SelectionMode enum. */
+                    enum SelectionMode {
+                        SELECTION_MODE_UNSPECIFIED = 0,
+                        SINGLE_SELECT = 1,
+                        MULTI_SELECT = 2
+                    }
+
+                    /** ClarificationQuestionType enum. */
+                    enum ClarificationQuestionType {
+                        CLARIFICATION_QUESTION_TYPE_UNSPECIFIED = 0,
+                        FILTER_VALUES = 1,
+                        FIELDS = 2
+                    }
+                }
+
+                /** Properties of a ClarificationMessage. */
+                interface IClarificationMessage {
+
+                    /** ClarificationMessage questions */
+                    questions?: (google.cloud.geminidataanalytics.v1beta.IClarificationQuestion[]|null);
+                }
+
+                /** Represents a ClarificationMessage. */
+                class ClarificationMessage implements IClarificationMessage {
+
+                    /**
+                     * Constructs a new ClarificationMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.geminidataanalytics.v1beta.IClarificationMessage);
+
+                    /** ClarificationMessage questions. */
+                    public questions: google.cloud.geminidataanalytics.v1beta.IClarificationQuestion[];
+
+                    /**
+                     * Creates a new ClarificationMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClarificationMessage instance
+                     */
+                    public static create(properties?: google.cloud.geminidataanalytics.v1beta.IClarificationMessage): google.cloud.geminidataanalytics.v1beta.ClarificationMessage;
+
+                    /**
+                     * Encodes the specified ClarificationMessage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                     * @param message ClarificationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.geminidataanalytics.v1beta.IClarificationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClarificationMessage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                     * @param message ClarificationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.geminidataanalytics.v1beta.IClarificationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClarificationMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClarificationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.geminidataanalytics.v1beta.ClarificationMessage;
+
+                    /**
+                     * Decodes a ClarificationMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClarificationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.geminidataanalytics.v1beta.ClarificationMessage;
+
+                    /**
+                     * Verifies a ClarificationMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClarificationMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClarificationMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.geminidataanalytics.v1beta.ClarificationMessage;
+
+                    /**
+                     * Creates a plain object from a ClarificationMessage message. Also converts values to other types if specified.
+                     * @param message ClarificationMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.geminidataanalytics.v1beta.ClarificationMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClarificationMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClarificationMessage
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
