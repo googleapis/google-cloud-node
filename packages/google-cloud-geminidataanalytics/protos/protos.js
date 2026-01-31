@@ -21154,6 +21154,7 @@
                          * @property {google.cloud.geminidataanalytics.v1alpha.IChartMessage|null} [chart] SystemMessage chart
                          * @property {google.cloud.geminidataanalytics.v1alpha.IErrorMessage|null} [error] SystemMessage error
                          * @property {google.cloud.geminidataanalytics.v1alpha.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
+                         * @property {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage|null} [clarification] SystemMessage clarification
                          * @property {number|null} [groupId] SystemMessage groupId
                          */
     
@@ -21229,6 +21230,14 @@
                         SystemMessage.prototype.exampleQueries = null;
     
                         /**
+                         * SystemMessage clarification.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage|null|undefined} clarification
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.clarification = null;
+    
+                        /**
                          * SystemMessage groupId.
                          * @member {number|null|undefined} groupId
                          * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
@@ -21241,12 +21250,12 @@
     
                         /**
                          * SystemMessage kind.
-                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|undefined} kind
+                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1alpha.SystemMessage
                          * @instance
                          */
                         Object.defineProperty(SystemMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries", "clarification"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21296,6 +21305,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.groupId);
                             if (message.exampleQueries != null && Object.hasOwnProperty.call(message, "exampleQueries"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.clarification != null && Object.hasOwnProperty.call(message, "clarification"))
+                                $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.encode(message.clarification, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -21358,6 +21369,10 @@
                                     }
                                 case 13: {
                                         message.exampleQueries = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -21468,6 +21483,16 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify(message.clarification);
+                                    if (error)
+                                        return "clarification." + error;
+                                }
+                            }
                             if (message.groupId != null && message.hasOwnProperty("groupId")) {
                                 properties._groupId = 1;
                                 if (!$util.isInteger(message.groupId))
@@ -21522,6 +21547,11 @@
                                 if (typeof object.exampleQueries !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SystemMessage.exampleQueries: object expected");
                                 message.exampleQueries = $root.google.cloud.geminidataanalytics.v1alpha.ExampleQueries.fromObject(object.exampleQueries);
+                            }
+                            if (object.clarification != null) {
+                                if (typeof object.clarification !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.SystemMessage.clarification: object expected");
+                                message.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.fromObject(object.clarification);
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
@@ -21581,6 +21611,11 @@
                                 if (options.oneofs)
                                     object.kind = "exampleQueries";
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                object.clarification = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.toObject(message.clarification, options);
+                                if (options.oneofs)
+                                    object.kind = "clarification";
+                            }
                             return object;
                         };
     
@@ -21621,6 +21656,7 @@
                          * @interface ITextMessage
                          * @property {Array.<string>|null} [parts] TextMessage parts
                          * @property {google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType|null} [textType] TextMessage textType
+                         * @property {Uint8Array|null} [thoughtSignature] TextMessage thoughtSignature
                          */
     
                         /**
@@ -21656,6 +21692,14 @@
                         TextMessage.prototype.textType = 0;
     
                         /**
+                         * TextMessage thoughtSignature.
+                         * @member {Uint8Array} thoughtSignature
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.TextMessage
+                         * @instance
+                         */
+                        TextMessage.prototype.thoughtSignature = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new TextMessage instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1alpha.TextMessage
@@ -21684,6 +21728,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parts[i]);
                             if (message.textType != null && Object.hasOwnProperty.call(message, "textType"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.textType);
+                            if (message.thoughtSignature != null && Object.hasOwnProperty.call(message, "thoughtSignature"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thoughtSignature);
                             return writer;
                         };
     
@@ -21728,6 +21774,10 @@
                                     }
                                 case 2: {
                                         message.textType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.thoughtSignature = reader.bytes();
                                         break;
                                     }
                                 default:
@@ -21782,6 +21832,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
+                                    return "thoughtSignature: buffer expected";
                             return null;
                         };
     
@@ -21828,6 +21881,11 @@
                                 message.textType = 3;
                                 break;
                             }
+                            if (object.thoughtSignature != null)
+                                if (typeof object.thoughtSignature === "string")
+                                    $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
+                                else if (object.thoughtSignature.length >= 0)
+                                    message.thoughtSignature = object.thoughtSignature;
                             return message;
                         };
     
@@ -21846,8 +21904,16 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.parts = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.textType = options.enums === String ? "TEXT_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.thoughtSignature = "";
+                                else {
+                                    object.thoughtSignature = [];
+                                    if (options.bytes !== Array)
+                                        object.thoughtSignature = $util.newBuffer(object.thoughtSignature);
+                                }
+                            }
                             if (message.parts && message.parts.length) {
                                 object.parts = [];
                                 for (var j = 0; j < message.parts.length; ++j)
@@ -21855,6 +21921,8 @@
                             }
                             if (message.textType != null && message.hasOwnProperty("textType"))
                                 object.textType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType[message.textType] === undefined ? message.textType : $root.google.cloud.geminidataanalytics.v1alpha.TextMessage.TextType[message.textType] : message.textType;
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                object.thoughtSignature = options.bytes === String ? $util.base64.encode(message.thoughtSignature, 0, message.thoughtSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.thoughtSignature) : message.thoughtSignature;
                             return object;
                         };
     
@@ -23294,6 +23362,7 @@
                          * @property {string|null} [name] DataResult name
                          * @property {google.cloud.geminidataanalytics.v1alpha.ISchema|null} [schema] DataResult schema
                          * @property {Array.<google.protobuf.IStruct>|null} [data] DataResult data
+                         * @property {Array.<google.protobuf.IStruct>|null} [formattedData] DataResult formattedData
                          */
     
                         /**
@@ -23306,6 +23375,7 @@
                          */
                         function DataResult(properties) {
                             this.data = [];
+                            this.formattedData = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -23335,6 +23405,14 @@
                          * @instance
                          */
                         DataResult.prototype.data = $util.emptyArray;
+    
+                        /**
+                         * DataResult formattedData.
+                         * @member {Array.<google.protobuf.IStruct>} formattedData
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.DataResult
+                         * @instance
+                         */
+                        DataResult.prototype.formattedData = $util.emptyArray;
     
                         /**
                          * Creates a new DataResult instance using the specified properties.
@@ -23367,6 +23445,9 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1alpha.Schema.encode(message.schema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.formattedData != null && message.formattedData.length)
+                                for (var i = 0; i < message.formattedData.length; ++i)
+                                    $root.google.protobuf.Struct.encode(message.formattedData[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -23415,6 +23496,12 @@
                                         if (!(message.data && message.data.length))
                                             message.data = [];
                                         message.data.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.formattedData && message.formattedData.length))
+                                            message.formattedData = [];
+                                        message.formattedData.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -23469,6 +23556,15 @@
                                         return "data." + error;
                                 }
                             }
+                            if (message.formattedData != null && message.hasOwnProperty("formattedData")) {
+                                if (!Array.isArray(message.formattedData))
+                                    return "formattedData: array expected";
+                                for (var i = 0; i < message.formattedData.length; ++i) {
+                                    var error = $root.google.protobuf.Struct.verify(message.formattedData[i]);
+                                    if (error)
+                                        return "formattedData." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -23501,6 +23597,16 @@
                                     message.data[i] = $root.google.protobuf.Struct.fromObject(object.data[i]);
                                 }
                             }
+                            if (object.formattedData) {
+                                if (!Array.isArray(object.formattedData))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DataResult.formattedData: array expected");
+                                message.formattedData = [];
+                                for (var i = 0; i < object.formattedData.length; ++i) {
+                                    if (typeof object.formattedData[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.DataResult.formattedData: object expected");
+                                    message.formattedData[i] = $root.google.protobuf.Struct.fromObject(object.formattedData[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -23517,8 +23623,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.data = [];
+                                object.formattedData = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.schema = null;
@@ -23532,6 +23640,11 @@
                                 object.name = message.name;
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1alpha.Schema.toObject(message.schema, options);
+                            if (message.formattedData && message.formattedData.length) {
+                                object.formattedData = [];
+                                for (var j = 0; j < message.formattedData.length; ++j)
+                                    object.formattedData[j] = $root.google.protobuf.Struct.toObject(message.formattedData[j], options);
+                            }
                             return object;
                         };
     
@@ -25800,6 +25913,604 @@
                         };
     
                         return ErrorMessage;
+                    })();
+    
+                    v1alpha.ClarificationQuestion = (function() {
+    
+                        /**
+                         * Properties of a ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IClarificationQuestion
+                         * @property {string|null} [question] ClarificationQuestion question
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode|null} [selectionMode] ClarificationQuestion selectionMode
+                         * @property {Array.<string>|null} [options] ClarificationQuestion options
+                         * @property {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType|null} [clarificationQuestionType] ClarificationQuestion clarificationQuestionType
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ClarificationQuestion.
+                         * @implements IClarificationQuestion
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion=} [properties] Properties to set
+                         */
+                        function ClarificationQuestion(properties) {
+                            this.options = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationQuestion question.
+                         * @member {string} question
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.question = "";
+    
+                        /**
+                         * ClarificationQuestion selectionMode.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode} selectionMode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.selectionMode = 0;
+    
+                        /**
+                         * ClarificationQuestion options.
+                         * @member {Array.<string>} options
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.options = $util.emptyArray;
+    
+                        /**
+                         * ClarificationQuestion clarificationQuestionType.
+                         * @member {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType} clarificationQuestionType
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.clarificationQuestionType = 0;
+    
+                        /**
+                         * Creates a new ClarificationQuestion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion instance
+                         */
+                        ClarificationQuestion.create = function create(properties) {
+                            return new ClarificationQuestion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.question != null && Object.hasOwnProperty.call(message, "question"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.question);
+                            if (message.selectionMode != null && Object.hasOwnProperty.call(message, "selectionMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.selectionMode);
+                            if (message.options != null && message.options.length)
+                                for (var i = 0; i < message.options.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.options[i]);
+                            if (message.clarificationQuestionType != null && Object.hasOwnProperty.call(message, "clarificationQuestionType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.clarificationQuestionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.question = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.selectionMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.options && message.options.length))
+                                            message.options = [];
+                                        message.options.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clarificationQuestionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationQuestion message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationQuestion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                if (!$util.isString(message.question))
+                                    return "question: string expected";
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                switch (message.selectionMode) {
+                                default:
+                                    return "selectionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.options != null && message.hasOwnProperty("options")) {
+                                if (!Array.isArray(message.options))
+                                    return "options: array expected";
+                                for (var i = 0; i < message.options.length; ++i)
+                                    if (!$util.isString(message.options[i]))
+                                        return "options: string[] expected";
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                switch (message.clarificationQuestionType) {
+                                default:
+                                    return "clarificationQuestionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} ClarificationQuestion
+                         */
+                        ClarificationQuestion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion();
+                            if (object.question != null)
+                                message.question = String(object.question);
+                            switch (object.selectionMode) {
+                            default:
+                                if (typeof object.selectionMode === "number") {
+                                    message.selectionMode = object.selectionMode;
+                                    break;
+                                }
+                                break;
+                            case "SELECTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.selectionMode = 0;
+                                break;
+                            case "SINGLE_SELECT":
+                            case 1:
+                                message.selectionMode = 1;
+                                break;
+                            case "MULTI_SELECT":
+                            case 2:
+                                message.selectionMode = 2;
+                                break;
+                            }
+                            if (object.options) {
+                                if (!Array.isArray(object.options))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.options: array expected");
+                                message.options = [];
+                                for (var i = 0; i < object.options.length; ++i)
+                                    message.options[i] = String(object.options[i]);
+                            }
+                            switch (object.clarificationQuestionType) {
+                            default:
+                                if (typeof object.clarificationQuestionType === "number") {
+                                    message.clarificationQuestionType = object.clarificationQuestionType;
+                                    break;
+                                }
+                                break;
+                            case "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clarificationQuestionType = 0;
+                                break;
+                            case "FILTER_VALUES":
+                            case 1:
+                                message.clarificationQuestionType = 1;
+                                break;
+                            case "FIELDS":
+                            case 2:
+                                message.clarificationQuestionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationQuestion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion} message ClarificationQuestion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationQuestion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.options = [];
+                            if (options.defaults) {
+                                object.question = "";
+                                object.selectionMode = options.enums === String ? "SELECTION_MODE_UNSPECIFIED" : 0;
+                                object.clarificationQuestionType = options.enums === String ? "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                object.question = message.question;
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                object.selectionMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode[message.selectionMode] === undefined ? message.selectionMode : $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode[message.selectionMode] : message.selectionMode;
+                            if (message.options && message.options.length) {
+                                object.options = [];
+                                for (var j = 0; j < message.options.length; ++j)
+                                    object.options[j] = message.options[j];
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                object.clarificationQuestionType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] === undefined ? message.clarificationQuestionType : $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] : message.clarificationQuestionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationQuestion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationQuestion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationQuestion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationQuestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion";
+                        };
+    
+                        /**
+                         * SelectionMode enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.SelectionMode
+                         * @enum {number}
+                         * @property {number} SELECTION_MODE_UNSPECIFIED=0 SELECTION_MODE_UNSPECIFIED value
+                         * @property {number} SINGLE_SELECT=1 SINGLE_SELECT value
+                         * @property {number} MULTI_SELECT=2 MULTI_SELECT value
+                         */
+                        ClarificationQuestion.SelectionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SELECTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SINGLE_SELECT"] = 1;
+                            values[valuesById[2] = "MULTI_SELECT"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ClarificationQuestionType enum.
+                         * @name google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.ClarificationQuestionType
+                         * @enum {number}
+                         * @property {number} CLARIFICATION_QUESTION_TYPE_UNSPECIFIED=0 CLARIFICATION_QUESTION_TYPE_UNSPECIFIED value
+                         * @property {number} FILTER_VALUES=1 FILTER_VALUES value
+                         * @property {number} FIELDS=2 FIELDS value
+                         */
+                        ClarificationQuestion.ClarificationQuestionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FILTER_VALUES"] = 1;
+                            values[valuesById[2] = "FIELDS"] = 2;
+                            return values;
+                        })();
+    
+                        return ClarificationQuestion;
+                    })();
+    
+                    v1alpha.ClarificationMessage = (function() {
+    
+                        /**
+                         * Properties of a ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @interface IClarificationMessage
+                         * @property {Array.<google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion>|null} [questions] ClarificationMessage questions
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1alpha
+                         * @classdesc Represents a ClarificationMessage.
+                         * @implements IClarificationMessage
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage=} [properties] Properties to set
+                         */
+                        function ClarificationMessage(properties) {
+                            this.questions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationMessage questions.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1alpha.IClarificationQuestion>} questions
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @instance
+                         */
+                        ClarificationMessage.prototype.questions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ClarificationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage instance
+                         */
+                        ClarificationMessage.create = function create(properties) {
+                            return new ClarificationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.questions != null && message.questions.length)
+                                for (var i = 0; i < message.questions.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.encode(message.questions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.questions && message.questions.length))
+                                            message.questions = [];
+                                        message.questions.push($root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationMessage message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.questions != null && message.hasOwnProperty("questions")) {
+                                if (!Array.isArray(message.questions))
+                                    return "questions: array expected";
+                                for (var i = 0; i < message.questions.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.verify(message.questions[i]);
+                                    if (error)
+                                        return "questions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} ClarificationMessage
+                         */
+                        ClarificationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1alpha.ClarificationMessage();
+                            if (object.questions) {
+                                if (!Array.isArray(object.questions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.questions: array expected");
+                                message.questions = [];
+                                for (var i = 0; i < object.questions.length; ++i) {
+                                    if (typeof object.questions[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1alpha.ClarificationMessage.questions: object expected");
+                                    message.questions[i] = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.fromObject(object.questions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1alpha.ClarificationMessage} message ClarificationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.questions = [];
+                            if (message.questions && message.questions.length) {
+                                object.questions = [];
+                                for (var j = 0; j < message.questions.length; ++j)
+                                    object.questions[j] = $root.google.cloud.geminidataanalytics.v1alpha.ClarificationQuestion.toObject(message.questions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationMessage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1alpha.ClarificationMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1alpha.ClarificationMessage";
+                        };
+    
+                        return ClarificationMessage;
                     })();
     
                     v1alpha.ExampleQueries = (function() {
@@ -47366,6 +48077,7 @@
                          * @property {google.cloud.geminidataanalytics.v1beta.IChartMessage|null} [chart] SystemMessage chart
                          * @property {google.cloud.geminidataanalytics.v1beta.IErrorMessage|null} [error] SystemMessage error
                          * @property {google.cloud.geminidataanalytics.v1beta.IExampleQueries|null} [exampleQueries] SystemMessage exampleQueries
+                         * @property {google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null} [clarification] SystemMessage clarification
                          * @property {number|null} [groupId] SystemMessage groupId
                          */
     
@@ -47441,6 +48153,14 @@
                         SystemMessage.prototype.exampleQueries = null;
     
                         /**
+                         * SystemMessage clarification.
+                         * @member {google.cloud.geminidataanalytics.v1beta.IClarificationMessage|null|undefined} clarification
+                         * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
+                         * @instance
+                         */
+                        SystemMessage.prototype.clarification = null;
+    
+                        /**
                          * SystemMessage groupId.
                          * @member {number|null|undefined} groupId
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
@@ -47453,12 +48173,12 @@
     
                         /**
                          * SystemMessage kind.
-                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|undefined} kind
+                         * @member {"text"|"schema"|"data"|"analysis"|"chart"|"error"|"exampleQueries"|"clarification"|undefined} kind
                          * @memberof google.cloud.geminidataanalytics.v1beta.SystemMessage
                          * @instance
                          */
                         Object.defineProperty(SystemMessage.prototype, "kind", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "schema", "data", "analysis", "chart", "error", "exampleQueries", "clarification"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -47508,6 +48228,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.groupId);
                             if (message.exampleQueries != null && Object.hasOwnProperty.call(message, "exampleQueries"))
                                 $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.encode(message.exampleQueries, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.clarification != null && Object.hasOwnProperty.call(message, "clarification"))
+                                $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.encode(message.clarification, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -47570,6 +48292,10 @@
                                     }
                                 case 13: {
                                         message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -47680,6 +48406,16 @@
                                         return "exampleQueries." + error;
                                 }
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                if (properties.kind === 1)
+                                    return "kind: multiple values";
+                                properties.kind = 1;
+                                {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify(message.clarification);
+                                    if (error)
+                                        return "clarification." + error;
+                                }
+                            }
                             if (message.groupId != null && message.hasOwnProperty("groupId")) {
                                 properties._groupId = 1;
                                 if (!$util.isInteger(message.groupId))
@@ -47734,6 +48470,11 @@
                                 if (typeof object.exampleQueries !== "object")
                                     throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.exampleQueries: object expected");
                                 message.exampleQueries = $root.google.cloud.geminidataanalytics.v1beta.ExampleQueries.fromObject(object.exampleQueries);
+                            }
+                            if (object.clarification != null) {
+                                if (typeof object.clarification !== "object")
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.SystemMessage.clarification: object expected");
+                                message.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.fromObject(object.clarification);
                             }
                             if (object.groupId != null)
                                 message.groupId = object.groupId | 0;
@@ -47793,6 +48534,11 @@
                                 if (options.oneofs)
                                     object.kind = "exampleQueries";
                             }
+                            if (message.clarification != null && message.hasOwnProperty("clarification")) {
+                                object.clarification = $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage.toObject(message.clarification, options);
+                                if (options.oneofs)
+                                    object.kind = "clarification";
+                            }
                             return object;
                         };
     
@@ -47833,6 +48579,7 @@
                          * @interface ITextMessage
                          * @property {Array.<string>|null} [parts] TextMessage parts
                          * @property {google.cloud.geminidataanalytics.v1beta.TextMessage.TextType|null} [textType] TextMessage textType
+                         * @property {Uint8Array|null} [thoughtSignature] TextMessage thoughtSignature
                          */
     
                         /**
@@ -47868,6 +48615,14 @@
                         TextMessage.prototype.textType = 0;
     
                         /**
+                         * TextMessage thoughtSignature.
+                         * @member {Uint8Array} thoughtSignature
+                         * @memberof google.cloud.geminidataanalytics.v1beta.TextMessage
+                         * @instance
+                         */
+                        TextMessage.prototype.thoughtSignature = $util.newBuffer([]);
+    
+                        /**
                          * Creates a new TextMessage instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.geminidataanalytics.v1beta.TextMessage
@@ -47896,6 +48651,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parts[i]);
                             if (message.textType != null && Object.hasOwnProperty.call(message, "textType"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.textType);
+                            if (message.thoughtSignature != null && Object.hasOwnProperty.call(message, "thoughtSignature"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.thoughtSignature);
                             return writer;
                         };
     
@@ -47940,6 +48697,10 @@
                                     }
                                 case 2: {
                                         message.textType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.thoughtSignature = reader.bytes();
                                         break;
                                     }
                                 default:
@@ -47994,6 +48755,9 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
+                                    return "thoughtSignature: buffer expected";
                             return null;
                         };
     
@@ -48040,6 +48804,11 @@
                                 message.textType = 3;
                                 break;
                             }
+                            if (object.thoughtSignature != null)
+                                if (typeof object.thoughtSignature === "string")
+                                    $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
+                                else if (object.thoughtSignature.length >= 0)
+                                    message.thoughtSignature = object.thoughtSignature;
                             return message;
                         };
     
@@ -48058,8 +48827,16 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.parts = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.textType = options.enums === String ? "TEXT_TYPE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.thoughtSignature = "";
+                                else {
+                                    object.thoughtSignature = [];
+                                    if (options.bytes !== Array)
+                                        object.thoughtSignature = $util.newBuffer(object.thoughtSignature);
+                                }
+                            }
                             if (message.parts && message.parts.length) {
                                 object.parts = [];
                                 for (var j = 0; j < message.parts.length; ++j)
@@ -48067,6 +48844,8 @@
                             }
                             if (message.textType != null && message.hasOwnProperty("textType"))
                                 object.textType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] === undefined ? message.textType : $root.google.cloud.geminidataanalytics.v1beta.TextMessage.TextType[message.textType] : message.textType;
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                object.thoughtSignature = options.bytes === String ? $util.base64.encode(message.thoughtSignature, 0, message.thoughtSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.thoughtSignature) : message.thoughtSignature;
                             return object;
                         };
     
@@ -49506,6 +50285,7 @@
                          * @property {string|null} [name] DataResult name
                          * @property {google.cloud.geminidataanalytics.v1beta.ISchema|null} [schema] DataResult schema
                          * @property {Array.<google.protobuf.IStruct>|null} [data] DataResult data
+                         * @property {Array.<google.protobuf.IStruct>|null} [formattedData] DataResult formattedData
                          */
     
                         /**
@@ -49518,6 +50298,7 @@
                          */
                         function DataResult(properties) {
                             this.data = [];
+                            this.formattedData = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -49547,6 +50328,14 @@
                          * @instance
                          */
                         DataResult.prototype.data = $util.emptyArray;
+    
+                        /**
+                         * DataResult formattedData.
+                         * @member {Array.<google.protobuf.IStruct>} formattedData
+                         * @memberof google.cloud.geminidataanalytics.v1beta.DataResult
+                         * @instance
+                         */
+                        DataResult.prototype.formattedData = $util.emptyArray;
     
                         /**
                          * Creates a new DataResult instance using the specified properties.
@@ -49579,6 +50368,9 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.geminidataanalytics.v1beta.Schema.encode(message.schema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.formattedData != null && message.formattedData.length)
+                                for (var i = 0; i < message.formattedData.length; ++i)
+                                    $root.google.protobuf.Struct.encode(message.formattedData[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -49627,6 +50419,12 @@
                                         if (!(message.data && message.data.length))
                                             message.data = [];
                                         message.data.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.formattedData && message.formattedData.length))
+                                            message.formattedData = [];
+                                        message.formattedData.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -49681,6 +50479,15 @@
                                         return "data." + error;
                                 }
                             }
+                            if (message.formattedData != null && message.hasOwnProperty("formattedData")) {
+                                if (!Array.isArray(message.formattedData))
+                                    return "formattedData: array expected";
+                                for (var i = 0; i < message.formattedData.length; ++i) {
+                                    var error = $root.google.protobuf.Struct.verify(message.formattedData[i]);
+                                    if (error)
+                                        return "formattedData." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -49713,6 +50520,16 @@
                                     message.data[i] = $root.google.protobuf.Struct.fromObject(object.data[i]);
                                 }
                             }
+                            if (object.formattedData) {
+                                if (!Array.isArray(object.formattedData))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataResult.formattedData: array expected");
+                                message.formattedData = [];
+                                for (var i = 0; i < object.formattedData.length; ++i) {
+                                    if (typeof object.formattedData[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.DataResult.formattedData: object expected");
+                                    message.formattedData[i] = $root.google.protobuf.Struct.fromObject(object.formattedData[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -49729,8 +50546,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.data = [];
+                                object.formattedData = [];
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.schema = null;
@@ -49744,6 +50563,11 @@
                                 object.name = message.name;
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.geminidataanalytics.v1beta.Schema.toObject(message.schema, options);
+                            if (message.formattedData && message.formattedData.length) {
+                                object.formattedData = [];
+                                for (var j = 0; j < message.formattedData.length; ++j)
+                                    object.formattedData[j] = $root.google.protobuf.Struct.toObject(message.formattedData[j], options);
+                            }
                             return object;
                         };
     
@@ -52012,6 +52836,604 @@
                         };
     
                         return ErrorMessage;
+                    })();
+    
+                    v1beta.ClarificationQuestion = (function() {
+    
+                        /**
+                         * Properties of a ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IClarificationQuestion
+                         * @property {string|null} [question] ClarificationQuestion question
+                         * @property {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode|null} [selectionMode] ClarificationQuestion selectionMode
+                         * @property {Array.<string>|null} [options] ClarificationQuestion options
+                         * @property {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType|null} [clarificationQuestionType] ClarificationQuestion clarificationQuestionType
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationQuestion.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ClarificationQuestion.
+                         * @implements IClarificationQuestion
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion=} [properties] Properties to set
+                         */
+                        function ClarificationQuestion(properties) {
+                            this.options = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationQuestion question.
+                         * @member {string} question
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.question = "";
+    
+                        /**
+                         * ClarificationQuestion selectionMode.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode} selectionMode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.selectionMode = 0;
+    
+                        /**
+                         * ClarificationQuestion options.
+                         * @member {Array.<string>} options
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.options = $util.emptyArray;
+    
+                        /**
+                         * ClarificationQuestion clarificationQuestionType.
+                         * @member {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType} clarificationQuestionType
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         */
+                        ClarificationQuestion.prototype.clarificationQuestionType = 0;
+    
+                        /**
+                         * Creates a new ClarificationQuestion instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion instance
+                         */
+                        ClarificationQuestion.create = function create(properties) {
+                            return new ClarificationQuestion(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.question != null && Object.hasOwnProperty.call(message, "question"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.question);
+                            if (message.selectionMode != null && Object.hasOwnProperty.call(message, "selectionMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.selectionMode);
+                            if (message.options != null && message.options.length)
+                                for (var i = 0; i < message.options.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.options[i]);
+                            if (message.clarificationQuestionType != null && Object.hasOwnProperty.call(message, "clarificationQuestionType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.clarificationQuestionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationQuestion message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationQuestion} message ClarificationQuestion message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationQuestion.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.question = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.selectionMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.options && message.options.length))
+                                            message.options = [];
+                                        message.options.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clarificationQuestionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationQuestion message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationQuestion.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationQuestion message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationQuestion.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                if (!$util.isString(message.question))
+                                    return "question: string expected";
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                switch (message.selectionMode) {
+                                default:
+                                    return "selectionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.options != null && message.hasOwnProperty("options")) {
+                                if (!Array.isArray(message.options))
+                                    return "options: array expected";
+                                for (var i = 0; i < message.options.length; ++i)
+                                    if (!$util.isString(message.options[i]))
+                                        return "options: string[] expected";
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                switch (message.clarificationQuestionType) {
+                                default:
+                                    return "clarificationQuestionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationQuestion message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} ClarificationQuestion
+                         */
+                        ClarificationQuestion.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion();
+                            if (object.question != null)
+                                message.question = String(object.question);
+                            switch (object.selectionMode) {
+                            default:
+                                if (typeof object.selectionMode === "number") {
+                                    message.selectionMode = object.selectionMode;
+                                    break;
+                                }
+                                break;
+                            case "SELECTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.selectionMode = 0;
+                                break;
+                            case "SINGLE_SELECT":
+                            case 1:
+                                message.selectionMode = 1;
+                                break;
+                            case "MULTI_SELECT":
+                            case 2:
+                                message.selectionMode = 2;
+                                break;
+                            }
+                            if (object.options) {
+                                if (!Array.isArray(object.options))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.options: array expected");
+                                message.options = [];
+                                for (var i = 0; i < object.options.length; ++i)
+                                    message.options[i] = String(object.options[i]);
+                            }
+                            switch (object.clarificationQuestionType) {
+                            default:
+                                if (typeof object.clarificationQuestionType === "number") {
+                                    message.clarificationQuestionType = object.clarificationQuestionType;
+                                    break;
+                                }
+                                break;
+                            case "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.clarificationQuestionType = 0;
+                                break;
+                            case "FILTER_VALUES":
+                            case 1:
+                                message.clarificationQuestionType = 1;
+                                break;
+                            case "FIELDS":
+                            case 2:
+                                message.clarificationQuestionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationQuestion message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ClarificationQuestion} message ClarificationQuestion
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationQuestion.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.options = [];
+                            if (options.defaults) {
+                                object.question = "";
+                                object.selectionMode = options.enums === String ? "SELECTION_MODE_UNSPECIFIED" : 0;
+                                object.clarificationQuestionType = options.enums === String ? "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.question != null && message.hasOwnProperty("question"))
+                                object.question = message.question;
+                            if (message.selectionMode != null && message.hasOwnProperty("selectionMode"))
+                                object.selectionMode = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode[message.selectionMode] === undefined ? message.selectionMode : $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode[message.selectionMode] : message.selectionMode;
+                            if (message.options && message.options.length) {
+                                object.options = [];
+                                for (var j = 0; j < message.options.length; ++j)
+                                    object.options[j] = message.options[j];
+                            }
+                            if (message.clarificationQuestionType != null && message.hasOwnProperty("clarificationQuestionType"))
+                                object.clarificationQuestionType = options.enums === String ? $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] === undefined ? message.clarificationQuestionType : $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType[message.clarificationQuestionType] : message.clarificationQuestionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationQuestion to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationQuestion.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationQuestion
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationQuestion
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationQuestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ClarificationQuestion";
+                        };
+    
+                        /**
+                         * SelectionMode enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.SelectionMode
+                         * @enum {number}
+                         * @property {number} SELECTION_MODE_UNSPECIFIED=0 SELECTION_MODE_UNSPECIFIED value
+                         * @property {number} SINGLE_SELECT=1 SINGLE_SELECT value
+                         * @property {number} MULTI_SELECT=2 MULTI_SELECT value
+                         */
+                        ClarificationQuestion.SelectionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SELECTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SINGLE_SELECT"] = 1;
+                            values[valuesById[2] = "MULTI_SELECT"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ClarificationQuestionType enum.
+                         * @name google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.ClarificationQuestionType
+                         * @enum {number}
+                         * @property {number} CLARIFICATION_QUESTION_TYPE_UNSPECIFIED=0 CLARIFICATION_QUESTION_TYPE_UNSPECIFIED value
+                         * @property {number} FILTER_VALUES=1 FILTER_VALUES value
+                         * @property {number} FIELDS=2 FIELDS value
+                         */
+                        ClarificationQuestion.ClarificationQuestionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FILTER_VALUES"] = 1;
+                            values[valuesById[2] = "FIELDS"] = 2;
+                            return values;
+                        })();
+    
+                        return ClarificationQuestion;
+                    })();
+    
+                    v1beta.ClarificationMessage = (function() {
+    
+                        /**
+                         * Properties of a ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @interface IClarificationMessage
+                         * @property {Array.<google.cloud.geminidataanalytics.v1beta.IClarificationQuestion>|null} [questions] ClarificationMessage questions
+                         */
+    
+                        /**
+                         * Constructs a new ClarificationMessage.
+                         * @memberof google.cloud.geminidataanalytics.v1beta
+                         * @classdesc Represents a ClarificationMessage.
+                         * @implements IClarificationMessage
+                         * @constructor
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage=} [properties] Properties to set
+                         */
+                        function ClarificationMessage(properties) {
+                            this.questions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClarificationMessage questions.
+                         * @member {Array.<google.cloud.geminidataanalytics.v1beta.IClarificationQuestion>} questions
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @instance
+                         */
+                        ClarificationMessage.prototype.questions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ClarificationMessage instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage=} [properties] Properties to set
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage instance
+                         */
+                        ClarificationMessage.create = function create(properties) {
+                            return new ClarificationMessage(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.questions != null && message.questions.length)
+                                for (var i = 0; i < message.questions.length; ++i)
+                                    $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.encode(message.questions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClarificationMessage message, length delimited. Does not implicitly {@link google.cloud.geminidataanalytics.v1beta.ClarificationMessage.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.IClarificationMessage} message ClarificationMessage message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClarificationMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.questions && message.questions.length))
+                                            message.questions = [];
+                                        message.questions.push($root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClarificationMessage message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClarificationMessage.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClarificationMessage message.
+                         * @function verify
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClarificationMessage.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.questions != null && message.hasOwnProperty("questions")) {
+                                if (!Array.isArray(message.questions))
+                                    return "questions: array expected";
+                                for (var i = 0; i < message.questions.length; ++i) {
+                                    var error = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.verify(message.questions[i]);
+                                    if (error)
+                                        return "questions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClarificationMessage message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} ClarificationMessage
+                         */
+                        ClarificationMessage.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage)
+                                return object;
+                            var message = new $root.google.cloud.geminidataanalytics.v1beta.ClarificationMessage();
+                            if (object.questions) {
+                                if (!Array.isArray(object.questions))
+                                    throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationMessage.questions: array expected");
+                                message.questions = [];
+                                for (var i = 0; i < object.questions.length; ++i) {
+                                    if (typeof object.questions[i] !== "object")
+                                        throw TypeError(".google.cloud.geminidataanalytics.v1beta.ClarificationMessage.questions: object expected");
+                                    message.questions[i] = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.fromObject(object.questions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClarificationMessage message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {google.cloud.geminidataanalytics.v1beta.ClarificationMessage} message ClarificationMessage
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClarificationMessage.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.questions = [];
+                            if (message.questions && message.questions.length) {
+                                object.questions = [];
+                                for (var j = 0; j < message.questions.length; ++j)
+                                    object.questions[j] = $root.google.cloud.geminidataanalytics.v1beta.ClarificationQuestion.toObject(message.questions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClarificationMessage to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClarificationMessage.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClarificationMessage
+                         * @function getTypeUrl
+                         * @memberof google.cloud.geminidataanalytics.v1beta.ClarificationMessage
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClarificationMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.geminidataanalytics.v1beta.ClarificationMessage";
+                        };
+    
+                        return ClarificationMessage;
                     })();
     
                     v1beta.ExampleQueries = (function() {

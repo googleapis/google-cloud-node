@@ -2393,7 +2393,8 @@
                             "analysis",
                             "chart",
                             "error",
-                            "exampleQueries"
+                            "exampleQueries",
+                            "clarification"
                           ]
                         },
                         "_groupId": {
@@ -2434,6 +2435,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "clarification": {
+                          "type": "ClarificationMessage",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "groupId": {
                           "type": "int32",
                           "id": 12,
@@ -2456,6 +2464,13 @@
                         "textType": {
                           "type": "TextType",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2613,6 +2628,14 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formattedData": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2820,6 +2843,67 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationQuestion": {
+                      "fields": {
+                        "question": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectionMode": {
+                          "type": "SelectionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "options": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clarificationQuestionType": {
+                          "type": "ClarificationQuestionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectionMode": {
+                          "values": {
+                            "SELECTION_MODE_UNSPECIFIED": 0,
+                            "SINGLE_SELECT": 1,
+                            "MULTI_SELECT": 2
+                          }
+                        },
+                        "ClarificationQuestionType": {
+                          "values": {
+                            "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED": 0,
+                            "FILTER_VALUES": 1,
+                            "FIELDS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationMessage": {
+                      "fields": {
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "ClarificationQuestion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -5243,7 +5327,8 @@
                             "analysis",
                             "chart",
                             "error",
-                            "exampleQueries"
+                            "exampleQueries",
+                            "clarification"
                           ]
                         },
                         "_groupId": {
@@ -5284,6 +5369,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "clarification": {
+                          "type": "ClarificationMessage",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "groupId": {
                           "type": "int32",
                           "id": 12,
@@ -5306,6 +5398,13 @@
                         "textType": {
                           "type": "TextType",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thoughtSignature": {
+                          "type": "bytes",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5463,6 +5562,14 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formattedData": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5670,6 +5777,67 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationQuestion": {
+                      "fields": {
+                        "question": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "selectionMode": {
+                          "type": "SelectionMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "options": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clarificationQuestionType": {
+                          "type": "ClarificationQuestionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectionMode": {
+                          "values": {
+                            "SELECTION_MODE_UNSPECIFIED": 0,
+                            "SINGLE_SELECT": 1,
+                            "MULTI_SELECT": 2
+                          }
+                        },
+                        "ClarificationQuestionType": {
+                          "values": {
+                            "CLARIFICATION_QUESTION_TYPE_UNSPECIFIED": 0,
+                            "FILTER_VALUES": 1,
+                            "FIELDS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ClarificationMessage": {
+                      "fields": {
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "ClarificationQuestion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
