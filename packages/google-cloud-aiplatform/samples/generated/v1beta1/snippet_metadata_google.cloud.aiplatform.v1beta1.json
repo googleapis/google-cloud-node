@@ -17506,7 +17506,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -17521,6 +17521,10 @@
           },
           {
             "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force_delete",
             "type": "TYPE_BOOL"
           }
         ],
