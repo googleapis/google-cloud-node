@@ -417,7 +417,7 @@ message CloudFunction {
   //    KMS key or retrieving the service agent name provisions it. For more
   //    information, see
   //    https://cloud.google.com/storage/docs/projects#service-agents and
-  //    https://cloud.google.com/storage/docs/getting-service-agent#gsutil.
+  //    https://cloud.google.com/storage/docs/getting-service-agent.
   //
   // Google Cloud Functions delegates access to service agents to protect
   // function resources in internal projects that are not accessible by the
