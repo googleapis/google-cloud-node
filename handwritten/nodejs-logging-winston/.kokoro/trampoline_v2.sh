@@ -254,6 +254,26 @@ fi
 log_yellow "Changing to the project root: ${PROJECT_ROOT}."
 cd "${PROJECT_ROOT}"
 
+# Auto-injected conditional check
+# Check if the package directory has changes. If not, skip tests.
+if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
+    # The package path is hardcoded during migration
+    RELATIVE_PKG_PATH="handwritten/nodejs-logging-winston"
+    
+    echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
+    
+    # Determine the diff range based on the CI system/event
+    # Safe default: HEAD~1..HEAD
+    DIFF_RANGE="HEAD~1..HEAD"
+
+    if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
+        echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
+        exit 0
+    else
+        echo "Changes detected in ${RELATIVE_PKG_PATH}. Proceeding with tests."
+    fi
+fi
+
 # To support relative path for `TRAMPOLINE_SERVICE_ACCOUNT`, we need
 # to use this environment variable in `PROJECT_ROOT`.
 if [[ -n "${TRAMPOLINE_SERVICE_ACCOUNT:-}" ]]; then
