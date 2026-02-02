@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ function main(parent) {
    *      - 'end_time` - Corresponds to the time the job finished.
    *      - 'start_time` - Corresponds to the time the job finished.
    *  * The operator must be `=` or `!=`.
+   *  The syntax is based on https://google.aip.dev/160.
    *  Examples:
    *  * inspected_storage = cloud_storage AND state = done
    *  * inspected_storage = cloud_storage OR inspected_storage = bigquery

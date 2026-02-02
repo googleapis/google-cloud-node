@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.5.0...reviews-v0.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.4.0...reviews-v0.5.0) (2025-07-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* [merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview` ([#6533](https://github.com/googleapis/google-cloud-node/issues/6533))
+
+### Bug Fixes
+
+* [merchantapi] An existing field `attributes` is renamed to `merchant_review_attributes` in message `.google.shopping.merchant.reviews.v1beta.MerchantReview` ([#6533](https://github.com/googleapis/google-cloud-node/issues/6533)) ([0413b68](https://github.com/googleapis/google-cloud-node/commit/0413b68d2220637f007679641d3c6a55df0bfc68))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.3.0...reviews-v0.4.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.2.1...reviews-v0.3.0) (2025-06-03)
 
 

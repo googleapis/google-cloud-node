@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -427,9 +427,9 @@ export class MessagesV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
@@ -504,9 +504,9 @@ export class MessagesV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
@@ -572,9 +572,9 @@ export class MessagesV1Beta3Client {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'project_id': request.projectId ?? '',
+      'project_id': request.projectId?.toString() ?? '',
       'location': request.location ?? '',
-      'job_id': request.jobId ?? '',
+      'job_id': request.jobId?.toString() ?? '',
     });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);

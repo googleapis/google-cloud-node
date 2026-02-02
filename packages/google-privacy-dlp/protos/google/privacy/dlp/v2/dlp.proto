@@ -1624,6 +1624,25 @@ message RedactImageRequest {
 
   // The content must be PNG, JPEG, SVG or BMP.
   ByteContentItem byte_item = 7;
+
+  // The full resource name of the inspection template to use. Settings in the
+  // main `inspect_config` field override the corresponding settings in this
+  // inspection template.
+  //
+  // The merge behavior is as follows:
+  //
+  //   - Singular field: The main field's value replaces the value of the
+  //   corresponding field in the template.
+  //   - Repeated fields: The field values are appended to the list defined in
+  //   the template.
+  //   - Sub-messages and groups: The fields are recursively merged.
+  string inspect_template = 9;
+
+  // The full resource name of the de-identification template to use. Settings
+  // in the main `image_redaction_configs` field override the corresponding
+  // settings in this de-identification template. The request fails if the
+  // type of the template's deidentify_config is not image_transformations.
+  string deidentify_template = 10;
 }
 
 // Represents a color in the RGB color space.
@@ -1881,6 +1900,19 @@ message OutputStorageConfig {
     // compute a different privacy metric, or use different sets of
     // quasi-identifiers, cannot store their results in the same table.
     BigQueryTable table = 1;
+
+    // Store findings in an existing Cloud Storage bucket. Files will be
+    // generated with the job ID and file part number as the filename and will
+    // contain findings in textproto format as
+    // [SaveToGcsFindingsOutput][google.privacy.dlp.v2.SaveToGcsFindingsOutput].
+    // The filename will follow the naming convention `<job_id>-<shard_number>`.
+    // Example: `my-job-id-2`.
+    //
+    // Supported for [Inspect jobs][google.privacy.dlp.v2.InspectJobConfig]. The
+    // bucket must not be the same as the bucket being inspected. If storing
+    // findings to Cloud Storage, the output schema field should not be set. If
+    // set, it will be ignored.
+    CloudStoragePath storage_path = 5;
   }
 
   // Schema used for writing the findings for Inspect jobs. This field is only
@@ -1917,7 +1949,7 @@ message InspectDataSourceDetails {
     InspectJobConfig job_config = 3;
   }
 
-  // All result fields mentioned below are updated while the job is processing.
+  // All Result fields are updated while the job is processing.
   message Result {
     // Total size in bytes that were processed.
     int64 processed_bytes = 1;
@@ -2024,6 +2056,29 @@ message DeidentifyDataSourceDetails {
   DeidentifyDataSourceStats deidentify_stats = 2;
 }
 
+// Locations at which a feature can be used.
+message LocationSupport {
+  // The location scope for a feature.
+  enum RegionalizationScope {
+    // Invalid.
+    REGIONALIZATION_SCOPE_UNSPECIFIED = 0;
+
+    // Feature may be used with one or more regions. See locations for details.
+    REGIONAL = 1;
+
+    // Feature may be used anywhere. Default value.
+    ANY_LOCATION = 2;
+  }
+
+  // The current scope for location on this feature. This may expand over time.
+  RegionalizationScope regionalization_scope = 1;
+
+  // Specific locations where the feature may be used.
+  // Examples: us-central1, us, asia, global
+  // If scope is ANY_LOCATION, no regions will be listed.
+  repeated string locations = 2;
+}
+
 // InfoType description.
 message InfoTypeDescription {
   // Internal name of the infoType.
@@ -2038,6 +2093,9 @@ message InfoTypeDescription {
   // Description of the infotype. Translated when language is provided in the
   // request.
   string description = 4;
+
+  // Locations at which this feature can be used. May change over time.
+  LocationSupport location_support = 6;
 
   // A sample that is a true positive for this infoType.
   string example = 8;
@@ -2080,6 +2138,9 @@ message InfoTypeCategory {
 
     // The infoType is typically used in Australia.
     AUSTRALIA = 3;
+
+    // The infoType is typically used in Austria.
+    AUSTRIA = 53;
 
     // The infoType is typically used in Azerbaijan.
     AZERBAIJAN = 48;
@@ -2358,7 +2419,7 @@ message QuasiId {
 
     // A column can be tagged with a custom tag. In this case, the user must
     // indicate an auxiliary table that contains statistical information on
-    // the possible values of this column (below).
+    // the possible values of this column.
     string custom_tag = 3;
 
     // If no semantic tag is indicated, we infer the statistical model from
@@ -2383,7 +2444,7 @@ message StatisticalTable {
 
     // A column can be tagged with a custom tag. In this case, the user must
     // indicate an auxiliary table that contains statistical information on
-    // the possible values of this column (below).
+    // the possible values of this column.
     string custom_tag = 2;
   }
 
@@ -2477,7 +2538,7 @@ message PrivacyMetric {
 
         // A column can be tagged with a custom tag. In this case, the user must
         // indicate an auxiliary table that contains statistical information on
-        // the possible values of this column (below).
+        // the possible values of this column.
         string custom_tag = 3;
 
         // If no semantic tag is indicated, we infer the statistical model from
@@ -4199,6 +4260,21 @@ message Action {
   // Compatible with: Inspect
   message PublishFindingsToCloudDataCatalog {}
 
+  // Publish findings of a DlpJob to Dataplex Universal Catalog as a
+  // `sensitive-data-protection-job-result` aspect. For more information,
+  // see [Send inspection results to Dataplex Universal Catalog as
+  // aspects](https://cloud.google.com/sensitive-data-protection/docs/add-aspects-inspection-job).
+  //
+  // Aspects are stored in Dataplex Universal Catalog storage and are
+  // governed by service-specific policies for Dataplex Universal Catalog. For
+  // more information, see [Service Specific
+  // Terms](https://cloud.google.com/terms/service-terms).
+  //
+  // Only a single instance of this action can be specified. This action is
+  // allowed only if all resources being scanned are BigQuery tables.
+  // Compatible with: Inspect
+  message PublishFindingsToDataplexCatalog {}
+
   // Create a de-identified copy of a storage bucket. Only compatible
   // with Cloud Storage buckets.
   //
@@ -4287,12 +4363,12 @@ message Action {
     }
 
     // List of user-specified file type groups to transform. If specified, only
-    // the files with these file types will be transformed. If empty, all
-    // supported files will be transformed. Supported types may be automatically
-    // added over time. If a file type is set in this field that isn't supported
-    // by the Deidentify action then the job will fail and will not be
-    // successfully created/started. Currently the only file types supported
-    // are: IMAGES, TEXT_FILES, CSV, TSV.
+    // the files with these file types are transformed. If empty, all
+    // supported files are transformed. Supported types may be automatically
+    // added over time. Any unsupported file types that are set in this field
+    // are excluded from de-identification. An error is recorded for each
+    // unsupported file in the TransformationDetails output table. Currently the
+    // only file types supported are: IMAGES, TEXT_FILES, CSV, TSV.
     repeated FileType file_types_to_transform = 8;
   }
 
@@ -4318,9 +4394,14 @@ message Action {
     // Publish summary to Cloud Security Command Center (Alpha).
     PublishSummaryToCscc publish_summary_to_cscc = 3;
 
-    // Publish findings to Cloud Datahub.
-    PublishFindingsToCloudDataCatalog publish_findings_to_cloud_data_catalog =
-        5;
+    // Deprecated because Data Catalog is being turned down. Use
+    // publish_findings_to_dataplex_catalog to publish findings to Dataplex
+    // Universal Catalog.
+    PublishFindingsToCloudDataCatalog publish_findings_to_cloud_data_catalog = 5
+        [deprecated = true];
+
+    // Publish findings as an aspect to Dataplex Universal Catalog.
+    PublishFindingsToDataplexCatalog publish_findings_to_dataplex_catalog = 10;
 
     // Create a de-identified copy of the input data.
     Deidentify deidentify = 7;
@@ -4831,6 +4912,8 @@ message ListJobTriggersRequest {
   //     - 'error_count' - Number of errors that have occurred while running.
   // * The operator must be `=` or `!=` for status and inspected_storage.
   //
+  // The syntax is based on https://google.aip.dev/160.
+  //
   // Examples:
   //
   // * inspected_storage = cloud_storage AND status = HEALTHY
@@ -5004,15 +5087,16 @@ message DataProfileAction {
   // Center for each profile.
   message PublishToSecurityCommandCenter {}
 
-  // Create Dataplex Catalog aspects for profiled resources with the aspect type
-  // Sensitive Data Protection Profile. To learn more about aspects, see
-  // https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
+  // Create Dataplex Universal Catalog aspects for profiled resources with the
+  // aspect type Sensitive Data Protection Profile. To learn more about aspects,
+  // see https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
   message PublishToDataplexCatalog {
-    // Whether creating a Dataplex Catalog aspect for a profiled resource should
-    // lower the risk of the profile for that resource. This also lowers the
-    // data risk of resources at the lower levels of the resource hierarchy. For
-    // example, reducing the data risk of a table data profile also reduces the
-    // data risk of the constituent column data profiles.
+    // Whether creating a Dataplex Universal Catalog aspect for a profiled
+    // resource should lower the risk of the profile for that resource. This
+    // also lowers the data risk of resources at the lower levels of the
+    // resource hierarchy. For example, reducing the data risk of a table data
+    // profile also reduces the data risk of the constituent column data
+    // profiles.
     bool lower_data_risk_to_low = 1;
   }
 
@@ -5043,7 +5127,8 @@ message DataProfileAction {
       oneof format {
         // The namespaced name for the tag value to attach to resources. Must be
         // in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
-        // example, "123456/environment/prod".
+        // example, "123456/environment/prod" for an organization parent, or
+        // "my-project/environment/prod" for a project parent.
         string namespaced_value = 1;
       }
     }
@@ -5090,8 +5175,8 @@ message DataProfileAction {
     // Tags the profiled resources with the specified tag values.
     TagResources tag_resources = 8;
 
-    // Publishes a portion of each profile to Dataplex Catalog with the aspect
-    // type Sensitive Data Protection Profile.
+    // Publishes a portion of each profile to Dataplex Universal Catalog with
+    // the aspect type Sensitive Data Protection Profile.
     PublishToDataplexCatalog publish_to_dataplex_catalog = 9;
   }
 }
@@ -5892,6 +5977,18 @@ message FileStoreCollection {
     FileStoreRegexes include_regexes = 1
         [(google.api.field_behavior) = OPTIONAL];
   }
+
+  // Optional. To be included in the collection, a resource must meet all of the
+  // following requirements:
+  //
+  //  - If tag filters are provided, match all provided tag filters.
+  //  - If one or more patterns are specified, match at least one pattern.
+  //
+  // For a resource to match the tag filters, the resource must have all of the
+  // provided tags attached. Tags refer to Resource Manager tags bound to the
+  // resource or its ancestors. For more information, see [Manage
+  // schedules](https://cloud.google.com/sensitive-data-protection/docs/profile-project-cloud-storage#manage-schedules).
+  TagFilters include_tags = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // A collection of regular expressions to determine what file store to match
@@ -6365,10 +6462,14 @@ message VertexDatasetRegex {
   string project_id_regex = 1;
 }
 
-// Identifies a single Vertex AI dataset.
+// Identifies a single Vertex AI resource. Only datasets are
+// supported.
 message VertexDatasetResourceReference {
-  // Required. The name of the dataset resource. If set within a project-level
+  // Required. The name of the Vertex AI resource. If set within a project-level
   // configuration, the specified resource must be within the project.
+  // Examples:
+  //
+  // * `projects/{project}/locations/{location}/datasets/{dataset}`
   string dataset_resource_name = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
@@ -6531,6 +6632,8 @@ message ListDlpJobsRequest {
   //     - 'end_time` - Corresponds to the time the job finished.
   //     - 'start_time` - Corresponds to the time the job finished.
   // * The operator must be `=` or `!=`.
+  //
+  // The syntax is based on https://google.aip.dev/160.
   //
   // Examples:
   //
@@ -7142,30 +7245,30 @@ enum RelationalOperator {
 
 // Type of the match which can be applied to different ways of matching, like
 // Dictionary, regular expression and intersecting with findings of another
-// info type.
+// infoType.
 enum MatchingType {
   // Invalid.
   MATCHING_TYPE_UNSPECIFIED = 0;
 
   // Full match.
   //
-  // - Dictionary: join of Dictionary results matched complete finding quote
-  // - Regex: all regex matches fill a finding quote start to end
-  // - Exclude info type: completely inside affecting info types findings
+  // - Dictionary: join of Dictionary results matched the complete finding quote
+  // - Regex: all regex matches fill a finding quote from start to end
+  // - Exclude infoType: completely inside affecting infoTypes findings
   MATCHING_TYPE_FULL_MATCH = 1;
 
   // Partial match.
   //
   // - Dictionary: at least one of the tokens in the finding matches
   // - Regex: substring of the finding matches
-  // - Exclude info type: intersects with affecting info types findings
+  // - Exclude infoType: intersects with affecting infoTypes findings
   MATCHING_TYPE_PARTIAL_MATCH = 2;
 
   // Inverse match.
   //
   // - Dictionary: no tokens in the finding match the dictionary
   // - Regex: finding doesn't match the regex
-  // - Exclude info type: no intersection with affecting info types findings
+  // - Exclude infoType: no intersection with affecting infoTypes findings
   MATCHING_TYPE_INVERSE_MATCH = 3;
 }
 
@@ -7261,13 +7364,13 @@ message ListProjectDataProfilesRequest {
   // * `project_id`
   // * `sensitivity_level desc`
   //
-  // Supported fields are:
+  // Supported fields:
   //
   // - `project_id`: Google Cloud project ID
-  // - `sensitivity_level`: How sensitive the data in a project is, at most.
-  // - `data_risk_level`: How much risk is associated with this data.
-  // - `profile_last_generated`: When the profile was last updated in epoch
-  // seconds.
+  // - `sensitivity_level`: How sensitive the data in a project is, at most
+  // - `data_risk_level`: How much risk is associated with this data
+  // - `profile_last_generated`: Date and time (in epoch seconds) the profile
+  //   was last generated
   string order_by = 4;
 
   // Allows filtering.
@@ -7278,17 +7381,24 @@ message ListProjectDataProfilesRequest {
   // * Restrictions can be combined by `AND` or `OR` logical operators. A
   // sequence of restrictions implicitly uses `AND`.
   // * A restriction has the form of `{field} {operator} {value}`.
-  // * Supported fields/values:
-  //     - `sensitivity_level` - HIGH|MODERATE|LOW
-  //     - `data_risk_level` - HIGH|MODERATE|LOW
-  //     - `status_code` - an RPC status code as defined in
+  // * Supported fields:
+  //     - `project_id`: the Google Cloud project ID
+  //     - `sensitivity_level`: HIGH|MODERATE|LOW
+  //     - `data_risk_level`: HIGH|MODERATE|LOW
+  //     - `status_code`: an RPC status code as defined in
   //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-  // * The operator must be `=` or `!=`.
+  //     - `profile_last_generated`: Date and time the profile was last
+  //       generated
+  // * The operator must be `=` or `!=`. The `profile_last_generated` filter
+  //   also supports `<` and `>`.
+  //
+  // The syntax is based on https://google.aip.dev/160.
   //
   // Examples:
   //
   // * `project_id = 12345 AND status_code = 1`
   // * `project_id = 12345 AND sensitivity_level = HIGH`
+  // * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
   //
   // The length of this field should be no more than 500 characters.
   string filter = 5;
@@ -7354,22 +7464,29 @@ message ListTableDataProfilesRequest {
   // * Restrictions can be combined by `AND` or `OR` logical operators. A
   // sequence of restrictions implicitly uses `AND`.
   // * A restriction has the form of `{field} {operator} {value}`.
-  // * Supported fields/values:
-  //     - `project_id` - The Google Cloud project ID.
-  //     - `dataset_id` - The BigQuery dataset ID.
-  //     - `table_id` - The ID of the BigQuery table.
-  //     - `sensitivity_level` - HIGH|MODERATE|LOW
-  //     - `data_risk_level` - HIGH|MODERATE|LOW
+  // * Supported fields:
+  //     - `project_id`: The Google Cloud project ID
+  //     - `dataset_id`: The BigQuery dataset ID
+  //     - `table_id`: The ID of the BigQuery table
+  //     - `sensitivity_level`: HIGH|MODERATE|LOW
+  //     - `data_risk_level`: HIGH|MODERATE|LOW
   //     - `resource_visibility`: PUBLIC|RESTRICTED
-  //     - `status_code` - an RPC status code as defined in
+  //     - `status_code`: an RPC status code as defined in
   //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-  // * The operator must be `=` or `!=`.
+  //     - `profile_last_generated`: Date and time the profile was last
+  //       generated
+  //
+  // * The operator must be `=` or `!=`. The `profile_last_generated` filter
+  //   also supports `<` and `>`.
+  //
+  // The syntax is based on https://google.aip.dev/160.
   //
   // Examples:
   //
   // * `project_id = 12345 AND status_code = 1`
   // * `project_id = 12345 AND sensitivity_level = HIGH`
   // * `project_id = 12345 AND resource_visibility = PUBLIC`
+  // * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
   //
   // The length of this field should be no more than 500 characters.
   string filter = 5;
@@ -7433,26 +7550,32 @@ message ListColumnDataProfilesRequest {
   // * Restrictions can be combined by `AND` or `OR` logical operators. A
   // sequence of restrictions implicitly uses `AND`.
   // * A restriction has the form of `{field} {operator} {value}`.
-  // * Supported fields/values:
-  //     - `table_data_profile_name` - The name of the related table data
-  //     profile.
-  //     - `project_id` - The Google Cloud project ID. (REQUIRED)
-  //     - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-  //     - `table_id` - The BigQuery table ID. (REQUIRED)
-  //     - `field_id` - The ID of the BigQuery field.
-  //     - `info_type` - The infotype detected in the resource.
-  //     - `sensitivity_level` - HIGH|MEDIUM|LOW
-  //     - `data_risk_level`: How much risk is associated with this data.
-  //     - `status_code` - an RPC status code as defined in
+  // * Supported fields:
+  //     - `table_data_profile_name`: The name of the related table data
+  //     profile
+  //     - `project_id`: The Google Cloud project ID (REQUIRED)
+  //     - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+  //     - `table_id`: The BigQuery table ID (REQUIRED)
+  //     - `field_id`: The ID of the BigQuery field
+  //     - `info_type`: The infotype detected in the resource
+  //     - `sensitivity_level`: HIGH|MEDIUM|LOW
+  //     - `data_risk_level`: How much risk is associated with this data
+  //     - `status_code`: An RPC status code as defined in
   //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+  //     - `profile_last_generated`: Date and time the profile was last
+  //       generated
   // * The operator must be `=` for project_id, dataset_id, and table_id. Other
-  //   filters also support `!=`.
+  //   filters also support `!=`. The `profile_last_generated` filter also
+  //   supports `<` and `>`.
+  //
+  // The syntax is based on https://google.aip.dev/160.
   //
   // Examples:
   //
   // * project_id = 12345 AND status_code = 1
   // * project_id = 12345 AND sensitivity_level = HIGH
   // * project_id = 12345 AND info_type = STREET_ADDRESS
+  // * profile_last_generated < "2025-01-01T00:00:00.000Z"
   //
   // The length of this field should be no more than 500 characters.
   string filter = 5;
@@ -7628,7 +7751,8 @@ message TableDataProfile {
   // May be empty if the profile is still being generated.
   ProfileStatus profile_status = 21;
 
-  // State of a profile.
+  // State of a profile. This will always be set to DONE when the table data
+  // profile is written to another service like BigQuery or Pub/Sub.
   State state = 22;
 
   // The sensitivity score of this table.
@@ -7690,6 +7814,9 @@ message TableDataProfile {
 
   // Resources related to this profile.
   repeated RelatedResource related_resources = 41;
+
+  // Domains associated with the profile.
+  repeated Domain domains = 47;
 }
 
 // Success or errors for the profile generation.
@@ -8069,14 +8196,18 @@ message FileStoreDataProfile {
 
   // Resources related to this profile.
   repeated RelatedResource related_resources = 26;
+
+  // Domains associated with the profile.
+  repeated Domain domains = 27;
 }
 
 // A tag associated with a resource.
 message Tag {
   // The namespaced name for the tag value to attach to Google Cloud resources.
   // Must be in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
-  // example, "123456/environment/prod". This is only set for Google Cloud
-  // resources.
+  // example, "123456/environment/prod" for an organization parent, or
+  // "my-project/environment/prod" for a project parent. This is only set for
+  // Google Cloud resources.
   string namespaced_tag_value = 1;
 
   // The key of a tag key-value pair. For Google Cloud resources, this is the
@@ -8086,6 +8217,31 @@ message Tag {
   // The value of a tag key-value pair. For Google Cloud resources, this is the
   // resource name of the value, for example, "tagValues/123456".
   string value = 3;
+}
+
+// Tags to match against for filtering.
+message TagFilters {
+  // Required. A resource must match ALL of the specified tag filters to be
+  // included in the collection.
+  repeated TagFilter tag_filters = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// A single tag to filter against.
+message TagFilter {
+  // Tag filter formats. Tags refer to Resource Manager tags bound to the
+  // resource or its ancestors.
+  oneof format {
+    // The namespaced name for the tag value. Must be in the format
+    // `{parent_id}/{tag_key_short_name}/{short_name}`, for example,
+    // "123456/environment/prod" for an organization parent, or
+    // "my-project/environment/prod" for a project parent.
+    string namespaced_tag_value = 1;
+
+    // The namespaced name for the tag key. Must be in the format
+    // `{parent_id}/{tag_key_short_name}`, for example, "123456/sensitive" for
+    // an organization parent, or "my-project/sensitive" for a project parent.
+    string namespaced_tag_key = 2;
+  }
 }
 
 // A related resource.
@@ -8221,20 +8377,26 @@ message ListFileStoreDataProfilesRequest {
   // * Restrictions can be combined by `AND` or `OR` logical operators. A
   // sequence of restrictions implicitly uses `AND`.
   // * A restriction has the form of `{field} {operator} {value}`.
-  // * Supported fields/values:
-  //     - `project_id` - The Google Cloud project ID.
-  //     - `account_id` - The AWS account ID.
-  //     - `file_store_path` - The path like "gs://bucket".
-  //     - `data_source_type` - The profile's data source type, like
-  //     "google/storage/bucket".
-  //     - `data_storage_location` - The location where the file store's data is
-  //     stored, like "us-central1".
-  //     - `sensitivity_level` - HIGH|MODERATE|LOW
-  //     - `data_risk_level` - HIGH|MODERATE|LOW
+  // * Supported fields:
+  //     - `project_id`: The Google Cloud project ID
+  //     - `account_id`: The AWS account ID
+  //     - `file_store_path`: The path like "gs://bucket"
+  //     - `data_source_type`: The profile's data source type, like
+  //     "google/storage/bucket"
+  //     - `data_storage_location`: The location where the file store's data is
+  //     stored, like "us-central1"
+  //     - `sensitivity_level`: HIGH|MODERATE|LOW
+  //     - `data_risk_level`: HIGH|MODERATE|LOW
   //     - `resource_visibility`: PUBLIC|RESTRICTED
-  //     - `status_code` - an RPC status code as defined in
+  //     - `status_code`: an RPC status code as defined in
   //     https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-  // * The operator must be `=` or `!=`.
+  //     - `profile_last_generated`: Date and time the profile was last
+  //       generated
+  //
+  // * The operator must be `=` or `!=`. The `profile_last_generated` filter
+  //   also supports `<` and `>`.
+  //
+  // The syntax is based on https://google.aip.dev/160.
   //
   // Examples:
   //
@@ -8242,6 +8404,7 @@ message ListFileStoreDataProfilesRequest {
   // * `project_id = 12345 AND sensitivity_level = HIGH`
   // * `project_id = 12345 AND resource_visibility = PUBLIC`
   // * `file_store_path = "gs://mybucket"`
+  // * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
   //
   // The length of this field should be no more than 500 characters.
   string filter = 5 [(google.api.field_behavior) = OPTIONAL];
@@ -8413,6 +8576,8 @@ message ListConnectionsRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+  //
+  // The syntax is based on https://google.aip.dev/160.
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -8436,6 +8601,8 @@ message SearchConnectionsRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+  //
+  // The syntax is based on https://google.aip.dev/160.
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -8619,14 +8786,14 @@ message DeleteTableDataProfileRequest {
 
 // Message used to identify the type of resource being profiled.
 message DataSourceType {
-  // Output only. An identifying string to the type of resource being profiled.
+  // A string that identifies the type of resource being profiled.
   // Current values:
   //
   // * google/bigquery/table
   // * google/project
   // * google/sql/table
   // * google/gcs/bucket
-  string data_source = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  string data_source = 1;
 }
 
 // Message used to identify file cluster type being profiled.
@@ -8679,32 +8846,102 @@ message FileClusterType {
 // image OCR is only provided in limited regions but configuring
 // ProcessingLocation will redirect OCR to a location where OCR is provided.
 message ProcessingLocation {
-  // Processing will happen in a multi-region that contains the current region
+  // Processing occurs in a multi-region that contains the current region
   // if available.
   message MultiRegionProcessing {}
 
-  // Processing will happen in the global region.
+  // Processing occurs in the global region.
   message GlobalProcessing {}
 
-  // Configure image processing to fall back to the configured processing option
-  // below if unavailable in the request location.
+  // Configure image processing to fall back to any of the following processing
+  // options if image processing is unavailable in the original request
+  // location.
   message ImageFallbackLocation {
-    // Processing will happen in a multi-region that contains the current region
+    // Processing occurs in a multi-region that contains the current region
     // if available.
     MultiRegionProcessing multi_region_processing = 100;
 
-    // Processing will happen in the global region.
+    // Processing occurs in the global region.
     GlobalProcessing global_processing = 200;
   }
 
-  // Image processing will fall back using this configuration.
+  // Configure document processing to fall back to any of the following
+  // processing options if document processing is unavailable in the original
+  // request location.
+  message DocumentFallbackLocation {
+    // Processing occurs in a multi-region that contains the current region
+    // if available.
+    MultiRegionProcessing multi_region_processing = 100;
+
+    // Processing occurs in the global region.
+    GlobalProcessing global_processing = 200;
+  }
+
+  // Image processing falls back using this configuration.
   ImageFallbackLocation image_fallback_location = 1;
+
+  // Document processing falls back using this configuration.
+  DocumentFallbackLocation document_fallback_location = 2;
 }
 
 // Collection of findings saved to a Cloud Storage bucket. This is used as the
 // proto schema for textproto files created when specifying a cloud storage
-// path to save inspection findings.
+// path to save Inspect findings.
 message SaveToGcsFindingsOutput {
   // List of findings.
   repeated Finding findings = 1;
+}
+
+// A domain represents a thematic category that a data profile can fall under.
+message Domain {
+  // This enum defines the various domain categories a data profile can fall
+  // under.
+  enum Category {
+    // Category unspecified.
+    CATEGORY_UNSPECIFIED = 0;
+
+    // Indicates that the data profile is related to artificial intelligence.
+    // When set, all findings stored to Security Command Center will set the
+    // corresponding AI domain field of `Finding` objects.
+    AI = 1;
+
+    // Indicates that the data profile is related to code.
+    CODE = 2;
+  }
+
+  // The signal used to determine the category.
+  // This list may increase over time.
+  enum Signal {
+    // Unused.
+    SIGNAL_UNSPECIFIED = 0;
+
+    // One or more machine learning models are present.
+    MODEL = 1;
+
+    // A table appears to be a text embedding.
+    TEXT_EMBEDDING = 2;
+
+    // The [Cloud SQL Vertex
+    // AI](https://cloud.google.com/sql/docs/postgres/integrate-cloud-sql-with-vertex-ai)
+    // plugin is installed on the database.
+    VERTEX_PLUGIN = 3;
+
+    // Support for [Cloud SQL vector
+    // embeddings](https://cloud.google.com/sql/docs/mysql/enable-vector-search)
+    // is enabled on the database.
+    VECTOR_PLUGIN = 4;
+
+    // Source code is present.
+    SOURCE_CODE = 5;
+
+    // If the service determines the category type. For example, Vertex AI
+    // assets would always have a `Category` of `AI`.
+    SERVICE = 6;
+  }
+
+  // A domain category that this profile is related to.
+  Category category = 1;
+
+  // The collection of signals that influenced selection of the category.
+  repeated Signal signals = 2;
 }

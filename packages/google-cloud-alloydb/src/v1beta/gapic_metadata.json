@@ -60,6 +60,11 @@
                 "deleteUser"
               ]
             },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
+              ]
+            },
             "CreateCluster": {
               "methods": [
                 "createCluster"
@@ -260,6 +265,11 @@
             "DeleteUser": {
               "methods": [
                 "deleteUser"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
               ]
             },
             "CreateCluster": {

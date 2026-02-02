@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ function main(parent) {
    *  Optional. The maximum number of `PrivateAuctionDeals` to return. The
    *  service may return fewer than this value. If unspecified, at most 50
    *  `PrivateAuctionDeals` will be returned. The maximum value is 1000;
-   *  values above 1000 will be coerced to 1000.
+   *  values greater than 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**

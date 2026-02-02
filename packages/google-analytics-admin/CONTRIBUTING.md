@@ -39,8 +39,9 @@ accept your pull requests.
 
 ### Before you begin
 
-1.  [Select or create a Cloud Platform project][projects]. 
-1.  [Enable the Google Analytics Admin API][enable_api]. 
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Admin API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 

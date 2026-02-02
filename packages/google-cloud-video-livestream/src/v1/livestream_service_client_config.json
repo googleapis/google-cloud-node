@@ -67,6 +67,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "StartDistribution": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopDistribution": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateInput": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -88,6 +98,11 @@
           "retry_params_name": "default"
         },
         "UpdateInput": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PreviewInput": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -123,38 +138,47 @@
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateClip": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteClip": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateDvrSession": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListDvrSessions": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetDvrSession": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteDvrSession": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateDvrSession": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateAsset": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteAsset": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -174,6 +198,7 @@
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UpdatePool": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

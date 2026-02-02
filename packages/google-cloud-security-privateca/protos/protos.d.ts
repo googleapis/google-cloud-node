@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -82,6 +82,15 @@ export namespace google {
 
                         /** CertificateAuthority labels */
                         labels?: ({ [k: string]: string }|null);
+
+                        /** CertificateAuthority userDefinedAccessUrls */
+                        userDefinedAccessUrls?: (google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls|null);
+
+                        /** CertificateAuthority satisfiesPzs */
+                        satisfiesPzs?: (boolean|null);
+
+                        /** CertificateAuthority satisfiesPzi */
+                        satisfiesPzi?: (boolean|null);
                     }
 
                     /** Represents a CertificateAuthority. */
@@ -143,6 +152,15 @@ export namespace google {
 
                         /** CertificateAuthority labels. */
                         public labels: { [k: string]: string };
+
+                        /** CertificateAuthority userDefinedAccessUrls. */
+                        public userDefinedAccessUrls?: (google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls|null);
+
+                        /** CertificateAuthority satisfiesPzs. */
+                        public satisfiesPzs: boolean;
+
+                        /** CertificateAuthority satisfiesPzi. */
+                        public satisfiesPzi: boolean;
 
                         /**
                          * Creates a new CertificateAuthority instance using the specified properties.
@@ -462,6 +480,109 @@ export namespace google {
                             EC_P256_SHA256 = 4,
                             EC_P384_SHA384 = 5
                         }
+
+                        /** Properties of a UserDefinedAccessUrls. */
+                        interface IUserDefinedAccessUrls {
+
+                            /** UserDefinedAccessUrls aiaIssuingCertificateUrls */
+                            aiaIssuingCertificateUrls?: (string[]|null);
+
+                            /** UserDefinedAccessUrls crlAccessUrls */
+                            crlAccessUrls?: (string[]|null);
+                        }
+
+                        /** Represents a UserDefinedAccessUrls. */
+                        class UserDefinedAccessUrls implements IUserDefinedAccessUrls {
+
+                            /**
+                             * Constructs a new UserDefinedAccessUrls.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls);
+
+                            /** UserDefinedAccessUrls aiaIssuingCertificateUrls. */
+                            public aiaIssuingCertificateUrls: string[];
+
+                            /** UserDefinedAccessUrls crlAccessUrls. */
+                            public crlAccessUrls: string[];
+
+                            /**
+                             * Creates a new UserDefinedAccessUrls instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UserDefinedAccessUrls instance
+                             */
+                            public static create(properties?: google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls): google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls;
+
+                            /**
+                             * Encodes the specified UserDefinedAccessUrls message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.verify|verify} messages.
+                             * @param message UserDefinedAccessUrls message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UserDefinedAccessUrls message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.verify|verify} messages.
+                             * @param message UserDefinedAccessUrls message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a UserDefinedAccessUrls message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UserDefinedAccessUrls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls;
+
+                            /**
+                             * Decodes a UserDefinedAccessUrls message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UserDefinedAccessUrls
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls;
+
+                            /**
+                             * Verifies a UserDefinedAccessUrls message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a UserDefinedAccessUrls message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UserDefinedAccessUrls
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls;
+
+                            /**
+                             * Creates a plain object from a UserDefinedAccessUrls message. Also converts values to other types if specified.
+                             * @param message UserDefinedAccessUrls
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UserDefinedAccessUrls to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UserDefinedAccessUrls
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a CaPool. */
@@ -719,6 +840,9 @@ export namespace google {
                             /** IssuancePolicy allowedKeyTypes */
                             allowedKeyTypes?: (google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType[]|null);
 
+                            /** IssuancePolicy backdateDuration */
+                            backdateDuration?: (google.protobuf.IDuration|null);
+
                             /** IssuancePolicy maximumLifetime */
                             maximumLifetime?: (google.protobuf.IDuration|null);
 
@@ -746,6 +870,9 @@ export namespace google {
 
                             /** IssuancePolicy allowedKeyTypes. */
                             public allowedKeyTypes: google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType[];
+
+                            /** IssuancePolicy backdateDuration. */
+                            public backdateDuration?: (google.protobuf.IDuration|null);
 
                             /** IssuancePolicy maximumLifetime. */
                             public maximumLifetime?: (google.protobuf.IDuration|null);
@@ -3006,6 +3133,9 @@ export namespace google {
 
                         /** CertificateDescription certFingerprint */
                         certFingerprint?: (google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint|null);
+
+                        /** CertificateDescription tbsCertificateDigest */
+                        tbsCertificateDigest?: (string|null);
                     }
 
                     /** Represents a CertificateDescription. */
@@ -3040,6 +3170,9 @@ export namespace google {
 
                         /** CertificateDescription certFingerprint. */
                         public certFingerprint?: (google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint|null);
+
+                        /** CertificateDescription tbsCertificateDigest. */
+                        public tbsCertificateDigest: string;
 
                         /**
                          * Creates a new CertificateDescription instance using the specified properties.
@@ -4033,6 +4166,215 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of an AttributeTypeAndValue. */
+                    interface IAttributeTypeAndValue {
+
+                        /** AttributeTypeAndValue type */
+                        type?: (google.cloud.security.privateca.v1.AttributeType|keyof typeof google.cloud.security.privateca.v1.AttributeType|null);
+
+                        /** AttributeTypeAndValue objectId */
+                        objectId?: (google.cloud.security.privateca.v1.IObjectId|null);
+
+                        /** AttributeTypeAndValue value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents an AttributeTypeAndValue. */
+                    class AttributeTypeAndValue implements IAttributeTypeAndValue {
+
+                        /**
+                         * Constructs a new AttributeTypeAndValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IAttributeTypeAndValue);
+
+                        /** AttributeTypeAndValue type. */
+                        public type?: (google.cloud.security.privateca.v1.AttributeType|keyof typeof google.cloud.security.privateca.v1.AttributeType|null);
+
+                        /** AttributeTypeAndValue objectId. */
+                        public objectId?: (google.cloud.security.privateca.v1.IObjectId|null);
+
+                        /** AttributeTypeAndValue value. */
+                        public value: string;
+
+                        /** AttributeTypeAndValue attributeType. */
+                        public attributeType?: ("type"|"objectId");
+
+                        /**
+                         * Creates a new AttributeTypeAndValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AttributeTypeAndValue instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IAttributeTypeAndValue): google.cloud.security.privateca.v1.AttributeTypeAndValue;
+
+                        /**
+                         * Encodes the specified AttributeTypeAndValue message. Does not implicitly {@link google.cloud.security.privateca.v1.AttributeTypeAndValue.verify|verify} messages.
+                         * @param message AttributeTypeAndValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IAttributeTypeAndValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AttributeTypeAndValue message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.AttributeTypeAndValue.verify|verify} messages.
+                         * @param message AttributeTypeAndValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IAttributeTypeAndValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AttributeTypeAndValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AttributeTypeAndValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.AttributeTypeAndValue;
+
+                        /**
+                         * Decodes an AttributeTypeAndValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AttributeTypeAndValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.AttributeTypeAndValue;
+
+                        /**
+                         * Verifies an AttributeTypeAndValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AttributeTypeAndValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AttributeTypeAndValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.AttributeTypeAndValue;
+
+                        /**
+                         * Creates a plain object from an AttributeTypeAndValue message. Also converts values to other types if specified.
+                         * @param message AttributeTypeAndValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.AttributeTypeAndValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AttributeTypeAndValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AttributeTypeAndValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RelativeDistinguishedName. */
+                    interface IRelativeDistinguishedName {
+
+                        /** RelativeDistinguishedName attributes */
+                        attributes?: (google.cloud.security.privateca.v1.IAttributeTypeAndValue[]|null);
+                    }
+
+                    /** Represents a RelativeDistinguishedName. */
+                    class RelativeDistinguishedName implements IRelativeDistinguishedName {
+
+                        /**
+                         * Constructs a new RelativeDistinguishedName.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.security.privateca.v1.IRelativeDistinguishedName);
+
+                        /** RelativeDistinguishedName attributes. */
+                        public attributes: google.cloud.security.privateca.v1.IAttributeTypeAndValue[];
+
+                        /**
+                         * Creates a new RelativeDistinguishedName instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RelativeDistinguishedName instance
+                         */
+                        public static create(properties?: google.cloud.security.privateca.v1.IRelativeDistinguishedName): google.cloud.security.privateca.v1.RelativeDistinguishedName;
+
+                        /**
+                         * Encodes the specified RelativeDistinguishedName message. Does not implicitly {@link google.cloud.security.privateca.v1.RelativeDistinguishedName.verify|verify} messages.
+                         * @param message RelativeDistinguishedName message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.security.privateca.v1.IRelativeDistinguishedName, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RelativeDistinguishedName message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.RelativeDistinguishedName.verify|verify} messages.
+                         * @param message RelativeDistinguishedName message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.security.privateca.v1.IRelativeDistinguishedName, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RelativeDistinguishedName message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RelativeDistinguishedName
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.security.privateca.v1.RelativeDistinguishedName;
+
+                        /**
+                         * Decodes a RelativeDistinguishedName message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RelativeDistinguishedName
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.security.privateca.v1.RelativeDistinguishedName;
+
+                        /**
+                         * Verifies a RelativeDistinguishedName message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RelativeDistinguishedName message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RelativeDistinguishedName
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.security.privateca.v1.RelativeDistinguishedName;
+
+                        /**
+                         * Creates a plain object from a RelativeDistinguishedName message. Also converts values to other types if specified.
+                         * @param message RelativeDistinguishedName
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.security.privateca.v1.RelativeDistinguishedName, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RelativeDistinguishedName to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RelativeDistinguishedName
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Subject. */
                     interface ISubject {
 
@@ -4059,6 +4401,9 @@ export namespace google {
 
                         /** Subject postalCode */
                         postalCode?: (string|null);
+
+                        /** Subject rdnSequence */
+                        rdnSequence?: (google.cloud.security.privateca.v1.IRelativeDistinguishedName[]|null);
                     }
 
                     /** Represents a Subject. */
@@ -4093,6 +4438,9 @@ export namespace google {
 
                         /** Subject postalCode. */
                         public postalCode: string;
+
+                        /** Subject rdnSequence. */
+                        public rdnSequence: google.cloud.security.privateca.v1.IRelativeDistinguishedName[];
 
                         /**
                          * Creates a new Subject instance using the specified properties.
@@ -4519,6 +4867,19 @@ export namespace google {
                         }
                     }
 
+                    /** AttributeType enum. */
+                    enum AttributeType {
+                        ATTRIBUTE_TYPE_UNSPECIFIED = 0,
+                        COMMON_NAME = 1,
+                        COUNTRY_CODE = 2,
+                        ORGANIZATION = 3,
+                        ORGANIZATIONAL_UNIT = 4,
+                        LOCALITY = 5,
+                        PROVINCE = 6,
+                        STREET_ADDRESS = 7,
+                        POSTAL_CODE = 8
+                    }
+
                     /** RevocationReason enum. */
                     enum RevocationReason {
                         REVOCATION_REASON_UNSPECIFIED = 0,
@@ -4536,6 +4897,7 @@ export namespace google {
                     enum SubjectRequestMode {
                         SUBJECT_REQUEST_MODE_UNSPECIFIED = 0,
                         DEFAULT = 1,
+                        RDN_SEQUENCE = 3,
                         REFLECTED_SPIFFE = 2
                     }
 
@@ -18595,6 +18957,115 @@ export namespace google {
             GA = 4,
             DEPRECATED = 5
         }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
     }
 
     /** Namespace protobuf. */
@@ -20769,6 +21240,9 @@ export namespace google {
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -225,11 +225,11 @@ export class SearchServiceClient {
       projectLocationCollectionDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
       ),
-      projectLocationCollectionDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
-      ),
       projectLocationCollectionDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionDataStoreSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/sessions/{session}'
       ),
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
@@ -246,11 +246,11 @@ export class SearchServiceClient {
       projectLocationCollectionEngineServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
       ),
-      projectLocationCollectionEngineSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
-      ),
       projectLocationCollectionEngineSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationCollectionEngineSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}'
       ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
@@ -282,11 +282,11 @@ export class SearchServiceClient {
       projectLocationDataStoreServingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
       ),
-      projectLocationDataStoreSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
-      ),
       projectLocationDataStoreSessionAnswerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}/answers/{answer}'
+      ),
+      projectLocationDataStoreSessionsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}/sessions/{session}'
       ),
       projectLocationDataStoreSiteSearchEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
@@ -634,8 +634,14 @@ export class SearchServiceClient {
  *   The ranking expression controls the customized ranking on retrieval
  *   documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
- *   The ranking expression is a single function or multiple functions that are
- *   joined by "+".
+ *   The syntax and supported features depend on the
+ *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
+ *   provided, it defaults to `RANK_BY_EMBEDDING`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+ *   function or multiple functions that are joined by "+".
  *
  *     * ranking_expression = function, { " + ", function };
  *
@@ -650,13 +656,73 @@ export class SearchServiceClient {
  *     between query and document.
  *     * `embedding_field_path`: the document embedding field
  *     used with query embedding vector.
- *     * `dotProduct`: embedding function between embedding_field_path and query
- *     embedding vector.
+ *     * `dotProduct`: embedding function between `embedding_field_path` and
+ *     query embedding vector.
  *
  *    Example ranking expression:
  *
  *      If document has an embedding field doc_embedding, the ranking expression
  *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is set to `RANK_BY_FORMULA`, the following expression types (and
+ *   combinations of those chained using + or
+ *   * operators) are supported:
+ *
+ *     * `double`
+ *     * `signal`
+ *     * `log(signal)`
+ *     * `exp(signal)`
+ *     * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+ *     argument being a denominator constant.
+ *     * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+ *     * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+ *     signal2 | double, else returns signal1.
+ *
+ *     Here are a few examples of ranking formulas that use the supported
+ *     ranking expression types:
+ *
+ *     - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+ *     -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+ *     `semantic_smilarity_score` adjustment.
+ *     - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+ *     is_nan(keyword_similarity_score)` -- rank by the exponent of
+ *     `semantic_similarity_score` filling the value with 0 if it's NaN, also
+ *     add constant 0.3 adjustment to the final score if
+ *     `semantic_similarity_score` is NaN.
+ *     - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+ *     rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+ *     of `keyword_similarity_score` with slight adjustment of reciprocal rank
+ *     of `semantic_smilarity_score`.
+ *
+ *   The following signals are supported:
+ *
+ *     * `semantic_similarity_score`: semantic similarity adjustment that is
+ *     calculated using the embeddings generated by a proprietary Google model.
+ *     This score determines how semantically similar a search query is to a
+ *     document.
+ *     * `keyword_similarity_score`: keyword match adjustment uses the Best
+ *     Match 25 (BM25) ranking function. This score is calculated using a
+ *     probabilistic model to estimate the probability that a document is
+ *     relevant to a given query.
+ *     * `relevance_score`: semantic relevance adjustment that uses a
+ *     proprietary Google model to determine the meaning and intent behind a
+ *     user's query in context with the content in the documents.
+ *     * `pctr_rank`: predicted conversion rate adjustment as a rank use
+ *     predicted Click-through rate (pCTR) to gauge the relevance and
+ *     attractiveness of a search result from a user's perspective. A higher
+ *     pCTR suggests that the result is more likely to satisfy the user's query
+ *     and intent, making it a valuable signal for ranking.
+ *     * `freshness_rank`: freshness adjustment as a rank
+ *     * `document_age`: The time in hours elapsed since the document was last
+ *     updated, a floating-point number (e.g., 0.25 means 15 minutes).
+ *     * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+ *     Google model to determine the keyword-based overlap between the query and
+ *     the document.
+ *     * `base_rank`: the default rank of the result
+ * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
+ *   The backend to use for the ranking expression evaluation.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
  *   website search.
@@ -696,22 +762,16 @@ export class SearchServiceClient {
  *   between /search API calls and /answer API calls.
  *
  *   Example #1 (multi-turn /search API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /search API with the session ID generated in the first call.
- *        Here, the previous search query gets considered in query
- *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *        and the current query is "How about 2023?", the current query will
- *        be interpreted as "How did Alphabet do in 2023?".
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
  *
  *   Example #2 (coordination between /search API calls and /answer API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /answer API with the session ID generated in the first call.
- *        Here, the answer generation happens in the context of the search
- *        results from the first search call.
- *
- *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
- *   gets automatically created. Otherwise, users can use the create-session API
- *   to create a session manually.
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
  *
  *   Multi-turn Search feature is currently at private GA stage. Please use
  *   v1alpha or v1beta version instead before we launch this feature to public
@@ -990,8 +1050,14 @@ export class SearchServiceClient {
  *   The ranking expression controls the customized ranking on retrieval
  *   documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
- *   The ranking expression is a single function or multiple functions that are
- *   joined by "+".
+ *   The syntax and supported features depend on the
+ *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
+ *   provided, it defaults to `RANK_BY_EMBEDDING`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+ *   function or multiple functions that are joined by "+".
  *
  *     * ranking_expression = function, { " + ", function };
  *
@@ -1006,13 +1072,73 @@ export class SearchServiceClient {
  *     between query and document.
  *     * `embedding_field_path`: the document embedding field
  *     used with query embedding vector.
- *     * `dotProduct`: embedding function between embedding_field_path and query
- *     embedding vector.
+ *     * `dotProduct`: embedding function between `embedding_field_path` and
+ *     query embedding vector.
  *
  *    Example ranking expression:
  *
  *      If document has an embedding field doc_embedding, the ranking expression
  *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is set to `RANK_BY_FORMULA`, the following expression types (and
+ *   combinations of those chained using + or
+ *   * operators) are supported:
+ *
+ *     * `double`
+ *     * `signal`
+ *     * `log(signal)`
+ *     * `exp(signal)`
+ *     * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+ *     argument being a denominator constant.
+ *     * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+ *     * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+ *     signal2 | double, else returns signal1.
+ *
+ *     Here are a few examples of ranking formulas that use the supported
+ *     ranking expression types:
+ *
+ *     - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+ *     -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+ *     `semantic_smilarity_score` adjustment.
+ *     - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+ *     is_nan(keyword_similarity_score)` -- rank by the exponent of
+ *     `semantic_similarity_score` filling the value with 0 if it's NaN, also
+ *     add constant 0.3 adjustment to the final score if
+ *     `semantic_similarity_score` is NaN.
+ *     - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+ *     rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+ *     of `keyword_similarity_score` with slight adjustment of reciprocal rank
+ *     of `semantic_smilarity_score`.
+ *
+ *   The following signals are supported:
+ *
+ *     * `semantic_similarity_score`: semantic similarity adjustment that is
+ *     calculated using the embeddings generated by a proprietary Google model.
+ *     This score determines how semantically similar a search query is to a
+ *     document.
+ *     * `keyword_similarity_score`: keyword match adjustment uses the Best
+ *     Match 25 (BM25) ranking function. This score is calculated using a
+ *     probabilistic model to estimate the probability that a document is
+ *     relevant to a given query.
+ *     * `relevance_score`: semantic relevance adjustment that uses a
+ *     proprietary Google model to determine the meaning and intent behind a
+ *     user's query in context with the content in the documents.
+ *     * `pctr_rank`: predicted conversion rate adjustment as a rank use
+ *     predicted Click-through rate (pCTR) to gauge the relevance and
+ *     attractiveness of a search result from a user's perspective. A higher
+ *     pCTR suggests that the result is more likely to satisfy the user's query
+ *     and intent, making it a valuable signal for ranking.
+ *     * `freshness_rank`: freshness adjustment as a rank
+ *     * `document_age`: The time in hours elapsed since the document was last
+ *     updated, a floating-point number (e.g., 0.25 means 15 minutes).
+ *     * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+ *     Google model to determine the keyword-based overlap between the query and
+ *     the document.
+ *     * `base_rank`: the default rank of the result
+ * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
+ *   The backend to use for the ranking expression evaluation.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
  *   website search.
@@ -1052,22 +1178,16 @@ export class SearchServiceClient {
  *   between /search API calls and /answer API calls.
  *
  *   Example #1 (multi-turn /search API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /search API with the session ID generated in the first call.
- *        Here, the previous search query gets considered in query
- *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *        and the current query is "How about 2023?", the current query will
- *        be interpreted as "How did Alphabet do in 2023?".
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
  *
  *   Example #2 (coordination between /search API calls and /answer API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /answer API with the session ID generated in the first call.
- *        Here, the answer generation happens in the context of the search
- *        results from the first search call.
- *
- *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
- *   gets automatically created. Otherwise, users can use the create-session API
- *   to create a session manually.
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
  *
  *   Multi-turn Search feature is currently at private GA stage. Please use
  *   v1alpha or v1beta version instead before we launch this feature to public
@@ -1295,8 +1415,14 @@ export class SearchServiceClient {
  *   The ranking expression controls the customized ranking on retrieval
  *   documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1alpha.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
- *   The ranking expression is a single function or multiple functions that are
- *   joined by "+".
+ *   The syntax and supported features depend on the
+ *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
+ *   provided, it defaults to `RANK_BY_EMBEDDING`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+ *   function or multiple functions that are joined by "+".
  *
  *     * ranking_expression = function, { " + ", function };
  *
@@ -1311,13 +1437,73 @@ export class SearchServiceClient {
  *     between query and document.
  *     * `embedding_field_path`: the document embedding field
  *     used with query embedding vector.
- *     * `dotProduct`: embedding function between embedding_field_path and query
- *     embedding vector.
+ *     * `dotProduct`: embedding function between `embedding_field_path` and
+ *     query embedding vector.
  *
  *    Example ranking expression:
  *
  *      If document has an embedding field doc_embedding, the ranking expression
  *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+ *
+ *   If
+ *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.ranking_expression_backend|ranking_expression_backend}
+ *   is set to `RANK_BY_FORMULA`, the following expression types (and
+ *   combinations of those chained using + or
+ *   * operators) are supported:
+ *
+ *     * `double`
+ *     * `signal`
+ *     * `log(signal)`
+ *     * `exp(signal)`
+ *     * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+ *     argument being a denominator constant.
+ *     * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+ *     * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+ *     signal2 | double, else returns signal1.
+ *
+ *     Here are a few examples of ranking formulas that use the supported
+ *     ranking expression types:
+ *
+ *     - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+ *     -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+ *     `semantic_smilarity_score` adjustment.
+ *     - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+ *     is_nan(keyword_similarity_score)` -- rank by the exponent of
+ *     `semantic_similarity_score` filling the value with 0 if it's NaN, also
+ *     add constant 0.3 adjustment to the final score if
+ *     `semantic_similarity_score` is NaN.
+ *     - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+ *     rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+ *     of `keyword_similarity_score` with slight adjustment of reciprocal rank
+ *     of `semantic_smilarity_score`.
+ *
+ *   The following signals are supported:
+ *
+ *     * `semantic_similarity_score`: semantic similarity adjustment that is
+ *     calculated using the embeddings generated by a proprietary Google model.
+ *     This score determines how semantically similar a search query is to a
+ *     document.
+ *     * `keyword_similarity_score`: keyword match adjustment uses the Best
+ *     Match 25 (BM25) ranking function. This score is calculated using a
+ *     probabilistic model to estimate the probability that a document is
+ *     relevant to a given query.
+ *     * `relevance_score`: semantic relevance adjustment that uses a
+ *     proprietary Google model to determine the meaning and intent behind a
+ *     user's query in context with the content in the documents.
+ *     * `pctr_rank`: predicted conversion rate adjustment as a rank use
+ *     predicted Click-through rate (pCTR) to gauge the relevance and
+ *     attractiveness of a search result from a user's perspective. A higher
+ *     pCTR suggests that the result is more likely to satisfy the user's query
+ *     and intent, making it a valuable signal for ranking.
+ *     * `freshness_rank`: freshness adjustment as a rank
+ *     * `document_age`: The time in hours elapsed since the document was last
+ *     updated, a floating-point number (e.g., 0.25 means 15 minutes).
+ *     * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+ *     Google model to determine the keyword-based overlap between the query and
+ *     the document.
+ *     * `base_rank`: the default rank of the result
+ * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
+ *   The backend to use for the ranking expression evaluation.
  * @param {boolean} request.safeSearch
  *   Whether to turn on safe search. This is only supported for
  *   website search.
@@ -1357,22 +1543,16 @@ export class SearchServiceClient {
  *   between /search API calls and /answer API calls.
  *
  *   Example #1 (multi-turn /search API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /search API with the session ID generated in the first call.
- *        Here, the previous search query gets considered in query
- *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *        and the current query is "How about 2023?", the current query will
- *        be interpreted as "How did Alphabet do in 2023?".
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
  *
  *   Example #2 (coordination between /search API calls and /answer API calls):
- *     1. Call /search API with the auto-session mode (see below).
- *     2. Call /answer API with the session ID generated in the first call.
- *        Here, the answer generation happens in the context of the search
- *        results from the first search call.
- *
- *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
- *   gets automatically created. Otherwise, users can use the create-session API
- *   to create a session manually.
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
  *
  *   Multi-turn Search feature is currently at private GA stage. Please use
  *   v1alpha or v1beta version instead before we launch this feature to public
@@ -2438,81 +2618,6 @@ export class SearchServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionDataStoreSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @param {string} data_store
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationCollectionDataStoreSessionPath(project:string,location:string,collection:string,dataStore:string,session:string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      data_store: dataStore,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).location;
-  }
-
-  /**
-   * Parse the collection from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).collection;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).data_store;
-  }
-
-  /**
-   * Parse the session from ProjectLocationCollectionDataStoreSession resource.
-   *
-   * @param {string} projectLocationCollectionDataStoreSessionName
-   *   A fully-qualified path representing project_location_collection_data_store_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationCollectionDataStoreSessionName(projectLocationCollectionDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.match(projectLocationCollectionDataStoreSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSessionAnswer resource name string.
    *
    * @param {string} project
@@ -2598,6 +2703,81 @@ export class SearchServiceClient {
    */
   matchAnswerFromProjectLocationCollectionDataStoreSessionAnswerName(projectLocationCollectionDataStoreSessionAnswerName: string) {
     return this.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.match(projectLocationCollectionDataStoreSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSessionsPath(project:string,location:string,collection:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      data_store: dataStore,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).data_store;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionDataStoreSessions resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSessionsName
+   *   A fully-qualified path representing project_location_collection_data_store_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionDataStoreSessionsName(projectLocationCollectionDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSessionsPathTemplate.match(projectLocationCollectionDataStoreSessionsName).session;
   }
 
   /**
@@ -2963,81 +3143,6 @@ export class SearchServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationCollectionEngineSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} collection
-   * @param {string} engine
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationCollectionEngineSessionPath(project:string,location:string,collection:string,engine:string,session:string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render({
-      project: project,
-      location: location,
-      collection: collection,
-      engine: engine,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).location;
-  }
-
-  /**
-   * Parse the collection from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the collection.
-   */
-  matchCollectionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).collection;
-  }
-
-  /**
-   * Parse the engine from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the engine.
-   */
-  matchEngineFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).engine;
-  }
-
-  /**
-   * Parse the session from ProjectLocationCollectionEngineSession resource.
-   *
-   * @param {string} projectLocationCollectionEngineSessionName
-   *   A fully-qualified path representing project_location_collection_engine_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationCollectionEngineSessionName(projectLocationCollectionEngineSessionName: string) {
-    return this.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.match(projectLocationCollectionEngineSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationCollectionEngineSessionAnswer resource name string.
    *
    * @param {string} project
@@ -3123,6 +3228,81 @@ export class SearchServiceClient {
    */
   matchAnswerFromProjectLocationCollectionEngineSessionAnswerName(projectLocationCollectionEngineSessionAnswerName: string) {
     return this.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.match(projectLocationCollectionEngineSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineSessionsPath(project:string,location:string,collection:string,engine:string,session:string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).engine;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineSessionsName(projectLocationCollectionEngineSessionsName: string) {
+    return this.pathTemplates.projectLocationCollectionEngineSessionsPathTemplate.match(projectLocationCollectionEngineSessionsName).session;
   }
 
   /**
@@ -3759,68 +3939,6 @@ export class SearchServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationDataStoreSession resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} data_store
-   * @param {string} session
-   * @returns {string} Resource name string.
-   */
-  projectLocationDataStoreSessionPath(project:string,location:string,dataStore:string,session:string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.render({
-      project: project,
-      location: location,
-      data_store: dataStore,
-      session: session,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).project;
-  }
-
-  /**
-   * Parse the location from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).location;
-  }
-
-  /**
-   * Parse the data_store from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the data_store.
-   */
-  matchDataStoreFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).data_store;
-  }
-
-  /**
-   * Parse the session from ProjectLocationDataStoreSession resource.
-   *
-   * @param {string} projectLocationDataStoreSessionName
-   *   A fully-qualified path representing project_location_data_store_session resource.
-   * @returns {string} A string representing the session.
-   */
-  matchSessionFromProjectLocationDataStoreSessionName(projectLocationDataStoreSessionName: string) {
-    return this.pathTemplates.projectLocationDataStoreSessionPathTemplate.match(projectLocationDataStoreSessionName).session;
-  }
-
-  /**
    * Return a fully-qualified projectLocationDataStoreSessionAnswer resource name string.
    *
    * @param {string} project
@@ -3893,6 +4011,68 @@ export class SearchServiceClient {
    */
   matchAnswerFromProjectLocationDataStoreSessionAnswerName(projectLocationDataStoreSessionAnswerName: string) {
     return this.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.match(projectLocationDataStoreSessionAnswerName).answer;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSessionsPath(project:string,location:string,dataStore:string,session:string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).data_store;
+  }
+
+  /**
+   * Parse the session from ProjectLocationDataStoreSessions resource.
+   *
+   * @param {string} projectLocationDataStoreSessionsName
+   *   A fully-qualified path representing project_location_data_store_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationDataStoreSessionsName(projectLocationDataStoreSessionsName: string) {
+    return this.pathTemplates.projectLocationDataStoreSessionsPathTemplate.match(projectLocationDataStoreSessionsName).session;
   }
 
   /**

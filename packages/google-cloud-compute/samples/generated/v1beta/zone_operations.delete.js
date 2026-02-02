@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(operation, project, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the Operations resource to delete, or its unique numeric identifier.
+   *  Name of the Operations resource to delete, or its unique numeric
+   *  identifier.
    */
   // const operation = 'abc123'
   /**

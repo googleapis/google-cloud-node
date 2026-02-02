@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ export class QuotaAdjusterSettingsManagerClient {
   // -- Service calls --
   // -------------------
 /**
- * RPC Method for updating QuotaAdjusterSettings based on the request
+ * Updates the QuotaAdjusterSettings for the specified resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -457,7 +457,7 @@ export class QuotaAdjusterSettingsManagerClient {
       });
   }
 /**
- * RPC Method for getting QuotaAdjusterSettings based on the request
+ * Gets the QuotaAdjusterSettings for the specified resource.
  *
  * @param {Object} request
  *   The request object that will be sent.

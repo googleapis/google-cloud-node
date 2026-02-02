@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,10 +23,12 @@ const run = require('@google-cloud/run');
 function main() {
   const buildsClient = new run.BuildsClient();
   const executionsClient = new run.ExecutionsClient();
+  const instancesClient = new run.InstancesClient();
   const jobsClient = new run.JobsClient();
   const revisionsClient = new run.RevisionsClient();
   const servicesClient = new run.ServicesClient();
   const tasksClient = new run.TasksClient();
+  const workerPoolsClient = new run.WorkerPoolsClient();
 }
 
 main();

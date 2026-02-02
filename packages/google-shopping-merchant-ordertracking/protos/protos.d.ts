@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,727 @@ export namespace google {
 
             /** Namespace ordertracking. */
             namespace ordertracking {
+
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents an OrderTrackingSignalsService */
+                    class OrderTrackingSignalsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new OrderTrackingSignalsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new OrderTrackingSignalsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrderTrackingSignalsService;
+
+                        /**
+                         * Calls CreateOrderTrackingSignal.
+                         * @param request CreateOrderTrackingSignalRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and OrderTrackingSignal
+                         */
+                        public createOrderTrackingSignal(request: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, callback: google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService.CreateOrderTrackingSignalCallback): void;
+
+                        /**
+                         * Calls CreateOrderTrackingSignal.
+                         * @param request CreateOrderTrackingSignalRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createOrderTrackingSignal(request: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest): Promise<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal>;
+                    }
+
+                    namespace OrderTrackingSignalsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService|createOrderTrackingSignal}.
+                         * @param error Error, if any
+                         * @param [response] OrderTrackingSignal
+                         */
+                        type CreateOrderTrackingSignalCallback = (error: (Error|null), response?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal) => void;
+                    }
+
+                    /** Properties of a CreateOrderTrackingSignalRequest. */
+                    interface ICreateOrderTrackingSignalRequest {
+
+                        /** CreateOrderTrackingSignalRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignalId */
+                        orderTrackingSignalId?: (string|null);
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignal */
+                        orderTrackingSignal?: (google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null);
+                    }
+
+                    /** Represents a CreateOrderTrackingSignalRequest. */
+                    class CreateOrderTrackingSignalRequest implements ICreateOrderTrackingSignalRequest {
+
+                        /**
+                         * Constructs a new CreateOrderTrackingSignalRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest);
+
+                        /** CreateOrderTrackingSignalRequest parent. */
+                        public parent: string;
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignalId. */
+                        public orderTrackingSignalId: string;
+
+                        /** CreateOrderTrackingSignalRequest orderTrackingSignal. */
+                        public orderTrackingSignal?: (google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null);
+
+                        /**
+                         * Creates a new CreateOrderTrackingSignalRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateOrderTrackingSignalRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Encodes the specified CreateOrderTrackingSignalRequest message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                         * @param message CreateOrderTrackingSignalRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateOrderTrackingSignalRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                         * @param message CreateOrderTrackingSignalRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateOrderTrackingSignalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateOrderTrackingSignalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Verifies a CreateOrderTrackingSignalRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateOrderTrackingSignalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateOrderTrackingSignalRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest;
+
+                        /**
+                         * Creates a plain object from a CreateOrderTrackingSignalRequest message. Also converts values to other types if specified.
+                         * @param message CreateOrderTrackingSignalRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateOrderTrackingSignalRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateOrderTrackingSignalRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OrderTrackingSignal. */
+                    interface IOrderTrackingSignal {
+
+                        /** OrderTrackingSignal orderTrackingSignalId */
+                        orderTrackingSignalId?: (number|Long|string|null);
+
+                        /** OrderTrackingSignal merchantId */
+                        merchantId?: (number|Long|string|null);
+
+                        /** OrderTrackingSignal orderCreatedTime */
+                        orderCreatedTime?: (google.type.IDateTime|null);
+
+                        /** OrderTrackingSignal orderId */
+                        orderId?: (string|null);
+
+                        /** OrderTrackingSignal shippingInfo */
+                        shippingInfo?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo[]|null);
+
+                        /** OrderTrackingSignal lineItems */
+                        lineItems?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails[]|null);
+
+                        /** OrderTrackingSignal shipmentLineItemMapping */
+                        shipmentLineItemMapping?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping[]|null);
+
+                        /** OrderTrackingSignal customerShippingFee */
+                        customerShippingFee?: (google.shopping.type.IPrice|null);
+
+                        /** OrderTrackingSignal deliveryPostalCode */
+                        deliveryPostalCode?: (string|null);
+
+                        /** OrderTrackingSignal deliveryRegionCode */
+                        deliveryRegionCode?: (string|null);
+                    }
+
+                    /** Represents an OrderTrackingSignal. */
+                    class OrderTrackingSignal implements IOrderTrackingSignal {
+
+                        /**
+                         * Constructs a new OrderTrackingSignal.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal);
+
+                        /** OrderTrackingSignal orderTrackingSignalId. */
+                        public orderTrackingSignalId: (number|Long|string);
+
+                        /** OrderTrackingSignal merchantId. */
+                        public merchantId: (number|Long|string);
+
+                        /** OrderTrackingSignal orderCreatedTime. */
+                        public orderCreatedTime?: (google.type.IDateTime|null);
+
+                        /** OrderTrackingSignal orderId. */
+                        public orderId: string;
+
+                        /** OrderTrackingSignal shippingInfo. */
+                        public shippingInfo: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo[];
+
+                        /** OrderTrackingSignal lineItems. */
+                        public lineItems: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails[];
+
+                        /** OrderTrackingSignal shipmentLineItemMapping. */
+                        public shipmentLineItemMapping: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping[];
+
+                        /** OrderTrackingSignal customerShippingFee. */
+                        public customerShippingFee?: (google.shopping.type.IPrice|null);
+
+                        /** OrderTrackingSignal deliveryPostalCode. */
+                        public deliveryPostalCode: string;
+
+                        /** OrderTrackingSignal deliveryRegionCode. */
+                        public deliveryRegionCode: string;
+
+                        /**
+                         * Creates a new OrderTrackingSignal instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OrderTrackingSignal instance
+                         */
+                        public static create(properties?: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Encodes the specified OrderTrackingSignal message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                         * @param message OrderTrackingSignal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OrderTrackingSignal message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                         * @param message OrderTrackingSignal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OrderTrackingSignal message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OrderTrackingSignal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Decodes an OrderTrackingSignal message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OrderTrackingSignal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Verifies an OrderTrackingSignal message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OrderTrackingSignal message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OrderTrackingSignal
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal;
+
+                        /**
+                         * Creates a plain object from an OrderTrackingSignal message. Also converts values to other types if specified.
+                         * @param message OrderTrackingSignal
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OrderTrackingSignal to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OrderTrackingSignal
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace OrderTrackingSignal {
+
+                        /** Properties of a ShippingInfo. */
+                        interface IShippingInfo {
+
+                            /** ShippingInfo shipmentId */
+                            shipmentId?: (string|null);
+
+                            /** ShippingInfo trackingId */
+                            trackingId?: (string|null);
+
+                            /** ShippingInfo carrier */
+                            carrier?: (string|null);
+
+                            /** ShippingInfo carrierService */
+                            carrierService?: (string|null);
+
+                            /** ShippingInfo shippedTime */
+                            shippedTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo earliestDeliveryPromiseTime */
+                            earliestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo latestDeliveryPromiseTime */
+                            latestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo actualDeliveryTime */
+                            actualDeliveryTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo shippingStatus */
+                            shippingStatus?: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|keyof typeof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|null);
+
+                            /** ShippingInfo originPostalCode */
+                            originPostalCode?: (string|null);
+
+                            /** ShippingInfo originRegionCode */
+                            originRegionCode?: (string|null);
+                        }
+
+                        /** Represents a ShippingInfo. */
+                        class ShippingInfo implements IShippingInfo {
+
+                            /**
+                             * Constructs a new ShippingInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo);
+
+                            /** ShippingInfo shipmentId. */
+                            public shipmentId: string;
+
+                            /** ShippingInfo trackingId. */
+                            public trackingId: string;
+
+                            /** ShippingInfo carrier. */
+                            public carrier: string;
+
+                            /** ShippingInfo carrierService. */
+                            public carrierService: string;
+
+                            /** ShippingInfo shippedTime. */
+                            public shippedTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo earliestDeliveryPromiseTime. */
+                            public earliestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo latestDeliveryPromiseTime. */
+                            public latestDeliveryPromiseTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo actualDeliveryTime. */
+                            public actualDeliveryTime?: (google.type.IDateTime|null);
+
+                            /** ShippingInfo shippingStatus. */
+                            public shippingStatus: (google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|keyof typeof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState);
+
+                            /** ShippingInfo originPostalCode. */
+                            public originPostalCode: string;
+
+                            /** ShippingInfo originRegionCode. */
+                            public originRegionCode: string;
+
+                            /**
+                             * Creates a new ShippingInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShippingInfo instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Encodes the specified ShippingInfo message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                             * @param message ShippingInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShippingInfo message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                             * @param message ShippingInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShippingInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShippingInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Decodes a ShippingInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShippingInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Verifies a ShippingInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShippingInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShippingInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo;
+
+                            /**
+                             * Creates a plain object from a ShippingInfo message. Also converts values to other types if specified.
+                             * @param message ShippingInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShippingInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShippingInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ShippingInfo {
+
+                            /** ShippingState enum. */
+                            enum ShippingState {
+                                SHIPPING_STATE_UNSPECIFIED = 0,
+                                SHIPPED = 1,
+                                DELIVERED = 2
+                            }
+                        }
+
+                        /** Properties of a LineItemDetails. */
+                        interface ILineItemDetails {
+
+                            /** LineItemDetails lineItemId */
+                            lineItemId?: (string|null);
+
+                            /** LineItemDetails productId */
+                            productId?: (string|null);
+
+                            /** LineItemDetails gtins */
+                            gtins?: (string[]|null);
+
+                            /** LineItemDetails mpn */
+                            mpn?: (string|null);
+
+                            /** LineItemDetails productTitle */
+                            productTitle?: (string|null);
+
+                            /** LineItemDetails brand */
+                            brand?: (string|null);
+
+                            /** LineItemDetails quantity */
+                            quantity?: (number|Long|string|null);
+                        }
+
+                        /** Represents a LineItemDetails. */
+                        class LineItemDetails implements ILineItemDetails {
+
+                            /**
+                             * Constructs a new LineItemDetails.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails);
+
+                            /** LineItemDetails lineItemId. */
+                            public lineItemId: string;
+
+                            /** LineItemDetails productId. */
+                            public productId: string;
+
+                            /** LineItemDetails gtins. */
+                            public gtins: string[];
+
+                            /** LineItemDetails mpn. */
+                            public mpn: string;
+
+                            /** LineItemDetails productTitle. */
+                            public productTitle?: (string|null);
+
+                            /** LineItemDetails brand. */
+                            public brand?: (string|null);
+
+                            /** LineItemDetails quantity. */
+                            public quantity: (number|Long|string);
+
+                            /**
+                             * Creates a new LineItemDetails instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LineItemDetails instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Encodes the specified LineItemDetails message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                             * @param message LineItemDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LineItemDetails message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                             * @param message LineItemDetails message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LineItemDetails message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LineItemDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Decodes a LineItemDetails message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LineItemDetails
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Verifies a LineItemDetails message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LineItemDetails message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LineItemDetails
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails;
+
+                            /**
+                             * Creates a plain object from a LineItemDetails message. Also converts values to other types if specified.
+                             * @param message LineItemDetails
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LineItemDetails to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LineItemDetails
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ShipmentLineItemMapping. */
+                        interface IShipmentLineItemMapping {
+
+                            /** ShipmentLineItemMapping shipmentId */
+                            shipmentId?: (string|null);
+
+                            /** ShipmentLineItemMapping lineItemId */
+                            lineItemId?: (string|null);
+
+                            /** ShipmentLineItemMapping quantity */
+                            quantity?: (number|Long|string|null);
+                        }
+
+                        /** Represents a ShipmentLineItemMapping. */
+                        class ShipmentLineItemMapping implements IShipmentLineItemMapping {
+
+                            /**
+                             * Constructs a new ShipmentLineItemMapping.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping);
+
+                            /** ShipmentLineItemMapping shipmentId. */
+                            public shipmentId: string;
+
+                            /** ShipmentLineItemMapping lineItemId. */
+                            public lineItemId: string;
+
+                            /** ShipmentLineItemMapping quantity. */
+                            public quantity: (number|Long|string);
+
+                            /**
+                             * Creates a new ShipmentLineItemMapping instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShipmentLineItemMapping instance
+                             */
+                            public static create(properties?: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Encodes the specified ShipmentLineItemMapping message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                             * @param message ShipmentLineItemMapping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShipmentLineItemMapping message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                             * @param message ShipmentLineItemMapping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShipmentLineItemMapping message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShipmentLineItemMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Decodes a ShipmentLineItemMapping message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShipmentLineItemMapping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Verifies a ShipmentLineItemMapping message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShipmentLineItemMapping message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShipmentLineItemMapping
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping;
+
+                            /**
+                             * Creates a plain object from a ShipmentLineItemMapping message. Also converts values to other types if specified.
+                             * @param message ShipmentLineItemMapping
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShipmentLineItemMapping to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShipmentLineItemMapping
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
 
                 /** Namespace v1beta. */
                 namespace v1beta {

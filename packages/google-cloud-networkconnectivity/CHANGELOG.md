@@ -1,5 +1,42 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.5.1...network-connectivity-v4.6.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [4.5.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.5.0...network-connectivity-v4.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.4.0...network-connectivity-v4.5.0) (2025-09-09)
+
+
+### Features
+
+* [networkconnectivity] introduce DataTransfer APIs ([#6673](https://github.com/googleapis/google-cloud-node/issues/6673)) ([44d6bbb](https://github.com/googleapis/google-cloud-node/commit/44d6bbb3855a7f8fe1b516a9294c0451036bba2f))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.3.0...network-connectivity-v4.4.0) (2025-07-22)
+
+
+### Features
+
+* [networkconnectivity] add Network Connectivity Center APIs for Internal Range service ([#6512](https://github.com/googleapis/google-cloud-node/issues/6512)) ([872ff6e](https://github.com/googleapis/google-cloud-node/commit/872ff6ea741976c5173fbae5c5f5fee8f7f99a51))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.2.0...network-connectivity-v4.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6422](https://github.com/googleapis/google-cloud-node/issues/6422)) ([1e17ea2](https://github.com/googleapis/google-cloud-node/commit/1e17ea2496a502905259010a6702e7cc68f9d1ba))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v4.1.0...network-connectivity-v4.2.0) (2025-06-03)
 
 

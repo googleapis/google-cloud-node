@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ function main(parent, googleApiSource, googleApiSourceId) {
   // const googleApiSource = {}
   /**
    *  Required. The user-provided ID to be assigned to the GoogleApiSource. It
-   *  should match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   *  should match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
    */
   // const googleApiSourceId = 'abc123'
   /**

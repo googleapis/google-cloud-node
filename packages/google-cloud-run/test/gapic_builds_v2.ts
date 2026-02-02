@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -558,6 +558,52 @@ describe('v2.BuildsClient', () => {
                 const result = client.matchExecutionFromExecutionName(fakePath);
                 assert.strictEqual(result, "executionValue");
                 assert((client.pathTemplates.executionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('instance', async () => {
+            const fakePath = "/rendered/path/instance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                instance: "instanceValue",
+            };
+            const client = new buildsModule.v2.BuildsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.instancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.instancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('instancePath', () => {
+                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromInstanceName', () => {
+                const result = client.matchProjectFromInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromInstanceName', () => {
+                const result = client.matchLocationFromInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchInstanceFromInstanceName', () => {
+                const result = client.matchInstanceFromInstanceName(fakePath);
+                assert.strictEqual(result, "instanceValue");
+                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

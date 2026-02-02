@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11502,6 +11502,6737 @@
                         };
     
                         return DeleteServiceConnectionTokenRequest;
+                    })();
+    
+                    v1.DataTransferService = (function() {
+    
+                        /**
+                         * Constructs a new DataTransferService service.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a DataTransferService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DataTransferService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DataTransferService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataTransferService;
+    
+                        /**
+                         * Creates new DataTransferService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DataTransferService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DataTransferService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|listMulticloudDataTransferConfigs}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef ListMulticloudDataTransferConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} [response] ListMulticloudDataTransferConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListMulticloudDataTransferConfigs.
+                         * @function listMulticloudDataTransferConfigs
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest} request ListMulticloudDataTransferConfigsRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.ListMulticloudDataTransferConfigsCallback} callback Node-style callback called with the error, if any, and ListMulticloudDataTransferConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.listMulticloudDataTransferConfigs = function listMulticloudDataTransferConfigs(request, callback) {
+                            return this.rpcCall(listMulticloudDataTransferConfigs, $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest, $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse, request, callback);
+                        }, "name", { value: "ListMulticloudDataTransferConfigs" });
+    
+                        /**
+                         * Calls ListMulticloudDataTransferConfigs.
+                         * @function listMulticloudDataTransferConfigs
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest} request ListMulticloudDataTransferConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|getMulticloudDataTransferConfig}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef GetMulticloudDataTransferConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} [response] MulticloudDataTransferConfig
+                         */
+    
+                        /**
+                         * Calls GetMulticloudDataTransferConfig.
+                         * @function getMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest} request GetMulticloudDataTransferConfigRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.GetMulticloudDataTransferConfigCallback} callback Node-style callback called with the error, if any, and MulticloudDataTransferConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.getMulticloudDataTransferConfig = function getMulticloudDataTransferConfig(request, callback) {
+                            return this.rpcCall(getMulticloudDataTransferConfig, $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest, $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig, request, callback);
+                        }, "name", { value: "GetMulticloudDataTransferConfig" });
+    
+                        /**
+                         * Calls GetMulticloudDataTransferConfig.
+                         * @function getMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest} request GetMulticloudDataTransferConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|createMulticloudDataTransferConfig}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef CreateMulticloudDataTransferConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateMulticloudDataTransferConfig.
+                         * @function createMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest} request CreateMulticloudDataTransferConfigRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.CreateMulticloudDataTransferConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.createMulticloudDataTransferConfig = function createMulticloudDataTransferConfig(request, callback) {
+                            return this.rpcCall(createMulticloudDataTransferConfig, $root.google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateMulticloudDataTransferConfig" });
+    
+                        /**
+                         * Calls CreateMulticloudDataTransferConfig.
+                         * @function createMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest} request CreateMulticloudDataTransferConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|updateMulticloudDataTransferConfig}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef UpdateMulticloudDataTransferConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateMulticloudDataTransferConfig.
+                         * @function updateMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest} request UpdateMulticloudDataTransferConfigRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.UpdateMulticloudDataTransferConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.updateMulticloudDataTransferConfig = function updateMulticloudDataTransferConfig(request, callback) {
+                            return this.rpcCall(updateMulticloudDataTransferConfig, $root.google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateMulticloudDataTransferConfig" });
+    
+                        /**
+                         * Calls UpdateMulticloudDataTransferConfig.
+                         * @function updateMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest} request UpdateMulticloudDataTransferConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|deleteMulticloudDataTransferConfig}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef DeleteMulticloudDataTransferConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteMulticloudDataTransferConfig.
+                         * @function deleteMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest} request DeleteMulticloudDataTransferConfigRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.DeleteMulticloudDataTransferConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.deleteMulticloudDataTransferConfig = function deleteMulticloudDataTransferConfig(request, callback) {
+                            return this.rpcCall(deleteMulticloudDataTransferConfig, $root.google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteMulticloudDataTransferConfig" });
+    
+                        /**
+                         * Calls DeleteMulticloudDataTransferConfig.
+                         * @function deleteMulticloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest} request DeleteMulticloudDataTransferConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|listDestinations}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef ListDestinationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListDestinationsResponse} [response] ListDestinationsResponse
+                         */
+    
+                        /**
+                         * Calls ListDestinations.
+                         * @function listDestinations
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest} request ListDestinationsRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.ListDestinationsCallback} callback Node-style callback called with the error, if any, and ListDestinationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.listDestinations = function listDestinations(request, callback) {
+                            return this.rpcCall(listDestinations, $root.google.cloud.networkconnectivity.v1.ListDestinationsRequest, $root.google.cloud.networkconnectivity.v1.ListDestinationsResponse, request, callback);
+                        }, "name", { value: "ListDestinations" });
+    
+                        /**
+                         * Calls ListDestinations.
+                         * @function listDestinations
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest} request ListDestinationsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListDestinationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|getDestination}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef GetDestinationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.Destination} [response] Destination
+                         */
+    
+                        /**
+                         * Calls GetDestination.
+                         * @function getDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest} request GetDestinationRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.GetDestinationCallback} callback Node-style callback called with the error, if any, and Destination
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.getDestination = function getDestination(request, callback) {
+                            return this.rpcCall(getDestination, $root.google.cloud.networkconnectivity.v1.GetDestinationRequest, $root.google.cloud.networkconnectivity.v1.Destination, request, callback);
+                        }, "name", { value: "GetDestination" });
+    
+                        /**
+                         * Calls GetDestination.
+                         * @function getDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest} request GetDestinationRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.Destination>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|createDestination}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef CreateDestinationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateDestination.
+                         * @function createDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest} request CreateDestinationRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.CreateDestinationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.createDestination = function createDestination(request, callback) {
+                            return this.rpcCall(createDestination, $root.google.cloud.networkconnectivity.v1.CreateDestinationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateDestination" });
+    
+                        /**
+                         * Calls CreateDestination.
+                         * @function createDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest} request CreateDestinationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|updateDestination}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef UpdateDestinationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateDestination.
+                         * @function updateDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest} request UpdateDestinationRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.UpdateDestinationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.updateDestination = function updateDestination(request, callback) {
+                            return this.rpcCall(updateDestination, $root.google.cloud.networkconnectivity.v1.UpdateDestinationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateDestination" });
+    
+                        /**
+                         * Calls UpdateDestination.
+                         * @function updateDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest} request UpdateDestinationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|deleteDestination}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef DeleteDestinationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteDestination.
+                         * @function deleteDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest} request DeleteDestinationRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.DeleteDestinationCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.deleteDestination = function deleteDestination(request, callback) {
+                            return this.rpcCall(deleteDestination, $root.google.cloud.networkconnectivity.v1.DeleteDestinationRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteDestination" });
+    
+                        /**
+                         * Calls DeleteDestination.
+                         * @function deleteDestination
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest} request DeleteDestinationRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|getMulticloudDataTransferSupportedService}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef GetMulticloudDataTransferSupportedServiceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} [response] MulticloudDataTransferSupportedService
+                         */
+    
+                        /**
+                         * Calls GetMulticloudDataTransferSupportedService.
+                         * @function getMulticloudDataTransferSupportedService
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest} request GetMulticloudDataTransferSupportedServiceRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.GetMulticloudDataTransferSupportedServiceCallback} callback Node-style callback called with the error, if any, and MulticloudDataTransferSupportedService
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.getMulticloudDataTransferSupportedService = function getMulticloudDataTransferSupportedService(request, callback) {
+                            return this.rpcCall(getMulticloudDataTransferSupportedService, $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest, $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService, request, callback);
+                        }, "name", { value: "GetMulticloudDataTransferSupportedService" });
+    
+                        /**
+                         * Calls GetMulticloudDataTransferSupportedService.
+                         * @function getMulticloudDataTransferSupportedService
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest} request GetMulticloudDataTransferSupportedServiceRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.DataTransferService|listMulticloudDataTransferSupportedServices}.
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @typedef ListMulticloudDataTransferSupportedServicesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} [response] ListMulticloudDataTransferSupportedServicesResponse
+                         */
+    
+                        /**
+                         * Calls ListMulticloudDataTransferSupportedServices.
+                         * @function listMulticloudDataTransferSupportedServices
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest} request ListMulticloudDataTransferSupportedServicesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.DataTransferService.ListMulticloudDataTransferSupportedServicesCallback} callback Node-style callback called with the error, if any, and ListMulticloudDataTransferSupportedServicesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataTransferService.prototype.listMulticloudDataTransferSupportedServices = function listMulticloudDataTransferSupportedServices(request, callback) {
+                            return this.rpcCall(listMulticloudDataTransferSupportedServices, $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest, $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse, request, callback);
+                        }, "name", { value: "ListMulticloudDataTransferSupportedServices" });
+    
+                        /**
+                         * Calls ListMulticloudDataTransferSupportedServices.
+                         * @function listMulticloudDataTransferSupportedServices
+                         * @memberof google.cloud.networkconnectivity.v1.DataTransferService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest} request ListMulticloudDataTransferSupportedServicesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return DataTransferService;
+                    })();
+    
+                    v1.MulticloudDataTransferConfig = (function() {
+    
+                        /**
+                         * Properties of a MulticloudDataTransferConfig.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IMulticloudDataTransferConfig
+                         * @property {string|null} [name] MulticloudDataTransferConfig name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] MulticloudDataTransferConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] MulticloudDataTransferConfig updateTime
+                         * @property {Object.<string,string>|null} [labels] MulticloudDataTransferConfig labels
+                         * @property {string|null} [etag] MulticloudDataTransferConfig etag
+                         * @property {string|null} [description] MulticloudDataTransferConfig description
+                         * @property {number|null} [destinationsCount] MulticloudDataTransferConfig destinationsCount
+                         * @property {number|null} [destinationsActiveCount] MulticloudDataTransferConfig destinationsActiveCount
+                         * @property {Object.<string,google.cloud.networkconnectivity.v1.IStateTimeline>|null} [services] MulticloudDataTransferConfig services
+                         * @property {string|null} [uid] MulticloudDataTransferConfig uid
+                         */
+    
+                        /**
+                         * Constructs a new MulticloudDataTransferConfig.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a MulticloudDataTransferConfig.
+                         * @implements IMulticloudDataTransferConfig
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig=} [properties] Properties to set
+                         */
+                        function MulticloudDataTransferConfig(properties) {
+                            this.labels = {};
+                            this.services = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MulticloudDataTransferConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.name = "";
+    
+                        /**
+                         * MulticloudDataTransferConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.createTime = null;
+    
+                        /**
+                         * MulticloudDataTransferConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.updateTime = null;
+    
+                        /**
+                         * MulticloudDataTransferConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * MulticloudDataTransferConfig etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.etag = "";
+    
+                        /**
+                         * MulticloudDataTransferConfig description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.description = "";
+    
+                        /**
+                         * MulticloudDataTransferConfig destinationsCount.
+                         * @member {number} destinationsCount
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.destinationsCount = 0;
+    
+                        /**
+                         * MulticloudDataTransferConfig destinationsActiveCount.
+                         * @member {number} destinationsActiveCount
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.destinationsActiveCount = 0;
+    
+                        /**
+                         * MulticloudDataTransferConfig services.
+                         * @member {Object.<string,google.cloud.networkconnectivity.v1.IStateTimeline>} services
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.services = $util.emptyObject;
+    
+                        /**
+                         * MulticloudDataTransferConfig uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         */
+                        MulticloudDataTransferConfig.prototype.uid = "";
+    
+                        /**
+                         * Creates a new MulticloudDataTransferConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} MulticloudDataTransferConfig instance
+                         */
+                        MulticloudDataTransferConfig.create = function create(properties) {
+                            return new MulticloudDataTransferConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MulticloudDataTransferConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig} message MulticloudDataTransferConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MulticloudDataTransferConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            if (message.destinationsCount != null && Object.hasOwnProperty.call(message, "destinationsCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.destinationsCount);
+                            if (message.destinationsActiveCount != null && Object.hasOwnProperty.call(message, "destinationsActiveCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.destinationsActiveCount);
+                            if (message.services != null && Object.hasOwnProperty.call(message, "services"))
+                                for (var keys = Object.keys(message.services), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.networkconnectivity.v1.StateTimeline.encode(message.services[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MulticloudDataTransferConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig} message MulticloudDataTransferConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MulticloudDataTransferConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MulticloudDataTransferConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} MulticloudDataTransferConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MulticloudDataTransferConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.destinationsCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.destinationsActiveCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.services === $util.emptyObject)
+                                            message.services = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.networkconnectivity.v1.StateTimeline.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.services[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MulticloudDataTransferConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} MulticloudDataTransferConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MulticloudDataTransferConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MulticloudDataTransferConfig message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MulticloudDataTransferConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.destinationsCount != null && message.hasOwnProperty("destinationsCount"))
+                                if (!$util.isInteger(message.destinationsCount))
+                                    return "destinationsCount: integer expected";
+                            if (message.destinationsActiveCount != null && message.hasOwnProperty("destinationsActiveCount"))
+                                if (!$util.isInteger(message.destinationsActiveCount))
+                                    return "destinationsActiveCount: integer expected";
+                            if (message.services != null && message.hasOwnProperty("services")) {
+                                if (!$util.isObject(message.services))
+                                    return "services: object expected";
+                                var key = Object.keys(message.services);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.StateTimeline.verify(message.services[key[i]]);
+                                    if (error)
+                                        return "services." + error;
+                                }
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MulticloudDataTransferConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} MulticloudDataTransferConfig
+                         */
+                        MulticloudDataTransferConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.destinationsCount != null)
+                                message.destinationsCount = object.destinationsCount | 0;
+                            if (object.destinationsActiveCount != null)
+                                message.destinationsActiveCount = object.destinationsActiveCount | 0;
+                            if (object.services) {
+                                if (typeof object.services !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.services: object expected");
+                                message.services = {};
+                                for (var keys = Object.keys(object.services), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.services[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.services: object expected");
+                                    message.services[keys[i]] = $root.google.cloud.networkconnectivity.v1.StateTimeline.fromObject(object.services[keys[i]]);
+                                }
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MulticloudDataTransferConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig} message MulticloudDataTransferConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MulticloudDataTransferConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.services = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.description = "";
+                                object.destinationsCount = 0;
+                                object.destinationsActiveCount = 0;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.destinationsCount != null && message.hasOwnProperty("destinationsCount"))
+                                object.destinationsCount = message.destinationsCount;
+                            if (message.destinationsActiveCount != null && message.hasOwnProperty("destinationsActiveCount"))
+                                object.destinationsActiveCount = message.destinationsActiveCount;
+                            if (message.services && (keys2 = Object.keys(message.services)).length) {
+                                object.services = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.services[keys2[j]] = $root.google.cloud.networkconnectivity.v1.StateTimeline.toObject(message.services[keys2[j]], options);
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MulticloudDataTransferConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MulticloudDataTransferConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MulticloudDataTransferConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MulticloudDataTransferConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig";
+                        };
+    
+                        return MulticloudDataTransferConfig;
+                    })();
+    
+                    v1.ListMulticloudDataTransferConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMulticloudDataTransferConfigsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListMulticloudDataTransferConfigsRequest
+                         * @property {string|null} [parent] ListMulticloudDataTransferConfigsRequest parent
+                         * @property {number|null} [pageSize] ListMulticloudDataTransferConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListMulticloudDataTransferConfigsRequest pageToken
+                         * @property {string|null} [filter] ListMulticloudDataTransferConfigsRequest filter
+                         * @property {string|null} [orderBy] ListMulticloudDataTransferConfigsRequest orderBy
+                         * @property {boolean|null} [returnPartialSuccess] ListMulticloudDataTransferConfigsRequest returnPartialSuccess
+                         */
+    
+                        /**
+                         * Constructs a new ListMulticloudDataTransferConfigsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListMulticloudDataTransferConfigsRequest.
+                         * @implements IListMulticloudDataTransferConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListMulticloudDataTransferConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
+                         * Creates a new ListMulticloudDataTransferConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest} ListMulticloudDataTransferConfigsRequest instance
+                         */
+                        ListMulticloudDataTransferConfigsRequest.create = function create(properties) {
+                            return new ListMulticloudDataTransferConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferConfigsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest} message ListMulticloudDataTransferConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.returnPartialSuccess);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsRequest} message ListMulticloudDataTransferConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest} ListMulticloudDataTransferConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.returnPartialSuccess = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest} ListMulticloudDataTransferConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMulticloudDataTransferConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMulticloudDataTransferConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMulticloudDataTransferConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest} ListMulticloudDataTransferConfigsRequest
+                         */
+                        ListMulticloudDataTransferConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMulticloudDataTransferConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest} message ListMulticloudDataTransferConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMulticloudDataTransferConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.returnPartialSuccess = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMulticloudDataTransferConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMulticloudDataTransferConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMulticloudDataTransferConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMulticloudDataTransferConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsRequest";
+                        };
+    
+                        return ListMulticloudDataTransferConfigsRequest;
+                    })();
+    
+                    v1.ListMulticloudDataTransferConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMulticloudDataTransferConfigsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListMulticloudDataTransferConfigsResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig>|null} [multicloudDataTransferConfigs] ListMulticloudDataTransferConfigsResponse multicloudDataTransferConfigs
+                         * @property {string|null} [nextPageToken] ListMulticloudDataTransferConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMulticloudDataTransferConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMulticloudDataTransferConfigsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListMulticloudDataTransferConfigsResponse.
+                         * @implements IListMulticloudDataTransferConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListMulticloudDataTransferConfigsResponse(properties) {
+                            this.multicloudDataTransferConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsResponse multicloudDataTransferConfigs.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig>} multicloudDataTransferConfigs
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsResponse.prototype.multicloudDataTransferConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMulticloudDataTransferConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @instance
+                         */
+                        ListMulticloudDataTransferConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMulticloudDataTransferConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} ListMulticloudDataTransferConfigsResponse instance
+                         */
+                        ListMulticloudDataTransferConfigsResponse.create = function create(properties) {
+                            return new ListMulticloudDataTransferConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferConfigsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsResponse} message ListMulticloudDataTransferConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.multicloudDataTransferConfigs != null && message.multicloudDataTransferConfigs.length)
+                                for (var i = 0; i < message.multicloudDataTransferConfigs.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.encode(message.multicloudDataTransferConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferConfigsResponse} message ListMulticloudDataTransferConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} ListMulticloudDataTransferConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.multicloudDataTransferConfigs && message.multicloudDataTransferConfigs.length))
+                                            message.multicloudDataTransferConfigs = [];
+                                        message.multicloudDataTransferConfigs.push($root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} ListMulticloudDataTransferConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMulticloudDataTransferConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMulticloudDataTransferConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.multicloudDataTransferConfigs != null && message.hasOwnProperty("multicloudDataTransferConfigs")) {
+                                if (!Array.isArray(message.multicloudDataTransferConfigs))
+                                    return "multicloudDataTransferConfigs: array expected";
+                                for (var i = 0; i < message.multicloudDataTransferConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.verify(message.multicloudDataTransferConfigs[i]);
+                                    if (error)
+                                        return "multicloudDataTransferConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMulticloudDataTransferConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} ListMulticloudDataTransferConfigsResponse
+                         */
+                        ListMulticloudDataTransferConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse();
+                            if (object.multicloudDataTransferConfigs) {
+                                if (!Array.isArray(object.multicloudDataTransferConfigs))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse.multicloudDataTransferConfigs: array expected");
+                                message.multicloudDataTransferConfigs = [];
+                                for (var i = 0; i < object.multicloudDataTransferConfigs.length; ++i) {
+                                    if (typeof object.multicloudDataTransferConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse.multicloudDataTransferConfigs: object expected");
+                                    message.multicloudDataTransferConfigs[i] = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.fromObject(object.multicloudDataTransferConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMulticloudDataTransferConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse} message ListMulticloudDataTransferConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMulticloudDataTransferConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.multicloudDataTransferConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.multicloudDataTransferConfigs && message.multicloudDataTransferConfigs.length) {
+                                object.multicloudDataTransferConfigs = [];
+                                for (var j = 0; j < message.multicloudDataTransferConfigs.length; ++j)
+                                    object.multicloudDataTransferConfigs[j] = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.toObject(message.multicloudDataTransferConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMulticloudDataTransferConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMulticloudDataTransferConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMulticloudDataTransferConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMulticloudDataTransferConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListMulticloudDataTransferConfigsResponse";
+                        };
+    
+                        return ListMulticloudDataTransferConfigsResponse;
+                    })();
+    
+                    v1.GetMulticloudDataTransferConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetMulticloudDataTransferConfigRequest
+                         * @property {string|null} [name] GetMulticloudDataTransferConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetMulticloudDataTransferConfigRequest.
+                         * @implements IGetMulticloudDataTransferConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         */
+                        function GetMulticloudDataTransferConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMulticloudDataTransferConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        GetMulticloudDataTransferConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMulticloudDataTransferConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest} GetMulticloudDataTransferConfigRequest instance
+                         */
+                        GetMulticloudDataTransferConfigRequest.create = function create(properties) {
+                            return new GetMulticloudDataTransferConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest} message GetMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMulticloudDataTransferConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferConfigRequest} message GetMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMulticloudDataTransferConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest} GetMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMulticloudDataTransferConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest} GetMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMulticloudDataTransferConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMulticloudDataTransferConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMulticloudDataTransferConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest} GetMulticloudDataTransferConfigRequest
+                         */
+                        GetMulticloudDataTransferConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest} message GetMulticloudDataTransferConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMulticloudDataTransferConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMulticloudDataTransferConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMulticloudDataTransferConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMulticloudDataTransferConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMulticloudDataTransferConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetMulticloudDataTransferConfigRequest";
+                        };
+    
+                        return GetMulticloudDataTransferConfigRequest;
+                    })();
+    
+                    v1.CreateMulticloudDataTransferConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ICreateMulticloudDataTransferConfigRequest
+                         * @property {string|null} [parent] CreateMulticloudDataTransferConfigRequest parent
+                         * @property {string|null} [multicloudDataTransferConfigId] CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfigId
+                         * @property {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig|null} [multicloudDataTransferConfig] CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfig
+                         * @property {string|null} [requestId] CreateMulticloudDataTransferConfigRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a CreateMulticloudDataTransferConfigRequest.
+                         * @implements ICreateMulticloudDataTransferConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateMulticloudDataTransferConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMulticloudDataTransferConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        CreateMulticloudDataTransferConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfigId.
+                         * @member {string} multicloudDataTransferConfigId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        CreateMulticloudDataTransferConfigRequest.prototype.multicloudDataTransferConfigId = "";
+    
+                        /**
+                         * CreateMulticloudDataTransferConfigRequest multicloudDataTransferConfig.
+                         * @member {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig|null|undefined} multicloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        CreateMulticloudDataTransferConfigRequest.prototype.multicloudDataTransferConfig = null;
+    
+                        /**
+                         * CreateMulticloudDataTransferConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        CreateMulticloudDataTransferConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateMulticloudDataTransferConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest} CreateMulticloudDataTransferConfigRequest instance
+                         */
+                        CreateMulticloudDataTransferConfigRequest.create = function create(properties) {
+                            return new CreateMulticloudDataTransferConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest} message CreateMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMulticloudDataTransferConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.multicloudDataTransferConfigId != null && Object.hasOwnProperty.call(message, "multicloudDataTransferConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.multicloudDataTransferConfigId);
+                            if (message.multicloudDataTransferConfig != null && Object.hasOwnProperty.call(message, "multicloudDataTransferConfig"))
+                                $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.encode(message.multicloudDataTransferConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateMulticloudDataTransferConfigRequest} message CreateMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMulticloudDataTransferConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest} CreateMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMulticloudDataTransferConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.multicloudDataTransferConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest} CreateMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMulticloudDataTransferConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMulticloudDataTransferConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMulticloudDataTransferConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.multicloudDataTransferConfigId != null && message.hasOwnProperty("multicloudDataTransferConfigId"))
+                                if (!$util.isString(message.multicloudDataTransferConfigId))
+                                    return "multicloudDataTransferConfigId: string expected";
+                            if (message.multicloudDataTransferConfig != null && message.hasOwnProperty("multicloudDataTransferConfig")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.verify(message.multicloudDataTransferConfig);
+                                if (error)
+                                    return "multicloudDataTransferConfig." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest} CreateMulticloudDataTransferConfigRequest
+                         */
+                        CreateMulticloudDataTransferConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.multicloudDataTransferConfigId != null)
+                                message.multicloudDataTransferConfigId = String(object.multicloudDataTransferConfigId);
+                            if (object.multicloudDataTransferConfig != null) {
+                                if (typeof object.multicloudDataTransferConfig !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest.multicloudDataTransferConfig: object expected");
+                                message.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.fromObject(object.multicloudDataTransferConfig);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest} message CreateMulticloudDataTransferConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMulticloudDataTransferConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.multicloudDataTransferConfigId = "";
+                                object.multicloudDataTransferConfig = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.multicloudDataTransferConfigId != null && message.hasOwnProperty("multicloudDataTransferConfigId"))
+                                object.multicloudDataTransferConfigId = message.multicloudDataTransferConfigId;
+                            if (message.multicloudDataTransferConfig != null && message.hasOwnProperty("multicloudDataTransferConfig"))
+                                object.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.toObject(message.multicloudDataTransferConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMulticloudDataTransferConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMulticloudDataTransferConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateMulticloudDataTransferConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMulticloudDataTransferConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.CreateMulticloudDataTransferConfigRequest";
+                        };
+    
+                        return CreateMulticloudDataTransferConfigRequest;
+                    })();
+    
+                    v1.UpdateMulticloudDataTransferConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IUpdateMulticloudDataTransferConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMulticloudDataTransferConfigRequest updateMask
+                         * @property {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig|null} [multicloudDataTransferConfig] UpdateMulticloudDataTransferConfigRequest multicloudDataTransferConfig
+                         * @property {string|null} [requestId] UpdateMulticloudDataTransferConfigRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an UpdateMulticloudDataTransferConfigRequest.
+                         * @implements IUpdateMulticloudDataTransferConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateMulticloudDataTransferConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMulticloudDataTransferConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateMulticloudDataTransferConfigRequest multicloudDataTransferConfig.
+                         * @member {google.cloud.networkconnectivity.v1.IMulticloudDataTransferConfig|null|undefined} multicloudDataTransferConfig
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.prototype.multicloudDataTransferConfig = null;
+    
+                        /**
+                         * UpdateMulticloudDataTransferConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateMulticloudDataTransferConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest} UpdateMulticloudDataTransferConfigRequest instance
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.create = function create(properties) {
+                            return new UpdateMulticloudDataTransferConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest} message UpdateMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.multicloudDataTransferConfig != null && Object.hasOwnProperty.call(message, "multicloudDataTransferConfig"))
+                                $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.encode(message.multicloudDataTransferConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateMulticloudDataTransferConfigRequest} message UpdateMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest} UpdateMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest} UpdateMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMulticloudDataTransferConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.multicloudDataTransferConfig != null && message.hasOwnProperty("multicloudDataTransferConfig")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.verify(message.multicloudDataTransferConfig);
+                                if (error)
+                                    return "multicloudDataTransferConfig." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest} UpdateMulticloudDataTransferConfigRequest
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.multicloudDataTransferConfig != null) {
+                                if (typeof object.multicloudDataTransferConfig !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest.multicloudDataTransferConfig: object expected");
+                                message.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.fromObject(object.multicloudDataTransferConfig);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest} message UpdateMulticloudDataTransferConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.multicloudDataTransferConfig = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.multicloudDataTransferConfig != null && message.hasOwnProperty("multicloudDataTransferConfig"))
+                                object.multicloudDataTransferConfig = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig.toObject(message.multicloudDataTransferConfig, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMulticloudDataTransferConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMulticloudDataTransferConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMulticloudDataTransferConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.UpdateMulticloudDataTransferConfigRequest";
+                        };
+    
+                        return UpdateMulticloudDataTransferConfigRequest;
+                    })();
+    
+                    v1.DeleteMulticloudDataTransferConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IDeleteMulticloudDataTransferConfigRequest
+                         * @property {string|null} [name] DeleteMulticloudDataTransferConfigRequest name
+                         * @property {string|null} [requestId] DeleteMulticloudDataTransferConfigRequest requestId
+                         * @property {string|null} [etag] DeleteMulticloudDataTransferConfigRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMulticloudDataTransferConfigRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a DeleteMulticloudDataTransferConfigRequest.
+                         * @implements IDeleteMulticloudDataTransferConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteMulticloudDataTransferConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMulticloudDataTransferConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteMulticloudDataTransferConfigRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteMulticloudDataTransferConfigRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @instance
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteMulticloudDataTransferConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest} DeleteMulticloudDataTransferConfigRequest instance
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.create = function create(properties) {
+                            return new DeleteMulticloudDataTransferConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMulticloudDataTransferConfigRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest} message DeleteMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMulticloudDataTransferConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteMulticloudDataTransferConfigRequest} message DeleteMulticloudDataTransferConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMulticloudDataTransferConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest} DeleteMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMulticloudDataTransferConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest} DeleteMulticloudDataTransferConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMulticloudDataTransferConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMulticloudDataTransferConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest} DeleteMulticloudDataTransferConfigRequest
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMulticloudDataTransferConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest} message DeleteMulticloudDataTransferConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMulticloudDataTransferConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteMulticloudDataTransferConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteMulticloudDataTransferConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.DeleteMulticloudDataTransferConfigRequest";
+                        };
+    
+                        return DeleteMulticloudDataTransferConfigRequest;
+                    })();
+    
+                    v1.Destination = (function() {
+    
+                        /**
+                         * Properties of a Destination.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IDestination
+                         * @property {string|null} [name] Destination name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Destination createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Destination updateTime
+                         * @property {Object.<string,string>|null} [labels] Destination labels
+                         * @property {string|null} [etag] Destination etag
+                         * @property {string|null} [description] Destination description
+                         * @property {string|null} [ipPrefix] Destination ipPrefix
+                         * @property {Array.<google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint>|null} [endpoints] Destination endpoints
+                         * @property {google.cloud.networkconnectivity.v1.IStateTimeline|null} [stateTimeline] Destination stateTimeline
+                         * @property {string|null} [uid] Destination uid
+                         */
+    
+                        /**
+                         * Constructs a new Destination.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a Destination.
+                         * @implements IDestination
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IDestination=} [properties] Properties to set
+                         */
+                        function Destination(properties) {
+                            this.labels = {};
+                            this.endpoints = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Destination name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.name = "";
+    
+                        /**
+                         * Destination createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.createTime = null;
+    
+                        /**
+                         * Destination updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.updateTime = null;
+    
+                        /**
+                         * Destination labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Destination etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.etag = "";
+    
+                        /**
+                         * Destination description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.description = "";
+    
+                        /**
+                         * Destination ipPrefix.
+                         * @member {string} ipPrefix
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.ipPrefix = "";
+    
+                        /**
+                         * Destination endpoints.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint>} endpoints
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.endpoints = $util.emptyArray;
+    
+                        /**
+                         * Destination stateTimeline.
+                         * @member {google.cloud.networkconnectivity.v1.IStateTimeline|null|undefined} stateTimeline
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.stateTimeline = null;
+    
+                        /**
+                         * Destination uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         */
+                        Destination.prototype.uid = "";
+    
+                        /**
+                         * Creates a new Destination instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDestination=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.Destination} Destination instance
+                         */
+                        Destination.create = function create(properties) {
+                            return new Destination(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Destination message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Destination.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDestination} message Destination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Destination.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.etag);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            if (message.ipPrefix != null && Object.hasOwnProperty.call(message, "ipPrefix"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.ipPrefix);
+                            if (message.endpoints != null && message.endpoints.length)
+                                for (var i = 0; i < message.endpoints.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.encode(message.endpoints[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.stateTimeline != null && Object.hasOwnProperty.call(message, "stateTimeline"))
+                                $root.google.cloud.networkconnectivity.v1.StateTimeline.encode(message.stateTimeline, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.uid);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Destination.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDestination} message Destination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Destination message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.Destination} Destination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Destination.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.Destination(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.ipPrefix = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.endpoints && message.endpoints.length))
+                                            message.endpoints = [];
+                                        message.endpoints.push($root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.stateTimeline = $root.google.cloud.networkconnectivity.v1.StateTimeline.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Destination message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.Destination} Destination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Destination.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Destination message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Destination.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.ipPrefix != null && message.hasOwnProperty("ipPrefix"))
+                                if (!$util.isString(message.ipPrefix))
+                                    return "ipPrefix: string expected";
+                            if (message.endpoints != null && message.hasOwnProperty("endpoints")) {
+                                if (!Array.isArray(message.endpoints))
+                                    return "endpoints: array expected";
+                                for (var i = 0; i < message.endpoints.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.verify(message.endpoints[i]);
+                                    if (error)
+                                        return "endpoints." + error;
+                                }
+                            }
+                            if (message.stateTimeline != null && message.hasOwnProperty("stateTimeline")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.StateTimeline.verify(message.stateTimeline);
+                                if (error)
+                                    return "stateTimeline." + error;
+                            }
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.Destination} Destination
+                         */
+                        Destination.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.Destination)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.Destination();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Destination.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Destination.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Destination.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.ipPrefix != null)
+                                message.ipPrefix = String(object.ipPrefix);
+                            if (object.endpoints) {
+                                if (!Array.isArray(object.endpoints))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Destination.endpoints: array expected");
+                                message.endpoints = [];
+                                for (var i = 0; i < object.endpoints.length; ++i) {
+                                    if (typeof object.endpoints[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.Destination.endpoints: object expected");
+                                    message.endpoints[i] = $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.fromObject(object.endpoints[i]);
+                                }
+                            }
+                            if (object.stateTimeline != null) {
+                                if (typeof object.stateTimeline !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Destination.stateTimeline: object expected");
+                                message.stateTimeline = $root.google.cloud.networkconnectivity.v1.StateTimeline.fromObject(object.stateTimeline);
+                            }
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.Destination} message Destination
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Destination.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.endpoints = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.etag = "";
+                                object.description = "";
+                                object.ipPrefix = "";
+                                object.stateTimeline = null;
+                                object.uid = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.ipPrefix != null && message.hasOwnProperty("ipPrefix"))
+                                object.ipPrefix = message.ipPrefix;
+                            if (message.endpoints && message.endpoints.length) {
+                                object.endpoints = [];
+                                for (var j = 0; j < message.endpoints.length; ++j)
+                                    object.endpoints[j] = $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.toObject(message.endpoints[j], options);
+                            }
+                            if (message.stateTimeline != null && message.hasOwnProperty("stateTimeline"))
+                                object.stateTimeline = $root.google.cloud.networkconnectivity.v1.StateTimeline.toObject(message.stateTimeline, options);
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Destination to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Destination.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Destination
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.Destination
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Destination";
+                        };
+    
+                        Destination.DestinationEndpoint = (function() {
+    
+                            /**
+                             * Properties of a DestinationEndpoint.
+                             * @memberof google.cloud.networkconnectivity.v1.Destination
+                             * @interface IDestinationEndpoint
+                             * @property {number|Long|null} [asn] DestinationEndpoint asn
+                             * @property {string|null} [csp] DestinationEndpoint csp
+                             * @property {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.State|null} [state] DestinationEndpoint state
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] DestinationEndpoint updateTime
+                             */
+    
+                            /**
+                             * Constructs a new DestinationEndpoint.
+                             * @memberof google.cloud.networkconnectivity.v1.Destination
+                             * @classdesc Represents a DestinationEndpoint.
+                             * @implements IDestinationEndpoint
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint=} [properties] Properties to set
+                             */
+                            function DestinationEndpoint(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DestinationEndpoint asn.
+                             * @member {number|Long} asn
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @instance
+                             */
+                            DestinationEndpoint.prototype.asn = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * DestinationEndpoint csp.
+                             * @member {string} csp
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @instance
+                             */
+                            DestinationEndpoint.prototype.csp = "";
+    
+                            /**
+                             * DestinationEndpoint state.
+                             * @member {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.State} state
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @instance
+                             */
+                            DestinationEndpoint.prototype.state = 0;
+    
+                            /**
+                             * DestinationEndpoint updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @instance
+                             */
+                            DestinationEndpoint.prototype.updateTime = null;
+    
+                            /**
+                             * Creates a new DestinationEndpoint instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint} DestinationEndpoint instance
+                             */
+                            DestinationEndpoint.create = function create(properties) {
+                                return new DestinationEndpoint(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DestinationEndpoint message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint} message DestinationEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DestinationEndpoint.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.asn != null && Object.hasOwnProperty.call(message, "asn"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.asn);
+                                if (message.csp != null && Object.hasOwnProperty.call(message, "csp"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.csp);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DestinationEndpoint message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Destination.IDestinationEndpoint} message DestinationEndpoint message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DestinationEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DestinationEndpoint message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint} DestinationEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DestinationEndpoint.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.asn = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.csp = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DestinationEndpoint message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint} DestinationEndpoint
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DestinationEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DestinationEndpoint message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DestinationEndpoint.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.asn != null && message.hasOwnProperty("asn"))
+                                    if (!$util.isInteger(message.asn) && !(message.asn && $util.isInteger(message.asn.low) && $util.isInteger(message.asn.high)))
+                                        return "asn: integer|Long expected";
+                                if (message.csp != null && message.hasOwnProperty("csp"))
+                                    if (!$util.isString(message.csp))
+                                        return "csp: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DestinationEndpoint message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint} DestinationEndpoint
+                             */
+                            DestinationEndpoint.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint();
+                                if (object.asn != null)
+                                    if ($util.Long)
+                                        (message.asn = $util.Long.fromValue(object.asn)).unsigned = false;
+                                    else if (typeof object.asn === "string")
+                                        message.asn = parseInt(object.asn, 10);
+                                    else if (typeof object.asn === "number")
+                                        message.asn = object.asn;
+                                    else if (typeof object.asn === "object")
+                                        message.asn = new $util.LongBits(object.asn.low >>> 0, object.asn.high >>> 0).toNumber();
+                                if (object.csp != null)
+                                    message.csp = String(object.csp);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "VALID":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "INVALID":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DestinationEndpoint message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint} message DestinationEndpoint
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DestinationEndpoint.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.asn = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.asn = options.longs === String ? "0" : 0;
+                                    object.csp = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.updateTime = null;
+                                }
+                                if (message.asn != null && message.hasOwnProperty("asn"))
+                                    if (typeof message.asn === "number")
+                                        object.asn = options.longs === String ? String(message.asn) : message.asn;
+                                    else
+                                        object.asn = options.longs === String ? $util.Long.prototype.toString.call(message.asn) : options.longs === Number ? new $util.LongBits(message.asn.low >>> 0, message.asn.high >>> 0).toNumber() : message.asn;
+                                if (message.csp != null && message.hasOwnProperty("csp"))
+                                    object.csp = message.csp;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.State[message.state] : message.state;
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DestinationEndpoint to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DestinationEndpoint.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DestinationEndpoint
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DestinationEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.networkconnectivity.v1.Destination.DestinationEndpoint.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} VALID=1 VALID value
+                             * @property {number} INVALID=2 INVALID value
+                             */
+                            DestinationEndpoint.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "VALID"] = 1;
+                                values[valuesById[2] = "INVALID"] = 2;
+                                return values;
+                            })();
+    
+                            return DestinationEndpoint;
+                        })();
+    
+                        return Destination;
+                    })();
+    
+                    v1.ListDestinationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDestinationsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListDestinationsRequest
+                         * @property {string|null} [parent] ListDestinationsRequest parent
+                         * @property {number|null} [pageSize] ListDestinationsRequest pageSize
+                         * @property {string|null} [pageToken] ListDestinationsRequest pageToken
+                         * @property {string|null} [filter] ListDestinationsRequest filter
+                         * @property {string|null} [orderBy] ListDestinationsRequest orderBy
+                         * @property {boolean|null} [returnPartialSuccess] ListDestinationsRequest returnPartialSuccess
+                         */
+    
+                        /**
+                         * Constructs a new ListDestinationsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListDestinationsRequest.
+                         * @implements IListDestinationsRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest=} [properties] Properties to set
+                         */
+                        function ListDestinationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDestinationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDestinationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDestinationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDestinationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListDestinationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListDestinationsRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         */
+                        ListDestinationsRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
+                         * Creates a new ListDestinationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsRequest} ListDestinationsRequest instance
+                         */
+                        ListDestinationsRequest.create = function create(properties) {
+                            return new ListDestinationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDestinationsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListDestinationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest} message ListDestinationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDestinationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.returnPartialSuccess);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDestinationsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListDestinationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsRequest} message ListDestinationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDestinationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDestinationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsRequest} ListDestinationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDestinationsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListDestinationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.returnPartialSuccess = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDestinationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsRequest} ListDestinationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDestinationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDestinationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDestinationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDestinationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsRequest} ListDestinationsRequest
+                         */
+                        ListDestinationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListDestinationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListDestinationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDestinationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListDestinationsRequest} message ListDestinationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDestinationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.returnPartialSuccess = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDestinationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDestinationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDestinationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDestinationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListDestinationsRequest";
+                        };
+    
+                        return ListDestinationsRequest;
+                    })();
+    
+                    v1.ListDestinationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDestinationsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListDestinationsResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IDestination>|null} [destinations] ListDestinationsResponse destinations
+                         * @property {string|null} [nextPageToken] ListDestinationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListDestinationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListDestinationsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListDestinationsResponse.
+                         * @implements IListDestinationsResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsResponse=} [properties] Properties to set
+                         */
+                        function ListDestinationsResponse(properties) {
+                            this.destinations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDestinationsResponse destinations.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IDestination>} destinations
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @instance
+                         */
+                        ListDestinationsResponse.prototype.destinations = $util.emptyArray;
+    
+                        /**
+                         * ListDestinationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @instance
+                         */
+                        ListDestinationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListDestinationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @instance
+                         */
+                        ListDestinationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListDestinationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsResponse} ListDestinationsResponse instance
+                         */
+                        ListDestinationsResponse.create = function create(properties) {
+                            return new ListDestinationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDestinationsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListDestinationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsResponse} message ListDestinationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDestinationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.destinations != null && message.destinations.length)
+                                for (var i = 0; i < message.destinations.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Destination.encode(message.destinations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDestinationsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListDestinationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListDestinationsResponse} message ListDestinationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDestinationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDestinationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsResponse} ListDestinationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDestinationsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListDestinationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.destinations && message.destinations.length))
+                                            message.destinations = [];
+                                        message.destinations.push($root.google.cloud.networkconnectivity.v1.Destination.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDestinationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsResponse} ListDestinationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDestinationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDestinationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDestinationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                if (!Array.isArray(message.destinations))
+                                    return "destinations: array expected";
+                                for (var i = 0; i < message.destinations.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Destination.verify(message.destinations[i]);
+                                    if (error)
+                                        return "destinations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDestinationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListDestinationsResponse} ListDestinationsResponse
+                         */
+                        ListDestinationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListDestinationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListDestinationsResponse();
+                            if (object.destinations) {
+                                if (!Array.isArray(object.destinations))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListDestinationsResponse.destinations: array expected");
+                                message.destinations = [];
+                                for (var i = 0; i < object.destinations.length; ++i) {
+                                    if (typeof object.destinations[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListDestinationsResponse.destinations: object expected");
+                                    message.destinations[i] = $root.google.cloud.networkconnectivity.v1.Destination.fromObject(object.destinations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListDestinationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDestinationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListDestinationsResponse} message ListDestinationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDestinationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.destinations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.destinations && message.destinations.length) {
+                                object.destinations = [];
+                                for (var j = 0; j < message.destinations.length; ++j)
+                                    object.destinations[j] = $root.google.cloud.networkconnectivity.v1.Destination.toObject(message.destinations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDestinationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDestinationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDestinationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListDestinationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDestinationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListDestinationsResponse";
+                        };
+    
+                        return ListDestinationsResponse;
+                    })();
+    
+                    v1.GetDestinationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetDestinationRequest
+                         * @property {string|null} [name] GetDestinationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetDestinationRequest.
+                         * @implements IGetDestinationRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest=} [properties] Properties to set
+                         */
+                        function GetDestinationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDestinationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @instance
+                         */
+                        GetDestinationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDestinationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetDestinationRequest} GetDestinationRequest instance
+                         */
+                        GetDestinationRequest.create = function create(properties) {
+                            return new GetDestinationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetDestinationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest} message GetDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDestinationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetDestinationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetDestinationRequest} message GetDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDestinationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDestinationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetDestinationRequest} GetDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDestinationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetDestinationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDestinationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetDestinationRequest} GetDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDestinationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDestinationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDestinationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetDestinationRequest} GetDestinationRequest
+                         */
+                        GetDestinationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetDestinationRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetDestinationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDestinationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetDestinationRequest} message GetDestinationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDestinationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDestinationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDestinationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDestinationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetDestinationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDestinationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetDestinationRequest";
+                        };
+    
+                        return GetDestinationRequest;
+                    })();
+    
+                    v1.CreateDestinationRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ICreateDestinationRequest
+                         * @property {string|null} [parent] CreateDestinationRequest parent
+                         * @property {string|null} [destinationId] CreateDestinationRequest destinationId
+                         * @property {google.cloud.networkconnectivity.v1.IDestination|null} [destination] CreateDestinationRequest destination
+                         * @property {string|null} [requestId] CreateDestinationRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a CreateDestinationRequest.
+                         * @implements ICreateDestinationRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest=} [properties] Properties to set
+                         */
+                        function CreateDestinationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDestinationRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @instance
+                         */
+                        CreateDestinationRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDestinationRequest destinationId.
+                         * @member {string} destinationId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @instance
+                         */
+                        CreateDestinationRequest.prototype.destinationId = "";
+    
+                        /**
+                         * CreateDestinationRequest destination.
+                         * @member {google.cloud.networkconnectivity.v1.IDestination|null|undefined} destination
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @instance
+                         */
+                        CreateDestinationRequest.prototype.destination = null;
+    
+                        /**
+                         * CreateDestinationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @instance
+                         */
+                        CreateDestinationRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateDestinationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.CreateDestinationRequest} CreateDestinationRequest instance
+                         */
+                        CreateDestinationRequest.create = function create(properties) {
+                            return new CreateDestinationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateDestinationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest} message CreateDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDestinationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.destinationId != null && Object.hasOwnProperty.call(message, "destinationId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.destinationId);
+                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                $root.google.cloud.networkconnectivity.v1.Destination.encode(message.destination, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateDestinationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateDestinationRequest} message CreateDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDestinationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDestinationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.CreateDestinationRequest} CreateDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDestinationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.CreateDestinationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.destinationId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.destination = $root.google.cloud.networkconnectivity.v1.Destination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDestinationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.CreateDestinationRequest} CreateDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDestinationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDestinationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDestinationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.destinationId != null && message.hasOwnProperty("destinationId"))
+                                if (!$util.isString(message.destinationId))
+                                    return "destinationId: string expected";
+                            if (message.destination != null && message.hasOwnProperty("destination")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.Destination.verify(message.destination);
+                                if (error)
+                                    return "destination." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.CreateDestinationRequest} CreateDestinationRequest
+                         */
+                        CreateDestinationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.CreateDestinationRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.CreateDestinationRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.destinationId != null)
+                                message.destinationId = String(object.destinationId);
+                            if (object.destination != null) {
+                                if (typeof object.destination !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.CreateDestinationRequest.destination: object expected");
+                                message.destination = $root.google.cloud.networkconnectivity.v1.Destination.fromObject(object.destination);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDestinationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.CreateDestinationRequest} message CreateDestinationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDestinationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.destinationId = "";
+                                object.destination = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.destinationId != null && message.hasOwnProperty("destinationId"))
+                                object.destinationId = message.destinationId;
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                object.destination = $root.google.cloud.networkconnectivity.v1.Destination.toObject(message.destination, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDestinationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDestinationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDestinationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.CreateDestinationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDestinationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.CreateDestinationRequest";
+                        };
+    
+                        return CreateDestinationRequest;
+                    })();
+    
+                    v1.UpdateDestinationRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IUpdateDestinationRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDestinationRequest updateMask
+                         * @property {google.cloud.networkconnectivity.v1.IDestination|null} [destination] UpdateDestinationRequest destination
+                         * @property {string|null} [requestId] UpdateDestinationRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an UpdateDestinationRequest.
+                         * @implements IUpdateDestinationRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest=} [properties] Properties to set
+                         */
+                        function UpdateDestinationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDestinationRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @instance
+                         */
+                        UpdateDestinationRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateDestinationRequest destination.
+                         * @member {google.cloud.networkconnectivity.v1.IDestination|null|undefined} destination
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @instance
+                         */
+                        UpdateDestinationRequest.prototype.destination = null;
+    
+                        /**
+                         * UpdateDestinationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @instance
+                         */
+                        UpdateDestinationRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateDestinationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateDestinationRequest} UpdateDestinationRequest instance
+                         */
+                        UpdateDestinationRequest.create = function create(properties) {
+                            return new UpdateDestinationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateDestinationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest} message UpdateDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDestinationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                $root.google.cloud.networkconnectivity.v1.Destination.encode(message.destination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateDestinationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateDestinationRequest} message UpdateDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDestinationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDestinationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateDestinationRequest} UpdateDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDestinationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.UpdateDestinationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.destination = $root.google.cloud.networkconnectivity.v1.Destination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDestinationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateDestinationRequest} UpdateDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDestinationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDestinationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDestinationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.destination != null && message.hasOwnProperty("destination")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.Destination.verify(message.destination);
+                                if (error)
+                                    return "destination." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateDestinationRequest} UpdateDestinationRequest
+                         */
+                        UpdateDestinationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.UpdateDestinationRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.UpdateDestinationRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateDestinationRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.destination != null) {
+                                if (typeof object.destination !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateDestinationRequest.destination: object expected");
+                                message.destination = $root.google.cloud.networkconnectivity.v1.Destination.fromObject(object.destination);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDestinationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.UpdateDestinationRequest} message UpdateDestinationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDestinationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.destination = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.destination != null && message.hasOwnProperty("destination"))
+                                object.destination = $root.google.cloud.networkconnectivity.v1.Destination.toObject(message.destination, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDestinationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDestinationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDestinationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateDestinationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDestinationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.UpdateDestinationRequest";
+                        };
+    
+                        return UpdateDestinationRequest;
+                    })();
+    
+                    v1.DeleteDestinationRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IDeleteDestinationRequest
+                         * @property {string|null} [name] DeleteDestinationRequest name
+                         * @property {string|null} [requestId] DeleteDestinationRequest requestId
+                         * @property {string|null} [etag] DeleteDestinationRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDestinationRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a DeleteDestinationRequest.
+                         * @implements IDeleteDestinationRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest=} [properties] Properties to set
+                         */
+                        function DeleteDestinationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDestinationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @instance
+                         */
+                        DeleteDestinationRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteDestinationRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @instance
+                         */
+                        DeleteDestinationRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteDestinationRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @instance
+                         */
+                        DeleteDestinationRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteDestinationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteDestinationRequest} DeleteDestinationRequest instance
+                         */
+                        DeleteDestinationRequest.create = function create(properties) {
+                            return new DeleteDestinationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDestinationRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteDestinationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest} message DeleteDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDestinationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDestinationRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteDestinationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteDestinationRequest} message DeleteDestinationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDestinationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDestinationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteDestinationRequest} DeleteDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDestinationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.DeleteDestinationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDestinationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteDestinationRequest} DeleteDestinationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDestinationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDestinationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDestinationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDestinationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteDestinationRequest} DeleteDestinationRequest
+                         */
+                        DeleteDestinationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.DeleteDestinationRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.DeleteDestinationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDestinationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.DeleteDestinationRequest} message DeleteDestinationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDestinationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDestinationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDestinationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDestinationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteDestinationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDestinationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.DeleteDestinationRequest";
+                        };
+    
+                        return DeleteDestinationRequest;
+                    })();
+    
+                    v1.StateTimeline = (function() {
+    
+                        /**
+                         * Properties of a StateTimeline.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IStateTimeline
+                         * @property {Array.<google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata>|null} [states] StateTimeline states
+                         */
+    
+                        /**
+                         * Constructs a new StateTimeline.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a StateTimeline.
+                         * @implements IStateTimeline
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IStateTimeline=} [properties] Properties to set
+                         */
+                        function StateTimeline(properties) {
+                            this.states = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StateTimeline states.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata>} states
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @instance
+                         */
+                        StateTimeline.prototype.states = $util.emptyArray;
+    
+                        /**
+                         * Creates a new StateTimeline instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IStateTimeline=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.StateTimeline} StateTimeline instance
+                         */
+                        StateTimeline.create = function create(properties) {
+                            return new StateTimeline(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StateTimeline message. Does not implicitly {@link google.cloud.networkconnectivity.v1.StateTimeline.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IStateTimeline} message StateTimeline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateTimeline.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.states != null && message.states.length)
+                                for (var i = 0; i < message.states.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.encode(message.states[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StateTimeline message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.StateTimeline.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IStateTimeline} message StateTimeline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StateTimeline.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StateTimeline message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.StateTimeline} StateTimeline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateTimeline.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.StateTimeline();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.states && message.states.length))
+                                            message.states = [];
+                                        message.states.push($root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StateTimeline message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.StateTimeline} StateTimeline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StateTimeline.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StateTimeline message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StateTimeline.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.states != null && message.hasOwnProperty("states")) {
+                                if (!Array.isArray(message.states))
+                                    return "states: array expected";
+                                for (var i = 0; i < message.states.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.verify(message.states[i]);
+                                    if (error)
+                                        return "states." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StateTimeline message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.StateTimeline} StateTimeline
+                         */
+                        StateTimeline.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.StateTimeline)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.StateTimeline();
+                            if (object.states) {
+                                if (!Array.isArray(object.states))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.StateTimeline.states: array expected");
+                                message.states = [];
+                                for (var i = 0; i < object.states.length; ++i) {
+                                    if (typeof object.states[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.StateTimeline.states: object expected");
+                                    message.states[i] = $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.fromObject(object.states[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StateTimeline message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.StateTimeline} message StateTimeline
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StateTimeline.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.states = [];
+                            if (message.states && message.states.length) {
+                                object.states = [];
+                                for (var j = 0; j < message.states.length; ++j)
+                                    object.states[j] = $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.toObject(message.states[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StateTimeline to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StateTimeline.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StateTimeline
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StateTimeline.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.StateTimeline";
+                        };
+    
+                        StateTimeline.StateMetadata = (function() {
+    
+                            /**
+                             * Properties of a StateMetadata.
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                             * @interface IStateMetadata
+                             * @property {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.State|null} [state] StateMetadata state
+                             * @property {google.protobuf.ITimestamp|null} [effectiveTime] StateMetadata effectiveTime
+                             */
+    
+                            /**
+                             * Constructs a new StateMetadata.
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline
+                             * @classdesc Represents a StateMetadata.
+                             * @implements IStateMetadata
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata=} [properties] Properties to set
+                             */
+                            function StateMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StateMetadata state.
+                             * @member {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.State} state
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @instance
+                             */
+                            StateMetadata.prototype.state = 0;
+    
+                            /**
+                             * StateMetadata effectiveTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} effectiveTime
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @instance
+                             */
+                            StateMetadata.prototype.effectiveTime = null;
+    
+                            /**
+                             * Creates a new StateMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata} StateMetadata instance
+                             */
+                            StateMetadata.create = function create(properties) {
+                                return new StateMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StateMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata} message StateMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StateMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.effectiveTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StateMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.StateTimeline.IStateMetadata} message StateMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StateMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StateMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata} StateMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StateMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.effectiveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StateMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata} StateMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StateMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StateMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StateMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime);
+                                    if (error)
+                                        return "effectiveTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StateMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata} StateMetadata
+                             */
+                            StateMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata();
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ADDING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "ACTIVE":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "SUSPENDING":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                case "SUSPENDED":
+                                case 5:
+                                    message.state = 5;
+                                    break;
+                                }
+                                if (object.effectiveTime != null) {
+                                    if (typeof object.effectiveTime !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.effectiveTime: object expected");
+                                    message.effectiveTime = $root.google.protobuf.Timestamp.fromObject(object.effectiveTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StateMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata} message StateMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StateMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.effectiveTime = null;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.State[message.state] : message.state;
+                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime"))
+                                    object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StateMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StateMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StateMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StateMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} ADDING=1 ADDING value
+                             * @property {number} ACTIVE=2 ACTIVE value
+                             * @property {number} DELETING=3 DELETING value
+                             * @property {number} SUSPENDING=4 SUSPENDING value
+                             * @property {number} SUSPENDED=5 SUSPENDED value
+                             */
+                            StateMetadata.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ADDING"] = 1;
+                                values[valuesById[2] = "ACTIVE"] = 2;
+                                values[valuesById[3] = "DELETING"] = 3;
+                                values[valuesById[4] = "SUSPENDING"] = 4;
+                                values[valuesById[5] = "SUSPENDED"] = 5;
+                                return values;
+                            })();
+    
+                            return StateMetadata;
+                        })();
+    
+                        return StateTimeline;
+                    })();
+    
+                    v1.MulticloudDataTransferSupportedService = (function() {
+    
+                        /**
+                         * Properties of a MulticloudDataTransferSupportedService.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IMulticloudDataTransferSupportedService
+                         * @property {string|null} [name] MulticloudDataTransferSupportedService name
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IServiceConfig>|null} [serviceConfigs] MulticloudDataTransferSupportedService serviceConfigs
+                         */
+    
+                        /**
+                         * Constructs a new MulticloudDataTransferSupportedService.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a MulticloudDataTransferSupportedService.
+                         * @implements IMulticloudDataTransferSupportedService
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService=} [properties] Properties to set
+                         */
+                        function MulticloudDataTransferSupportedService(properties) {
+                            this.serviceConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MulticloudDataTransferSupportedService name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @instance
+                         */
+                        MulticloudDataTransferSupportedService.prototype.name = "";
+    
+                        /**
+                         * MulticloudDataTransferSupportedService serviceConfigs.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IServiceConfig>} serviceConfigs
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @instance
+                         */
+                        MulticloudDataTransferSupportedService.prototype.serviceConfigs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MulticloudDataTransferSupportedService instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} MulticloudDataTransferSupportedService instance
+                         */
+                        MulticloudDataTransferSupportedService.create = function create(properties) {
+                            return new MulticloudDataTransferSupportedService(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MulticloudDataTransferSupportedService message. Does not implicitly {@link google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService} message MulticloudDataTransferSupportedService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MulticloudDataTransferSupportedService.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.serviceConfigs != null && message.serviceConfigs.length)
+                                for (var i = 0; i < message.serviceConfigs.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.ServiceConfig.encode(message.serviceConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MulticloudDataTransferSupportedService message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService} message MulticloudDataTransferSupportedService message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MulticloudDataTransferSupportedService.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MulticloudDataTransferSupportedService message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} MulticloudDataTransferSupportedService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MulticloudDataTransferSupportedService.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.serviceConfigs && message.serviceConfigs.length))
+                                            message.serviceConfigs = [];
+                                        message.serviceConfigs.push($root.google.cloud.networkconnectivity.v1.ServiceConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MulticloudDataTransferSupportedService message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} MulticloudDataTransferSupportedService
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MulticloudDataTransferSupportedService.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MulticloudDataTransferSupportedService message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MulticloudDataTransferSupportedService.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.serviceConfigs != null && message.hasOwnProperty("serviceConfigs")) {
+                                if (!Array.isArray(message.serviceConfigs))
+                                    return "serviceConfigs: array expected";
+                                for (var i = 0; i < message.serviceConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.ServiceConfig.verify(message.serviceConfigs[i]);
+                                    if (error)
+                                        return "serviceConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MulticloudDataTransferSupportedService message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} MulticloudDataTransferSupportedService
+                         */
+                        MulticloudDataTransferSupportedService.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.serviceConfigs) {
+                                if (!Array.isArray(object.serviceConfigs))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.serviceConfigs: array expected");
+                                message.serviceConfigs = [];
+                                for (var i = 0; i < object.serviceConfigs.length; ++i) {
+                                    if (typeof object.serviceConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.serviceConfigs: object expected");
+                                    message.serviceConfigs[i] = $root.google.cloud.networkconnectivity.v1.ServiceConfig.fromObject(object.serviceConfigs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MulticloudDataTransferSupportedService message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService} message MulticloudDataTransferSupportedService
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MulticloudDataTransferSupportedService.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.serviceConfigs = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.serviceConfigs && message.serviceConfigs.length) {
+                                object.serviceConfigs = [];
+                                for (var j = 0; j < message.serviceConfigs.length; ++j)
+                                    object.serviceConfigs[j] = $root.google.cloud.networkconnectivity.v1.ServiceConfig.toObject(message.serviceConfigs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MulticloudDataTransferSupportedService to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MulticloudDataTransferSupportedService.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MulticloudDataTransferSupportedService
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MulticloudDataTransferSupportedService.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService";
+                        };
+    
+                        return MulticloudDataTransferSupportedService;
+                    })();
+    
+                    v1.ServiceConfig = (function() {
+    
+                        /**
+                         * Properties of a ServiceConfig.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IServiceConfig
+                         * @property {google.cloud.networkconnectivity.v1.ServiceConfig.EligibilityCriteria|null} [eligibilityCriteria] ServiceConfig eligibilityCriteria
+                         * @property {google.protobuf.ITimestamp|null} [supportEndTime] ServiceConfig supportEndTime
+                         */
+    
+                        /**
+                         * Constructs a new ServiceConfig.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ServiceConfig.
+                         * @implements IServiceConfig
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IServiceConfig=} [properties] Properties to set
+                         */
+                        function ServiceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServiceConfig eligibilityCriteria.
+                         * @member {google.cloud.networkconnectivity.v1.ServiceConfig.EligibilityCriteria} eligibilityCriteria
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.eligibilityCriteria = 0;
+    
+                        /**
+                         * ServiceConfig supportEndTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} supportEndTime
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @instance
+                         */
+                        ServiceConfig.prototype.supportEndTime = null;
+    
+                        /**
+                         * Creates a new ServiceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IServiceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ServiceConfig} ServiceConfig instance
+                         */
+                        ServiceConfig.create = function create(properties) {
+                            return new ServiceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ServiceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IServiceConfig} message ServiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.eligibilityCriteria != null && Object.hasOwnProperty.call(message, "eligibilityCriteria"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.eligibilityCriteria);
+                            if (message.supportEndTime != null && Object.hasOwnProperty.call(message, "supportEndTime"))
+                                $root.google.protobuf.Timestamp.encode(message.supportEndTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServiceConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ServiceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IServiceConfig} message ServiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServiceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ServiceConfig} ServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ServiceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.eligibilityCriteria = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.supportEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServiceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ServiceConfig} ServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServiceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServiceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.eligibilityCriteria != null && message.hasOwnProperty("eligibilityCriteria"))
+                                switch (message.eligibilityCriteria) {
+                                default:
+                                    return "eligibilityCriteria: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.supportEndTime != null && message.hasOwnProperty("supportEndTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.supportEndTime);
+                                if (error)
+                                    return "supportEndTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ServiceConfig} ServiceConfig
+                         */
+                        ServiceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ServiceConfig)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ServiceConfig();
+                            switch (object.eligibilityCriteria) {
+                            default:
+                                if (typeof object.eligibilityCriteria === "number") {
+                                    message.eligibilityCriteria = object.eligibilityCriteria;
+                                    break;
+                                }
+                                break;
+                            case "ELIGIBILITY_CRITERIA_UNSPECIFIED":
+                            case 0:
+                                message.eligibilityCriteria = 0;
+                                break;
+                            case "NETWORK_SERVICE_TIER_PREMIUM_ONLY":
+                            case 1:
+                                message.eligibilityCriteria = 1;
+                                break;
+                            case "NETWORK_SERVICE_TIER_STANDARD_ONLY":
+                            case 2:
+                                message.eligibilityCriteria = 2;
+                                break;
+                            case "REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY":
+                            case 3:
+                                message.eligibilityCriteria = 3;
+                                break;
+                            }
+                            if (object.supportEndTime != null) {
+                                if (typeof object.supportEndTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ServiceConfig.supportEndTime: object expected");
+                                message.supportEndTime = $root.google.protobuf.Timestamp.fromObject(object.supportEndTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServiceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ServiceConfig} message ServiceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServiceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.eligibilityCriteria = options.enums === String ? "ELIGIBILITY_CRITERIA_UNSPECIFIED" : 0;
+                                object.supportEndTime = null;
+                            }
+                            if (message.eligibilityCriteria != null && message.hasOwnProperty("eligibilityCriteria"))
+                                object.eligibilityCriteria = options.enums === String ? $root.google.cloud.networkconnectivity.v1.ServiceConfig.EligibilityCriteria[message.eligibilityCriteria] === undefined ? message.eligibilityCriteria : $root.google.cloud.networkconnectivity.v1.ServiceConfig.EligibilityCriteria[message.eligibilityCriteria] : message.eligibilityCriteria;
+                            if (message.supportEndTime != null && message.hasOwnProperty("supportEndTime"))
+                                object.supportEndTime = $root.google.protobuf.Timestamp.toObject(message.supportEndTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServiceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServiceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServiceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ServiceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ServiceConfig";
+                        };
+    
+                        /**
+                         * EligibilityCriteria enum.
+                         * @name google.cloud.networkconnectivity.v1.ServiceConfig.EligibilityCriteria
+                         * @enum {number}
+                         * @property {number} ELIGIBILITY_CRITERIA_UNSPECIFIED=0 ELIGIBILITY_CRITERIA_UNSPECIFIED value
+                         * @property {number} NETWORK_SERVICE_TIER_PREMIUM_ONLY=1 NETWORK_SERVICE_TIER_PREMIUM_ONLY value
+                         * @property {number} NETWORK_SERVICE_TIER_STANDARD_ONLY=2 NETWORK_SERVICE_TIER_STANDARD_ONLY value
+                         * @property {number} REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY=3 REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY value
+                         */
+                        ServiceConfig.EligibilityCriteria = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ELIGIBILITY_CRITERIA_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NETWORK_SERVICE_TIER_PREMIUM_ONLY"] = 1;
+                            values[valuesById[2] = "NETWORK_SERVICE_TIER_STANDARD_ONLY"] = 2;
+                            values[valuesById[3] = "REQUEST_ENDPOINT_REGIONAL_ENDPOINT_ONLY"] = 3;
+                            return values;
+                        })();
+    
+                        return ServiceConfig;
+                    })();
+    
+                    v1.GetMulticloudDataTransferSupportedServiceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMulticloudDataTransferSupportedServiceRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetMulticloudDataTransferSupportedServiceRequest
+                         * @property {string|null} [name] GetMulticloudDataTransferSupportedServiceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMulticloudDataTransferSupportedServiceRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetMulticloudDataTransferSupportedServiceRequest.
+                         * @implements IGetMulticloudDataTransferSupportedServiceRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest=} [properties] Properties to set
+                         */
+                        function GetMulticloudDataTransferSupportedServiceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMulticloudDataTransferSupportedServiceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @instance
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMulticloudDataTransferSupportedServiceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest} GetMulticloudDataTransferSupportedServiceRequest instance
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.create = function create(properties) {
+                            return new GetMulticloudDataTransferSupportedServiceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMulticloudDataTransferSupportedServiceRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest} message GetMulticloudDataTransferSupportedServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMulticloudDataTransferSupportedServiceRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetMulticloudDataTransferSupportedServiceRequest} message GetMulticloudDataTransferSupportedServiceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMulticloudDataTransferSupportedServiceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest} GetMulticloudDataTransferSupportedServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMulticloudDataTransferSupportedServiceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest} GetMulticloudDataTransferSupportedServiceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMulticloudDataTransferSupportedServiceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMulticloudDataTransferSupportedServiceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest} GetMulticloudDataTransferSupportedServiceRequest
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMulticloudDataTransferSupportedServiceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest} message GetMulticloudDataTransferSupportedServiceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMulticloudDataTransferSupportedServiceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMulticloudDataTransferSupportedServiceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMulticloudDataTransferSupportedServiceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetMulticloudDataTransferSupportedServiceRequest";
+                        };
+    
+                        return GetMulticloudDataTransferSupportedServiceRequest;
+                    })();
+    
+                    v1.ListMulticloudDataTransferSupportedServicesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMulticloudDataTransferSupportedServicesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListMulticloudDataTransferSupportedServicesRequest
+                         * @property {string|null} [parent] ListMulticloudDataTransferSupportedServicesRequest parent
+                         * @property {number|null} [pageSize] ListMulticloudDataTransferSupportedServicesRequest pageSize
+                         * @property {string|null} [pageToken] ListMulticloudDataTransferSupportedServicesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMulticloudDataTransferSupportedServicesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListMulticloudDataTransferSupportedServicesRequest.
+                         * @implements IListMulticloudDataTransferSupportedServicesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest=} [properties] Properties to set
+                         */
+                        function ListMulticloudDataTransferSupportedServicesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMulticloudDataTransferSupportedServicesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMulticloudDataTransferSupportedServicesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMulticloudDataTransferSupportedServicesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMulticloudDataTransferSupportedServicesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest} ListMulticloudDataTransferSupportedServicesRequest instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.create = function create(properties) {
+                            return new ListMulticloudDataTransferSupportedServicesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferSupportedServicesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest} message ListMulticloudDataTransferSupportedServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferSupportedServicesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesRequest} message ListMulticloudDataTransferSupportedServicesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferSupportedServicesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest} ListMulticloudDataTransferSupportedServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferSupportedServicesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest} ListMulticloudDataTransferSupportedServicesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMulticloudDataTransferSupportedServicesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMulticloudDataTransferSupportedServicesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest} ListMulticloudDataTransferSupportedServicesRequest
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMulticloudDataTransferSupportedServicesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest} message ListMulticloudDataTransferSupportedServicesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMulticloudDataTransferSupportedServicesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMulticloudDataTransferSupportedServicesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMulticloudDataTransferSupportedServicesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest";
+                        };
+    
+                        return ListMulticloudDataTransferSupportedServicesRequest;
+                    })();
+    
+                    v1.ListMulticloudDataTransferSupportedServicesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMulticloudDataTransferSupportedServicesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListMulticloudDataTransferSupportedServicesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService>|null} [multicloudDataTransferSupportedServices] ListMulticloudDataTransferSupportedServicesResponse multicloudDataTransferSupportedServices
+                         * @property {string|null} [nextPageToken] ListMulticloudDataTransferSupportedServicesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMulticloudDataTransferSupportedServicesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListMulticloudDataTransferSupportedServicesResponse.
+                         * @implements IListMulticloudDataTransferSupportedServicesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesResponse=} [properties] Properties to set
+                         */
+                        function ListMulticloudDataTransferSupportedServicesResponse(properties) {
+                            this.multicloudDataTransferSupportedServices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMulticloudDataTransferSupportedServicesResponse multicloudDataTransferSupportedServices.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IMulticloudDataTransferSupportedService>} multicloudDataTransferSupportedServices
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.prototype.multicloudDataTransferSupportedServices = $util.emptyArray;
+    
+                        /**
+                         * ListMulticloudDataTransferSupportedServicesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListMulticloudDataTransferSupportedServicesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} ListMulticloudDataTransferSupportedServicesResponse instance
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.create = function create(properties) {
+                            return new ListMulticloudDataTransferSupportedServicesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferSupportedServicesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesResponse} message ListMulticloudDataTransferSupportedServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.multicloudDataTransferSupportedServices != null && message.multicloudDataTransferSupportedServices.length)
+                                for (var i = 0; i < message.multicloudDataTransferSupportedServices.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.encode(message.multicloudDataTransferSupportedServices[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMulticloudDataTransferSupportedServicesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListMulticloudDataTransferSupportedServicesResponse} message ListMulticloudDataTransferSupportedServicesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferSupportedServicesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} ListMulticloudDataTransferSupportedServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.multicloudDataTransferSupportedServices && message.multicloudDataTransferSupportedServices.length))
+                                            message.multicloudDataTransferSupportedServices = [];
+                                        message.multicloudDataTransferSupportedServices.push($root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMulticloudDataTransferSupportedServicesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} ListMulticloudDataTransferSupportedServicesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMulticloudDataTransferSupportedServicesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.multicloudDataTransferSupportedServices != null && message.hasOwnProperty("multicloudDataTransferSupportedServices")) {
+                                if (!Array.isArray(message.multicloudDataTransferSupportedServices))
+                                    return "multicloudDataTransferSupportedServices: array expected";
+                                for (var i = 0; i < message.multicloudDataTransferSupportedServices.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.verify(message.multicloudDataTransferSupportedServices[i]);
+                                    if (error)
+                                        return "multicloudDataTransferSupportedServices." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMulticloudDataTransferSupportedServicesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} ListMulticloudDataTransferSupportedServicesResponse
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse();
+                            if (object.multicloudDataTransferSupportedServices) {
+                                if (!Array.isArray(object.multicloudDataTransferSupportedServices))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse.multicloudDataTransferSupportedServices: array expected");
+                                message.multicloudDataTransferSupportedServices = [];
+                                for (var i = 0; i < object.multicloudDataTransferSupportedServices.length; ++i) {
+                                    if (typeof object.multicloudDataTransferSupportedServices[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse.multicloudDataTransferSupportedServices: object expected");
+                                    message.multicloudDataTransferSupportedServices[i] = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.fromObject(object.multicloudDataTransferSupportedServices[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMulticloudDataTransferSupportedServicesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse} message ListMulticloudDataTransferSupportedServicesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.multicloudDataTransferSupportedServices = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.multicloudDataTransferSupportedServices && message.multicloudDataTransferSupportedServices.length) {
+                                object.multicloudDataTransferSupportedServices = [];
+                                for (var j = 0; j < message.multicloudDataTransferSupportedServices.length; ++j)
+                                    object.multicloudDataTransferSupportedServices[j] = $root.google.cloud.networkconnectivity.v1.MulticloudDataTransferSupportedService.toObject(message.multicloudDataTransferSupportedServices[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMulticloudDataTransferSupportedServicesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMulticloudDataTransferSupportedServicesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMulticloudDataTransferSupportedServicesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesResponse";
+                        };
+    
+                        return ListMulticloudDataTransferSupportedServicesResponse;
                     })();
     
                     v1.HubService = (function() {
@@ -30391,6 +37122,3120 @@
                         };
     
                         return UpdateGroupRequest;
+                    })();
+    
+                    v1.InternalRangeService = (function() {
+    
+                        /**
+                         * Constructs a new InternalRangeService service.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an InternalRangeService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function InternalRangeService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (InternalRangeService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = InternalRangeService;
+    
+                        /**
+                         * Creates new InternalRangeService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {InternalRangeService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        InternalRangeService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.InternalRangeService|listInternalRanges}.
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @typedef ListInternalRangesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} [response] ListInternalRangesResponse
+                         */
+    
+                        /**
+                         * Calls ListInternalRanges.
+                         * @function listInternalRanges
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest} request ListInternalRangesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.InternalRangeService.ListInternalRangesCallback} callback Node-style callback called with the error, if any, and ListInternalRangesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InternalRangeService.prototype.listInternalRanges = function listInternalRanges(request, callback) {
+                            return this.rpcCall(listInternalRanges, $root.google.cloud.networkconnectivity.v1.ListInternalRangesRequest, $root.google.cloud.networkconnectivity.v1.ListInternalRangesResponse, request, callback);
+                        }, "name", { value: "ListInternalRanges" });
+    
+                        /**
+                         * Calls ListInternalRanges.
+                         * @function listInternalRanges
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest} request ListInternalRangesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListInternalRangesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.InternalRangeService|getInternalRange}.
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @typedef GetInternalRangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.InternalRange} [response] InternalRange
+                         */
+    
+                        /**
+                         * Calls GetInternalRange.
+                         * @function getInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest} request GetInternalRangeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.InternalRangeService.GetInternalRangeCallback} callback Node-style callback called with the error, if any, and InternalRange
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InternalRangeService.prototype.getInternalRange = function getInternalRange(request, callback) {
+                            return this.rpcCall(getInternalRange, $root.google.cloud.networkconnectivity.v1.GetInternalRangeRequest, $root.google.cloud.networkconnectivity.v1.InternalRange, request, callback);
+                        }, "name", { value: "GetInternalRange" });
+    
+                        /**
+                         * Calls GetInternalRange.
+                         * @function getInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest} request GetInternalRangeRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.InternalRange>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.InternalRangeService|createInternalRange}.
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @typedef CreateInternalRangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateInternalRange.
+                         * @function createInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest} request CreateInternalRangeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.InternalRangeService.CreateInternalRangeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InternalRangeService.prototype.createInternalRange = function createInternalRange(request, callback) {
+                            return this.rpcCall(createInternalRange, $root.google.cloud.networkconnectivity.v1.CreateInternalRangeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateInternalRange" });
+    
+                        /**
+                         * Calls CreateInternalRange.
+                         * @function createInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest} request CreateInternalRangeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.InternalRangeService|updateInternalRange}.
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @typedef UpdateInternalRangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateInternalRange.
+                         * @function updateInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest} request UpdateInternalRangeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.InternalRangeService.UpdateInternalRangeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InternalRangeService.prototype.updateInternalRange = function updateInternalRange(request, callback) {
+                            return this.rpcCall(updateInternalRange, $root.google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateInternalRange" });
+    
+                        /**
+                         * Calls UpdateInternalRange.
+                         * @function updateInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest} request UpdateInternalRangeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.InternalRangeService|deleteInternalRange}.
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @typedef DeleteInternalRangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteInternalRange.
+                         * @function deleteInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest} request DeleteInternalRangeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.InternalRangeService.DeleteInternalRangeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(InternalRangeService.prototype.deleteInternalRange = function deleteInternalRange(request, callback) {
+                            return this.rpcCall(deleteInternalRange, $root.google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteInternalRange" });
+    
+                        /**
+                         * Calls DeleteInternalRange.
+                         * @function deleteInternalRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRangeService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest} request DeleteInternalRangeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return InternalRangeService;
+                    })();
+    
+                    v1.InternalRange = (function() {
+    
+                        /**
+                         * Properties of an InternalRange.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IInternalRange
+                         * @property {string|null} [name] InternalRange name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] InternalRange createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] InternalRange updateTime
+                         * @property {Object.<string,string>|null} [labels] InternalRange labels
+                         * @property {string|null} [description] InternalRange description
+                         * @property {string|null} [ipCidrRange] InternalRange ipCidrRange
+                         * @property {string|null} [network] InternalRange network
+                         * @property {google.cloud.networkconnectivity.v1.InternalRange.Usage|null} [usage] InternalRange usage
+                         * @property {google.cloud.networkconnectivity.v1.InternalRange.Peering|null} [peering] InternalRange peering
+                         * @property {number|null} [prefixLength] InternalRange prefixLength
+                         * @property {Array.<string>|null} [targetCidrRange] InternalRange targetCidrRange
+                         * @property {Array.<string>|null} [users] InternalRange users
+                         * @property {Array.<google.cloud.networkconnectivity.v1.InternalRange.Overlap>|null} [overlaps] InternalRange overlaps
+                         * @property {google.cloud.networkconnectivity.v1.InternalRange.IMigration|null} [migration] InternalRange migration
+                         * @property {boolean|null} [immutable] InternalRange immutable
+                         * @property {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions|null} [allocationOptions] InternalRange allocationOptions
+                         * @property {Array.<string>|null} [excludeCidrRanges] InternalRange excludeCidrRanges
+                         */
+    
+                        /**
+                         * Constructs a new InternalRange.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an InternalRange.
+                         * @implements IInternalRange
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IInternalRange=} [properties] Properties to set
+                         */
+                        function InternalRange(properties) {
+                            this.labels = {};
+                            this.targetCidrRange = [];
+                            this.users = [];
+                            this.overlaps = [];
+                            this.excludeCidrRanges = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InternalRange name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.name = "";
+    
+                        /**
+                         * InternalRange createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.createTime = null;
+    
+                        /**
+                         * InternalRange updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.updateTime = null;
+    
+                        /**
+                         * InternalRange labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * InternalRange description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.description = "";
+    
+                        /**
+                         * InternalRange ipCidrRange.
+                         * @member {string} ipCidrRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.ipCidrRange = "";
+    
+                        /**
+                         * InternalRange network.
+                         * @member {string} network
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.network = "";
+    
+                        /**
+                         * InternalRange usage.
+                         * @member {google.cloud.networkconnectivity.v1.InternalRange.Usage} usage
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.usage = 0;
+    
+                        /**
+                         * InternalRange peering.
+                         * @member {google.cloud.networkconnectivity.v1.InternalRange.Peering} peering
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.peering = 0;
+    
+                        /**
+                         * InternalRange prefixLength.
+                         * @member {number} prefixLength
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.prefixLength = 0;
+    
+                        /**
+                         * InternalRange targetCidrRange.
+                         * @member {Array.<string>} targetCidrRange
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.targetCidrRange = $util.emptyArray;
+    
+                        /**
+                         * InternalRange users.
+                         * @member {Array.<string>} users
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.users = $util.emptyArray;
+    
+                        /**
+                         * InternalRange overlaps.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.InternalRange.Overlap>} overlaps
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.overlaps = $util.emptyArray;
+    
+                        /**
+                         * InternalRange migration.
+                         * @member {google.cloud.networkconnectivity.v1.InternalRange.IMigration|null|undefined} migration
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.migration = null;
+    
+                        /**
+                         * InternalRange immutable.
+                         * @member {boolean} immutable
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.immutable = false;
+    
+                        /**
+                         * InternalRange allocationOptions.
+                         * @member {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions|null|undefined} allocationOptions
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.allocationOptions = null;
+    
+                        /**
+                         * InternalRange excludeCidrRanges.
+                         * @member {Array.<string>} excludeCidrRanges
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         */
+                        InternalRange.prototype.excludeCidrRanges = $util.emptyArray;
+    
+                        /**
+                         * Creates a new InternalRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IInternalRange=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.InternalRange} InternalRange instance
+                         */
+                        InternalRange.create = function create(properties) {
+                            return new InternalRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InternalRange message. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IInternalRange} message InternalRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InternalRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.ipCidrRange != null && Object.hasOwnProperty.call(message, "ipCidrRange"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.ipCidrRange);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.network);
+                            if (message.usage != null && Object.hasOwnProperty.call(message, "usage"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.usage);
+                            if (message.peering != null && Object.hasOwnProperty.call(message, "peering"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.peering);
+                            if (message.prefixLength != null && Object.hasOwnProperty.call(message, "prefixLength"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.prefixLength);
+                            if (message.targetCidrRange != null && message.targetCidrRange.length)
+                                for (var i = 0; i < message.targetCidrRange.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.targetCidrRange[i]);
+                            if (message.users != null && message.users.length)
+                                for (var i = 0; i < message.users.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.users[i]);
+                            if (message.overlaps != null && message.overlaps.length) {
+                                writer.uint32(/* id 13, wireType 2 =*/106).fork();
+                                for (var i = 0; i < message.overlaps.length; ++i)
+                                    writer.int32(message.overlaps[i]);
+                                writer.ldelim();
+                            }
+                            if (message.migration != null && Object.hasOwnProperty.call(message, "migration"))
+                                $root.google.cloud.networkconnectivity.v1.InternalRange.Migration.encode(message.migration, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.immutable != null && Object.hasOwnProperty.call(message, "immutable"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.immutable);
+                            if (message.allocationOptions != null && Object.hasOwnProperty.call(message, "allocationOptions"))
+                                $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.encode(message.allocationOptions, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.excludeCidrRanges != null && message.excludeCidrRanges.length)
+                                for (var i = 0; i < message.excludeCidrRanges.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.excludeCidrRanges[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InternalRange message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IInternalRange} message InternalRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InternalRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InternalRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.InternalRange} InternalRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InternalRange.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.InternalRange(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ipCidrRange = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.usage = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.peering = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.prefixLength = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (!(message.targetCidrRange && message.targetCidrRange.length))
+                                            message.targetCidrRange = [];
+                                        message.targetCidrRange.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.users && message.users.length))
+                                            message.users = [];
+                                        message.users.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.overlaps && message.overlaps.length))
+                                            message.overlaps = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.overlaps.push(reader.int32());
+                                        } else
+                                            message.overlaps.push(reader.int32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.migration = $root.google.cloud.networkconnectivity.v1.InternalRange.Migration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.immutable = reader.bool();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.allocationOptions = $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        if (!(message.excludeCidrRanges && message.excludeCidrRanges.length))
+                                            message.excludeCidrRanges = [];
+                                        message.excludeCidrRanges.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InternalRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.InternalRange} InternalRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InternalRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InternalRange message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InternalRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                if (!$util.isString(message.ipCidrRange))
+                                    return "ipCidrRange: string expected";
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            if (message.usage != null && message.hasOwnProperty("usage"))
+                                switch (message.usage) {
+                                default:
+                                    return "usage: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.peering != null && message.hasOwnProperty("peering"))
+                                switch (message.peering) {
+                                default:
+                                    return "peering: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.prefixLength != null && message.hasOwnProperty("prefixLength"))
+                                if (!$util.isInteger(message.prefixLength))
+                                    return "prefixLength: integer expected";
+                            if (message.targetCidrRange != null && message.hasOwnProperty("targetCidrRange")) {
+                                if (!Array.isArray(message.targetCidrRange))
+                                    return "targetCidrRange: array expected";
+                                for (var i = 0; i < message.targetCidrRange.length; ++i)
+                                    if (!$util.isString(message.targetCidrRange[i]))
+                                        return "targetCidrRange: string[] expected";
+                            }
+                            if (message.users != null && message.hasOwnProperty("users")) {
+                                if (!Array.isArray(message.users))
+                                    return "users: array expected";
+                                for (var i = 0; i < message.users.length; ++i)
+                                    if (!$util.isString(message.users[i]))
+                                        return "users: string[] expected";
+                            }
+                            if (message.overlaps != null && message.hasOwnProperty("overlaps")) {
+                                if (!Array.isArray(message.overlaps))
+                                    return "overlaps: array expected";
+                                for (var i = 0; i < message.overlaps.length; ++i)
+                                    switch (message.overlaps[i]) {
+                                    default:
+                                        return "overlaps: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                            }
+                            if (message.migration != null && message.hasOwnProperty("migration")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.InternalRange.Migration.verify(message.migration);
+                                if (error)
+                                    return "migration." + error;
+                            }
+                            if (message.immutable != null && message.hasOwnProperty("immutable"))
+                                if (typeof message.immutable !== "boolean")
+                                    return "immutable: boolean expected";
+                            if (message.allocationOptions != null && message.hasOwnProperty("allocationOptions")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.verify(message.allocationOptions);
+                                if (error)
+                                    return "allocationOptions." + error;
+                            }
+                            if (message.excludeCidrRanges != null && message.hasOwnProperty("excludeCidrRanges")) {
+                                if (!Array.isArray(message.excludeCidrRanges))
+                                    return "excludeCidrRanges: array expected";
+                                for (var i = 0; i < message.excludeCidrRanges.length; ++i)
+                                    if (!$util.isString(message.excludeCidrRanges[i]))
+                                        return "excludeCidrRanges: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InternalRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.InternalRange} InternalRange
+                         */
+                        InternalRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.InternalRange)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.InternalRange();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.ipCidrRange != null)
+                                message.ipCidrRange = String(object.ipCidrRange);
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            switch (object.usage) {
+                            default:
+                                if (typeof object.usage === "number") {
+                                    message.usage = object.usage;
+                                    break;
+                                }
+                                break;
+                            case "USAGE_UNSPECIFIED":
+                            case 0:
+                                message.usage = 0;
+                                break;
+                            case "FOR_VPC":
+                            case 1:
+                                message.usage = 1;
+                                break;
+                            case "EXTERNAL_TO_VPC":
+                            case 2:
+                                message.usage = 2;
+                                break;
+                            case "FOR_MIGRATION":
+                            case 3:
+                                message.usage = 3;
+                                break;
+                            }
+                            switch (object.peering) {
+                            default:
+                                if (typeof object.peering === "number") {
+                                    message.peering = object.peering;
+                                    break;
+                                }
+                                break;
+                            case "PEERING_UNSPECIFIED":
+                            case 0:
+                                message.peering = 0;
+                                break;
+                            case "FOR_SELF":
+                            case 1:
+                                message.peering = 1;
+                                break;
+                            case "FOR_PEER":
+                            case 2:
+                                message.peering = 2;
+                                break;
+                            case "NOT_SHARED":
+                            case 3:
+                                message.peering = 3;
+                                break;
+                            }
+                            if (object.prefixLength != null)
+                                message.prefixLength = object.prefixLength | 0;
+                            if (object.targetCidrRange) {
+                                if (!Array.isArray(object.targetCidrRange))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.targetCidrRange: array expected");
+                                message.targetCidrRange = [];
+                                for (var i = 0; i < object.targetCidrRange.length; ++i)
+                                    message.targetCidrRange[i] = String(object.targetCidrRange[i]);
+                            }
+                            if (object.users) {
+                                if (!Array.isArray(object.users))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.users: array expected");
+                                message.users = [];
+                                for (var i = 0; i < object.users.length; ++i)
+                                    message.users[i] = String(object.users[i]);
+                            }
+                            if (object.overlaps) {
+                                if (!Array.isArray(object.overlaps))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.overlaps: array expected");
+                                message.overlaps = [];
+                                for (var i = 0; i < object.overlaps.length; ++i)
+                                    switch (object.overlaps[i]) {
+                                    default:
+                                        if (typeof object.overlaps[i] === "number") {
+                                            message.overlaps[i] = object.overlaps[i];
+                                            break;
+                                        }
+                                    case "OVERLAP_UNSPECIFIED":
+                                    case 0:
+                                        message.overlaps[i] = 0;
+                                        break;
+                                    case "OVERLAP_ROUTE_RANGE":
+                                    case 1:
+                                        message.overlaps[i] = 1;
+                                        break;
+                                    case "OVERLAP_EXISTING_SUBNET_RANGE":
+                                    case 2:
+                                        message.overlaps[i] = 2;
+                                        break;
+                                    }
+                            }
+                            if (object.migration != null) {
+                                if (typeof object.migration !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.migration: object expected");
+                                message.migration = $root.google.cloud.networkconnectivity.v1.InternalRange.Migration.fromObject(object.migration);
+                            }
+                            if (object.immutable != null)
+                                message.immutable = Boolean(object.immutable);
+                            if (object.allocationOptions != null) {
+                                if (typeof object.allocationOptions !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.allocationOptions: object expected");
+                                message.allocationOptions = $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.fromObject(object.allocationOptions);
+                            }
+                            if (object.excludeCidrRanges) {
+                                if (!Array.isArray(object.excludeCidrRanges))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.InternalRange.excludeCidrRanges: array expected");
+                                message.excludeCidrRanges = [];
+                                for (var i = 0; i < object.excludeCidrRanges.length; ++i)
+                                    message.excludeCidrRanges[i] = String(object.excludeCidrRanges[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InternalRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.InternalRange} message InternalRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InternalRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.targetCidrRange = [];
+                                object.users = [];
+                                object.overlaps = [];
+                                object.excludeCidrRanges = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.ipCidrRange = "";
+                                object.network = "";
+                                object.usage = options.enums === String ? "USAGE_UNSPECIFIED" : 0;
+                                object.peering = options.enums === String ? "PEERING_UNSPECIFIED" : 0;
+                                object.prefixLength = 0;
+                                object.migration = null;
+                                object.immutable = false;
+                                object.allocationOptions = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                object.ipCidrRange = message.ipCidrRange;
+                            if (message.network != null && message.hasOwnProperty("network"))
+                                object.network = message.network;
+                            if (message.usage != null && message.hasOwnProperty("usage"))
+                                object.usage = options.enums === String ? $root.google.cloud.networkconnectivity.v1.InternalRange.Usage[message.usage] === undefined ? message.usage : $root.google.cloud.networkconnectivity.v1.InternalRange.Usage[message.usage] : message.usage;
+                            if (message.peering != null && message.hasOwnProperty("peering"))
+                                object.peering = options.enums === String ? $root.google.cloud.networkconnectivity.v1.InternalRange.Peering[message.peering] === undefined ? message.peering : $root.google.cloud.networkconnectivity.v1.InternalRange.Peering[message.peering] : message.peering;
+                            if (message.prefixLength != null && message.hasOwnProperty("prefixLength"))
+                                object.prefixLength = message.prefixLength;
+                            if (message.targetCidrRange && message.targetCidrRange.length) {
+                                object.targetCidrRange = [];
+                                for (var j = 0; j < message.targetCidrRange.length; ++j)
+                                    object.targetCidrRange[j] = message.targetCidrRange[j];
+                            }
+                            if (message.users && message.users.length) {
+                                object.users = [];
+                                for (var j = 0; j < message.users.length; ++j)
+                                    object.users[j] = message.users[j];
+                            }
+                            if (message.overlaps && message.overlaps.length) {
+                                object.overlaps = [];
+                                for (var j = 0; j < message.overlaps.length; ++j)
+                                    object.overlaps[j] = options.enums === String ? $root.google.cloud.networkconnectivity.v1.InternalRange.Overlap[message.overlaps[j]] === undefined ? message.overlaps[j] : $root.google.cloud.networkconnectivity.v1.InternalRange.Overlap[message.overlaps[j]] : message.overlaps[j];
+                            }
+                            if (message.migration != null && message.hasOwnProperty("migration"))
+                                object.migration = $root.google.cloud.networkconnectivity.v1.InternalRange.Migration.toObject(message.migration, options);
+                            if (message.immutable != null && message.hasOwnProperty("immutable"))
+                                object.immutable = message.immutable;
+                            if (message.allocationOptions != null && message.hasOwnProperty("allocationOptions"))
+                                object.allocationOptions = $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.toObject(message.allocationOptions, options);
+                            if (message.excludeCidrRanges && message.excludeCidrRanges.length) {
+                                object.excludeCidrRanges = [];
+                                for (var j = 0; j < message.excludeCidrRanges.length; ++j)
+                                    object.excludeCidrRanges[j] = message.excludeCidrRanges[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InternalRange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InternalRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InternalRange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InternalRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.InternalRange";
+                        };
+    
+                        InternalRange.Migration = (function() {
+    
+                            /**
+                             * Properties of a Migration.
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                             * @interface IMigration
+                             * @property {string|null} [source] Migration source
+                             * @property {string|null} [target] Migration target
+                             */
+    
+                            /**
+                             * Constructs a new Migration.
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                             * @classdesc Represents a Migration.
+                             * @implements IMigration
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IMigration=} [properties] Properties to set
+                             */
+                            function Migration(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Migration source.
+                             * @member {string} source
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @instance
+                             */
+                            Migration.prototype.source = "";
+    
+                            /**
+                             * Migration target.
+                             * @member {string} target
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @instance
+                             */
+                            Migration.prototype.target = "";
+    
+                            /**
+                             * Creates a new Migration instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IMigration=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.Migration} Migration instance
+                             */
+                            Migration.create = function create(properties) {
+                                return new Migration(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Migration message. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.Migration.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IMigration} message Migration message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Migration.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.source);
+                                if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.target);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Migration message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.Migration.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IMigration} message Migration message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Migration.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Migration message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.Migration} Migration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Migration.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.InternalRange.Migration();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.source = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.target = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Migration message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.Migration} Migration
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Migration.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Migration message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Migration.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    if (!$util.isString(message.source))
+                                        return "source: string expected";
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    if (!$util.isString(message.target))
+                                        return "target: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Migration message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.Migration} Migration
+                             */
+                            Migration.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.InternalRange.Migration)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.InternalRange.Migration();
+                                if (object.source != null)
+                                    message.source = String(object.source);
+                                if (object.target != null)
+                                    message.target = String(object.target);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Migration message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.Migration} message Migration
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Migration.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.source = "";
+                                    object.target = "";
+                                }
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    object.source = message.source;
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    object.target = message.target;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Migration to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Migration.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Migration
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.Migration
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Migration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.InternalRange.Migration";
+                            };
+    
+                            return Migration;
+                        })();
+    
+                        InternalRange.AllocationOptions = (function() {
+    
+                            /**
+                             * Properties of an AllocationOptions.
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                             * @interface IAllocationOptions
+                             * @property {google.cloud.networkconnectivity.v1.InternalRange.AllocationStrategy|null} [allocationStrategy] AllocationOptions allocationStrategy
+                             * @property {number|null} [firstAvailableRangesLookupSize] AllocationOptions firstAvailableRangesLookupSize
+                             */
+    
+                            /**
+                             * Constructs a new AllocationOptions.
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange
+                             * @classdesc Represents an AllocationOptions.
+                             * @implements IAllocationOptions
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions=} [properties] Properties to set
+                             */
+                            function AllocationOptions(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AllocationOptions allocationStrategy.
+                             * @member {google.cloud.networkconnectivity.v1.InternalRange.AllocationStrategy} allocationStrategy
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @instance
+                             */
+                            AllocationOptions.prototype.allocationStrategy = 0;
+    
+                            /**
+                             * AllocationOptions firstAvailableRangesLookupSize.
+                             * @member {number} firstAvailableRangesLookupSize
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @instance
+                             */
+                            AllocationOptions.prototype.firstAvailableRangesLookupSize = 0;
+    
+                            /**
+                             * Creates a new AllocationOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions} AllocationOptions instance
+                             */
+                            AllocationOptions.create = function create(properties) {
+                                return new AllocationOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AllocationOptions message. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions} message AllocationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllocationOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allocationStrategy != null && Object.hasOwnProperty.call(message, "allocationStrategy"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.allocationStrategy);
+                                if (message.firstAvailableRangesLookupSize != null && Object.hasOwnProperty.call(message, "firstAvailableRangesLookupSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.firstAvailableRangesLookupSize);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AllocationOptions message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.IAllocationOptions} message AllocationOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllocationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AllocationOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions} AllocationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllocationOptions.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allocationStrategy = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.firstAvailableRangesLookupSize = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AllocationOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions} AllocationOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllocationOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AllocationOptions message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AllocationOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allocationStrategy != null && message.hasOwnProperty("allocationStrategy"))
+                                    switch (message.allocationStrategy) {
+                                    default:
+                                        return "allocationStrategy: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.firstAvailableRangesLookupSize != null && message.hasOwnProperty("firstAvailableRangesLookupSize"))
+                                    if (!$util.isInteger(message.firstAvailableRangesLookupSize))
+                                        return "firstAvailableRangesLookupSize: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AllocationOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions} AllocationOptions
+                             */
+                            AllocationOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions();
+                                switch (object.allocationStrategy) {
+                                default:
+                                    if (typeof object.allocationStrategy === "number") {
+                                        message.allocationStrategy = object.allocationStrategy;
+                                        break;
+                                    }
+                                    break;
+                                case "ALLOCATION_STRATEGY_UNSPECIFIED":
+                                case 0:
+                                    message.allocationStrategy = 0;
+                                    break;
+                                case "RANDOM":
+                                case 1:
+                                    message.allocationStrategy = 1;
+                                    break;
+                                case "FIRST_AVAILABLE":
+                                case 2:
+                                    message.allocationStrategy = 2;
+                                    break;
+                                case "RANDOM_FIRST_N_AVAILABLE":
+                                case 3:
+                                    message.allocationStrategy = 3;
+                                    break;
+                                case "FIRST_SMALLEST_FITTING":
+                                case 4:
+                                    message.allocationStrategy = 4;
+                                    break;
+                                }
+                                if (object.firstAvailableRangesLookupSize != null)
+                                    message.firstAvailableRangesLookupSize = object.firstAvailableRangesLookupSize | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AllocationOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions} message AllocationOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AllocationOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.allocationStrategy = options.enums === String ? "ALLOCATION_STRATEGY_UNSPECIFIED" : 0;
+                                    object.firstAvailableRangesLookupSize = 0;
+                                }
+                                if (message.allocationStrategy != null && message.hasOwnProperty("allocationStrategy"))
+                                    object.allocationStrategy = options.enums === String ? $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationStrategy[message.allocationStrategy] === undefined ? message.allocationStrategy : $root.google.cloud.networkconnectivity.v1.InternalRange.AllocationStrategy[message.allocationStrategy] : message.allocationStrategy;
+                                if (message.firstAvailableRangesLookupSize != null && message.hasOwnProperty("firstAvailableRangesLookupSize"))
+                                    object.firstAvailableRangesLookupSize = message.firstAvailableRangesLookupSize;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AllocationOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AllocationOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AllocationOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AllocationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.InternalRange.AllocationOptions";
+                            };
+    
+                            return AllocationOptions;
+                        })();
+    
+                        /**
+                         * Usage enum.
+                         * @name google.cloud.networkconnectivity.v1.InternalRange.Usage
+                         * @enum {number}
+                         * @property {number} USAGE_UNSPECIFIED=0 USAGE_UNSPECIFIED value
+                         * @property {number} FOR_VPC=1 FOR_VPC value
+                         * @property {number} EXTERNAL_TO_VPC=2 EXTERNAL_TO_VPC value
+                         * @property {number} FOR_MIGRATION=3 FOR_MIGRATION value
+                         */
+                        InternalRange.Usage = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "USAGE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FOR_VPC"] = 1;
+                            values[valuesById[2] = "EXTERNAL_TO_VPC"] = 2;
+                            values[valuesById[3] = "FOR_MIGRATION"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * Peering enum.
+                         * @name google.cloud.networkconnectivity.v1.InternalRange.Peering
+                         * @enum {number}
+                         * @property {number} PEERING_UNSPECIFIED=0 PEERING_UNSPECIFIED value
+                         * @property {number} FOR_SELF=1 FOR_SELF value
+                         * @property {number} FOR_PEER=2 FOR_PEER value
+                         * @property {number} NOT_SHARED=3 NOT_SHARED value
+                         */
+                        InternalRange.Peering = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PEERING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FOR_SELF"] = 1;
+                            values[valuesById[2] = "FOR_PEER"] = 2;
+                            values[valuesById[3] = "NOT_SHARED"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * Overlap enum.
+                         * @name google.cloud.networkconnectivity.v1.InternalRange.Overlap
+                         * @enum {number}
+                         * @property {number} OVERLAP_UNSPECIFIED=0 OVERLAP_UNSPECIFIED value
+                         * @property {number} OVERLAP_ROUTE_RANGE=1 OVERLAP_ROUTE_RANGE value
+                         * @property {number} OVERLAP_EXISTING_SUBNET_RANGE=2 OVERLAP_EXISTING_SUBNET_RANGE value
+                         */
+                        InternalRange.Overlap = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "OVERLAP_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OVERLAP_ROUTE_RANGE"] = 1;
+                            values[valuesById[2] = "OVERLAP_EXISTING_SUBNET_RANGE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * AllocationStrategy enum.
+                         * @name google.cloud.networkconnectivity.v1.InternalRange.AllocationStrategy
+                         * @enum {number}
+                         * @property {number} ALLOCATION_STRATEGY_UNSPECIFIED=0 ALLOCATION_STRATEGY_UNSPECIFIED value
+                         * @property {number} RANDOM=1 RANDOM value
+                         * @property {number} FIRST_AVAILABLE=2 FIRST_AVAILABLE value
+                         * @property {number} RANDOM_FIRST_N_AVAILABLE=3 RANDOM_FIRST_N_AVAILABLE value
+                         * @property {number} FIRST_SMALLEST_FITTING=4 FIRST_SMALLEST_FITTING value
+                         */
+                        InternalRange.AllocationStrategy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ALLOCATION_STRATEGY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RANDOM"] = 1;
+                            values[valuesById[2] = "FIRST_AVAILABLE"] = 2;
+                            values[valuesById[3] = "RANDOM_FIRST_N_AVAILABLE"] = 3;
+                            values[valuesById[4] = "FIRST_SMALLEST_FITTING"] = 4;
+                            return values;
+                        })();
+    
+                        return InternalRange;
+                    })();
+    
+                    v1.ListInternalRangesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListInternalRangesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListInternalRangesRequest
+                         * @property {string|null} [parent] ListInternalRangesRequest parent
+                         * @property {number|null} [pageSize] ListInternalRangesRequest pageSize
+                         * @property {string|null} [pageToken] ListInternalRangesRequest pageToken
+                         * @property {string|null} [filter] ListInternalRangesRequest filter
+                         * @property {string|null} [orderBy] ListInternalRangesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListInternalRangesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListInternalRangesRequest.
+                         * @implements IListInternalRangesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest=} [properties] Properties to set
+                         */
+                        function ListInternalRangesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInternalRangesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         */
+                        ListInternalRangesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListInternalRangesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         */
+                        ListInternalRangesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListInternalRangesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         */
+                        ListInternalRangesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListInternalRangesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         */
+                        ListInternalRangesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListInternalRangesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         */
+                        ListInternalRangesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListInternalRangesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesRequest} ListInternalRangesRequest instance
+                         */
+                        ListInternalRangesRequest.create = function create(properties) {
+                            return new ListInternalRangesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInternalRangesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListInternalRangesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest} message ListInternalRangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInternalRangesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInternalRangesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListInternalRangesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesRequest} message ListInternalRangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInternalRangesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInternalRangesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesRequest} ListInternalRangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInternalRangesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListInternalRangesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInternalRangesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesRequest} ListInternalRangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInternalRangesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInternalRangesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInternalRangesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInternalRangesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesRequest} ListInternalRangesRequest
+                         */
+                        ListInternalRangesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListInternalRangesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListInternalRangesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInternalRangesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListInternalRangesRequest} message ListInternalRangesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInternalRangesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInternalRangesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInternalRangesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInternalRangesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInternalRangesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListInternalRangesRequest";
+                        };
+    
+                        return ListInternalRangesRequest;
+                    })();
+    
+                    v1.ListInternalRangesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListInternalRangesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListInternalRangesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IInternalRange>|null} [internalRanges] ListInternalRangesResponse internalRanges
+                         * @property {string|null} [nextPageToken] ListInternalRangesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListInternalRangesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListInternalRangesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListInternalRangesResponse.
+                         * @implements IListInternalRangesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesResponse=} [properties] Properties to set
+                         */
+                        function ListInternalRangesResponse(properties) {
+                            this.internalRanges = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInternalRangesResponse internalRanges.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IInternalRange>} internalRanges
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @instance
+                         */
+                        ListInternalRangesResponse.prototype.internalRanges = $util.emptyArray;
+    
+                        /**
+                         * ListInternalRangesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @instance
+                         */
+                        ListInternalRangesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListInternalRangesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @instance
+                         */
+                        ListInternalRangesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListInternalRangesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} ListInternalRangesResponse instance
+                         */
+                        ListInternalRangesResponse.create = function create(properties) {
+                            return new ListInternalRangesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInternalRangesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListInternalRangesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesResponse} message ListInternalRangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInternalRangesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.internalRanges != null && message.internalRanges.length)
+                                for (var i = 0; i < message.internalRanges.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.InternalRange.encode(message.internalRanges[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInternalRangesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListInternalRangesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListInternalRangesResponse} message ListInternalRangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInternalRangesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInternalRangesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} ListInternalRangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInternalRangesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListInternalRangesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.internalRanges && message.internalRanges.length))
+                                            message.internalRanges = [];
+                                        message.internalRanges.push($root.google.cloud.networkconnectivity.v1.InternalRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInternalRangesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} ListInternalRangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInternalRangesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInternalRangesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInternalRangesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.internalRanges != null && message.hasOwnProperty("internalRanges")) {
+                                if (!Array.isArray(message.internalRanges))
+                                    return "internalRanges: array expected";
+                                for (var i = 0; i < message.internalRanges.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.InternalRange.verify(message.internalRanges[i]);
+                                    if (error)
+                                        return "internalRanges." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInternalRangesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} ListInternalRangesResponse
+                         */
+                        ListInternalRangesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListInternalRangesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListInternalRangesResponse();
+                            if (object.internalRanges) {
+                                if (!Array.isArray(object.internalRanges))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListInternalRangesResponse.internalRanges: array expected");
+                                message.internalRanges = [];
+                                for (var i = 0; i < object.internalRanges.length; ++i) {
+                                    if (typeof object.internalRanges[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListInternalRangesResponse.internalRanges: object expected");
+                                    message.internalRanges[i] = $root.google.cloud.networkconnectivity.v1.InternalRange.fromObject(object.internalRanges[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListInternalRangesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInternalRangesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListInternalRangesResponse} message ListInternalRangesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInternalRangesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.internalRanges = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.internalRanges && message.internalRanges.length) {
+                                object.internalRanges = [];
+                                for (var j = 0; j < message.internalRanges.length; ++j)
+                                    object.internalRanges[j] = $root.google.cloud.networkconnectivity.v1.InternalRange.toObject(message.internalRanges[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInternalRangesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInternalRangesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInternalRangesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListInternalRangesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInternalRangesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListInternalRangesResponse";
+                        };
+    
+                        return ListInternalRangesResponse;
+                    })();
+    
+                    v1.GetInternalRangeRequest = (function() {
+    
+                        /**
+                         * Properties of a GetInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetInternalRangeRequest
+                         * @property {string|null} [name] GetInternalRangeRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetInternalRangeRequest.
+                         * @implements IGetInternalRangeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest=} [properties] Properties to set
+                         */
+                        function GetInternalRangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetInternalRangeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @instance
+                         */
+                        GetInternalRangeRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetInternalRangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetInternalRangeRequest} GetInternalRangeRequest instance
+                         */
+                        GetInternalRangeRequest.create = function create(properties) {
+                            return new GetInternalRangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetInternalRangeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetInternalRangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest} message GetInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInternalRangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetInternalRangeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetInternalRangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetInternalRangeRequest} message GetInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetInternalRangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetInternalRangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetInternalRangeRequest} GetInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInternalRangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetInternalRangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetInternalRangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetInternalRangeRequest} GetInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetInternalRangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetInternalRangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetInternalRangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetInternalRangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetInternalRangeRequest} GetInternalRangeRequest
+                         */
+                        GetInternalRangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetInternalRangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetInternalRangeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetInternalRangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetInternalRangeRequest} message GetInternalRangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetInternalRangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetInternalRangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetInternalRangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetInternalRangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetInternalRangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetInternalRangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetInternalRangeRequest";
+                        };
+    
+                        return GetInternalRangeRequest;
+                    })();
+    
+                    v1.CreateInternalRangeRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ICreateInternalRangeRequest
+                         * @property {string|null} [parent] CreateInternalRangeRequest parent
+                         * @property {string|null} [internalRangeId] CreateInternalRangeRequest internalRangeId
+                         * @property {google.cloud.networkconnectivity.v1.IInternalRange|null} [internalRange] CreateInternalRangeRequest internalRange
+                         * @property {string|null} [requestId] CreateInternalRangeRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a CreateInternalRangeRequest.
+                         * @implements ICreateInternalRangeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest=} [properties] Properties to set
+                         */
+                        function CreateInternalRangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateInternalRangeRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @instance
+                         */
+                        CreateInternalRangeRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateInternalRangeRequest internalRangeId.
+                         * @member {string} internalRangeId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @instance
+                         */
+                        CreateInternalRangeRequest.prototype.internalRangeId = "";
+    
+                        /**
+                         * CreateInternalRangeRequest internalRange.
+                         * @member {google.cloud.networkconnectivity.v1.IInternalRange|null|undefined} internalRange
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @instance
+                         */
+                        CreateInternalRangeRequest.prototype.internalRange = null;
+    
+                        /**
+                         * CreateInternalRangeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @instance
+                         */
+                        CreateInternalRangeRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateInternalRangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.CreateInternalRangeRequest} CreateInternalRangeRequest instance
+                         */
+                        CreateInternalRangeRequest.create = function create(properties) {
+                            return new CreateInternalRangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInternalRangeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateInternalRangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest} message CreateInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInternalRangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.internalRangeId != null && Object.hasOwnProperty.call(message, "internalRangeId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.internalRangeId);
+                            if (message.internalRange != null && Object.hasOwnProperty.call(message, "internalRange"))
+                                $root.google.cloud.networkconnectivity.v1.InternalRange.encode(message.internalRange, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateInternalRangeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateInternalRangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ICreateInternalRangeRequest} message CreateInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateInternalRangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateInternalRangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.CreateInternalRangeRequest} CreateInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInternalRangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.CreateInternalRangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.internalRangeId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateInternalRangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.CreateInternalRangeRequest} CreateInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateInternalRangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateInternalRangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateInternalRangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.internalRangeId != null && message.hasOwnProperty("internalRangeId"))
+                                if (!$util.isString(message.internalRangeId))
+                                    return "internalRangeId: string expected";
+                            if (message.internalRange != null && message.hasOwnProperty("internalRange")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.InternalRange.verify(message.internalRange);
+                                if (error)
+                                    return "internalRange." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateInternalRangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.CreateInternalRangeRequest} CreateInternalRangeRequest
+                         */
+                        CreateInternalRangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.CreateInternalRangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.CreateInternalRangeRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.internalRangeId != null)
+                                message.internalRangeId = String(object.internalRangeId);
+                            if (object.internalRange != null) {
+                                if (typeof object.internalRange !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.CreateInternalRangeRequest.internalRange: object expected");
+                                message.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.fromObject(object.internalRange);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateInternalRangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.CreateInternalRangeRequest} message CreateInternalRangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateInternalRangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.internalRangeId = "";
+                                object.internalRange = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.internalRangeId != null && message.hasOwnProperty("internalRangeId"))
+                                object.internalRangeId = message.internalRangeId;
+                            if (message.internalRange != null && message.hasOwnProperty("internalRange"))
+                                object.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.toObject(message.internalRange, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateInternalRangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateInternalRangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateInternalRangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.CreateInternalRangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateInternalRangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.CreateInternalRangeRequest";
+                        };
+    
+                        return CreateInternalRangeRequest;
+                    })();
+    
+                    v1.UpdateInternalRangeRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IUpdateInternalRangeRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateInternalRangeRequest updateMask
+                         * @property {google.cloud.networkconnectivity.v1.IInternalRange|null} [internalRange] UpdateInternalRangeRequest internalRange
+                         * @property {string|null} [requestId] UpdateInternalRangeRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an UpdateInternalRangeRequest.
+                         * @implements IUpdateInternalRangeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest=} [properties] Properties to set
+                         */
+                        function UpdateInternalRangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateInternalRangeRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @instance
+                         */
+                        UpdateInternalRangeRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateInternalRangeRequest internalRange.
+                         * @member {google.cloud.networkconnectivity.v1.IInternalRange|null|undefined} internalRange
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @instance
+                         */
+                        UpdateInternalRangeRequest.prototype.internalRange = null;
+    
+                        /**
+                         * UpdateInternalRangeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @instance
+                         */
+                        UpdateInternalRangeRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateInternalRangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest} UpdateInternalRangeRequest instance
+                         */
+                        UpdateInternalRangeRequest.create = function create(properties) {
+                            return new UpdateInternalRangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInternalRangeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest} message UpdateInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInternalRangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.internalRange != null && Object.hasOwnProperty.call(message, "internalRange"))
+                                $root.google.cloud.networkconnectivity.v1.InternalRange.encode(message.internalRange, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateInternalRangeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IUpdateInternalRangeRequest} message UpdateInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateInternalRangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateInternalRangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest} UpdateInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInternalRangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateInternalRangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest} UpdateInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateInternalRangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateInternalRangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateInternalRangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.internalRange != null && message.hasOwnProperty("internalRange")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.InternalRange.verify(message.internalRange);
+                                if (error)
+                                    return "internalRange." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateInternalRangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest} UpdateInternalRangeRequest
+                         */
+                        UpdateInternalRangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.internalRange != null) {
+                                if (typeof object.internalRange !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest.internalRange: object expected");
+                                message.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.fromObject(object.internalRange);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateInternalRangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest} message UpdateInternalRangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateInternalRangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.internalRange = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.internalRange != null && message.hasOwnProperty("internalRange"))
+                                object.internalRange = $root.google.cloud.networkconnectivity.v1.InternalRange.toObject(message.internalRange, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateInternalRangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateInternalRangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateInternalRangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateInternalRangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.UpdateInternalRangeRequest";
+                        };
+    
+                        return UpdateInternalRangeRequest;
+                    })();
+    
+                    v1.DeleteInternalRangeRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IDeleteInternalRangeRequest
+                         * @property {string|null} [name] DeleteInternalRangeRequest name
+                         * @property {string|null} [requestId] DeleteInternalRangeRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteInternalRangeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a DeleteInternalRangeRequest.
+                         * @implements IDeleteInternalRangeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest=} [properties] Properties to set
+                         */
+                        function DeleteInternalRangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteInternalRangeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @instance
+                         */
+                        DeleteInternalRangeRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteInternalRangeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @instance
+                         */
+                        DeleteInternalRangeRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteInternalRangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest} DeleteInternalRangeRequest instance
+                         */
+                        DeleteInternalRangeRequest.create = function create(properties) {
+                            return new DeleteInternalRangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInternalRangeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest} message DeleteInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInternalRangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteInternalRangeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IDeleteInternalRangeRequest} message DeleteInternalRangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteInternalRangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteInternalRangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest} DeleteInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInternalRangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteInternalRangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest} DeleteInternalRangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteInternalRangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteInternalRangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteInternalRangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteInternalRangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest} DeleteInternalRangeRequest
+                         */
+                        DeleteInternalRangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteInternalRangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest} message DeleteInternalRangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteInternalRangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteInternalRangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteInternalRangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteInternalRangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteInternalRangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.DeleteInternalRangeRequest";
+                        };
+    
+                        return DeleteInternalRangeRequest;
                     })();
     
                     v1.PolicyBasedRoutingService = (function() {

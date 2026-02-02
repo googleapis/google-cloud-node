@@ -8,6 +8,321 @@
               "nested": {
                 "quota": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.Quota.V1",
+                        "go_package": "cloud.google.com/go/shopping/merchant/quota/apiv1/quotapb;quotapb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "QuotaProto",
+                        "java_package": "com.google.shopping.merchant.quota.v1",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Quota\\V1",
+                        "ruby_package": "Google::Shopping::Merchant::Quota::V1",
+                        "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
+                        "(google.api.resource_definition).pattern": "accounts/{account}"
+                      },
+                      "nested": {
+                        "AccountLimitsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetAccountLimit": {
+                              "requestType": "GetAccountLimitRequest",
+                              "responseType": "AccountLimit",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1/{name=accounts/*/limits/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1/{name=accounts/*/limits/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAccountLimits": {
+                              "requestType": "ListAccountLimitsRequest",
+                              "responseType": "ListAccountLimitsResponse",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1/{parent=accounts/*}/limits",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1/{parent=accounts/*}/limits"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ProductLimit": {
+                          "fields": {
+                            "scope": {
+                              "type": "Scope",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "limit": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Scope": {
+                              "values": {
+                                "SCOPE_UNSPECIFIED": 0,
+                                "ADS_NON_EEA": 1,
+                                "ADS_EEA": 2
+                              }
+                            }
+                          }
+                        },
+                        "AccountLimit": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/AccountLimit",
+                            "(google.api.resource).pattern": "accounts/{account}/limits/{limit}",
+                            "(google.api.resource).plural": "accountLimits",
+                            "(google.api.resource).singular": "accountLimit"
+                          },
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "products"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "products": {
+                              "type": "ProductLimit",
+                              "id": 100
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            }
+                          }
+                        },
+                        "GetAccountLimitRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/AccountLimit"
+                              }
+                            }
+                          }
+                        },
+                        "ListAccountLimitsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ListAccountLimitsResponse": {
+                          "fields": {
+                            "accountLimits": {
+                              "rule": "repeated",
+                              "type": "AccountLimit",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "QuotaService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "ListQuotaGroups": {
+                              "requestType": "ListQuotaGroupsRequest",
+                              "responseType": "ListQuotaGroupsResponse",
+                              "options": {
+                                "(google.api.http).get": "/quota/v1/{parent=accounts/*}/quotas",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/quota/v1/{parent=accounts/*}/quotas"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "QuotaGroup": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/QuotaGroup",
+                            "(google.api.resource).pattern": "accounts/{account}/groups/{group}",
+                            "(google.api.resource).plural": "quotaGroups",
+                            "(google.api.resource).singular": "quotaGroup"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "quotaUsage": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "quotaLimit": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "quotaMinuteLimit": {
+                              "type": "int64",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "methodDetails": {
+                              "rule": "repeated",
+                              "type": "MethodDetails",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "MethodDetails": {
+                          "fields": {
+                            "method": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "subapi": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "path": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "ListQuotaGroupsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "merchantapi.googleapis.com/QuotaGroup"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListQuotaGroupsResponse": {
+                          "fields": {
+                            "quotaGroups": {
+                              "rule": "repeated",
+                              "type": "QuotaGroup",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta": {
                       "options": {
                         "go_package": "cloud.google.com/go/shopping/merchant/quota/apiv1beta/quotapb;quotapb",

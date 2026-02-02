@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,2035 @@
                      * @namespace
                      */
                     var ordertracking = {};
+    
+                    ordertracking.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.ordertracking
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.OrderTrackingSignalsService = (function() {
+    
+                            /**
+                             * Constructs a new OrderTrackingSignalsService service.
+                             * @memberof google.shopping.merchant.ordertracking.v1
+                             * @classdesc Represents an OrderTrackingSignalsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function OrderTrackingSignalsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (OrderTrackingSignalsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OrderTrackingSignalsService;
+    
+                            /**
+                             * Creates new OrderTrackingSignalsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {OrderTrackingSignalsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            OrderTrackingSignalsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService|createOrderTrackingSignal}.
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService
+                             * @typedef CreateOrderTrackingSignalCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} [response] OrderTrackingSignal
+                             */
+    
+                            /**
+                             * Calls CreateOrderTrackingSignal.
+                             * @function createOrderTrackingSignal
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService
+                             * @instance
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest} request CreateOrderTrackingSignalRequest message or plain object
+                             * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService.CreateOrderTrackingSignalCallback} callback Node-style callback called with the error, if any, and OrderTrackingSignal
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(OrderTrackingSignalsService.prototype.createOrderTrackingSignal = function createOrderTrackingSignal(request, callback) {
+                                return this.rpcCall(createOrderTrackingSignal, $root.google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest, $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal, request, callback);
+                            }, "name", { value: "CreateOrderTrackingSignal" });
+    
+                            /**
+                             * Calls CreateOrderTrackingSignal.
+                             * @function createOrderTrackingSignal
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignalsService
+                             * @instance
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest} request CreateOrderTrackingSignalRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal>} Promise
+                             * @variation 2
+                             */
+    
+                            return OrderTrackingSignalsService;
+                        })();
+    
+                        v1.CreateOrderTrackingSignalRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateOrderTrackingSignalRequest.
+                             * @memberof google.shopping.merchant.ordertracking.v1
+                             * @interface ICreateOrderTrackingSignalRequest
+                             * @property {string|null} [parent] CreateOrderTrackingSignalRequest parent
+                             * @property {string|null} [orderTrackingSignalId] CreateOrderTrackingSignalRequest orderTrackingSignalId
+                             * @property {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null} [orderTrackingSignal] CreateOrderTrackingSignalRequest orderTrackingSignal
+                             */
+    
+                            /**
+                             * Constructs a new CreateOrderTrackingSignalRequest.
+                             * @memberof google.shopping.merchant.ordertracking.v1
+                             * @classdesc Represents a CreateOrderTrackingSignalRequest.
+                             * @implements ICreateOrderTrackingSignalRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest=} [properties] Properties to set
+                             */
+                            function CreateOrderTrackingSignalRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateOrderTrackingSignalRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @instance
+                             */
+                            CreateOrderTrackingSignalRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateOrderTrackingSignalRequest orderTrackingSignalId.
+                             * @member {string} orderTrackingSignalId
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @instance
+                             */
+                            CreateOrderTrackingSignalRequest.prototype.orderTrackingSignalId = "";
+    
+                            /**
+                             * CreateOrderTrackingSignalRequest orderTrackingSignal.
+                             * @member {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal|null|undefined} orderTrackingSignal
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @instance
+                             */
+                            CreateOrderTrackingSignalRequest.prototype.orderTrackingSignal = null;
+    
+                            /**
+                             * Creates a new CreateOrderTrackingSignalRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest} CreateOrderTrackingSignalRequest instance
+                             */
+                            CreateOrderTrackingSignalRequest.create = function create(properties) {
+                                return new CreateOrderTrackingSignalRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOrderTrackingSignalRequest message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest} message CreateOrderTrackingSignalRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOrderTrackingSignalRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.orderTrackingSignalId != null && Object.hasOwnProperty.call(message, "orderTrackingSignalId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.orderTrackingSignalId);
+                                if (message.orderTrackingSignal != null && Object.hasOwnProperty.call(message, "orderTrackingSignal"))
+                                    $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.encode(message.orderTrackingSignal, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateOrderTrackingSignalRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.ICreateOrderTrackingSignalRequest} message CreateOrderTrackingSignalRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateOrderTrackingSignalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest} CreateOrderTrackingSignalRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOrderTrackingSignalRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.orderTrackingSignalId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.orderTrackingSignal = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateOrderTrackingSignalRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest} CreateOrderTrackingSignalRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateOrderTrackingSignalRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateOrderTrackingSignalRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateOrderTrackingSignalRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.orderTrackingSignalId != null && message.hasOwnProperty("orderTrackingSignalId"))
+                                    if (!$util.isString(message.orderTrackingSignalId))
+                                        return "orderTrackingSignalId: string expected";
+                                if (message.orderTrackingSignal != null && message.hasOwnProperty("orderTrackingSignal")) {
+                                    var error = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify(message.orderTrackingSignal);
+                                    if (error)
+                                        return "orderTrackingSignal." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateOrderTrackingSignalRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest} CreateOrderTrackingSignalRequest
+                             */
+                            CreateOrderTrackingSignalRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.orderTrackingSignalId != null)
+                                    message.orderTrackingSignalId = String(object.orderTrackingSignalId);
+                                if (object.orderTrackingSignal != null) {
+                                    if (typeof object.orderTrackingSignal !== "object")
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest.orderTrackingSignal: object expected");
+                                    message.orderTrackingSignal = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.fromObject(object.orderTrackingSignal);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateOrderTrackingSignalRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest} message CreateOrderTrackingSignalRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateOrderTrackingSignalRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.orderTrackingSignalId = "";
+                                    object.orderTrackingSignal = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.orderTrackingSignalId != null && message.hasOwnProperty("orderTrackingSignalId"))
+                                    object.orderTrackingSignalId = message.orderTrackingSignalId;
+                                if (message.orderTrackingSignal != null && message.hasOwnProperty("orderTrackingSignal"))
+                                    object.orderTrackingSignal = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.toObject(message.orderTrackingSignal, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateOrderTrackingSignalRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateOrderTrackingSignalRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateOrderTrackingSignalRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateOrderTrackingSignalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.ordertracking.v1.CreateOrderTrackingSignalRequest";
+                            };
+    
+                            return CreateOrderTrackingSignalRequest;
+                        })();
+    
+                        v1.OrderTrackingSignal = (function() {
+    
+                            /**
+                             * Properties of an OrderTrackingSignal.
+                             * @memberof google.shopping.merchant.ordertracking.v1
+                             * @interface IOrderTrackingSignal
+                             * @property {number|Long|null} [orderTrackingSignalId] OrderTrackingSignal orderTrackingSignalId
+                             * @property {number|Long|null} [merchantId] OrderTrackingSignal merchantId
+                             * @property {google.type.IDateTime|null} [orderCreatedTime] OrderTrackingSignal orderCreatedTime
+                             * @property {string|null} [orderId] OrderTrackingSignal orderId
+                             * @property {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo>|null} [shippingInfo] OrderTrackingSignal shippingInfo
+                             * @property {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails>|null} [lineItems] OrderTrackingSignal lineItems
+                             * @property {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping>|null} [shipmentLineItemMapping] OrderTrackingSignal shipmentLineItemMapping
+                             * @property {google.shopping.type.IPrice|null} [customerShippingFee] OrderTrackingSignal customerShippingFee
+                             * @property {string|null} [deliveryPostalCode] OrderTrackingSignal deliveryPostalCode
+                             * @property {string|null} [deliveryRegionCode] OrderTrackingSignal deliveryRegionCode
+                             */
+    
+                            /**
+                             * Constructs a new OrderTrackingSignal.
+                             * @memberof google.shopping.merchant.ordertracking.v1
+                             * @classdesc Represents an OrderTrackingSignal.
+                             * @implements IOrderTrackingSignal
+                             * @constructor
+                             * @param {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal=} [properties] Properties to set
+                             */
+                            function OrderTrackingSignal(properties) {
+                                this.shippingInfo = [];
+                                this.lineItems = [];
+                                this.shipmentLineItemMapping = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OrderTrackingSignal orderTrackingSignalId.
+                             * @member {number|Long} orderTrackingSignalId
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.orderTrackingSignalId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * OrderTrackingSignal merchantId.
+                             * @member {number|Long} merchantId
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.merchantId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * OrderTrackingSignal orderCreatedTime.
+                             * @member {google.type.IDateTime|null|undefined} orderCreatedTime
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.orderCreatedTime = null;
+    
+                            /**
+                             * OrderTrackingSignal orderId.
+                             * @member {string} orderId
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.orderId = "";
+    
+                            /**
+                             * OrderTrackingSignal shippingInfo.
+                             * @member {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo>} shippingInfo
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.shippingInfo = $util.emptyArray;
+    
+                            /**
+                             * OrderTrackingSignal lineItems.
+                             * @member {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails>} lineItems
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.lineItems = $util.emptyArray;
+    
+                            /**
+                             * OrderTrackingSignal shipmentLineItemMapping.
+                             * @member {Array.<google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping>} shipmentLineItemMapping
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.shipmentLineItemMapping = $util.emptyArray;
+    
+                            /**
+                             * OrderTrackingSignal customerShippingFee.
+                             * @member {google.shopping.type.IPrice|null|undefined} customerShippingFee
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.customerShippingFee = null;
+    
+                            /**
+                             * OrderTrackingSignal deliveryPostalCode.
+                             * @member {string} deliveryPostalCode
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.deliveryPostalCode = "";
+    
+                            /**
+                             * OrderTrackingSignal deliveryRegionCode.
+                             * @member {string} deliveryRegionCode
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             */
+                            OrderTrackingSignal.prototype.deliveryRegionCode = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(OrderTrackingSignal.prototype, "_customerShippingFee", {
+                                get: $util.oneOfGetter($oneOfFields = ["customerShippingFee"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new OrderTrackingSignal instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} OrderTrackingSignal instance
+                             */
+                            OrderTrackingSignal.create = function create(properties) {
+                                return new OrderTrackingSignal(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OrderTrackingSignal message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal} message OrderTrackingSignal message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OrderTrackingSignal.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.orderCreatedTime != null && Object.hasOwnProperty.call(message, "orderCreatedTime"))
+                                    $root.google.type.DateTime.encode(message.orderCreatedTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.orderId != null && Object.hasOwnProperty.call(message, "orderId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.orderId);
+                                if (message.shippingInfo != null && message.shippingInfo.length)
+                                    for (var i = 0; i < message.shippingInfo.length; ++i)
+                                        $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.encode(message.shippingInfo[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.lineItems != null && message.lineItems.length)
+                                    for (var i = 0; i < message.lineItems.length; ++i)
+                                        $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.encode(message.lineItems[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.shipmentLineItemMapping != null && message.shipmentLineItemMapping.length)
+                                    for (var i = 0; i < message.shipmentLineItemMapping.length; ++i)
+                                        $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.encode(message.shipmentLineItemMapping[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.customerShippingFee != null && Object.hasOwnProperty.call(message, "customerShippingFee"))
+                                    $root.google.shopping.type.Price.encode(message.customerShippingFee, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.deliveryPostalCode != null && Object.hasOwnProperty.call(message, "deliveryPostalCode"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.deliveryPostalCode);
+                                if (message.deliveryRegionCode != null && Object.hasOwnProperty.call(message, "deliveryRegionCode"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.deliveryRegionCode);
+                                if (message.orderTrackingSignalId != null && Object.hasOwnProperty.call(message, "orderTrackingSignalId"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).int64(message.orderTrackingSignalId);
+                                if (message.merchantId != null && Object.hasOwnProperty.call(message, "merchantId"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int64(message.merchantId);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OrderTrackingSignal message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.IOrderTrackingSignal} message OrderTrackingSignal message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OrderTrackingSignal.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OrderTrackingSignal message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} OrderTrackingSignal
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OrderTrackingSignal.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 11: {
+                                            message.orderTrackingSignalId = reader.int64();
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.merchantId = reader.int64();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.orderCreatedTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.orderId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.shippingInfo && message.shippingInfo.length))
+                                                message.shippingInfo = [];
+                                            message.shippingInfo.push($root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.lineItems && message.lineItems.length))
+                                                message.lineItems = [];
+                                            message.lineItems.push($root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.shipmentLineItemMapping && message.shipmentLineItemMapping.length))
+                                                message.shipmentLineItemMapping = [];
+                                            message.shipmentLineItemMapping.push($root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.customerShippingFee = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.deliveryPostalCode = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.deliveryRegionCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OrderTrackingSignal message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} OrderTrackingSignal
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OrderTrackingSignal.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OrderTrackingSignal message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OrderTrackingSignal.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.orderTrackingSignalId != null && message.hasOwnProperty("orderTrackingSignalId"))
+                                    if (!$util.isInteger(message.orderTrackingSignalId) && !(message.orderTrackingSignalId && $util.isInteger(message.orderTrackingSignalId.low) && $util.isInteger(message.orderTrackingSignalId.high)))
+                                        return "orderTrackingSignalId: integer|Long expected";
+                                if (message.merchantId != null && message.hasOwnProperty("merchantId"))
+                                    if (!$util.isInteger(message.merchantId) && !(message.merchantId && $util.isInteger(message.merchantId.low) && $util.isInteger(message.merchantId.high)))
+                                        return "merchantId: integer|Long expected";
+                                if (message.orderCreatedTime != null && message.hasOwnProperty("orderCreatedTime")) {
+                                    var error = $root.google.type.DateTime.verify(message.orderCreatedTime);
+                                    if (error)
+                                        return "orderCreatedTime." + error;
+                                }
+                                if (message.orderId != null && message.hasOwnProperty("orderId"))
+                                    if (!$util.isString(message.orderId))
+                                        return "orderId: string expected";
+                                if (message.shippingInfo != null && message.hasOwnProperty("shippingInfo")) {
+                                    if (!Array.isArray(message.shippingInfo))
+                                        return "shippingInfo: array expected";
+                                    for (var i = 0; i < message.shippingInfo.length; ++i) {
+                                        var error = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify(message.shippingInfo[i]);
+                                        if (error)
+                                            return "shippingInfo." + error;
+                                    }
+                                }
+                                if (message.lineItems != null && message.hasOwnProperty("lineItems")) {
+                                    if (!Array.isArray(message.lineItems))
+                                        return "lineItems: array expected";
+                                    for (var i = 0; i < message.lineItems.length; ++i) {
+                                        var error = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify(message.lineItems[i]);
+                                        if (error)
+                                            return "lineItems." + error;
+                                    }
+                                }
+                                if (message.shipmentLineItemMapping != null && message.hasOwnProperty("shipmentLineItemMapping")) {
+                                    if (!Array.isArray(message.shipmentLineItemMapping))
+                                        return "shipmentLineItemMapping: array expected";
+                                    for (var i = 0; i < message.shipmentLineItemMapping.length; ++i) {
+                                        var error = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify(message.shipmentLineItemMapping[i]);
+                                        if (error)
+                                            return "shipmentLineItemMapping." + error;
+                                    }
+                                }
+                                if (message.customerShippingFee != null && message.hasOwnProperty("customerShippingFee")) {
+                                    properties._customerShippingFee = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.customerShippingFee);
+                                        if (error)
+                                            return "customerShippingFee." + error;
+                                    }
+                                }
+                                if (message.deliveryPostalCode != null && message.hasOwnProperty("deliveryPostalCode"))
+                                    if (!$util.isString(message.deliveryPostalCode))
+                                        return "deliveryPostalCode: string expected";
+                                if (message.deliveryRegionCode != null && message.hasOwnProperty("deliveryRegionCode"))
+                                    if (!$util.isString(message.deliveryRegionCode))
+                                        return "deliveryRegionCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OrderTrackingSignal message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} OrderTrackingSignal
+                             */
+                            OrderTrackingSignal.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal();
+                                if (object.orderTrackingSignalId != null)
+                                    if ($util.Long)
+                                        (message.orderTrackingSignalId = $util.Long.fromValue(object.orderTrackingSignalId)).unsigned = false;
+                                    else if (typeof object.orderTrackingSignalId === "string")
+                                        message.orderTrackingSignalId = parseInt(object.orderTrackingSignalId, 10);
+                                    else if (typeof object.orderTrackingSignalId === "number")
+                                        message.orderTrackingSignalId = object.orderTrackingSignalId;
+                                    else if (typeof object.orderTrackingSignalId === "object")
+                                        message.orderTrackingSignalId = new $util.LongBits(object.orderTrackingSignalId.low >>> 0, object.orderTrackingSignalId.high >>> 0).toNumber();
+                                if (object.merchantId != null)
+                                    if ($util.Long)
+                                        (message.merchantId = $util.Long.fromValue(object.merchantId)).unsigned = false;
+                                    else if (typeof object.merchantId === "string")
+                                        message.merchantId = parseInt(object.merchantId, 10);
+                                    else if (typeof object.merchantId === "number")
+                                        message.merchantId = object.merchantId;
+                                    else if (typeof object.merchantId === "object")
+                                        message.merchantId = new $util.LongBits(object.merchantId.low >>> 0, object.merchantId.high >>> 0).toNumber();
+                                if (object.orderCreatedTime != null) {
+                                    if (typeof object.orderCreatedTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.orderCreatedTime: object expected");
+                                    message.orderCreatedTime = $root.google.type.DateTime.fromObject(object.orderCreatedTime);
+                                }
+                                if (object.orderId != null)
+                                    message.orderId = String(object.orderId);
+                                if (object.shippingInfo) {
+                                    if (!Array.isArray(object.shippingInfo))
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.shippingInfo: array expected");
+                                    message.shippingInfo = [];
+                                    for (var i = 0; i < object.shippingInfo.length; ++i) {
+                                        if (typeof object.shippingInfo[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.shippingInfo: object expected");
+                                        message.shippingInfo[i] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.fromObject(object.shippingInfo[i]);
+                                    }
+                                }
+                                if (object.lineItems) {
+                                    if (!Array.isArray(object.lineItems))
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.lineItems: array expected");
+                                    message.lineItems = [];
+                                    for (var i = 0; i < object.lineItems.length; ++i) {
+                                        if (typeof object.lineItems[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.lineItems: object expected");
+                                        message.lineItems[i] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.fromObject(object.lineItems[i]);
+                                    }
+                                }
+                                if (object.shipmentLineItemMapping) {
+                                    if (!Array.isArray(object.shipmentLineItemMapping))
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.shipmentLineItemMapping: array expected");
+                                    message.shipmentLineItemMapping = [];
+                                    for (var i = 0; i < object.shipmentLineItemMapping.length; ++i) {
+                                        if (typeof object.shipmentLineItemMapping[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.shipmentLineItemMapping: object expected");
+                                        message.shipmentLineItemMapping[i] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.fromObject(object.shipmentLineItemMapping[i]);
+                                    }
+                                }
+                                if (object.customerShippingFee != null) {
+                                    if (typeof object.customerShippingFee !== "object")
+                                        throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.customerShippingFee: object expected");
+                                    message.customerShippingFee = $root.google.shopping.type.Price.fromObject(object.customerShippingFee);
+                                }
+                                if (object.deliveryPostalCode != null)
+                                    message.deliveryPostalCode = String(object.deliveryPostalCode);
+                                if (object.deliveryRegionCode != null)
+                                    message.deliveryRegionCode = String(object.deliveryRegionCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OrderTrackingSignal message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal} message OrderTrackingSignal
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OrderTrackingSignal.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.shippingInfo = [];
+                                    object.lineItems = [];
+                                    object.shipmentLineItemMapping = [];
+                                }
+                                if (options.defaults) {
+                                    object.orderCreatedTime = null;
+                                    object.orderId = "";
+                                    object.deliveryPostalCode = "";
+                                    object.deliveryRegionCode = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.orderTrackingSignalId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.orderTrackingSignalId = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.merchantId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.merchantId = options.longs === String ? "0" : 0;
+                                }
+                                if (message.orderCreatedTime != null && message.hasOwnProperty("orderCreatedTime"))
+                                    object.orderCreatedTime = $root.google.type.DateTime.toObject(message.orderCreatedTime, options);
+                                if (message.orderId != null && message.hasOwnProperty("orderId"))
+                                    object.orderId = message.orderId;
+                                if (message.shippingInfo && message.shippingInfo.length) {
+                                    object.shippingInfo = [];
+                                    for (var j = 0; j < message.shippingInfo.length; ++j)
+                                        object.shippingInfo[j] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.toObject(message.shippingInfo[j], options);
+                                }
+                                if (message.lineItems && message.lineItems.length) {
+                                    object.lineItems = [];
+                                    for (var j = 0; j < message.lineItems.length; ++j)
+                                        object.lineItems[j] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.toObject(message.lineItems[j], options);
+                                }
+                                if (message.shipmentLineItemMapping && message.shipmentLineItemMapping.length) {
+                                    object.shipmentLineItemMapping = [];
+                                    for (var j = 0; j < message.shipmentLineItemMapping.length; ++j)
+                                        object.shipmentLineItemMapping[j] = $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.toObject(message.shipmentLineItemMapping[j], options);
+                                }
+                                if (message.customerShippingFee != null && message.hasOwnProperty("customerShippingFee")) {
+                                    object.customerShippingFee = $root.google.shopping.type.Price.toObject(message.customerShippingFee, options);
+                                    if (options.oneofs)
+                                        object._customerShippingFee = "customerShippingFee";
+                                }
+                                if (message.deliveryPostalCode != null && message.hasOwnProperty("deliveryPostalCode"))
+                                    object.deliveryPostalCode = message.deliveryPostalCode;
+                                if (message.deliveryRegionCode != null && message.hasOwnProperty("deliveryRegionCode"))
+                                    object.deliveryRegionCode = message.deliveryRegionCode;
+                                if (message.orderTrackingSignalId != null && message.hasOwnProperty("orderTrackingSignalId"))
+                                    if (typeof message.orderTrackingSignalId === "number")
+                                        object.orderTrackingSignalId = options.longs === String ? String(message.orderTrackingSignalId) : message.orderTrackingSignalId;
+                                    else
+                                        object.orderTrackingSignalId = options.longs === String ? $util.Long.prototype.toString.call(message.orderTrackingSignalId) : options.longs === Number ? new $util.LongBits(message.orderTrackingSignalId.low >>> 0, message.orderTrackingSignalId.high >>> 0).toNumber() : message.orderTrackingSignalId;
+                                if (message.merchantId != null && message.hasOwnProperty("merchantId"))
+                                    if (typeof message.merchantId === "number")
+                                        object.merchantId = options.longs === String ? String(message.merchantId) : message.merchantId;
+                                    else
+                                        object.merchantId = options.longs === String ? $util.Long.prototype.toString.call(message.merchantId) : options.longs === Number ? new $util.LongBits(message.merchantId.low >>> 0, message.merchantId.high >>> 0).toNumber() : message.merchantId;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OrderTrackingSignal to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OrderTrackingSignal.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OrderTrackingSignal
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OrderTrackingSignal.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.ordertracking.v1.OrderTrackingSignal";
+                            };
+    
+                            OrderTrackingSignal.ShippingInfo = (function() {
+    
+                                /**
+                                 * Properties of a ShippingInfo.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @interface IShippingInfo
+                                 * @property {string|null} [shipmentId] ShippingInfo shipmentId
+                                 * @property {string|null} [trackingId] ShippingInfo trackingId
+                                 * @property {string|null} [carrier] ShippingInfo carrier
+                                 * @property {string|null} [carrierService] ShippingInfo carrierService
+                                 * @property {google.type.IDateTime|null} [shippedTime] ShippingInfo shippedTime
+                                 * @property {google.type.IDateTime|null} [earliestDeliveryPromiseTime] ShippingInfo earliestDeliveryPromiseTime
+                                 * @property {google.type.IDateTime|null} [latestDeliveryPromiseTime] ShippingInfo latestDeliveryPromiseTime
+                                 * @property {google.type.IDateTime|null} [actualDeliveryTime] ShippingInfo actualDeliveryTime
+                                 * @property {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState|null} [shippingStatus] ShippingInfo shippingStatus
+                                 * @property {string|null} [originPostalCode] ShippingInfo originPostalCode
+                                 * @property {string|null} [originRegionCode] ShippingInfo originRegionCode
+                                 */
+    
+                                /**
+                                 * Constructs a new ShippingInfo.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @classdesc Represents a ShippingInfo.
+                                 * @implements IShippingInfo
+                                 * @constructor
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo=} [properties] Properties to set
+                                 */
+                                function ShippingInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ShippingInfo shipmentId.
+                                 * @member {string} shipmentId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.shipmentId = "";
+    
+                                /**
+                                 * ShippingInfo trackingId.
+                                 * @member {string} trackingId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.trackingId = "";
+    
+                                /**
+                                 * ShippingInfo carrier.
+                                 * @member {string} carrier
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.carrier = "";
+    
+                                /**
+                                 * ShippingInfo carrierService.
+                                 * @member {string} carrierService
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.carrierService = "";
+    
+                                /**
+                                 * ShippingInfo shippedTime.
+                                 * @member {google.type.IDateTime|null|undefined} shippedTime
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.shippedTime = null;
+    
+                                /**
+                                 * ShippingInfo earliestDeliveryPromiseTime.
+                                 * @member {google.type.IDateTime|null|undefined} earliestDeliveryPromiseTime
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.earliestDeliveryPromiseTime = null;
+    
+                                /**
+                                 * ShippingInfo latestDeliveryPromiseTime.
+                                 * @member {google.type.IDateTime|null|undefined} latestDeliveryPromiseTime
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.latestDeliveryPromiseTime = null;
+    
+                                /**
+                                 * ShippingInfo actualDeliveryTime.
+                                 * @member {google.type.IDateTime|null|undefined} actualDeliveryTime
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.actualDeliveryTime = null;
+    
+                                /**
+                                 * ShippingInfo shippingStatus.
+                                 * @member {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState} shippingStatus
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.shippingStatus = 0;
+    
+                                /**
+                                 * ShippingInfo originPostalCode.
+                                 * @member {string} originPostalCode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.originPostalCode = "";
+    
+                                /**
+                                 * ShippingInfo originRegionCode.
+                                 * @member {string} originRegionCode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 */
+                                ShippingInfo.prototype.originRegionCode = "";
+    
+                                /**
+                                 * Creates a new ShippingInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo} ShippingInfo instance
+                                 */
+                                ShippingInfo.create = function create(properties) {
+                                    return new ShippingInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ShippingInfo message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo} message ShippingInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShippingInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.shipmentId != null && Object.hasOwnProperty.call(message, "shipmentId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.shipmentId);
+                                    if (message.trackingId != null && Object.hasOwnProperty.call(message, "trackingId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.trackingId);
+                                    if (message.carrier != null && Object.hasOwnProperty.call(message, "carrier"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.carrier);
+                                    if (message.carrierService != null && Object.hasOwnProperty.call(message, "carrierService"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.carrierService);
+                                    if (message.shippedTime != null && Object.hasOwnProperty.call(message, "shippedTime"))
+                                        $root.google.type.DateTime.encode(message.shippedTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.earliestDeliveryPromiseTime != null && Object.hasOwnProperty.call(message, "earliestDeliveryPromiseTime"))
+                                        $root.google.type.DateTime.encode(message.earliestDeliveryPromiseTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    if (message.latestDeliveryPromiseTime != null && Object.hasOwnProperty.call(message, "latestDeliveryPromiseTime"))
+                                        $root.google.type.DateTime.encode(message.latestDeliveryPromiseTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.actualDeliveryTime != null && Object.hasOwnProperty.call(message, "actualDeliveryTime"))
+                                        $root.google.type.DateTime.encode(message.actualDeliveryTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    if (message.shippingStatus != null && Object.hasOwnProperty.call(message, "shippingStatus"))
+                                        writer.uint32(/* id 9, wireType 0 =*/72).int32(message.shippingStatus);
+                                    if (message.originPostalCode != null && Object.hasOwnProperty.call(message, "originPostalCode"))
+                                        writer.uint32(/* id 10, wireType 2 =*/82).string(message.originPostalCode);
+                                    if (message.originRegionCode != null && Object.hasOwnProperty.call(message, "originRegionCode"))
+                                        writer.uint32(/* id 11, wireType 2 =*/90).string(message.originRegionCode);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ShippingInfo message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShippingInfo} message ShippingInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShippingInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ShippingInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo} ShippingInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShippingInfo.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.shipmentId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.trackingId = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.carrier = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.carrierService = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.shippedTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.earliestDeliveryPromiseTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.latestDeliveryPromiseTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.actualDeliveryTime = $root.google.type.DateTime.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.shippingStatus = reader.int32();
+                                                break;
+                                            }
+                                        case 10: {
+                                                message.originPostalCode = reader.string();
+                                                break;
+                                            }
+                                        case 11: {
+                                                message.originRegionCode = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ShippingInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo} ShippingInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShippingInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ShippingInfo message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ShippingInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.shipmentId != null && message.hasOwnProperty("shipmentId"))
+                                        if (!$util.isString(message.shipmentId))
+                                            return "shipmentId: string expected";
+                                    if (message.trackingId != null && message.hasOwnProperty("trackingId"))
+                                        if (!$util.isString(message.trackingId))
+                                            return "trackingId: string expected";
+                                    if (message.carrier != null && message.hasOwnProperty("carrier"))
+                                        if (!$util.isString(message.carrier))
+                                            return "carrier: string expected";
+                                    if (message.carrierService != null && message.hasOwnProperty("carrierService"))
+                                        if (!$util.isString(message.carrierService))
+                                            return "carrierService: string expected";
+                                    if (message.shippedTime != null && message.hasOwnProperty("shippedTime")) {
+                                        var error = $root.google.type.DateTime.verify(message.shippedTime);
+                                        if (error)
+                                            return "shippedTime." + error;
+                                    }
+                                    if (message.earliestDeliveryPromiseTime != null && message.hasOwnProperty("earliestDeliveryPromiseTime")) {
+                                        var error = $root.google.type.DateTime.verify(message.earliestDeliveryPromiseTime);
+                                        if (error)
+                                            return "earliestDeliveryPromiseTime." + error;
+                                    }
+                                    if (message.latestDeliveryPromiseTime != null && message.hasOwnProperty("latestDeliveryPromiseTime")) {
+                                        var error = $root.google.type.DateTime.verify(message.latestDeliveryPromiseTime);
+                                        if (error)
+                                            return "latestDeliveryPromiseTime." + error;
+                                    }
+                                    if (message.actualDeliveryTime != null && message.hasOwnProperty("actualDeliveryTime")) {
+                                        var error = $root.google.type.DateTime.verify(message.actualDeliveryTime);
+                                        if (error)
+                                            return "actualDeliveryTime." + error;
+                                    }
+                                    if (message.shippingStatus != null && message.hasOwnProperty("shippingStatus"))
+                                        switch (message.shippingStatus) {
+                                        default:
+                                            return "shippingStatus: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.originPostalCode != null && message.hasOwnProperty("originPostalCode"))
+                                        if (!$util.isString(message.originPostalCode))
+                                            return "originPostalCode: string expected";
+                                    if (message.originRegionCode != null && message.hasOwnProperty("originRegionCode"))
+                                        if (!$util.isString(message.originRegionCode))
+                                            return "originRegionCode: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ShippingInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo} ShippingInfo
+                                 */
+                                ShippingInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo();
+                                    if (object.shipmentId != null)
+                                        message.shipmentId = String(object.shipmentId);
+                                    if (object.trackingId != null)
+                                        message.trackingId = String(object.trackingId);
+                                    if (object.carrier != null)
+                                        message.carrier = String(object.carrier);
+                                    if (object.carrierService != null)
+                                        message.carrierService = String(object.carrierService);
+                                    if (object.shippedTime != null) {
+                                        if (typeof object.shippedTime !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.shippedTime: object expected");
+                                        message.shippedTime = $root.google.type.DateTime.fromObject(object.shippedTime);
+                                    }
+                                    if (object.earliestDeliveryPromiseTime != null) {
+                                        if (typeof object.earliestDeliveryPromiseTime !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.earliestDeliveryPromiseTime: object expected");
+                                        message.earliestDeliveryPromiseTime = $root.google.type.DateTime.fromObject(object.earliestDeliveryPromiseTime);
+                                    }
+                                    if (object.latestDeliveryPromiseTime != null) {
+                                        if (typeof object.latestDeliveryPromiseTime !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.latestDeliveryPromiseTime: object expected");
+                                        message.latestDeliveryPromiseTime = $root.google.type.DateTime.fromObject(object.latestDeliveryPromiseTime);
+                                    }
+                                    if (object.actualDeliveryTime != null) {
+                                        if (typeof object.actualDeliveryTime !== "object")
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.actualDeliveryTime: object expected");
+                                        message.actualDeliveryTime = $root.google.type.DateTime.fromObject(object.actualDeliveryTime);
+                                    }
+                                    switch (object.shippingStatus) {
+                                    default:
+                                        if (typeof object.shippingStatus === "number") {
+                                            message.shippingStatus = object.shippingStatus;
+                                            break;
+                                        }
+                                        break;
+                                    case "SHIPPING_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.shippingStatus = 0;
+                                        break;
+                                    case "SHIPPED":
+                                    case 1:
+                                        message.shippingStatus = 1;
+                                        break;
+                                    case "DELIVERED":
+                                    case 2:
+                                        message.shippingStatus = 2;
+                                        break;
+                                    }
+                                    if (object.originPostalCode != null)
+                                        message.originPostalCode = String(object.originPostalCode);
+                                    if (object.originRegionCode != null)
+                                        message.originRegionCode = String(object.originRegionCode);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ShippingInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo} message ShippingInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ShippingInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.shipmentId = "";
+                                        object.trackingId = "";
+                                        object.carrier = "";
+                                        object.carrierService = "";
+                                        object.shippedTime = null;
+                                        object.earliestDeliveryPromiseTime = null;
+                                        object.latestDeliveryPromiseTime = null;
+                                        object.actualDeliveryTime = null;
+                                        object.shippingStatus = options.enums === String ? "SHIPPING_STATE_UNSPECIFIED" : 0;
+                                        object.originPostalCode = "";
+                                        object.originRegionCode = "";
+                                    }
+                                    if (message.shipmentId != null && message.hasOwnProperty("shipmentId"))
+                                        object.shipmentId = message.shipmentId;
+                                    if (message.trackingId != null && message.hasOwnProperty("trackingId"))
+                                        object.trackingId = message.trackingId;
+                                    if (message.carrier != null && message.hasOwnProperty("carrier"))
+                                        object.carrier = message.carrier;
+                                    if (message.carrierService != null && message.hasOwnProperty("carrierService"))
+                                        object.carrierService = message.carrierService;
+                                    if (message.shippedTime != null && message.hasOwnProperty("shippedTime"))
+                                        object.shippedTime = $root.google.type.DateTime.toObject(message.shippedTime, options);
+                                    if (message.earliestDeliveryPromiseTime != null && message.hasOwnProperty("earliestDeliveryPromiseTime"))
+                                        object.earliestDeliveryPromiseTime = $root.google.type.DateTime.toObject(message.earliestDeliveryPromiseTime, options);
+                                    if (message.latestDeliveryPromiseTime != null && message.hasOwnProperty("latestDeliveryPromiseTime"))
+                                        object.latestDeliveryPromiseTime = $root.google.type.DateTime.toObject(message.latestDeliveryPromiseTime, options);
+                                    if (message.actualDeliveryTime != null && message.hasOwnProperty("actualDeliveryTime"))
+                                        object.actualDeliveryTime = $root.google.type.DateTime.toObject(message.actualDeliveryTime, options);
+                                    if (message.shippingStatus != null && message.hasOwnProperty("shippingStatus"))
+                                        object.shippingStatus = options.enums === String ? $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState[message.shippingStatus] === undefined ? message.shippingStatus : $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState[message.shippingStatus] : message.shippingStatus;
+                                    if (message.originPostalCode != null && message.hasOwnProperty("originPostalCode"))
+                                        object.originPostalCode = message.originPostalCode;
+                                    if (message.originRegionCode != null && message.hasOwnProperty("originRegionCode"))
+                                        object.originRegionCode = message.originRegionCode;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ShippingInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ShippingInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ShippingInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ShippingInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo";
+                                };
+    
+                                /**
+                                 * ShippingState enum.
+                                 * @name google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShippingInfo.ShippingState
+                                 * @enum {number}
+                                 * @property {number} SHIPPING_STATE_UNSPECIFIED=0 SHIPPING_STATE_UNSPECIFIED value
+                                 * @property {number} SHIPPED=1 SHIPPED value
+                                 * @property {number} DELIVERED=2 DELIVERED value
+                                 */
+                                ShippingInfo.ShippingState = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SHIPPING_STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "SHIPPED"] = 1;
+                                    values[valuesById[2] = "DELIVERED"] = 2;
+                                    return values;
+                                })();
+    
+                                return ShippingInfo;
+                            })();
+    
+                            OrderTrackingSignal.LineItemDetails = (function() {
+    
+                                /**
+                                 * Properties of a LineItemDetails.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @interface ILineItemDetails
+                                 * @property {string|null} [lineItemId] LineItemDetails lineItemId
+                                 * @property {string|null} [productId] LineItemDetails productId
+                                 * @property {Array.<string>|null} [gtins] LineItemDetails gtins
+                                 * @property {string|null} [mpn] LineItemDetails mpn
+                                 * @property {string|null} [productTitle] LineItemDetails productTitle
+                                 * @property {string|null} [brand] LineItemDetails brand
+                                 * @property {number|Long|null} [quantity] LineItemDetails quantity
+                                 */
+    
+                                /**
+                                 * Constructs a new LineItemDetails.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @classdesc Represents a LineItemDetails.
+                                 * @implements ILineItemDetails
+                                 * @constructor
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails=} [properties] Properties to set
+                                 */
+                                function LineItemDetails(properties) {
+                                    this.gtins = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LineItemDetails lineItemId.
+                                 * @member {string} lineItemId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.lineItemId = "";
+    
+                                /**
+                                 * LineItemDetails productId.
+                                 * @member {string} productId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.productId = "";
+    
+                                /**
+                                 * LineItemDetails gtins.
+                                 * @member {Array.<string>} gtins
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.gtins = $util.emptyArray;
+    
+                                /**
+                                 * LineItemDetails mpn.
+                                 * @member {string} mpn
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.mpn = "";
+    
+                                /**
+                                 * LineItemDetails productTitle.
+                                 * @member {string|null|undefined} productTitle
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.productTitle = null;
+    
+                                /**
+                                 * LineItemDetails brand.
+                                 * @member {string|null|undefined} brand
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.brand = null;
+    
+                                /**
+                                 * LineItemDetails quantity.
+                                 * @member {number|Long} quantity
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 */
+                                LineItemDetails.prototype.quantity = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(LineItemDetails.prototype, "_productTitle", {
+                                    get: $util.oneOfGetter($oneOfFields = ["productTitle"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(LineItemDetails.prototype, "_brand", {
+                                    get: $util.oneOfGetter($oneOfFields = ["brand"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new LineItemDetails instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails} LineItemDetails instance
+                                 */
+                                LineItemDetails.create = function create(properties) {
+                                    return new LineItemDetails(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LineItemDetails message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails} message LineItemDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LineItemDetails.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.lineItemId != null && Object.hasOwnProperty.call(message, "lineItemId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.lineItemId);
+                                    if (message.productId != null && Object.hasOwnProperty.call(message, "productId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.productId);
+                                    if (message.mpn != null && Object.hasOwnProperty.call(message, "mpn"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.mpn);
+                                    if (message.productTitle != null && Object.hasOwnProperty.call(message, "productTitle"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.productTitle);
+                                    if (message.brand != null && Object.hasOwnProperty.call(message, "brand"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.brand);
+                                    if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                        writer.uint32(/* id 7, wireType 0 =*/56).int64(message.quantity);
+                                    if (message.gtins != null && message.gtins.length)
+                                        for (var i = 0; i < message.gtins.length; ++i)
+                                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.gtins[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LineItemDetails message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ILineItemDetails} message LineItemDetails message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LineItemDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LineItemDetails message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails} LineItemDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LineItemDetails.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.lineItemId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.productId = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                if (!(message.gtins && message.gtins.length))
+                                                    message.gtins = [];
+                                                message.gtins.push(reader.string());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.mpn = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.productTitle = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.brand = reader.string();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.quantity = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LineItemDetails message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails} LineItemDetails
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LineItemDetails.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LineItemDetails message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LineItemDetails.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.lineItemId != null && message.hasOwnProperty("lineItemId"))
+                                        if (!$util.isString(message.lineItemId))
+                                            return "lineItemId: string expected";
+                                    if (message.productId != null && message.hasOwnProperty("productId"))
+                                        if (!$util.isString(message.productId))
+                                            return "productId: string expected";
+                                    if (message.gtins != null && message.hasOwnProperty("gtins")) {
+                                        if (!Array.isArray(message.gtins))
+                                            return "gtins: array expected";
+                                        for (var i = 0; i < message.gtins.length; ++i)
+                                            if (!$util.isString(message.gtins[i]))
+                                                return "gtins: string[] expected";
+                                    }
+                                    if (message.mpn != null && message.hasOwnProperty("mpn"))
+                                        if (!$util.isString(message.mpn))
+                                            return "mpn: string expected";
+                                    if (message.productTitle != null && message.hasOwnProperty("productTitle")) {
+                                        properties._productTitle = 1;
+                                        if (!$util.isString(message.productTitle))
+                                            return "productTitle: string expected";
+                                    }
+                                    if (message.brand != null && message.hasOwnProperty("brand")) {
+                                        properties._brand = 1;
+                                        if (!$util.isString(message.brand))
+                                            return "brand: string expected";
+                                    }
+                                    if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                        if (!$util.isInteger(message.quantity) && !(message.quantity && $util.isInteger(message.quantity.low) && $util.isInteger(message.quantity.high)))
+                                            return "quantity: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LineItemDetails message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails} LineItemDetails
+                                 */
+                                LineItemDetails.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails();
+                                    if (object.lineItemId != null)
+                                        message.lineItemId = String(object.lineItemId);
+                                    if (object.productId != null)
+                                        message.productId = String(object.productId);
+                                    if (object.gtins) {
+                                        if (!Array.isArray(object.gtins))
+                                            throw TypeError(".google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails.gtins: array expected");
+                                        message.gtins = [];
+                                        for (var i = 0; i < object.gtins.length; ++i)
+                                            message.gtins[i] = String(object.gtins[i]);
+                                    }
+                                    if (object.mpn != null)
+                                        message.mpn = String(object.mpn);
+                                    if (object.productTitle != null)
+                                        message.productTitle = String(object.productTitle);
+                                    if (object.brand != null)
+                                        message.brand = String(object.brand);
+                                    if (object.quantity != null)
+                                        if ($util.Long)
+                                            (message.quantity = $util.Long.fromValue(object.quantity)).unsigned = false;
+                                        else if (typeof object.quantity === "string")
+                                            message.quantity = parseInt(object.quantity, 10);
+                                        else if (typeof object.quantity === "number")
+                                            message.quantity = object.quantity;
+                                        else if (typeof object.quantity === "object")
+                                            message.quantity = new $util.LongBits(object.quantity.low >>> 0, object.quantity.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LineItemDetails message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails} message LineItemDetails
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LineItemDetails.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.gtins = [];
+                                    if (options.defaults) {
+                                        object.lineItemId = "";
+                                        object.productId = "";
+                                        object.mpn = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.quantity = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.quantity = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.lineItemId != null && message.hasOwnProperty("lineItemId"))
+                                        object.lineItemId = message.lineItemId;
+                                    if (message.productId != null && message.hasOwnProperty("productId"))
+                                        object.productId = message.productId;
+                                    if (message.mpn != null && message.hasOwnProperty("mpn"))
+                                        object.mpn = message.mpn;
+                                    if (message.productTitle != null && message.hasOwnProperty("productTitle")) {
+                                        object.productTitle = message.productTitle;
+                                        if (options.oneofs)
+                                            object._productTitle = "productTitle";
+                                    }
+                                    if (message.brand != null && message.hasOwnProperty("brand")) {
+                                        object.brand = message.brand;
+                                        if (options.oneofs)
+                                            object._brand = "brand";
+                                    }
+                                    if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                        if (typeof message.quantity === "number")
+                                            object.quantity = options.longs === String ? String(message.quantity) : message.quantity;
+                                        else
+                                            object.quantity = options.longs === String ? $util.Long.prototype.toString.call(message.quantity) : options.longs === Number ? new $util.LongBits(message.quantity.low >>> 0, message.quantity.high >>> 0).toNumber() : message.quantity;
+                                    if (message.gtins && message.gtins.length) {
+                                        object.gtins = [];
+                                        for (var j = 0; j < message.gtins.length; ++j)
+                                            object.gtins[j] = message.gtins[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LineItemDetails to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LineItemDetails.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LineItemDetails
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LineItemDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.LineItemDetails";
+                                };
+    
+                                return LineItemDetails;
+                            })();
+    
+                            OrderTrackingSignal.ShipmentLineItemMapping = (function() {
+    
+                                /**
+                                 * Properties of a ShipmentLineItemMapping.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @interface IShipmentLineItemMapping
+                                 * @property {string|null} [shipmentId] ShipmentLineItemMapping shipmentId
+                                 * @property {string|null} [lineItemId] ShipmentLineItemMapping lineItemId
+                                 * @property {number|Long|null} [quantity] ShipmentLineItemMapping quantity
+                                 */
+    
+                                /**
+                                 * Constructs a new ShipmentLineItemMapping.
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal
+                                 * @classdesc Represents a ShipmentLineItemMapping.
+                                 * @implements IShipmentLineItemMapping
+                                 * @constructor
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping=} [properties] Properties to set
+                                 */
+                                function ShipmentLineItemMapping(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ShipmentLineItemMapping shipmentId.
+                                 * @member {string} shipmentId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @instance
+                                 */
+                                ShipmentLineItemMapping.prototype.shipmentId = "";
+    
+                                /**
+                                 * ShipmentLineItemMapping lineItemId.
+                                 * @member {string} lineItemId
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @instance
+                                 */
+                                ShipmentLineItemMapping.prototype.lineItemId = "";
+    
+                                /**
+                                 * ShipmentLineItemMapping quantity.
+                                 * @member {number|Long} quantity
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @instance
+                                 */
+                                ShipmentLineItemMapping.prototype.quantity = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new ShipmentLineItemMapping instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping} ShipmentLineItemMapping instance
+                                 */
+                                ShipmentLineItemMapping.create = function create(properties) {
+                                    return new ShipmentLineItemMapping(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ShipmentLineItemMapping message. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping} message ShipmentLineItemMapping message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShipmentLineItemMapping.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.shipmentId != null && Object.hasOwnProperty.call(message, "shipmentId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.shipmentId);
+                                    if (message.lineItemId != null && Object.hasOwnProperty.call(message, "lineItemId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.lineItemId);
+                                    if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int64(message.quantity);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ShipmentLineItemMapping message, length delimited. Does not implicitly {@link google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.IShipmentLineItemMapping} message ShipmentLineItemMapping message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ShipmentLineItemMapping.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ShipmentLineItemMapping message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping} ShipmentLineItemMapping
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShipmentLineItemMapping.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.shipmentId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.lineItemId = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.quantity = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ShipmentLineItemMapping message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping} ShipmentLineItemMapping
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ShipmentLineItemMapping.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ShipmentLineItemMapping message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ShipmentLineItemMapping.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.shipmentId != null && message.hasOwnProperty("shipmentId"))
+                                        if (!$util.isString(message.shipmentId))
+                                            return "shipmentId: string expected";
+                                    if (message.lineItemId != null && message.hasOwnProperty("lineItemId"))
+                                        if (!$util.isString(message.lineItemId))
+                                            return "lineItemId: string expected";
+                                    if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                        if (!$util.isInteger(message.quantity) && !(message.quantity && $util.isInteger(message.quantity.low) && $util.isInteger(message.quantity.high)))
+                                            return "quantity: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ShipmentLineItemMapping message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping} ShipmentLineItemMapping
+                                 */
+                                ShipmentLineItemMapping.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping();
+                                    if (object.shipmentId != null)
+                                        message.shipmentId = String(object.shipmentId);
+                                    if (object.lineItemId != null)
+                                        message.lineItemId = String(object.lineItemId);
+                                    if (object.quantity != null)
+                                        if ($util.Long)
+                                            (message.quantity = $util.Long.fromValue(object.quantity)).unsigned = false;
+                                        else if (typeof object.quantity === "string")
+                                            message.quantity = parseInt(object.quantity, 10);
+                                        else if (typeof object.quantity === "number")
+                                            message.quantity = object.quantity;
+                                        else if (typeof object.quantity === "object")
+                                            message.quantity = new $util.LongBits(object.quantity.low >>> 0, object.quantity.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ShipmentLineItemMapping message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping} message ShipmentLineItemMapping
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ShipmentLineItemMapping.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.shipmentId = "";
+                                        object.lineItemId = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.quantity = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.quantity = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.shipmentId != null && message.hasOwnProperty("shipmentId"))
+                                        object.shipmentId = message.shipmentId;
+                                    if (message.lineItemId != null && message.hasOwnProperty("lineItemId"))
+                                        object.lineItemId = message.lineItemId;
+                                    if (message.quantity != null && message.hasOwnProperty("quantity"))
+                                        if (typeof message.quantity === "number")
+                                            object.quantity = options.longs === String ? String(message.quantity) : message.quantity;
+                                        else
+                                            object.quantity = options.longs === String ? $util.Long.prototype.toString.call(message.quantity) : options.longs === Number ? new $util.LongBits(message.quantity.low >>> 0, message.quantity.high >>> 0).toNumber() : message.quantity;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ShipmentLineItemMapping to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ShipmentLineItemMapping.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ShipmentLineItemMapping
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ShipmentLineItemMapping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.ordertracking.v1.OrderTrackingSignal.ShipmentLineItemMapping";
+                                };
+    
+                                return ShipmentLineItemMapping;
+                            })();
+    
+                            return OrderTrackingSignal;
+                        })();
+    
+                        return v1;
+                    })();
     
                     ordertracking.v1beta = (function() {
     

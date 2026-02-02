@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -833,6 +833,237 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|createQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef CreateQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls CreateQueryTemplate.
+                             * @function createQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} request CreateQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.createQueryTemplate = function createQueryTemplate(request, callback) {
+                                return this.rpcCall(createQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "CreateQueryTemplate" });
+    
+                            /**
+                             * Calls CreateQueryTemplate.
+                             * @function createQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} request CreateQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|getQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef GetQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls GetQueryTemplate.
+                             * @function getQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} request GetQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.getQueryTemplate = function getQueryTemplate(request, callback) {
+                                return this.rpcCall(getQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "GetQueryTemplate" });
+    
+                            /**
+                             * Calls GetQueryTemplate.
+                             * @function getQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} request GetQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|listQueryTemplates}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef ListQueryTemplatesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} [response] ListQueryTemplatesResponse
+                             */
+    
+                            /**
+                             * Calls ListQueryTemplates.
+                             * @function listQueryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} request ListQueryTemplatesRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplatesCallback} callback Node-style callback called with the error, if any, and ListQueryTemplatesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.listQueryTemplates = function listQueryTemplates(request, callback) {
+                                return this.rpcCall(listQueryTemplates, $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest, $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse, request, callback);
+                            }, "name", { value: "ListQueryTemplates" });
+    
+                            /**
+                             * Calls ListQueryTemplates.
+                             * @function listQueryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} request ListQueryTemplatesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|updateQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef UpdateQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls UpdateQueryTemplate.
+                             * @function updateQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} request UpdateQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.updateQueryTemplate = function updateQueryTemplate(request, callback) {
+                                return this.rpcCall(updateQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "UpdateQueryTemplate" });
+    
+                            /**
+                             * Calls UpdateQueryTemplate.
+                             * @function updateQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} request UpdateQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|deleteQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef DeleteQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteQueryTemplate.
+                             * @function deleteQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} request DeleteQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplateCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.deleteQueryTemplate = function deleteQueryTemplate(request, callback) {
+                                return this.rpcCall(deleteQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteQueryTemplate" });
+    
+                            /**
+                             * Calls DeleteQueryTemplate.
+                             * @function deleteQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} request DeleteQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|submitQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef SubmitQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls SubmitQueryTemplate.
+                             * @function submitQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} request SubmitQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.submitQueryTemplate = function submitQueryTemplate(request, callback) {
+                                return this.rpcCall(submitQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "SubmitQueryTemplate" });
+    
+                            /**
+                             * Calls SubmitQueryTemplate.
+                             * @function submitQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} request SubmitQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|approveQueryTemplate}.
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @typedef ApproveQueryTemplateCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} [response] QueryTemplate
+                             */
+    
+                            /**
+                             * Calls ApproveQueryTemplate.
+                             * @function approveQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} request ApproveQueryTemplateRequest message or plain object
+                             * @param {google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplateCallback} callback Node-style callback called with the error, if any, and QueryTemplate
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AnalyticsHubService.prototype.approveQueryTemplate = function approveQueryTemplate(request, callback) {
+                                return this.rpcCall(approveQueryTemplate, $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest, $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate, request, callback);
+                            }, "name", { value: "ApproveQueryTemplate" });
+    
+                            /**
+                             * Calls ApproveQueryTemplate.
+                             * @function approveQueryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.AnalyticsHubService
+                             * @instance
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} request ApproveQueryTemplateRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.analyticshub.v1.QueryTemplate>} Promise
+                             * @variation 2
+                             */
+    
                             return AnalyticsHubService;
                         })();
     
@@ -1341,6 +1572,2568 @@
                             };
     
                             return DataExchange;
+                        })();
+    
+                        v1.QueryTemplate = (function() {
+    
+                            /**
+                             * Properties of a QueryTemplate.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IQueryTemplate
+                             * @property {string|null} [name] QueryTemplate name
+                             * @property {string|null} [displayName] QueryTemplate displayName
+                             * @property {string|null} [description] QueryTemplate description
+                             * @property {string|null} [proposer] QueryTemplate proposer
+                             * @property {string|null} [primaryContact] QueryTemplate primaryContact
+                             * @property {string|null} [documentation] QueryTemplate documentation
+                             * @property {google.cloud.bigquery.analyticshub.v1.QueryTemplate.State|null} [state] QueryTemplate state
+                             * @property {google.cloud.bigquery.analyticshub.v1.IRoutine|null} [routine] QueryTemplate routine
+                             * @property {google.protobuf.ITimestamp|null} [createTime] QueryTemplate createTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] QueryTemplate updateTime
+                             */
+    
+                            /**
+                             * Constructs a new QueryTemplate.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a QueryTemplate.
+                             * @implements IQueryTemplate
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate=} [properties] Properties to set
+                             */
+                            function QueryTemplate(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QueryTemplate name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.name = "";
+    
+                            /**
+                             * QueryTemplate displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.displayName = "";
+    
+                            /**
+                             * QueryTemplate description.
+                             * @member {string} description
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.description = "";
+    
+                            /**
+                             * QueryTemplate proposer.
+                             * @member {string} proposer
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.proposer = "";
+    
+                            /**
+                             * QueryTemplate primaryContact.
+                             * @member {string} primaryContact
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.primaryContact = "";
+    
+                            /**
+                             * QueryTemplate documentation.
+                             * @member {string} documentation
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.documentation = "";
+    
+                            /**
+                             * QueryTemplate state.
+                             * @member {google.cloud.bigquery.analyticshub.v1.QueryTemplate.State} state
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.state = 0;
+    
+                            /**
+                             * QueryTemplate routine.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IRoutine|null|undefined} routine
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.routine = null;
+    
+                            /**
+                             * QueryTemplate createTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.createTime = null;
+    
+                            /**
+                             * QueryTemplate updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             */
+                            QueryTemplate.prototype.updateTime = null;
+    
+                            /**
+                             * Creates a new QueryTemplate instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate instance
+                             */
+                            QueryTemplate.create = function create(properties) {
+                                return new QueryTemplate(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QueryTemplate message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate} message QueryTemplate message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryTemplate.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                if (message.proposer != null && Object.hasOwnProperty.call(message, "proposer"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.proposer);
+                                if (message.documentation != null && Object.hasOwnProperty.call(message, "documentation"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.documentation);
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                                if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.Routine.encode(message.routine, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.primaryContact != null && Object.hasOwnProperty.call(message, "primaryContact"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.primaryContact);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QueryTemplate message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IQueryTemplate} message QueryTemplate message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QueryTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QueryTemplate message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryTemplate.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.description = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.proposer = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.primaryContact = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.documentation = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QueryTemplate message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QueryTemplate.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QueryTemplate message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QueryTemplate.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    if (!$util.isString(message.description))
+                                        return "description: string expected";
+                                if (message.proposer != null && message.hasOwnProperty("proposer"))
+                                    if (!$util.isString(message.proposer))
+                                        return "proposer: string expected";
+                                if (message.primaryContact != null && message.hasOwnProperty("primaryContact"))
+                                    if (!$util.isString(message.primaryContact))
+                                        return "primaryContact: string expected";
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    if (!$util.isString(message.documentation))
+                                        return "documentation: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.Routine.verify(message.routine);
+                                    if (error)
+                                        return "routine." + error;
+                                }
+                                if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                    if (error)
+                                        return "createTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QueryTemplate message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.QueryTemplate} QueryTemplate
+                             */
+                            QueryTemplate.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.description != null)
+                                    message.description = String(object.description);
+                                if (object.proposer != null)
+                                    message.proposer = String(object.proposer);
+                                if (object.primaryContact != null)
+                                    message.primaryContact = String(object.primaryContact);
+                                if (object.documentation != null)
+                                    message.documentation = String(object.documentation);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "DRAFTED":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "PENDING":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETED":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "APPROVED":
+                                case 4:
+                                    message.state = 4;
+                                    break;
+                                }
+                                if (object.routine != null) {
+                                    if (typeof object.routine !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.routine: object expected");
+                                    message.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.fromObject(object.routine);
+                                }
+                                if (object.createTime != null) {
+                                    if (typeof object.createTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.createTime: object expected");
+                                    message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.QueryTemplate.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QueryTemplate message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.QueryTemplate} message QueryTemplate
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QueryTemplate.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.displayName = "";
+                                    object.description = "";
+                                    object.proposer = "";
+                                    object.documentation = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.routine = null;
+                                    object.createTime = null;
+                                    object.updateTime = null;
+                                    object.primaryContact = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.description != null && message.hasOwnProperty("description"))
+                                    object.description = message.description;
+                                if (message.proposer != null && message.hasOwnProperty("proposer"))
+                                    object.proposer = message.proposer;
+                                if (message.documentation != null && message.hasOwnProperty("documentation"))
+                                    object.documentation = message.documentation;
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.State[message.state] === undefined ? message.state : $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.State[message.state] : message.state;
+                                if (message.routine != null && message.hasOwnProperty("routine"))
+                                    object.routine = $root.google.cloud.bigquery.analyticshub.v1.Routine.toObject(message.routine, options);
+                                if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                    object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                                if (message.primaryContact != null && message.hasOwnProperty("primaryContact"))
+                                    object.primaryContact = message.primaryContact;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QueryTemplate to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QueryTemplate.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QueryTemplate
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.QueryTemplate
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QueryTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.QueryTemplate";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.QueryTemplate.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} DRAFTED=1 DRAFTED value
+                             * @property {number} PENDING=2 PENDING value
+                             * @property {number} DELETED=3 DELETED value
+                             * @property {number} APPROVED=4 APPROVED value
+                             */
+                            QueryTemplate.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DRAFTED"] = 1;
+                                values[valuesById[2] = "PENDING"] = 2;
+                                values[valuesById[3] = "DELETED"] = 3;
+                                values[valuesById[4] = "APPROVED"] = 4;
+                                return values;
+                            })();
+    
+                            return QueryTemplate;
+                        })();
+    
+                        v1.Routine = (function() {
+    
+                            /**
+                             * Properties of a Routine.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IRoutine
+                             * @property {google.cloud.bigquery.analyticshub.v1.Routine.RoutineType|null} [routineType] Routine routineType
+                             * @property {string|null} [definitionBody] Routine definitionBody
+                             */
+    
+                            /**
+                             * Constructs a new Routine.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a Routine.
+                             * @implements IRoutine
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine=} [properties] Properties to set
+                             */
+                            function Routine(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Routine routineType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.Routine.RoutineType} routineType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             */
+                            Routine.prototype.routineType = 0;
+    
+                            /**
+                             * Routine definitionBody.
+                             * @member {string} definitionBody
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             */
+                            Routine.prototype.definitionBody = "";
+    
+                            /**
+                             * Creates a new Routine instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine instance
+                             */
+                            Routine.create = function create(properties) {
+                                return new Routine(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Routine message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Routine.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine} message Routine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Routine.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.routineType != null && Object.hasOwnProperty.call(message, "routineType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.routineType);
+                                if (message.definitionBody != null && Object.hasOwnProperty.call(message, "definitionBody"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.definitionBody);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Routine message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Routine.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRoutine} message Routine message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Routine.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Routine message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Routine.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Routine();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.routineType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.definitionBody = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Routine message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Routine.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Routine message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Routine.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.routineType != null && message.hasOwnProperty("routineType"))
+                                    switch (message.routineType) {
+                                    default:
+                                        return "routineType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.definitionBody != null && message.hasOwnProperty("definitionBody"))
+                                    if (!$util.isString(message.definitionBody))
+                                        return "definitionBody: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Routine message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.Routine} Routine
+                             */
+                            Routine.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Routine)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.Routine();
+                                switch (object.routineType) {
+                                default:
+                                    if (typeof object.routineType === "number") {
+                                        message.routineType = object.routineType;
+                                        break;
+                                    }
+                                    break;
+                                case "ROUTINE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.routineType = 0;
+                                    break;
+                                case "TABLE_VALUED_FUNCTION":
+                                case 1:
+                                    message.routineType = 1;
+                                    break;
+                                }
+                                if (object.definitionBody != null)
+                                    message.definitionBody = String(object.definitionBody);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Routine message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.Routine} message Routine
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Routine.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.routineType = options.enums === String ? "ROUTINE_TYPE_UNSPECIFIED" : 0;
+                                    object.definitionBody = "";
+                                }
+                                if (message.routineType != null && message.hasOwnProperty("routineType"))
+                                    object.routineType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Routine.RoutineType[message.routineType] === undefined ? message.routineType : $root.google.cloud.bigquery.analyticshub.v1.Routine.RoutineType[message.routineType] : message.routineType;
+                                if (message.definitionBody != null && message.hasOwnProperty("definitionBody"))
+                                    object.definitionBody = message.definitionBody;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Routine to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Routine.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Routine
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Routine
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Routine.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Routine";
+                            };
+    
+                            /**
+                             * RoutineType enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.Routine.RoutineType
+                             * @enum {number}
+                             * @property {number} ROUTINE_TYPE_UNSPECIFIED=0 ROUTINE_TYPE_UNSPECIFIED value
+                             * @property {number} TABLE_VALUED_FUNCTION=1 TABLE_VALUED_FUNCTION value
+                             */
+                            Routine.RoutineType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ROUTINE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "TABLE_VALUED_FUNCTION"] = 1;
+                                return values;
+                            })();
+    
+                            return Routine;
+                        })();
+    
+                        v1.CreateQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface ICreateQueryTemplateRequest
+                             * @property {string|null} [parent] CreateQueryTemplateRequest parent
+                             * @property {string|null} [queryTemplateId] CreateQueryTemplateRequest queryTemplateId
+                             * @property {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null} [queryTemplate] CreateQueryTemplateRequest queryTemplate
+                             */
+    
+                            /**
+                             * Constructs a new CreateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a CreateQueryTemplateRequest.
+                             * @implements ICreateQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function CreateQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateQueryTemplateRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateQueryTemplateRequest queryTemplateId.
+                             * @member {string} queryTemplateId
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.queryTemplateId = "";
+    
+                            /**
+                             * CreateQueryTemplateRequest queryTemplate.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null|undefined} queryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             */
+                            CreateQueryTemplateRequest.prototype.queryTemplate = null;
+    
+                            /**
+                             * Creates a new CreateQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest instance
+                             */
+                            CreateQueryTemplateRequest.create = function create(properties) {
+                                return new CreateQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} message CreateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.queryTemplateId != null && Object.hasOwnProperty.call(message, "queryTemplateId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.queryTemplateId);
+                                if (message.queryTemplate != null && Object.hasOwnProperty.call(message, "queryTemplate"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICreateQueryTemplateRequest} message CreateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.queryTemplateId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.queryTemplateId != null && message.hasOwnProperty("queryTemplateId"))
+                                    if (!$util.isString(message.queryTemplateId))
+                                        return "queryTemplateId: string expected";
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplate);
+                                    if (error)
+                                        return "queryTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} CreateQueryTemplateRequest
+                             */
+                            CreateQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.queryTemplateId != null)
+                                    message.queryTemplateId = String(object.queryTemplateId);
+                                if (object.queryTemplate != null) {
+                                    if (typeof object.queryTemplate !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest.queryTemplate: object expected");
+                                    message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest} message CreateQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.queryTemplateId = "";
+                                    object.queryTemplate = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.queryTemplateId != null && message.hasOwnProperty("queryTemplateId"))
+                                    object.queryTemplateId = message.queryTemplateId;
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate"))
+                                    object.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.CreateQueryTemplateRequest";
+                            };
+    
+                            return CreateQueryTemplateRequest;
+                        })();
+    
+                        v1.GetQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a GetQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IGetQueryTemplateRequest
+                             * @property {string|null} [name] GetQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a GetQueryTemplateRequest.
+                             * @implements IGetQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function GetQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @instance
+                             */
+                            GetQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest instance
+                             */
+                            GetQueryTemplateRequest.create = function create(properties) {
+                                return new GetQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} message GetQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IGetQueryTemplateRequest} message GetQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} GetQueryTemplateRequest
+                             */
+                            GetQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest} message GetQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.GetQueryTemplateRequest";
+                            };
+    
+                            return GetQueryTemplateRequest;
+                        })();
+    
+                        v1.ListQueryTemplatesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListQueryTemplatesRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IListQueryTemplatesRequest
+                             * @property {string|null} [parent] ListQueryTemplatesRequest parent
+                             * @property {number|null} [pageSize] ListQueryTemplatesRequest pageSize
+                             * @property {string|null} [pageToken] ListQueryTemplatesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListQueryTemplatesRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a ListQueryTemplatesRequest.
+                             * @implements IListQueryTemplatesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest=} [properties] Properties to set
+                             */
+                            function ListQueryTemplatesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListQueryTemplatesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListQueryTemplatesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListQueryTemplatesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             */
+                            ListQueryTemplatesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListQueryTemplatesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest instance
+                             */
+                            ListQueryTemplatesRequest.create = function create(properties) {
+                                return new ListQueryTemplatesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} message ListQueryTemplatesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesRequest} message ListQueryTemplatesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListQueryTemplatesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListQueryTemplatesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListQueryTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} ListQueryTemplatesRequest
+                             */
+                            ListQueryTemplatesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListQueryTemplatesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest} message ListQueryTemplatesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListQueryTemplatesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListQueryTemplatesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListQueryTemplatesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListQueryTemplatesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListQueryTemplatesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesRequest";
+                            };
+    
+                            return ListQueryTemplatesRequest;
+                        })();
+    
+                        v1.ListQueryTemplatesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListQueryTemplatesResponse.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IListQueryTemplatesResponse
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.IQueryTemplate>|null} [queryTemplates] ListQueryTemplatesResponse queryTemplates
+                             * @property {string|null} [nextPageToken] ListQueryTemplatesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListQueryTemplatesResponse.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a ListQueryTemplatesResponse.
+                             * @implements IListQueryTemplatesResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse=} [properties] Properties to set
+                             */
+                            function ListQueryTemplatesResponse(properties) {
+                                this.queryTemplates = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListQueryTemplatesResponse queryTemplates.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.IQueryTemplate>} queryTemplates
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             */
+                            ListQueryTemplatesResponse.prototype.queryTemplates = $util.emptyArray;
+    
+                            /**
+                             * ListQueryTemplatesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             */
+                            ListQueryTemplatesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListQueryTemplatesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse instance
+                             */
+                            ListQueryTemplatesResponse.create = function create(properties) {
+                                return new ListQueryTemplatesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse} message ListQueryTemplatesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.queryTemplates != null && message.queryTemplates.length)
+                                    for (var i = 0; i < message.queryTemplates.length; ++i)
+                                        $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplates[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListQueryTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IListQueryTemplatesResponse} message ListQueryTemplatesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListQueryTemplatesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.queryTemplates && message.queryTemplates.length))
+                                                message.queryTemplates = [];
+                                            message.queryTemplates.push($root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListQueryTemplatesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListQueryTemplatesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListQueryTemplatesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListQueryTemplatesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.queryTemplates != null && message.hasOwnProperty("queryTemplates")) {
+                                    if (!Array.isArray(message.queryTemplates))
+                                        return "queryTemplates: array expected";
+                                    for (var i = 0; i < message.queryTemplates.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplates[i]);
+                                        if (error)
+                                            return "queryTemplates." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListQueryTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} ListQueryTemplatesResponse
+                             */
+                            ListQueryTemplatesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse();
+                                if (object.queryTemplates) {
+                                    if (!Array.isArray(object.queryTemplates))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.queryTemplates: array expected");
+                                    message.queryTemplates = [];
+                                    for (var i = 0; i < object.queryTemplates.length; ++i) {
+                                        if (typeof object.queryTemplates[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse.queryTemplates: object expected");
+                                        message.queryTemplates[i] = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplates[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListQueryTemplatesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse} message ListQueryTemplatesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListQueryTemplatesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.queryTemplates = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.queryTemplates && message.queryTemplates.length) {
+                                    object.queryTemplates = [];
+                                    for (var j = 0; j < message.queryTemplates.length; ++j)
+                                        object.queryTemplates[j] = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplates[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListQueryTemplatesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListQueryTemplatesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListQueryTemplatesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListQueryTemplatesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse";
+                            };
+    
+                            return ListQueryTemplatesResponse;
+                        })();
+    
+                        v1.UpdateQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IUpdateQueryTemplateRequest
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateQueryTemplateRequest updateMask
+                             * @property {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null} [queryTemplate] UpdateQueryTemplateRequest queryTemplate
+                             */
+    
+                            /**
+                             * Constructs a new UpdateQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents an UpdateQueryTemplateRequest.
+                             * @implements IUpdateQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function UpdateQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateQueryTemplateRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             */
+                            UpdateQueryTemplateRequest.prototype.updateMask = null;
+    
+                            /**
+                             * UpdateQueryTemplateRequest queryTemplate.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IQueryTemplate|null|undefined} queryTemplate
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             */
+                            UpdateQueryTemplateRequest.prototype.queryTemplate = null;
+    
+                            /**
+                             * Creates a new UpdateQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest instance
+                             */
+                            UpdateQueryTemplateRequest.create = function create(properties) {
+                                return new UpdateQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} message UpdateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.queryTemplate != null && Object.hasOwnProperty.call(message, "queryTemplate"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.encode(message.queryTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IUpdateQueryTemplateRequest} message UpdateQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.verify(message.queryTemplate);
+                                    if (error)
+                                        return "queryTemplate." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} UpdateQueryTemplateRequest
+                             */
+                            UpdateQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest();
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                if (object.queryTemplate != null) {
+                                    if (typeof object.queryTemplate !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest.queryTemplate: object expected");
+                                    message.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.fromObject(object.queryTemplate);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest} message UpdateQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.updateMask = null;
+                                    object.queryTemplate = null;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.queryTemplate != null && message.hasOwnProperty("queryTemplate"))
+                                    object.queryTemplate = $root.google.cloud.bigquery.analyticshub.v1.QueryTemplate.toObject(message.queryTemplate, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.UpdateQueryTemplateRequest";
+                            };
+    
+                            return UpdateQueryTemplateRequest;
+                        })();
+    
+                        v1.DeleteQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IDeleteQueryTemplateRequest
+                             * @property {string|null} [name] DeleteQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a DeleteQueryTemplateRequest.
+                             * @implements IDeleteQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function DeleteQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @instance
+                             */
+                            DeleteQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest instance
+                             */
+                            DeleteQueryTemplateRequest.create = function create(properties) {
+                                return new DeleteQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} message DeleteQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeleteQueryTemplateRequest} message DeleteQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} DeleteQueryTemplateRequest
+                             */
+                            DeleteQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest} message DeleteQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.DeleteQueryTemplateRequest";
+                            };
+    
+                            return DeleteQueryTemplateRequest;
+                        })();
+    
+                        v1.SubmitQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of a SubmitQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface ISubmitQueryTemplateRequest
+                             * @property {string|null} [name] SubmitQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new SubmitQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a SubmitQueryTemplateRequest.
+                             * @implements ISubmitQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function SubmitQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SubmitQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @instance
+                             */
+                            SubmitQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new SubmitQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest instance
+                             */
+                            SubmitQueryTemplateRequest.create = function create(properties) {
+                                return new SubmitQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SubmitQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} message SubmitQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubmitQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SubmitQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ISubmitQueryTemplateRequest} message SubmitQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SubmitQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SubmitQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubmitQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SubmitQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SubmitQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SubmitQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SubmitQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SubmitQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} SubmitQueryTemplateRequest
+                             */
+                            SubmitQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SubmitQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest} message SubmitQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SubmitQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SubmitQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SubmitQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SubmitQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SubmitQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.SubmitQueryTemplateRequest";
+                            };
+    
+                            return SubmitQueryTemplateRequest;
+                        })();
+    
+                        v1.ApproveQueryTemplateRequest = (function() {
+    
+                            /**
+                             * Properties of an ApproveQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IApproveQueryTemplateRequest
+                             * @property {string|null} [name] ApproveQueryTemplateRequest name
+                             */
+    
+                            /**
+                             * Constructs a new ApproveQueryTemplateRequest.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents an ApproveQueryTemplateRequest.
+                             * @implements IApproveQueryTemplateRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest=} [properties] Properties to set
+                             */
+                            function ApproveQueryTemplateRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ApproveQueryTemplateRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @instance
+                             */
+                            ApproveQueryTemplateRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new ApproveQueryTemplateRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest instance
+                             */
+                            ApproveQueryTemplateRequest.create = function create(properties) {
+                                return new ApproveQueryTemplateRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ApproveQueryTemplateRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} message ApproveQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ApproveQueryTemplateRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ApproveQueryTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IApproveQueryTemplateRequest} message ApproveQueryTemplateRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ApproveQueryTemplateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ApproveQueryTemplateRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ApproveQueryTemplateRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ApproveQueryTemplateRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ApproveQueryTemplateRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ApproveQueryTemplateRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ApproveQueryTemplateRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ApproveQueryTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} ApproveQueryTemplateRequest
+                             */
+                            ApproveQueryTemplateRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ApproveQueryTemplateRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest} message ApproveQueryTemplateRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ApproveQueryTemplateRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ApproveQueryTemplateRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ApproveQueryTemplateRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ApproveQueryTemplateRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ApproveQueryTemplateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ApproveQueryTemplateRequest";
+                            };
+    
+                            return ApproveQueryTemplateRequest;
                         })();
     
                         v1.SharingEnvironmentConfig = (function() {
@@ -2733,6 +5526,7 @@
                              * @property {google.protobuf.IStringValue|null} [description] DestinationDataset description
                              * @property {Object.<string,string>|null} [labels] DestinationDataset labels
                              * @property {string|null} [location] DestinationDataset location
+                             * @property {Array.<string>|null} [replicaLocations] DestinationDataset replicaLocations
                              */
     
                             /**
@@ -2745,6 +5539,7 @@
                              */
                             function DestinationDataset(properties) {
                                 this.labels = {};
+                                this.replicaLocations = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -2792,6 +5587,14 @@
                             DestinationDataset.prototype.location = "";
     
                             /**
+                             * DestinationDataset replicaLocations.
+                             * @member {Array.<string>} replicaLocations
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationDataset
+                             * @instance
+                             */
+                            DestinationDataset.prototype.replicaLocations = $util.emptyArray;
+    
+                            /**
                              * Creates a new DestinationDataset instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.analyticshub.v1.DestinationDataset
@@ -2826,6 +5629,9 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.location);
+                                if (message.replicaLocations != null && message.replicaLocations.length)
+                                    for (var i = 0; i < message.replicaLocations.length; ++i)
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.replicaLocations[i]);
                                 return writer;
                             };
     
@@ -2901,6 +5707,12 @@
                                             message.location = reader.string();
                                             break;
                                         }
+                                    case 6: {
+                                            if (!(message.replicaLocations && message.replicaLocations.length))
+                                                message.replicaLocations = [];
+                                            message.replicaLocations.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2962,6 +5774,13 @@
                                 if (message.location != null && message.hasOwnProperty("location"))
                                     if (!$util.isString(message.location))
                                         return "location: string expected";
+                                if (message.replicaLocations != null && message.hasOwnProperty("replicaLocations")) {
+                                    if (!Array.isArray(message.replicaLocations))
+                                        return "replicaLocations: array expected";
+                                    for (var i = 0; i < message.replicaLocations.length; ++i)
+                                        if (!$util.isString(message.replicaLocations[i]))
+                                            return "replicaLocations: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -3001,6 +5820,13 @@
                                 }
                                 if (object.location != null)
                                     message.location = String(object.location);
+                                if (object.replicaLocations) {
+                                    if (!Array.isArray(object.replicaLocations))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.DestinationDataset.replicaLocations: array expected");
+                                    message.replicaLocations = [];
+                                    for (var i = 0; i < object.replicaLocations.length; ++i)
+                                        message.replicaLocations[i] = String(object.replicaLocations[i]);
+                                }
                                 return message;
                             };
     
@@ -3017,6 +5843,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.replicaLocations = [];
                                 if (options.objects || options.defaults)
                                     object.labels = {};
                                 if (options.defaults) {
@@ -3039,6 +5867,11 @@
                                 }
                                 if (message.location != null && message.hasOwnProperty("location"))
                                     object.location = message.location;
+                                if (message.replicaLocations && message.replicaLocations.length) {
+                                    object.replicaLocations = [];
+                                    for (var j = 0; j < message.replicaLocations.length; ++j)
+                                        object.replicaLocations[j] = message.replicaLocations[j];
+                                }
                                 return object;
                             };
     
@@ -3301,6 +6134,7 @@
                              * @property {google.cloud.bigquery.analyticshub.v1.IPublisher|null} [publisher] Listing publisher
                              * @property {string|null} [requestAccess] Listing requestAccess
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null} [restrictedExportConfig] Listing restrictedExportConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null} [storedProcedureConfig] Listing storedProcedureConfig
                              * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] Listing discoveryType
                              * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Listing resourceType
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo|null} [commercialInfo] Listing commercialInfo
@@ -3435,6 +6269,14 @@
                              * @instance
                              */
                             Listing.prototype.restrictedExportConfig = null;
+    
+                            /**
+                             * Listing storedProcedureConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null|undefined} storedProcedureConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.storedProcedureConfig = null;
     
                             /**
                              * Listing discoveryType.
@@ -3580,6 +6422,8 @@
                                     writer.uint32(/* id 18, wireType 0 =*/144).bool(message.logLinkedDatasetQueryUserEmail);
                                 if (message.allowOnlyMetadataSharing != null && Object.hasOwnProperty.call(message, "allowOnlyMetadataSharing"))
                                     writer.uint32(/* id 19, wireType 0 =*/152).bool(message.allowOnlyMetadataSharing);
+                                if (message.storedProcedureConfig != null && Object.hasOwnProperty.call(message, "storedProcedureConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.encode(message.storedProcedureConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3677,6 +6521,10 @@
                                         }
                                     case 13: {
                                             message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 14: {
@@ -3811,6 +6659,7 @@
                                         case 17:
                                         case 18:
                                         case 19:
+                                        case 20:
                                             break;
                                         }
                                 }
@@ -3826,6 +6675,11 @@
                                     var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.verify(message.restrictedExportConfig);
                                     if (error)
                                         return "restrictedExportConfig." + error;
+                                }
+                                if (message.storedProcedureConfig != null && message.hasOwnProperty("storedProcedureConfig")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify(message.storedProcedureConfig);
+                                    if (error)
+                                        return "storedProcedureConfig." + error;
                                 }
                                 if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
                                     properties._discoveryType = 1;
@@ -4017,6 +6871,10 @@
                                         case 19:
                                             message.categories[i] = 19;
                                             break;
+                                        case "CATEGORY_GOOGLE_EARTH_ENGINE":
+                                        case 20:
+                                            message.categories[i] = 20;
+                                            break;
                                         }
                                 }
                                 if (object.publisher != null) {
@@ -4030,6 +6888,11 @@
                                     if (typeof object.restrictedExportConfig !== "object")
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.restrictedExportConfig: object expected");
                                     message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.fromObject(object.restrictedExportConfig);
+                                }
+                                if (object.storedProcedureConfig != null) {
+                                    if (typeof object.storedProcedureConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.storedProcedureConfig: object expected");
+                                    message.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.fromObject(object.storedProcedureConfig);
                                 }
                                 switch (object.discoveryType) {
                                 default:
@@ -4117,6 +6980,7 @@
                                     object.requestAccess = "";
                                     object.restrictedExportConfig = null;
                                     object.resourceType = options.enums === String ? "SHARED_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                    object.storedProcedureConfig = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -4177,6 +7041,8 @@
                                     if (options.oneofs)
                                         object._allowOnlyMetadataSharing = "allowOnlyMetadataSharing";
                                 }
+                                if (message.storedProcedureConfig != null && message.hasOwnProperty("storedProcedureConfig"))
+                                    object.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.toObject(message.storedProcedureConfig, options);
                                 return object;
                             };
     
@@ -4215,6 +7081,8 @@
                                  * @property {string|null} [dataset] BigQueryDatasetSource dataset
                                  * @property {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.ISelectedResource>|null} [selectedResources] BigQueryDatasetSource selectedResources
                                  * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null} [restrictedExportPolicy] BigQueryDatasetSource restrictedExportPolicy
+                                 * @property {Array.<string>|null} [replicaLocations] BigQueryDatasetSource replicaLocations
+                                 * @property {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica>|null} [effectiveReplicas] BigQueryDatasetSource effectiveReplicas
                                  */
     
                                 /**
@@ -4227,6 +7095,8 @@
                                  */
                                 function BigQueryDatasetSource(properties) {
                                     this.selectedResources = [];
+                                    this.replicaLocations = [];
+                                    this.effectiveReplicas = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -4256,6 +7126,22 @@
                                  * @instance
                                  */
                                 BigQueryDatasetSource.prototype.restrictedExportPolicy = null;
+    
+                                /**
+                                 * BigQueryDatasetSource replicaLocations.
+                                 * @member {Array.<string>} replicaLocations
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                 * @instance
+                                 */
+                                BigQueryDatasetSource.prototype.replicaLocations = $util.emptyArray;
+    
+                                /**
+                                 * BigQueryDatasetSource effectiveReplicas.
+                                 * @member {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica>} effectiveReplicas
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                 * @instance
+                                 */
+                                BigQueryDatasetSource.prototype.effectiveReplicas = $util.emptyArray;
     
                                 /**
                                  * Creates a new BigQueryDatasetSource instance using the specified properties.
@@ -4288,6 +7174,12 @@
                                             $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.encode(message.selectedResources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                     if (message.restrictedExportPolicy != null && Object.hasOwnProperty.call(message, "restrictedExportPolicy"))
                                         $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.encode(message.restrictedExportPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.replicaLocations != null && message.replicaLocations.length)
+                                        for (var i = 0; i < message.replicaLocations.length; ++i)
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.replicaLocations[i]);
+                                    if (message.effectiveReplicas != null && message.effectiveReplicas.length)
+                                        for (var i = 0; i < message.effectiveReplicas.length; ++i)
+                                            $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.encode(message.effectiveReplicas[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -4336,6 +7228,18 @@
                                             }
                                         case 3: {
                                                 message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                if (!(message.replicaLocations && message.replicaLocations.length))
+                                                    message.replicaLocations = [];
+                                                message.replicaLocations.push(reader.string());
+                                                break;
+                                            }
+                                        case 6: {
+                                                if (!(message.effectiveReplicas && message.effectiveReplicas.length))
+                                                    message.effectiveReplicas = [];
+                                                message.effectiveReplicas.push($root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.decode(reader, reader.uint32()));
                                                 break;
                                             }
                                         default:
@@ -4390,6 +7294,22 @@
                                         if (error)
                                             return "restrictedExportPolicy." + error;
                                     }
+                                    if (message.replicaLocations != null && message.hasOwnProperty("replicaLocations")) {
+                                        if (!Array.isArray(message.replicaLocations))
+                                            return "replicaLocations: array expected";
+                                        for (var i = 0; i < message.replicaLocations.length; ++i)
+                                            if (!$util.isString(message.replicaLocations[i]))
+                                                return "replicaLocations: string[] expected";
+                                    }
+                                    if (message.effectiveReplicas != null && message.hasOwnProperty("effectiveReplicas")) {
+                                        if (!Array.isArray(message.effectiveReplicas))
+                                            return "effectiveReplicas: array expected";
+                                        for (var i = 0; i < message.effectiveReplicas.length; ++i) {
+                                            var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify(message.effectiveReplicas[i]);
+                                            if (error)
+                                                return "effectiveReplicas." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -4422,6 +7342,23 @@
                                             throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.restrictedExportPolicy: object expected");
                                         message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.fromObject(object.restrictedExportPolicy);
                                     }
+                                    if (object.replicaLocations) {
+                                        if (!Array.isArray(object.replicaLocations))
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.replicaLocations: array expected");
+                                        message.replicaLocations = [];
+                                        for (var i = 0; i < object.replicaLocations.length; ++i)
+                                            message.replicaLocations[i] = String(object.replicaLocations[i]);
+                                    }
+                                    if (object.effectiveReplicas) {
+                                        if (!Array.isArray(object.effectiveReplicas))
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.effectiveReplicas: array expected");
+                                        message.effectiveReplicas = [];
+                                        for (var i = 0; i < object.effectiveReplicas.length; ++i) {
+                                            if (typeof object.effectiveReplicas[i] !== "object")
+                                                throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.effectiveReplicas: object expected");
+                                            message.effectiveReplicas[i] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.fromObject(object.effectiveReplicas[i]);
+                                        }
+                                    }
                                     return message;
                                 };
     
@@ -4438,8 +7375,11 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.arrays || options.defaults)
+                                    if (options.arrays || options.defaults) {
                                         object.selectedResources = [];
+                                        object.replicaLocations = [];
+                                        object.effectiveReplicas = [];
+                                    }
                                     if (options.defaults) {
                                         object.dataset = "";
                                         object.restrictedExportPolicy = null;
@@ -4453,6 +7393,16 @@
                                     }
                                     if (message.restrictedExportPolicy != null && message.hasOwnProperty("restrictedExportPolicy"))
                                         object.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.toObject(message.restrictedExportPolicy, options);
+                                    if (message.replicaLocations && message.replicaLocations.length) {
+                                        object.replicaLocations = [];
+                                        for (var j = 0; j < message.replicaLocations.length; ++j)
+                                            object.replicaLocations[j] = message.replicaLocations[j];
+                                    }
+                                    if (message.effectiveReplicas && message.effectiveReplicas.length) {
+                                        object.effectiveReplicas = [];
+                                        for (var j = 0; j < message.effectiveReplicas.length; ++j)
+                                            object.effectiveReplicas[j] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.toObject(message.effectiveReplicas[j], options);
+                                    }
                                     return object;
                                 };
     
@@ -4999,6 +7949,345 @@
                                     };
     
                                     return RestrictedExportPolicy;
+                                })();
+    
+                                BigQueryDatasetSource.Replica = (function() {
+    
+                                    /**
+                                     * Properties of a Replica.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @interface IReplica
+                                     * @property {string|null} [location] Replica location
+                                     * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState|null} [replicaState] Replica replicaState
+                                     * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState|null} [primaryState] Replica primaryState
+                                     */
+    
+                                    /**
+                                     * Constructs a new Replica.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @classdesc Represents a Replica.
+                                     * @implements IReplica
+                                     * @constructor
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica=} [properties] Properties to set
+                                     */
+                                    function Replica(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Replica location.
+                                     * @member {string} location
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.location = "";
+    
+                                    /**
+                                     * Replica replicaState.
+                                     * @member {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState} replicaState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.replicaState = 0;
+    
+                                    /**
+                                     * Replica primaryState.
+                                     * @member {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState|null|undefined} primaryState
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     */
+                                    Replica.prototype.primaryState = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(Replica.prototype, "_primaryState", {
+                                        get: $util.oneOfGetter($oneOfFields = ["primaryState"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new Replica instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica=} [properties] Properties to set
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica instance
+                                     */
+                                    Replica.create = function create(properties) {
+                                        return new Replica(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Replica message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica} message Replica message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Replica.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                                        if (message.replicaState != null && Object.hasOwnProperty.call(message, "replicaState"))
+                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.replicaState);
+                                        if (message.primaryState != null && Object.hasOwnProperty.call(message, "primaryState"))
+                                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.primaryState);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Replica message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IReplica} message Replica message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Replica.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Replica message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Replica.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.location = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.replicaState = reader.int32();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.primaryState = reader.int32();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Replica message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Replica.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Replica message.
+                                     * @function verify
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Replica.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.location != null && message.hasOwnProperty("location"))
+                                            if (!$util.isString(message.location))
+                                                return "location: string expected";
+                                        if (message.replicaState != null && message.hasOwnProperty("replicaState"))
+                                            switch (message.replicaState) {
+                                            default:
+                                                return "replicaState: enum value expected";
+                                            case 0:
+                                            case 1:
+                                            case 2:
+                                                break;
+                                            }
+                                        if (message.primaryState != null && message.hasOwnProperty("primaryState")) {
+                                            properties._primaryState = 1;
+                                            switch (message.primaryState) {
+                                            default:
+                                                return "primaryState: enum value expected";
+                                            case 0:
+                                            case 1:
+                                                break;
+                                            }
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Replica message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} Replica
+                                     */
+                                    Replica.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica)
+                                            return object;
+                                        var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica();
+                                        if (object.location != null)
+                                            message.location = String(object.location);
+                                        switch (object.replicaState) {
+                                        default:
+                                            if (typeof object.replicaState === "number") {
+                                                message.replicaState = object.replicaState;
+                                                break;
+                                            }
+                                            break;
+                                        case "REPLICA_STATE_UNSPECIFIED":
+                                        case 0:
+                                            message.replicaState = 0;
+                                            break;
+                                        case "READY_TO_USE":
+                                        case 1:
+                                            message.replicaState = 1;
+                                            break;
+                                        case "UNAVAILABLE":
+                                        case 2:
+                                            message.replicaState = 2;
+                                            break;
+                                        }
+                                        switch (object.primaryState) {
+                                        default:
+                                            if (typeof object.primaryState === "number") {
+                                                message.primaryState = object.primaryState;
+                                                break;
+                                            }
+                                            break;
+                                        case "PRIMARY_STATE_UNSPECIFIED":
+                                        case 0:
+                                            message.primaryState = 0;
+                                            break;
+                                        case "PRIMARY_REPLICA":
+                                        case 1:
+                                            message.primaryState = 1;
+                                            break;
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Replica message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica} message Replica
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Replica.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.location = "";
+                                            object.replicaState = options.enums === String ? "REPLICA_STATE_UNSPECIFIED" : 0;
+                                        }
+                                        if (message.location != null && message.hasOwnProperty("location"))
+                                            object.location = message.location;
+                                        if (message.replicaState != null && message.hasOwnProperty("replicaState"))
+                                            object.replicaState = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState[message.replicaState] === undefined ? message.replicaState : $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState[message.replicaState] : message.replicaState;
+                                        if (message.primaryState != null && message.hasOwnProperty("primaryState")) {
+                                            object.primaryState = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState[message.primaryState] === undefined ? message.primaryState : $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState[message.primaryState] : message.primaryState;
+                                            if (options.oneofs)
+                                                object._primaryState = "primaryState";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Replica to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Replica.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Replica
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Replica.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica";
+                                    };
+    
+                                    /**
+                                     * ReplicaState enum.
+                                     * @name google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.ReplicaState
+                                     * @enum {number}
+                                     * @property {number} REPLICA_STATE_UNSPECIFIED=0 REPLICA_STATE_UNSPECIFIED value
+                                     * @property {number} READY_TO_USE=1 READY_TO_USE value
+                                     * @property {number} UNAVAILABLE=2 UNAVAILABLE value
+                                     */
+                                    Replica.ReplicaState = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "REPLICA_STATE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "READY_TO_USE"] = 1;
+                                        values[valuesById[2] = "UNAVAILABLE"] = 2;
+                                        return values;
+                                    })();
+    
+                                    /**
+                                     * PrimaryState enum.
+                                     * @name google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica.PrimaryState
+                                     * @enum {number}
+                                     * @property {number} PRIMARY_STATE_UNSPECIFIED=0 PRIMARY_STATE_UNSPECIFIED value
+                                     * @property {number} PRIMARY_REPLICA=1 PRIMARY_REPLICA value
+                                     */
+                                    Replica.PrimaryState = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "PRIMARY_STATE_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "PRIMARY_REPLICA"] = 1;
+                                        return values;
+                                    })();
+    
+                                    return Replica;
                                 })();
     
                                 return BigQueryDatasetSource;
@@ -6054,6 +9343,7 @@
                              * @property {number} CATEGORY_SCIENCE_AND_RESEARCH=17 CATEGORY_SCIENCE_AND_RESEARCH value
                              * @property {number} CATEGORY_TRANSPORTATION_AND_LOGISTICS=18 CATEGORY_TRANSPORTATION_AND_LOGISTICS value
                              * @property {number} CATEGORY_TRAVEL_AND_TOURISM=19 CATEGORY_TRAVEL_AND_TOURISM value
+                             * @property {number} CATEGORY_GOOGLE_EARTH_ENGINE=20 CATEGORY_GOOGLE_EARTH_ENGINE value
                              */
                             Listing.Category = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -6077,10 +9367,297 @@
                                 values[valuesById[17] = "CATEGORY_SCIENCE_AND_RESEARCH"] = 17;
                                 values[valuesById[18] = "CATEGORY_TRANSPORTATION_AND_LOGISTICS"] = 18;
                                 values[valuesById[19] = "CATEGORY_TRAVEL_AND_TOURISM"] = 19;
+                                values[valuesById[20] = "CATEGORY_GOOGLE_EARTH_ENGINE"] = 20;
                                 return values;
                             })();
     
                             return Listing;
+                        })();
+    
+                        v1.StoredProcedureConfig = (function() {
+    
+                            /**
+                             * Properties of a StoredProcedureConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IStoredProcedureConfig
+                             * @property {boolean|null} [enabled] StoredProcedureConfig enabled
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType>|null} [allowedStoredProcedureTypes] StoredProcedureConfig allowedStoredProcedureTypes
+                             */
+    
+                            /**
+                             * Constructs a new StoredProcedureConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a StoredProcedureConfig.
+                             * @implements IStoredProcedureConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig=} [properties] Properties to set
+                             */
+                            function StoredProcedureConfig(properties) {
+                                this.allowedStoredProcedureTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StoredProcedureConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             */
+                            StoredProcedureConfig.prototype.enabled = false;
+    
+                            /**
+                             * StoredProcedureConfig allowedStoredProcedureTypes.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType>} allowedStoredProcedureTypes
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             */
+                            StoredProcedureConfig.prototype.allowedStoredProcedureTypes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new StoredProcedureConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig instance
+                             */
+                            StoredProcedureConfig.create = function create(properties) {
+                                return new StoredProcedureConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StoredProcedureConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig} message StoredProcedureConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoredProcedureConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                if (message.allowedStoredProcedureTypes != null && message.allowedStoredProcedureTypes.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.allowedStoredProcedureTypes.length; ++i)
+                                        writer.int32(message.allowedStoredProcedureTypes[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StoredProcedureConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig} message StoredProcedureConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoredProcedureConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StoredProcedureConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoredProcedureConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.allowedStoredProcedureTypes && message.allowedStoredProcedureTypes.length))
+                                                message.allowedStoredProcedureTypes = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.allowedStoredProcedureTypes.push(reader.int32());
+                                            } else
+                                                message.allowedStoredProcedureTypes.push(reader.int32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StoredProcedureConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoredProcedureConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StoredProcedureConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StoredProcedureConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.allowedStoredProcedureTypes != null && message.hasOwnProperty("allowedStoredProcedureTypes")) {
+                                    if (!Array.isArray(message.allowedStoredProcedureTypes))
+                                        return "allowedStoredProcedureTypes: array expected";
+                                    for (var i = 0; i < message.allowedStoredProcedureTypes.length; ++i)
+                                        switch (message.allowedStoredProcedureTypes[i]) {
+                                        default:
+                                            return "allowedStoredProcedureTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StoredProcedureConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             */
+                            StoredProcedureConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.allowedStoredProcedureTypes) {
+                                    if (!Array.isArray(object.allowedStoredProcedureTypes))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.allowedStoredProcedureTypes: array expected");
+                                    message.allowedStoredProcedureTypes = [];
+                                    for (var i = 0; i < object.allowedStoredProcedureTypes.length; ++i)
+                                        switch (object.allowedStoredProcedureTypes[i]) {
+                                        default:
+                                            if (typeof object.allowedStoredProcedureTypes[i] === "number") {
+                                                message.allowedStoredProcedureTypes[i] = object.allowedStoredProcedureTypes[i];
+                                                break;
+                                            }
+                                        case "STORED_PROCEDURE_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.allowedStoredProcedureTypes[i] = 0;
+                                            break;
+                                        case "SQL_PROCEDURE":
+                                        case 1:
+                                            message.allowedStoredProcedureTypes[i] = 1;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StoredProcedureConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} message StoredProcedureConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StoredProcedureConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.allowedStoredProcedureTypes = [];
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                if (message.allowedStoredProcedureTypes && message.allowedStoredProcedureTypes.length) {
+                                    object.allowedStoredProcedureTypes = [];
+                                    for (var j = 0; j < message.allowedStoredProcedureTypes.length; ++j)
+                                        object.allowedStoredProcedureTypes[j] = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[message.allowedStoredProcedureTypes[j]] === undefined ? message.allowedStoredProcedureTypes[j] : $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[message.allowedStoredProcedureTypes[j]] : message.allowedStoredProcedureTypes[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StoredProcedureConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StoredProcedureConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StoredProcedureConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StoredProcedureConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig";
+                            };
+    
+                            /**
+                             * StoredProcedureType enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType
+                             * @enum {number}
+                             * @property {number} STORED_PROCEDURE_TYPE_UNSPECIFIED=0 STORED_PROCEDURE_TYPE_UNSPECIFIED value
+                             * @property {number} SQL_PROCEDURE=1 SQL_PROCEDURE value
+                             */
+                            StoredProcedureConfig.StoredProcedureType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STORED_PROCEDURE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SQL_PROCEDURE"] = 1;
+                                return values;
+                            })();
+    
+                            return StoredProcedureConfig;
                         })();
     
                         v1.Subscription = (function() {
@@ -14503,6 +18080,7 @@
                              * @property {boolean|null} [detached] PubSubSubscription detached
                              * @property {boolean|null} [enableExactlyOnceDelivery] PubSubSubscription enableExactlyOnceDelivery
                              * @property {Array.<google.cloud.bigquery.analyticshub.v1.IMessageTransform>|null} [messageTransforms] PubSubSubscription messageTransforms
+                             * @property {Object.<string,string>|null} [tags] PubSubSubscription tags
                              */
     
                             /**
@@ -14516,6 +18094,7 @@
                             function PubSubSubscription(properties) {
                                 this.labels = {};
                                 this.messageTransforms = [];
+                                this.tags = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -14651,6 +18230,14 @@
                             PubSubSubscription.prototype.messageTransforms = $util.emptyArray;
     
                             /**
+                             * PubSubSubscription tags.
+                             * @member {Object.<string,string>} tags
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.tags = $util.emptyObject;
+    
+                            /**
                              * Creates a new PubSubSubscription instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
@@ -14708,6 +18295,9 @@
                                 if (message.messageTransforms != null && message.messageTransforms.length)
                                     for (var i = 0; i < message.messageTransforms.length; ++i)
                                         $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                    for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 26, wireType 2 =*/210).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                                 return writer;
                             };
     
@@ -14829,6 +18419,29 @@
                                             message.messageTransforms.push($root.google.cloud.bigquery.analyticshub.v1.MessageTransform.decode(reader, reader.uint32()));
                                             break;
                                         }
+                                    case 26: {
+                                            if (message.tags === $util.emptyObject)
+                                                message.tags = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.tags[key] = value;
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14937,6 +18550,14 @@
                                             return "messageTransforms." + error;
                                     }
                                 }
+                                if (message.tags != null && message.hasOwnProperty("tags")) {
+                                    if (!$util.isObject(message.tags))
+                                        return "tags: object expected";
+                                    var key = Object.keys(message.tags);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.tags[key[i]]))
+                                            return "tags: string{k:string} expected";
+                                }
                                 return null;
                             };
     
@@ -15018,6 +18639,13 @@
                                         message.messageTransforms[i] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.fromObject(object.messageTransforms[i]);
                                     }
                                 }
+                                if (object.tags) {
+                                    if (typeof object.tags !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.tags: object expected");
+                                    message.tags = {};
+                                    for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                        message.tags[keys[i]] = String(object.tags[keys[i]]);
+                                }
                                 return message;
                             };
     
@@ -15036,8 +18664,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.messageTransforms = [];
-                                if (options.objects || options.defaults)
+                                if (options.objects || options.defaults) {
                                     object.labels = {};
+                                    object.tags = {};
+                                }
                                 if (options.defaults) {
                                     object.name = "";
                                     object.pushConfig = null;
@@ -15092,6 +18722,11 @@
                                     object.messageTransforms = [];
                                     for (var j = 0; j < message.messageTransforms.length; ++j)
                                         object.messageTransforms[j] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.toObject(message.messageTransforms[j], options);
+                                }
+                                if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                    object.tags = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.tags[keys2[j]] = message.tags[keys2[j]];
                                 }
                                 return object;
                             };

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -571,7 +571,7 @@ export class ServiceManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'service_name': request.serviceName ?? '',
-      'config_id': request.configId ?? '',
+      'config_id': request.configId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getServiceConfig request %j', request);
@@ -776,7 +776,7 @@ export class ServiceManagerClient {
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
       'service_name': request.serviceName ?? '',
-      'rollout_id': request.rolloutId ?? '',
+      'rollout_id': request.rolloutId?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('getServiceRollout request %j', request);

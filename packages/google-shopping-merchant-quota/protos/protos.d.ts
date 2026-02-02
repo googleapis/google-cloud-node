@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,1103 @@ export namespace google {
 
             /** Namespace quota. */
             namespace quota {
+
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents an AccountLimitsService */
+                    class AccountLimitsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new AccountLimitsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new AccountLimitsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AccountLimitsService;
+
+                        /**
+                         * Calls GetAccountLimit.
+                         * @param request GetAccountLimitRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AccountLimit
+                         */
+                        public getAccountLimit(request: google.shopping.merchant.quota.v1.IGetAccountLimitRequest, callback: google.shopping.merchant.quota.v1.AccountLimitsService.GetAccountLimitCallback): void;
+
+                        /**
+                         * Calls GetAccountLimit.
+                         * @param request GetAccountLimitRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAccountLimit(request: google.shopping.merchant.quota.v1.IGetAccountLimitRequest): Promise<google.shopping.merchant.quota.v1.AccountLimit>;
+
+                        /**
+                         * Calls ListAccountLimits.
+                         * @param request ListAccountLimitsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAccountLimitsResponse
+                         */
+                        public listAccountLimits(request: google.shopping.merchant.quota.v1.IListAccountLimitsRequest, callback: google.shopping.merchant.quota.v1.AccountLimitsService.ListAccountLimitsCallback): void;
+
+                        /**
+                         * Calls ListAccountLimits.
+                         * @param request ListAccountLimitsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAccountLimits(request: google.shopping.merchant.quota.v1.IListAccountLimitsRequest): Promise<google.shopping.merchant.quota.v1.ListAccountLimitsResponse>;
+                    }
+
+                    namespace AccountLimitsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.quota.v1.AccountLimitsService|getAccountLimit}.
+                         * @param error Error, if any
+                         * @param [response] AccountLimit
+                         */
+                        type GetAccountLimitCallback = (error: (Error|null), response?: google.shopping.merchant.quota.v1.AccountLimit) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.quota.v1.AccountLimitsService|listAccountLimits}.
+                         * @param error Error, if any
+                         * @param [response] ListAccountLimitsResponse
+                         */
+                        type ListAccountLimitsCallback = (error: (Error|null), response?: google.shopping.merchant.quota.v1.ListAccountLimitsResponse) => void;
+                    }
+
+                    /** Properties of a ProductLimit. */
+                    interface IProductLimit {
+
+                        /** ProductLimit scope */
+                        scope?: (google.shopping.merchant.quota.v1.ProductLimit.Scope|keyof typeof google.shopping.merchant.quota.v1.ProductLimit.Scope|null);
+
+                        /** ProductLimit limit */
+                        limit?: (number|Long|string|null);
+                    }
+
+                    /** Represents a ProductLimit. */
+                    class ProductLimit implements IProductLimit {
+
+                        /**
+                         * Constructs a new ProductLimit.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IProductLimit);
+
+                        /** ProductLimit scope. */
+                        public scope: (google.shopping.merchant.quota.v1.ProductLimit.Scope|keyof typeof google.shopping.merchant.quota.v1.ProductLimit.Scope);
+
+                        /** ProductLimit limit. */
+                        public limit: (number|Long|string);
+
+                        /**
+                         * Creates a new ProductLimit instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductLimit instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IProductLimit): google.shopping.merchant.quota.v1.ProductLimit;
+
+                        /**
+                         * Encodes the specified ProductLimit message. Does not implicitly {@link google.shopping.merchant.quota.v1.ProductLimit.verify|verify} messages.
+                         * @param message ProductLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IProductLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductLimit message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ProductLimit.verify|verify} messages.
+                         * @param message ProductLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IProductLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductLimit message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.ProductLimit;
+
+                        /**
+                         * Decodes a ProductLimit message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.ProductLimit;
+
+                        /**
+                         * Verifies a ProductLimit message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductLimit message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductLimit
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.ProductLimit;
+
+                        /**
+                         * Creates a plain object from a ProductLimit message. Also converts values to other types if specified.
+                         * @param message ProductLimit
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.ProductLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductLimit to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductLimit
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductLimit {
+
+                        /** Scope enum. */
+                        enum Scope {
+                            SCOPE_UNSPECIFIED = 0,
+                            ADS_NON_EEA = 1,
+                            ADS_EEA = 2
+                        }
+                    }
+
+                    /** Properties of an AccountLimit. */
+                    interface IAccountLimit {
+
+                        /** AccountLimit products */
+                        products?: (google.shopping.merchant.quota.v1.IProductLimit|null);
+
+                        /** AccountLimit name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents an AccountLimit. */
+                    class AccountLimit implements IAccountLimit {
+
+                        /**
+                         * Constructs a new AccountLimit.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IAccountLimit);
+
+                        /** AccountLimit products. */
+                        public products?: (google.shopping.merchant.quota.v1.IProductLimit|null);
+
+                        /** AccountLimit name. */
+                        public name: string;
+
+                        /** AccountLimit type. */
+                        public type?: "products";
+
+                        /**
+                         * Creates a new AccountLimit instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccountLimit instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IAccountLimit): google.shopping.merchant.quota.v1.AccountLimit;
+
+                        /**
+                         * Encodes the specified AccountLimit message. Does not implicitly {@link google.shopping.merchant.quota.v1.AccountLimit.verify|verify} messages.
+                         * @param message AccountLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IAccountLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccountLimit message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.AccountLimit.verify|verify} messages.
+                         * @param message AccountLimit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IAccountLimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccountLimit message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccountLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.AccountLimit;
+
+                        /**
+                         * Decodes an AccountLimit message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccountLimit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.AccountLimit;
+
+                        /**
+                         * Verifies an AccountLimit message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccountLimit message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccountLimit
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.AccountLimit;
+
+                        /**
+                         * Creates a plain object from an AccountLimit message. Also converts values to other types if specified.
+                         * @param message AccountLimit
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.AccountLimit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccountLimit to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccountLimit
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAccountLimitRequest. */
+                    interface IGetAccountLimitRequest {
+
+                        /** GetAccountLimitRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAccountLimitRequest. */
+                    class GetAccountLimitRequest implements IGetAccountLimitRequest {
+
+                        /**
+                         * Constructs a new GetAccountLimitRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IGetAccountLimitRequest);
+
+                        /** GetAccountLimitRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAccountLimitRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAccountLimitRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IGetAccountLimitRequest): google.shopping.merchant.quota.v1.GetAccountLimitRequest;
+
+                        /**
+                         * Encodes the specified GetAccountLimitRequest message. Does not implicitly {@link google.shopping.merchant.quota.v1.GetAccountLimitRequest.verify|verify} messages.
+                         * @param message GetAccountLimitRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IGetAccountLimitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAccountLimitRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.GetAccountLimitRequest.verify|verify} messages.
+                         * @param message GetAccountLimitRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IGetAccountLimitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAccountLimitRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAccountLimitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.GetAccountLimitRequest;
+
+                        /**
+                         * Decodes a GetAccountLimitRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAccountLimitRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.GetAccountLimitRequest;
+
+                        /**
+                         * Verifies a GetAccountLimitRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAccountLimitRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAccountLimitRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.GetAccountLimitRequest;
+
+                        /**
+                         * Creates a plain object from a GetAccountLimitRequest message. Also converts values to other types if specified.
+                         * @param message GetAccountLimitRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.GetAccountLimitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAccountLimitRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAccountLimitRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAccountLimitsRequest. */
+                    interface IListAccountLimitsRequest {
+
+                        /** ListAccountLimitsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAccountLimitsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAccountLimitsRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListAccountLimitsRequest filter */
+                        filter?: (string|null);
+                    }
+
+                    /** Represents a ListAccountLimitsRequest. */
+                    class ListAccountLimitsRequest implements IListAccountLimitsRequest {
+
+                        /**
+                         * Constructs a new ListAccountLimitsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IListAccountLimitsRequest);
+
+                        /** ListAccountLimitsRequest parent. */
+                        public parent: string;
+
+                        /** ListAccountLimitsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAccountLimitsRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListAccountLimitsRequest filter. */
+                        public filter: string;
+
+                        /**
+                         * Creates a new ListAccountLimitsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAccountLimitsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IListAccountLimitsRequest): google.shopping.merchant.quota.v1.ListAccountLimitsRequest;
+
+                        /**
+                         * Encodes the specified ListAccountLimitsRequest message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsRequest.verify|verify} messages.
+                         * @param message ListAccountLimitsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IListAccountLimitsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAccountLimitsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsRequest.verify|verify} messages.
+                         * @param message ListAccountLimitsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IListAccountLimitsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAccountLimitsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAccountLimitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.ListAccountLimitsRequest;
+
+                        /**
+                         * Decodes a ListAccountLimitsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAccountLimitsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.ListAccountLimitsRequest;
+
+                        /**
+                         * Verifies a ListAccountLimitsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAccountLimitsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAccountLimitsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.ListAccountLimitsRequest;
+
+                        /**
+                         * Creates a plain object from a ListAccountLimitsRequest message. Also converts values to other types if specified.
+                         * @param message ListAccountLimitsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.ListAccountLimitsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAccountLimitsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAccountLimitsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAccountLimitsResponse. */
+                    interface IListAccountLimitsResponse {
+
+                        /** ListAccountLimitsResponse accountLimits */
+                        accountLimits?: (google.shopping.merchant.quota.v1.IAccountLimit[]|null);
+
+                        /** ListAccountLimitsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAccountLimitsResponse. */
+                    class ListAccountLimitsResponse implements IListAccountLimitsResponse {
+
+                        /**
+                         * Constructs a new ListAccountLimitsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IListAccountLimitsResponse);
+
+                        /** ListAccountLimitsResponse accountLimits. */
+                        public accountLimits: google.shopping.merchant.quota.v1.IAccountLimit[];
+
+                        /** ListAccountLimitsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListAccountLimitsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAccountLimitsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IListAccountLimitsResponse): google.shopping.merchant.quota.v1.ListAccountLimitsResponse;
+
+                        /**
+                         * Encodes the specified ListAccountLimitsResponse message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsResponse.verify|verify} messages.
+                         * @param message ListAccountLimitsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IListAccountLimitsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAccountLimitsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListAccountLimitsResponse.verify|verify} messages.
+                         * @param message ListAccountLimitsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IListAccountLimitsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAccountLimitsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAccountLimitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.ListAccountLimitsResponse;
+
+                        /**
+                         * Decodes a ListAccountLimitsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAccountLimitsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.ListAccountLimitsResponse;
+
+                        /**
+                         * Verifies a ListAccountLimitsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAccountLimitsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAccountLimitsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.ListAccountLimitsResponse;
+
+                        /**
+                         * Creates a plain object from a ListAccountLimitsResponse message. Also converts values to other types if specified.
+                         * @param message ListAccountLimitsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.ListAccountLimitsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAccountLimitsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAccountLimitsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Represents a QuotaService */
+                    class QuotaService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new QuotaService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new QuotaService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): QuotaService;
+
+                        /**
+                         * Calls ListQuotaGroups.
+                         * @param request ListQuotaGroupsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListQuotaGroupsResponse
+                         */
+                        public listQuotaGroups(request: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest, callback: google.shopping.merchant.quota.v1.QuotaService.ListQuotaGroupsCallback): void;
+
+                        /**
+                         * Calls ListQuotaGroups.
+                         * @param request ListQuotaGroupsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listQuotaGroups(request: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest): Promise<google.shopping.merchant.quota.v1.ListQuotaGroupsResponse>;
+                    }
+
+                    namespace QuotaService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.quota.v1.QuotaService|listQuotaGroups}.
+                         * @param error Error, if any
+                         * @param [response] ListQuotaGroupsResponse
+                         */
+                        type ListQuotaGroupsCallback = (error: (Error|null), response?: google.shopping.merchant.quota.v1.ListQuotaGroupsResponse) => void;
+                    }
+
+                    /** Properties of a QuotaGroup. */
+                    interface IQuotaGroup {
+
+                        /** QuotaGroup name */
+                        name?: (string|null);
+
+                        /** QuotaGroup quotaUsage */
+                        quotaUsage?: (number|Long|string|null);
+
+                        /** QuotaGroup quotaLimit */
+                        quotaLimit?: (number|Long|string|null);
+
+                        /** QuotaGroup quotaMinuteLimit */
+                        quotaMinuteLimit?: (number|Long|string|null);
+
+                        /** QuotaGroup methodDetails */
+                        methodDetails?: (google.shopping.merchant.quota.v1.IMethodDetails[]|null);
+                    }
+
+                    /** Represents a QuotaGroup. */
+                    class QuotaGroup implements IQuotaGroup {
+
+                        /**
+                         * Constructs a new QuotaGroup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IQuotaGroup);
+
+                        /** QuotaGroup name. */
+                        public name: string;
+
+                        /** QuotaGroup quotaUsage. */
+                        public quotaUsage: (number|Long|string);
+
+                        /** QuotaGroup quotaLimit. */
+                        public quotaLimit: (number|Long|string);
+
+                        /** QuotaGroup quotaMinuteLimit. */
+                        public quotaMinuteLimit: (number|Long|string);
+
+                        /** QuotaGroup methodDetails. */
+                        public methodDetails: google.shopping.merchant.quota.v1.IMethodDetails[];
+
+                        /**
+                         * Creates a new QuotaGroup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuotaGroup instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IQuotaGroup): google.shopping.merchant.quota.v1.QuotaGroup;
+
+                        /**
+                         * Encodes the specified QuotaGroup message. Does not implicitly {@link google.shopping.merchant.quota.v1.QuotaGroup.verify|verify} messages.
+                         * @param message QuotaGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IQuotaGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuotaGroup message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.QuotaGroup.verify|verify} messages.
+                         * @param message QuotaGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IQuotaGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuotaGroup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuotaGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.QuotaGroup;
+
+                        /**
+                         * Decodes a QuotaGroup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuotaGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.QuotaGroup;
+
+                        /**
+                         * Verifies a QuotaGroup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuotaGroup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuotaGroup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.QuotaGroup;
+
+                        /**
+                         * Creates a plain object from a QuotaGroup message. Also converts values to other types if specified.
+                         * @param message QuotaGroup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.QuotaGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuotaGroup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuotaGroup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MethodDetails. */
+                    interface IMethodDetails {
+
+                        /** MethodDetails method */
+                        method?: (string|null);
+
+                        /** MethodDetails version */
+                        version?: (string|null);
+
+                        /** MethodDetails subapi */
+                        subapi?: (string|null);
+
+                        /** MethodDetails path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a MethodDetails. */
+                    class MethodDetails implements IMethodDetails {
+
+                        /**
+                         * Constructs a new MethodDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IMethodDetails);
+
+                        /** MethodDetails method. */
+                        public method: string;
+
+                        /** MethodDetails version. */
+                        public version: string;
+
+                        /** MethodDetails subapi. */
+                        public subapi: string;
+
+                        /** MethodDetails path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new MethodDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MethodDetails instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IMethodDetails): google.shopping.merchant.quota.v1.MethodDetails;
+
+                        /**
+                         * Encodes the specified MethodDetails message. Does not implicitly {@link google.shopping.merchant.quota.v1.MethodDetails.verify|verify} messages.
+                         * @param message MethodDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IMethodDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MethodDetails message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.MethodDetails.verify|verify} messages.
+                         * @param message MethodDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IMethodDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MethodDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MethodDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.MethodDetails;
+
+                        /**
+                         * Decodes a MethodDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MethodDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.MethodDetails;
+
+                        /**
+                         * Verifies a MethodDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MethodDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MethodDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.MethodDetails;
+
+                        /**
+                         * Creates a plain object from a MethodDetails message. Also converts values to other types if specified.
+                         * @param message MethodDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.MethodDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MethodDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MethodDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListQuotaGroupsRequest. */
+                    interface IListQuotaGroupsRequest {
+
+                        /** ListQuotaGroupsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListQuotaGroupsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListQuotaGroupsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListQuotaGroupsRequest. */
+                    class ListQuotaGroupsRequest implements IListQuotaGroupsRequest {
+
+                        /**
+                         * Constructs a new ListQuotaGroupsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest);
+
+                        /** ListQuotaGroupsRequest parent. */
+                        public parent: string;
+
+                        /** ListQuotaGroupsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListQuotaGroupsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListQuotaGroupsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListQuotaGroupsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest): google.shopping.merchant.quota.v1.ListQuotaGroupsRequest;
+
+                        /**
+                         * Encodes the specified ListQuotaGroupsRequest message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListQuotaGroupsRequest.verify|verify} messages.
+                         * @param message ListQuotaGroupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListQuotaGroupsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListQuotaGroupsRequest.verify|verify} messages.
+                         * @param message ListQuotaGroupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IListQuotaGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListQuotaGroupsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListQuotaGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.ListQuotaGroupsRequest;
+
+                        /**
+                         * Decodes a ListQuotaGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListQuotaGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.ListQuotaGroupsRequest;
+
+                        /**
+                         * Verifies a ListQuotaGroupsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListQuotaGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListQuotaGroupsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.ListQuotaGroupsRequest;
+
+                        /**
+                         * Creates a plain object from a ListQuotaGroupsRequest message. Also converts values to other types if specified.
+                         * @param message ListQuotaGroupsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.ListQuotaGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListQuotaGroupsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListQuotaGroupsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListQuotaGroupsResponse. */
+                    interface IListQuotaGroupsResponse {
+
+                        /** ListQuotaGroupsResponse quotaGroups */
+                        quotaGroups?: (google.shopping.merchant.quota.v1.IQuotaGroup[]|null);
+
+                        /** ListQuotaGroupsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListQuotaGroupsResponse. */
+                    class ListQuotaGroupsResponse implements IListQuotaGroupsResponse {
+
+                        /**
+                         * Constructs a new ListQuotaGroupsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.quota.v1.IListQuotaGroupsResponse);
+
+                        /** ListQuotaGroupsResponse quotaGroups. */
+                        public quotaGroups: google.shopping.merchant.quota.v1.IQuotaGroup[];
+
+                        /** ListQuotaGroupsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListQuotaGroupsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListQuotaGroupsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.quota.v1.IListQuotaGroupsResponse): google.shopping.merchant.quota.v1.ListQuotaGroupsResponse;
+
+                        /**
+                         * Encodes the specified ListQuotaGroupsResponse message. Does not implicitly {@link google.shopping.merchant.quota.v1.ListQuotaGroupsResponse.verify|verify} messages.
+                         * @param message ListQuotaGroupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.quota.v1.IListQuotaGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListQuotaGroupsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.quota.v1.ListQuotaGroupsResponse.verify|verify} messages.
+                         * @param message ListQuotaGroupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.quota.v1.IListQuotaGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListQuotaGroupsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListQuotaGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.quota.v1.ListQuotaGroupsResponse;
+
+                        /**
+                         * Decodes a ListQuotaGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListQuotaGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.quota.v1.ListQuotaGroupsResponse;
+
+                        /**
+                         * Verifies a ListQuotaGroupsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListQuotaGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListQuotaGroupsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.quota.v1.ListQuotaGroupsResponse;
+
+                        /**
+                         * Creates a plain object from a ListQuotaGroupsResponse message. Also converts values to other types if specified.
+                         * @param message ListQuotaGroupsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.quota.v1.ListQuotaGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListQuotaGroupsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListQuotaGroupsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
 
                 /** Namespace v1beta. */
                 namespace v1beta {

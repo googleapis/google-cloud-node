@@ -204,8 +204,9 @@ message ListSessionsRequest {
   // Optional. The standard list filter.
   // Supported fields:
   //    * `display_name`
+  //    * `user_id`
   //
-  // Example: `display_name=abc`.
+  // Example: `display_name="abc"`, `user_id="123"`.
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. A comma-separated list of fields to order by, sorted in ascending
@@ -282,6 +283,21 @@ message ListEventsRequest {
   // [SessionService.ListEvents][google.cloud.aiplatform.v1beta1.SessionService.ListEvents]
   // call.
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The standard list filter.
+  // Supported fields:
+  //    * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+  //    the timestamp is in RFC 3339 format)
+  //
+  // More detail in [AIP-160](https://google.aip.dev/160).
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A comma-separated list of fields to order by, sorted in ascending
+  // order. Use "desc" after a field name for descending. Supported fields:
+  //   * `timestamp`
+  //
+  // Example: `timestamp desc`.
+  string order_by = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,6 +48,21 @@ function main(parent) {
    *  call.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. The standard list filter.
+   *  Supported fields:
+   *     * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+   *     the timestamp is in RFC 3339 format)
+   *  More detail in AIP-160 (https://google.aip.dev/160).
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. A comma-separated list of fields to order by, sorted in ascending
+   *  order. Use "desc" after a field name for descending. Supported fields:
+   *    * `timestamp`
+   *  Example: `timestamp desc`.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Aiplatform library
   const {SessionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

@@ -3100,6 +3100,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "highestUpgradableCveSeverity": {
+                          "type": "VulnerabilitySeverityLevel",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3203,6 +3210,17 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "VulnerabilitySeverityLevel": {
+                          "values": {
+                            "VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED": 0,
+                            "NONE": 1,
+                            "MINIMAL": 2,
+                            "LOW": 3,
+                            "MEDIUM": 4,
+                            "HIGH": 5,
+                            "CRITICAL": 6
                           }
                         }
                       }

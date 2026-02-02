@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,3443 @@
                      * @namespace
                      */
                     var conversions = {};
+    
+                    conversions.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.conversions
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.ConversionSourcesService = (function() {
+    
+                            /**
+                             * Constructs a new ConversionSourcesService service.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a ConversionSourcesService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function ConversionSourcesService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (ConversionSourcesService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConversionSourcesService;
+    
+                            /**
+                             * Creates new ConversionSourcesService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {ConversionSourcesService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            ConversionSourcesService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|createConversionSource}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef CreateConversionSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSource} [response] ConversionSource
+                             */
+    
+                            /**
+                             * Calls CreateConversionSource.
+                             * @function createConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest} request CreateConversionSourceRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.CreateConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.createConversionSource = function createConversionSource(request, callback) {
+                                return this.rpcCall(createConversionSource, $root.google.shopping.merchant.conversions.v1.CreateConversionSourceRequest, $root.google.shopping.merchant.conversions.v1.ConversionSource, request, callback);
+                            }, "name", { value: "CreateConversionSource" });
+    
+                            /**
+                             * Calls CreateConversionSource.
+                             * @function createConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest} request CreateConversionSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.conversions.v1.ConversionSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|updateConversionSource}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef UpdateConversionSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSource} [response] ConversionSource
+                             */
+    
+                            /**
+                             * Calls UpdateConversionSource.
+                             * @function updateConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest} request UpdateConversionSourceRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.UpdateConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.updateConversionSource = function updateConversionSource(request, callback) {
+                                return this.rpcCall(updateConversionSource, $root.google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest, $root.google.shopping.merchant.conversions.v1.ConversionSource, request, callback);
+                            }, "name", { value: "UpdateConversionSource" });
+    
+                            /**
+                             * Calls UpdateConversionSource.
+                             * @function updateConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest} request UpdateConversionSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.conversions.v1.ConversionSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|deleteConversionSource}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef DeleteConversionSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteConversionSource.
+                             * @function deleteConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest} request DeleteConversionSourceRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.DeleteConversionSourceCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.deleteConversionSource = function deleteConversionSource(request, callback) {
+                                return this.rpcCall(deleteConversionSource, $root.google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteConversionSource" });
+    
+                            /**
+                             * Calls DeleteConversionSource.
+                             * @function deleteConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest} request DeleteConversionSourceRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|undeleteConversionSource}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef UndeleteConversionSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSource} [response] ConversionSource
+                             */
+    
+                            /**
+                             * Calls UndeleteConversionSource.
+                             * @function undeleteConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest} request UndeleteConversionSourceRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.UndeleteConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.undeleteConversionSource = function undeleteConversionSource(request, callback) {
+                                return this.rpcCall(undeleteConversionSource, $root.google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest, $root.google.shopping.merchant.conversions.v1.ConversionSource, request, callback);
+                            }, "name", { value: "UndeleteConversionSource" });
+    
+                            /**
+                             * Calls UndeleteConversionSource.
+                             * @function undeleteConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest} request UndeleteConversionSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.conversions.v1.ConversionSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|getConversionSource}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef GetConversionSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSource} [response] ConversionSource
+                             */
+    
+                            /**
+                             * Calls GetConversionSource.
+                             * @function getConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest} request GetConversionSourceRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.GetConversionSourceCallback} callback Node-style callback called with the error, if any, and ConversionSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.getConversionSource = function getConversionSource(request, callback) {
+                                return this.rpcCall(getConversionSource, $root.google.shopping.merchant.conversions.v1.GetConversionSourceRequest, $root.google.shopping.merchant.conversions.v1.ConversionSource, request, callback);
+                            }, "name", { value: "GetConversionSource" });
+    
+                            /**
+                             * Calls GetConversionSource.
+                             * @function getConversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest} request GetConversionSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.conversions.v1.ConversionSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.conversions.v1.ConversionSourcesService|listConversionSources}.
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @typedef ListConversionSourcesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} [response] ListConversionSourcesResponse
+                             */
+    
+                            /**
+                             * Calls ListConversionSources.
+                             * @function listConversionSources
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest} request ListConversionSourcesRequest message or plain object
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSourcesService.ListConversionSourcesCallback} callback Node-style callback called with the error, if any, and ListConversionSourcesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ConversionSourcesService.prototype.listConversionSources = function listConversionSources(request, callback) {
+                                return this.rpcCall(listConversionSources, $root.google.shopping.merchant.conversions.v1.ListConversionSourcesRequest, $root.google.shopping.merchant.conversions.v1.ListConversionSourcesResponse, request, callback);
+                            }, "name", { value: "ListConversionSources" });
+    
+                            /**
+                             * Calls ListConversionSources.
+                             * @function listConversionSources
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest} request ListConversionSourcesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.conversions.v1.ListConversionSourcesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return ConversionSourcesService;
+                        })();
+    
+                        v1.ConversionSource = (function() {
+    
+                            /**
+                             * Properties of a ConversionSource.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IConversionSource
+                             * @property {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink|null} [googleAnalyticsLink] ConversionSource googleAnalyticsLink
+                             * @property {google.shopping.merchant.conversions.v1.IMerchantCenterDestination|null} [merchantCenterDestination] ConversionSource merchantCenterDestination
+                             * @property {string|null} [name] ConversionSource name
+                             * @property {google.shopping.merchant.conversions.v1.ConversionSource.State|null} [state] ConversionSource state
+                             * @property {google.protobuf.ITimestamp|null} [expireTime] ConversionSource expireTime
+                             * @property {google.shopping.merchant.conversions.v1.ConversionSource.Controller|null} [controller] ConversionSource controller
+                             */
+    
+                            /**
+                             * Constructs a new ConversionSource.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a ConversionSource.
+                             * @implements IConversionSource
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IConversionSource=} [properties] Properties to set
+                             */
+                            function ConversionSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConversionSource googleAnalyticsLink.
+                             * @member {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink|null|undefined} googleAnalyticsLink
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.googleAnalyticsLink = null;
+    
+                            /**
+                             * ConversionSource merchantCenterDestination.
+                             * @member {google.shopping.merchant.conversions.v1.IMerchantCenterDestination|null|undefined} merchantCenterDestination
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.merchantCenterDestination = null;
+    
+                            /**
+                             * ConversionSource name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.name = "";
+    
+                            /**
+                             * ConversionSource state.
+                             * @member {google.shopping.merchant.conversions.v1.ConversionSource.State} state
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.state = 0;
+    
+                            /**
+                             * ConversionSource expireTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.expireTime = null;
+    
+                            /**
+                             * ConversionSource controller.
+                             * @member {google.shopping.merchant.conversions.v1.ConversionSource.Controller} controller
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            ConversionSource.prototype.controller = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ConversionSource sourceData.
+                             * @member {"googleAnalyticsLink"|"merchantCenterDestination"|undefined} sourceData
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             */
+                            Object.defineProperty(ConversionSource.prototype, "sourceData", {
+                                get: $util.oneOfGetter($oneOfFields = ["googleAnalyticsLink", "merchantCenterDestination"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ConversionSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IConversionSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.ConversionSource} ConversionSource instance
+                             */
+                            ConversionSource.create = function create(properties) {
+                                return new ConversionSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConversionSource message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ConversionSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IConversionSource} message ConversionSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversionSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.googleAnalyticsLink != null && Object.hasOwnProperty.call(message, "googleAnalyticsLink"))
+                                    $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.encode(message.googleAnalyticsLink, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.merchantCenterDestination != null && Object.hasOwnProperty.call(message, "merchantCenterDestination"))
+                                    $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination.encode(message.merchantCenterDestination, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.controller != null && Object.hasOwnProperty.call(message, "controller"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.controller);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConversionSource message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ConversionSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IConversionSource} message ConversionSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConversionSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConversionSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.ConversionSource} ConversionSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversionSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.ConversionSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.controller = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConversionSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.ConversionSource} ConversionSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConversionSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConversionSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConversionSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.googleAnalyticsLink != null && message.hasOwnProperty("googleAnalyticsLink")) {
+                                    properties.sourceData = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.verify(message.googleAnalyticsLink);
+                                        if (error)
+                                            return "googleAnalyticsLink." + error;
+                                    }
+                                }
+                                if (message.merchantCenterDestination != null && message.hasOwnProperty("merchantCenterDestination")) {
+                                    if (properties.sourceData === 1)
+                                        return "sourceData: multiple values";
+                                    properties.sourceData = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination.verify(message.merchantCenterDestination);
+                                        if (error)
+                                            return "merchantCenterDestination." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                                if (message.controller != null && message.hasOwnProperty("controller"))
+                                    switch (message.controller) {
+                                    default:
+                                        return "controller: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConversionSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.ConversionSource} ConversionSource
+                             */
+                            ConversionSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.ConversionSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.ConversionSource();
+                                if (object.googleAnalyticsLink != null) {
+                                    if (typeof object.googleAnalyticsLink !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.ConversionSource.googleAnalyticsLink: object expected");
+                                    message.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.fromObject(object.googleAnalyticsLink);
+                                }
+                                if (object.merchantCenterDestination != null) {
+                                    if (typeof object.merchantCenterDestination !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.ConversionSource.merchantCenterDestination: object expected");
+                                    message.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination.fromObject(object.merchantCenterDestination);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "ACTIVE":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "ARCHIVED":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "PENDING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                }
+                                if (object.expireTime != null) {
+                                    if (typeof object.expireTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.ConversionSource.expireTime: object expected");
+                                    message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                                }
+                                switch (object.controller) {
+                                default:
+                                    if (typeof object.controller === "number") {
+                                        message.controller = object.controller;
+                                        break;
+                                    }
+                                    break;
+                                case "CONTROLLER_UNSPECIFIED":
+                                case 0:
+                                    message.controller = 0;
+                                    break;
+                                case "MERCHANT":
+                                case 1:
+                                    message.controller = 1;
+                                    break;
+                                case "YOUTUBE_AFFILIATES":
+                                case 2:
+                                    message.controller = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConversionSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ConversionSource} message ConversionSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConversionSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    object.expireTime = null;
+                                    object.controller = options.enums === String ? "CONTROLLER_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.googleAnalyticsLink != null && message.hasOwnProperty("googleAnalyticsLink")) {
+                                    object.googleAnalyticsLink = $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.toObject(message.googleAnalyticsLink, options);
+                                    if (options.oneofs)
+                                        object.sourceData = "googleAnalyticsLink";
+                                }
+                                if (message.merchantCenterDestination != null && message.hasOwnProperty("merchantCenterDestination")) {
+                                    object.merchantCenterDestination = $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination.toObject(message.merchantCenterDestination, options);
+                                    if (options.oneofs)
+                                        object.sourceData = "merchantCenterDestination";
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.shopping.merchant.conversions.v1.ConversionSource.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.conversions.v1.ConversionSource.State[message.state] : message.state;
+                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                    object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                if (message.controller != null && message.hasOwnProperty("controller"))
+                                    object.controller = options.enums === String ? $root.google.shopping.merchant.conversions.v1.ConversionSource.Controller[message.controller] === undefined ? message.controller : $root.google.shopping.merchant.conversions.v1.ConversionSource.Controller[message.controller] : message.controller;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConversionSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConversionSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConversionSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.ConversionSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConversionSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.ConversionSource";
+                            };
+    
+                            /**
+                             * State enum.
+                             * @name google.shopping.merchant.conversions.v1.ConversionSource.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} ACTIVE=1 ACTIVE value
+                             * @property {number} ARCHIVED=2 ARCHIVED value
+                             * @property {number} PENDING=3 PENDING value
+                             */
+                            ConversionSource.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ACTIVE"] = 1;
+                                values[valuesById[2] = "ARCHIVED"] = 2;
+                                values[valuesById[3] = "PENDING"] = 3;
+                                return values;
+                            })();
+    
+                            /**
+                             * Controller enum.
+                             * @name google.shopping.merchant.conversions.v1.ConversionSource.Controller
+                             * @enum {number}
+                             * @property {number} CONTROLLER_UNSPECIFIED=0 CONTROLLER_UNSPECIFIED value
+                             * @property {number} MERCHANT=1 MERCHANT value
+                             * @property {number} YOUTUBE_AFFILIATES=2 YOUTUBE_AFFILIATES value
+                             */
+                            ConversionSource.Controller = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONTROLLER_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MERCHANT"] = 1;
+                                values[valuesById[2] = "YOUTUBE_AFFILIATES"] = 2;
+                                return values;
+                            })();
+    
+                            return ConversionSource;
+                        })();
+    
+                        v1.AttributionSettings = (function() {
+    
+                            /**
+                             * Properties of an AttributionSettings.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IAttributionSettings
+                             * @property {number|null} [attributionLookbackWindowDays] AttributionSettings attributionLookbackWindowDays
+                             * @property {google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel|null} [attributionModel] AttributionSettings attributionModel
+                             * @property {Array.<google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType>|null} [conversionType] AttributionSettings conversionType
+                             */
+    
+                            /**
+                             * Constructs a new AttributionSettings.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents an AttributionSettings.
+                             * @implements IAttributionSettings
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IAttributionSettings=} [properties] Properties to set
+                             */
+                            function AttributionSettings(properties) {
+                                this.conversionType = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AttributionSettings attributionLookbackWindowDays.
+                             * @member {number} attributionLookbackWindowDays
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @instance
+                             */
+                            AttributionSettings.prototype.attributionLookbackWindowDays = 0;
+    
+                            /**
+                             * AttributionSettings attributionModel.
+                             * @member {google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel} attributionModel
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @instance
+                             */
+                            AttributionSettings.prototype.attributionModel = 0;
+    
+                            /**
+                             * AttributionSettings conversionType.
+                             * @member {Array.<google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType>} conversionType
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @instance
+                             */
+                            AttributionSettings.prototype.conversionType = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AttributionSettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IAttributionSettings=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.AttributionSettings} AttributionSettings instance
+                             */
+                            AttributionSettings.create = function create(properties) {
+                                return new AttributionSettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AttributionSettings message. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IAttributionSettings} message AttributionSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AttributionSettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.attributionLookbackWindowDays != null && Object.hasOwnProperty.call(message, "attributionLookbackWindowDays"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.attributionLookbackWindowDays);
+                                if (message.attributionModel != null && Object.hasOwnProperty.call(message, "attributionModel"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.attributionModel);
+                                if (message.conversionType != null && message.conversionType.length)
+                                    for (var i = 0; i < message.conversionType.length; ++i)
+                                        $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.encode(message.conversionType[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AttributionSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IAttributionSettings} message AttributionSettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AttributionSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AttributionSettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.AttributionSettings} AttributionSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AttributionSettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.AttributionSettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.attributionLookbackWindowDays = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.attributionModel = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.conversionType && message.conversionType.length))
+                                                message.conversionType = [];
+                                            message.conversionType.push($root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AttributionSettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.AttributionSettings} AttributionSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AttributionSettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AttributionSettings message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AttributionSettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.attributionLookbackWindowDays != null && message.hasOwnProperty("attributionLookbackWindowDays"))
+                                    if (!$util.isInteger(message.attributionLookbackWindowDays))
+                                        return "attributionLookbackWindowDays: integer expected";
+                                if (message.attributionModel != null && message.hasOwnProperty("attributionModel"))
+                                    switch (message.attributionModel) {
+                                    default:
+                                        return "attributionModel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                        break;
+                                    }
+                                if (message.conversionType != null && message.hasOwnProperty("conversionType")) {
+                                    if (!Array.isArray(message.conversionType))
+                                        return "conversionType: array expected";
+                                    for (var i = 0; i < message.conversionType.length; ++i) {
+                                        var error = $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.verify(message.conversionType[i]);
+                                        if (error)
+                                            return "conversionType." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AttributionSettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.AttributionSettings} AttributionSettings
+                             */
+                            AttributionSettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.AttributionSettings)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.AttributionSettings();
+                                if (object.attributionLookbackWindowDays != null)
+                                    message.attributionLookbackWindowDays = object.attributionLookbackWindowDays | 0;
+                                switch (object.attributionModel) {
+                                default:
+                                    if (typeof object.attributionModel === "number") {
+                                        message.attributionModel = object.attributionModel;
+                                        break;
+                                    }
+                                    break;
+                                case "ATTRIBUTION_MODEL_UNSPECIFIED":
+                                case 0:
+                                    message.attributionModel = 0;
+                                    break;
+                                case "CROSS_CHANNEL_LAST_CLICK":
+                                case 1:
+                                    message.attributionModel = 1;
+                                    break;
+                                case "ADS_PREFERRED_LAST_CLICK":
+                                case 2:
+                                    message.attributionModel = 2;
+                                    break;
+                                case "CROSS_CHANNEL_DATA_DRIVEN":
+                                case 5:
+                                    message.attributionModel = 5;
+                                    break;
+                                case "CROSS_CHANNEL_FIRST_CLICK":
+                                case 6:
+                                    message.attributionModel = 6;
+                                    break;
+                                case "CROSS_CHANNEL_LINEAR":
+                                case 7:
+                                    message.attributionModel = 7;
+                                    break;
+                                case "CROSS_CHANNEL_POSITION_BASED":
+                                case 8:
+                                    message.attributionModel = 8;
+                                    break;
+                                case "CROSS_CHANNEL_TIME_DECAY":
+                                case 9:
+                                    message.attributionModel = 9;
+                                    break;
+                                }
+                                if (object.conversionType) {
+                                    if (!Array.isArray(object.conversionType))
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.AttributionSettings.conversionType: array expected");
+                                    message.conversionType = [];
+                                    for (var i = 0; i < object.conversionType.length; ++i) {
+                                        if (typeof object.conversionType[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.conversions.v1.AttributionSettings.conversionType: object expected");
+                                        message.conversionType[i] = $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.fromObject(object.conversionType[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AttributionSettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.AttributionSettings} message AttributionSettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AttributionSettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.conversionType = [];
+                                if (options.defaults) {
+                                    object.attributionLookbackWindowDays = 0;
+                                    object.attributionModel = options.enums === String ? "ATTRIBUTION_MODEL_UNSPECIFIED" : 0;
+                                }
+                                if (message.attributionLookbackWindowDays != null && message.hasOwnProperty("attributionLookbackWindowDays"))
+                                    object.attributionLookbackWindowDays = message.attributionLookbackWindowDays;
+                                if (message.attributionModel != null && message.hasOwnProperty("attributionModel"))
+                                    object.attributionModel = options.enums === String ? $root.google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel[message.attributionModel] === undefined ? message.attributionModel : $root.google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel[message.attributionModel] : message.attributionModel;
+                                if (message.conversionType && message.conversionType.length) {
+                                    object.conversionType = [];
+                                    for (var j = 0; j < message.conversionType.length; ++j)
+                                        object.conversionType[j] = $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.toObject(message.conversionType[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AttributionSettings to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AttributionSettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AttributionSettings
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AttributionSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.AttributionSettings";
+                            };
+    
+                            AttributionSettings.ConversionType = (function() {
+    
+                                /**
+                                 * Properties of a ConversionType.
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                                 * @interface IConversionType
+                                 * @property {string|null} [name] ConversionType name
+                                 * @property {boolean|null} [report] ConversionType report
+                                 */
+    
+                                /**
+                                 * Constructs a new ConversionType.
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings
+                                 * @classdesc Represents a ConversionType.
+                                 * @implements IConversionType
+                                 * @constructor
+                                 * @param {google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType=} [properties] Properties to set
+                                 */
+                                function ConversionType(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ConversionType name.
+                                 * @member {string} name
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @instance
+                                 */
+                                ConversionType.prototype.name = "";
+    
+                                /**
+                                 * ConversionType report.
+                                 * @member {boolean} report
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @instance
+                                 */
+                                ConversionType.prototype.report = false;
+    
+                                /**
+                                 * Creates a new ConversionType instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType} ConversionType instance
+                                 */
+                                ConversionType.create = function create(properties) {
+                                    return new ConversionType(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ConversionType message. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType} message ConversionType message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ConversionType.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                    if (message.report != null && Object.hasOwnProperty.call(message, "report"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.report);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ConversionType message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {google.shopping.merchant.conversions.v1.AttributionSettings.IConversionType} message ConversionType message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ConversionType.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ConversionType message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType} ConversionType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ConversionType.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.name = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.report = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ConversionType message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType} ConversionType
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ConversionType.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ConversionType message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ConversionType.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        if (!$util.isString(message.name))
+                                            return "name: string expected";
+                                    if (message.report != null && message.hasOwnProperty("report"))
+                                        if (typeof message.report !== "boolean")
+                                            return "report: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ConversionType message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType} ConversionType
+                                 */
+                                ConversionType.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType();
+                                    if (object.name != null)
+                                        message.name = String(object.name);
+                                    if (object.report != null)
+                                        message.report = Boolean(object.report);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ConversionType message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType} message ConversionType
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ConversionType.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.name = "";
+                                        object.report = false;
+                                    }
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        object.name = message.name;
+                                    if (message.report != null && message.hasOwnProperty("report"))
+                                        object.report = message.report;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ConversionType to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ConversionType.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ConversionType
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ConversionType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.AttributionSettings.ConversionType";
+                                };
+    
+                                return ConversionType;
+                            })();
+    
+                            /**
+                             * AttributionModel enum.
+                             * @name google.shopping.merchant.conversions.v1.AttributionSettings.AttributionModel
+                             * @enum {number}
+                             * @property {number} ATTRIBUTION_MODEL_UNSPECIFIED=0 ATTRIBUTION_MODEL_UNSPECIFIED value
+                             * @property {number} CROSS_CHANNEL_LAST_CLICK=1 CROSS_CHANNEL_LAST_CLICK value
+                             * @property {number} ADS_PREFERRED_LAST_CLICK=2 ADS_PREFERRED_LAST_CLICK value
+                             * @property {number} CROSS_CHANNEL_DATA_DRIVEN=5 CROSS_CHANNEL_DATA_DRIVEN value
+                             * @property {number} CROSS_CHANNEL_FIRST_CLICK=6 CROSS_CHANNEL_FIRST_CLICK value
+                             * @property {number} CROSS_CHANNEL_LINEAR=7 CROSS_CHANNEL_LINEAR value
+                             * @property {number} CROSS_CHANNEL_POSITION_BASED=8 CROSS_CHANNEL_POSITION_BASED value
+                             * @property {number} CROSS_CHANNEL_TIME_DECAY=9 CROSS_CHANNEL_TIME_DECAY value
+                             */
+                            AttributionSettings.AttributionModel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ATTRIBUTION_MODEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CROSS_CHANNEL_LAST_CLICK"] = 1;
+                                values[valuesById[2] = "ADS_PREFERRED_LAST_CLICK"] = 2;
+                                values[valuesById[5] = "CROSS_CHANNEL_DATA_DRIVEN"] = 5;
+                                values[valuesById[6] = "CROSS_CHANNEL_FIRST_CLICK"] = 6;
+                                values[valuesById[7] = "CROSS_CHANNEL_LINEAR"] = 7;
+                                values[valuesById[8] = "CROSS_CHANNEL_POSITION_BASED"] = 8;
+                                values[valuesById[9] = "CROSS_CHANNEL_TIME_DECAY"] = 9;
+                                return values;
+                            })();
+    
+                            return AttributionSettings;
+                        })();
+    
+                        v1.GoogleAnalyticsLink = (function() {
+    
+                            /**
+                             * Properties of a GoogleAnalyticsLink.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IGoogleAnalyticsLink
+                             * @property {number|Long|null} [propertyId] GoogleAnalyticsLink propertyId
+                             * @property {google.shopping.merchant.conversions.v1.IAttributionSettings|null} [attributionSettings] GoogleAnalyticsLink attributionSettings
+                             * @property {string|null} [property] GoogleAnalyticsLink property
+                             */
+    
+                            /**
+                             * Constructs a new GoogleAnalyticsLink.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a GoogleAnalyticsLink.
+                             * @implements IGoogleAnalyticsLink
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink=} [properties] Properties to set
+                             */
+                            function GoogleAnalyticsLink(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoogleAnalyticsLink propertyId.
+                             * @member {number|Long} propertyId
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @instance
+                             */
+                            GoogleAnalyticsLink.prototype.propertyId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * GoogleAnalyticsLink attributionSettings.
+                             * @member {google.shopping.merchant.conversions.v1.IAttributionSettings|null|undefined} attributionSettings
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @instance
+                             */
+                            GoogleAnalyticsLink.prototype.attributionSettings = null;
+    
+                            /**
+                             * GoogleAnalyticsLink property.
+                             * @member {string} property
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @instance
+                             */
+                            GoogleAnalyticsLink.prototype.property = "";
+    
+                            /**
+                             * Creates a new GoogleAnalyticsLink instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.GoogleAnalyticsLink} GoogleAnalyticsLink instance
+                             */
+                            GoogleAnalyticsLink.create = function create(properties) {
+                                return new GoogleAnalyticsLink(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleAnalyticsLink message. Does not implicitly {@link google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink} message GoogleAnalyticsLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleAnalyticsLink.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.propertyId != null && Object.hasOwnProperty.call(message, "propertyId"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.propertyId);
+                                if (message.attributionSettings != null && Object.hasOwnProperty.call(message, "attributionSettings"))
+                                    $root.google.shopping.merchant.conversions.v1.AttributionSettings.encode(message.attributionSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.property);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleAnalyticsLink message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGoogleAnalyticsLink} message GoogleAnalyticsLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleAnalyticsLink.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoogleAnalyticsLink message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.GoogleAnalyticsLink} GoogleAnalyticsLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleAnalyticsLink.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.propertyId = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.property = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoogleAnalyticsLink message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.GoogleAnalyticsLink} GoogleAnalyticsLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleAnalyticsLink.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoogleAnalyticsLink message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoogleAnalyticsLink.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.propertyId != null && message.hasOwnProperty("propertyId"))
+                                    if (!$util.isInteger(message.propertyId) && !(message.propertyId && $util.isInteger(message.propertyId.low) && $util.isInteger(message.propertyId.high)))
+                                        return "propertyId: integer|Long expected";
+                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings")) {
+                                    var error = $root.google.shopping.merchant.conversions.v1.AttributionSettings.verify(message.attributionSettings);
+                                    if (error)
+                                        return "attributionSettings." + error;
+                                }
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    if (!$util.isString(message.property))
+                                        return "property: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoogleAnalyticsLink message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.GoogleAnalyticsLink} GoogleAnalyticsLink
+                             */
+                            GoogleAnalyticsLink.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.GoogleAnalyticsLink();
+                                if (object.propertyId != null)
+                                    if ($util.Long)
+                                        (message.propertyId = $util.Long.fromValue(object.propertyId)).unsigned = false;
+                                    else if (typeof object.propertyId === "string")
+                                        message.propertyId = parseInt(object.propertyId, 10);
+                                    else if (typeof object.propertyId === "number")
+                                        message.propertyId = object.propertyId;
+                                    else if (typeof object.propertyId === "object")
+                                        message.propertyId = new $util.LongBits(object.propertyId.low >>> 0, object.propertyId.high >>> 0).toNumber();
+                                if (object.attributionSettings != null) {
+                                    if (typeof object.attributionSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.GoogleAnalyticsLink.attributionSettings: object expected");
+                                    message.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.fromObject(object.attributionSettings);
+                                }
+                                if (object.property != null)
+                                    message.property = String(object.property);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoogleAnalyticsLink message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.GoogleAnalyticsLink} message GoogleAnalyticsLink
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoogleAnalyticsLink.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.propertyId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.propertyId = options.longs === String ? "0" : 0;
+                                    object.attributionSettings = null;
+                                    object.property = "";
+                                }
+                                if (message.propertyId != null && message.hasOwnProperty("propertyId"))
+                                    if (typeof message.propertyId === "number")
+                                        object.propertyId = options.longs === String ? String(message.propertyId) : message.propertyId;
+                                    else
+                                        object.propertyId = options.longs === String ? $util.Long.prototype.toString.call(message.propertyId) : options.longs === Number ? new $util.LongBits(message.propertyId.low >>> 0, message.propertyId.high >>> 0).toNumber() : message.propertyId;
+                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings"))
+                                    object.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.toObject(message.attributionSettings, options);
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    object.property = message.property;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoogleAnalyticsLink to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoogleAnalyticsLink.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoogleAnalyticsLink
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.GoogleAnalyticsLink
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoogleAnalyticsLink.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.GoogleAnalyticsLink";
+                            };
+    
+                            return GoogleAnalyticsLink;
+                        })();
+    
+                        v1.MerchantCenterDestination = (function() {
+    
+                            /**
+                             * Properties of a MerchantCenterDestination.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IMerchantCenterDestination
+                             * @property {string|null} [destination] MerchantCenterDestination destination
+                             * @property {google.shopping.merchant.conversions.v1.IAttributionSettings|null} [attributionSettings] MerchantCenterDestination attributionSettings
+                             * @property {string|null} [displayName] MerchantCenterDestination displayName
+                             * @property {string|null} [currencyCode] MerchantCenterDestination currencyCode
+                             */
+    
+                            /**
+                             * Constructs a new MerchantCenterDestination.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a MerchantCenterDestination.
+                             * @implements IMerchantCenterDestination
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IMerchantCenterDestination=} [properties] Properties to set
+                             */
+                            function MerchantCenterDestination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MerchantCenterDestination destination.
+                             * @member {string} destination
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @instance
+                             */
+                            MerchantCenterDestination.prototype.destination = "";
+    
+                            /**
+                             * MerchantCenterDestination attributionSettings.
+                             * @member {google.shopping.merchant.conversions.v1.IAttributionSettings|null|undefined} attributionSettings
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @instance
+                             */
+                            MerchantCenterDestination.prototype.attributionSettings = null;
+    
+                            /**
+                             * MerchantCenterDestination displayName.
+                             * @member {string} displayName
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @instance
+                             */
+                            MerchantCenterDestination.prototype.displayName = "";
+    
+                            /**
+                             * MerchantCenterDestination currencyCode.
+                             * @member {string} currencyCode
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @instance
+                             */
+                            MerchantCenterDestination.prototype.currencyCode = "";
+    
+                            /**
+                             * Creates a new MerchantCenterDestination instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IMerchantCenterDestination=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.MerchantCenterDestination} MerchantCenterDestination instance
+                             */
+                            MerchantCenterDestination.create = function create(properties) {
+                                return new MerchantCenterDestination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantCenterDestination message. Does not implicitly {@link google.shopping.merchant.conversions.v1.MerchantCenterDestination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IMerchantCenterDestination} message MerchantCenterDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantCenterDestination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.destination);
+                                if (message.attributionSettings != null && Object.hasOwnProperty.call(message, "attributionSettings"))
+                                    $root.google.shopping.merchant.conversions.v1.AttributionSettings.encode(message.attributionSettings, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.currencyCode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantCenterDestination message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.MerchantCenterDestination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IMerchantCenterDestination} message MerchantCenterDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantCenterDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MerchantCenterDestination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.MerchantCenterDestination} MerchantCenterDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantCenterDestination.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.destination = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.currencyCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MerchantCenterDestination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.MerchantCenterDestination} MerchantCenterDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantCenterDestination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MerchantCenterDestination message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MerchantCenterDestination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.destination != null && message.hasOwnProperty("destination"))
+                                    if (!$util.isString(message.destination))
+                                        return "destination: string expected";
+                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings")) {
+                                    var error = $root.google.shopping.merchant.conversions.v1.AttributionSettings.verify(message.attributionSettings);
+                                    if (error)
+                                        return "attributionSettings." + error;
+                                }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                    if (!$util.isString(message.currencyCode))
+                                        return "currencyCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MerchantCenterDestination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.MerchantCenterDestination} MerchantCenterDestination
+                             */
+                            MerchantCenterDestination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.MerchantCenterDestination();
+                                if (object.destination != null)
+                                    message.destination = String(object.destination);
+                                if (object.attributionSettings != null) {
+                                    if (typeof object.attributionSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.MerchantCenterDestination.attributionSettings: object expected");
+                                    message.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.fromObject(object.attributionSettings);
+                                }
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.currencyCode != null)
+                                    message.currencyCode = String(object.currencyCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MerchantCenterDestination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.MerchantCenterDestination} message MerchantCenterDestination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MerchantCenterDestination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.destination = "";
+                                    object.attributionSettings = null;
+                                    object.displayName = "";
+                                    object.currencyCode = "";
+                                }
+                                if (message.destination != null && message.hasOwnProperty("destination"))
+                                    object.destination = message.destination;
+                                if (message.attributionSettings != null && message.hasOwnProperty("attributionSettings"))
+                                    object.attributionSettings = $root.google.shopping.merchant.conversions.v1.AttributionSettings.toObject(message.attributionSettings, options);
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                    object.currencyCode = message.currencyCode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MerchantCenterDestination to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MerchantCenterDestination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MerchantCenterDestination
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.MerchantCenterDestination
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MerchantCenterDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.MerchantCenterDestination";
+                            };
+    
+                            return MerchantCenterDestination;
+                        })();
+    
+                        v1.CreateConversionSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface ICreateConversionSourceRequest
+                             * @property {string|null} [parent] CreateConversionSourceRequest parent
+                             * @property {google.shopping.merchant.conversions.v1.IConversionSource|null} [conversionSource] CreateConversionSourceRequest conversionSource
+                             */
+    
+                            /**
+                             * Constructs a new CreateConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a CreateConversionSourceRequest.
+                             * @implements ICreateConversionSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest=} [properties] Properties to set
+                             */
+                            function CreateConversionSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateConversionSourceRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @instance
+                             */
+                            CreateConversionSourceRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateConversionSourceRequest conversionSource.
+                             * @member {google.shopping.merchant.conversions.v1.IConversionSource|null|undefined} conversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @instance
+                             */
+                            CreateConversionSourceRequest.prototype.conversionSource = null;
+    
+                            /**
+                             * Creates a new CreateConversionSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.CreateConversionSourceRequest} CreateConversionSourceRequest instance
+                             */
+                            CreateConversionSourceRequest.create = function create(properties) {
+                                return new CreateConversionSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.CreateConversionSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest} message CreateConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateConversionSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.conversionSource != null && Object.hasOwnProperty.call(message, "conversionSource"))
+                                    $root.google.shopping.merchant.conversions.v1.ConversionSource.encode(message.conversionSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.CreateConversionSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ICreateConversionSourceRequest} message CreateConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateConversionSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.CreateConversionSourceRequest} CreateConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateConversionSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.CreateConversionSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateConversionSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.CreateConversionSourceRequest} CreateConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateConversionSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateConversionSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource")) {
+                                    var error = $root.google.shopping.merchant.conversions.v1.ConversionSource.verify(message.conversionSource);
+                                    if (error)
+                                        return "conversionSource." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.CreateConversionSourceRequest} CreateConversionSourceRequest
+                             */
+                            CreateConversionSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.CreateConversionSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.CreateConversionSourceRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.conversionSource != null) {
+                                    if (typeof object.conversionSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.CreateConversionSourceRequest.conversionSource: object expected");
+                                    message.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.fromObject(object.conversionSource);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateConversionSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.CreateConversionSourceRequest} message CreateConversionSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateConversionSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.conversionSource = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource"))
+                                    object.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.toObject(message.conversionSource, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateConversionSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateConversionSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateConversionSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.CreateConversionSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.CreateConversionSourceRequest";
+                            };
+    
+                            return CreateConversionSourceRequest;
+                        })();
+    
+                        v1.UpdateConversionSourceRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IUpdateConversionSourceRequest
+                             * @property {google.shopping.merchant.conversions.v1.IConversionSource|null} [conversionSource] UpdateConversionSourceRequest conversionSource
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateConversionSourceRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents an UpdateConversionSourceRequest.
+                             * @implements IUpdateConversionSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest=} [properties] Properties to set
+                             */
+                            function UpdateConversionSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateConversionSourceRequest conversionSource.
+                             * @member {google.shopping.merchant.conversions.v1.IConversionSource|null|undefined} conversionSource
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @instance
+                             */
+                            UpdateConversionSourceRequest.prototype.conversionSource = null;
+    
+                            /**
+                             * UpdateConversionSourceRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @instance
+                             */
+                            UpdateConversionSourceRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateConversionSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest} UpdateConversionSourceRequest instance
+                             */
+                            UpdateConversionSourceRequest.create = function create(properties) {
+                                return new UpdateConversionSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest} message UpdateConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConversionSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.conversionSource != null && Object.hasOwnProperty.call(message, "conversionSource"))
+                                    $root.google.shopping.merchant.conversions.v1.ConversionSource.encode(message.conversionSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUpdateConversionSourceRequest} message UpdateConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest} UpdateConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConversionSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateConversionSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest} UpdateConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateConversionSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateConversionSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource")) {
+                                    var error = $root.google.shopping.merchant.conversions.v1.ConversionSource.verify(message.conversionSource);
+                                    if (error)
+                                        return "conversionSource." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest} UpdateConversionSourceRequest
+                             */
+                            UpdateConversionSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest();
+                                if (object.conversionSource != null) {
+                                    if (typeof object.conversionSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.conversionSource: object expected");
+                                    message.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.fromObject(object.conversionSource);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateConversionSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest} message UpdateConversionSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateConversionSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.conversionSource = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.conversionSource != null && message.hasOwnProperty("conversionSource"))
+                                    object.conversionSource = $root.google.shopping.merchant.conversions.v1.ConversionSource.toObject(message.conversionSource, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateConversionSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateConversionSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateConversionSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.UpdateConversionSourceRequest";
+                            };
+    
+                            return UpdateConversionSourceRequest;
+                        })();
+    
+                        v1.DeleteConversionSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IDeleteConversionSourceRequest
+                             * @property {string|null} [name] DeleteConversionSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a DeleteConversionSourceRequest.
+                             * @implements IDeleteConversionSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest=} [properties] Properties to set
+                             */
+                            function DeleteConversionSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteConversionSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @instance
+                             */
+                            DeleteConversionSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteConversionSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest} DeleteConversionSourceRequest instance
+                             */
+                            DeleteConversionSourceRequest.create = function create(properties) {
+                                return new DeleteConversionSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest} message DeleteConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteConversionSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IDeleteConversionSourceRequest} message DeleteConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest} DeleteConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteConversionSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest} DeleteConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteConversionSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteConversionSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest} DeleteConversionSourceRequest
+                             */
+                            DeleteConversionSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteConversionSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest} message DeleteConversionSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteConversionSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteConversionSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteConversionSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteConversionSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.DeleteConversionSourceRequest";
+                            };
+    
+                            return DeleteConversionSourceRequest;
+                        })();
+    
+                        v1.UndeleteConversionSourceRequest = (function() {
+    
+                            /**
+                             * Properties of an UndeleteConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IUndeleteConversionSourceRequest
+                             * @property {string|null} [name] UndeleteConversionSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new UndeleteConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents an UndeleteConversionSourceRequest.
+                             * @implements IUndeleteConversionSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest=} [properties] Properties to set
+                             */
+                            function UndeleteConversionSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UndeleteConversionSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @instance
+                             */
+                            UndeleteConversionSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new UndeleteConversionSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest instance
+                             */
+                            UndeleteConversionSourceRequest.create = function create(properties) {
+                                return new UndeleteConversionSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UndeleteConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest} message UndeleteConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UndeleteConversionSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UndeleteConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IUndeleteConversionSourceRequest} message UndeleteConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UndeleteConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UndeleteConversionSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UndeleteConversionSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UndeleteConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UndeleteConversionSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UndeleteConversionSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UndeleteConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest} UndeleteConversionSourceRequest
+                             */
+                            UndeleteConversionSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UndeleteConversionSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest} message UndeleteConversionSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UndeleteConversionSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UndeleteConversionSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UndeleteConversionSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UndeleteConversionSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UndeleteConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.UndeleteConversionSourceRequest";
+                            };
+    
+                            return UndeleteConversionSourceRequest;
+                        })();
+    
+                        v1.GetConversionSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a GetConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IGetConversionSourceRequest
+                             * @property {string|null} [name] GetConversionSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetConversionSourceRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a GetConversionSourceRequest.
+                             * @implements IGetConversionSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest=} [properties] Properties to set
+                             */
+                            function GetConversionSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetConversionSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @instance
+                             */
+                            GetConversionSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetConversionSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.GetConversionSourceRequest} GetConversionSourceRequest instance
+                             */
+                            GetConversionSourceRequest.create = function create(properties) {
+                                return new GetConversionSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetConversionSourceRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.GetConversionSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest} message GetConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetConversionSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetConversionSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.GetConversionSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IGetConversionSourceRequest} message GetConversionSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetConversionSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetConversionSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.GetConversionSourceRequest} GetConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetConversionSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.GetConversionSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetConversionSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.GetConversionSourceRequest} GetConversionSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetConversionSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetConversionSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetConversionSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetConversionSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.GetConversionSourceRequest} GetConversionSourceRequest
+                             */
+                            GetConversionSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.GetConversionSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.GetConversionSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetConversionSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.GetConversionSourceRequest} message GetConversionSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetConversionSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetConversionSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetConversionSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetConversionSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.GetConversionSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetConversionSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.GetConversionSourceRequest";
+                            };
+    
+                            return GetConversionSourceRequest;
+                        })();
+    
+                        v1.ListConversionSourcesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListConversionSourcesRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IListConversionSourcesRequest
+                             * @property {string|null} [parent] ListConversionSourcesRequest parent
+                             * @property {number|null} [pageSize] ListConversionSourcesRequest pageSize
+                             * @property {string|null} [pageToken] ListConversionSourcesRequest pageToken
+                             * @property {boolean|null} [showDeleted] ListConversionSourcesRequest showDeleted
+                             */
+    
+                            /**
+                             * Constructs a new ListConversionSourcesRequest.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a ListConversionSourcesRequest.
+                             * @implements IListConversionSourcesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest=} [properties] Properties to set
+                             */
+                            function ListConversionSourcesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListConversionSourcesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @instance
+                             */
+                            ListConversionSourcesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListConversionSourcesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @instance
+                             */
+                            ListConversionSourcesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListConversionSourcesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @instance
+                             */
+                            ListConversionSourcesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListConversionSourcesRequest showDeleted.
+                             * @member {boolean} showDeleted
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @instance
+                             */
+                            ListConversionSourcesRequest.prototype.showDeleted = false;
+    
+                            /**
+                             * Creates a new ListConversionSourcesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesRequest} ListConversionSourcesRequest instance
+                             */
+                            ListConversionSourcesRequest.create = function create(properties) {
+                                return new ListConversionSourcesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListConversionSourcesRequest message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest} message ListConversionSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConversionSourcesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.showDeleted);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListConversionSourcesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesRequest} message ListConversionSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConversionSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListConversionSourcesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesRequest} ListConversionSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConversionSourcesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.ListConversionSourcesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.showDeleted = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListConversionSourcesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesRequest} ListConversionSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConversionSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListConversionSourcesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListConversionSourcesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                    if (typeof message.showDeleted !== "boolean")
+                                        return "showDeleted: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListConversionSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesRequest} ListConversionSourcesRequest
+                             */
+                            ListConversionSourcesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.ListConversionSourcesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.ListConversionSourcesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.showDeleted != null)
+                                    message.showDeleted = Boolean(object.showDeleted);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListConversionSourcesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ListConversionSourcesRequest} message ListConversionSourcesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListConversionSourcesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.showDeleted = false;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                    object.showDeleted = message.showDeleted;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListConversionSourcesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListConversionSourcesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListConversionSourcesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListConversionSourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.ListConversionSourcesRequest";
+                            };
+    
+                            return ListConversionSourcesRequest;
+                        })();
+    
+                        v1.ListConversionSourcesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListConversionSourcesResponse.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @interface IListConversionSourcesResponse
+                             * @property {Array.<google.shopping.merchant.conversions.v1.IConversionSource>|null} [conversionSources] ListConversionSourcesResponse conversionSources
+                             * @property {string|null} [nextPageToken] ListConversionSourcesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListConversionSourcesResponse.
+                             * @memberof google.shopping.merchant.conversions.v1
+                             * @classdesc Represents a ListConversionSourcesResponse.
+                             * @implements IListConversionSourcesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesResponse=} [properties] Properties to set
+                             */
+                            function ListConversionSourcesResponse(properties) {
+                                this.conversionSources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListConversionSourcesResponse conversionSources.
+                             * @member {Array.<google.shopping.merchant.conversions.v1.IConversionSource>} conversionSources
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @instance
+                             */
+                            ListConversionSourcesResponse.prototype.conversionSources = $util.emptyArray;
+    
+                            /**
+                             * ListConversionSourcesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @instance
+                             */
+                            ListConversionSourcesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListConversionSourcesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} ListConversionSourcesResponse instance
+                             */
+                            ListConversionSourcesResponse.create = function create(properties) {
+                                return new ListConversionSourcesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListConversionSourcesResponse message. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesResponse} message ListConversionSourcesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConversionSourcesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.conversionSources != null && message.conversionSources.length)
+                                    for (var i = 0; i < message.conversionSources.length; ++i)
+                                        $root.google.shopping.merchant.conversions.v1.ConversionSource.encode(message.conversionSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListConversionSourcesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.IListConversionSourcesResponse} message ListConversionSourcesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListConversionSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListConversionSourcesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} ListConversionSourcesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConversionSourcesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.conversions.v1.ListConversionSourcesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.conversionSources && message.conversionSources.length))
+                                                message.conversionSources = [];
+                                            message.conversionSources.push($root.google.shopping.merchant.conversions.v1.ConversionSource.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListConversionSourcesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} ListConversionSourcesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListConversionSourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListConversionSourcesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListConversionSourcesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.conversionSources != null && message.hasOwnProperty("conversionSources")) {
+                                    if (!Array.isArray(message.conversionSources))
+                                        return "conversionSources: array expected";
+                                    for (var i = 0; i < message.conversionSources.length; ++i) {
+                                        var error = $root.google.shopping.merchant.conversions.v1.ConversionSource.verify(message.conversionSources[i]);
+                                        if (error)
+                                            return "conversionSources." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListConversionSourcesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} ListConversionSourcesResponse
+                             */
+                            ListConversionSourcesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.conversions.v1.ListConversionSourcesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.conversions.v1.ListConversionSourcesResponse();
+                                if (object.conversionSources) {
+                                    if (!Array.isArray(object.conversionSources))
+                                        throw TypeError(".google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.conversionSources: array expected");
+                                    message.conversionSources = [];
+                                    for (var i = 0; i < object.conversionSources.length; ++i) {
+                                        if (typeof object.conversionSources[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.conversions.v1.ListConversionSourcesResponse.conversionSources: object expected");
+                                        message.conversionSources[i] = $root.google.shopping.merchant.conversions.v1.ConversionSource.fromObject(object.conversionSources[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListConversionSourcesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.conversions.v1.ListConversionSourcesResponse} message ListConversionSourcesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListConversionSourcesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.conversionSources = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.conversionSources && message.conversionSources.length) {
+                                    object.conversionSources = [];
+                                    for (var j = 0; j < message.conversionSources.length; ++j)
+                                        object.conversionSources[j] = $root.google.shopping.merchant.conversions.v1.ConversionSource.toObject(message.conversionSources[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListConversionSourcesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListConversionSourcesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListConversionSourcesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.conversions.v1.ListConversionSourcesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListConversionSourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.conversions.v1.ListConversionSourcesResponse";
+                            };
+    
+                            return ListConversionSourcesResponse;
+                        })();
+    
+                        return v1;
+                    })();
     
                     conversions.v1beta = (function() {
     

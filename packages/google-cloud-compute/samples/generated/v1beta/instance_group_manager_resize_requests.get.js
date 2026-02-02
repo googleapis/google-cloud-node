@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ function main(instanceGroupManager, project, resizeRequest, zone) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the managed instance group. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the managed instance group.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const instanceGroupManager = 'abc123'
   /**
@@ -37,11 +38,13 @@ function main(instanceGroupManager, project, resizeRequest, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the resize request. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the resize request.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const resizeRequest = 'abc123'
   /**
-   *  Name of the href="/compute/docs/regions-zones/#available">zone scoping this request. Name should conform to RFC1035.
+   *  Name of the href="/compute/docs/regions-zones/#available">zone
+   *  scoping this request. Name should conform to RFC1035.
    */
   // const zone = 'abc123'
 

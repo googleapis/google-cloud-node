@@ -19,12 +19,14 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
+const OrganizationVpcFlowLogsServiceClient = v1.OrganizationVpcFlowLogsServiceClient;
+type OrganizationVpcFlowLogsServiceClient = v1.OrganizationVpcFlowLogsServiceClient;
 const ReachabilityServiceClient = v1.ReachabilityServiceClient;
 type ReachabilityServiceClient = v1.ReachabilityServiceClient;
 const VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
 type VpcFlowLogsServiceClient = v1.VpcFlowLogsServiceClient;
 
-export {v1, v1beta1, ReachabilityServiceClient, VpcFlowLogsServiceClient};
-export default {v1, v1beta1, ReachabilityServiceClient, VpcFlowLogsServiceClient};
+export {v1, v1beta1, OrganizationVpcFlowLogsServiceClient, ReachabilityServiceClient, VpcFlowLogsServiceClient};
+export default {v1, v1beta1, OrganizationVpcFlowLogsServiceClient, ReachabilityServiceClient, VpcFlowLogsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

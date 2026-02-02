@@ -40,6 +40,14 @@
         "BatchOptimizeTours": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "OptimizeToursLongRunning": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "OptimizeToursUri": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

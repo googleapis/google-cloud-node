@@ -17,9 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
-
-const StorageControlClient = v2.StorageControlClient;
-type StorageControlClient = v2.StorageControlClient;
+import {StorageControlClient} from './storage_control_client';
 
 export {v2, StorageControlClient};
 export default {v2, StorageControlClient};

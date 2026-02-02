@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -320,7 +320,8 @@ export class ImageFamilyViewsClient {
   // -- Service calls --
   // -------------------
 /**
- * Returns the latest image that is part of an image family, is not deprecated and is rolled out in the specified zone.
+ * Returns the latest image that is part of an image family, is not
+ * deprecated and is rolled out in the specified zone.
  *
  * @param {Object} request
  *   The request object that will be sent.

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -661,8 +661,8 @@ export namespace google {
                         /** MerchantReview merchantReviewId */
                         merchantReviewId?: (string|null);
 
-                        /** MerchantReview attributes */
-                        attributes?: (google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null);
+                        /** MerchantReview merchantReviewAttributes */
+                        merchantReviewAttributes?: (google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null);
 
                         /** MerchantReview customAttributes */
                         customAttributes?: (google.shopping.type.ICustomAttribute[]|null);
@@ -689,8 +689,8 @@ export namespace google {
                         /** MerchantReview merchantReviewId. */
                         public merchantReviewId: string;
 
-                        /** MerchantReview attributes. */
-                        public attributes?: (google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null);
+                        /** MerchantReview merchantReviewAttributes. */
+                        public merchantReviewAttributes?: (google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null);
 
                         /** MerchantReview customAttributes. */
                         public customAttributes: google.shopping.type.ICustomAttribute[];
@@ -1973,8 +1973,8 @@ export namespace google {
                         /** ProductReview productReviewId */
                         productReviewId?: (string|null);
 
-                        /** ProductReview attributes */
-                        attributes?: (google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null);
+                        /** ProductReview productReviewAttributes */
+                        productReviewAttributes?: (google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null);
 
                         /** ProductReview customAttributes */
                         customAttributes?: (google.shopping.type.ICustomAttribute[]|null);
@@ -2001,8 +2001,8 @@ export namespace google {
                         /** ProductReview productReviewId. */
                         public productReviewId: string;
 
-                        /** ProductReview attributes. */
-                        public attributes?: (google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null);
+                        /** ProductReview productReviewAttributes. */
+                        public productReviewAttributes?: (google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null);
 
                         /** ProductReview customAttributes. */
                         public customAttributes: google.shopping.type.ICustomAttribute[];
@@ -2175,6 +2175,12 @@ export namespace google {
                         /** ProductReviewAttributes isSpam */
                         isSpam?: (boolean|null);
 
+                        /** ProductReviewAttributes isVerifiedPurchase */
+                        isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview */
+                        isIncentivizedReview?: (boolean|null);
+
                         /** ProductReviewAttributes collectionMethod */
                         collectionMethod?: (google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|null);
 
@@ -2271,6 +2277,12 @@ export namespace google {
 
                         /** ProductReviewAttributes isSpam. */
                         public isSpam?: (boolean|null);
+
+                        /** ProductReviewAttributes isVerifiedPurchase. */
+                        public isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview. */
+                        public isIncentivizedReview?: (boolean|null);
 
                         /** ProductReviewAttributes collectionMethod. */
                         public collectionMethod: (google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod);

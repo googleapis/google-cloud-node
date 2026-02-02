@@ -4,6 +4,48 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.3.4](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.3...vision-v5.3.4) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.2...vision-v5.3.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency redis to ~5.7.0 ([#6551](https://github.com/googleapis/google-cloud-node/issues/6551)) ([517a9ca](https://github.com/googleapis/google-cloud-node/commit/517a9caaf1ef6bf7484208745f2fb27a57fc49da))
+
+## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.1...vision-v5.3.2) (2025-07-22)
+
+
+### Bug Fixes
+
+* Remove is dependency ([#6516](https://github.com/googleapis/google-cloud-node/issues/6516)) ([0cb9bb2](https://github.com/googleapis/google-cloud-node/commit/0cb9bb2180f333f075aabd0fd637918352e88cf7))
+
+## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.0...vision-v5.3.1) (2025-07-17)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency redis to ~5.6.0 ([#6469](https://github.com/googleapis/google-cloud-node/issues/6469)) ([6ac1df8](https://github.com/googleapis/google-cloud-node/commit/6ac1df8ff2e813499c8f4f2248ed3b8b16193446))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/vision-v5.2.0...vision-v5.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6424](https://github.com/googleapis/google-cloud-node/issues/6424)) ([9a595a6](https://github.com/googleapis/google-cloud-node/commit/9a595a658b5fc2a02a18ffbca618190eb64d8013))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency redis to v5 ([#6324](https://github.com/googleapis/google-cloud-node/issues/6324)) ([2259f40](https://github.com/googleapis/google-cloud-node/commit/2259f408e8a18b1a9a9a45b4bfe022c5591eb912))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/vision-v5.1.0...vision-v5.2.0) (2025-06-03)
 
 

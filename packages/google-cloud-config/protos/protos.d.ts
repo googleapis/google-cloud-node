@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -367,6 +367,90 @@ export namespace google {
                      * @returns Promise
                      */
                     public getTerraformVersion(request: google.cloud.config.v1.IGetTerraformVersionRequest): Promise<google.cloud.config.v1.TerraformVersion>;
+
+                    /**
+                     * Calls ListResourceChanges.
+                     * @param request ListResourceChangesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListResourceChangesResponse
+                     */
+                    public listResourceChanges(request: google.cloud.config.v1.IListResourceChangesRequest, callback: google.cloud.config.v1.Config.ListResourceChangesCallback): void;
+
+                    /**
+                     * Calls ListResourceChanges.
+                     * @param request ListResourceChangesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listResourceChanges(request: google.cloud.config.v1.IListResourceChangesRequest): Promise<google.cloud.config.v1.ListResourceChangesResponse>;
+
+                    /**
+                     * Calls GetResourceChange.
+                     * @param request GetResourceChangeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResourceChange
+                     */
+                    public getResourceChange(request: google.cloud.config.v1.IGetResourceChangeRequest, callback: google.cloud.config.v1.Config.GetResourceChangeCallback): void;
+
+                    /**
+                     * Calls GetResourceChange.
+                     * @param request GetResourceChangeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getResourceChange(request: google.cloud.config.v1.IGetResourceChangeRequest): Promise<google.cloud.config.v1.ResourceChange>;
+
+                    /**
+                     * Calls ListResourceDrifts.
+                     * @param request ListResourceDriftsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListResourceDriftsResponse
+                     */
+                    public listResourceDrifts(request: google.cloud.config.v1.IListResourceDriftsRequest, callback: google.cloud.config.v1.Config.ListResourceDriftsCallback): void;
+
+                    /**
+                     * Calls ListResourceDrifts.
+                     * @param request ListResourceDriftsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listResourceDrifts(request: google.cloud.config.v1.IListResourceDriftsRequest): Promise<google.cloud.config.v1.ListResourceDriftsResponse>;
+
+                    /**
+                     * Calls GetResourceDrift.
+                     * @param request GetResourceDriftRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResourceDrift
+                     */
+                    public getResourceDrift(request: google.cloud.config.v1.IGetResourceDriftRequest, callback: google.cloud.config.v1.Config.GetResourceDriftCallback): void;
+
+                    /**
+                     * Calls GetResourceDrift.
+                     * @param request GetResourceDriftRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getResourceDrift(request: google.cloud.config.v1.IGetResourceDriftRequest): Promise<google.cloud.config.v1.ResourceDrift>;
+
+                    /**
+                     * Calls GetAutoMigrationConfig.
+                     * @param request GetAutoMigrationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutoMigrationConfig
+                     */
+                    public getAutoMigrationConfig(request: google.cloud.config.v1.IGetAutoMigrationConfigRequest, callback: google.cloud.config.v1.Config.GetAutoMigrationConfigCallback): void;
+
+                    /**
+                     * Calls GetAutoMigrationConfig.
+                     * @param request GetAutoMigrationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAutoMigrationConfig(request: google.cloud.config.v1.IGetAutoMigrationConfigRequest): Promise<google.cloud.config.v1.AutoMigrationConfig>;
+
+                    /**
+                     * Calls UpdateAutoMigrationConfig.
+                     * @param request UpdateAutoMigrationConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAutoMigrationConfig(request: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, callback: google.cloud.config.v1.Config.UpdateAutoMigrationConfigCallback): void;
+
+                    /**
+                     * Calls UpdateAutoMigrationConfig.
+                     * @param request UpdateAutoMigrationConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAutoMigrationConfig(request: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Config {
@@ -531,6 +615,48 @@ export namespace google {
                      * @param [response] TerraformVersion
                      */
                     type GetTerraformVersionCallback = (error: (Error|null), response?: google.cloud.config.v1.TerraformVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|listResourceChanges}.
+                     * @param error Error, if any
+                     * @param [response] ListResourceChangesResponse
+                     */
+                    type ListResourceChangesCallback = (error: (Error|null), response?: google.cloud.config.v1.ListResourceChangesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getResourceChange}.
+                     * @param error Error, if any
+                     * @param [response] ResourceChange
+                     */
+                    type GetResourceChangeCallback = (error: (Error|null), response?: google.cloud.config.v1.ResourceChange) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|listResourceDrifts}.
+                     * @param error Error, if any
+                     * @param [response] ListResourceDriftsResponse
+                     */
+                    type ListResourceDriftsCallback = (error: (Error|null), response?: google.cloud.config.v1.ListResourceDriftsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getResourceDrift}.
+                     * @param error Error, if any
+                     * @param [response] ResourceDrift
+                     */
+                    type GetResourceDriftCallback = (error: (Error|null), response?: google.cloud.config.v1.ResourceDrift) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|getAutoMigrationConfig}.
+                     * @param error Error, if any
+                     * @param [response] AutoMigrationConfig
+                     */
+                    type GetAutoMigrationConfigCallback = (error: (Error|null), response?: google.cloud.config.v1.AutoMigrationConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.config.v1.Config|updateAutoMigrationConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAutoMigrationConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** QuotaValidation enum. */
@@ -611,6 +737,9 @@ export namespace google {
 
                     /** Deployment annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Deployment providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Deployment. */
@@ -690,6 +819,9 @@ export namespace google {
 
                     /** Deployment annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Deployment providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Deployment blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -794,7 +926,8 @@ export namespace google {
                         DELETE_BUILD_API_FAILED = 5,
                         DELETE_BUILD_RUN_FAILED = 6,
                         BUCKET_CREATION_PERMISSION_DENIED = 7,
-                        BUCKET_CREATION_FAILED = 8
+                        BUCKET_CREATION_FAILED = 8,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 10
                     }
 
                     /** LockState enum. */
@@ -2443,6 +2576,9 @@ export namespace google {
 
                     /** Revision quotaValidation */
                     quotaValidation?: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation|null);
+
+                    /** Revision providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Revision. */
@@ -2513,6 +2649,9 @@ export namespace google {
 
                     /** Revision quotaValidation. */
                     public quotaValidation: (google.cloud.config.v1.QuotaValidation|keyof typeof google.cloud.config.v1.QuotaValidation);
+
+                    /** Revision providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Revision blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -2619,7 +2758,8 @@ export namespace google {
                         CLOUD_BUILD_PERMISSION_DENIED = 1,
                         APPLY_BUILD_API_FAILED = 4,
                         APPLY_BUILD_RUN_FAILED = 5,
-                        QUOTA_VALIDATION_FAILED = 7
+                        QUOTA_VALIDATION_FAILED = 7,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 8
                     }
                 }
 
@@ -4653,6 +4793,9 @@ export namespace google {
 
                     /** Preview annotations */
                     annotations?: ({ [k: string]: string }|null);
+
+                    /** Preview providerConfig */
+                    providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
                 }
 
                 /** Represents a Preview. */
@@ -4723,6 +4866,9 @@ export namespace google {
 
                     /** Preview annotations. */
                     public annotations: { [k: string]: string };
+
+                    /** Preview providerConfig. */
+                    public providerConfig?: (google.cloud.config.v1.IProviderConfig|null);
 
                     /** Preview blueprint. */
                     public blueprint?: "terraformBlueprint";
@@ -4834,7 +4980,8 @@ export namespace google {
                         BUCKET_CREATION_FAILED = 3,
                         DEPLOYMENT_LOCK_ACQUIRE_FAILED = 4,
                         PREVIEW_BUILD_API_FAILED = 5,
-                        PREVIEW_BUILD_RUN_FAILED = 6
+                        PREVIEW_BUILD_RUN_FAILED = 6,
+                        EXTERNAL_VALUE_SOURCE_IMPORT_FAILED = 7
                     }
                 }
 
@@ -6373,6 +6520,1790 @@ export namespace google {
                         DEPRECATED = 2,
                         OBSOLETE = 3
                     }
+                }
+
+                /** Properties of a ResourceChangeTerraformInfo. */
+                interface IResourceChangeTerraformInfo {
+
+                    /** ResourceChangeTerraformInfo address */
+                    address?: (string|null);
+
+                    /** ResourceChangeTerraformInfo type */
+                    type?: (string|null);
+
+                    /** ResourceChangeTerraformInfo resourceName */
+                    resourceName?: (string|null);
+
+                    /** ResourceChangeTerraformInfo provider */
+                    provider?: (string|null);
+
+                    /** ResourceChangeTerraformInfo actions */
+                    actions?: (string[]|null);
+                }
+
+                /** Represents a ResourceChangeTerraformInfo. */
+                class ResourceChangeTerraformInfo implements IResourceChangeTerraformInfo {
+
+                    /**
+                     * Constructs a new ResourceChangeTerraformInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IResourceChangeTerraformInfo);
+
+                    /** ResourceChangeTerraformInfo address. */
+                    public address: string;
+
+                    /** ResourceChangeTerraformInfo type. */
+                    public type: string;
+
+                    /** ResourceChangeTerraformInfo resourceName. */
+                    public resourceName: string;
+
+                    /** ResourceChangeTerraformInfo provider. */
+                    public provider: string;
+
+                    /** ResourceChangeTerraformInfo actions. */
+                    public actions: string[];
+
+                    /**
+                     * Creates a new ResourceChangeTerraformInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceChangeTerraformInfo instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IResourceChangeTerraformInfo): google.cloud.config.v1.ResourceChangeTerraformInfo;
+
+                    /**
+                     * Encodes the specified ResourceChangeTerraformInfo message. Does not implicitly {@link google.cloud.config.v1.ResourceChangeTerraformInfo.verify|verify} messages.
+                     * @param message ResourceChangeTerraformInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IResourceChangeTerraformInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceChangeTerraformInfo message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceChangeTerraformInfo.verify|verify} messages.
+                     * @param message ResourceChangeTerraformInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IResourceChangeTerraformInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceChangeTerraformInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceChangeTerraformInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ResourceChangeTerraformInfo;
+
+                    /**
+                     * Decodes a ResourceChangeTerraformInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceChangeTerraformInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ResourceChangeTerraformInfo;
+
+                    /**
+                     * Verifies a ResourceChangeTerraformInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceChangeTerraformInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceChangeTerraformInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ResourceChangeTerraformInfo;
+
+                    /**
+                     * Creates a plain object from a ResourceChangeTerraformInfo message. Also converts values to other types if specified.
+                     * @param message ResourceChangeTerraformInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ResourceChangeTerraformInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceChangeTerraformInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceChangeTerraformInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResourceChange. */
+                interface IResourceChange {
+
+                    /** ResourceChange name */
+                    name?: (string|null);
+
+                    /** ResourceChange terraformInfo */
+                    terraformInfo?: (google.cloud.config.v1.IResourceChangeTerraformInfo|null);
+
+                    /** ResourceChange intent */
+                    intent?: (google.cloud.config.v1.ResourceChange.Intent|keyof typeof google.cloud.config.v1.ResourceChange.Intent|null);
+
+                    /** ResourceChange propertyChanges */
+                    propertyChanges?: (google.cloud.config.v1.IPropertyChange[]|null);
+                }
+
+                /** Represents a ResourceChange. */
+                class ResourceChange implements IResourceChange {
+
+                    /**
+                     * Constructs a new ResourceChange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IResourceChange);
+
+                    /** ResourceChange name. */
+                    public name: string;
+
+                    /** ResourceChange terraformInfo. */
+                    public terraformInfo?: (google.cloud.config.v1.IResourceChangeTerraformInfo|null);
+
+                    /** ResourceChange intent. */
+                    public intent: (google.cloud.config.v1.ResourceChange.Intent|keyof typeof google.cloud.config.v1.ResourceChange.Intent);
+
+                    /** ResourceChange propertyChanges. */
+                    public propertyChanges: google.cloud.config.v1.IPropertyChange[];
+
+                    /**
+                     * Creates a new ResourceChange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceChange instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IResourceChange): google.cloud.config.v1.ResourceChange;
+
+                    /**
+                     * Encodes the specified ResourceChange message. Does not implicitly {@link google.cloud.config.v1.ResourceChange.verify|verify} messages.
+                     * @param message ResourceChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IResourceChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceChange message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceChange.verify|verify} messages.
+                     * @param message ResourceChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IResourceChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceChange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ResourceChange;
+
+                    /**
+                     * Decodes a ResourceChange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ResourceChange;
+
+                    /**
+                     * Verifies a ResourceChange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceChange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceChange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ResourceChange;
+
+                    /**
+                     * Creates a plain object from a ResourceChange message. Also converts values to other types if specified.
+                     * @param message ResourceChange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ResourceChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceChange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceChange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ResourceChange {
+
+                    /** Intent enum. */
+                    enum Intent {
+                        INTENT_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        UPDATE = 2,
+                        DELETE = 3,
+                        RECREATE = 4,
+                        UNCHANGED = 5
+                    }
+                }
+
+                /** Properties of a PropertyChange. */
+                interface IPropertyChange {
+
+                    /** PropertyChange path */
+                    path?: (string|null);
+
+                    /** PropertyChange beforeSensitivePaths */
+                    beforeSensitivePaths?: (string[]|null);
+
+                    /** PropertyChange before */
+                    before?: (google.protobuf.IValue|null);
+
+                    /** PropertyChange afterSensitivePaths */
+                    afterSensitivePaths?: (string[]|null);
+
+                    /** PropertyChange after */
+                    after?: (google.protobuf.IValue|null);
+                }
+
+                /** Represents a PropertyChange. */
+                class PropertyChange implements IPropertyChange {
+
+                    /**
+                     * Constructs a new PropertyChange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IPropertyChange);
+
+                    /** PropertyChange path. */
+                    public path: string;
+
+                    /** PropertyChange beforeSensitivePaths. */
+                    public beforeSensitivePaths: string[];
+
+                    /** PropertyChange before. */
+                    public before?: (google.protobuf.IValue|null);
+
+                    /** PropertyChange afterSensitivePaths. */
+                    public afterSensitivePaths: string[];
+
+                    /** PropertyChange after. */
+                    public after?: (google.protobuf.IValue|null);
+
+                    /**
+                     * Creates a new PropertyChange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyChange instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IPropertyChange): google.cloud.config.v1.PropertyChange;
+
+                    /**
+                     * Encodes the specified PropertyChange message. Does not implicitly {@link google.cloud.config.v1.PropertyChange.verify|verify} messages.
+                     * @param message PropertyChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IPropertyChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyChange message, length delimited. Does not implicitly {@link google.cloud.config.v1.PropertyChange.verify|verify} messages.
+                     * @param message PropertyChange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IPropertyChange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyChange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.PropertyChange;
+
+                    /**
+                     * Decodes a PropertyChange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyChange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.PropertyChange;
+
+                    /**
+                     * Verifies a PropertyChange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyChange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyChange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.PropertyChange;
+
+                    /**
+                     * Creates a plain object from a PropertyChange message. Also converts values to other types if specified.
+                     * @param message PropertyChange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.PropertyChange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyChange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PropertyChange
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceChangesRequest. */
+                interface IListResourceChangesRequest {
+
+                    /** ListResourceChangesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListResourceChangesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListResourceChangesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListResourceChangesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListResourceChangesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListResourceChangesRequest. */
+                class ListResourceChangesRequest implements IListResourceChangesRequest {
+
+                    /**
+                     * Constructs a new ListResourceChangesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListResourceChangesRequest);
+
+                    /** ListResourceChangesRequest parent. */
+                    public parent: string;
+
+                    /** ListResourceChangesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListResourceChangesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListResourceChangesRequest filter. */
+                    public filter: string;
+
+                    /** ListResourceChangesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListResourceChangesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceChangesRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListResourceChangesRequest): google.cloud.config.v1.ListResourceChangesRequest;
+
+                    /**
+                     * Encodes the specified ListResourceChangesRequest message. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesRequest.verify|verify} messages.
+                     * @param message ListResourceChangesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListResourceChangesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceChangesRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesRequest.verify|verify} messages.
+                     * @param message ListResourceChangesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListResourceChangesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceChangesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceChangesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListResourceChangesRequest;
+
+                    /**
+                     * Decodes a ListResourceChangesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceChangesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListResourceChangesRequest;
+
+                    /**
+                     * Verifies a ListResourceChangesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceChangesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceChangesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListResourceChangesRequest;
+
+                    /**
+                     * Creates a plain object from a ListResourceChangesRequest message. Also converts values to other types if specified.
+                     * @param message ListResourceChangesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListResourceChangesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceChangesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceChangesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceChangesResponse. */
+                interface IListResourceChangesResponse {
+
+                    /** ListResourceChangesResponse resourceChanges */
+                    resourceChanges?: (google.cloud.config.v1.IResourceChange[]|null);
+
+                    /** ListResourceChangesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListResourceChangesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListResourceChangesResponse. */
+                class ListResourceChangesResponse implements IListResourceChangesResponse {
+
+                    /**
+                     * Constructs a new ListResourceChangesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListResourceChangesResponse);
+
+                    /** ListResourceChangesResponse resourceChanges. */
+                    public resourceChanges: google.cloud.config.v1.IResourceChange[];
+
+                    /** ListResourceChangesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListResourceChangesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListResourceChangesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceChangesResponse instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListResourceChangesResponse): google.cloud.config.v1.ListResourceChangesResponse;
+
+                    /**
+                     * Encodes the specified ListResourceChangesResponse message. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesResponse.verify|verify} messages.
+                     * @param message ListResourceChangesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListResourceChangesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceChangesResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesResponse.verify|verify} messages.
+                     * @param message ListResourceChangesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListResourceChangesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceChangesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceChangesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListResourceChangesResponse;
+
+                    /**
+                     * Decodes a ListResourceChangesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceChangesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListResourceChangesResponse;
+
+                    /**
+                     * Verifies a ListResourceChangesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceChangesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceChangesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListResourceChangesResponse;
+
+                    /**
+                     * Creates a plain object from a ListResourceChangesResponse message. Also converts values to other types if specified.
+                     * @param message ListResourceChangesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListResourceChangesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceChangesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceChangesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetResourceChangeRequest. */
+                interface IGetResourceChangeRequest {
+
+                    /** GetResourceChangeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetResourceChangeRequest. */
+                class GetResourceChangeRequest implements IGetResourceChangeRequest {
+
+                    /**
+                     * Constructs a new GetResourceChangeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetResourceChangeRequest);
+
+                    /** GetResourceChangeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetResourceChangeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetResourceChangeRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetResourceChangeRequest): google.cloud.config.v1.GetResourceChangeRequest;
+
+                    /**
+                     * Encodes the specified GetResourceChangeRequest message. Does not implicitly {@link google.cloud.config.v1.GetResourceChangeRequest.verify|verify} messages.
+                     * @param message GetResourceChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetResourceChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetResourceChangeRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetResourceChangeRequest.verify|verify} messages.
+                     * @param message GetResourceChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetResourceChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetResourceChangeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetResourceChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetResourceChangeRequest;
+
+                    /**
+                     * Decodes a GetResourceChangeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetResourceChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetResourceChangeRequest;
+
+                    /**
+                     * Verifies a GetResourceChangeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetResourceChangeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetResourceChangeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetResourceChangeRequest;
+
+                    /**
+                     * Creates a plain object from a GetResourceChangeRequest message. Also converts values to other types if specified.
+                     * @param message GetResourceChangeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetResourceChangeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetResourceChangeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetResourceChangeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResourceDriftTerraformInfo. */
+                interface IResourceDriftTerraformInfo {
+
+                    /** ResourceDriftTerraformInfo address */
+                    address?: (string|null);
+
+                    /** ResourceDriftTerraformInfo type */
+                    type?: (string|null);
+
+                    /** ResourceDriftTerraformInfo resourceName */
+                    resourceName?: (string|null);
+
+                    /** ResourceDriftTerraformInfo provider */
+                    provider?: (string|null);
+                }
+
+                /** Represents a ResourceDriftTerraformInfo. */
+                class ResourceDriftTerraformInfo implements IResourceDriftTerraformInfo {
+
+                    /**
+                     * Constructs a new ResourceDriftTerraformInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IResourceDriftTerraformInfo);
+
+                    /** ResourceDriftTerraformInfo address. */
+                    public address: string;
+
+                    /** ResourceDriftTerraformInfo type. */
+                    public type: string;
+
+                    /** ResourceDriftTerraformInfo resourceName. */
+                    public resourceName: string;
+
+                    /** ResourceDriftTerraformInfo provider. */
+                    public provider: string;
+
+                    /**
+                     * Creates a new ResourceDriftTerraformInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceDriftTerraformInfo instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IResourceDriftTerraformInfo): google.cloud.config.v1.ResourceDriftTerraformInfo;
+
+                    /**
+                     * Encodes the specified ResourceDriftTerraformInfo message. Does not implicitly {@link google.cloud.config.v1.ResourceDriftTerraformInfo.verify|verify} messages.
+                     * @param message ResourceDriftTerraformInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IResourceDriftTerraformInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceDriftTerraformInfo message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceDriftTerraformInfo.verify|verify} messages.
+                     * @param message ResourceDriftTerraformInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IResourceDriftTerraformInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceDriftTerraformInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceDriftTerraformInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ResourceDriftTerraformInfo;
+
+                    /**
+                     * Decodes a ResourceDriftTerraformInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceDriftTerraformInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ResourceDriftTerraformInfo;
+
+                    /**
+                     * Verifies a ResourceDriftTerraformInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceDriftTerraformInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceDriftTerraformInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ResourceDriftTerraformInfo;
+
+                    /**
+                     * Creates a plain object from a ResourceDriftTerraformInfo message. Also converts values to other types if specified.
+                     * @param message ResourceDriftTerraformInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ResourceDriftTerraformInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceDriftTerraformInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceDriftTerraformInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResourceDrift. */
+                interface IResourceDrift {
+
+                    /** ResourceDrift name */
+                    name?: (string|null);
+
+                    /** ResourceDrift terraformInfo */
+                    terraformInfo?: (google.cloud.config.v1.IResourceDriftTerraformInfo|null);
+
+                    /** ResourceDrift propertyDrifts */
+                    propertyDrifts?: (google.cloud.config.v1.IPropertyDrift[]|null);
+                }
+
+                /** Represents a ResourceDrift. */
+                class ResourceDrift implements IResourceDrift {
+
+                    /**
+                     * Constructs a new ResourceDrift.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IResourceDrift);
+
+                    /** ResourceDrift name. */
+                    public name: string;
+
+                    /** ResourceDrift terraformInfo. */
+                    public terraformInfo?: (google.cloud.config.v1.IResourceDriftTerraformInfo|null);
+
+                    /** ResourceDrift propertyDrifts. */
+                    public propertyDrifts: google.cloud.config.v1.IPropertyDrift[];
+
+                    /**
+                     * Creates a new ResourceDrift instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceDrift instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IResourceDrift): google.cloud.config.v1.ResourceDrift;
+
+                    /**
+                     * Encodes the specified ResourceDrift message. Does not implicitly {@link google.cloud.config.v1.ResourceDrift.verify|verify} messages.
+                     * @param message ResourceDrift message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IResourceDrift, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceDrift message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceDrift.verify|verify} messages.
+                     * @param message ResourceDrift message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IResourceDrift, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceDrift message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceDrift
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ResourceDrift;
+
+                    /**
+                     * Decodes a ResourceDrift message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceDrift
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ResourceDrift;
+
+                    /**
+                     * Verifies a ResourceDrift message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceDrift message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceDrift
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ResourceDrift;
+
+                    /**
+                     * Creates a plain object from a ResourceDrift message. Also converts values to other types if specified.
+                     * @param message ResourceDrift
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ResourceDrift, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceDrift to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceDrift
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PropertyDrift. */
+                interface IPropertyDrift {
+
+                    /** PropertyDrift path */
+                    path?: (string|null);
+
+                    /** PropertyDrift beforeSensitivePaths */
+                    beforeSensitivePaths?: (string[]|null);
+
+                    /** PropertyDrift before */
+                    before?: (google.protobuf.IValue|null);
+
+                    /** PropertyDrift afterSensitivePaths */
+                    afterSensitivePaths?: (string[]|null);
+
+                    /** PropertyDrift after */
+                    after?: (google.protobuf.IValue|null);
+                }
+
+                /** Represents a PropertyDrift. */
+                class PropertyDrift implements IPropertyDrift {
+
+                    /**
+                     * Constructs a new PropertyDrift.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IPropertyDrift);
+
+                    /** PropertyDrift path. */
+                    public path: string;
+
+                    /** PropertyDrift beforeSensitivePaths. */
+                    public beforeSensitivePaths: string[];
+
+                    /** PropertyDrift before. */
+                    public before?: (google.protobuf.IValue|null);
+
+                    /** PropertyDrift afterSensitivePaths. */
+                    public afterSensitivePaths: string[];
+
+                    /** PropertyDrift after. */
+                    public after?: (google.protobuf.IValue|null);
+
+                    /**
+                     * Creates a new PropertyDrift instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyDrift instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IPropertyDrift): google.cloud.config.v1.PropertyDrift;
+
+                    /**
+                     * Encodes the specified PropertyDrift message. Does not implicitly {@link google.cloud.config.v1.PropertyDrift.verify|verify} messages.
+                     * @param message PropertyDrift message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IPropertyDrift, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyDrift message, length delimited. Does not implicitly {@link google.cloud.config.v1.PropertyDrift.verify|verify} messages.
+                     * @param message PropertyDrift message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IPropertyDrift, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyDrift message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyDrift
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.PropertyDrift;
+
+                    /**
+                     * Decodes a PropertyDrift message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyDrift
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.PropertyDrift;
+
+                    /**
+                     * Verifies a PropertyDrift message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyDrift message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyDrift
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.PropertyDrift;
+
+                    /**
+                     * Creates a plain object from a PropertyDrift message. Also converts values to other types if specified.
+                     * @param message PropertyDrift
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.PropertyDrift, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyDrift to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PropertyDrift
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceDriftsRequest. */
+                interface IListResourceDriftsRequest {
+
+                    /** ListResourceDriftsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListResourceDriftsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListResourceDriftsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListResourceDriftsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListResourceDriftsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListResourceDriftsRequest. */
+                class ListResourceDriftsRequest implements IListResourceDriftsRequest {
+
+                    /**
+                     * Constructs a new ListResourceDriftsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListResourceDriftsRequest);
+
+                    /** ListResourceDriftsRequest parent. */
+                    public parent: string;
+
+                    /** ListResourceDriftsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListResourceDriftsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListResourceDriftsRequest filter. */
+                    public filter: string;
+
+                    /** ListResourceDriftsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListResourceDriftsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceDriftsRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListResourceDriftsRequest): google.cloud.config.v1.ListResourceDriftsRequest;
+
+                    /**
+                     * Encodes the specified ListResourceDriftsRequest message. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsRequest.verify|verify} messages.
+                     * @param message ListResourceDriftsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListResourceDriftsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceDriftsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsRequest.verify|verify} messages.
+                     * @param message ListResourceDriftsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListResourceDriftsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceDriftsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceDriftsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListResourceDriftsRequest;
+
+                    /**
+                     * Decodes a ListResourceDriftsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceDriftsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListResourceDriftsRequest;
+
+                    /**
+                     * Verifies a ListResourceDriftsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceDriftsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceDriftsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListResourceDriftsRequest;
+
+                    /**
+                     * Creates a plain object from a ListResourceDriftsRequest message. Also converts values to other types if specified.
+                     * @param message ListResourceDriftsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListResourceDriftsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceDriftsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceDriftsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceDriftsResponse. */
+                interface IListResourceDriftsResponse {
+
+                    /** ListResourceDriftsResponse resourceDrifts */
+                    resourceDrifts?: (google.cloud.config.v1.IResourceDrift[]|null);
+
+                    /** ListResourceDriftsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListResourceDriftsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListResourceDriftsResponse. */
+                class ListResourceDriftsResponse implements IListResourceDriftsResponse {
+
+                    /**
+                     * Constructs a new ListResourceDriftsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IListResourceDriftsResponse);
+
+                    /** ListResourceDriftsResponse resourceDrifts. */
+                    public resourceDrifts: google.cloud.config.v1.IResourceDrift[];
+
+                    /** ListResourceDriftsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListResourceDriftsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListResourceDriftsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceDriftsResponse instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IListResourceDriftsResponse): google.cloud.config.v1.ListResourceDriftsResponse;
+
+                    /**
+                     * Encodes the specified ListResourceDriftsResponse message. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsResponse.verify|verify} messages.
+                     * @param message ListResourceDriftsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IListResourceDriftsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceDriftsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsResponse.verify|verify} messages.
+                     * @param message ListResourceDriftsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IListResourceDriftsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceDriftsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceDriftsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ListResourceDriftsResponse;
+
+                    /**
+                     * Decodes a ListResourceDriftsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceDriftsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ListResourceDriftsResponse;
+
+                    /**
+                     * Verifies a ListResourceDriftsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceDriftsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceDriftsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ListResourceDriftsResponse;
+
+                    /**
+                     * Creates a plain object from a ListResourceDriftsResponse message. Also converts values to other types if specified.
+                     * @param message ListResourceDriftsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ListResourceDriftsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceDriftsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceDriftsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetResourceDriftRequest. */
+                interface IGetResourceDriftRequest {
+
+                    /** GetResourceDriftRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetResourceDriftRequest. */
+                class GetResourceDriftRequest implements IGetResourceDriftRequest {
+
+                    /**
+                     * Constructs a new GetResourceDriftRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetResourceDriftRequest);
+
+                    /** GetResourceDriftRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetResourceDriftRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetResourceDriftRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetResourceDriftRequest): google.cloud.config.v1.GetResourceDriftRequest;
+
+                    /**
+                     * Encodes the specified GetResourceDriftRequest message. Does not implicitly {@link google.cloud.config.v1.GetResourceDriftRequest.verify|verify} messages.
+                     * @param message GetResourceDriftRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetResourceDriftRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetResourceDriftRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetResourceDriftRequest.verify|verify} messages.
+                     * @param message GetResourceDriftRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetResourceDriftRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetResourceDriftRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetResourceDriftRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetResourceDriftRequest;
+
+                    /**
+                     * Decodes a GetResourceDriftRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetResourceDriftRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetResourceDriftRequest;
+
+                    /**
+                     * Verifies a GetResourceDriftRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetResourceDriftRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetResourceDriftRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetResourceDriftRequest;
+
+                    /**
+                     * Creates a plain object from a GetResourceDriftRequest message. Also converts values to other types if specified.
+                     * @param message GetResourceDriftRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetResourceDriftRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetResourceDriftRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetResourceDriftRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProviderConfig. */
+                interface IProviderConfig {
+
+                    /** ProviderConfig sourceType */
+                    sourceType?: (google.cloud.config.v1.ProviderConfig.ProviderSource|keyof typeof google.cloud.config.v1.ProviderConfig.ProviderSource|null);
+                }
+
+                /** Represents a ProviderConfig. */
+                class ProviderConfig implements IProviderConfig {
+
+                    /**
+                     * Constructs a new ProviderConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IProviderConfig);
+
+                    /** ProviderConfig sourceType. */
+                    public sourceType?: (google.cloud.config.v1.ProviderConfig.ProviderSource|keyof typeof google.cloud.config.v1.ProviderConfig.ProviderSource|null);
+
+                    /**
+                     * Creates a new ProviderConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProviderConfig instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IProviderConfig): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Encodes the specified ProviderConfig message. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                     * @param message ProviderConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IProviderConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProviderConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                     * @param message ProviderConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IProviderConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProviderConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProviderConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Decodes a ProviderConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProviderConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Verifies a ProviderConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProviderConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProviderConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.ProviderConfig;
+
+                    /**
+                     * Creates a plain object from a ProviderConfig message. Also converts values to other types if specified.
+                     * @param message ProviderConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.ProviderConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProviderConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProviderConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProviderConfig {
+
+                    /** ProviderSource enum. */
+                    enum ProviderSource {
+                        PROVIDER_SOURCE_UNSPECIFIED = 0,
+                        SERVICE_MAINTAINED = 1
+                    }
+                }
+
+                /** Properties of a GetAutoMigrationConfigRequest. */
+                interface IGetAutoMigrationConfigRequest {
+
+                    /** GetAutoMigrationConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAutoMigrationConfigRequest. */
+                class GetAutoMigrationConfigRequest implements IGetAutoMigrationConfigRequest {
+
+                    /**
+                     * Constructs a new GetAutoMigrationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IGetAutoMigrationConfigRequest);
+
+                    /** GetAutoMigrationConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAutoMigrationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAutoMigrationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IGetAutoMigrationConfigRequest): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Encodes the specified GetAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message GetAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IGetAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message GetAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IGetAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Verifies a GetAutoMigrationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAutoMigrationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.GetAutoMigrationConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetAutoMigrationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.GetAutoMigrationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAutoMigrationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAutoMigrationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutoMigrationConfig. */
+                interface IAutoMigrationConfig {
+
+                    /** AutoMigrationConfig name */
+                    name?: (string|null);
+
+                    /** AutoMigrationConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoMigrationConfig autoMigrationEnabled */
+                    autoMigrationEnabled?: (boolean|null);
+                }
+
+                /** Represents an AutoMigrationConfig. */
+                class AutoMigrationConfig implements IAutoMigrationConfig {
+
+                    /**
+                     * Constructs a new AutoMigrationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IAutoMigrationConfig);
+
+                    /** AutoMigrationConfig name. */
+                    public name: string;
+
+                    /** AutoMigrationConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutoMigrationConfig autoMigrationEnabled. */
+                    public autoMigrationEnabled: boolean;
+
+                    /**
+                     * Creates a new AutoMigrationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutoMigrationConfig instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IAutoMigrationConfig): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Encodes the specified AutoMigrationConfig message. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                     * @param message AutoMigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IAutoMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutoMigrationConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                     * @param message AutoMigrationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IAutoMigrationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutoMigrationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutoMigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Decodes an AutoMigrationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutoMigrationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Verifies an AutoMigrationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutoMigrationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutoMigrationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.AutoMigrationConfig;
+
+                    /**
+                     * Creates a plain object from an AutoMigrationConfig message. Also converts values to other types if specified.
+                     * @param message AutoMigrationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.AutoMigrationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutoMigrationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutoMigrationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAutoMigrationConfigRequest. */
+                interface IUpdateAutoMigrationConfigRequest {
+
+                    /** UpdateAutoMigrationConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoMigrationConfigRequest autoMigrationConfig */
+                    autoMigrationConfig?: (google.cloud.config.v1.IAutoMigrationConfig|null);
+                }
+
+                /** Represents an UpdateAutoMigrationConfigRequest. */
+                class UpdateAutoMigrationConfigRequest implements IUpdateAutoMigrationConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateAutoMigrationConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest);
+
+                    /** UpdateAutoMigrationConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutoMigrationConfigRequest autoMigrationConfig. */
+                    public autoMigrationConfig?: (google.cloud.config.v1.IAutoMigrationConfig|null);
+
+                    /**
+                     * Creates a new UpdateAutoMigrationConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAutoMigrationConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                     * @param message UpdateAutoMigrationConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.config.v1.IUpdateAutoMigrationConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAutoMigrationConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Verifies an UpdateAutoMigrationConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAutoMigrationConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.config.v1.UpdateAutoMigrationConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAutoMigrationConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.config.v1.UpdateAutoMigrationConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAutoMigrationConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAutoMigrationConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

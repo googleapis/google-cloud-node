@@ -357,6 +357,54 @@
                         }
                       }
                     },
+                    "TransferMetadataOptions": {
+                      "fields": {
+                        "uid": {
+                          "type": "Uid",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gid": {
+                          "type": "Gid",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mode": {
+                          "type": "Mode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Uid": {
+                          "values": {
+                            "UID_UNSPECIFIED": 0,
+                            "UID_SKIP": 1,
+                            "UID_NUMBER_PRESERVE": 2
+                          }
+                        },
+                        "Gid": {
+                          "values": {
+                            "GID_UNSPECIFIED": 0,
+                            "GID_SKIP": 1,
+                            "GID_NUMBER_PRESERVE": 2
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_SKIP": 1,
+                            "MODE_PRESERVE": 2
+                          }
+                        }
+                      }
+                    },
                     "ListInstancesRequest": {
                       "fields": {
                         "parent": {
@@ -646,6 +694,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
+                        },
+                        "metadataOptions": {
+                          "type": "TransferMetadataOptions",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -693,6 +748,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
+                        },
+                        "metadataOptions": {
+                          "type": "TransferMetadataOptions",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

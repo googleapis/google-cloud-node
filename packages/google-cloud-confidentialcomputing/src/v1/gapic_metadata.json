@@ -19,6 +19,16 @@
               "methods": [
                 "verifyAttestation"
               ]
+            },
+            "VerifyConfidentialSpace": {
+              "methods": [
+                "verifyConfidentialSpace"
+              ]
+            },
+            "VerifyConfidentialGke": {
+              "methods": [
+                "verifyConfidentialGke"
+              ]
             }
           }
         },
@@ -33,6 +43,16 @@
             "VerifyAttestation": {
               "methods": [
                 "verifyAttestation"
+              ]
+            },
+            "VerifyConfidentialSpace": {
+              "methods": [
+                "verifyConfidentialSpace"
+              ]
+            },
+            "VerifyConfidentialGke": {
+              "methods": [
+                "verifyConfidentialGke"
               ]
             }
           }

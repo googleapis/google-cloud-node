@@ -24,6 +24,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "AddNetworkInterface": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "AddResourcePolicies": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -45,6 +49,10 @@
           "retry_params_name": "default"
         },
         "DeleteAccessConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteNetworkInterface": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

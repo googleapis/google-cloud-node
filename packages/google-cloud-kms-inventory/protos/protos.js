@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3058,6 +3058,7 @@
                                 case 6:
                                 case 7:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -3159,6 +3160,10 @@
                             case "MAC":
                             case 9:
                                 message.purpose = 9;
+                                break;
+                            case "KEY_ENCAPSULATION":
+                            case 10:
+                                message.purpose = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3302,6 +3307,7 @@
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
                          * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
+                         * @property {number} KEY_ENCAPSULATION=10 KEY_ENCAPSULATION value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3311,6 +3317,7 @@
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
                             values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
+                            values[valuesById[10] = "KEY_ENCAPSULATION"] = 10;
                             return values;
                         })();
     
@@ -3474,6 +3481,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -3516,6 +3524,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -3561,6 +3572,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -3713,6 +3728,18 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
                                 break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
@@ -4772,6 +4799,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -4814,6 +4842,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -4963,6 +4994,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -5115,6 +5150,18 @@
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
+                                break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
                                 break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
@@ -5305,6 +5352,9 @@
                          * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
                          * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
+                         * @property {number} ML_KEM_768=47 ML_KEM_768 value
+                         * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
+                         * @property {number} KEM_XWING=63 KEM_XWING value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
                          */
@@ -5346,6 +5396,9 @@
                             values[valuesById[35] = "HMAC_SHA512"] = 35;
                             values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
+                            values[valuesById[47] = "ML_KEM_768"] = 47;
+                            values[valuesById[48] = "ML_KEM_1024"] = 48;
+                            values[valuesById[63] = "KEM_XWING"] = 63;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
                             return values;
@@ -5909,6 +5962,9 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
                                 case 56:
                                 case 57:
                                     break;
@@ -5930,6 +5986,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
@@ -5938,7 +5995,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
@@ -6114,6 +6173,18 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
@@ -6157,6 +6228,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             switch (object.publicKeyFormat) {
                             default:
@@ -6173,9 +6248,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             if (object.publicKey != null) {
@@ -6257,13 +6340,17 @@
                          * @enum {number}
                          * @property {number} PUBLIC_KEY_FORMAT_UNSPECIFIED=0 PUBLIC_KEY_FORMAT_UNSPECIFIED value
                          * @property {number} PEM=1 PEM value
+                         * @property {number} DER=2 DER value
                          * @property {number} NIST_PQC=3 NIST_PQC value
+                         * @property {number} XWING_RAW_BYTES=4 XWING_RAW_BYTES value
                          */
                         PublicKey.PublicKeyFormat = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PUBLIC_KEY_FORMAT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PEM"] = 1;
+                            values[valuesById[2] = "DER"] = 2;
                             values[valuesById[3] = "NIST_PQC"] = 3;
+                            values[valuesById[4] = "XWING_RAW_BYTES"] = 4;
                             return values;
                         })();
     
@@ -6286,6 +6373,7 @@
                          * @property {google.cloud.kms.v1.ImportJob.ImportJobState|null} [state] ImportJob state
                          * @property {google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null} [publicKey] ImportJob publicKey
                          * @property {google.cloud.kms.v1.IKeyOperationAttestation|null} [attestation] ImportJob attestation
+                         * @property {string|null} [cryptoKeyBackend] ImportJob cryptoKeyBackend
                          */
     
                         /**
@@ -6384,6 +6472,14 @@
                         ImportJob.prototype.attestation = null;
     
                         /**
+                         * ImportJob cryptoKeyBackend.
+                         * @member {string} cryptoKeyBackend
+                         * @memberof google.cloud.kms.v1.ImportJob
+                         * @instance
+                         */
+                        ImportJob.prototype.cryptoKeyBackend = "";
+    
+                        /**
                          * Creates a new ImportJob instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.ImportJob
@@ -6427,6 +6523,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.protectionLevel);
                             if (message.expireEventTime != null && Object.hasOwnProperty.call(message, "expireEventTime"))
                                 $root.google.protobuf.Timestamp.encode(message.expireEventTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyBackend);
                             return writer;
                         };
     
@@ -6503,6 +6601,10 @@
                                         message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        message.cryptoKeyBackend = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6563,6 +6665,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -6605,6 +6708,9 @@
                                 if (error)
                                     return "attestation." + error;
                             }
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                if (!$util.isString(message.cryptoKeyBackend))
+                                    return "cryptoKeyBackend: string expected";
                             return null;
                         };
     
@@ -6685,6 +6791,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -6740,6 +6850,8 @@
                                     throw TypeError(".google.cloud.kms.v1.ImportJob.attestation: object expected");
                                 message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.fromObject(object.attestation);
                             }
+                            if (object.cryptoKeyBackend != null)
+                                message.cryptoKeyBackend = String(object.cryptoKeyBackend);
                             return message;
                         };
     
@@ -6767,6 +6879,7 @@
                                 object.attestation = null;
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                                 object.expireEventTime = null;
+                                object.cryptoKeyBackend = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6788,6 +6901,8 @@
                                 object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             if (message.expireEventTime != null && message.hasOwnProperty("expireEventTime"))
                                 object.expireEventTime = $root.google.protobuf.Timestamp.toObject(message.expireEventTime, options);
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                object.cryptoKeyBackend = message.cryptoKeyBackend;
                             return object;
                         };
     
@@ -7603,6 +7718,7 @@
                      * @property {number} HSM=2 HSM value
                      * @property {number} EXTERNAL=3 EXTERNAL value
                      * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
+                     * @property {number} HSM_SINGLE_TENANT=5 HSM_SINGLE_TENANT value
                      */
                     v1.ProtectionLevel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -7611,6 +7727,7 @@
                         values[valuesById[2] = "HSM"] = 2;
                         values[valuesById[3] = "EXTERNAL"] = 3;
                         values[valuesById[4] = "EXTERNAL_VPC"] = 4;
+                        values[valuesById[5] = "HSM_SINGLE_TENANT"] = 5;
                         return values;
                     })();
     

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -470,6 +470,47 @@ describe('v1.SqlFlagsServiceClient', () => {
                         expectedHeaderRequestParams
                     )
             );
+        });
+    });
+
+    describe('Path templates', () => {
+
+        describe('backup', async () => {
+            const fakePath = "/rendered/path/backup";
+            const expectedParameters = {
+                project: "projectValue",
+                backup: "backupValue",
+            };
+            const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.backupPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.backupPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('backupPath', () => {
+                const result = client.backupPath("projectValue", "backupValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.backupPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromBackupName', () => {
+                const result = client.matchProjectFromBackupName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBackupFromBackupName', () => {
+                const result = client.matchBackupFromBackupName(fakePath);
+                assert.strictEqual(result, "backupValue");
+                assert((client.pathTemplates.backupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
         });
     });
 });

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -124,6 +124,9 @@ export namespace google {
 
                     /** FindClosestBuildingInsightsRequest exactQualityRequired */
                     exactQualityRequired?: (boolean|null);
+
+                    /** FindClosestBuildingInsightsRequest experiments */
+                    experiments?: (google.maps.solar.v1.Experiment[]|null);
                 }
 
                 /** Represents a FindClosestBuildingInsightsRequest. */
@@ -143,6 +146,9 @@ export namespace google {
 
                     /** FindClosestBuildingInsightsRequest exactQualityRequired. */
                     public exactQualityRequired: boolean;
+
+                    /** FindClosestBuildingInsightsRequest experiments. */
+                    public experiments: google.maps.solar.v1.Experiment[];
 
                     /**
                      * Creates a new FindClosestBuildingInsightsRequest instance using the specified properties.
@@ -2026,6 +2032,9 @@ export namespace google {
 
                     /** GetDataLayersRequest exactQualityRequired */
                     exactQualityRequired?: (boolean|null);
+
+                    /** GetDataLayersRequest experiments */
+                    experiments?: (google.maps.solar.v1.Experiment[]|null);
                 }
 
                 /** Represents a GetDataLayersRequest. */
@@ -2054,6 +2063,9 @@ export namespace google {
 
                     /** GetDataLayersRequest exactQualityRequired. */
                     public exactQualityRequired: boolean;
+
+                    /** GetDataLayersRequest experiments. */
+                    public experiments: google.maps.solar.v1.Experiment[];
 
                     /**
                      * Creates a new GetDataLayersRequest instance using the specified properties.
@@ -2390,7 +2402,8 @@ export namespace google {
                     IMAGERY_QUALITY_UNSPECIFIED = 0,
                     HIGH = 1,
                     MEDIUM = 2,
-                    LOW = 3
+                    LOW = 3,
+                    BASE = 4
                 }
 
                 /** SolarPanelOrientation enum. */
@@ -2398,6 +2411,12 @@ export namespace google {
                     SOLAR_PANEL_ORIENTATION_UNSPECIFIED = 0,
                     LANDSCAPE = 1,
                     PORTRAIT = 2
+                }
+
+                /** Experiment enum. */
+                enum Experiment {
+                    EXPERIMENT_UNSPECIFIED = 0,
+                    EXPANDED_COVERAGE = 1
                 }
             }
         }

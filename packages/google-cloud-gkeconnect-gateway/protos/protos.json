@@ -107,7 +107,7 @@
                         "csharp_namespace": "Google.Cloud.GkeConnect.Gateway.V1Beta1",
                         "go_package": "cloud.google.com/go/gkeconnect/gateway/apiv1beta1/gatewaypb;gatewaypb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "GatewayProto",
+                        "java_outer_classname": "ControlProto",
                         "java_package": "com.google.cloud.gkeconnect.gateway.v1beta1",
                         "php_namespace": "Google\\Cloud\\GkeConnect\\Gateway\\V1beta1",
                         "ruby_package": "Google::Cloud::GkeConnect::Gateway::V1beta1"
@@ -193,84 +193,6 @@
                               "id": 2
                             }
                           }
-                        },
-                        "GatewayService": {
-                          "options": {
-                            "(google.api.default_host)": "connectgateway.googleapis.com",
-                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                          },
-                          "methods": {
-                            "GetResource": {
-                              "requestType": "google.api.HttpBody",
-                              "responseType": "google.api.HttpBody",
-                              "options": {
-                                "(google.api.http).get": "/v1beta1/**"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "get": "/v1beta1/**"
-                                  }
-                                }
-                              ]
-                            },
-                            "PostResource": {
-                              "requestType": "google.api.HttpBody",
-                              "responseType": "google.api.HttpBody",
-                              "options": {
-                                "(google.api.http).post": "/v1beta1/**"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "post": "/v1beta1/**"
-                                  }
-                                }
-                              ]
-                            },
-                            "DeleteResource": {
-                              "requestType": "google.api.HttpBody",
-                              "responseType": "google.api.HttpBody",
-                              "options": {
-                                "(google.api.http).delete": "/v1beta1/**"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "delete": "/v1beta1/**"
-                                  }
-                                }
-                              ]
-                            },
-                            "PutResource": {
-                              "requestType": "google.api.HttpBody",
-                              "responseType": "google.api.HttpBody",
-                              "options": {
-                                "(google.api.http).put": "/v1beta1/**"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "put": "/v1beta1/**"
-                                  }
-                                }
-                              ]
-                            },
-                            "PatchResource": {
-                              "requestType": "google.api.HttpBody",
-                              "responseType": "google.api.HttpBody",
-                              "options": {
-                                "(google.api.http).patch": "/v1beta1/**"
-                              },
-                              "parsedOptions": [
-                                {
-                                  "(google.api.http)": {
-                                    "patch": "/v1beta1/**"
-                                  }
-                                }
-                              ]
-                            }
-                          }
                         }
                       }
                     }
@@ -282,9 +204,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/httpbody;httpbody",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpBodyProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -701,23 +623,6 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
-              }
-            },
-            "HttpBody": {
-              "fields": {
-                "contentType": {
-                  "type": "string",
-                  "id": 1
-                },
-                "data": {
-                  "type": "bytes",
-                  "id": 2
-                },
-                "extensions": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
-                }
               }
             }
           }
@@ -2041,18 +1946,6 @@
                 },
                 "nanos": {
                   "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
                   "id": 2
                 }
               }

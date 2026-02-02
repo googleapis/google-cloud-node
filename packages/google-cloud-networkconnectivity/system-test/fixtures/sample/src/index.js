@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ const networkconnectivity = require('@google-cloud/network-connectivity');
 
 function main() {
   const crossNetworkAutomationServiceClient = new networkconnectivity.CrossNetworkAutomationServiceClient();
+  const dataTransferServiceClient = new networkconnectivity.DataTransferServiceClient();
   const hubServiceClient = new networkconnectivity.HubServiceClient();
+  const internalRangeServiceClient = new networkconnectivity.InternalRangeServiceClient();
   const policyBasedRoutingServiceClient = new networkconnectivity.PolicyBasedRoutingServiceClient();
 }
 

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.gkeconnect.gateway.v1",
-  "libraryPackage": "@google-cloud/gateway",
+  "libraryPackage": "@google-cloud/gke-connect-gateway",
   "services": {
     "GatewayControl": {
       "clients": {

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -399,6 +399,138 @@ describe('v1beta.RegionInstanceGroupManagersClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.abandonInstances(request), expectedError);
+        });
+    });
+
+    describe('adoptInstances', () => {
+        it('invokes adoptInstances without error', async () => {
+            const client = new regioninstancegroupmanagersModule.v1beta.RegionInstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.adoptInstances = stubSimpleCall(expectedResponse);
+            const [response] = await client.adoptInstances(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes adoptInstances without error using callback', async () => {
+            const client = new regioninstancegroupmanagersModule.v1beta.RegionInstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.adoptInstances = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.adoptInstances(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes adoptInstances with error', async () => {
+            const client = new regioninstancegroupmanagersModule.v1beta.RegionInstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&region=${defaultValue2 ?? '' }&instance_group_manager=${defaultValue3 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.adoptInstances = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.adoptInstances(request), expectedError);
+            const actualRequest = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.adoptInstances as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes adoptInstances with closed client', async () => {
+            const client = new regioninstancegroupmanagersModule.v1beta.RegionInstanceGroupManagersClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['region']);
+            request.region = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.AdoptInstancesRegionInstanceGroupManagerRequest', ['instanceGroupManager']);
+            request.instanceGroupManager = defaultValue3;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.adoptInstances(request), expectedError);
         });
     });
 

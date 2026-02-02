@@ -35,9 +35,19 @@
                 "getBackupPlan"
               ]
             },
+            "GetBackupPlanRevision": {
+              "methods": [
+                "getBackupPlanRevision"
+              ]
+            },
             "GetBackupPlanAssociation": {
               "methods": [
                 "getBackupPlanAssociation"
+              ]
+            },
+            "GetDataSourceReference": {
+              "methods": [
+                "getDataSourceReference"
               ]
             },
             "CreateManagementServer": {
@@ -90,6 +100,11 @@
                 "createBackupPlan"
               ]
             },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
             "DeleteBackupPlan": {
               "methods": [
                 "deleteBackupPlan"
@@ -98,6 +113,11 @@
             "CreateBackupPlanAssociation": {
               "methods": [
                 "createBackupPlanAssociation"
+              ]
+            },
+            "UpdateBackupPlanAssociation": {
+              "methods": [
+                "updateBackupPlanAssociation"
               ]
             },
             "DeleteBackupPlanAssociation": {
@@ -150,6 +170,13 @@
                 "listBackupsAsync"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
             "ListBackupPlans": {
               "methods": [
                 "listBackupPlans",
@@ -157,11 +184,39 @@
                 "listBackupPlansAsync"
               ]
             },
+            "ListBackupPlanRevisions": {
+              "methods": [
+                "listBackupPlanRevisions",
+                "listBackupPlanRevisionsStream",
+                "listBackupPlanRevisionsAsync"
+              ]
+            },
             "ListBackupPlanAssociations": {
               "methods": [
                 "listBackupPlanAssociations",
                 "listBackupPlanAssociationsStream",
                 "listBackupPlanAssociationsAsync"
+              ]
+            },
+            "FetchBackupPlanAssociationsForResourceType": {
+              "methods": [
+                "fetchBackupPlanAssociationsForResourceType",
+                "fetchBackupPlanAssociationsForResourceTypeStream",
+                "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
+              ]
+            },
+            "FetchDataSourceReferencesForResourceType": {
+              "methods": [
+                "fetchDataSourceReferencesForResourceType",
+                "fetchDataSourceReferencesForResourceTypeStream",
+                "fetchDataSourceReferencesForResourceTypeAsync"
               ]
             }
           }
@@ -194,9 +249,19 @@
                 "getBackupPlan"
               ]
             },
+            "GetBackupPlanRevision": {
+              "methods": [
+                "getBackupPlanRevision"
+              ]
+            },
             "GetBackupPlanAssociation": {
               "methods": [
                 "getBackupPlanAssociation"
+              ]
+            },
+            "GetDataSourceReference": {
+              "methods": [
+                "getDataSourceReference"
               ]
             },
             "CreateManagementServer": {
@@ -249,6 +314,11 @@
                 "createBackupPlan"
               ]
             },
+            "UpdateBackupPlan": {
+              "methods": [
+                "updateBackupPlan"
+              ]
+            },
             "DeleteBackupPlan": {
               "methods": [
                 "deleteBackupPlan"
@@ -257,6 +327,11 @@
             "CreateBackupPlanAssociation": {
               "methods": [
                 "createBackupPlanAssociation"
+              ]
+            },
+            "UpdateBackupPlanAssociation": {
+              "methods": [
+                "updateBackupPlanAssociation"
               ]
             },
             "DeleteBackupPlanAssociation": {
@@ -309,6 +384,13 @@
                 "listBackupsAsync"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
             "ListBackupPlans": {
               "methods": [
                 "listBackupPlans",
@@ -316,11 +398,67 @@
                 "listBackupPlansAsync"
               ]
             },
+            "ListBackupPlanRevisions": {
+              "methods": [
+                "listBackupPlanRevisions",
+                "listBackupPlanRevisionsStream",
+                "listBackupPlanRevisionsAsync"
+              ]
+            },
             "ListBackupPlanAssociations": {
               "methods": [
                 "listBackupPlanAssociations",
                 "listBackupPlanAssociationsStream",
                 "listBackupPlanAssociationsAsync"
+              ]
+            },
+            "FetchBackupPlanAssociationsForResourceType": {
+              "methods": [
+                "fetchBackupPlanAssociationsForResourceType",
+                "fetchBackupPlanAssociationsForResourceTypeStream",
+                "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
+              ]
+            },
+            "FetchDataSourceReferencesForResourceType": {
+              "methods": [
+                "fetchDataSourceReferencesForResourceType",
+                "fetchDataSourceReferencesForResourceTypeStream",
+                "fetchDataSourceReferencesForResourceTypeAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackupDrProtectionSummary": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackupDrProtectionSummaryClient",
+          "rpcs": {
+            "ListResourceBackupConfigs": {
+              "methods": [
+                "listResourceBackupConfigs",
+                "listResourceBackupConfigsStream",
+                "listResourceBackupConfigsAsync"
               ]
             }
           }

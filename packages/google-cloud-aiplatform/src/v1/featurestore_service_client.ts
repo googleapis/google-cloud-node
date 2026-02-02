@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3696,7 +3696,6 @@ export class FeaturestoreServiceClient {
  *   containing the substring `foo` and description containing the substring
  *   `bar`.
  *
- *
  *   Besides field queries, the following exact-match filters are
  *   supported. The exact-match filters do not support wildcards. Unlike
  *   field-restricted queries, exact-match filters are case-sensitive.
@@ -3866,7 +3865,6 @@ export class FeaturestoreServiceClient {
  *   containing the substring `foo` and description containing the substring
  *   `bar`.
  *
- *
  *   Besides field queries, the following exact-match filters are
  *   supported. The exact-match filters do not support wildcards. Unlike
  *   field-restricted queries, exact-match filters are case-sensitive.
@@ -3984,7 +3982,6 @@ export class FeaturestoreServiceClient {
  *   * `feature_id: foo AND description: bar` --> Matches a Feature with ID
  *   containing the substring `foo` and description containing the substring
  *   `bar`.
- *
  *
  *   Besides field queries, the following exact-match filters are
  *   supported. The exact-match filters do not support wildcards. Unlike

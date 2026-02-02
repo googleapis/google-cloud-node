@@ -415,7 +415,8 @@
                             "ASYMMETRIC_SIGN": 5,
                             "ASYMMETRIC_DECRYPT": 6,
                             "RAW_ENCRYPT_DECRYPT": 7,
-                            "MAC": 9
+                            "MAC": 9,
+                            "KEY_ENCAPSULATION": 10
                           }
                         }
                       }
@@ -640,6 +641,9 @@
                             "HMAC_SHA512": 35,
                             "HMAC_SHA224": 36,
                             "EXTERNAL_SYMMETRIC_ENCRYPTION": 18,
+                            "ML_KEM_768": 47,
+                            "ML_KEM_1024": 48,
+                            "KEM_XWING": 63,
                             "PQ_SIGN_ML_DSA_65": 56,
                             "PQ_SIGN_SLH_DSA_SHA2_128S": 57
                           }
@@ -719,7 +723,9 @@
                           "values": {
                             "PUBLIC_KEY_FORMAT_UNSPECIFIED": 0,
                             "PEM": 1,
-                            "NIST_PQC": 3
+                            "DER": 2,
+                            "NIST_PQC": 3,
+                            "XWING_RAW_BYTES": 4
                           }
                         }
                       }
@@ -799,6 +805,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cryptoKeyBackend": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "*"
+                          }
                         }
                       },
                       "nested": {
@@ -858,10 +872,19 @@
                         "SOFTWARE": 1,
                         "HSM": 2,
                         "EXTERNAL": 3,
-                        "EXTERNAL_VPC": 4
+                        "EXTERNAL_VPC": 4,
+                        "HSM_SINGLE_TENANT": 5
                       }
                     },
                     "AccessReason": {
+                      "valuesOptions": {
+                        "MODIFIED_CUSTOMER_INITIATED_ACCESS": {
+                          "deprecated": true
+                        },
+                        "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "REASON_UNSPECIFIED": 0,
                         "CUSTOMER_INITIATED_SUPPORT": 1,

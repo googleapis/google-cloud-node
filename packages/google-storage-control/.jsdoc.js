@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,10 +37,14 @@ module.exports = {
       'build/src',
       'protos'
     ],
+    exclude: [
+      'build/src/v2/storage_client.js',
+      'build/src/v2/storage_control_client.js'
+    ],
     includePattern: '\\.js$'
   },
   templates: {
-    copyright: 'Copyright 2025 Google LLC',
+    copyright: 'Copyright 2026 Google LLC',
     includeDate: false,
     sourceFiles: false,
     systemName: '@google-cloud/storage-control',

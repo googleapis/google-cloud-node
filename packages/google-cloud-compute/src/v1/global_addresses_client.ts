@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -223,7 +223,7 @@ export class GlobalAddressesClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const globalAddressesStubMethods =
-        ['delete', 'get', 'insert', 'list', 'move', 'setLabels'];
+        ['delete', 'get', 'insert', 'list', 'move', 'setLabels', 'testIamPermissions'];
     for (const methodName of globalAddressesStubMethods) {
       const callPromise = this.globalAddressesStub.then(
         stub => (...args: Array<{}>) => {
@@ -337,7 +337,19 @@ export class GlobalAddressesClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -528,7 +540,8 @@ export class GlobalAddressesClient {
       });
   }
 /**
- * Creates an address resource in the specified project by using the data included in the request.
+ * Creates an address resource in the specified project by using the data
+ * included in the request.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -537,7 +550,19 @@ export class GlobalAddressesClient {
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -641,7 +666,19 @@ export class GlobalAddressesClient {
  * @param {string} request.project
  *   Source project ID which the Address is moved from.
  * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ *   An optional request ID to identify requests. Specify a unique request ID so
+ *   that if you must retry your request, the server will know to ignore the
+ *   request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and
+ *   the request times out. If you make the request again with the same
+ *   request ID, the server can check if original operation with the same
+ *   request ID was received, and if so, will ignore the second request. This
+ *   prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be
+ *   a valid UUID with the exception that zero UUID is not supported
+ *   (00000000-0000-0000-0000-000000000000).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -735,7 +772,8 @@ export class GlobalAddressesClient {
       });
   }
 /**
- * Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.
+ * Sets the labels on a GlobalAddress. To learn more about labels, read theLabeling
+ * Resources documentation.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -837,6 +875,105 @@ export class GlobalAddressesClient {
         throw error;
       });
   }
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/global_addresses.test_iam_permissions.js</caption>
+ * region_tag:compute_v1_generated_GlobalAddresses_TestIamPermissions_async
+ */
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|undefined, {}|undefined
+      ]>;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsGlobalAddressRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
  /**
  * Retrieves a list of global addresses.
@@ -844,17 +981,95 @@ export class GlobalAddressesClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -948,17 +1163,95 @@ export class GlobalAddressesClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1001,17 +1294,95 @@ export class GlobalAddressesClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
  * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
  * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
  * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

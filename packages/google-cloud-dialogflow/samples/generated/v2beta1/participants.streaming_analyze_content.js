@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -72,13 +72,14 @@ function main(participant) {
   /**
    *  The intent to be triggered on V3 agent.
    *  Format: `projects/<Project ID>/locations/<Location ID>/locations/
-   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`.
+   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`. This can only be
+   *  used to trigger the Welcome intent id if you are using text_config.
    */
   // const inputIntent = 'abc123'
   /**
    *  The input event name.
    *  This can only be sent once and would cancel the ongoing speech
-   *  recognition if any.
+   *  recognition if any. To trigger the Welcome intent use the event "WELCOME"
    */
   // const inputEvent = 'abc123'
   /**
@@ -137,6 +138,12 @@ function main(participant) {
    *  return partial responses.
    */
   // const enablePartialAutomatedAgentReply = true
+  /**
+   *  Optional. If multiple utterances are detected in the audio stream, process
+   *  them individually instead of stitching them together to form a single
+   *  utterance.
+   */
+  // const outputMultipleUtterances = true
   /**
    *  if true, `StreamingAnalyzeContentResponse.debugging_info` will get
    *  populated.

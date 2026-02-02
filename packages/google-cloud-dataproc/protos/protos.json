@@ -1529,6 +1529,7 @@
                         "HUDI": 18,
                         "ICEBERG": 19,
                         "JUPYTER": 1,
+                        "JUPYTER_KERNEL_GATEWAY": 22,
                         "PIG": 21,
                         "PRESTO": 6,
                         "TRINO": 17,

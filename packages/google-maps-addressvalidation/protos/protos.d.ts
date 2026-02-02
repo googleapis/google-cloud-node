@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1409,6 +1409,9 @@ export namespace google {
 
                     /** Verdict hasReplacedComponents */
                     hasReplacedComponents?: (boolean|null);
+
+                    /** Verdict hasSpellCorrectedComponents */
+                    hasSpellCorrectedComponents?: (boolean|null);
                 }
 
                 /** Represents a Verdict. */
@@ -1440,6 +1443,9 @@ export namespace google {
 
                     /** Verdict hasReplacedComponents. */
                     public hasReplacedComponents: boolean;
+
+                    /** Verdict hasSpellCorrectedComponents. */
+                    public hasSpellCorrectedComponents: boolean;
 
                     /**
                      * Creates a new Verdict instance using the specified properties.

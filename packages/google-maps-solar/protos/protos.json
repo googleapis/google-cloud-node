@@ -90,6 +90,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "experiments": {
+                          "rule": "repeated",
+                          "type": "Experiment",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -638,6 +646,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "experiments": {
+                          "rule": "repeated",
+                          "type": "Experiment",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -708,7 +724,8 @@
                         "IMAGERY_QUALITY_UNSPECIFIED": 0,
                         "HIGH": 1,
                         "MEDIUM": 2,
-                        "LOW": 3
+                        "LOW": 3,
+                        "BASE": 4
                       }
                     },
                     "SolarPanelOrientation": {
@@ -716,6 +733,12 @@
                         "SOLAR_PANEL_ORIENTATION_UNSPECIFIED": 0,
                         "LANDSCAPE": 1,
                         "PORTRAIT": 2
+                      }
+                    },
+                    "Experiment": {
+                      "values": {
+                        "EXPERIMENT_UNSPECIFIED": 0,
+                        "EXPANDED_COVERAGE": 1
                       }
                     }
                   }

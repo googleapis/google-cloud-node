@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Assistant_service.stream_assist](#assistant_service.stream_assist)
   * [Cmek_config_service.delete_cmek_config](#cmek_config_service.delete_cmek_config)
   * [Cmek_config_service.get_cmek_config](#cmek_config_service.get_cmek_config)
   * [Cmek_config_service.list_cmek_configs](#cmek_config_service.list_cmek_configs)
@@ -81,6 +82,11 @@
   * [Search_tuning_service.list_custom_models](#search_tuning_service.list_custom_models)
   * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
+  * [Session_service.create_session](#session_service.create_session)
+  * [Session_service.delete_session](#session_service.delete_session)
+  * [Session_service.get_session](#session_service.get_session)
+  * [Session_service.list_sessions](#session_service.list_sessions)
+  * [Session_service.update_session](#session_service.update_session)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
   * [Site_search_engine_service.create_sitemap](#site_search_engine_service.create_sitemap)
@@ -186,6 +192,12 @@
   * [Serving_config_service.get_serving_config](#serving_config_service.get_serving_config)
   * [Serving_config_service.list_serving_configs](#serving_config_service.list_serving_configs)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
+  * [Session_service.create_session](#session_service.create_session)
+  * [Session_service.delete_session](#session_service.delete_session)
+  * [Session_service.get_session](#session_service.get_session)
+  * [Session_service.list_files](#session_service.list_files)
+  * [Session_service.list_sessions](#session_service.list_sessions)
+  * [Session_service.update_session](#session_service.update_session)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
   * [Site_search_engine_service.create_target_site](#site_search_engine_service.create_target_site)
@@ -282,6 +294,11 @@
   * [Serving_config_service.get_serving_config](#serving_config_service.get_serving_config)
   * [Serving_config_service.list_serving_configs](#serving_config_service.list_serving_configs)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
+  * [Session_service.create_session](#session_service.create_session)
+  * [Session_service.delete_session](#session_service.delete_session)
+  * [Session_service.get_session](#session_service.get_session)
+  * [Session_service.list_sessions](#session_service.list_sessions)
+  * [Session_service.update_session](#session_service.update_session)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
   * [Site_search_engine_service.create_sitemap](#site_search_engine_service.create_sitemap)
@@ -315,6 +332,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Assistant_service.stream_assist
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/assistant_service.stream_assist.js`
+
+
+-----
+
 
 
 
@@ -1484,6 +1518,91 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/serving_config_service.update_serving_config.js`
+
+
+-----
+
+
+
+
+### Session_service.create_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/session_service.create_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/session_service.create_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/session_service.create_session.js`
+
+
+-----
+
+
+
+
+### Session_service.delete_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/session_service.delete_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/session_service.delete_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/session_service.delete_session.js`
+
+
+-----
+
+
+
+
+### Session_service.get_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/session_service.get_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/session_service.get_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/session_service.get_session.js`
+
+
+-----
+
+
+
+
+### Session_service.list_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/session_service.list_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/session_service.list_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/session_service.list_sessions.js`
+
+
+-----
+
+
+
+
+### Session_service.update_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/session_service.update_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/session_service.update_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/session_service.update_session.js`
 
 
 -----
@@ -3276,6 +3395,108 @@ __Usage:__
 
 
 
+### Session_service.create_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.create_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.create_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.create_session.js`
+
+
+-----
+
+
+
+
+### Session_service.delete_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.delete_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.delete_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.delete_session.js`
+
+
+-----
+
+
+
+
+### Session_service.get_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.get_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.get_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.get_session.js`
+
+
+-----
+
+
+
+
+### Session_service.list_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_files.js`
+
+
+-----
+
+
+
+
+### Session_service.list_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.list_sessions.js`
+
+
+-----
+
+
+
+
+### Session_service.update_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.update_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.update_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/session_service.update_session.js`
+
+
+-----
+
+
+
+
 ### Site_search_engine_service.batch_create_target_sites
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js).
@@ -4901,6 +5122,91 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.update_serving_config.js`
+
+
+-----
+
+
+
+
+### Session_service.create_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.create_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.create_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.create_session.js`
+
+
+-----
+
+
+
+
+### Session_service.delete_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.delete_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.delete_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.delete_session.js`
+
+
+-----
+
+
+
+
+### Session_service.get_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.get_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.get_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.get_session.js`
+
+
+-----
+
+
+
+
+### Session_service.list_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.list_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.list_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.list_sessions.js`
+
+
+-----
+
+
+
+
+### Session_service.update_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.update_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.update_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/session_service.update_session.js`
 
 
 -----

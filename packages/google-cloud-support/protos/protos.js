@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7258,6 +7258,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.CaseAttachmentService|getAttachment}.
+                         * @memberof google.cloud.support.v2beta.CaseAttachmentService
+                         * @typedef GetAttachmentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.Attachment} [response] Attachment
+                         */
+    
+                        /**
+                         * Calls GetAttachment.
+                         * @function getAttachment
+                         * @memberof google.cloud.support.v2beta.CaseAttachmentService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest} request GetAttachmentRequest message or plain object
+                         * @param {google.cloud.support.v2beta.CaseAttachmentService.GetAttachmentCallback} callback Node-style callback called with the error, if any, and Attachment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CaseAttachmentService.prototype.getAttachment = function getAttachment(request, callback) {
+                            return this.rpcCall(getAttachment, $root.google.cloud.support.v2beta.GetAttachmentRequest, $root.google.cloud.support.v2beta.Attachment, request, callback);
+                        }, "name", { value: "GetAttachment" });
+    
+                        /**
+                         * Calls GetAttachment.
+                         * @function getAttachment
+                         * @memberof google.cloud.support.v2beta.CaseAttachmentService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest} request GetAttachmentRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.Attachment>} Promise
+                         * @variation 2
+                         */
+    
                         return CaseAttachmentService;
                     })();
     
@@ -7511,6 +7544,211 @@
                         };
     
                         return ListAttachmentsRequest;
+                    })();
+    
+                    v2beta.GetAttachmentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAttachmentRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IGetAttachmentRequest
+                         * @property {string|null} [name] GetAttachmentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAttachmentRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a GetAttachmentRequest.
+                         * @implements IGetAttachmentRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest=} [properties] Properties to set
+                         */
+                        function GetAttachmentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAttachmentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @instance
+                         */
+                        GetAttachmentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAttachmentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.GetAttachmentRequest} GetAttachmentRequest instance
+                         */
+                        GetAttachmentRequest.create = function create(properties) {
+                            return new GetAttachmentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAttachmentRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetAttachmentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest} message GetAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAttachmentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetAttachmentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetAttachmentRequest} message GetAttachmentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAttachmentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAttachmentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.GetAttachmentRequest} GetAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAttachmentRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.GetAttachmentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAttachmentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.GetAttachmentRequest} GetAttachmentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAttachmentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAttachmentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAttachmentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.GetAttachmentRequest} GetAttachmentRequest
+                         */
+                        GetAttachmentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.support.v2beta.GetAttachmentRequest)
+                                return object;
+                            var message = new $root.google.cloud.support.v2beta.GetAttachmentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAttachmentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.GetAttachmentRequest} message GetAttachmentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAttachmentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAttachmentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAttachmentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAttachmentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.GetAttachmentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAttachmentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.GetAttachmentRequest";
+                        };
+    
+                        return GetAttachmentRequest;
                     })();
     
                     v2beta.ListAttachmentsResponse = (function() {
@@ -12691,6 +12929,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.support.v2beta.CommentService|getComment}.
+                         * @memberof google.cloud.support.v2beta.CommentService
+                         * @typedef GetCommentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.support.v2beta.Comment} [response] Comment
+                         */
+    
+                        /**
+                         * Calls GetComment.
+                         * @function getComment
+                         * @memberof google.cloud.support.v2beta.CommentService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest} request GetCommentRequest message or plain object
+                         * @param {google.cloud.support.v2beta.CommentService.GetCommentCallback} callback Node-style callback called with the error, if any, and Comment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CommentService.prototype.getComment = function getComment(request, callback) {
+                            return this.rpcCall(getComment, $root.google.cloud.support.v2beta.GetCommentRequest, $root.google.cloud.support.v2beta.Comment, request, callback);
+                        }, "name", { value: "GetComment" });
+    
+                        /**
+                         * Calls GetComment.
+                         * @function getComment
+                         * @memberof google.cloud.support.v2beta.CommentService
+                         * @instance
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest} request GetCommentRequest message or plain object
+                         * @returns {Promise<google.cloud.support.v2beta.Comment>} Promise
+                         * @variation 2
+                         */
+    
                         return CommentService;
                     })();
     
@@ -13428,6 +13699,211 @@
                         };
     
                         return CreateCommentRequest;
+                    })();
+    
+                    v2beta.GetCommentRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCommentRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @interface IGetCommentRequest
+                         * @property {string|null} [name] GetCommentRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCommentRequest.
+                         * @memberof google.cloud.support.v2beta
+                         * @classdesc Represents a GetCommentRequest.
+                         * @implements IGetCommentRequest
+                         * @constructor
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest=} [properties] Properties to set
+                         */
+                        function GetCommentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCommentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @instance
+                         */
+                        GetCommentRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCommentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.support.v2beta.GetCommentRequest} GetCommentRequest instance
+                         */
+                        GetCommentRequest.create = function create(properties) {
+                            return new GetCommentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCommentRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetCommentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest} message GetCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCommentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCommentRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetCommentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.IGetCommentRequest} message GetCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCommentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCommentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.support.v2beta.GetCommentRequest} GetCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCommentRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.support.v2beta.GetCommentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCommentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.support.v2beta.GetCommentRequest} GetCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCommentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCommentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCommentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCommentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.support.v2beta.GetCommentRequest} GetCommentRequest
+                         */
+                        GetCommentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.support.v2beta.GetCommentRequest)
+                                return object;
+                            var message = new $root.google.cloud.support.v2beta.GetCommentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCommentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {google.cloud.support.v2beta.GetCommentRequest} message GetCommentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCommentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCommentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCommentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetCommentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.support.v2beta.GetCommentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetCommentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.support.v2beta.GetCommentRequest";
+                        };
+    
+                        return GetCommentRequest;
                     })();
     
                     v2beta.TextContent = (function() {

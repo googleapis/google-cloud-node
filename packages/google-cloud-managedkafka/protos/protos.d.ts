@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3337,6 +3337,9 @@ export namespace google {
 
                     /** Cluster satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
+
+                    /** Cluster tlsConfig */
+                    tlsConfig?: (google.cloud.managedkafka.v1.ITlsConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -3377,6 +3380,9 @@ export namespace google {
 
                     /** Cluster satisfiesPzs. */
                     public satisfiesPzs?: (boolean|null);
+
+                    /** Cluster tlsConfig. */
+                    public tlsConfig?: (google.cloud.managedkafka.v1.ITlsConfig|null);
 
                     /** Cluster platformConfig. */
                     public platformConfig?: "gcpConfig";
@@ -3975,6 +3981,306 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TlsConfig. */
+                interface ITlsConfig {
+
+                    /** TlsConfig trustConfig */
+                    trustConfig?: (google.cloud.managedkafka.v1.ITrustConfig|null);
+
+                    /** TlsConfig sslPrincipalMappingRules */
+                    sslPrincipalMappingRules?: (string|null);
+                }
+
+                /** Represents a TlsConfig. */
+                class TlsConfig implements ITlsConfig {
+
+                    /**
+                     * Constructs a new TlsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ITlsConfig);
+
+                    /** TlsConfig trustConfig. */
+                    public trustConfig?: (google.cloud.managedkafka.v1.ITrustConfig|null);
+
+                    /** TlsConfig sslPrincipalMappingRules. */
+                    public sslPrincipalMappingRules: string;
+
+                    /**
+                     * Creates a new TlsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TlsConfig instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ITlsConfig): google.cloud.managedkafka.v1.TlsConfig;
+
+                    /**
+                     * Encodes the specified TlsConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TlsConfig.verify|verify} messages.
+                     * @param message TlsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ITlsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TlsConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TlsConfig.verify|verify} messages.
+                     * @param message TlsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ITlsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TlsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TlsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.TlsConfig;
+
+                    /**
+                     * Decodes a TlsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TlsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.TlsConfig;
+
+                    /**
+                     * Verifies a TlsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TlsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TlsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.TlsConfig;
+
+                    /**
+                     * Creates a plain object from a TlsConfig message. Also converts values to other types if specified.
+                     * @param message TlsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.TlsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TlsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TlsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TrustConfig. */
+                interface ITrustConfig {
+
+                    /** TrustConfig casConfigs */
+                    casConfigs?: (google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig[]|null);
+                }
+
+                /** Represents a TrustConfig. */
+                class TrustConfig implements ITrustConfig {
+
+                    /**
+                     * Constructs a new TrustConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.managedkafka.v1.ITrustConfig);
+
+                    /** TrustConfig casConfigs. */
+                    public casConfigs: google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig[];
+
+                    /**
+                     * Creates a new TrustConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrustConfig instance
+                     */
+                    public static create(properties?: google.cloud.managedkafka.v1.ITrustConfig): google.cloud.managedkafka.v1.TrustConfig;
+
+                    /**
+                     * Encodes the specified TrustConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.verify|verify} messages.
+                     * @param message TrustConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.managedkafka.v1.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrustConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.verify|verify} messages.
+                     * @param message TrustConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.managedkafka.v1.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrustConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrustConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.TrustConfig;
+
+                    /**
+                     * Decodes a TrustConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrustConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.TrustConfig;
+
+                    /**
+                     * Verifies a TrustConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrustConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrustConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.TrustConfig;
+
+                    /**
+                     * Creates a plain object from a TrustConfig message. Also converts values to other types if specified.
+                     * @param message TrustConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.managedkafka.v1.TrustConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrustConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrustConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TrustConfig {
+
+                    /** Properties of a CertificateAuthorityServiceConfig. */
+                    interface ICertificateAuthorityServiceConfig {
+
+                        /** CertificateAuthorityServiceConfig caPool */
+                        caPool?: (string|null);
+                    }
+
+                    /** Represents a CertificateAuthorityServiceConfig. */
+                    class CertificateAuthorityServiceConfig implements ICertificateAuthorityServiceConfig {
+
+                        /**
+                         * Constructs a new CertificateAuthorityServiceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig);
+
+                        /** CertificateAuthorityServiceConfig caPool. */
+                        public caPool: string;
+
+                        /**
+                         * Creates a new CertificateAuthorityServiceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CertificateAuthorityServiceConfig instance
+                         */
+                        public static create(properties?: google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig): google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig;
+
+                        /**
+                         * Encodes the specified CertificateAuthorityServiceConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                         * @param message CertificateAuthorityServiceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CertificateAuthorityServiceConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                         * @param message CertificateAuthorityServiceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CertificateAuthorityServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig;
+
+                        /**
+                         * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CertificateAuthorityServiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig;
+
+                        /**
+                         * Verifies a CertificateAuthorityServiceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CertificateAuthorityServiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CertificateAuthorityServiceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig;
+
+                        /**
+                         * Creates a plain object from a CertificateAuthorityServiceConfig message. Also converts values to other types if specified.
+                         * @param message CertificateAuthorityServiceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CertificateAuthorityServiceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CertificateAuthorityServiceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Topic. */

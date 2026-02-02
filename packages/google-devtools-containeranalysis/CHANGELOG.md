@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.1...containeranalysis-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [containeranalysis] A new message `File` is added ([#6987](https://github.com/googleapis/google-cloud-node/issues/6987)) ([0413036](https://github.com/googleapis/google-cloud-node/commit/04130369a1e730a90e456ea2d33b1320de67f03b))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.0...containeranalysis-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.2.0...containeranalysis-v6.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6425](https://github.com/googleapis/google-cloud-node/issues/6425)) ([c920e8d](https://github.com/googleapis/google-cloud-node/commit/c920e8d0d43be81fc171bc5f7d59800b66b830b8))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.1.0...containeranalysis-v6.2.0) (2025-05-09)
 
 

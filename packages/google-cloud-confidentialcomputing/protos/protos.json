@@ -58,6 +58,38 @@
                               }
                             }
                           ]
+                        },
+                        "VerifyConfidentialSpace": {
+                          "requestType": "VerifyConfidentialSpaceRequest",
+                          "responseType": "VerifyConfidentialSpaceResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{challenge=projects/*/locations/*/challenges/*}:verifyConfidentialSpace",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{challenge=projects/*/locations/*/challenges/*}:verifyConfidentialSpace",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "VerifyConfidentialGke": {
+                          "requestType": "VerifyConfidentialGkeRequest",
+                          "responseType": "VerifyConfidentialGkeResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{challenge=projects/*/locations/*/challenges/*}:verifyConfidentialGke",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{challenge=projects/*/locations/*/challenges/*}:verifyConfidentialGke",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -76,6 +108,20 @@
                         "TOKEN_TYPE_PKI": 2,
                         "TOKEN_TYPE_LIMITED_AWS": 3,
                         "TOKEN_TYPE_AWS_PRINCIPALTAGS": 4
+                      }
+                    },
+                    "SignatureType": {
+                      "values": {
+                        "SIGNATURE_TYPE_UNSPECIFIED": 0,
+                        "SIGNATURE_TYPE_OIDC": 1,
+                        "SIGNATURE_TYPE_PKI": 2
+                      }
+                    },
+                    "TokenProfile": {
+                      "values": {
+                        "TOKEN_PROFILE_UNSPECIFIED": 0,
+                        "TOKEN_PROFILE_DEFAULT_EAT": 1,
+                        "TOKEN_PROFILE_AWS": 2
                       }
                     },
                     "Challenge": {
@@ -325,12 +371,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
+                      }
+                    },
+                    "AwsPrincipalTagsOptions": {
+                      "fields": {
+                        "allowedPrincipalTags": {
+                          "type": "AllowedPrincipalTags",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
                       },
                       "nested": {
-                        "AwsPrincipalTagsOptions": {
+                        "AllowedPrincipalTags": {
                           "fields": {
-                            "allowedPrincipalTags": {
-                              "type": "AllowedPrincipalTags",
+                            "containerImageSignatures": {
+                              "type": "ContainerImageSignatures",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
@@ -338,27 +395,14 @@
                             }
                           },
                           "nested": {
-                            "AllowedPrincipalTags": {
+                            "ContainerImageSignatures": {
                               "fields": {
-                                "containerImageSignatures": {
-                                  "type": "ContainerImageSignatures",
+                                "keyIds": {
+                                  "rule": "repeated",
+                                  "type": "string",
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              },
-                              "nested": {
-                                "ContainerImageSignatures": {
-                                  "fields": {
-                                    "keyIds": {
-                                      "rule": "repeated",
-                                      "type": "string",
-                                      "id": 1,
-                                      "options": {
-                                        "(google.api.field_behavior)": "OPTIONAL"
-                                      }
-                                    }
                                   }
                                 }
                               }
@@ -468,6 +512,190 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConfidentialSpaceRequest": {
+                      "oneofs": {
+                        "teeAttestation": {
+                          "oneof": [
+                            "tdCcel",
+                            "tpmAttestation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tdCcel": {
+                          "type": "TdxCcelAttestation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "tpmAttestation": {
+                          "type": "TpmAttestation",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "challenge": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "confidentialcomputing.googleapis.com/Challenge"
+                          }
+                        },
+                        "gcpCredentials": {
+                          "type": "GcpCredentials",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "signedEntities": {
+                          "rule": "repeated",
+                          "type": "SignedEntity",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gceShieldedIdentity": {
+                          "type": "GceShieldedIdentity",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "options": {
+                          "type": "ConfidentialSpaceOptions",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConfidentialSpaceOptions": {
+                          "oneofs": {
+                            "tokenProfileOptions": {
+                              "oneof": [
+                                "awsPrincipalTagsOptions"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "awsPrincipalTagsOptions": {
+                              "type": "AwsPrincipalTagsOptions",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "audience": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "tokenProfile": {
+                              "type": "TokenProfile",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "nonce": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "signatureType": {
+                              "type": "SignatureType",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GceShieldedIdentity": {
+                      "fields": {
+                        "akCert": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "akCertChain": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConfidentialSpaceResponse": {
+                      "fields": {
+                        "attestationToken": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConfidentialGkeRequest": {
+                      "oneofs": {
+                        "teeAttestation": {
+                          "oneof": [
+                            "tpmAttestation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tpmAttestation": {
+                          "type": "TpmAttestation",
+                          "id": 2
+                        },
+                        "challenge": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "confidentialcomputing.googleapis.com/Challenge"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyConfidentialGkeResponse": {
+                      "fields": {
+                        "attestationToken": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

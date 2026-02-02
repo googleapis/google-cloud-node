@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,7 +37,8 @@ function main(instanceGroup, project, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the zone where the instance group is located.
+   *  The name of the zone
+   *  where the instance group is located.
    */
   // const zone = 'abc123'
 

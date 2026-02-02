@@ -20,8 +20,10 @@ import * as v1 from './v1';
 
 const BackupDRClient = v1.BackupDRClient;
 type BackupDRClient = v1.BackupDRClient;
+const BackupDrProtectionSummaryClient = v1.BackupDrProtectionSummaryClient;
+type BackupDrProtectionSummaryClient = v1.BackupDrProtectionSummaryClient;
 
-export {v1, BackupDRClient};
-export default {v1, BackupDRClient};
+export {v1, BackupDRClient, BackupDrProtectionSummaryClient};
+export default {v1, BackupDRClient, BackupDrProtectionSummaryClient};
 import * as protos from '../protos/protos';
 export {protos};

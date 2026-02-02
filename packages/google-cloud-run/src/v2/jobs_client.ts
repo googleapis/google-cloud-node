@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -187,6 +187,9 @@ export class JobsClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
       ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}'
+      ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
       ),
@@ -204,6 +207,9 @@ export class JobsClient {
       ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}/tasks/{task}'
+      ),
+      workerPoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/workerPools/{worker_pool}'
       ),
     };
 
@@ -1943,6 +1949,55 @@ export class JobsClient {
   }
 
   /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project:string,location:string,instance:string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the location from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).location;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
+  }
+
+  /**
    * Return a fully-qualified job resource name string.
    *
    * @param {string} project
@@ -2234,6 +2289,55 @@ export class JobsClient {
    */
   matchTaskFromTaskName(taskName: string) {
     return this.pathTemplates.taskPathTemplate.match(taskName).task;
+  }
+
+  /**
+   * Return a fully-qualified workerPool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} worker_pool
+   * @returns {string} Resource name string.
+   */
+  workerPoolPath(project:string,location:string,workerPool:string) {
+    return this.pathTemplates.workerPoolPathTemplate.render({
+      project: project,
+      location: location,
+      worker_pool: workerPool,
+    });
+  }
+
+  /**
+   * Parse the project from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).project;
+  }
+
+  /**
+   * Parse the location from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).location;
+  }
+
+  /**
+   * Parse the worker_pool from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the worker_pool.
+   */
+  matchWorkerPoolFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).worker_pool;
   }
 
   /**

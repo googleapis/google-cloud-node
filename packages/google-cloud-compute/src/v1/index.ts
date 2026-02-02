@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,15 +18,18 @@
 
 export {AcceleratorTypesClient} from './accelerator_types_client';
 export {AddressesClient} from './addresses_client';
+export {AdviceClient} from './advice_client';
 export {AutoscalersClient} from './autoscalers_client';
 export {BackendBucketsClient} from './backend_buckets_client';
 export {BackendServicesClient} from './backend_services_client';
+export {CrossSiteNetworksClient} from './cross_site_networks_client';
 export {DisksClient} from './disks_client';
 export {DiskTypesClient} from './disk_types_client';
 export {ExternalVpnGatewaysClient} from './external_vpn_gateways_client';
 export {FirewallPoliciesClient} from './firewall_policies_client';
 export {FirewallsClient} from './firewalls_client';
 export {ForwardingRulesClient} from './forwarding_rules_client';
+export {FutureReservationsClient} from './future_reservations_client';
 export {GlobalAddressesClient} from './global_addresses_client';
 export {GlobalForwardingRulesClient} from './global_forwarding_rules_client';
 export {GlobalNetworkEndpointGroupsClient} from './global_network_endpoint_groups_client';
@@ -62,7 +65,9 @@ export {NetworksClient} from './networks_client';
 export {NodeGroupsClient} from './node_groups_client';
 export {NodeTemplatesClient} from './node_templates_client';
 export {NodeTypesClient} from './node_types_client';
+export {OrganizationSecurityPoliciesClient} from './organization_security_policies_client';
 export {PacketMirroringsClient} from './packet_mirrorings_client';
+export {PreviewFeaturesClient} from './preview_features_client';
 export {ProjectsClient} from './projects_client';
 export {PublicAdvertisedPrefixesClient} from './public_advertised_prefixes_client';
 export {PublicDelegatedPrefixesClient} from './public_delegated_prefixes_client';
@@ -117,5 +122,6 @@ export {TargetVpnGatewaysClient} from './target_vpn_gateways_client';
 export {UrlMapsClient} from './url_maps_client';
 export {VpnGatewaysClient} from './vpn_gateways_client';
 export {VpnTunnelsClient} from './vpn_tunnels_client';
+export {WireGroupsClient} from './wire_groups_client';
 export {ZoneOperationsClient} from './zone_operations_client';
 export {ZonesClient} from './zones_client';

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -9680,6 +9680,8 @@
                          * @property {Array.<google.privacy.dlp.v2.RedactImageRequest.IImageRedactionConfig>|null} [imageRedactionConfigs] RedactImageRequest imageRedactionConfigs
                          * @property {boolean|null} [includeFindings] RedactImageRequest includeFindings
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] RedactImageRequest byteItem
+                         * @property {string|null} [inspectTemplate] RedactImageRequest inspectTemplate
+                         * @property {string|null} [deidentifyTemplate] RedactImageRequest deidentifyTemplate
                          */
     
                         /**
@@ -9747,6 +9749,22 @@
                         RedactImageRequest.prototype.byteItem = null;
     
                         /**
+                         * RedactImageRequest inspectTemplate.
+                         * @member {string} inspectTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.inspectTemplate = "";
+    
+                        /**
+                         * RedactImageRequest deidentifyTemplate.
+                         * @member {string} deidentifyTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.deidentifyTemplate = "";
+    
+                        /**
                          * Creates a new RedactImageRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.RedactImageRequest
@@ -9783,6 +9801,10 @@
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.locationId);
+                            if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.inspectTemplate);
+                            if (message.deidentifyTemplate != null && Object.hasOwnProperty.call(message, "deidentifyTemplate"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.deidentifyTemplate);
                             return writer;
                         };
     
@@ -9843,6 +9865,14 @@
                                     }
                                 case 7: {
                                         message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.inspectTemplate = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.deidentifyTemplate = reader.string();
                                         break;
                                     }
                                 default:
@@ -9908,6 +9938,12 @@
                                 if (error)
                                     return "byteItem." + error;
                             }
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                if (!$util.isString(message.inspectTemplate))
+                                    return "inspectTemplate: string expected";
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                if (!$util.isString(message.deidentifyTemplate))
+                                    return "deidentifyTemplate: string expected";
                             return null;
                         };
     
@@ -9949,6 +9985,10 @@
                                     throw TypeError(".google.privacy.dlp.v2.RedactImageRequest.byteItem: object expected");
                                 message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.fromObject(object.byteItem);
                             }
+                            if (object.inspectTemplate != null)
+                                message.inspectTemplate = String(object.inspectTemplate);
+                            if (object.deidentifyTemplate != null)
+                                message.deidentifyTemplate = String(object.deidentifyTemplate);
                             return message;
                         };
     
@@ -9973,6 +10013,8 @@
                                 object.includeFindings = false;
                                 object.byteItem = null;
                                 object.locationId = "";
+                                object.inspectTemplate = "";
+                                object.deidentifyTemplate = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -9989,6 +10031,10 @@
                                 object.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.toObject(message.byteItem, options);
                             if (message.locationId != null && message.hasOwnProperty("locationId"))
                                 object.locationId = message.locationId;
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                object.inspectTemplate = message.inspectTemplate;
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                object.deidentifyTemplate = message.deidentifyTemplate;
                             return object;
                         };
     
@@ -12547,6 +12593,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IOutputStorageConfig
                          * @property {google.privacy.dlp.v2.IBigQueryTable|null} [table] OutputStorageConfig table
+                         * @property {google.privacy.dlp.v2.ICloudStoragePath|null} [storagePath] OutputStorageConfig storagePath
                          * @property {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null} [outputSchema] OutputStorageConfig outputSchema
                          */
     
@@ -12574,6 +12621,14 @@
                         OutputStorageConfig.prototype.table = null;
     
                         /**
+                         * OutputStorageConfig storagePath.
+                         * @member {google.privacy.dlp.v2.ICloudStoragePath|null|undefined} storagePath
+                         * @memberof google.privacy.dlp.v2.OutputStorageConfig
+                         * @instance
+                         */
+                        OutputStorageConfig.prototype.storagePath = null;
+    
+                        /**
                          * OutputStorageConfig outputSchema.
                          * @member {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema} outputSchema
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
@@ -12586,12 +12641,12 @@
     
                         /**
                          * OutputStorageConfig type.
-                         * @member {"table"|undefined} type
+                         * @member {"table"|"storagePath"|undefined} type
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
                          * @instance
                          */
                         Object.defineProperty(OutputStorageConfig.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["table"]),
+                            get: $util.oneOfGetter($oneOfFields = ["table", "storagePath"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -12623,6 +12678,8 @@
                                 $root.google.privacy.dlp.v2.BigQueryTable.encode(message.table, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.outputSchema != null && Object.hasOwnProperty.call(message, "outputSchema"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outputSchema);
+                            if (message.storagePath != null && Object.hasOwnProperty.call(message, "storagePath"))
+                                $root.google.privacy.dlp.v2.CloudStoragePath.encode(message.storagePath, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -12661,6 +12718,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -12711,6 +12772,16 @@
                                         return "table." + error;
                                 }
                             }
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CloudStoragePath.verify(message.storagePath);
+                                    if (error)
+                                        return "storagePath." + error;
+                                }
+                            }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 switch (message.outputSchema) {
                                 default:
@@ -12742,6 +12813,11 @@
                                 if (typeof object.table !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.table: object expected");
                                 message.table = $root.google.privacy.dlp.v2.BigQueryTable.fromObject(object.table);
+                            }
+                            if (object.storagePath != null) {
+                                if (typeof object.storagePath !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.storagePath: object expected");
+                                message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.fromObject(object.storagePath);
                             }
                             switch (object.outputSchema) {
                             default:
@@ -12800,6 +12876,11 @@
                             }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 object.outputSchema = options.enums === String ? $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] === undefined ? message.outputSchema : $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] : message.outputSchema;
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                object.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.toObject(message.storagePath, options);
+                                if (options.oneofs)
+                                    object.type = "storagePath";
+                            }
                             return object;
                         };
     
@@ -15569,6 +15650,291 @@
                         return DeidentifyDataSourceDetails;
                     })();
     
+                    v2.LocationSupport = (function() {
+    
+                        /**
+                         * Properties of a LocationSupport.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ILocationSupport
+                         * @property {google.privacy.dlp.v2.LocationSupport.RegionalizationScope|null} [regionalizationScope] LocationSupport regionalizationScope
+                         * @property {Array.<string>|null} [locations] LocationSupport locations
+                         */
+    
+                        /**
+                         * Constructs a new LocationSupport.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a LocationSupport.
+                         * @implements ILocationSupport
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ILocationSupport=} [properties] Properties to set
+                         */
+                        function LocationSupport(properties) {
+                            this.locations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationSupport regionalizationScope.
+                         * @member {google.privacy.dlp.v2.LocationSupport.RegionalizationScope} regionalizationScope
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         */
+                        LocationSupport.prototype.regionalizationScope = 0;
+    
+                        /**
+                         * LocationSupport locations.
+                         * @member {Array.<string>} locations
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         */
+                        LocationSupport.prototype.locations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationSupport instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport instance
+                         */
+                        LocationSupport.create = function create(properties) {
+                            return new LocationSupport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationSupport message. Does not implicitly {@link google.privacy.dlp.v2.LocationSupport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport} message LocationSupport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationSupport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.regionalizationScope != null && Object.hasOwnProperty.call(message, "regionalizationScope"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.regionalizationScope);
+                            if (message.locations != null && message.locations.length)
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.locations[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationSupport message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.LocationSupport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport} message LocationSupport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationSupport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationSupport.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.LocationSupport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.regionalizationScope = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.locations && message.locations.length))
+                                            message.locations = [];
+                                        message.locations.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationSupport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationSupport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationSupport message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationSupport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.regionalizationScope != null && message.hasOwnProperty("regionalizationScope"))
+                                switch (message.regionalizationScope) {
+                                default:
+                                    return "regionalizationScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.locations != null && message.hasOwnProperty("locations")) {
+                                if (!Array.isArray(message.locations))
+                                    return "locations: array expected";
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    if (!$util.isString(message.locations[i]))
+                                        return "locations: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationSupport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         */
+                        LocationSupport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.LocationSupport)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.LocationSupport();
+                            switch (object.regionalizationScope) {
+                            default:
+                                if (typeof object.regionalizationScope === "number") {
+                                    message.regionalizationScope = object.regionalizationScope;
+                                    break;
+                                }
+                                break;
+                            case "REGIONALIZATION_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.regionalizationScope = 0;
+                                break;
+                            case "REGIONAL":
+                            case 1:
+                                message.regionalizationScope = 1;
+                                break;
+                            case "ANY_LOCATION":
+                            case 2:
+                                message.regionalizationScope = 2;
+                                break;
+                            }
+                            if (object.locations) {
+                                if (!Array.isArray(object.locations))
+                                    throw TypeError(".google.privacy.dlp.v2.LocationSupport.locations: array expected");
+                                message.locations = [];
+                                for (var i = 0; i < object.locations.length; ++i)
+                                    message.locations[i] = String(object.locations[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationSupport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.LocationSupport} message LocationSupport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationSupport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.locations = [];
+                            if (options.defaults)
+                                object.regionalizationScope = options.enums === String ? "REGIONALIZATION_SCOPE_UNSPECIFIED" : 0;
+                            if (message.regionalizationScope != null && message.hasOwnProperty("regionalizationScope"))
+                                object.regionalizationScope = options.enums === String ? $root.google.privacy.dlp.v2.LocationSupport.RegionalizationScope[message.regionalizationScope] === undefined ? message.regionalizationScope : $root.google.privacy.dlp.v2.LocationSupport.RegionalizationScope[message.regionalizationScope] : message.regionalizationScope;
+                            if (message.locations && message.locations.length) {
+                                object.locations = [];
+                                for (var j = 0; j < message.locations.length; ++j)
+                                    object.locations[j] = message.locations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationSupport to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationSupport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationSupport
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.LocationSupport";
+                        };
+    
+                        /**
+                         * RegionalizationScope enum.
+                         * @name google.privacy.dlp.v2.LocationSupport.RegionalizationScope
+                         * @enum {number}
+                         * @property {number} REGIONALIZATION_SCOPE_UNSPECIFIED=0 REGIONALIZATION_SCOPE_UNSPECIFIED value
+                         * @property {number} REGIONAL=1 REGIONAL value
+                         * @property {number} ANY_LOCATION=2 ANY_LOCATION value
+                         */
+                        LocationSupport.RegionalizationScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REGIONALIZATION_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REGIONAL"] = 1;
+                            values[valuesById[2] = "ANY_LOCATION"] = 2;
+                            return values;
+                        })();
+    
+                        return LocationSupport;
+                    })();
+    
                     v2.InfoTypeDescription = (function() {
     
                         /**
@@ -15579,6 +15945,7 @@
                          * @property {string|null} [displayName] InfoTypeDescription displayName
                          * @property {Array.<google.privacy.dlp.v2.InfoTypeSupportedBy>|null} [supportedBy] InfoTypeDescription supportedBy
                          * @property {string|null} [description] InfoTypeDescription description
+                         * @property {google.privacy.dlp.v2.ILocationSupport|null} [locationSupport] InfoTypeDescription locationSupport
                          * @property {string|null} [example] InfoTypeDescription example
                          * @property {Array.<google.privacy.dlp.v2.IVersionDescription>|null} [versions] InfoTypeDescription versions
                          * @property {Array.<google.privacy.dlp.v2.IInfoTypeCategory>|null} [categories] InfoTypeDescription categories
@@ -15636,6 +16003,14 @@
                          * @instance
                          */
                         InfoTypeDescription.prototype.description = "";
+    
+                        /**
+                         * InfoTypeDescription locationSupport.
+                         * @member {google.privacy.dlp.v2.ILocationSupport|null|undefined} locationSupport
+                         * @memberof google.privacy.dlp.v2.InfoTypeDescription
+                         * @instance
+                         */
+                        InfoTypeDescription.prototype.locationSupport = null;
     
                         /**
                          * InfoTypeDescription example.
@@ -15713,6 +16088,8 @@
                             }
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.locationSupport != null && Object.hasOwnProperty.call(message, "locationSupport"))
+                                $root.google.privacy.dlp.v2.LocationSupport.encode(message.locationSupport, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.example != null && Object.hasOwnProperty.call(message, "example"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.example);
                             if (message.versions != null && message.versions.length)
@@ -15783,6 +16160,10 @@
                                     }
                                 case 4: {
                                         message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -15868,6 +16249,11 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.locationSupport != null && message.hasOwnProperty("locationSupport")) {
+                                var error = $root.google.privacy.dlp.v2.LocationSupport.verify(message.locationSupport);
+                                if (error)
+                                    return "locationSupport." + error;
+                            }
                             if (message.example != null && message.hasOwnProperty("example"))
                                 if (!$util.isString(message.example))
                                     return "example: string expected";
@@ -15947,6 +16333,11 @@
                             }
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.locationSupport != null) {
+                                if (typeof object.locationSupport !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.InfoTypeDescription.locationSupport: object expected");
+                                message.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.fromObject(object.locationSupport);
+                            }
                             if (object.example != null)
                                 message.example = String(object.example);
                             if (object.versions) {
@@ -16007,6 +16398,7 @@
                                 object.name = "";
                                 object.displayName = "";
                                 object.description = "";
+                                object.locationSupport = null;
                                 object.example = "";
                                 object.sensitivityScore = null;
                             }
@@ -16021,6 +16413,8 @@
                             }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.locationSupport != null && message.hasOwnProperty("locationSupport"))
+                                object.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.toObject(message.locationSupport, options);
                             if (message.example != null && message.hasOwnProperty("example"))
                                 object.example = message.example;
                             if (message.versions && message.versions.length) {
@@ -16260,6 +16654,7 @@
                                 case 2:
                                 case 51:
                                 case 3:
+                                case 53:
                                 case 48:
                                 case 50:
                                 case 4:
@@ -16384,6 +16779,10 @@
                             case "AUSTRALIA":
                             case 3:
                                 message.locationCategory = 3;
+                                break;
+                            case "AUSTRIA":
+                            case 53:
+                                message.locationCategory = 53;
                                 break;
                             case "AZERBAIJAN":
                             case 48:
@@ -16711,6 +17110,7 @@
                          * @property {number} ARGENTINA=2 ARGENTINA value
                          * @property {number} ARMENIA=51 ARMENIA value
                          * @property {number} AUSTRALIA=3 AUSTRALIA value
+                         * @property {number} AUSTRIA=53 AUSTRIA value
                          * @property {number} AZERBAIJAN=48 AZERBAIJAN value
                          * @property {number} BELARUS=50 BELARUS value
                          * @property {number} BELGIUM=4 BELGIUM value
@@ -16766,6 +17166,7 @@
                             values[valuesById[2] = "ARGENTINA"] = 2;
                             values[valuesById[51] = "ARMENIA"] = 51;
                             values[valuesById[3] = "AUSTRALIA"] = 3;
+                            values[valuesById[53] = "AUSTRIA"] = 53;
                             values[valuesById[48] = "AZERBAIJAN"] = 48;
                             values[valuesById[50] = "BELARUS"] = 50;
                             values[valuesById[4] = "BELGIUM"] = 4;
@@ -42801,6 +43202,7 @@
                          * @property {google.privacy.dlp.v2.Action.IPublishToPubSub|null} [pubSub] Action pubSub
                          * @property {google.privacy.dlp.v2.Action.IPublishSummaryToCscc|null} [publishSummaryToCscc] Action publishSummaryToCscc
                          * @property {google.privacy.dlp.v2.Action.IPublishFindingsToCloudDataCatalog|null} [publishFindingsToCloudDataCatalog] Action publishFindingsToCloudDataCatalog
+                         * @property {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null} [publishFindingsToDataplexCatalog] Action publishFindingsToDataplexCatalog
                          * @property {google.privacy.dlp.v2.Action.IDeidentify|null} [deidentify] Action deidentify
                          * @property {google.privacy.dlp.v2.Action.IJobNotificationEmails|null} [jobNotificationEmails] Action jobNotificationEmails
                          * @property {google.privacy.dlp.v2.Action.IPublishToStackdriver|null} [publishToStackdriver] Action publishToStackdriver
@@ -42854,6 +43256,14 @@
                         Action.prototype.publishFindingsToCloudDataCatalog = null;
     
                         /**
+                         * Action publishFindingsToDataplexCatalog.
+                         * @member {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null|undefined} publishFindingsToDataplexCatalog
+                         * @memberof google.privacy.dlp.v2.Action
+                         * @instance
+                         */
+                        Action.prototype.publishFindingsToDataplexCatalog = null;
+    
+                        /**
                          * Action deidentify.
                          * @member {google.privacy.dlp.v2.Action.IDeidentify|null|undefined} deidentify
                          * @memberof google.privacy.dlp.v2.Action
@@ -42882,12 +43292,12 @@
     
                         /**
                          * Action action.
-                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
+                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"publishFindingsToDataplexCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
                          * @memberof google.privacy.dlp.v2.Action
                          * @instance
                          */
                         Object.defineProperty(Action.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
+                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "publishFindingsToDataplexCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -42929,6 +43339,8 @@
                                 $root.google.privacy.dlp.v2.Action.JobNotificationEmails.encode(message.jobNotificationEmails, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.publishToStackdriver != null && Object.hasOwnProperty.call(message, "publishToStackdriver"))
                                 $root.google.privacy.dlp.v2.Action.PublishToStackdriver.encode(message.publishToStackdriver, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.publishFindingsToDataplexCatalog != null && Object.hasOwnProperty.call(message, "publishFindingsToDataplexCatalog"))
+                                $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.encode(message.publishFindingsToDataplexCatalog, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -42979,6 +43391,10 @@
                                     }
                                 case 5: {
                                         message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -43067,6 +43483,16 @@
                                         return "publishFindingsToCloudDataCatalog." + error;
                                 }
                             }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify(message.publishFindingsToDataplexCatalog);
+                                    if (error)
+                                        return "publishFindingsToDataplexCatalog." + error;
+                                }
+                            }
                             if (message.deidentify != null && message.hasOwnProperty("deidentify")) {
                                 if (properties.action === 1)
                                     return "action: multiple values";
@@ -43131,6 +43557,11 @@
                                 if (typeof object.publishFindingsToCloudDataCatalog !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToCloudDataCatalog: object expected");
                                 message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.fromObject(object.publishFindingsToCloudDataCatalog);
+                            }
+                            if (object.publishFindingsToDataplexCatalog != null) {
+                                if (typeof object.publishFindingsToDataplexCatalog !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToDataplexCatalog: object expected");
+                                message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.fromObject(object.publishFindingsToDataplexCatalog);
                             }
                             if (object.deidentify != null) {
                                 if (typeof object.deidentify !== "object")
@@ -43197,6 +43628,11 @@
                                 object.publishToStackdriver = $root.google.privacy.dlp.v2.Action.PublishToStackdriver.toObject(message.publishToStackdriver, options);
                                 if (options.oneofs)
                                     object.action = "publishToStackdriver";
+                            }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                object.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.toObject(message.publishFindingsToDataplexCatalog, options);
+                                if (options.oneofs)
+                                    object.action = "publishFindingsToDataplexCatalog";
                             }
                             return object;
                         };
@@ -43994,6 +44430,183 @@
                             };
     
                             return PublishFindingsToCloudDataCatalog;
+                        })();
+    
+                        Action.PublishFindingsToDataplexCatalog = (function() {
+    
+                            /**
+                             * Properties of a PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @interface IPublishFindingsToDataplexCatalog
+                             */
+    
+                            /**
+                             * Constructs a new PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @classdesc Represents a PublishFindingsToDataplexCatalog.
+                             * @implements IPublishFindingsToDataplexCatalog
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             */
+                            function PublishFindingsToDataplexCatalog(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new PublishFindingsToDataplexCatalog instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog instance
+                             */
+                            PublishFindingsToDataplexCatalog.create = function create(properties) {
+                                return new PublishFindingsToDataplexCatalog(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PublishFindingsToDataplexCatalog message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PublishFindingsToDataplexCatalog.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PublishFindingsToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             */
+                            PublishFindingsToDataplexCatalog.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                            };
+    
+                            /**
+                             * Creates a plain object from a PublishFindingsToDataplexCatalog message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PublishFindingsToDataplexCatalog.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this PublishFindingsToDataplexCatalog to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PublishFindingsToDataplexCatalog.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PublishFindingsToDataplexCatalog
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PublishFindingsToDataplexCatalog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog";
+                            };
+    
+                            return PublishFindingsToDataplexCatalog;
                         })();
     
                         Action.Deidentify = (function() {
@@ -62932,6 +63545,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IFileStoreCollection
                          * @property {google.privacy.dlp.v2.IFileStoreRegexes|null} [includeRegexes] FileStoreCollection includeRegexes
+                         * @property {google.privacy.dlp.v2.ITagFilters|null} [includeTags] FileStoreCollection includeTags
                          */
     
                         /**
@@ -62956,6 +63570,14 @@
                          * @instance
                          */
                         FileStoreCollection.prototype.includeRegexes = null;
+    
+                        /**
+                         * FileStoreCollection includeTags.
+                         * @member {google.privacy.dlp.v2.ITagFilters|null|undefined} includeTags
+                         * @memberof google.privacy.dlp.v2.FileStoreCollection
+                         * @instance
+                         */
+                        FileStoreCollection.prototype.includeTags = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -62997,6 +63619,8 @@
                                 writer = $Writer.create();
                             if (message.includeRegexes != null && Object.hasOwnProperty.call(message, "includeRegexes"))
                                 $root.google.privacy.dlp.v2.FileStoreRegexes.encode(message.includeRegexes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.includeTags != null && Object.hasOwnProperty.call(message, "includeTags"))
+                                $root.google.privacy.dlp.v2.TagFilters.encode(message.includeTags, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -63035,6 +63659,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.includeTags = $root.google.privacy.dlp.v2.TagFilters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -63081,6 +63709,11 @@
                                         return "includeRegexes." + error;
                                 }
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags")) {
+                                var error = $root.google.privacy.dlp.v2.TagFilters.verify(message.includeTags);
+                                if (error)
+                                    return "includeTags." + error;
+                            }
                             return null;
                         };
     
@@ -63101,6 +63734,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeRegexes: object expected");
                                 message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.fromObject(object.includeRegexes);
                             }
+                            if (object.includeTags != null) {
+                                if (typeof object.includeTags !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeTags: object expected");
+                                message.includeTags = $root.google.privacy.dlp.v2.TagFilters.fromObject(object.includeTags);
+                            }
                             return message;
                         };
     
@@ -63117,11 +63755,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.includeTags = null;
                             if (message.includeRegexes != null && message.hasOwnProperty("includeRegexes")) {
                                 object.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.toObject(message.includeRegexes, options);
                                 if (options.oneofs)
                                     object.pattern = "includeRegexes";
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags"))
+                                object.includeTags = $root.google.privacy.dlp.v2.TagFilters.toObject(message.includeTags, options);
                             return object;
                         };
     
@@ -82177,6 +82819,7 @@
                          * @property {google.privacy.dlp.v2.IBigQueryTable|null} [sampleFindingsTable] TableDataProfile sampleFindingsTable
                          * @property {Array.<google.privacy.dlp.v2.ITag>|null} [tags] TableDataProfile tags
                          * @property {Array.<google.privacy.dlp.v2.IRelatedResource>|null} [relatedResources] TableDataProfile relatedResources
+                         * @property {Array.<google.privacy.dlp.v2.IDomain>|null} [domains] TableDataProfile domains
                          */
     
                         /**
@@ -82193,6 +82836,7 @@
                             this.resourceLabels = {};
                             this.tags = [];
                             this.relatedResources = [];
+                            this.domains = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -82432,6 +83076,14 @@
                         TableDataProfile.prototype.relatedResources = $util.emptyArray;
     
                         /**
+                         * TableDataProfile domains.
+                         * @member {Array.<google.privacy.dlp.v2.IDomain>} domains
+                         * @memberof google.privacy.dlp.v2.TableDataProfile
+                         * @instance
+                         */
+                        TableDataProfile.prototype.domains = $util.emptyArray;
+    
+                        /**
                          * Creates a new TableDataProfile instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.TableDataProfile
@@ -82518,6 +83170,9 @@
                             if (message.relatedResources != null && message.relatedResources.length)
                                 for (var i = 0; i < message.relatedResources.length; ++i)
                                     $root.google.privacy.dlp.v2.RelatedResource.encode(message.relatedResources[i], writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.domains != null && message.domains.length)
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    $root.google.privacy.dlp.v2.Domain.encode(message.domains[i], writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -82695,6 +83350,12 @@
                                         if (!(message.relatedResources && message.relatedResources.length))
                                             message.relatedResources = [];
                                         message.relatedResources.push($root.google.privacy.dlp.v2.RelatedResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 47: {
+                                        if (!(message.domains && message.domains.length))
+                                            message.domains = [];
+                                        message.domains.push($root.google.privacy.dlp.v2.Domain.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -82885,6 +83546,15 @@
                                     var error = $root.google.privacy.dlp.v2.RelatedResource.verify(message.relatedResources[i]);
                                     if (error)
                                         return "relatedResources." + error;
+                                }
+                            }
+                            if (message.domains != null && message.hasOwnProperty("domains")) {
+                                if (!Array.isArray(message.domains))
+                                    return "domains: array expected";
+                                for (var i = 0; i < message.domains.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Domain.verify(message.domains[i]);
+                                    if (error)
+                                        return "domains." + error;
                                 }
                             }
                             return null;
@@ -83113,6 +83783,16 @@
                                     message.relatedResources[i] = $root.google.privacy.dlp.v2.RelatedResource.fromObject(object.relatedResources[i]);
                                 }
                             }
+                            if (object.domains) {
+                                if (!Array.isArray(object.domains))
+                                    throw TypeError(".google.privacy.dlp.v2.TableDataProfile.domains: array expected");
+                                message.domains = [];
+                                for (var i = 0; i < object.domains.length; ++i) {
+                                    if (typeof object.domains[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TableDataProfile.domains: object expected");
+                                    message.domains[i] = $root.google.privacy.dlp.v2.Domain.fromObject(object.domains[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -83134,6 +83814,7 @@
                                 object.otherInfoTypes = [];
                                 object.tags = [];
                                 object.relatedResources = [];
+                                object.domains = [];
                             }
                             if (options.objects || options.defaults)
                                 object.resourceLabels = {};
@@ -83264,6 +83945,11 @@
                                 object.relatedResources = [];
                                 for (var j = 0; j < message.relatedResources.length; ++j)
                                     object.relatedResources[j] = $root.google.privacy.dlp.v2.RelatedResource.toObject(message.relatedResources[j], options);
+                            }
+                            if (message.domains && message.domains.length) {
+                                object.domains = [];
+                                for (var j = 0; j < message.domains.length; ++j)
+                                    object.domains[j] = $root.google.privacy.dlp.v2.Domain.toObject(message.domains[j], options);
                             }
                             return object;
                         };
@@ -85107,6 +85793,7 @@
                          * @property {boolean|null} [fileStoreIsEmpty] FileStoreDataProfile fileStoreIsEmpty
                          * @property {Array.<google.privacy.dlp.v2.ITag>|null} [tags] FileStoreDataProfile tags
                          * @property {Array.<google.privacy.dlp.v2.IRelatedResource>|null} [relatedResources] FileStoreDataProfile relatedResources
+                         * @property {Array.<google.privacy.dlp.v2.IDomain>|null} [domains] FileStoreDataProfile domains
                          */
     
                         /**
@@ -85125,6 +85812,7 @@
                             this.fileStoreInfoTypeSummaries = [];
                             this.tags = [];
                             this.relatedResources = [];
+                            this.domains = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -85340,6 +86028,14 @@
                         FileStoreDataProfile.prototype.relatedResources = $util.emptyArray;
     
                         /**
+                         * FileStoreDataProfile domains.
+                         * @member {Array.<google.privacy.dlp.v2.IDomain>} domains
+                         * @memberof google.privacy.dlp.v2.FileStoreDataProfile
+                         * @instance
+                         */
+                        FileStoreDataProfile.prototype.domains = $util.emptyArray;
+    
+                        /**
                          * Creates a new FileStoreDataProfile instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.FileStoreDataProfile
@@ -85424,6 +86120,9 @@
                             if (message.relatedResources != null && message.relatedResources.length)
                                 for (var i = 0; i < message.relatedResources.length; ++i)
                                     $root.google.privacy.dlp.v2.RelatedResource.encode(message.relatedResources[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.domains != null && message.domains.length)
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    $root.google.privacy.dlp.v2.Domain.encode(message.domains[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             return writer;
                         };
     
@@ -85612,6 +86311,12 @@
                                         message.relatedResources.push($root.google.privacy.dlp.v2.RelatedResource.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 27: {
+                                        if (!(message.domains && message.domains.length))
+                                            message.domains = [];
+                                        message.domains.push($root.google.privacy.dlp.v2.Domain.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -85794,6 +86499,15 @@
                                     var error = $root.google.privacy.dlp.v2.RelatedResource.verify(message.relatedResources[i]);
                                     if (error)
                                         return "relatedResources." + error;
+                                }
+                            }
+                            if (message.domains != null && message.hasOwnProperty("domains")) {
+                                if (!Array.isArray(message.domains))
+                                    return "domains: array expected";
+                                for (var i = 0; i < message.domains.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Domain.verify(message.domains[i]);
+                                    if (error)
+                                        return "domains." + error;
                                 }
                             }
                             return null;
@@ -85980,6 +86694,16 @@
                                     message.relatedResources[i] = $root.google.privacy.dlp.v2.RelatedResource.fromObject(object.relatedResources[i]);
                                 }
                             }
+                            if (object.domains) {
+                                if (!Array.isArray(object.domains))
+                                    throw TypeError(".google.privacy.dlp.v2.FileStoreDataProfile.domains: array expected");
+                                message.domains = [];
+                                for (var i = 0; i < object.domains.length; ++i) {
+                                    if (typeof object.domains[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.FileStoreDataProfile.domains: object expected");
+                                    message.domains[i] = $root.google.privacy.dlp.v2.Domain.fromObject(object.domains[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -86002,6 +86726,7 @@
                                 object.fileStoreInfoTypeSummaries = [];
                                 object.tags = [];
                                 object.relatedResources = [];
+                                object.domains = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.resourceAttributes = {};
@@ -86101,6 +86826,11 @@
                                 object.relatedResources = [];
                                 for (var j = 0; j < message.relatedResources.length; ++j)
                                     object.relatedResources[j] = $root.google.privacy.dlp.v2.RelatedResource.toObject(message.relatedResources[j], options);
+                            }
+                            if (message.domains && message.domains.length) {
+                                object.domains = [];
+                                for (var j = 0; j < message.domains.length; ++j)
+                                    object.domains[j] = $root.google.privacy.dlp.v2.Domain.toObject(message.domains[j], options);
                             }
                             return object;
                         };
@@ -86400,6 +87130,484 @@
                         };
     
                         return Tag;
+                    })();
+    
+                    v2.TagFilters = (function() {
+    
+                        /**
+                         * Properties of a TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilters
+                         * @property {Array.<google.privacy.dlp.v2.ITagFilter>|null} [tagFilters] TagFilters tagFilters
+                         */
+    
+                        /**
+                         * Constructs a new TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilters.
+                         * @implements ITagFilters
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         */
+                        function TagFilters(properties) {
+                            this.tagFilters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilters tagFilters.
+                         * @member {Array.<google.privacy.dlp.v2.ITagFilter>} tagFilters
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         */
+                        TagFilters.prototype.tagFilters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TagFilters instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters instance
+                         */
+                        TagFilters.create = function create(properties) {
+                            return new TagFilters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tagFilters != null && message.tagFilters.length)
+                                for (var i = 0; i < message.tagFilters.length; ++i)
+                                    $root.google.privacy.dlp.v2.TagFilter.encode(message.tagFilters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.tagFilters && message.tagFilters.length))
+                                            message.tagFilters = [];
+                                        message.tagFilters.push($root.google.privacy.dlp.v2.TagFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilters message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tagFilters != null && message.hasOwnProperty("tagFilters")) {
+                                if (!Array.isArray(message.tagFilters))
+                                    return "tagFilters: array expected";
+                                for (var i = 0; i < message.tagFilters.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.TagFilter.verify(message.tagFilters[i]);
+                                    if (error)
+                                        return "tagFilters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         */
+                        TagFilters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilters)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilters();
+                            if (object.tagFilters) {
+                                if (!Array.isArray(object.tagFilters))
+                                    throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: array expected");
+                                message.tagFilters = [];
+                                for (var i = 0; i < object.tagFilters.length; ++i) {
+                                    if (typeof object.tagFilters[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: object expected");
+                                    message.tagFilters[i] = $root.google.privacy.dlp.v2.TagFilter.fromObject(object.tagFilters[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilters} message TagFilters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tagFilters = [];
+                            if (message.tagFilters && message.tagFilters.length) {
+                                object.tagFilters = [];
+                                for (var j = 0; j < message.tagFilters.length; ++j)
+                                    object.tagFilters[j] = $root.google.privacy.dlp.v2.TagFilter.toObject(message.tagFilters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilters to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilters
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilters";
+                        };
+    
+                        return TagFilters;
+                    })();
+    
+                    v2.TagFilter = (function() {
+    
+                        /**
+                         * Properties of a TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilter
+                         * @property {string|null} [namespacedTagValue] TagFilter namespacedTagValue
+                         * @property {string|null} [namespacedTagKey] TagFilter namespacedTagKey
+                         */
+    
+                        /**
+                         * Constructs a new TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilter.
+                         * @implements ITagFilter
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         */
+                        function TagFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilter namespacedTagValue.
+                         * @member {string|null|undefined} namespacedTagValue
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagValue = null;
+    
+                        /**
+                         * TagFilter namespacedTagKey.
+                         * @member {string|null|undefined} namespacedTagKey
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TagFilter format.
+                         * @member {"namespacedTagValue"|"namespacedTagKey"|undefined} format
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        Object.defineProperty(TagFilter.prototype, "format", {
+                            get: $util.oneOfGetter($oneOfFields = ["namespacedTagValue", "namespacedTagKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TagFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter instance
+                         */
+                        TagFilter.create = function create(properties) {
+                            return new TagFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespacedTagValue != null && Object.hasOwnProperty.call(message, "namespacedTagValue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespacedTagValue);
+                            if (message.namespacedTagKey != null && Object.hasOwnProperty.call(message, "namespacedTagKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespacedTagKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.namespacedTagValue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.namespacedTagKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilter message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagValue))
+                                    return "namespacedTagValue: string expected";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                if (properties.format === 1)
+                                    return "format: multiple values";
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagKey))
+                                    return "namespacedTagKey: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         */
+                        TagFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilter)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilter();
+                            if (object.namespacedTagValue != null)
+                                message.namespacedTagValue = String(object.namespacedTagValue);
+                            if (object.namespacedTagKey != null)
+                                message.namespacedTagKey = String(object.namespacedTagKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilter} message TagFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                object.namespacedTagValue = message.namespacedTagValue;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagValue";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                object.namespacedTagKey = message.namespacedTagKey;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagKey";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilter
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilter";
+                        };
+    
+                        return TagFilter;
                     })();
     
                     v2.RelatedResource = (function() {
@@ -94017,6 +95225,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IProcessingLocation
                          * @property {google.privacy.dlp.v2.ProcessingLocation.IImageFallbackLocation|null} [imageFallbackLocation] ProcessingLocation imageFallbackLocation
+                         * @property {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation|null} [documentFallbackLocation] ProcessingLocation documentFallbackLocation
                          */
     
                         /**
@@ -94041,6 +95250,14 @@
                          * @instance
                          */
                         ProcessingLocation.prototype.imageFallbackLocation = null;
+    
+                        /**
+                         * ProcessingLocation documentFallbackLocation.
+                         * @member {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation|null|undefined} documentFallbackLocation
+                         * @memberof google.privacy.dlp.v2.ProcessingLocation
+                         * @instance
+                         */
+                        ProcessingLocation.prototype.documentFallbackLocation = null;
     
                         /**
                          * Creates a new ProcessingLocation instance using the specified properties.
@@ -94068,6 +95285,8 @@
                                 writer = $Writer.create();
                             if (message.imageFallbackLocation != null && Object.hasOwnProperty.call(message, "imageFallbackLocation"))
                                 $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.encode(message.imageFallbackLocation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.documentFallbackLocation != null && Object.hasOwnProperty.call(message, "documentFallbackLocation"))
+                                $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.encode(message.documentFallbackLocation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -94106,6 +95325,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -94148,6 +95371,11 @@
                                 if (error)
                                     return "imageFallbackLocation." + error;
                             }
+                            if (message.documentFallbackLocation != null && message.hasOwnProperty("documentFallbackLocation")) {
+                                var error = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify(message.documentFallbackLocation);
+                                if (error)
+                                    return "documentFallbackLocation." + error;
+                            }
                             return null;
                         };
     
@@ -94168,6 +95396,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.imageFallbackLocation: object expected");
                                 message.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.fromObject(object.imageFallbackLocation);
                             }
+                            if (object.documentFallbackLocation != null) {
+                                if (typeof object.documentFallbackLocation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.documentFallbackLocation: object expected");
+                                message.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.fromObject(object.documentFallbackLocation);
+                            }
                             return message;
                         };
     
@@ -94184,10 +95417,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.imageFallbackLocation = null;
+                                object.documentFallbackLocation = null;
+                            }
                             if (message.imageFallbackLocation != null && message.hasOwnProperty("imageFallbackLocation"))
                                 object.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.toObject(message.imageFallbackLocation, options);
+                            if (message.documentFallbackLocation != null && message.hasOwnProperty("documentFallbackLocation"))
+                                object.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.toObject(message.documentFallbackLocation, options);
                             return object;
                         };
     
@@ -94810,6 +96047,245 @@
                             return ImageFallbackLocation;
                         })();
     
+                        ProcessingLocation.DocumentFallbackLocation = (function() {
+    
+                            /**
+                             * Properties of a DocumentFallbackLocation.
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation
+                             * @interface IDocumentFallbackLocation
+                             * @property {google.privacy.dlp.v2.ProcessingLocation.IMultiRegionProcessing|null} [multiRegionProcessing] DocumentFallbackLocation multiRegionProcessing
+                             * @property {google.privacy.dlp.v2.ProcessingLocation.IGlobalProcessing|null} [globalProcessing] DocumentFallbackLocation globalProcessing
+                             */
+    
+                            /**
+                             * Constructs a new DocumentFallbackLocation.
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation
+                             * @classdesc Represents a DocumentFallbackLocation.
+                             * @implements IDocumentFallbackLocation
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation=} [properties] Properties to set
+                             */
+                            function DocumentFallbackLocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DocumentFallbackLocation multiRegionProcessing.
+                             * @member {google.privacy.dlp.v2.ProcessingLocation.IMultiRegionProcessing|null|undefined} multiRegionProcessing
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             */
+                            DocumentFallbackLocation.prototype.multiRegionProcessing = null;
+    
+                            /**
+                             * DocumentFallbackLocation globalProcessing.
+                             * @member {google.privacy.dlp.v2.ProcessingLocation.IGlobalProcessing|null|undefined} globalProcessing
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             */
+                            DocumentFallbackLocation.prototype.globalProcessing = null;
+    
+                            /**
+                             * Creates a new DocumentFallbackLocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation instance
+                             */
+                            DocumentFallbackLocation.create = function create(properties) {
+                                return new DocumentFallbackLocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DocumentFallbackLocation message. Does not implicitly {@link google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation} message DocumentFallbackLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DocumentFallbackLocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiRegionProcessing != null && Object.hasOwnProperty.call(message, "multiRegionProcessing"))
+                                    $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.encode(message.multiRegionProcessing, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                                if (message.globalProcessing != null && Object.hasOwnProperty.call(message, "globalProcessing"))
+                                    $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.encode(message.globalProcessing, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DocumentFallbackLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation} message DocumentFallbackLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DocumentFallbackLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DocumentFallbackLocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DocumentFallbackLocation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 100: {
+                                            message.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 200: {
+                                            message.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DocumentFallbackLocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DocumentFallbackLocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DocumentFallbackLocation message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DocumentFallbackLocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiRegionProcessing != null && message.hasOwnProperty("multiRegionProcessing")) {
+                                    var error = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.verify(message.multiRegionProcessing);
+                                    if (error)
+                                        return "multiRegionProcessing." + error;
+                                }
+                                if (message.globalProcessing != null && message.hasOwnProperty("globalProcessing")) {
+                                    var error = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.verify(message.globalProcessing);
+                                    if (error)
+                                        return "globalProcessing." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DocumentFallbackLocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             */
+                            DocumentFallbackLocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation();
+                                if (object.multiRegionProcessing != null) {
+                                    if (typeof object.multiRegionProcessing !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.multiRegionProcessing: object expected");
+                                    message.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.fromObject(object.multiRegionProcessing);
+                                }
+                                if (object.globalProcessing != null) {
+                                    if (typeof object.globalProcessing !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.globalProcessing: object expected");
+                                    message.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.fromObject(object.globalProcessing);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DocumentFallbackLocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} message DocumentFallbackLocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DocumentFallbackLocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.multiRegionProcessing = null;
+                                    object.globalProcessing = null;
+                                }
+                                if (message.multiRegionProcessing != null && message.hasOwnProperty("multiRegionProcessing"))
+                                    object.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.toObject(message.multiRegionProcessing, options);
+                                if (message.globalProcessing != null && message.hasOwnProperty("globalProcessing"))
+                                    object.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.toObject(message.globalProcessing, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DocumentFallbackLocation to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DocumentFallbackLocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DocumentFallbackLocation
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DocumentFallbackLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation";
+                            };
+    
+                            return DocumentFallbackLocation;
+                        })();
+    
                         return ProcessingLocation;
                     })();
     
@@ -95037,6 +96513,367 @@
                         };
     
                         return SaveToGcsFindingsOutput;
+                    })();
+    
+                    v2.Domain = (function() {
+    
+                        /**
+                         * Properties of a Domain.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IDomain
+                         * @property {google.privacy.dlp.v2.Domain.Category|null} [category] Domain category
+                         * @property {Array.<google.privacy.dlp.v2.Domain.Signal>|null} [signals] Domain signals
+                         */
+    
+                        /**
+                         * Constructs a new Domain.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a Domain.
+                         * @implements IDomain
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IDomain=} [properties] Properties to set
+                         */
+                        function Domain(properties) {
+                            this.signals = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Domain category.
+                         * @member {google.privacy.dlp.v2.Domain.Category} category
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         */
+                        Domain.prototype.category = 0;
+    
+                        /**
+                         * Domain signals.
+                         * @member {Array.<google.privacy.dlp.v2.Domain.Signal>} signals
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         */
+                        Domain.prototype.signals = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Domain instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Domain} Domain instance
+                         */
+                        Domain.create = function create(properties) {
+                            return new Domain(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Domain message. Does not implicitly {@link google.privacy.dlp.v2.Domain.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain} message Domain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Domain.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                            if (message.signals != null && message.signals.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.signals.length; ++i)
+                                    writer.int32(message.signals[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Domain message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Domain.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain} message Domain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Domain.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Domain message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Domain.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Domain();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.signals && message.signals.length))
+                                            message.signals = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.signals.push(reader.int32());
+                                        } else
+                                            message.signals.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Domain message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Domain.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Domain message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Domain.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.signals != null && message.hasOwnProperty("signals")) {
+                                if (!Array.isArray(message.signals))
+                                    return "signals: array expected";
+                                for (var i = 0; i < message.signals.length; ++i)
+                                    switch (message.signals[i]) {
+                                    default:
+                                        return "signals: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Domain message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         */
+                        Domain.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Domain)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.Domain();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "AI":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "CODE":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            }
+                            if (object.signals) {
+                                if (!Array.isArray(object.signals))
+                                    throw TypeError(".google.privacy.dlp.v2.Domain.signals: array expected");
+                                message.signals = [];
+                                for (var i = 0; i < object.signals.length; ++i)
+                                    switch (object.signals[i]) {
+                                    default:
+                                        if (typeof object.signals[i] === "number") {
+                                            message.signals[i] = object.signals[i];
+                                            break;
+                                        }
+                                    case "SIGNAL_UNSPECIFIED":
+                                    case 0:
+                                        message.signals[i] = 0;
+                                        break;
+                                    case "MODEL":
+                                    case 1:
+                                        message.signals[i] = 1;
+                                        break;
+                                    case "TEXT_EMBEDDING":
+                                    case 2:
+                                        message.signals[i] = 2;
+                                        break;
+                                    case "VERTEX_PLUGIN":
+                                    case 3:
+                                        message.signals[i] = 3;
+                                        break;
+                                    case "VECTOR_PLUGIN":
+                                    case 4:
+                                        message.signals[i] = 4;
+                                        break;
+                                    case "SOURCE_CODE":
+                                    case 5:
+                                        message.signals[i] = 5;
+                                        break;
+                                    case "SERVICE":
+                                    case 6:
+                                        message.signals[i] = 6;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Domain message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.Domain} message Domain
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Domain.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.signals = [];
+                            if (options.defaults)
+                                object.category = options.enums === String ? "CATEGORY_UNSPECIFIED" : 0;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.privacy.dlp.v2.Domain.Category[message.category] === undefined ? message.category : $root.google.privacy.dlp.v2.Domain.Category[message.category] : message.category;
+                            if (message.signals && message.signals.length) {
+                                object.signals = [];
+                                for (var j = 0; j < message.signals.length; ++j)
+                                    object.signals[j] = options.enums === String ? $root.google.privacy.dlp.v2.Domain.Signal[message.signals[j]] === undefined ? message.signals[j] : $root.google.privacy.dlp.v2.Domain.Signal[message.signals[j]] : message.signals[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Domain to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Domain.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Domain
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Domain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Domain";
+                        };
+    
+                        /**
+                         * Category enum.
+                         * @name google.privacy.dlp.v2.Domain.Category
+                         * @enum {number}
+                         * @property {number} CATEGORY_UNSPECIFIED=0 CATEGORY_UNSPECIFIED value
+                         * @property {number} AI=1 AI value
+                         * @property {number} CODE=2 CODE value
+                         */
+                        Domain.Category = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CATEGORY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI"] = 1;
+                            values[valuesById[2] = "CODE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Signal enum.
+                         * @name google.privacy.dlp.v2.Domain.Signal
+                         * @enum {number}
+                         * @property {number} SIGNAL_UNSPECIFIED=0 SIGNAL_UNSPECIFIED value
+                         * @property {number} MODEL=1 MODEL value
+                         * @property {number} TEXT_EMBEDDING=2 TEXT_EMBEDDING value
+                         * @property {number} VERTEX_PLUGIN=3 VERTEX_PLUGIN value
+                         * @property {number} VECTOR_PLUGIN=4 VECTOR_PLUGIN value
+                         * @property {number} SOURCE_CODE=5 SOURCE_CODE value
+                         * @property {number} SERVICE=6 SERVICE value
+                         */
+                        Domain.Signal = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SIGNAL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODEL"] = 1;
+                            values[valuesById[2] = "TEXT_EMBEDDING"] = 2;
+                            values[valuesById[3] = "VERTEX_PLUGIN"] = 3;
+                            values[valuesById[4] = "VECTOR_PLUGIN"] = 4;
+                            values[valuesById[5] = "SOURCE_CODE"] = 5;
+                            values[valuesById[6] = "SERVICE"] = 6;
+                            return values;
+                        })();
+    
+                        return Domain;
                     })();
     
                     v2.InfoType = (function() {

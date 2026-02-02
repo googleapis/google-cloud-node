@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,10 @@ const apihub = require('@google-cloud/apihub');
 
 function main() {
   const apiHubClient = new apihub.ApiHubClient();
+  const apiHubCollectClient = new apihub.ApiHubCollectClient();
+  const apiHubCurateClient = new apihub.ApiHubCurateClient();
   const apiHubDependenciesClient = new apihub.ApiHubDependenciesClient();
+  const apiHubDiscoveryClient = new apihub.ApiHubDiscoveryClient();
   const apiHubPluginClient = new apihub.ApiHubPluginClient();
   const hostProjectRegistrationServiceClient = new apihub.HostProjectRegistrationServiceClient();
   const lintingServiceClient = new apihub.LintingServiceClient();

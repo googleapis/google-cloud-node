@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ export {GlobalNetworkEndpointGroupsClient} from './global_network_endpoint_group
 export {GlobalOperationsClient} from './global_operations_client';
 export {GlobalOrganizationOperationsClient} from './global_organization_operations_client';
 export {GlobalPublicDelegatedPrefixesClient} from './global_public_delegated_prefixes_client';
+export {GlobalVmExtensionPoliciesClient} from './global_vm_extension_policies_client';
 export {HealthChecksClient} from './health_checks_client';
 export {ImageFamilyViewsClient} from './image_family_views_client';
 export {ImagesClient} from './images_client';
@@ -73,22 +74,28 @@ export {ProjectsClient} from './projects_client';
 export {PublicAdvertisedPrefixesClient} from './public_advertised_prefixes_client';
 export {PublicDelegatedPrefixesClient} from './public_delegated_prefixes_client';
 export {RegionAutoscalersClient} from './region_autoscalers_client';
+export {RegionBackendBucketsClient} from './region_backend_buckets_client';
 export {RegionBackendServicesClient} from './region_backend_services_client';
 export {RegionCommitmentsClient} from './region_commitments_client';
+export {RegionCompositeHealthChecksClient} from './region_composite_health_checks_client';
 export {RegionDisksClient} from './region_disks_client';
 export {RegionDiskSettingsClient} from './region_disk_settings_client';
 export {RegionDiskTypesClient} from './region_disk_types_client';
+export {RegionHealthAggregationPoliciesClient} from './region_health_aggregation_policies_client';
 export {RegionHealthChecksClient} from './region_health_checks_client';
 export {RegionHealthCheckServicesClient} from './region_health_check_services_client';
+export {RegionHealthSourcesClient} from './region_health_sources_client';
 export {RegionInstanceGroupManagerResizeRequestsClient} from './region_instance_group_manager_resize_requests_client';
 export {RegionInstanceGroupManagersClient} from './region_instance_group_managers_client';
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
 export {RegionInstanceTemplatesClient} from './region_instance_templates_client';
 export {RegionInstantSnapshotsClient} from './region_instant_snapshots_client';
+export {RegionMultiMigMembersClient} from './region_multi_mig_members_client';
 export {RegionMultiMigsClient} from './region_multi_migs_client';
 export {RegionNetworkEndpointGroupsClient} from './region_network_endpoint_groups_client';
 export {RegionNetworkFirewallPoliciesClient} from './region_network_firewall_policies_client';
+export {RegionNetworkPoliciesClient} from './region_network_policies_client';
 export {RegionNotificationEndpointsClient} from './region_notification_endpoints_client';
 export {RegionOperationsClient} from './region_operations_client';
 export {RegionsClient} from './regions_client';
@@ -106,6 +113,8 @@ export {ReservationBlocksClient} from './reservation_blocks_client';
 export {ReservationsClient} from './reservations_client';
 export {ReservationSubBlocksClient} from './reservation_sub_blocks_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
+export {RolloutPlansClient} from './rollout_plans_client';
+export {RolloutsClient} from './rollouts_client';
 export {RoutersClient} from './routers_client';
 export {RoutesClient} from './routes_client';
 export {SecurityPoliciesClient} from './security_policies_client';
@@ -131,3 +140,4 @@ export {VpnTunnelsClient} from './vpn_tunnels_client';
 export {WireGroupsClient} from './wire_groups_client';
 export {ZoneOperationsClient} from './zone_operations_client';
 export {ZonesClient} from './zones_client';
+export {ZoneVmExtensionPoliciesClient} from './zone_vm_extension_policies_client';

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -746,6 +746,7 @@
                      * @property {number} POSTGRES_14=2 POSTGRES_14 value
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=5 POSTGRES_17 value
                      */
                     v1.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -754,6 +755,7 @@
                         values[valuesById[2] = "POSTGRES_14"] = 2;
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
+                        values[valuesById[5] = "POSTGRES_17"] = 5;
                         return values;
                     })();
     
@@ -6248,6 +6250,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -6509,6 +6512,10 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
                                 break;
                             }
                             if (object.networkConfig != null) {
@@ -8067,6 +8074,7 @@
                          * @property {google.cloud.alloydb.v1.Instance.IInstanceNetworkConfig|null} [networkConfig] Instance networkConfig
                          * @property {Array.<string>|null} [outboundPublicIpAddresses] Instance outboundPublicIpAddresses
                          * @property {google.cloud.alloydb.v1.Instance.ActivationPolicy|null} [activationPolicy] Instance activationPolicy
+                         * @property {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig|null} [connectionPoolConfig] Instance connectionPoolConfig
                          */
     
                         /**
@@ -8322,6 +8330,14 @@
                         Instance.prototype.activationPolicy = 0;
     
                         /**
+                         * Instance connectionPoolConfig.
+                         * @member {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig|null|undefined} connectionPoolConfig
+                         * @memberof google.cloud.alloydb.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.connectionPoolConfig = null;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.alloydb.v1.Instance
@@ -8408,6 +8424,8 @@
                                     writer.uint32(/* id 34, wireType 2 =*/274).string(message.outboundPublicIpAddresses[i]);
                             if (message.activationPolicy != null && Object.hasOwnProperty.call(message, "activationPolicy"))
                                 writer.uint32(/* id 35, wireType 0 =*/280).int32(message.activationPolicy);
+                            if (message.connectionPoolConfig != null && Object.hasOwnProperty.call(message, "connectionPoolConfig"))
+                                $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.encode(message.connectionPoolConfig, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
                             return writer;
                         };
     
@@ -8621,6 +8639,10 @@
                                         message.activationPolicy = reader.int32();
                                         break;
                                     }
+                                case 37: {
+                                        message.connectionPoolConfig = $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -8821,6 +8843,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.connectionPoolConfig != null && message.hasOwnProperty("connectionPoolConfig")) {
+                                var error = $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.verify(message.connectionPoolConfig);
+                                if (error)
+                                    return "connectionPoolConfig." + error;
+                            }
                             return null;
                         };
     
@@ -9055,6 +9082,11 @@
                                 message.activationPolicy = 2;
                                 break;
                             }
+                            if (object.connectionPoolConfig != null) {
+                                if (typeof object.connectionPoolConfig !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1.Instance.connectionPoolConfig: object expected");
+                                message.connectionPoolConfig = $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.fromObject(object.connectionPoolConfig);
+                            }
                             return message;
                         };
     
@@ -9105,6 +9137,7 @@
                                 object.pscInstanceConfig = null;
                                 object.networkConfig = null;
                                 object.activationPolicy = options.enums === String ? "ACTIVATION_POLICY_UNSPECIFIED" : 0;
+                                object.connectionPoolConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9180,6 +9213,8 @@
                             }
                             if (message.activationPolicy != null && message.hasOwnProperty("activationPolicy"))
                                 object.activationPolicy = options.enums === String ? $root.google.cloud.alloydb.v1.Instance.ActivationPolicy[message.activationPolicy] === undefined ? message.activationPolicy : $root.google.cloud.alloydb.v1.Instance.ActivationPolicy[message.activationPolicy] : message.activationPolicy;
+                            if (message.connectionPoolConfig != null && message.hasOwnProperty("connectionPoolConfig"))
+                                object.connectionPoolConfig = $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.toObject(message.connectionPoolConfig, options);
                             return object;
                         };
     
@@ -12295,6 +12330,294 @@
                             return InstanceNetworkConfig;
                         })();
     
+                        Instance.ConnectionPoolConfig = (function() {
+    
+                            /**
+                             * Properties of a ConnectionPoolConfig.
+                             * @memberof google.cloud.alloydb.v1.Instance
+                             * @interface IConnectionPoolConfig
+                             * @property {boolean|null} [enabled] ConnectionPoolConfig enabled
+                             * @property {Object.<string,string>|null} [flags] ConnectionPoolConfig flags
+                             * @property {number|null} [poolerCount] ConnectionPoolConfig poolerCount
+                             */
+    
+                            /**
+                             * Constructs a new ConnectionPoolConfig.
+                             * @memberof google.cloud.alloydb.v1.Instance
+                             * @classdesc Represents a ConnectionPoolConfig.
+                             * @implements IConnectionPoolConfig
+                             * @constructor
+                             * @param {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig=} [properties] Properties to set
+                             */
+                            function ConnectionPoolConfig(properties) {
+                                this.flags = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectionPoolConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.enabled = false;
+    
+                            /**
+                             * ConnectionPoolConfig flags.
+                             * @member {Object.<string,string>} flags
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.flags = $util.emptyObject;
+    
+                            /**
+                             * ConnectionPoolConfig poolerCount.
+                             * @member {number} poolerCount
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.poolerCount = 0;
+    
+                            /**
+                             * Creates a new ConnectionPoolConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig=} [properties] Properties to set
+                             * @returns {google.cloud.alloydb.v1.Instance.ConnectionPoolConfig} ConnectionPoolConfig instance
+                             */
+                            ConnectionPoolConfig.create = function create(properties) {
+                                return new ConnectionPoolConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig} message ConnectionPoolConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionPoolConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enabled);
+                                if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+                                    for (var keys = Object.keys(message.flags), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.flags[keys[i]]).ldelim();
+                                if (message.poolerCount != null && Object.hasOwnProperty.call(message, "poolerCount"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.poolerCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Instance.IConnectionPoolConfig} message ConnectionPoolConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionPoolConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.alloydb.v1.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionPoolConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 12: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (message.flags === $util.emptyObject)
+                                                message.flags = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.flags[key] = value;
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.poolerCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.alloydb.v1.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionPoolConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectionPoolConfig message.
+                             * @function verify
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectionPoolConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.flags != null && message.hasOwnProperty("flags")) {
+                                    if (!$util.isObject(message.flags))
+                                        return "flags: object expected";
+                                    var key = Object.keys(message.flags);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.flags[key[i]]))
+                                            return "flags: string{k:string} expected";
+                                }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    if (!$util.isInteger(message.poolerCount))
+                                        return "poolerCount: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.alloydb.v1.Instance.ConnectionPoolConfig} ConnectionPoolConfig
+                             */
+                            ConnectionPoolConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig)
+                                    return object;
+                                var message = new $root.google.cloud.alloydb.v1.Instance.ConnectionPoolConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.flags) {
+                                    if (typeof object.flags !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.flags: object expected");
+                                    message.flags = {};
+                                    for (var keys = Object.keys(object.flags), i = 0; i < keys.length; ++i)
+                                        message.flags[keys[i]] = String(object.flags[keys[i]]);
+                                }
+                                if (object.poolerCount != null)
+                                    message.poolerCount = object.poolerCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {google.cloud.alloydb.v1.Instance.ConnectionPoolConfig} message ConnectionPoolConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectionPoolConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.flags = {};
+                                if (options.defaults) {
+                                    object.enabled = false;
+                                    object.poolerCount = 0;
+                                }
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                var keys2;
+                                if (message.flags && (keys2 = Object.keys(message.flags)).length) {
+                                    object.flags = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.flags[keys2[j]] = message.flags[keys2[j]];
+                                }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    object.poolerCount = message.poolerCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectionPoolConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectionPoolConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectionPoolConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.alloydb.v1.Instance.ConnectionPoolConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectionPoolConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.alloydb.v1.Instance.ConnectionPoolConfig";
+                            };
+    
+                            return ConnectionPoolConfig;
+                        })();
+    
                         /**
                          * State enum.
                          * @name google.cloud.alloydb.v1.Instance.State
@@ -13308,6 +13631,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -13492,6 +13816,10 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
                                 break;
                             }
                             if (object.tags) {
@@ -14295,6 +14623,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -14406,6 +14735,10 @@
                                     case "POSTGRES_16":
                                     case 4:
                                         message.supportedDbVersions[i] = 4;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 5:
+                                        message.supportedDbVersions[i] = 5;
                                         break;
                                     }
                             }
@@ -15386,6 +15719,9 @@
                          * @property {string|null} [name] Database name
                          * @property {string|null} [charset] Database charset
                          * @property {string|null} [collation] Database collation
+                         * @property {string|null} [characterType] Database characterType
+                         * @property {string|null} [databaseTemplate] Database databaseTemplate
+                         * @property {boolean|null} [isTemplateDatabase] Database isTemplateDatabase
                          */
     
                         /**
@@ -15428,6 +15764,39 @@
                         Database.prototype.collation = "";
     
                         /**
+                         * Database characterType.
+                         * @member {string} characterType
+                         * @memberof google.cloud.alloydb.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.characterType = "";
+    
+                        /**
+                         * Database databaseTemplate.
+                         * @member {string} databaseTemplate
+                         * @memberof google.cloud.alloydb.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.databaseTemplate = "";
+    
+                        /**
+                         * Database isTemplateDatabase.
+                         * @member {boolean|null|undefined} isTemplateDatabase
+                         * @memberof google.cloud.alloydb.v1.Database
+                         * @instance
+                         */
+                        Database.prototype.isTemplateDatabase = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Database.prototype, "_isTemplateDatabase", {
+                            get: $util.oneOfGetter($oneOfFields = ["isTemplateDatabase"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Database instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.alloydb.v1.Database
@@ -15457,6 +15826,12 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.charset);
                             if (message.collation != null && Object.hasOwnProperty.call(message, "collation"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.collation);
+                            if (message.characterType != null && Object.hasOwnProperty.call(message, "characterType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.characterType);
+                            if (message.databaseTemplate != null && Object.hasOwnProperty.call(message, "databaseTemplate"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.databaseTemplate);
+                            if (message.isTemplateDatabase != null && Object.hasOwnProperty.call(message, "isTemplateDatabase"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isTemplateDatabase);
                             return writer;
                         };
     
@@ -15505,6 +15880,18 @@
                                         message.collation = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.characterType = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.databaseTemplate = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.isTemplateDatabase = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15540,6 +15927,7 @@
                         Database.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -15549,6 +15937,17 @@
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 if (!$util.isString(message.collation))
                                     return "collation: string expected";
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                if (!$util.isString(message.characterType))
+                                    return "characterType: string expected";
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                if (!$util.isString(message.databaseTemplate))
+                                    return "databaseTemplate: string expected";
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                properties._isTemplateDatabase = 1;
+                                if (typeof message.isTemplateDatabase !== "boolean")
+                                    return "isTemplateDatabase: boolean expected";
+                            }
                             return null;
                         };
     
@@ -15570,6 +15969,12 @@
                                 message.charset = String(object.charset);
                             if (object.collation != null)
                                 message.collation = String(object.collation);
+                            if (object.characterType != null)
+                                message.characterType = String(object.characterType);
+                            if (object.databaseTemplate != null)
+                                message.databaseTemplate = String(object.databaseTemplate);
+                            if (object.isTemplateDatabase != null)
+                                message.isTemplateDatabase = Boolean(object.isTemplateDatabase);
                             return message;
                         };
     
@@ -15590,6 +15995,8 @@
                                 object.name = "";
                                 object.charset = "";
                                 object.collation = "";
+                                object.characterType = "";
+                                object.databaseTemplate = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -15597,6 +16004,15 @@
                                 object.charset = message.charset;
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 object.collation = message.collation;
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                object.characterType = message.characterType;
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                object.databaseTemplate = message.databaseTemplate;
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                object.isTemplateDatabase = message.isTemplateDatabase;
+                                if (options.oneofs)
+                                    object._isTemplateDatabase = "isTemplateDatabase";
+                            }
                             return object;
                         };
     
@@ -21303,6 +21719,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -21357,6 +21774,10 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.version = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.version = 5;
                                 break;
                             }
                             if (object.requestId != null)
@@ -22681,6 +23102,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -22804,6 +23226,10 @@
                                 case "POSTGRES_16":
                                 case 4:
                                     message.databaseVersion = 4;
+                                    break;
+                                case "POSTGRES_17":
+                                case 5:
+                                    message.databaseVersion = 5;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -28434,6 +28860,7 @@
                          * @property {string|null} [database] ExecuteSqlRequest database
                          * @property {string|null} [user] ExecuteSqlRequest user
                          * @property {string|null} [sqlStatement] ExecuteSqlRequest sqlStatement
+                         * @property {boolean|null} [validateOnly] ExecuteSqlRequest validateOnly
                          */
     
                         /**
@@ -28491,6 +28918,14 @@
                          */
                         ExecuteSqlRequest.prototype.sqlStatement = "";
     
+                        /**
+                         * ExecuteSqlRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.alloydb.v1.ExecuteSqlRequest
+                         * @instance
+                         */
+                        ExecuteSqlRequest.prototype.validateOnly = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -28539,6 +28974,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.sqlStatement);
                             if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.password);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
                             return writer;
                         };
     
@@ -28595,6 +29032,10 @@
                                         message.sqlStatement = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28648,6 +29089,9 @@
                             if (message.sqlStatement != null && message.hasOwnProperty("sqlStatement"))
                                 if (!$util.isString(message.sqlStatement))
                                     return "sqlStatement: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
                             return null;
                         };
     
@@ -28673,6 +29117,8 @@
                                 message.user = String(object.user);
                             if (object.sqlStatement != null)
                                 message.sqlStatement = String(object.sqlStatement);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
                             return message;
                         };
     
@@ -28694,6 +29140,7 @@
                                 object.database = "";
                                 object.user = "";
                                 object.sqlStatement = "";
+                                object.validateOnly = false;
                             }
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 object.instance = message.instance;
@@ -28708,6 +29155,8 @@
                                 if (options.oneofs)
                                     object.userCredential = "password";
                             }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
                             return object;
                         };
     
@@ -32987,6 +33436,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -32998,6 +33448,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -33093,6 +33544,10 @@
                             case 4:
                                 message.sourceVersion = 4;
                                 break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.sourceVersion = 5;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -33120,6 +33575,10 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.targetVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.targetVersion = 5;
                                 break;
                             }
                             if (object.stages) {
@@ -33207,6 +33666,7 @@
                              * @property {google.cloud.alloydb.v1.UpgradeClusterStatus.IReadPoolInstancesUpgradeStageStatus|null} [readPoolInstancesUpgrade] StageStatus readPoolInstancesUpgrade
                              * @property {google.cloud.alloydb.v1.UpgradeClusterResponse.Stage|null} [stage] StageStatus stage
                              * @property {google.cloud.alloydb.v1.UpgradeClusterResponse.Status|null} [state] StageStatus state
+                             * @property {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule|null} [schedule] StageStatus schedule
                              */
     
                             /**
@@ -33247,6 +33707,14 @@
                              * @instance
                              */
                             StageStatus.prototype.state = 0;
+    
+                            /**
+                             * StageStatus schedule.
+                             * @member {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule|null|undefined} schedule
+                             * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus
+                             * @instance
+                             */
+                            StageStatus.prototype.schedule = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -33290,6 +33758,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stage);
                                 if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                if (message.schedule != null && Object.hasOwnProperty.call(message, "schedule"))
+                                    $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.encode(message.schedule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.readPoolInstancesUpgrade != null && Object.hasOwnProperty.call(message, "readPoolInstancesUpgrade"))
                                     $root.google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.encode(message.readPoolInstancesUpgrade, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
@@ -33338,6 +33808,10 @@
                                         }
                                     case 2: {
                                             message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.schedule = $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -33412,6 +33886,11 @@
                                     case 7:
                                         break;
                                     }
+                                if (message.schedule != null && message.hasOwnProperty("schedule")) {
+                                    var error = $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.verify(message.schedule);
+                                    if (error)
+                                        return "schedule." + error;
+                                }
                                 return null;
                             };
     
@@ -33512,6 +33991,11 @@
                                     message.state = 7;
                                     break;
                                 }
+                                if (object.schedule != null) {
+                                    if (typeof object.schedule !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.schedule: object expected");
+                                    message.schedule = $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.fromObject(object.schedule);
+                                }
                                 return message;
                             };
     
@@ -33531,11 +34015,14 @@
                                 if (options.defaults) {
                                     object.stage = options.enums === String ? "STAGE_UNSPECIFIED" : 0;
                                     object.state = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
+                                    object.schedule = null;
                                 }
                                 if (message.stage != null && message.hasOwnProperty("stage"))
                                     object.stage = options.enums === String ? $root.google.cloud.alloydb.v1.UpgradeClusterResponse.Stage[message.stage] === undefined ? message.stage : $root.google.cloud.alloydb.v1.UpgradeClusterResponse.Stage[message.stage] : message.stage;
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     object.state = options.enums === String ? $root.google.cloud.alloydb.v1.UpgradeClusterResponse.Status[message.state] === undefined ? message.state : $root.google.cloud.alloydb.v1.UpgradeClusterResponse.Status[message.state] : message.state;
+                                if (message.schedule != null && message.hasOwnProperty("schedule"))
+                                    object.schedule = $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.toObject(message.schedule, options);
                                 if (message.readPoolInstancesUpgrade != null && message.hasOwnProperty("readPoolInstancesUpgrade")) {
                                     object.readPoolInstancesUpgrade = $root.google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.toObject(message.readPoolInstancesUpgrade, options);
                                     if (options.oneofs)
@@ -33569,6 +34056,301 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus";
                             };
+    
+                            StageStatus.StageSchedule = (function() {
+    
+                                /**
+                                 * Properties of a StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus
+                                 * @interface IStageSchedule
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedStartTime] StageSchedule estimatedStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualStartTime] StageSchedule actualStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedEndTime] StageSchedule estimatedEndTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualEndTime] StageSchedule actualEndTime
+                                 */
+    
+                                /**
+                                 * Constructs a new StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus
+                                 * @classdesc Represents a StageSchedule.
+                                 * @implements IStageSchedule
+                                 * @constructor
+                                 * @param {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 */
+                                function StageSchedule(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StageSchedule estimatedStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedStartTime
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedStartTime = null;
+    
+                                /**
+                                 * StageSchedule actualStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualStartTime
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualStartTime = null;
+    
+                                /**
+                                 * StageSchedule estimatedEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedEndTime
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedEndTime = null;
+    
+                                /**
+                                 * StageSchedule actualEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualEndTime
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualEndTime = null;
+    
+                                /**
+                                 * Creates a new StageSchedule instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 * @returns {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule instance
+                                 */
+                                StageSchedule.create = function create(properties) {
+                                    return new StageSchedule(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.estimatedStartTime != null && Object.hasOwnProperty.call(message, "estimatedStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedStartTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.actualStartTime != null && Object.hasOwnProperty.call(message, "actualStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.estimatedEndTime != null && Object.hasOwnProperty.call(message, "estimatedEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedEndTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.actualEndTime != null && Object.hasOwnProperty.call(message, "actualEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualEndTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.estimatedStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.actualStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.estimatedEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.actualEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StageSchedule message.
+                                 * @function verify
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StageSchedule.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedStartTime);
+                                        if (error)
+                                            return "estimatedStartTime." + error;
+                                    }
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualStartTime);
+                                        if (error)
+                                            return "actualStartTime." + error;
+                                    }
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedEndTime);
+                                        if (error)
+                                            return "estimatedEndTime." + error;
+                                    }
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualEndTime);
+                                        if (error)
+                                            return "actualEndTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 */
+                                StageSchedule.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule)
+                                        return object;
+                                    var message = new $root.google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    if (object.estimatedStartTime != null) {
+                                        if (typeof object.estimatedStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedStartTime: object expected");
+                                        message.estimatedStartTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedStartTime);
+                                    }
+                                    if (object.actualStartTime != null) {
+                                        if (typeof object.actualStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.actualStartTime: object expected");
+                                        message.actualStartTime = $root.google.protobuf.Timestamp.fromObject(object.actualStartTime);
+                                    }
+                                    if (object.estimatedEndTime != null) {
+                                        if (typeof object.estimatedEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedEndTime: object expected");
+                                        message.estimatedEndTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedEndTime);
+                                    }
+                                    if (object.actualEndTime != null) {
+                                        if (typeof object.actualEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.actualEndTime: object expected");
+                                        message.actualEndTime = $root.google.protobuf.Timestamp.fromObject(object.actualEndTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule} message StageSchedule
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StageSchedule.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.estimatedStartTime = null;
+                                        object.actualStartTime = null;
+                                        object.estimatedEndTime = null;
+                                        object.actualEndTime = null;
+                                    }
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime"))
+                                        object.estimatedStartTime = $root.google.protobuf.Timestamp.toObject(message.estimatedStartTime, options);
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime"))
+                                        object.actualStartTime = $root.google.protobuf.Timestamp.toObject(message.actualStartTime, options);
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime"))
+                                        object.estimatedEndTime = $root.google.protobuf.Timestamp.toObject(message.estimatedEndTime, options);
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime"))
+                                        object.actualEndTime = $root.google.protobuf.Timestamp.toObject(message.actualEndTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StageSchedule to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StageSchedule.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StageSchedule
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StageSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule";
+                                };
+    
+                                return StageSchedule;
+                            })();
     
                             return StageStatus;
                         })();
@@ -37911,6 +38693,8 @@
                      * @property {number} POSTGRES_14=2 POSTGRES_14 value
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=5 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=6 POSTGRES_18 value
                      */
                     v1alpha.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -37919,6 +38703,8 @@
                         values[valuesById[2] = "POSTGRES_14"] = 2;
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
+                        values[valuesById[5] = "POSTGRES_17"] = 5;
+                        values[valuesById[6] = "POSTGRES_18"] = 6;
                         return values;
                     })();
     
@@ -43458,6 +44244,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -43730,6 +44518,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.networkConfig != null) {
@@ -49987,6 +50783,8 @@
                              * @memberof google.cloud.alloydb.v1alpha.Instance
                              * @interface IConnectionPoolConfig
                              * @property {boolean|null} [enabled] ConnectionPoolConfig enabled
+                             * @property {Object.<string,string>|null} [flags] ConnectionPoolConfig flags
+                             * @property {number|null} [poolerCount] ConnectionPoolConfig poolerCount
                              */
     
                             /**
@@ -49998,6 +50796,7 @@
                              * @param {google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig=} [properties] Properties to set
                              */
                             function ConnectionPoolConfig(properties) {
+                                this.flags = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -50011,6 +50810,22 @@
                              * @instance
                              */
                             ConnectionPoolConfig.prototype.enabled = false;
+    
+                            /**
+                             * ConnectionPoolConfig flags.
+                             * @member {Object.<string,string>} flags
+                             * @memberof google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.flags = $util.emptyObject;
+    
+                            /**
+                             * ConnectionPoolConfig poolerCount.
+                             * @member {number} poolerCount
+                             * @memberof google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.poolerCount = 0;
     
                             /**
                              * Creates a new ConnectionPoolConfig instance using the specified properties.
@@ -50038,6 +50853,11 @@
                                     writer = $Writer.create();
                                 if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                     writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enabled);
+                                if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
+                                    for (var keys = Object.keys(message.flags), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.flags[keys[i]]).ldelim();
+                                if (message.poolerCount != null && Object.hasOwnProperty.call(message, "poolerCount"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.poolerCount);
                                 return writer;
                             };
     
@@ -50068,7 +50888,7 @@
                             ConnectionPoolConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -50076,6 +50896,33 @@
                                     switch (tag >>> 3) {
                                     case 12: {
                                             message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 13: {
+                                            if (message.flags === $util.emptyObject)
+                                                message.flags = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.flags[key] = value;
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.poolerCount = reader.int32();
                                             break;
                                         }
                                     default:
@@ -50116,6 +50963,17 @@
                                 if (message.enabled != null && message.hasOwnProperty("enabled"))
                                     if (typeof message.enabled !== "boolean")
                                         return "enabled: boolean expected";
+                                if (message.flags != null && message.hasOwnProperty("flags")) {
+                                    if (!$util.isObject(message.flags))
+                                        return "flags: object expected";
+                                    var key = Object.keys(message.flags);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.flags[key[i]]))
+                                            return "flags: string{k:string} expected";
+                                }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    if (!$util.isInteger(message.poolerCount))
+                                        return "poolerCount: integer expected";
                                 return null;
                             };
     
@@ -50133,6 +50991,15 @@
                                 var message = new $root.google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig();
                                 if (object.enabled != null)
                                     message.enabled = Boolean(object.enabled);
+                                if (object.flags) {
+                                    if (typeof object.flags !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.flags: object expected");
+                                    message.flags = {};
+                                    for (var keys = Object.keys(object.flags), i = 0; i < keys.length; ++i)
+                                        message.flags[keys[i]] = String(object.flags[keys[i]]);
+                                }
+                                if (object.poolerCount != null)
+                                    message.poolerCount = object.poolerCount | 0;
                                 return message;
                             };
     
@@ -50149,10 +51016,22 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.objects || options.defaults)
+                                    object.flags = {};
+                                if (options.defaults) {
                                     object.enabled = false;
+                                    object.poolerCount = 0;
+                                }
                                 if (message.enabled != null && message.hasOwnProperty("enabled"))
                                     object.enabled = message.enabled;
+                                var keys2;
+                                if (message.flags && (keys2 = Object.keys(message.flags)).length) {
+                                    object.flags = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.flags[keys2[j]] = message.flags[keys2[j]];
+                                }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    object.poolerCount = message.poolerCount;
                                 return object;
                             };
     
@@ -50181,22 +51060,6 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig";
                             };
-    
-                            /**
-                             * PoolMode enum.
-                             * @name google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.PoolMode
-                             * @enum {number}
-                             * @property {number} POOL_MODE_UNSPECIFIED=0 POOL_MODE_UNSPECIFIED value
-                             * @property {number} POOL_MODE_SESSION=1 POOL_MODE_SESSION value
-                             * @property {number} POOL_MODE_TRANSACTION=2 POOL_MODE_TRANSACTION value
-                             */
-                            ConnectionPoolConfig.PoolMode = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "POOL_MODE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "POOL_MODE_SESSION"] = 1;
-                                values[valuesById[2] = "POOL_MODE_TRANSACTION"] = 2;
-                                return values;
-                            })();
     
                             return ConnectionPoolConfig;
                         })();
@@ -51295,6 +52158,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -51481,6 +52346,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.tags) {
@@ -52287,6 +53160,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -52398,6 +53273,14 @@
                                     case "POSTGRES_16":
                                     case 4:
                                         message.supportedDbVersions[i] = 4;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 5:
+                                        message.supportedDbVersions[i] = 5;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 6:
+                                        message.supportedDbVersions[i] = 6;
                                         break;
                                     }
                             }
@@ -53378,6 +54261,10 @@
                          * @property {string|null} [name] Database name
                          * @property {string|null} [charset] Database charset
                          * @property {string|null} [collation] Database collation
+                         * @property {string|null} [characterType] Database characterType
+                         * @property {boolean|null} [isTemplate] Database isTemplate
+                         * @property {string|null} [databaseTemplate] Database databaseTemplate
+                         * @property {boolean|null} [isTemplateDatabase] Database isTemplateDatabase
                          */
     
                         /**
@@ -53420,6 +54307,47 @@
                         Database.prototype.collation = "";
     
                         /**
+                         * Database characterType.
+                         * @member {string} characterType
+                         * @memberof google.cloud.alloydb.v1alpha.Database
+                         * @instance
+                         */
+                        Database.prototype.characterType = "";
+    
+                        /**
+                         * Database isTemplate.
+                         * @member {boolean} isTemplate
+                         * @memberof google.cloud.alloydb.v1alpha.Database
+                         * @instance
+                         */
+                        Database.prototype.isTemplate = false;
+    
+                        /**
+                         * Database databaseTemplate.
+                         * @member {string} databaseTemplate
+                         * @memberof google.cloud.alloydb.v1alpha.Database
+                         * @instance
+                         */
+                        Database.prototype.databaseTemplate = "";
+    
+                        /**
+                         * Database isTemplateDatabase.
+                         * @member {boolean|null|undefined} isTemplateDatabase
+                         * @memberof google.cloud.alloydb.v1alpha.Database
+                         * @instance
+                         */
+                        Database.prototype.isTemplateDatabase = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Database.prototype, "_isTemplateDatabase", {
+                            get: $util.oneOfGetter($oneOfFields = ["isTemplateDatabase"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Database instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.alloydb.v1alpha.Database
@@ -53449,6 +54377,14 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.charset);
                             if (message.collation != null && Object.hasOwnProperty.call(message, "collation"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.collation);
+                            if (message.characterType != null && Object.hasOwnProperty.call(message, "characterType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.characterType);
+                            if (message.isTemplate != null && Object.hasOwnProperty.call(message, "isTemplate"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isTemplate);
+                            if (message.databaseTemplate != null && Object.hasOwnProperty.call(message, "databaseTemplate"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.databaseTemplate);
+                            if (message.isTemplateDatabase != null && Object.hasOwnProperty.call(message, "isTemplateDatabase"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isTemplateDatabase);
                             return writer;
                         };
     
@@ -53497,6 +54433,22 @@
                                         message.collation = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.characterType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.isTemplate = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.databaseTemplate = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.isTemplateDatabase = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -53532,6 +54484,7 @@
                         Database.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -53541,6 +54494,20 @@
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 if (!$util.isString(message.collation))
                                     return "collation: string expected";
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                if (!$util.isString(message.characterType))
+                                    return "characterType: string expected";
+                            if (message.isTemplate != null && message.hasOwnProperty("isTemplate"))
+                                if (typeof message.isTemplate !== "boolean")
+                                    return "isTemplate: boolean expected";
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                if (!$util.isString(message.databaseTemplate))
+                                    return "databaseTemplate: string expected";
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                properties._isTemplateDatabase = 1;
+                                if (typeof message.isTemplateDatabase !== "boolean")
+                                    return "isTemplateDatabase: boolean expected";
+                            }
                             return null;
                         };
     
@@ -53562,6 +54529,14 @@
                                 message.charset = String(object.charset);
                             if (object.collation != null)
                                 message.collation = String(object.collation);
+                            if (object.characterType != null)
+                                message.characterType = String(object.characterType);
+                            if (object.isTemplate != null)
+                                message.isTemplate = Boolean(object.isTemplate);
+                            if (object.databaseTemplate != null)
+                                message.databaseTemplate = String(object.databaseTemplate);
+                            if (object.isTemplateDatabase != null)
+                                message.isTemplateDatabase = Boolean(object.isTemplateDatabase);
                             return message;
                         };
     
@@ -53582,6 +54557,9 @@
                                 object.name = "";
                                 object.charset = "";
                                 object.collation = "";
+                                object.characterType = "";
+                                object.isTemplate = false;
+                                object.databaseTemplate = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -53589,6 +54567,17 @@
                                 object.charset = message.charset;
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 object.collation = message.collation;
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                object.characterType = message.characterType;
+                            if (message.isTemplate != null && message.hasOwnProperty("isTemplate"))
+                                object.isTemplate = message.isTemplate;
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                object.databaseTemplate = message.databaseTemplate;
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                object.isTemplateDatabase = message.isTemplateDatabase;
+                                if (options.oneofs)
+                                    object._isTemplateDatabase = "isTemplateDatabase";
+                            }
                             return object;
                         };
     
@@ -55519,6 +56508,39 @@
                          * @instance
                          * @param {google.cloud.alloydb.v1alpha.IListDatabasesRequest} request ListDatabasesRequest message or plain object
                          * @returns {Promise<google.cloud.alloydb.v1alpha.ListDatabasesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.alloydb.v1alpha.AlloyDBAdmin|createDatabase}.
+                         * @memberof google.cloud.alloydb.v1alpha.AlloyDBAdmin
+                         * @typedef CreateDatabaseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.alloydb.v1alpha.Database} [response] Database
+                         */
+    
+                        /**
+                         * Calls CreateDatabase.
+                         * @function createDatabase
+                         * @memberof google.cloud.alloydb.v1alpha.AlloyDBAdmin
+                         * @instance
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest} request CreateDatabaseRequest message or plain object
+                         * @param {google.cloud.alloydb.v1alpha.AlloyDBAdmin.CreateDatabaseCallback} callback Node-style callback called with the error, if any, and Database
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlloyDBAdmin.prototype.createDatabase = function createDatabase(request, callback) {
+                            return this.rpcCall(createDatabase, $root.google.cloud.alloydb.v1alpha.CreateDatabaseRequest, $root.google.cloud.alloydb.v1alpha.Database, request, callback);
+                        }, "name", { value: "CreateDatabase" });
+    
+                        /**
+                         * Calls CreateDatabase.
+                         * @function createDatabase
+                         * @memberof google.cloud.alloydb.v1alpha.AlloyDBAdmin
+                         * @instance
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest} request CreateDatabaseRequest message or plain object
+                         * @returns {Promise<google.cloud.alloydb.v1alpha.Database>} Promise
                          * @variation 2
                          */
     
@@ -59943,6 +60965,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -59997,6 +61021,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.version = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.version = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.version = 6;
                                 break;
                             }
                             if (object.requestId != null)
@@ -61321,6 +62353,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -61444,6 +62478,14 @@
                                 case "POSTGRES_16":
                                 case 4:
                                     message.databaseVersion = 4;
+                                    break;
+                                case "POSTGRES_17":
+                                case 5:
+                                    message.databaseVersion = 5;
+                                    break;
+                                case "POSTGRES_18":
+                                case 6:
+                                    message.databaseVersion = 6;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -67074,6 +68116,7 @@
                          * @property {string|null} [database] ExecuteSqlRequest database
                          * @property {string|null} [user] ExecuteSqlRequest user
                          * @property {string|null} [sqlStatement] ExecuteSqlRequest sqlStatement
+                         * @property {boolean|null} [validateOnly] ExecuteSqlRequest validateOnly
                          */
     
                         /**
@@ -67131,6 +68174,14 @@
                          */
                         ExecuteSqlRequest.prototype.sqlStatement = "";
     
+                        /**
+                         * ExecuteSqlRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.alloydb.v1alpha.ExecuteSqlRequest
+                         * @instance
+                         */
+                        ExecuteSqlRequest.prototype.validateOnly = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -67179,6 +68230,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.sqlStatement);
                             if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.password);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
                             return writer;
                         };
     
@@ -67235,6 +68288,10 @@
                                         message.sqlStatement = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -67288,6 +68345,9 @@
                             if (message.sqlStatement != null && message.hasOwnProperty("sqlStatement"))
                                 if (!$util.isString(message.sqlStatement))
                                     return "sqlStatement: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
                             return null;
                         };
     
@@ -67313,6 +68373,8 @@
                                 message.user = String(object.user);
                             if (object.sqlStatement != null)
                                 message.sqlStatement = String(object.sqlStatement);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
                             return message;
                         };
     
@@ -67334,6 +68396,7 @@
                                 object.database = "";
                                 object.user = "";
                                 object.sqlStatement = "";
+                                object.validateOnly = false;
                             }
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 object.instance = message.instance;
@@ -67348,6 +68411,8 @@
                                 if (options.oneofs)
                                     object.userCredential = "password";
                             }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
                             return object;
                         };
     
@@ -71961,6 +73026,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -71972,6 +73039,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -72067,6 +73136,14 @@
                             case 4:
                                 message.sourceVersion = 4;
                                 break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.sourceVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.sourceVersion = 6;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -72094,6 +73171,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.targetVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.targetVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.targetVersion = 6;
                                 break;
                             }
                             if (object.stages) {
@@ -72181,6 +73266,7 @@
                              * @property {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.IReadPoolInstancesUpgradeStageStatus|null} [readPoolInstancesUpgrade] StageStatus readPoolInstancesUpgrade
                              * @property {google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Stage|null} [stage] StageStatus stage
                              * @property {google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status|null} [state] StageStatus state
+                             * @property {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule|null} [schedule] StageStatus schedule
                              */
     
                             /**
@@ -72221,6 +73307,14 @@
                              * @instance
                              */
                             StageStatus.prototype.state = 0;
+    
+                            /**
+                             * StageStatus schedule.
+                             * @member {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule|null|undefined} schedule
+                             * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus
+                             * @instance
+                             */
+                            StageStatus.prototype.schedule = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -72264,6 +73358,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stage);
                                 if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                if (message.schedule != null && Object.hasOwnProperty.call(message, "schedule"))
+                                    $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.encode(message.schedule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.readPoolInstancesUpgrade != null && Object.hasOwnProperty.call(message, "readPoolInstancesUpgrade"))
                                     $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.encode(message.readPoolInstancesUpgrade, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
@@ -72312,6 +73408,10 @@
                                         }
                                     case 2: {
                                             message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.schedule = $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -72386,6 +73486,11 @@
                                     case 7:
                                         break;
                                     }
+                                if (message.schedule != null && message.hasOwnProperty("schedule")) {
+                                    var error = $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.verify(message.schedule);
+                                    if (error)
+                                        return "schedule." + error;
+                                }
                                 return null;
                             };
     
@@ -72486,6 +73591,11 @@
                                     message.state = 7;
                                     break;
                                 }
+                                if (object.schedule != null) {
+                                    if (typeof object.schedule !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.schedule: object expected");
+                                    message.schedule = $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.fromObject(object.schedule);
+                                }
                                 return message;
                             };
     
@@ -72505,11 +73615,14 @@
                                 if (options.defaults) {
                                     object.stage = options.enums === String ? "STAGE_UNSPECIFIED" : 0;
                                     object.state = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
+                                    object.schedule = null;
                                 }
                                 if (message.stage != null && message.hasOwnProperty("stage"))
                                     object.stage = options.enums === String ? $root.google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Stage[message.stage] === undefined ? message.stage : $root.google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Stage[message.stage] : message.stage;
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     object.state = options.enums === String ? $root.google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status[message.state] === undefined ? message.state : $root.google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status[message.state] : message.state;
+                                if (message.schedule != null && message.hasOwnProperty("schedule"))
+                                    object.schedule = $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.toObject(message.schedule, options);
                                 if (message.readPoolInstancesUpgrade != null && message.hasOwnProperty("readPoolInstancesUpgrade")) {
                                     object.readPoolInstancesUpgrade = $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.toObject(message.readPoolInstancesUpgrade, options);
                                     if (options.oneofs)
@@ -72543,6 +73656,301 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus";
                             };
+    
+                            StageStatus.StageSchedule = (function() {
+    
+                                /**
+                                 * Properties of a StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus
+                                 * @interface IStageSchedule
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedStartTime] StageSchedule estimatedStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualStartTime] StageSchedule actualStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedEndTime] StageSchedule estimatedEndTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualEndTime] StageSchedule actualEndTime
+                                 */
+    
+                                /**
+                                 * Constructs a new StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus
+                                 * @classdesc Represents a StageSchedule.
+                                 * @implements IStageSchedule
+                                 * @constructor
+                                 * @param {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 */
+                                function StageSchedule(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StageSchedule estimatedStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedStartTime
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedStartTime = null;
+    
+                                /**
+                                 * StageSchedule actualStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualStartTime
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualStartTime = null;
+    
+                                /**
+                                 * StageSchedule estimatedEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedEndTime
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedEndTime = null;
+    
+                                /**
+                                 * StageSchedule actualEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualEndTime
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualEndTime = null;
+    
+                                /**
+                                 * Creates a new StageSchedule instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 * @returns {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule instance
+                                 */
+                                StageSchedule.create = function create(properties) {
+                                    return new StageSchedule(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.estimatedStartTime != null && Object.hasOwnProperty.call(message, "estimatedStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedStartTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.actualStartTime != null && Object.hasOwnProperty.call(message, "actualStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.estimatedEndTime != null && Object.hasOwnProperty.call(message, "estimatedEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedEndTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.actualEndTime != null && Object.hasOwnProperty.call(message, "actualEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualEndTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.estimatedStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.actualStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.estimatedEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.actualEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StageSchedule message.
+                                 * @function verify
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StageSchedule.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedStartTime);
+                                        if (error)
+                                            return "estimatedStartTime." + error;
+                                    }
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualStartTime);
+                                        if (error)
+                                            return "actualStartTime." + error;
+                                    }
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedEndTime);
+                                        if (error)
+                                            return "estimatedEndTime." + error;
+                                    }
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualEndTime);
+                                        if (error)
+                                            return "actualEndTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 */
+                                StageSchedule.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule)
+                                        return object;
+                                    var message = new $root.google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    if (object.estimatedStartTime != null) {
+                                        if (typeof object.estimatedStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedStartTime: object expected");
+                                        message.estimatedStartTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedStartTime);
+                                    }
+                                    if (object.actualStartTime != null) {
+                                        if (typeof object.actualStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.actualStartTime: object expected");
+                                        message.actualStartTime = $root.google.protobuf.Timestamp.fromObject(object.actualStartTime);
+                                    }
+                                    if (object.estimatedEndTime != null) {
+                                        if (typeof object.estimatedEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedEndTime: object expected");
+                                        message.estimatedEndTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedEndTime);
+                                    }
+                                    if (object.actualEndTime != null) {
+                                        if (typeof object.actualEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.actualEndTime: object expected");
+                                        message.actualEndTime = $root.google.protobuf.Timestamp.fromObject(object.actualEndTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule} message StageSchedule
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StageSchedule.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.estimatedStartTime = null;
+                                        object.actualStartTime = null;
+                                        object.estimatedEndTime = null;
+                                        object.actualEndTime = null;
+                                    }
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime"))
+                                        object.estimatedStartTime = $root.google.protobuf.Timestamp.toObject(message.estimatedStartTime, options);
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime"))
+                                        object.actualStartTime = $root.google.protobuf.Timestamp.toObject(message.actualStartTime, options);
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime"))
+                                        object.estimatedEndTime = $root.google.protobuf.Timestamp.toObject(message.estimatedEndTime, options);
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime"))
+                                        object.actualEndTime = $root.google.protobuf.Timestamp.toObject(message.actualEndTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StageSchedule to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StageSchedule.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StageSchedule
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StageSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule";
+                                };
+    
+                                return StageSchedule;
+                            })();
     
                             return StageStatus;
                         })();
@@ -75216,6 +76624,263 @@
                         return ListDatabasesResponse;
                     })();
     
+                    v1alpha.CreateDatabaseRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatabaseRequest.
+                         * @memberof google.cloud.alloydb.v1alpha
+                         * @interface ICreateDatabaseRequest
+                         * @property {string|null} [parent] CreateDatabaseRequest parent
+                         * @property {string|null} [databaseId] CreateDatabaseRequest databaseId
+                         * @property {google.cloud.alloydb.v1alpha.IDatabase|null} [database] CreateDatabaseRequest database
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatabaseRequest.
+                         * @memberof google.cloud.alloydb.v1alpha
+                         * @classdesc Represents a CreateDatabaseRequest.
+                         * @implements ICreateDatabaseRequest
+                         * @constructor
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest=} [properties] Properties to set
+                         */
+                        function CreateDatabaseRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatabaseRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatabaseRequest databaseId.
+                         * @member {string} databaseId
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.databaseId = "";
+    
+                        /**
+                         * CreateDatabaseRequest database.
+                         * @member {google.cloud.alloydb.v1alpha.IDatabase|null|undefined} database
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.database = null;
+    
+                        /**
+                         * Creates a new CreateDatabaseRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest=} [properties] Properties to set
+                         * @returns {google.cloud.alloydb.v1alpha.CreateDatabaseRequest} CreateDatabaseRequest instance
+                         */
+                        CreateDatabaseRequest.create = function create(properties) {
+                            return new CreateDatabaseRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatabaseRequest message. Does not implicitly {@link google.cloud.alloydb.v1alpha.CreateDatabaseRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest} message CreateDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatabaseRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.databaseId);
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                $root.google.cloud.alloydb.v1alpha.Database.encode(message.database, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.CreateDatabaseRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1alpha.ICreateDatabaseRequest} message CreateDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatabaseRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatabaseRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.alloydb.v1alpha.CreateDatabaseRequest} CreateDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatabaseRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1alpha.CreateDatabaseRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.databaseId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.database = $root.google.cloud.alloydb.v1alpha.Database.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatabaseRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.alloydb.v1alpha.CreateDatabaseRequest} CreateDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatabaseRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatabaseRequest message.
+                         * @function verify
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatabaseRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                if (!$util.isString(message.databaseId))
+                                    return "databaseId: string expected";
+                            if (message.database != null && message.hasOwnProperty("database")) {
+                                var error = $root.google.cloud.alloydb.v1alpha.Database.verify(message.database);
+                                if (error)
+                                    return "database." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.alloydb.v1alpha.CreateDatabaseRequest} CreateDatabaseRequest
+                         */
+                        CreateDatabaseRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.alloydb.v1alpha.CreateDatabaseRequest)
+                                return object;
+                            var message = new $root.google.cloud.alloydb.v1alpha.CreateDatabaseRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.databaseId != null)
+                                message.databaseId = String(object.databaseId);
+                            if (object.database != null) {
+                                if (typeof object.database !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1alpha.CreateDatabaseRequest.database: object expected");
+                                message.database = $root.google.cloud.alloydb.v1alpha.Database.fromObject(object.database);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatabaseRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1alpha.CreateDatabaseRequest} message CreateDatabaseRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatabaseRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.databaseId = "";
+                                object.database = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                object.databaseId = message.databaseId;
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                object.database = $root.google.cloud.alloydb.v1alpha.Database.toObject(message.database, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatabaseRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatabaseRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatabaseRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.alloydb.v1alpha.CreateDatabaseRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatabaseRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.alloydb.v1alpha.CreateDatabaseRequest";
+                        };
+    
+                        return CreateDatabaseRequest;
+                    })();
+    
                     v1alpha.SqlResult = (function() {
     
                         /**
@@ -76885,6 +78550,8 @@
                      * @property {number} POSTGRES_14=2 POSTGRES_14 value
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=5 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=6 POSTGRES_18 value
                      */
                     v1beta.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -76893,6 +78560,8 @@
                         values[valuesById[2] = "POSTGRES_14"] = 2;
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
+                        values[valuesById[5] = "POSTGRES_17"] = 5;
+                        values[valuesById[6] = "POSTGRES_18"] = 6;
                         return values;
                     })();
     
@@ -82417,6 +84086,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -82686,6 +84357,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.networkConfig != null) {
@@ -88916,6 +90595,7 @@
                              * @interface IConnectionPoolConfig
                              * @property {boolean|null} [enabled] ConnectionPoolConfig enabled
                              * @property {Object.<string,string>|null} [flags] ConnectionPoolConfig flags
+                             * @property {number|null} [poolerCount] ConnectionPoolConfig poolerCount
                              */
     
                             /**
@@ -88951,6 +90631,14 @@
                             ConnectionPoolConfig.prototype.flags = $util.emptyObject;
     
                             /**
+                             * ConnectionPoolConfig poolerCount.
+                             * @member {number} poolerCount
+                             * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
+                             * @instance
+                             */
+                            ConnectionPoolConfig.prototype.poolerCount = 0;
+    
+                            /**
                              * Creates a new ConnectionPoolConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig
@@ -88979,6 +90667,8 @@
                                 if (message.flags != null && Object.hasOwnProperty.call(message, "flags"))
                                     for (var keys = Object.keys(message.flags), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.flags[keys[i]]).ldelim();
+                                if (message.poolerCount != null && Object.hasOwnProperty.call(message, "poolerCount"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.poolerCount);
                                 return writer;
                             };
     
@@ -89042,6 +90732,10 @@
                                             message.flags[key] = value;
                                             break;
                                         }
+                                    case 14: {
+                                            message.poolerCount = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -89088,6 +90782,9 @@
                                         if (!$util.isString(message.flags[key[i]]))
                                             return "flags: string{k:string} expected";
                                 }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    if (!$util.isInteger(message.poolerCount))
+                                        return "poolerCount: integer expected";
                                 return null;
                             };
     
@@ -89112,6 +90809,8 @@
                                     for (var keys = Object.keys(object.flags), i = 0; i < keys.length; ++i)
                                         message.flags[keys[i]] = String(object.flags[keys[i]]);
                                 }
+                                if (object.poolerCount != null)
+                                    message.poolerCount = object.poolerCount | 0;
                                 return message;
                             };
     
@@ -89130,8 +90829,10 @@
                                 var object = {};
                                 if (options.objects || options.defaults)
                                     object.flags = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.enabled = false;
+                                    object.poolerCount = 0;
+                                }
                                 if (message.enabled != null && message.hasOwnProperty("enabled"))
                                     object.enabled = message.enabled;
                                 var keys2;
@@ -89140,6 +90841,8 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.flags[keys2[j]] = message.flags[keys2[j]];
                                 }
+                                if (message.poolerCount != null && message.hasOwnProperty("poolerCount"))
+                                    object.poolerCount = message.poolerCount;
                                 return object;
                             };
     
@@ -89168,22 +90871,6 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig";
                             };
-    
-                            /**
-                             * PoolMode enum.
-                             * @name google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.PoolMode
-                             * @enum {number}
-                             * @property {number} POOL_MODE_UNSPECIFIED=0 POOL_MODE_UNSPECIFIED value
-                             * @property {number} POOL_MODE_SESSION=1 POOL_MODE_SESSION value
-                             * @property {number} POOL_MODE_TRANSACTION=2 POOL_MODE_TRANSACTION value
-                             */
-                            ConnectionPoolConfig.PoolMode = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "POOL_MODE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "POOL_MODE_SESSION"] = 1;
-                                values[valuesById[2] = "POOL_MODE_TRANSACTION"] = 2;
-                                return values;
-                            })();
     
                             return ConnectionPoolConfig;
                         })();
@@ -90264,6 +91951,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -90448,6 +92137,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.databaseVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.tags) {
@@ -91251,6 +92948,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -91362,6 +93061,14 @@
                                     case "POSTGRES_16":
                                     case 4:
                                         message.supportedDbVersions[i] = 4;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 5:
+                                        message.supportedDbVersions[i] = 5;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 6:
+                                        message.supportedDbVersions[i] = 6;
                                         break;
                                     }
                             }
@@ -92342,6 +94049,10 @@
                          * @property {string|null} [name] Database name
                          * @property {string|null} [charset] Database charset
                          * @property {string|null} [collation] Database collation
+                         * @property {string|null} [characterType] Database characterType
+                         * @property {boolean|null} [isTemplate] Database isTemplate
+                         * @property {string|null} [databaseTemplate] Database databaseTemplate
+                         * @property {boolean|null} [isTemplateDatabase] Database isTemplateDatabase
                          */
     
                         /**
@@ -92384,6 +94095,47 @@
                         Database.prototype.collation = "";
     
                         /**
+                         * Database characterType.
+                         * @member {string} characterType
+                         * @memberof google.cloud.alloydb.v1beta.Database
+                         * @instance
+                         */
+                        Database.prototype.characterType = "";
+    
+                        /**
+                         * Database isTemplate.
+                         * @member {boolean} isTemplate
+                         * @memberof google.cloud.alloydb.v1beta.Database
+                         * @instance
+                         */
+                        Database.prototype.isTemplate = false;
+    
+                        /**
+                         * Database databaseTemplate.
+                         * @member {string} databaseTemplate
+                         * @memberof google.cloud.alloydb.v1beta.Database
+                         * @instance
+                         */
+                        Database.prototype.databaseTemplate = "";
+    
+                        /**
+                         * Database isTemplateDatabase.
+                         * @member {boolean|null|undefined} isTemplateDatabase
+                         * @memberof google.cloud.alloydb.v1beta.Database
+                         * @instance
+                         */
+                        Database.prototype.isTemplateDatabase = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Database.prototype, "_isTemplateDatabase", {
+                            get: $util.oneOfGetter($oneOfFields = ["isTemplateDatabase"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Database instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.alloydb.v1beta.Database
@@ -92413,6 +94165,14 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.charset);
                             if (message.collation != null && Object.hasOwnProperty.call(message, "collation"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.collation);
+                            if (message.characterType != null && Object.hasOwnProperty.call(message, "characterType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.characterType);
+                            if (message.isTemplate != null && Object.hasOwnProperty.call(message, "isTemplate"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isTemplate);
+                            if (message.databaseTemplate != null && Object.hasOwnProperty.call(message, "databaseTemplate"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.databaseTemplate);
+                            if (message.isTemplateDatabase != null && Object.hasOwnProperty.call(message, "isTemplateDatabase"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isTemplateDatabase);
                             return writer;
                         };
     
@@ -92461,6 +94221,22 @@
                                         message.collation = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.characterType = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.isTemplate = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.databaseTemplate = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.isTemplateDatabase = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -92496,6 +94272,7 @@
                         Database.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -92505,6 +94282,20 @@
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 if (!$util.isString(message.collation))
                                     return "collation: string expected";
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                if (!$util.isString(message.characterType))
+                                    return "characterType: string expected";
+                            if (message.isTemplate != null && message.hasOwnProperty("isTemplate"))
+                                if (typeof message.isTemplate !== "boolean")
+                                    return "isTemplate: boolean expected";
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                if (!$util.isString(message.databaseTemplate))
+                                    return "databaseTemplate: string expected";
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                properties._isTemplateDatabase = 1;
+                                if (typeof message.isTemplateDatabase !== "boolean")
+                                    return "isTemplateDatabase: boolean expected";
+                            }
                             return null;
                         };
     
@@ -92526,6 +94317,14 @@
                                 message.charset = String(object.charset);
                             if (object.collation != null)
                                 message.collation = String(object.collation);
+                            if (object.characterType != null)
+                                message.characterType = String(object.characterType);
+                            if (object.isTemplate != null)
+                                message.isTemplate = Boolean(object.isTemplate);
+                            if (object.databaseTemplate != null)
+                                message.databaseTemplate = String(object.databaseTemplate);
+                            if (object.isTemplateDatabase != null)
+                                message.isTemplateDatabase = Boolean(object.isTemplateDatabase);
                             return message;
                         };
     
@@ -92546,6 +94345,9 @@
                                 object.name = "";
                                 object.charset = "";
                                 object.collation = "";
+                                object.characterType = "";
+                                object.isTemplate = false;
+                                object.databaseTemplate = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -92553,6 +94355,17 @@
                                 object.charset = message.charset;
                             if (message.collation != null && message.hasOwnProperty("collation"))
                                 object.collation = message.collation;
+                            if (message.characterType != null && message.hasOwnProperty("characterType"))
+                                object.characterType = message.characterType;
+                            if (message.isTemplate != null && message.hasOwnProperty("isTemplate"))
+                                object.isTemplate = message.isTemplate;
+                            if (message.databaseTemplate != null && message.hasOwnProperty("databaseTemplate"))
+                                object.databaseTemplate = message.databaseTemplate;
+                            if (message.isTemplateDatabase != null && message.hasOwnProperty("isTemplateDatabase")) {
+                                object.isTemplateDatabase = message.isTemplateDatabase;
+                                if (options.oneofs)
+                                    object._isTemplateDatabase = "isTemplateDatabase";
+                            }
                             return object;
                         };
     
@@ -94483,6 +96296,39 @@
                          * @instance
                          * @param {google.cloud.alloydb.v1beta.IListDatabasesRequest} request ListDatabasesRequest message or plain object
                          * @returns {Promise<google.cloud.alloydb.v1beta.ListDatabasesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.alloydb.v1beta.AlloyDBAdmin|createDatabase}.
+                         * @memberof google.cloud.alloydb.v1beta.AlloyDBAdmin
+                         * @typedef CreateDatabaseCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.alloydb.v1beta.Database} [response] Database
+                         */
+    
+                        /**
+                         * Calls CreateDatabase.
+                         * @function createDatabase
+                         * @memberof google.cloud.alloydb.v1beta.AlloyDBAdmin
+                         * @instance
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest} request CreateDatabaseRequest message or plain object
+                         * @param {google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateDatabaseCallback} callback Node-style callback called with the error, if any, and Database
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlloyDBAdmin.prototype.createDatabase = function createDatabase(request, callback) {
+                            return this.rpcCall(createDatabase, $root.google.cloud.alloydb.v1beta.CreateDatabaseRequest, $root.google.cloud.alloydb.v1beta.Database, request, callback);
+                        }, "name", { value: "CreateDatabase" });
+    
+                        /**
+                         * Calls CreateDatabase.
+                         * @function createDatabase
+                         * @memberof google.cloud.alloydb.v1beta.AlloyDBAdmin
+                         * @instance
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest} request CreateDatabaseRequest message or plain object
+                         * @returns {Promise<google.cloud.alloydb.v1beta.Database>} Promise
                          * @variation 2
                          */
     
@@ -98907,6 +100753,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -98961,6 +100809,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.version = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.version = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.version = 6;
                                 break;
                             }
                             if (object.requestId != null)
@@ -100285,6 +102141,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -100408,6 +102266,14 @@
                                 case "POSTGRES_16":
                                 case 4:
                                     message.databaseVersion = 4;
+                                    break;
+                                case "POSTGRES_17":
+                                case 5:
+                                    message.databaseVersion = 5;
+                                    break;
+                                case "POSTGRES_18":
+                                case 6:
+                                    message.databaseVersion = 6;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -106038,6 +107904,7 @@
                          * @property {string|null} [database] ExecuteSqlRequest database
                          * @property {string|null} [user] ExecuteSqlRequest user
                          * @property {string|null} [sqlStatement] ExecuteSqlRequest sqlStatement
+                         * @property {boolean|null} [validateOnly] ExecuteSqlRequest validateOnly
                          */
     
                         /**
@@ -106095,6 +107962,14 @@
                          */
                         ExecuteSqlRequest.prototype.sqlStatement = "";
     
+                        /**
+                         * ExecuteSqlRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.alloydb.v1beta.ExecuteSqlRequest
+                         * @instance
+                         */
+                        ExecuteSqlRequest.prototype.validateOnly = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -106143,6 +108018,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.sqlStatement);
                             if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.password);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.validateOnly);
                             return writer;
                         };
     
@@ -106199,6 +108076,10 @@
                                         message.sqlStatement = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.validateOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -106252,6 +108133,9 @@
                             if (message.sqlStatement != null && message.hasOwnProperty("sqlStatement"))
                                 if (!$util.isString(message.sqlStatement))
                                     return "sqlStatement: string expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
                             return null;
                         };
     
@@ -106277,6 +108161,8 @@
                                 message.user = String(object.user);
                             if (object.sqlStatement != null)
                                 message.sqlStatement = String(object.sqlStatement);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
                             return message;
                         };
     
@@ -106298,6 +108184,7 @@
                                 object.database = "";
                                 object.user = "";
                                 object.sqlStatement = "";
+                                object.validateOnly = false;
                             }
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 object.instance = message.instance;
@@ -106312,6 +108199,8 @@
                                 if (options.oneofs)
                                     object.userCredential = "password";
                             }
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
                             return object;
                         };
     
@@ -110925,6 +112814,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -110936,6 +112827,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -111031,6 +112924,14 @@
                             case 4:
                                 message.sourceVersion = 4;
                                 break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.sourceVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.sourceVersion = 6;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -111058,6 +112959,14 @@
                             case "POSTGRES_16":
                             case 4:
                                 message.targetVersion = 4;
+                                break;
+                            case "POSTGRES_17":
+                            case 5:
+                                message.targetVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.targetVersion = 6;
                                 break;
                             }
                             if (object.stages) {
@@ -111145,6 +113054,7 @@
                              * @property {google.cloud.alloydb.v1beta.UpgradeClusterStatus.IReadPoolInstancesUpgradeStageStatus|null} [readPoolInstancesUpgrade] StageStatus readPoolInstancesUpgrade
                              * @property {google.cloud.alloydb.v1beta.UpgradeClusterResponse.Stage|null} [stage] StageStatus stage
                              * @property {google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status|null} [state] StageStatus state
+                             * @property {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule|null} [schedule] StageStatus schedule
                              */
     
                             /**
@@ -111185,6 +113095,14 @@
                              * @instance
                              */
                             StageStatus.prototype.state = 0;
+    
+                            /**
+                             * StageStatus schedule.
+                             * @member {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule|null|undefined} schedule
+                             * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus
+                             * @instance
+                             */
+                            StageStatus.prototype.schedule = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -111228,6 +113146,8 @@
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stage);
                                 if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                if (message.schedule != null && Object.hasOwnProperty.call(message, "schedule"))
+                                    $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.encode(message.schedule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.readPoolInstancesUpgrade != null && Object.hasOwnProperty.call(message, "readPoolInstancesUpgrade"))
                                     $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.encode(message.readPoolInstancesUpgrade, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
@@ -111276,6 +113196,10 @@
                                         }
                                     case 2: {
                                             message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.schedule = $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -111350,6 +113274,11 @@
                                     case 7:
                                         break;
                                     }
+                                if (message.schedule != null && message.hasOwnProperty("schedule")) {
+                                    var error = $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.verify(message.schedule);
+                                    if (error)
+                                        return "schedule." + error;
+                                }
                                 return null;
                             };
     
@@ -111450,6 +113379,11 @@
                                     message.state = 7;
                                     break;
                                 }
+                                if (object.schedule != null) {
+                                    if (typeof object.schedule !== "object")
+                                        throw TypeError(".google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.schedule: object expected");
+                                    message.schedule = $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.fromObject(object.schedule);
+                                }
                                 return message;
                             };
     
@@ -111469,11 +113403,14 @@
                                 if (options.defaults) {
                                     object.stage = options.enums === String ? "STAGE_UNSPECIFIED" : 0;
                                     object.state = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
+                                    object.schedule = null;
                                 }
                                 if (message.stage != null && message.hasOwnProperty("stage"))
                                     object.stage = options.enums === String ? $root.google.cloud.alloydb.v1beta.UpgradeClusterResponse.Stage[message.stage] === undefined ? message.stage : $root.google.cloud.alloydb.v1beta.UpgradeClusterResponse.Stage[message.stage] : message.stage;
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     object.state = options.enums === String ? $root.google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status[message.state] === undefined ? message.state : $root.google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status[message.state] : message.state;
+                                if (message.schedule != null && message.hasOwnProperty("schedule"))
+                                    object.schedule = $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.toObject(message.schedule, options);
                                 if (message.readPoolInstancesUpgrade != null && message.hasOwnProperty("readPoolInstancesUpgrade")) {
                                     object.readPoolInstancesUpgrade = $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.toObject(message.readPoolInstancesUpgrade, options);
                                     if (options.oneofs)
@@ -111507,6 +113444,301 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus";
                             };
+    
+                            StageStatus.StageSchedule = (function() {
+    
+                                /**
+                                 * Properties of a StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus
+                                 * @interface IStageSchedule
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedStartTime] StageSchedule estimatedStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualStartTime] StageSchedule actualStartTime
+                                 * @property {google.protobuf.ITimestamp|null} [estimatedEndTime] StageSchedule estimatedEndTime
+                                 * @property {google.protobuf.ITimestamp|null} [actualEndTime] StageSchedule actualEndTime
+                                 */
+    
+                                /**
+                                 * Constructs a new StageSchedule.
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus
+                                 * @classdesc Represents a StageSchedule.
+                                 * @implements IStageSchedule
+                                 * @constructor
+                                 * @param {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 */
+                                function StageSchedule(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StageSchedule estimatedStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedStartTime
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedStartTime = null;
+    
+                                /**
+                                 * StageSchedule actualStartTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualStartTime
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualStartTime = null;
+    
+                                /**
+                                 * StageSchedule estimatedEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} estimatedEndTime
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.estimatedEndTime = null;
+    
+                                /**
+                                 * StageSchedule actualEndTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} actualEndTime
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 */
+                                StageSchedule.prototype.actualEndTime = null;
+    
+                                /**
+                                 * Creates a new StageSchedule instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule=} [properties] Properties to set
+                                 * @returns {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule instance
+                                 */
+                                StageSchedule.create = function create(properties) {
+                                    return new StageSchedule(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.estimatedStartTime != null && Object.hasOwnProperty.call(message, "estimatedStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedStartTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.actualStartTime != null && Object.hasOwnProperty.call(message, "actualStartTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualStartTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.estimatedEndTime != null && Object.hasOwnProperty.call(message, "estimatedEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.estimatedEndTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.actualEndTime != null && Object.hasOwnProperty.call(message, "actualEndTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.actualEndTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule} message StageSchedule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StageSchedule.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.estimatedStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.actualStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.estimatedEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.actualEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StageSchedule.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StageSchedule message.
+                                 * @function verify
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StageSchedule.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedStartTime);
+                                        if (error)
+                                            return "estimatedStartTime." + error;
+                                    }
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualStartTime);
+                                        if (error)
+                                            return "actualStartTime." + error;
+                                    }
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.estimatedEndTime);
+                                        if (error)
+                                            return "estimatedEndTime." + error;
+                                    }
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.actualEndTime);
+                                        if (error)
+                                            return "actualEndTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule} StageSchedule
+                                 */
+                                StageSchedule.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule)
+                                        return object;
+                                    var message = new $root.google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule();
+                                    if (object.estimatedStartTime != null) {
+                                        if (typeof object.estimatedStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedStartTime: object expected");
+                                        message.estimatedStartTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedStartTime);
+                                    }
+                                    if (object.actualStartTime != null) {
+                                        if (typeof object.actualStartTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.actualStartTime: object expected");
+                                        message.actualStartTime = $root.google.protobuf.Timestamp.fromObject(object.actualStartTime);
+                                    }
+                                    if (object.estimatedEndTime != null) {
+                                        if (typeof object.estimatedEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.estimatedEndTime: object expected");
+                                        message.estimatedEndTime = $root.google.protobuf.Timestamp.fromObject(object.estimatedEndTime);
+                                    }
+                                    if (object.actualEndTime != null) {
+                                        if (typeof object.actualEndTime !== "object")
+                                            throw TypeError(".google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.actualEndTime: object expected");
+                                        message.actualEndTime = $root.google.protobuf.Timestamp.fromObject(object.actualEndTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule} message StageSchedule
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StageSchedule.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.estimatedStartTime = null;
+                                        object.actualStartTime = null;
+                                        object.estimatedEndTime = null;
+                                        object.actualEndTime = null;
+                                    }
+                                    if (message.estimatedStartTime != null && message.hasOwnProperty("estimatedStartTime"))
+                                        object.estimatedStartTime = $root.google.protobuf.Timestamp.toObject(message.estimatedStartTime, options);
+                                    if (message.actualStartTime != null && message.hasOwnProperty("actualStartTime"))
+                                        object.actualStartTime = $root.google.protobuf.Timestamp.toObject(message.actualStartTime, options);
+                                    if (message.estimatedEndTime != null && message.hasOwnProperty("estimatedEndTime"))
+                                        object.estimatedEndTime = $root.google.protobuf.Timestamp.toObject(message.estimatedEndTime, options);
+                                    if (message.actualEndTime != null && message.hasOwnProperty("actualEndTime"))
+                                        object.actualEndTime = $root.google.protobuf.Timestamp.toObject(message.actualEndTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StageSchedule to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StageSchedule.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StageSchedule
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StageSchedule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule";
+                                };
+    
+                                return StageSchedule;
+                            })();
     
                             return StageStatus;
                         })();
@@ -114178,6 +116410,263 @@
                         };
     
                         return ListDatabasesResponse;
+                    })();
+    
+                    v1beta.CreateDatabaseRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatabaseRequest.
+                         * @memberof google.cloud.alloydb.v1beta
+                         * @interface ICreateDatabaseRequest
+                         * @property {string|null} [parent] CreateDatabaseRequest parent
+                         * @property {string|null} [databaseId] CreateDatabaseRequest databaseId
+                         * @property {google.cloud.alloydb.v1beta.IDatabase|null} [database] CreateDatabaseRequest database
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatabaseRequest.
+                         * @memberof google.cloud.alloydb.v1beta
+                         * @classdesc Represents a CreateDatabaseRequest.
+                         * @implements ICreateDatabaseRequest
+                         * @constructor
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest=} [properties] Properties to set
+                         */
+                        function CreateDatabaseRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatabaseRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatabaseRequest databaseId.
+                         * @member {string} databaseId
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.databaseId = "";
+    
+                        /**
+                         * CreateDatabaseRequest database.
+                         * @member {google.cloud.alloydb.v1beta.IDatabase|null|undefined} database
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @instance
+                         */
+                        CreateDatabaseRequest.prototype.database = null;
+    
+                        /**
+                         * Creates a new CreateDatabaseRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest=} [properties] Properties to set
+                         * @returns {google.cloud.alloydb.v1beta.CreateDatabaseRequest} CreateDatabaseRequest instance
+                         */
+                        CreateDatabaseRequest.create = function create(properties) {
+                            return new CreateDatabaseRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatabaseRequest message. Does not implicitly {@link google.cloud.alloydb.v1beta.CreateDatabaseRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest} message CreateDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatabaseRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.databaseId);
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                $root.google.cloud.alloydb.v1beta.Database.encode(message.database, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.CreateDatabaseRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1beta.ICreateDatabaseRequest} message CreateDatabaseRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatabaseRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatabaseRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.alloydb.v1beta.CreateDatabaseRequest} CreateDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatabaseRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.alloydb.v1beta.CreateDatabaseRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.databaseId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.database = $root.google.cloud.alloydb.v1beta.Database.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatabaseRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.alloydb.v1beta.CreateDatabaseRequest} CreateDatabaseRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatabaseRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatabaseRequest message.
+                         * @function verify
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatabaseRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                if (!$util.isString(message.databaseId))
+                                    return "databaseId: string expected";
+                            if (message.database != null && message.hasOwnProperty("database")) {
+                                var error = $root.google.cloud.alloydb.v1beta.Database.verify(message.database);
+                                if (error)
+                                    return "database." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.alloydb.v1beta.CreateDatabaseRequest} CreateDatabaseRequest
+                         */
+                        CreateDatabaseRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.alloydb.v1beta.CreateDatabaseRequest)
+                                return object;
+                            var message = new $root.google.cloud.alloydb.v1beta.CreateDatabaseRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.databaseId != null)
+                                message.databaseId = String(object.databaseId);
+                            if (object.database != null) {
+                                if (typeof object.database !== "object")
+                                    throw TypeError(".google.cloud.alloydb.v1beta.CreateDatabaseRequest.database: object expected");
+                                message.database = $root.google.cloud.alloydb.v1beta.Database.fromObject(object.database);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatabaseRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {google.cloud.alloydb.v1beta.CreateDatabaseRequest} message CreateDatabaseRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatabaseRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.databaseId = "";
+                                object.database = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.databaseId != null && message.hasOwnProperty("databaseId"))
+                                object.databaseId = message.databaseId;
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                object.database = $root.google.cloud.alloydb.v1beta.Database.toObject(message.database, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatabaseRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatabaseRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatabaseRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.alloydb.v1beta.CreateDatabaseRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatabaseRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.alloydb.v1beta.CreateDatabaseRequest";
+                        };
+    
+                        return CreateDatabaseRequest;
                     })();
     
                     v1beta.SqlResult = (function() {

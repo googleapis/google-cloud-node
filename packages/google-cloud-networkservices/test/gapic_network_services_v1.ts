@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -10811,6 +10811,52 @@ describe('v1.NetworkServicesClient', () => {
                 const result = client.matchHttpRouteFromHttpRouteName(fakePath);
                 assert.strictEqual(result, "httpRouteValue");
                 assert((client.pathTemplates.httpRoutePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('lbEdgeExtension', async () => {
+            const fakePath = "/rendered/path/lbEdgeExtension";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                lb_edge_extension: "lbEdgeExtensionValue",
+            };
+            const client = new networkservicesModule.v1.NetworkServicesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lbEdgeExtensionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lbEdgeExtensionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lbEdgeExtensionPath', () => {
+                const result = client.lbEdgeExtensionPath("projectValue", "locationValue", "lbEdgeExtensionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromLbEdgeExtensionName', () => {
+                const result = client.matchProjectFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromLbEdgeExtensionName', () => {
+                const result = client.matchLocationFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLbEdgeExtensionFromLbEdgeExtensionName', () => {
+                const result = client.matchLbEdgeExtensionFromLbEdgeExtensionName(fakePath);
+                assert.strictEqual(result, "lbEdgeExtensionValue");
+                assert((client.pathTemplates.lbEdgeExtensionPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -8,6 +8,345 @@
               "nested": {
                 "ordertracking": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.OrderTracking.V1",
+                        "go_package": "cloud.google.com/go/shopping/merchant/ordertracking/apiv1/ordertrackingpb;ordertrackingpb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "OrderTrackingSignalsProto",
+                        "java_package": "com.google.shopping.merchant.ordertracking.v1",
+                        "php_namespace": "Google\\Shopping\\Merchant\\OrderTracking\\V1",
+                        "ruby_package": "Google::Shopping::Merchant::OrderTracking::V1",
+                        "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
+                        "(google.api.resource_definition).pattern": "accounts/{account}"
+                      },
+                      "nested": {
+                        "OrderTrackingSignalsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "CreateOrderTrackingSignal": {
+                              "requestType": "CreateOrderTrackingSignalRequest",
+                              "responseType": "OrderTrackingSignal",
+                              "options": {
+                                "(google.api.http).post": "/ordertracking/v1/{parent=accounts/*}/orderTrackingSignals",
+                                "(google.api.http).body": "order_tracking_signal",
+                                "(google.api.method_signature)": "parent,order_tracking_signal_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/ordertracking/v1/{parent=accounts/*}/orderTrackingSignals",
+                                    "body": "order_tracking_signal"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,order_tracking_signal_id"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "CreateOrderTrackingSignalRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/Account"
+                              }
+                            },
+                            "orderTrackingSignalId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "orderTrackingSignal": {
+                              "type": "OrderTrackingSignal",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "OrderTrackingSignal": {
+                          "oneofs": {
+                            "_customerShippingFee": {
+                              "oneof": [
+                                "customerShippingFee"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "orderTrackingSignalId": {
+                              "type": "int64",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "merchantId": {
+                              "type": "int64",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderCreatedTime": {
+                              "type": "google.type.DateTime",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "orderId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "shippingInfo": {
+                              "rule": "repeated",
+                              "type": "ShippingInfo",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "lineItems": {
+                              "rule": "repeated",
+                              "type": "LineItemDetails",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "shipmentLineItemMapping": {
+                              "rule": "repeated",
+                              "type": "ShipmentLineItemMapping",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customerShippingFee": {
+                              "type": "google.shopping.type.Price",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "deliveryPostalCode": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deliveryRegionCode": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ShippingInfo": {
+                              "fields": {
+                                "shipmentId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "trackingId": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "carrier": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "carrierService": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "shippedTime": {
+                                  "type": "google.type.DateTime",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "earliestDeliveryPromiseTime": {
+                                  "type": "google.type.DateTime",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "latestDeliveryPromiseTime": {
+                                  "type": "google.type.DateTime",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "actualDeliveryTime": {
+                                  "type": "google.type.DateTime",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "shippingStatus": {
+                                  "type": "ShippingState",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "originPostalCode": {
+                                  "type": "string",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "originRegionCode": {
+                                  "type": "string",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "ShippingState": {
+                                  "values": {
+                                    "SHIPPING_STATE_UNSPECIFIED": 0,
+                                    "SHIPPED": 1,
+                                    "DELIVERED": 2
+                                  }
+                                }
+                              }
+                            },
+                            "LineItemDetails": {
+                              "oneofs": {
+                                "_productTitle": {
+                                  "oneof": [
+                                    "productTitle"
+                                  ]
+                                },
+                                "_brand": {
+                                  "oneof": [
+                                    "brand"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "lineItemId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "productId": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "gtins": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "mpn": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "productTitle": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "brand": {
+                                  "type": "string",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "quantity": {
+                                  "type": "int64",
+                                  "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "ShipmentLineItemMapping": {
+                              "fields": {
+                                "shipmentId": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "lineItemId": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "quantity": {
+                                  "type": "int64",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta": {
                       "options": {
                         "csharp_namespace": "Google.Shopping.Merchant.OrderTracking.V1Beta",

@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.3.0...alloydb-v2.4.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.1...alloydb-v2.3.0) (2026-01-12)
+
+
+### Features
+
+* [alloydb] add POSTGRES_18 to DatabaseVersion ([#6955](https://github.com/googleapis/google-cloud-node/issues/6955)) ([fcfdd73](https://github.com/googleapis/google-cloud-node/commit/fcfdd73f0fd8acdf1849f5fccb97b3f9a969c72c))
+
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.2.0...alloydb-v2.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.1.0...alloydb-v2.2.0) (2025-07-09)
+
+
+### Features
+
+* [alloydb] Instance.ActivationPolicy field ([#6402](https://github.com/googleapis/google-cloud-node/issues/6402)) ([eba52dc](https://github.com/googleapis/google-cloud-node/commit/eba52dc0adc496d289129ddf05b4c1bc39423a2b))
+* [alloydb] Instance.ActivationPolicy field ([#6431](https://github.com/googleapis/google-cloud-node/issues/6431)) ([de5790f](https://github.com/googleapis/google-cloud-node/commit/de5790faad12bd61164655dd1cf95ff2644bcac5))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6417](https://github.com/googleapis/google-cloud-node/issues/6417)) ([0d6d584](https://github.com/googleapis/google-cloud-node/commit/0d6d584a0c5c8f9f96daf3ede46f9440758e0f35))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.0.0...alloydb-v2.1.0) (2025-03-19)
 
 

@@ -60,6 +60,21 @@
                 "getReplicationCycle"
               ]
             },
+            "GetImageImport": {
+              "methods": [
+                "getImageImport"
+              ]
+            },
+            "GetImageImportJob": {
+              "methods": [
+                "getImageImportJob"
+              ]
+            },
+            "GetDiskMigrationJob": {
+              "methods": [
+                "getDiskMigrationJob"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -135,6 +150,11 @@
                 "finalizeMigration"
               ]
             },
+            "ExtendMigration": {
+              "methods": [
+                "extendMigration"
+              ]
+            },
             "CreateCloneJob": {
               "methods": [
                 "createCloneJob"
@@ -195,11 +215,58 @@
                 "deleteTargetProject"
               ]
             },
+            "CreateImageImport": {
+              "methods": [
+                "createImageImport"
+              ]
+            },
+            "DeleteImageImport": {
+              "methods": [
+                "deleteImageImport"
+              ]
+            },
+            "CancelImageImportJob": {
+              "methods": [
+                "cancelImageImportJob"
+              ]
+            },
+            "CreateDiskMigrationJob": {
+              "methods": [
+                "createDiskMigrationJob"
+              ]
+            },
+            "UpdateDiskMigrationJob": {
+              "methods": [
+                "updateDiskMigrationJob"
+              ]
+            },
+            "DeleteDiskMigrationJob": {
+              "methods": [
+                "deleteDiskMigrationJob"
+              ]
+            },
+            "RunDiskMigrationJob": {
+              "methods": [
+                "runDiskMigrationJob"
+              ]
+            },
+            "CancelDiskMigrationJob": {
+              "methods": [
+                "cancelDiskMigrationJob"
+              ]
+            },
             "ListSources": {
               "methods": [
                 "listSources",
                 "listSourcesStream",
                 "listSourcesAsync"
+              ]
+            },
+            "FetchStorageInventory": {
+              "methods": [
+                "fetchStorageInventory",
+                "fetchStorageInventoryStream",
+                "fetchStorageInventoryAsync"
               ]
             },
             "ListUtilizationReports": {
@@ -256,6 +323,27 @@
                 "listReplicationCycles",
                 "listReplicationCyclesStream",
                 "listReplicationCyclesAsync"
+              ]
+            },
+            "ListImageImports": {
+              "methods": [
+                "listImageImports",
+                "listImageImportsStream",
+                "listImageImportsAsync"
+              ]
+            },
+            "ListImageImportJobs": {
+              "methods": [
+                "listImageImportJobs",
+                "listImageImportJobsStream",
+                "listImageImportJobsAsync"
+              ]
+            },
+            "ListDiskMigrationJobs": {
+              "methods": [
+                "listDiskMigrationJobs",
+                "listDiskMigrationJobsStream",
+                "listDiskMigrationJobsAsync"
               ]
             }
           }
@@ -313,6 +401,21 @@
                 "getReplicationCycle"
               ]
             },
+            "GetImageImport": {
+              "methods": [
+                "getImageImport"
+              ]
+            },
+            "GetImageImportJob": {
+              "methods": [
+                "getImageImportJob"
+              ]
+            },
+            "GetDiskMigrationJob": {
+              "methods": [
+                "getDiskMigrationJob"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "createSource"
@@ -388,6 +491,11 @@
                 "finalizeMigration"
               ]
             },
+            "ExtendMigration": {
+              "methods": [
+                "extendMigration"
+              ]
+            },
             "CreateCloneJob": {
               "methods": [
                 "createCloneJob"
@@ -448,11 +556,58 @@
                 "deleteTargetProject"
               ]
             },
+            "CreateImageImport": {
+              "methods": [
+                "createImageImport"
+              ]
+            },
+            "DeleteImageImport": {
+              "methods": [
+                "deleteImageImport"
+              ]
+            },
+            "CancelImageImportJob": {
+              "methods": [
+                "cancelImageImportJob"
+              ]
+            },
+            "CreateDiskMigrationJob": {
+              "methods": [
+                "createDiskMigrationJob"
+              ]
+            },
+            "UpdateDiskMigrationJob": {
+              "methods": [
+                "updateDiskMigrationJob"
+              ]
+            },
+            "DeleteDiskMigrationJob": {
+              "methods": [
+                "deleteDiskMigrationJob"
+              ]
+            },
+            "RunDiskMigrationJob": {
+              "methods": [
+                "runDiskMigrationJob"
+              ]
+            },
+            "CancelDiskMigrationJob": {
+              "methods": [
+                "cancelDiskMigrationJob"
+              ]
+            },
             "ListSources": {
               "methods": [
                 "listSources",
                 "listSourcesStream",
                 "listSourcesAsync"
+              ]
+            },
+            "FetchStorageInventory": {
+              "methods": [
+                "fetchStorageInventory",
+                "fetchStorageInventoryStream",
+                "fetchStorageInventoryAsync"
               ]
             },
             "ListUtilizationReports": {
@@ -509,6 +664,27 @@
                 "listReplicationCycles",
                 "listReplicationCyclesStream",
                 "listReplicationCyclesAsync"
+              ]
+            },
+            "ListImageImports": {
+              "methods": [
+                "listImageImports",
+                "listImageImportsStream",
+                "listImageImportsAsync"
+              ]
+            },
+            "ListImageImportJobs": {
+              "methods": [
+                "listImageImportJobs",
+                "listImageImportJobsStream",
+                "listImageImportJobsAsync"
+              ]
+            },
+            "ListDiskMigrationJobs": {
+              "methods": [
+                "listDiskMigrationJobs",
+                "listDiskMigrationJobsStream",
+                "listDiskMigrationJobsAsync"
               ]
             }
           }

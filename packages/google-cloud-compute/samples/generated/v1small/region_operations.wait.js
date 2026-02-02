@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ function main(operation, project, region) {
   // const region = 'us-central1'
 
   // Imports the Compute library
-  const {RegionOperationsClient} = require('@google-cloud/compute-small').v1small;
+  const {RegionOperationsClient} = require('@google-cloud/compute').v1small;
 
   // Instantiates a client
   const computeClient = new RegionOperationsClient();

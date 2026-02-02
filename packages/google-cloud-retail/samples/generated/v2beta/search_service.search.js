@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -313,6 +313,28 @@ function main(placement, visitorId) {
    *  for revenue optimization.
    */
   // const placeId = 'abc123'
+  /**
+   *  Optional. The user attributes that could be used for personalization of
+   *  search results.
+   *  * Populate at most 100 key-value pairs per query.
+   *  * Only supports string keys and repeated string values.
+   *  * Duplicate keys are not allowed within a single query.
+   *  Example:
+   *     user_attributes: 
+   *      { key: "pets"
+   *        value {
+   *          values: "dog"
+   *          values: "cat"
+   *        }
+   *      },
+   *      { key: "state"
+   *        value {
+   *          values: "CA"
+   *        }
+   *      }
+   *      
+   */
+  // const userAttributes = [1,2,3,4]
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2beta;

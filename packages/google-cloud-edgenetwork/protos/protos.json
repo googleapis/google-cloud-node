@@ -27,6 +27,13 @@
                         "STATE_DELETING": 5
                       }
                     },
+                    "RemotePeeringNetworkType": {
+                      "values": {
+                        "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED": 0,
+                        "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL": 1,
+                        "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET": 2
+                      }
+                    },
                     "Zone": {
                       "options": {
                         "(google.api.resource).type": "edgenetwork.googleapis.com/Zone",
@@ -272,6 +279,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "remotePeeringNetworkType": {
+                          "type": "RemotePeeringNetworkType",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -354,6 +368,13 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "peeringType": {
+                          "type": "RemotePeeringNetworkType",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

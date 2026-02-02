@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3519,6 +3519,52 @@ describe('v1beta1.NetworkSecurityClient', () => {
                 const result = client.matchClientTlsPolicyFromClientTlsPolicyName(fakePath);
                 assert.strictEqual(result, "clientTlsPolicyValue");
                 assert((client.pathTemplates.clientTlsPolicyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('dnsThreatDetector', async () => {
+            const fakePath = "/rendered/path/dnsThreatDetector";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                dns_threat_detector: "dnsThreatDetectorValue",
+            };
+            const client = new networksecurityModule.v1beta1.NetworkSecurityClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.dnsThreatDetectorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.dnsThreatDetectorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('dnsThreatDetectorPath', () => {
+                const result = client.dnsThreatDetectorPath("projectValue", "locationValue", "dnsThreatDetectorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromDnsThreatDetectorName', () => {
+                const result = client.matchProjectFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromDnsThreatDetectorName', () => {
+                const result = client.matchLocationFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDnsThreatDetectorFromDnsThreatDetectorName', () => {
+                const result = client.matchDnsThreatDetectorFromDnsThreatDetectorName(fakePath);
+                assert.strictEqual(result, "dnsThreatDetectorValue");
+                assert((client.pathTemplates.dnsThreatDetectorPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

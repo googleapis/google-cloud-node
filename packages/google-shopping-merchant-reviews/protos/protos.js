@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1419,7 +1419,7 @@
                              * @interface IMerchantReview
                              * @property {string|null} [name] MerchantReview name
                              * @property {string|null} [merchantReviewId] MerchantReview merchantReviewId
-                             * @property {google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null} [attributes] MerchantReview attributes
+                             * @property {google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null} [merchantReviewAttributes] MerchantReview merchantReviewAttributes
                              * @property {Array.<google.shopping.type.ICustomAttribute>|null} [customAttributes] MerchantReview customAttributes
                              * @property {string|null} [dataSource] MerchantReview dataSource
                              * @property {google.shopping.merchant.reviews.v1beta.IMerchantReviewStatus|null} [merchantReviewStatus] MerchantReview merchantReviewStatus
@@ -1458,12 +1458,12 @@
                             MerchantReview.prototype.merchantReviewId = "";
     
                             /**
-                             * MerchantReview attributes.
-                             * @member {google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null|undefined} attributes
+                             * MerchantReview merchantReviewAttributes.
+                             * @member {google.shopping.merchant.reviews.v1beta.IMerchantReviewAttributes|null|undefined} merchantReviewAttributes
                              * @memberof google.shopping.merchant.reviews.v1beta.MerchantReview
                              * @instance
                              */
-                            MerchantReview.prototype.attributes = null;
+                            MerchantReview.prototype.merchantReviewAttributes = null;
     
                             /**
                              * MerchantReview customAttributes.
@@ -1517,8 +1517,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.merchantReviewId != null && Object.hasOwnProperty.call(message, "merchantReviewId"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.merchantReviewId);
-                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
-                                    $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.encode(message.attributes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.merchantReviewAttributes != null && Object.hasOwnProperty.call(message, "merchantReviewAttributes"))
+                                    $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.encode(message.merchantReviewAttributes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.customAttributes != null && message.customAttributes.length)
                                     for (var i = 0; i < message.customAttributes.length; ++i)
                                         $root.google.shopping.type.CustomAttribute.encode(message.customAttributes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
@@ -1571,7 +1571,7 @@
                                             break;
                                         }
                                     case 3: {
-                                            message.attributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.decode(reader, reader.uint32());
+                                            message.merchantReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 4: {
@@ -1629,10 +1629,10 @@
                                 if (message.merchantReviewId != null && message.hasOwnProperty("merchantReviewId"))
                                     if (!$util.isString(message.merchantReviewId))
                                         return "merchantReviewId: string expected";
-                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
-                                    var error = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.verify(message.attributes);
+                                if (message.merchantReviewAttributes != null && message.hasOwnProperty("merchantReviewAttributes")) {
+                                    var error = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.verify(message.merchantReviewAttributes);
                                     if (error)
-                                        return "attributes." + error;
+                                        return "merchantReviewAttributes." + error;
                                 }
                                 if (message.customAttributes != null && message.hasOwnProperty("customAttributes")) {
                                     if (!Array.isArray(message.customAttributes))
@@ -1670,10 +1670,10 @@
                                     message.name = String(object.name);
                                 if (object.merchantReviewId != null)
                                     message.merchantReviewId = String(object.merchantReviewId);
-                                if (object.attributes != null) {
-                                    if (typeof object.attributes !== "object")
-                                        throw TypeError(".google.shopping.merchant.reviews.v1beta.MerchantReview.attributes: object expected");
-                                    message.attributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.fromObject(object.attributes);
+                                if (object.merchantReviewAttributes != null) {
+                                    if (typeof object.merchantReviewAttributes !== "object")
+                                        throw TypeError(".google.shopping.merchant.reviews.v1beta.MerchantReview.merchantReviewAttributes: object expected");
+                                    message.merchantReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.fromObject(object.merchantReviewAttributes);
                                 }
                                 if (object.customAttributes) {
                                     if (!Array.isArray(object.customAttributes))
@@ -1713,7 +1713,7 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.merchantReviewId = "";
-                                    object.attributes = null;
+                                    object.merchantReviewAttributes = null;
                                     object.dataSource = "";
                                     object.merchantReviewStatus = null;
                                 }
@@ -1721,8 +1721,8 @@
                                     object.name = message.name;
                                 if (message.merchantReviewId != null && message.hasOwnProperty("merchantReviewId"))
                                     object.merchantReviewId = message.merchantReviewId;
-                                if (message.attributes != null && message.hasOwnProperty("attributes"))
-                                    object.attributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.toObject(message.attributes, options);
+                                if (message.merchantReviewAttributes != null && message.hasOwnProperty("merchantReviewAttributes"))
+                                    object.merchantReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.MerchantReviewAttributes.toObject(message.merchantReviewAttributes, options);
                                 if (message.customAttributes && message.customAttributes.length) {
                                     object.customAttributes = [];
                                     for (var j = 0; j < message.customAttributes.length; ++j)
@@ -5003,7 +5003,7 @@
                              * @interface IProductReview
                              * @property {string|null} [name] ProductReview name
                              * @property {string|null} [productReviewId] ProductReview productReviewId
-                             * @property {google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null} [attributes] ProductReview attributes
+                             * @property {google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null} [productReviewAttributes] ProductReview productReviewAttributes
                              * @property {Array.<google.shopping.type.ICustomAttribute>|null} [customAttributes] ProductReview customAttributes
                              * @property {string|null} [dataSource] ProductReview dataSource
                              * @property {google.shopping.merchant.reviews.v1beta.IProductReviewStatus|null} [productReviewStatus] ProductReview productReviewStatus
@@ -5042,12 +5042,12 @@
                             ProductReview.prototype.productReviewId = "";
     
                             /**
-                             * ProductReview attributes.
-                             * @member {google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null|undefined} attributes
+                             * ProductReview productReviewAttributes.
+                             * @member {google.shopping.merchant.reviews.v1beta.IProductReviewAttributes|null|undefined} productReviewAttributes
                              * @memberof google.shopping.merchant.reviews.v1beta.ProductReview
                              * @instance
                              */
-                            ProductReview.prototype.attributes = null;
+                            ProductReview.prototype.productReviewAttributes = null;
     
                             /**
                              * ProductReview customAttributes.
@@ -5101,8 +5101,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.productReviewId != null && Object.hasOwnProperty.call(message, "productReviewId"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.productReviewId);
-                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
-                                    $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.encode(message.attributes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.productReviewAttributes != null && Object.hasOwnProperty.call(message, "productReviewAttributes"))
+                                    $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.encode(message.productReviewAttributes, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.customAttributes != null && message.customAttributes.length)
                                     for (var i = 0; i < message.customAttributes.length; ++i)
                                         $root.google.shopping.type.CustomAttribute.encode(message.customAttributes[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
@@ -5155,7 +5155,7 @@
                                             break;
                                         }
                                     case 3: {
-                                            message.attributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.decode(reader, reader.uint32());
+                                            message.productReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 4: {
@@ -5213,10 +5213,10 @@
                                 if (message.productReviewId != null && message.hasOwnProperty("productReviewId"))
                                     if (!$util.isString(message.productReviewId))
                                         return "productReviewId: string expected";
-                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
-                                    var error = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.verify(message.attributes);
+                                if (message.productReviewAttributes != null && message.hasOwnProperty("productReviewAttributes")) {
+                                    var error = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.verify(message.productReviewAttributes);
                                     if (error)
-                                        return "attributes." + error;
+                                        return "productReviewAttributes." + error;
                                 }
                                 if (message.customAttributes != null && message.hasOwnProperty("customAttributes")) {
                                     if (!Array.isArray(message.customAttributes))
@@ -5254,10 +5254,10 @@
                                     message.name = String(object.name);
                                 if (object.productReviewId != null)
                                     message.productReviewId = String(object.productReviewId);
-                                if (object.attributes != null) {
-                                    if (typeof object.attributes !== "object")
-                                        throw TypeError(".google.shopping.merchant.reviews.v1beta.ProductReview.attributes: object expected");
-                                    message.attributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.fromObject(object.attributes);
+                                if (object.productReviewAttributes != null) {
+                                    if (typeof object.productReviewAttributes !== "object")
+                                        throw TypeError(".google.shopping.merchant.reviews.v1beta.ProductReview.productReviewAttributes: object expected");
+                                    message.productReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.fromObject(object.productReviewAttributes);
                                 }
                                 if (object.customAttributes) {
                                     if (!Array.isArray(object.customAttributes))
@@ -5297,7 +5297,7 @@
                                 if (options.defaults) {
                                     object.name = "";
                                     object.productReviewId = "";
-                                    object.attributes = null;
+                                    object.productReviewAttributes = null;
                                     object.dataSource = "";
                                     object.productReviewStatus = null;
                                 }
@@ -5305,8 +5305,8 @@
                                     object.name = message.name;
                                 if (message.productReviewId != null && message.hasOwnProperty("productReviewId"))
                                     object.productReviewId = message.productReviewId;
-                                if (message.attributes != null && message.hasOwnProperty("attributes"))
-                                    object.attributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.toObject(message.attributes, options);
+                                if (message.productReviewAttributes != null && message.hasOwnProperty("productReviewAttributes"))
+                                    object.productReviewAttributes = $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.toObject(message.productReviewAttributes, options);
                                 if (message.customAttributes && message.customAttributes.length) {
                                     object.customAttributes = [];
                                     for (var j = 0; j < message.customAttributes.length; ++j)
@@ -5381,6 +5381,8 @@
                              * @property {Array.<string>|null} [skus] ProductReviewAttributes skus
                              * @property {Array.<string>|null} [brands] ProductReviewAttributes brands
                              * @property {boolean|null} [isSpam] ProductReviewAttributes isSpam
+                             * @property {boolean|null} [isVerifiedPurchase] ProductReviewAttributes isVerifiedPurchase
+                             * @property {boolean|null} [isIncentivizedReview] ProductReviewAttributes isIncentivizedReview
                              * @property {google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod|null} [collectionMethod] ProductReviewAttributes collectionMethod
                              * @property {string|null} [transactionId] ProductReviewAttributes transactionId
                              */
@@ -5627,6 +5629,22 @@
                             ProductReviewAttributes.prototype.isSpam = null;
     
                             /**
+                             * ProductReviewAttributes isVerifiedPurchase.
+                             * @member {boolean|null|undefined} isVerifiedPurchase
+                             * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
+                             * @instance
+                             */
+                            ProductReviewAttributes.prototype.isVerifiedPurchase = null;
+    
+                            /**
+                             * ProductReviewAttributes isIncentivizedReview.
+                             * @member {boolean|null|undefined} isIncentivizedReview
+                             * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
+                             * @instance
+                             */
+                            ProductReviewAttributes.prototype.isIncentivizedReview = null;
+    
+                            /**
                              * ProductReviewAttributes collectionMethod.
                              * @member {google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod} collectionMethod
                              * @memberof google.shopping.merchant.reviews.v1beta.ProductReviewAttributes
@@ -5735,6 +5753,18 @@
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductReviewAttributes.prototype, "_isVerifiedPurchase", {
+                                get: $util.oneOfGetter($oneOfFields = ["isVerifiedPurchase"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ProductReviewAttributes.prototype, "_isIncentivizedReview", {
+                                get: $util.oneOfGetter($oneOfFields = ["isIncentivizedReview"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
                             /**
                              * Creates a new ProductReviewAttributes instance using the specified properties.
                              * @function create
@@ -5827,6 +5857,10 @@
                                     writer.uint32(/* id 28, wireType 0 =*/224).int32(message.collectionMethod);
                                 if (message.transactionId != null && Object.hasOwnProperty.call(message, "transactionId"))
                                     writer.uint32(/* id 29, wireType 2 =*/234).string(message.transactionId);
+                                if (message.isVerifiedPurchase != null && Object.hasOwnProperty.call(message, "isVerifiedPurchase"))
+                                    writer.uint32(/* id 30, wireType 0 =*/240).bool(message.isVerifiedPurchase);
+                                if (message.isIncentivizedReview != null && Object.hasOwnProperty.call(message, "isIncentivizedReview"))
+                                    writer.uint32(/* id 31, wireType 0 =*/248).bool(message.isIncentivizedReview);
                                 return writer;
                             };
     
@@ -5989,6 +6023,14 @@
                                         }
                                     case 27: {
                                             message.isSpam = reader.bool();
+                                            break;
+                                        }
+                                    case 30: {
+                                            message.isVerifiedPurchase = reader.bool();
+                                            break;
+                                        }
+                                    case 31: {
+                                            message.isIncentivizedReview = reader.bool();
                                             break;
                                         }
                                     case 28: {
@@ -6190,6 +6232,16 @@
                                     if (typeof message.isSpam !== "boolean")
                                         return "isSpam: boolean expected";
                                 }
+                                if (message.isVerifiedPurchase != null && message.hasOwnProperty("isVerifiedPurchase")) {
+                                    properties._isVerifiedPurchase = 1;
+                                    if (typeof message.isVerifiedPurchase !== "boolean")
+                                        return "isVerifiedPurchase: boolean expected";
+                                }
+                                if (message.isIncentivizedReview != null && message.hasOwnProperty("isIncentivizedReview")) {
+                                    properties._isIncentivizedReview = 1;
+                                    if (typeof message.isIncentivizedReview !== "boolean")
+                                        return "isIncentivizedReview: boolean expected";
+                                }
                                 if (message.collectionMethod != null && message.hasOwnProperty("collectionMethod"))
                                     switch (message.collectionMethod) {
                                     default:
@@ -6341,6 +6393,10 @@
                                 }
                                 if (object.isSpam != null)
                                     message.isSpam = Boolean(object.isSpam);
+                                if (object.isVerifiedPurchase != null)
+                                    message.isVerifiedPurchase = Boolean(object.isVerifiedPurchase);
+                                if (object.isIncentivizedReview != null)
+                                    message.isIncentivizedReview = Boolean(object.isIncentivizedReview);
                                 switch (object.collectionMethod) {
                                 default:
                                     if (typeof object.collectionMethod === "number") {
@@ -6536,6 +6592,16 @@
                                     object.collectionMethod = options.enums === String ? $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod[message.collectionMethod] === undefined ? message.collectionMethod : $root.google.shopping.merchant.reviews.v1beta.ProductReviewAttributes.CollectionMethod[message.collectionMethod] : message.collectionMethod;
                                 if (message.transactionId != null && message.hasOwnProperty("transactionId"))
                                     object.transactionId = message.transactionId;
+                                if (message.isVerifiedPurchase != null && message.hasOwnProperty("isVerifiedPurchase")) {
+                                    object.isVerifiedPurchase = message.isVerifiedPurchase;
+                                    if (options.oneofs)
+                                        object._isVerifiedPurchase = "isVerifiedPurchase";
+                                }
+                                if (message.isIncentivizedReview != null && message.hasOwnProperty("isIncentivizedReview")) {
+                                    object.isIncentivizedReview = message.isIncentivizedReview;
+                                    if (options.oneofs)
+                                        object._isIncentivizedReview = "isIncentivizedReview";
+                                }
                                 return object;
                             };
     

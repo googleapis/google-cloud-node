@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1234,7 +1234,8 @@ export namespace google {
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
-                        MAC = 9
+                        MAC = 9,
+                        KEY_ENCAPSULATION = 10
                     }
                 }
 
@@ -1796,6 +1797,9 @@ export namespace google {
                         HMAC_SHA512 = 35,
                         HMAC_SHA224 = 36,
                         EXTERNAL_SYMMETRIC_ENCRYPTION = 18,
+                        ML_KEM_768 = 47,
+                        ML_KEM_1024 = 48,
+                        KEM_XWING = 63,
                         PQ_SIGN_ML_DSA_65 = 56,
                         PQ_SIGN_SLH_DSA_SHA2_128S = 57
                     }
@@ -2064,7 +2068,9 @@ export namespace google {
                     enum PublicKeyFormat {
                         PUBLIC_KEY_FORMAT_UNSPECIFIED = 0,
                         PEM = 1,
-                        NIST_PQC = 3
+                        DER = 2,
+                        NIST_PQC = 3,
+                        XWING_RAW_BYTES = 4
                     }
                 }
 
@@ -2100,6 +2106,9 @@ export namespace google {
 
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend */
+                    cryptoKeyBackend?: (string|null);
                 }
 
                 /** Represents an ImportJob. */
@@ -2140,6 +2149,9 @@ export namespace google {
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend. */
+                    public cryptoKeyBackend: string;
 
                     /**
                      * Creates a new ImportJob instance using the specified properties.
@@ -2544,7 +2556,8 @@ export namespace google {
                     SOFTWARE = 1,
                     HSM = 2,
                     EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
+                    EXTERNAL_VPC = 4,
+                    HSM_SINGLE_TENANT = 5
                 }
 
                 /** AccessReason enum. */

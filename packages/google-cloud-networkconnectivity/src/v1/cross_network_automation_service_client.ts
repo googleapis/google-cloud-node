@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -187,6 +187,9 @@ export class CrossNetworkAutomationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      destinationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}/destinations/{destination}'
+      ),
       groupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}/groups/{group}'
       ),
@@ -196,8 +199,17 @@ export class CrossNetworkAutomationServiceClient {
       hubRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}/routes/{route}'
       ),
+      internalRangePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/internalRanges/{internal_range}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      multicloudDataTransferConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferConfigs/{multicloud_data_transfer_config}'
+      ),
+      multicloudDataTransferSupportedServicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/multicloudDataTransferSupportedServices/{multicloud_data_transfer_supported_service}'
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/global/networks/{resource_id}'
@@ -252,9 +264,9 @@ export class CrossNetworkAutomationServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',body: '*',}],
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/internalRanges/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/internalRanges/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/internalRanges/*}:testIamPermissions',body: '*',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -3393,6 +3405,68 @@ export class CrossNetworkAutomationServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified destination resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_config
+   * @param {string} destination
+   * @returns {string} Resource name string.
+   */
+  destinationPath(project:string,location:string,multicloudDataTransferConfig:string,destination:string) {
+    return this.pathTemplates.destinationPathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_config: multicloudDataTransferConfig,
+      destination: destination,
+    });
+  }
+
+  /**
+   * Parse the project from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).project;
+  }
+
+  /**
+   * Parse the location from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_config from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the multicloud_data_transfer_config.
+   */
+  matchMulticloudDataTransferConfigFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).multicloud_data_transfer_config;
+  }
+
+  /**
+   * Parse the destination from Destination resource.
+   *
+   * @param {string} destinationName
+   *   A fully-qualified path representing Destination resource.
+   * @returns {string} A string representing the destination.
+   */
+  matchDestinationFromDestinationName(destinationName: string) {
+    return this.pathTemplates.destinationPathTemplate.match(destinationName).destination;
+  }
+
+  /**
    * Return a fully-qualified group resource name string.
    *
    * @param {string} project
@@ -3540,6 +3614,55 @@ export class CrossNetworkAutomationServiceClient {
   }
 
   /**
+   * Return a fully-qualified internalRange resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} internal_range
+   * @returns {string} Resource name string.
+   */
+  internalRangePath(project:string,location:string,internalRange:string) {
+    return this.pathTemplates.internalRangePathTemplate.render({
+      project: project,
+      location: location,
+      internal_range: internalRange,
+    });
+  }
+
+  /**
+   * Parse the project from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).project;
+  }
+
+  /**
+   * Parse the location from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).location;
+  }
+
+  /**
+   * Parse the internal_range from InternalRange resource.
+   *
+   * @param {string} internalRangeName
+   *   A fully-qualified path representing InternalRange resource.
+   * @returns {string} A string representing the internal_range.
+   */
+  matchInternalRangeFromInternalRangeName(internalRangeName: string) {
+    return this.pathTemplates.internalRangePathTemplate.match(internalRangeName).internal_range;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -3573,6 +3696,104 @@ export class CrossNetworkAutomationServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified multicloudDataTransferConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_config
+   * @returns {string} Resource name string.
+   */
+  multicloudDataTransferConfigPath(project:string,location:string,multicloudDataTransferConfig:string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_config: multicloudDataTransferConfig,
+    });
+  }
+
+  /**
+   * Parse the project from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).project;
+  }
+
+  /**
+   * Parse the location from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_config from MulticloudDataTransferConfig resource.
+   *
+   * @param {string} multicloudDataTransferConfigName
+   *   A fully-qualified path representing MulticloudDataTransferConfig resource.
+   * @returns {string} A string representing the multicloud_data_transfer_config.
+   */
+  matchMulticloudDataTransferConfigFromMulticloudDataTransferConfigName(multicloudDataTransferConfigName: string) {
+    return this.pathTemplates.multicloudDataTransferConfigPathTemplate.match(multicloudDataTransferConfigName).multicloud_data_transfer_config;
+  }
+
+  /**
+   * Return a fully-qualified multicloudDataTransferSupportedService resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} multicloud_data_transfer_supported_service
+   * @returns {string} Resource name string.
+   */
+  multicloudDataTransferSupportedServicePath(project:string,location:string,multicloudDataTransferSupportedService:string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.render({
+      project: project,
+      location: location,
+      multicloud_data_transfer_supported_service: multicloudDataTransferSupportedService,
+    });
+  }
+
+  /**
+   * Parse the project from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).project;
+  }
+
+  /**
+   * Parse the location from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).location;
+  }
+
+  /**
+   * Parse the multicloud_data_transfer_supported_service from MulticloudDataTransferSupportedService resource.
+   *
+   * @param {string} multicloudDataTransferSupportedServiceName
+   *   A fully-qualified path representing MulticloudDataTransferSupportedService resource.
+   * @returns {string} A string representing the multicloud_data_transfer_supported_service.
+   */
+  matchMulticloudDataTransferSupportedServiceFromMulticloudDataTransferSupportedServiceName(multicloudDataTransferSupportedServiceName: string) {
+    return this.pathTemplates.multicloudDataTransferSupportedServicePathTemplate.match(multicloudDataTransferSupportedServiceName).multicloud_data_transfer_supported_service;
   }
 
   /**

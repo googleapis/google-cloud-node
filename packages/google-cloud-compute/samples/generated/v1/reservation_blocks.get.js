@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,13 +33,20 @@ function main(project, reservation, reservationBlock, zone) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the reservation. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the reservation.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const reservation = 'abc123'
   /**
-   *  The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the reservation block.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const reservationBlock = 'abc123'
+  /**
+   *  View of the Block.
+   *  Check the View enum for the list of possible values.
+   */
+  // const view = 'abc123'
   /**
    *  Name of the zone for this request. Zone name should conform to RFC1035.
    */

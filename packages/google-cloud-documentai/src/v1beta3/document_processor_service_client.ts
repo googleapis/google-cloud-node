@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -124,7 +124,7 @@ export class DocumentProcessorServiceClient {
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
 
-    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    // If scopes are unset in options set scopes.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
@@ -152,10 +152,7 @@ export class DocumentProcessorServiceClient {
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
 
-    // Set the default scopes in auth client if needed.
-    if (servicePath === this._servicePath) {
-      this.auth.defaultScopes = staticMembers.scopes;
-    }
+    
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts
@@ -2479,8 +2476,6 @@ export class DocumentProcessorServiceClient {
  * @param {string} request.processorVersionSource
  *   The source processor version to import from. The source processor version
  *   and destination processor need to be in the same environment and region.
- *   Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
- *   supported.
  * @param {google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource} request.externalProcessorVersionSource
  *   The source processor version to import from. It can be from a different
  *   environment and region than the destination processor.

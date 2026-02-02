@@ -1,5 +1,47 @@
 # Changelog
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.5.0...dialogflow-cx-v5.6.0) (2026-01-22)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries ([#7005](https://github.com/googleapis/google-cloud-node/issues/7005)) ([abccd1b](https://github.com/googleapis/google-cloud-node/commit/abccd1b4e58cd733ff7416f1e554ceedd84a23c2))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.4.0...dialogflow-cx-v5.5.0) (2025-11-21)
+
+
+### Features
+
+* [cx] add support for defining custom actions in code. See https://cloud.google.com/dialogflow/cx/docs/concept/playbook/code-block for more information ([#6879](https://github.com/googleapis/google-cloud-node/issues/6879)) ([54e3b03](https://github.com/googleapis/google-cloud-node/commit/54e3b03149fd8f91ea076b691ec0e32d45748421))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.3.0...dialogflow-cx-v5.4.0) (2025-10-13)
+
+
+### Features
+
+* [cx] Add parameters to adjust LLM input and output token limit and temperature in v3beta1 API ([#6806](https://github.com/googleapis/google-cloud-node/issues/6806)) ([8d9d660](https://github.com/googleapis/google-cloud-node/commit/8d9d6601f047fc0b7f2a2139a77792d416ff1054))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.2.0...dialogflow-cx-v5.3.0) (2025-07-17)
+
+
+### Features
+
+* [dialogflow-cx] Add support for generator settings on fulfillment ([#6466](https://github.com/googleapis/google-cloud-node/issues/6466)) ([02a74ee](https://github.com/googleapis/google-cloud-node/commit/02a74ee2eaa244dbb70b33b94e7884878a1457e2))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.1.0...dialogflow-cx-v5.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.0.1...dialogflow-cx-v5.1.0) (2025-06-03)
 
 

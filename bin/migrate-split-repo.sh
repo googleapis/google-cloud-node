@@ -22,16 +22,14 @@ then
 fi
  
 # repo name (e.g. nodejs-asset)
-SPLIT_REPO=$1
-# destination directory (e.g. google-cloud-asset)
-ARTIFACT_NAME=$2
- 
+export SPLIT_REPO=$1
+# destination directory (e.g. packages/google-cloud-asset)
+export PACKAGE_PATH="$2"
+  
 ## Get the directory of the build script
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
  
 export UPDATE_SCRIPT="${SCRIPT_DIR}/split-repo-post-process.sh"
-export PACKAGE_PATH="packages/${ARTIFACT_NAME}"
- 
 # run the migrate script, remove .kokoro and .github folders
 # keep the .github/.OwlBot.yaml config
 ${SCRIPT_DIR}/migrate-git-history.sh \
@@ -39,8 +37,8 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/google-cloud-node" \
   "" \
   "${PACKAGE_PATH}" \
-  ".kokoro,.github,.trampolinerc,SECURITY.md,renovate.json,samples" \
-  ".github/.OwlBot.yaml,samples/quickstart.js,samples/test/quickstart.js,system-test/test/quickstart.js,samples/.eslintrc.yml,samples/test/sample.test.js,samples/test/quickstart.test.js,system-test/test/quickstart.test.js,system-test/test/quickstart.js,samples/README.md,samples/package.json,samples/generated"
+  ".github/workflows/ci.yaml,.github/workflows/issues-no-repro.yaml,.github/workflows/response.yaml,SECURITY.md,renovate.json" \
+  ".github/.OwlBot.yaml,system-test/test/quickstart.js,system-test/test/quickstart.test.js"
  
 # run the script to update the split repo and either delete all the samples or just update the README
 ${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"

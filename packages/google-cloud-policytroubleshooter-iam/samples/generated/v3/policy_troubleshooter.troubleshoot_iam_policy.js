@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ function main() {
   // const accessTuple = {}
 
   // Imports the Iam library
-  const {PolicyTroubleshooterClient} = require('@google-cloud/iam').v3;
+  const {PolicyTroubleshooterClient} = require('@google-cloud/policy-troubleshooter-iam').v3;
 
   // Instantiates a client
   const iamClient = new PolicyTroubleshooterClient();

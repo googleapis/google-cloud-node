@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -889,6 +889,7 @@
                          * @interface IPart
                          * @property {string|null} [text] Part text
                          * @property {google.ai.generativelanguage.v1.IBlob|null} [inlineData] Part inlineData
+                         * @property {google.ai.generativelanguage.v1.IVideoMetadata|null} [videoMetadata] Part videoMetadata
                          */
     
                         /**
@@ -922,6 +923,14 @@
                          */
                         Part.prototype.inlineData = null;
     
+                        /**
+                         * Part videoMetadata.
+                         * @member {google.ai.generativelanguage.v1.IVideoMetadata|null|undefined} videoMetadata
+                         * @memberof google.ai.generativelanguage.v1.Part
+                         * @instance
+                         */
+                        Part.prototype.videoMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -933,6 +942,17 @@
                          */
                         Object.defineProperty(Part.prototype, "data", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "inlineData"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Part metadata.
+                         * @member {"videoMetadata"|undefined} metadata
+                         * @memberof google.ai.generativelanguage.v1.Part
+                         * @instance
+                         */
+                        Object.defineProperty(Part.prototype, "metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["videoMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -964,6 +984,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
                             if (message.inlineData != null && Object.hasOwnProperty.call(message, "inlineData"))
                                 $root.google.ai.generativelanguage.v1.Blob.encode(message.inlineData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.videoMetadata != null && Object.hasOwnProperty.call(message, "videoMetadata"))
+                                $root.google.ai.generativelanguage.v1.VideoMetadata.encode(message.videoMetadata, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -1006,6 +1028,10 @@
                                     }
                                 case 3: {
                                         message.inlineData = $root.google.ai.generativelanguage.v1.Blob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.videoMetadata = $root.google.ai.generativelanguage.v1.VideoMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1059,6 +1085,14 @@
                                         return "inlineData." + error;
                                 }
                             }
+                            if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
+                                properties.metadata = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1.VideoMetadata.verify(message.videoMetadata);
+                                    if (error)
+                                        return "videoMetadata." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1080,6 +1114,11 @@
                                 if (typeof object.inlineData !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1.Part.inlineData: object expected");
                                 message.inlineData = $root.google.ai.generativelanguage.v1.Blob.fromObject(object.inlineData);
+                            }
+                            if (object.videoMetadata != null) {
+                                if (typeof object.videoMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.Part.videoMetadata: object expected");
+                                message.videoMetadata = $root.google.ai.generativelanguage.v1.VideoMetadata.fromObject(object.videoMetadata);
                             }
                             return message;
                         };
@@ -1106,6 +1145,11 @@
                                 object.inlineData = $root.google.ai.generativelanguage.v1.Blob.toObject(message.inlineData, options);
                                 if (options.oneofs)
                                     object.data = "inlineData";
+                            }
+                            if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
+                                object.videoMetadata = $root.google.ai.generativelanguage.v1.VideoMetadata.toObject(message.videoMetadata, options);
+                                if (options.oneofs)
+                                    object.metadata = "videoMetadata";
                             }
                             return object;
                         };
@@ -1375,6 +1419,268 @@
                         };
     
                         return Blob;
+                    })();
+    
+                    v1.VideoMetadata = (function() {
+    
+                        /**
+                         * Properties of a VideoMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @interface IVideoMetadata
+                         * @property {google.protobuf.IDuration|null} [startOffset] VideoMetadata startOffset
+                         * @property {google.protobuf.IDuration|null} [endOffset] VideoMetadata endOffset
+                         * @property {number|null} [fps] VideoMetadata fps
+                         */
+    
+                        /**
+                         * Constructs a new VideoMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @classdesc Represents a VideoMetadata.
+                         * @implements IVideoMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1.IVideoMetadata=} [properties] Properties to set
+                         */
+                        function VideoMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VideoMetadata startOffset.
+                         * @member {google.protobuf.IDuration|null|undefined} startOffset
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.startOffset = null;
+    
+                        /**
+                         * VideoMetadata endOffset.
+                         * @member {google.protobuf.IDuration|null|undefined} endOffset
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.endOffset = null;
+    
+                        /**
+                         * VideoMetadata fps.
+                         * @member {number} fps
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.fps = 0;
+    
+                        /**
+                         * Creates a new VideoMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IVideoMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1.VideoMetadata} VideoMetadata instance
+                         */
+                        VideoMetadata.create = function create(properties) {
+                            return new VideoMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.VideoMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startOffset != null && Object.hasOwnProperty.call(message, "startOffset"))
+                                $root.google.protobuf.Duration.encode(message.startOffset, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endOffset != null && Object.hasOwnProperty.call(message, "endOffset"))
+                                $root.google.protobuf.Duration.encode(message.endOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.fps != null && Object.hasOwnProperty.call(message, "fps"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.fps);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.VideoMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VideoMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1.VideoMetadata} VideoMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.VideoMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fps = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1.VideoMetadata} VideoMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VideoMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VideoMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset")) {
+                                var error = $root.google.protobuf.Duration.verify(message.startOffset);
+                                if (error)
+                                    return "startOffset." + error;
+                            }
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset")) {
+                                var error = $root.google.protobuf.Duration.verify(message.endOffset);
+                                if (error)
+                                    return "endOffset." + error;
+                            }
+                            if (message.fps != null && message.hasOwnProperty("fps"))
+                                if (typeof message.fps !== "number")
+                                    return "fps: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1.VideoMetadata} VideoMetadata
+                         */
+                        VideoMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1.VideoMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1.VideoMetadata();
+                            if (object.startOffset != null) {
+                                if (typeof object.startOffset !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.VideoMetadata.startOffset: object expected");
+                                message.startOffset = $root.google.protobuf.Duration.fromObject(object.startOffset);
+                            }
+                            if (object.endOffset != null) {
+                                if (typeof object.endOffset !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.VideoMetadata.endOffset: object expected");
+                                message.endOffset = $root.google.protobuf.Duration.fromObject(object.endOffset);
+                            }
+                            if (object.fps != null)
+                                message.fps = Number(object.fps);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.VideoMetadata} message VideoMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VideoMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startOffset = null;
+                                object.endOffset = null;
+                                object.fps = 0;
+                            }
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                object.startOffset = $root.google.protobuf.Duration.toObject(message.startOffset, options);
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                object.endOffset = $root.google.protobuf.Duration.toObject(message.endOffset, options);
+                            if (message.fps != null && message.hasOwnProperty("fps"))
+                                object.fps = options.json && !isFinite(message.fps) ? String(message.fps) : message.fps;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VideoMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VideoMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VideoMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1.VideoMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VideoMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1.VideoMetadata";
+                        };
+    
+                        return VideoMetadata;
                     })();
     
                     v1.ModalityTokenCount = (function() {
@@ -2224,6 +2530,7 @@
                          * @property {number|null} [topP] GenerationConfig topP
                          * @property {number|null} [topK] GenerationConfig topK
                          * @property {number|null} [seed] GenerationConfig seed
+                         * @property {google.protobuf.IValue|null} [responseJsonSchemaOrdered] GenerationConfig responseJsonSchemaOrdered
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -2302,6 +2609,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.seed = null;
+    
+                        /**
+                         * GenerationConfig responseJsonSchemaOrdered.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchemaOrdered
+                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchemaOrdered = null;
     
                         /**
                          * GenerationConfig presencePenalty.
@@ -2461,6 +2776,8 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.logprobs);
                             if (message.enableEnhancedCivicAnswers != null && Object.hasOwnProperty.call(message, "enableEnhancedCivicAnswers"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.enableEnhancedCivicAnswers);
+                            if (message.responseJsonSchemaOrdered != null && Object.hasOwnProperty.call(message, "responseJsonSchemaOrdered"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchemaOrdered, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -2525,6 +2842,10 @@
                                     }
                                 case 8: {
                                         message.seed = reader.int32();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.responseJsonSchemaOrdered = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 15: {
@@ -2620,6 +2941,11 @@
                                 if (!$util.isInteger(message.seed))
                                     return "seed: integer expected";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchemaOrdered);
+                                if (error)
+                                    return "responseJsonSchemaOrdered." + error;
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -2679,6 +3005,11 @@
                                 message.topK = object.topK | 0;
                             if (object.seed != null)
                                 message.seed = object.seed | 0;
+                            if (object.responseJsonSchemaOrdered != null) {
+                                if (typeof object.responseJsonSchemaOrdered !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.GenerationConfig.responseJsonSchemaOrdered: object expected");
+                                message.responseJsonSchemaOrdered = $root.google.protobuf.Value.fromObject(object.responseJsonSchemaOrdered);
+                            }
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -2707,6 +3038,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.stopSequences = [];
+                            if (options.defaults)
+                                object.responseJsonSchemaOrdered = null;
                             if (message.candidateCount != null && message.hasOwnProperty("candidateCount")) {
                                 object.candidateCount = message.candidateCount;
                                 if (options.oneofs)
@@ -2767,6 +3100,8 @@
                                 if (options.oneofs)
                                     object._enableEnhancedCivicAnswers = "enableEnhancedCivicAnswers";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered"))
+                                object.responseJsonSchemaOrdered = $root.google.protobuf.Value.toObject(message.responseJsonSchemaOrdered, options);
                             return object;
                         };
     
@@ -2809,6 +3144,7 @@
                          * @property {google.ai.generativelanguage.v1.GenerateContentResponse.IPromptFeedback|null} [promptFeedback] GenerateContentResponse promptFeedback
                          * @property {google.ai.generativelanguage.v1.GenerateContentResponse.IUsageMetadata|null} [usageMetadata] GenerateContentResponse usageMetadata
                          * @property {string|null} [modelVersion] GenerateContentResponse modelVersion
+                         * @property {string|null} [responseId] GenerateContentResponse responseId
                          */
     
                         /**
@@ -2860,6 +3196,14 @@
                         GenerateContentResponse.prototype.modelVersion = "";
     
                         /**
+                         * GenerateContentResponse responseId.
+                         * @member {string} responseId
+                         * @memberof google.ai.generativelanguage.v1.GenerateContentResponse
+                         * @instance
+                         */
+                        GenerateContentResponse.prototype.responseId = "";
+    
+                        /**
                          * Creates a new GenerateContentResponse instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1.GenerateContentResponse
@@ -2892,6 +3236,8 @@
                                 $root.google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.encode(message.usageMetadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.modelVersion != null && Object.hasOwnProperty.call(message, "modelVersion"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.modelVersion);
+                            if (message.responseId != null && Object.hasOwnProperty.call(message, "responseId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.responseId);
                             return writer;
                         };
     
@@ -2944,6 +3290,10 @@
                                     }
                                 case 4: {
                                         message.modelVersion = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.responseId = reader.string();
                                         break;
                                     }
                                 default:
@@ -3003,6 +3353,9 @@
                             if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
                                 if (!$util.isString(message.modelVersion))
                                     return "modelVersion: string expected";
+                            if (message.responseId != null && message.hasOwnProperty("responseId"))
+                                if (!$util.isString(message.responseId))
+                                    return "responseId: string expected";
                             return null;
                         };
     
@@ -3040,6 +3393,8 @@
                             }
                             if (object.modelVersion != null)
                                 message.modelVersion = String(object.modelVersion);
+                            if (object.responseId != null)
+                                message.responseId = String(object.responseId);
                             return message;
                         };
     
@@ -3062,6 +3417,7 @@
                                 object.promptFeedback = null;
                                 object.usageMetadata = null;
                                 object.modelVersion = "";
+                                object.responseId = "";
                             }
                             if (message.candidates && message.candidates.length) {
                                 object.candidates = [];
@@ -3074,6 +3430,8 @@
                                 object.usageMetadata = $root.google.ai.generativelanguage.v1.GenerateContentResponse.UsageMetadata.toObject(message.usageMetadata, options);
                             if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
                                 object.modelVersion = message.modelVersion;
+                            if (message.responseId != null && message.hasOwnProperty("responseId"))
+                                object.responseId = message.responseId;
                             return object;
                         };
     
@@ -3902,12 +4260,14 @@
                          * @property {number|null} [index] Candidate index
                          * @property {google.ai.generativelanguage.v1.IContent|null} [content] Candidate content
                          * @property {google.ai.generativelanguage.v1.Candidate.FinishReason|null} [finishReason] Candidate finishReason
+                         * @property {string|null} [finishMessage] Candidate finishMessage
                          * @property {Array.<google.ai.generativelanguage.v1.ISafetyRating>|null} [safetyRatings] Candidate safetyRatings
                          * @property {google.ai.generativelanguage.v1.ICitationMetadata|null} [citationMetadata] Candidate citationMetadata
                          * @property {number|null} [tokenCount] Candidate tokenCount
                          * @property {google.ai.generativelanguage.v1.IGroundingMetadata|null} [groundingMetadata] Candidate groundingMetadata
                          * @property {number|null} [avgLogprobs] Candidate avgLogprobs
                          * @property {google.ai.generativelanguage.v1.ILogprobsResult|null} [logprobsResult] Candidate logprobsResult
+                         * @property {google.ai.generativelanguage.v1.IUrlContextMetadata|null} [urlContextMetadata] Candidate urlContextMetadata
                          */
     
                         /**
@@ -3949,6 +4309,14 @@
                          * @instance
                          */
                         Candidate.prototype.finishReason = 0;
+    
+                        /**
+                         * Candidate finishMessage.
+                         * @member {string|null|undefined} finishMessage
+                         * @memberof google.ai.generativelanguage.v1.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.finishMessage = null;
     
                         /**
                          * Candidate safetyRatings.
@@ -3998,12 +4366,26 @@
                          */
                         Candidate.prototype.logprobsResult = null;
     
+                        /**
+                         * Candidate urlContextMetadata.
+                         * @member {google.ai.generativelanguage.v1.IUrlContextMetadata|null|undefined} urlContextMetadata
+                         * @memberof google.ai.generativelanguage.v1.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.urlContextMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Candidate.prototype, "_index", {
                             get: $util.oneOfGetter($oneOfFields = ["index"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Candidate.prototype, "_finishMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["finishMessage"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4037,6 +4419,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.finishReason);
                             if (message.index != null && Object.hasOwnProperty.call(message, "index"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.index);
+                            if (message.finishMessage != null && Object.hasOwnProperty.call(message, "finishMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.finishMessage);
                             if (message.safetyRatings != null && message.safetyRatings.length)
                                 for (var i = 0; i < message.safetyRatings.length; ++i)
                                     $root.google.ai.generativelanguage.v1.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -4050,6 +4434,8 @@
                                 writer.uint32(/* id 10, wireType 1 =*/81).double(message.avgLogprobs);
                             if (message.logprobsResult != null && Object.hasOwnProperty.call(message, "logprobsResult"))
                                 $root.google.ai.generativelanguage.v1.LogprobsResult.encode(message.logprobsResult, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.urlContextMetadata != null && Object.hasOwnProperty.call(message, "urlContextMetadata"))
+                                $root.google.ai.generativelanguage.v1.UrlContextMetadata.encode(message.urlContextMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -4098,6 +4484,10 @@
                                         message.finishReason = reader.int32();
                                         break;
                                     }
+                                case 4: {
+                                        message.finishMessage = reader.string();
+                                        break;
+                                    }
                                 case 5: {
                                         if (!(message.safetyRatings && message.safetyRatings.length))
                                             message.safetyRatings = [];
@@ -4122,6 +4512,10 @@
                                     }
                                 case 11: {
                                         message.logprobsResult = $root.google.ai.generativelanguage.v1.LogprobsResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.urlContextMetadata = $root.google.ai.generativelanguage.v1.UrlContextMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4186,8 +4580,19 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 12:
+                                case 13:
                                     break;
                                 }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                properties._finishMessage = 1;
+                                if (!$util.isString(message.finishMessage))
+                                    return "finishMessage: string expected";
+                            }
                             if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
                                 if (!Array.isArray(message.safetyRatings))
                                     return "safetyRatings: array expected";
@@ -4217,6 +4622,11 @@
                                 var error = $root.google.ai.generativelanguage.v1.LogprobsResult.verify(message.logprobsResult);
                                 if (error)
                                     return "logprobsResult." + error;
+                            }
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata")) {
+                                var error = $root.google.ai.generativelanguage.v1.UrlContextMetadata.verify(message.urlContextMetadata);
+                                if (error)
+                                    return "urlContextMetadata." + error;
                             }
                             return null;
                         };
@@ -4295,7 +4705,33 @@
                             case 11:
                                 message.finishReason = 11;
                                 break;
+                            case "IMAGE_PROHIBITED_CONTENT":
+                            case 14:
+                                message.finishReason = 14;
+                                break;
+                            case "IMAGE_OTHER":
+                            case 15:
+                                message.finishReason = 15;
+                                break;
+                            case "NO_IMAGE":
+                            case 16:
+                                message.finishReason = 16;
+                                break;
+                            case "IMAGE_RECITATION":
+                            case 17:
+                                message.finishReason = 17;
+                                break;
+                            case "UNEXPECTED_TOOL_CALL":
+                            case 12:
+                                message.finishReason = 12;
+                                break;
+                            case "TOO_MANY_TOOL_CALLS":
+                            case 13:
+                                message.finishReason = 13;
+                                break;
                             }
+                            if (object.finishMessage != null)
+                                message.finishMessage = String(object.finishMessage);
                             if (object.safetyRatings) {
                                 if (!Array.isArray(object.safetyRatings))
                                     throw TypeError(".google.ai.generativelanguage.v1.Candidate.safetyRatings: array expected");
@@ -4325,6 +4761,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1.Candidate.logprobsResult: object expected");
                                 message.logprobsResult = $root.google.ai.generativelanguage.v1.LogprobsResult.fromObject(object.logprobsResult);
                             }
+                            if (object.urlContextMetadata != null) {
+                                if (typeof object.urlContextMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.Candidate.urlContextMetadata: object expected");
+                                message.urlContextMetadata = $root.google.ai.generativelanguage.v1.UrlContextMetadata.fromObject(object.urlContextMetadata);
+                            }
                             return message;
                         };
     
@@ -4351,6 +4792,7 @@
                                 object.groundingMetadata = null;
                                 object.avgLogprobs = 0;
                                 object.logprobsResult = null;
+                                object.urlContextMetadata = null;
                             }
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = $root.google.ai.generativelanguage.v1.Content.toObject(message.content, options);
@@ -4360,6 +4802,11 @@
                                 object.index = message.index;
                                 if (options.oneofs)
                                     object._index = "index";
+                            }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                object.finishMessage = message.finishMessage;
+                                if (options.oneofs)
+                                    object._finishMessage = "finishMessage";
                             }
                             if (message.safetyRatings && message.safetyRatings.length) {
                                 object.safetyRatings = [];
@@ -4376,6 +4823,8 @@
                                 object.avgLogprobs = options.json && !isFinite(message.avgLogprobs) ? String(message.avgLogprobs) : message.avgLogprobs;
                             if (message.logprobsResult != null && message.hasOwnProperty("logprobsResult"))
                                 object.logprobsResult = $root.google.ai.generativelanguage.v1.LogprobsResult.toObject(message.logprobsResult, options);
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata"))
+                                object.urlContextMetadata = $root.google.ai.generativelanguage.v1.UrlContextMetadata.toObject(message.urlContextMetadata, options);
                             return object;
                         };
     
@@ -4421,6 +4870,12 @@
                          * @property {number} SPII=9 SPII value
                          * @property {number} MALFORMED_FUNCTION_CALL=10 MALFORMED_FUNCTION_CALL value
                          * @property {number} IMAGE_SAFETY=11 IMAGE_SAFETY value
+                         * @property {number} IMAGE_PROHIBITED_CONTENT=14 IMAGE_PROHIBITED_CONTENT value
+                         * @property {number} IMAGE_OTHER=15 IMAGE_OTHER value
+                         * @property {number} NO_IMAGE=16 NO_IMAGE value
+                         * @property {number} IMAGE_RECITATION=17 IMAGE_RECITATION value
+                         * @property {number} UNEXPECTED_TOOL_CALL=12 UNEXPECTED_TOOL_CALL value
+                         * @property {number} TOO_MANY_TOOL_CALLS=13 TOO_MANY_TOOL_CALLS value
                          */
                         Candidate.FinishReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4436,10 +4891,525 @@
                             values[valuesById[9] = "SPII"] = 9;
                             values[valuesById[10] = "MALFORMED_FUNCTION_CALL"] = 10;
                             values[valuesById[11] = "IMAGE_SAFETY"] = 11;
+                            values[valuesById[14] = "IMAGE_PROHIBITED_CONTENT"] = 14;
+                            values[valuesById[15] = "IMAGE_OTHER"] = 15;
+                            values[valuesById[16] = "NO_IMAGE"] = 16;
+                            values[valuesById[17] = "IMAGE_RECITATION"] = 17;
+                            values[valuesById[12] = "UNEXPECTED_TOOL_CALL"] = 12;
+                            values[valuesById[13] = "TOO_MANY_TOOL_CALLS"] = 13;
                             return values;
                         })();
     
                         return Candidate;
+                    })();
+    
+                    v1.UrlContextMetadata = (function() {
+    
+                        /**
+                         * Properties of an UrlContextMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @interface IUrlContextMetadata
+                         * @property {Array.<google.ai.generativelanguage.v1.IUrlMetadata>|null} [urlMetadata] UrlContextMetadata urlMetadata
+                         */
+    
+                        /**
+                         * Constructs a new UrlContextMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @classdesc Represents an UrlContextMetadata.
+                         * @implements IUrlContextMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1.IUrlContextMetadata=} [properties] Properties to set
+                         */
+                        function UrlContextMetadata(properties) {
+                            this.urlMetadata = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UrlContextMetadata urlMetadata.
+                         * @member {Array.<google.ai.generativelanguage.v1.IUrlMetadata>} urlMetadata
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @instance
+                         */
+                        UrlContextMetadata.prototype.urlMetadata = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UrlContextMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlContextMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1.UrlContextMetadata} UrlContextMetadata instance
+                         */
+                        UrlContextMetadata.create = function create(properties) {
+                            return new UrlContextMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContextMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.UrlContextMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlContextMetadata} message UrlContextMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContextMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.urlMetadata != null && message.urlMetadata.length)
+                                for (var i = 0; i < message.urlMetadata.length; ++i)
+                                    $root.google.ai.generativelanguage.v1.UrlMetadata.encode(message.urlMetadata[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContextMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.UrlContextMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlContextMetadata} message UrlContextMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContextMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UrlContextMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1.UrlContextMetadata} UrlContextMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContextMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.UrlContextMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.urlMetadata && message.urlMetadata.length))
+                                            message.urlMetadata = [];
+                                        message.urlMetadata.push($root.google.ai.generativelanguage.v1.UrlMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UrlContextMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1.UrlContextMetadata} UrlContextMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContextMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UrlContextMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UrlContextMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.urlMetadata != null && message.hasOwnProperty("urlMetadata")) {
+                                if (!Array.isArray(message.urlMetadata))
+                                    return "urlMetadata: array expected";
+                                for (var i = 0; i < message.urlMetadata.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1.UrlMetadata.verify(message.urlMetadata[i]);
+                                    if (error)
+                                        return "urlMetadata." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UrlContextMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1.UrlContextMetadata} UrlContextMetadata
+                         */
+                        UrlContextMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1.UrlContextMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1.UrlContextMetadata();
+                            if (object.urlMetadata) {
+                                if (!Array.isArray(object.urlMetadata))
+                                    throw TypeError(".google.ai.generativelanguage.v1.UrlContextMetadata.urlMetadata: array expected");
+                                message.urlMetadata = [];
+                                for (var i = 0; i < object.urlMetadata.length; ++i) {
+                                    if (typeof object.urlMetadata[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1.UrlContextMetadata.urlMetadata: object expected");
+                                    message.urlMetadata[i] = $root.google.ai.generativelanguage.v1.UrlMetadata.fromObject(object.urlMetadata[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UrlContextMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.UrlContextMetadata} message UrlContextMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UrlContextMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.urlMetadata = [];
+                            if (message.urlMetadata && message.urlMetadata.length) {
+                                object.urlMetadata = [];
+                                for (var j = 0; j < message.urlMetadata.length; ++j)
+                                    object.urlMetadata[j] = $root.google.ai.generativelanguage.v1.UrlMetadata.toObject(message.urlMetadata[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UrlContextMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UrlContextMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UrlContextMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1.UrlContextMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UrlContextMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1.UrlContextMetadata";
+                        };
+    
+                        return UrlContextMetadata;
+                    })();
+    
+                    v1.UrlMetadata = (function() {
+    
+                        /**
+                         * Properties of an UrlMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @interface IUrlMetadata
+                         * @property {string|null} [retrievedUrl] UrlMetadata retrievedUrl
+                         * @property {google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus|null} [urlRetrievalStatus] UrlMetadata urlRetrievalStatus
+                         */
+    
+                        /**
+                         * Constructs a new UrlMetadata.
+                         * @memberof google.ai.generativelanguage.v1
+                         * @classdesc Represents an UrlMetadata.
+                         * @implements IUrlMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1.IUrlMetadata=} [properties] Properties to set
+                         */
+                        function UrlMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UrlMetadata retrievedUrl.
+                         * @member {string} retrievedUrl
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @instance
+                         */
+                        UrlMetadata.prototype.retrievedUrl = "";
+    
+                        /**
+                         * UrlMetadata urlRetrievalStatus.
+                         * @member {google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus} urlRetrievalStatus
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @instance
+                         */
+                        UrlMetadata.prototype.urlRetrievalStatus = 0;
+    
+                        /**
+                         * Creates a new UrlMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1.UrlMetadata} UrlMetadata instance
+                         */
+                        UrlMetadata.create = function create(properties) {
+                            return new UrlMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UrlMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1.UrlMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlMetadata} message UrlMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retrievedUrl != null && Object.hasOwnProperty.call(message, "retrievedUrl"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.retrievedUrl);
+                            if (message.urlRetrievalStatus != null && Object.hasOwnProperty.call(message, "urlRetrievalStatus"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.urlRetrievalStatus);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UrlMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.UrlMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.IUrlMetadata} message UrlMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UrlMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1.UrlMetadata} UrlMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1.UrlMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retrievedUrl = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.urlRetrievalStatus = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UrlMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1.UrlMetadata} UrlMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UrlMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UrlMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retrievedUrl != null && message.hasOwnProperty("retrievedUrl"))
+                                if (!$util.isString(message.retrievedUrl))
+                                    return "retrievedUrl: string expected";
+                            if (message.urlRetrievalStatus != null && message.hasOwnProperty("urlRetrievalStatus"))
+                                switch (message.urlRetrievalStatus) {
+                                default:
+                                    return "urlRetrievalStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UrlMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1.UrlMetadata} UrlMetadata
+                         */
+                        UrlMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1.UrlMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1.UrlMetadata();
+                            if (object.retrievedUrl != null)
+                                message.retrievedUrl = String(object.retrievedUrl);
+                            switch (object.urlRetrievalStatus) {
+                            default:
+                                if (typeof object.urlRetrievalStatus === "number") {
+                                    message.urlRetrievalStatus = object.urlRetrievalStatus;
+                                    break;
+                                }
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.urlRetrievalStatus = 0;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_SUCCESS":
+                            case 1:
+                                message.urlRetrievalStatus = 1;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_ERROR":
+                            case 2:
+                                message.urlRetrievalStatus = 2;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_PAYWALL":
+                            case 3:
+                                message.urlRetrievalStatus = 3;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSAFE":
+                            case 4:
+                                message.urlRetrievalStatus = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UrlMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1.UrlMetadata} message UrlMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UrlMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.retrievedUrl = "";
+                                object.urlRetrievalStatus = options.enums === String ? "URL_RETRIEVAL_STATUS_UNSPECIFIED" : 0;
+                            }
+                            if (message.retrievedUrl != null && message.hasOwnProperty("retrievedUrl"))
+                                object.retrievedUrl = message.retrievedUrl;
+                            if (message.urlRetrievalStatus != null && message.hasOwnProperty("urlRetrievalStatus"))
+                                object.urlRetrievalStatus = options.enums === String ? $root.google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus[message.urlRetrievalStatus] === undefined ? message.urlRetrievalStatus : $root.google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus[message.urlRetrievalStatus] : message.urlRetrievalStatus;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UrlMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UrlMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UrlMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1.UrlMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UrlMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1.UrlMetadata";
+                        };
+    
+                        /**
+                         * UrlRetrievalStatus enum.
+                         * @name google.ai.generativelanguage.v1.UrlMetadata.UrlRetrievalStatus
+                         * @enum {number}
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSPECIFIED=0 URL_RETRIEVAL_STATUS_UNSPECIFIED value
+                         * @property {number} URL_RETRIEVAL_STATUS_SUCCESS=1 URL_RETRIEVAL_STATUS_SUCCESS value
+                         * @property {number} URL_RETRIEVAL_STATUS_ERROR=2 URL_RETRIEVAL_STATUS_ERROR value
+                         * @property {number} URL_RETRIEVAL_STATUS_PAYWALL=3 URL_RETRIEVAL_STATUS_PAYWALL value
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSAFE=4 URL_RETRIEVAL_STATUS_UNSAFE value
+                         */
+                        UrlMetadata.UrlRetrievalStatus = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "URL_RETRIEVAL_STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "URL_RETRIEVAL_STATUS_SUCCESS"] = 1;
+                            values[valuesById[2] = "URL_RETRIEVAL_STATUS_ERROR"] = 2;
+                            values[valuesById[3] = "URL_RETRIEVAL_STATUS_PAYWALL"] = 3;
+                            values[valuesById[4] = "URL_RETRIEVAL_STATUS_UNSAFE"] = 4;
+                            return values;
+                        })();
+    
+                        return UrlMetadata;
                     })();
     
                     v1.LogprobsResult = (function() {
@@ -4448,6 +5418,7 @@
                          * Properties of a LogprobsResult.
                          * @memberof google.ai.generativelanguage.v1
                          * @interface ILogprobsResult
+                         * @property {number|null} [logProbabilitySum] LogprobsResult logProbabilitySum
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>|null} [topCandidates] LogprobsResult topCandidates
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ICandidate>|null} [chosenCandidates] LogprobsResult chosenCandidates
                          */
@@ -4470,6 +5441,14 @@
                         }
     
                         /**
+                         * LogprobsResult logProbabilitySum.
+                         * @member {number|null|undefined} logProbabilitySum
+                         * @memberof google.ai.generativelanguage.v1.LogprobsResult
+                         * @instance
+                         */
+                        LogprobsResult.prototype.logProbabilitySum = null;
+    
+                        /**
                          * LogprobsResult topCandidates.
                          * @member {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>} topCandidates
                          * @memberof google.ai.generativelanguage.v1.LogprobsResult
@@ -4484,6 +5463,15 @@
                          * @instance
                          */
                         LogprobsResult.prototype.chosenCandidates = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LogprobsResult.prototype, "_logProbabilitySum", {
+                            get: $util.oneOfGetter($oneOfFields = ["logProbabilitySum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new LogprobsResult instance using the specified properties.
@@ -4515,6 +5503,8 @@
                             if (message.chosenCandidates != null && message.chosenCandidates.length)
                                 for (var i = 0; i < message.chosenCandidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.encode(message.chosenCandidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.logProbabilitySum != null && Object.hasOwnProperty.call(message, "logProbabilitySum"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.logProbabilitySum);
                             return writer;
                         };
     
@@ -4551,6 +5541,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.logProbabilitySum = reader.float();
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
                                             message.topCandidates = [];
@@ -4598,6 +5592,12 @@
                         LogprobsResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                properties._logProbabilitySum = 1;
+                                if (typeof message.logProbabilitySum !== "number")
+                                    return "logProbabilitySum: number expected";
+                            }
                             if (message.topCandidates != null && message.hasOwnProperty("topCandidates")) {
                                 if (!Array.isArray(message.topCandidates))
                                     return "topCandidates: array expected";
@@ -4631,6 +5631,8 @@
                             if (object instanceof $root.google.ai.generativelanguage.v1.LogprobsResult)
                                 return object;
                             var message = new $root.google.ai.generativelanguage.v1.LogprobsResult();
+                            if (object.logProbabilitySum != null)
+                                message.logProbabilitySum = Number(object.logProbabilitySum);
                             if (object.topCandidates) {
                                 if (!Array.isArray(object.topCandidates))
                                     throw TypeError(".google.ai.generativelanguage.v1.LogprobsResult.topCandidates: array expected");
@@ -4680,6 +5682,11 @@
                                 object.chosenCandidates = [];
                                 for (var j = 0; j < message.chosenCandidates.length; ++j)
                                     object.chosenCandidates[j] = $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.toObject(message.chosenCandidates[j], options);
+                            }
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                object.logProbabilitySum = options.json && !isFinite(message.logProbabilitySum) ? String(message.logProbabilitySum) : message.logProbabilitySum;
+                                if (options.oneofs)
+                                    object._logProbabilitySum = "logProbabilitySum";
                             }
                             return object;
                         };
@@ -5439,6 +6446,7 @@
                          * @property {Array.<google.ai.generativelanguage.v1.IGroundingSupport>|null} [groundingSupports] GroundingMetadata groundingSupports
                          * @property {google.ai.generativelanguage.v1.IRetrievalMetadata|null} [retrievalMetadata] GroundingMetadata retrievalMetadata
                          * @property {Array.<string>|null} [webSearchQueries] GroundingMetadata webSearchQueries
+                         * @property {string|null} [googleMapsWidgetContextToken] GroundingMetadata googleMapsWidgetContextToken
                          */
     
                         /**
@@ -5499,6 +6507,14 @@
                          */
                         GroundingMetadata.prototype.webSearchQueries = $util.emptyArray;
     
+                        /**
+                         * GroundingMetadata googleMapsWidgetContextToken.
+                         * @member {string|null|undefined} googleMapsWidgetContextToken
+                         * @memberof google.ai.generativelanguage.v1.GroundingMetadata
+                         * @instance
+                         */
+                        GroundingMetadata.prototype.googleMapsWidgetContextToken = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5511,6 +6527,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(GroundingMetadata.prototype, "_googleMapsWidgetContextToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleMapsWidgetContextToken"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5551,6 +6573,8 @@
                             if (message.webSearchQueries != null && message.webSearchQueries.length)
                                 for (var i = 0; i < message.webSearchQueries.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.webSearchQueries[i]);
+                            if (message.googleMapsWidgetContextToken != null && Object.hasOwnProperty.call(message, "googleMapsWidgetContextToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.googleMapsWidgetContextToken);
                             return writer;
                         };
     
@@ -5611,6 +6635,10 @@
                                         if (!(message.webSearchQueries && message.webSearchQueries.length))
                                             message.webSearchQueries = [];
                                         message.webSearchQueries.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.googleMapsWidgetContextToken = reader.string();
                                         break;
                                     }
                                 default:
@@ -5690,6 +6718,11 @@
                                     if (!$util.isString(message.webSearchQueries[i]))
                                         return "webSearchQueries: string[] expected";
                             }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                properties._googleMapsWidgetContextToken = 1;
+                                if (!$util.isString(message.googleMapsWidgetContextToken))
+                                    return "googleMapsWidgetContextToken: string expected";
+                            }
                             return null;
                         };
     
@@ -5742,6 +6775,8 @@
                                 for (var i = 0; i < object.webSearchQueries.length; ++i)
                                     message.webSearchQueries[i] = String(object.webSearchQueries[i]);
                             }
+                            if (object.googleMapsWidgetContextToken != null)
+                                message.googleMapsWidgetContextToken = String(object.googleMapsWidgetContextToken);
                             return message;
                         };
     
@@ -5787,6 +6822,11 @@
                                 object.webSearchQueries = [];
                                 for (var j = 0; j < message.webSearchQueries.length; ++j)
                                     object.webSearchQueries[j] = message.webSearchQueries[j];
+                            }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                object.googleMapsWidgetContextToken = message.googleMapsWidgetContextToken;
+                                if (options.oneofs)
+                                    object._googleMapsWidgetContextToken = "googleMapsWidgetContextToken";
                             }
                             return object;
                         };
@@ -9799,6 +10839,7 @@
                          * @property {number|null} [maxTemperature] Model maxTemperature
                          * @property {number|null} [topP] Model topP
                          * @property {number|null} [topK] Model topK
+                         * @property {boolean|null} [thinking] Model thinking
                          */
     
                         /**
@@ -9913,6 +10954,14 @@
                          */
                         Model.prototype.topK = null;
     
+                        /**
+                         * Model thinking.
+                         * @member {boolean} thinking
+                         * @memberof google.ai.generativelanguage.v1.Model
+                         * @instance
+                         */
+                        Model.prototype.thinking = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -9989,6 +11038,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.topK);
                             if (message.maxTemperature != null && Object.hasOwnProperty.call(message, "maxTemperature"))
                                 writer.uint32(/* id 13, wireType 5 =*/109).float(message.maxTemperature);
+                            if (message.thinking != null && Object.hasOwnProperty.call(message, "thinking"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.thinking);
                             return writer;
                         };
     
@@ -10075,6 +11126,10 @@
                                         message.topK = reader.int32();
                                         break;
                                     }
+                                case 15: {
+                                        message.thinking = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -10159,6 +11214,9 @@
                                 if (!$util.isInteger(message.topK))
                                     return "topK: integer expected";
                             }
+                            if (message.thinking != null && message.hasOwnProperty("thinking"))
+                                if (typeof message.thinking !== "boolean")
+                                    return "thinking: boolean expected";
                             return null;
                         };
     
@@ -10203,6 +11261,8 @@
                                 message.topP = Number(object.topP);
                             if (object.topK != null)
                                 message.topK = object.topK | 0;
+                            if (object.thinking != null)
+                                message.thinking = Boolean(object.thinking);
                             return message;
                         };
     
@@ -10229,6 +11289,7 @@
                                 object.description = "";
                                 object.inputTokenLimit = 0;
                                 object.outputTokenLimit = 0;
+                                object.thinking = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10269,6 +11330,8 @@
                                 if (options.oneofs)
                                     object._maxTemperature = "maxTemperature";
                             }
+                            if (message.thinking != null && message.hasOwnProperty("thinking"))
+                                object.thinking = message.thinking;
                             return object;
                         };
     
@@ -62958,7 +64021,10 @@
                          * @property {google.ai.generativelanguage.v1beta.IFileData|null} [fileData] Part fileData
                          * @property {google.ai.generativelanguage.v1beta.IExecutableCode|null} [executableCode] Part executableCode
                          * @property {google.ai.generativelanguage.v1beta.ICodeExecutionResult|null} [codeExecutionResult] Part codeExecutionResult
+                         * @property {google.ai.generativelanguage.v1beta.IVideoMetadata|null} [videoMetadata] Part videoMetadata
                          * @property {boolean|null} [thought] Part thought
+                         * @property {Uint8Array|null} [thoughtSignature] Part thoughtSignature
+                         * @property {google.protobuf.IStruct|null} [partMetadata] Part partMetadata
                          */
     
                         /**
@@ -63033,12 +64099,36 @@
                         Part.prototype.codeExecutionResult = null;
     
                         /**
+                         * Part videoMetadata.
+                         * @member {google.ai.generativelanguage.v1beta.IVideoMetadata|null|undefined} videoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Part.prototype.videoMetadata = null;
+    
+                        /**
                          * Part thought.
                          * @member {boolean} thought
                          * @memberof google.ai.generativelanguage.v1beta.Part
                          * @instance
                          */
                         Part.prototype.thought = false;
+    
+                        /**
+                         * Part thoughtSignature.
+                         * @member {Uint8Array} thoughtSignature
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Part.prototype.thoughtSignature = $util.newBuffer([]);
+    
+                        /**
+                         * Part partMetadata.
+                         * @member {google.protobuf.IStruct|null|undefined} partMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Part.prototype.partMetadata = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -63051,6 +64141,17 @@
                          */
                         Object.defineProperty(Part.prototype, "data", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "inlineData", "functionCall", "functionResponse", "fileData", "executableCode", "codeExecutionResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Part metadata.
+                         * @member {"videoMetadata"|undefined} metadata
+                         * @memberof google.ai.generativelanguage.v1beta.Part
+                         * @instance
+                         */
+                        Object.defineProperty(Part.prototype, "metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["videoMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -63088,12 +64189,18 @@
                                 $root.google.ai.generativelanguage.v1beta.FunctionResponse.encode(message.functionResponse, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.fileData != null && Object.hasOwnProperty.call(message, "fileData"))
                                 $root.google.ai.generativelanguage.v1beta.FileData.encode(message.fileData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.partMetadata != null && Object.hasOwnProperty.call(message, "partMetadata"))
+                                $root.google.protobuf.Struct.encode(message.partMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.executableCode != null && Object.hasOwnProperty.call(message, "executableCode"))
                                 $root.google.ai.generativelanguage.v1beta.ExecutableCode.encode(message.executableCode, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.codeExecutionResult != null && Object.hasOwnProperty.call(message, "codeExecutionResult"))
                                 $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.encode(message.codeExecutionResult, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.thought != null && Object.hasOwnProperty.call(message, "thought"))
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.thought);
+                            if (message.thoughtSignature != null && Object.hasOwnProperty.call(message, "thoughtSignature"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).bytes(message.thoughtSignature);
+                            if (message.videoMetadata != null && Object.hasOwnProperty.call(message, "videoMetadata"))
+                                $root.google.ai.generativelanguage.v1beta.VideoMetadata.encode(message.videoMetadata, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -63158,8 +64265,20 @@
                                         message.codeExecutionResult = $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 11: {
                                         message.thought = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.thoughtSignature = reader.bytes();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.partMetadata = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -63263,9 +64382,25 @@
                                         return "codeExecutionResult." + error;
                                 }
                             }
+                            if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
+                                properties.metadata = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.VideoMetadata.verify(message.videoMetadata);
+                                    if (error)
+                                        return "videoMetadata." + error;
+                                }
+                            }
                             if (message.thought != null && message.hasOwnProperty("thought"))
                                 if (typeof message.thought !== "boolean")
                                     return "thought: boolean expected";
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                if (!(message.thoughtSignature && typeof message.thoughtSignature.length === "number" || $util.isString(message.thoughtSignature)))
+                                    return "thoughtSignature: buffer expected";
+                            if (message.partMetadata != null && message.hasOwnProperty("partMetadata")) {
+                                var error = $root.google.protobuf.Struct.verify(message.partMetadata);
+                                if (error)
+                                    return "partMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -63313,8 +64448,23 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Part.codeExecutionResult: object expected");
                                 message.codeExecutionResult = $root.google.ai.generativelanguage.v1beta.CodeExecutionResult.fromObject(object.codeExecutionResult);
                             }
+                            if (object.videoMetadata != null) {
+                                if (typeof object.videoMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Part.videoMetadata: object expected");
+                                message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.fromObject(object.videoMetadata);
+                            }
                             if (object.thought != null)
                                 message.thought = Boolean(object.thought);
+                            if (object.thoughtSignature != null)
+                                if (typeof object.thoughtSignature === "string")
+                                    $util.base64.decode(object.thoughtSignature, message.thoughtSignature = $util.newBuffer($util.base64.length(object.thoughtSignature)), 0);
+                                else if (object.thoughtSignature.length >= 0)
+                                    message.thoughtSignature = object.thoughtSignature;
+                            if (object.partMetadata != null) {
+                                if (typeof object.partMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Part.partMetadata: object expected");
+                                message.partMetadata = $root.google.protobuf.Struct.fromObject(object.partMetadata);
+                            }
                             return message;
                         };
     
@@ -63331,8 +64481,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
+                                object.partMetadata = null;
                                 object.thought = false;
+                                if (options.bytes === String)
+                                    object.thoughtSignature = "";
+                                else {
+                                    object.thoughtSignature = [];
+                                    if (options.bytes !== Array)
+                                        object.thoughtSignature = $util.newBuffer(object.thoughtSignature);
+                                }
+                            }
                             if (message.text != null && message.hasOwnProperty("text")) {
                                 object.text = message.text;
                                 if (options.oneofs)
@@ -63358,6 +64517,8 @@
                                 if (options.oneofs)
                                     object.data = "fileData";
                             }
+                            if (message.partMetadata != null && message.hasOwnProperty("partMetadata"))
+                                object.partMetadata = $root.google.protobuf.Struct.toObject(message.partMetadata, options);
                             if (message.executableCode != null && message.hasOwnProperty("executableCode")) {
                                 object.executableCode = $root.google.ai.generativelanguage.v1beta.ExecutableCode.toObject(message.executableCode, options);
                                 if (options.oneofs)
@@ -63370,6 +64531,13 @@
                             }
                             if (message.thought != null && message.hasOwnProperty("thought"))
                                 object.thought = message.thought;
+                            if (message.thoughtSignature != null && message.hasOwnProperty("thoughtSignature"))
+                                object.thoughtSignature = options.bytes === String ? $util.base64.encode(message.thoughtSignature, 0, message.thoughtSignature.length) : options.bytes === Array ? Array.prototype.slice.call(message.thoughtSignature) : message.thoughtSignature;
+                            if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
+                                object.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.toObject(message.videoMetadata, options);
+                                if (options.oneofs)
+                                    object.metadata = "videoMetadata";
+                            }
                             return object;
                         };
     
@@ -63400,6 +64568,235 @@
                         };
     
                         return Part;
+                    })();
+    
+                    v1beta.FunctionResponsePart = (function() {
+    
+                        /**
+                         * Properties of a FunctionResponsePart.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFunctionResponsePart
+                         * @property {google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null} [inlineData] FunctionResponsePart inlineData
+                         */
+    
+                        /**
+                         * Constructs a new FunctionResponsePart.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FunctionResponsePart.
+                         * @implements IFunctionResponsePart
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart=} [properties] Properties to set
+                         */
+                        function FunctionResponsePart(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FunctionResponsePart inlineData.
+                         * @member {google.ai.generativelanguage.v1beta.IFunctionResponseBlob|null|undefined} inlineData
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         */
+                        FunctionResponsePart.prototype.inlineData = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * FunctionResponsePart data.
+                         * @member {"inlineData"|undefined} data
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         */
+                        Object.defineProperty(FunctionResponsePart.prototype, "data", {
+                            get: $util.oneOfGetter($oneOfFields = ["inlineData"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new FunctionResponsePart instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart instance
+                         */
+                        FunctionResponsePart.create = function create(properties) {
+                            return new FunctionResponsePart(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponsePart message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart} message FunctionResponsePart message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponsePart.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inlineData != null && Object.hasOwnProperty.call(message, "inlineData"))
+                                $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.encode(message.inlineData, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponsePart message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponsePart.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponsePart} message FunctionResponsePart message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponsePart.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponsePart message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponsePart.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionResponsePart();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponsePart message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponsePart.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FunctionResponsePart message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FunctionResponsePart.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inlineData != null && message.hasOwnProperty("inlineData")) {
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify(message.inlineData);
+                                    if (error)
+                                        return "inlineData." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FunctionResponsePart message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponsePart} FunctionResponsePart
+                         */
+                        FunctionResponsePart.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FunctionResponsePart)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FunctionResponsePart();
+                            if (object.inlineData != null) {
+                                if (typeof object.inlineData !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponsePart.inlineData: object expected");
+                                message.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.fromObject(object.inlineData);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FunctionResponsePart message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FunctionResponsePart} message FunctionResponsePart
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FunctionResponsePart.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.inlineData != null && message.hasOwnProperty("inlineData")) {
+                                object.inlineData = $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob.toObject(message.inlineData, options);
+                                if (options.oneofs)
+                                    object.data = "inlineData";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FunctionResponsePart to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FunctionResponsePart.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunctionResponsePart
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponsePart
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunctionResponsePart.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionResponsePart";
+                        };
+    
+                        return FunctionResponsePart;
                     })();
     
                     v1beta.Blob = (function() {
@@ -63640,6 +65037,244 @@
                         return Blob;
                     })();
     
+                    v1beta.FunctionResponseBlob = (function() {
+    
+                        /**
+                         * Properties of a FunctionResponseBlob.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFunctionResponseBlob
+                         * @property {string|null} [mimeType] FunctionResponseBlob mimeType
+                         * @property {Uint8Array|null} [data] FunctionResponseBlob data
+                         */
+    
+                        /**
+                         * Constructs a new FunctionResponseBlob.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FunctionResponseBlob.
+                         * @implements IFunctionResponseBlob
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob=} [properties] Properties to set
+                         */
+                        function FunctionResponseBlob(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FunctionResponseBlob mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         */
+                        FunctionResponseBlob.prototype.mimeType = "";
+    
+                        /**
+                         * FunctionResponseBlob data.
+                         * @member {Uint8Array} data
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         */
+                        FunctionResponseBlob.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new FunctionResponseBlob instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob instance
+                         */
+                        FunctionResponseBlob.create = function create(properties) {
+                            return new FunctionResponseBlob(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponseBlob message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob} message FunctionResponseBlob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponseBlob.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.mimeType);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FunctionResponseBlob message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FunctionResponseBlob.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFunctionResponseBlob} message FunctionResponseBlob message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FunctionResponseBlob.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponseBlob message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponseBlob.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.mimeType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.data = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FunctionResponseBlob message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FunctionResponseBlob.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FunctionResponseBlob message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FunctionResponseBlob.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FunctionResponseBlob message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FunctionResponseBlob} FunctionResponseBlob
+                         */
+                        FunctionResponseBlob.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FunctionResponseBlob();
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length >= 0)
+                                    message.data = object.data;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FunctionResponseBlob message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FunctionResponseBlob} message FunctionResponseBlob
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FunctionResponseBlob.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FunctionResponseBlob to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FunctionResponseBlob.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FunctionResponseBlob
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponseBlob
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FunctionResponseBlob.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionResponseBlob";
+                        };
+    
+                        return FunctionResponseBlob;
+                    })();
+    
                     v1beta.FileData = (function() {
     
                         /**
@@ -63867,6 +65502,268 @@
                         };
     
                         return FileData;
+                    })();
+    
+                    v1beta.VideoMetadata = (function() {
+    
+                        /**
+                         * Properties of a VideoMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IVideoMetadata
+                         * @property {google.protobuf.IDuration|null} [startOffset] VideoMetadata startOffset
+                         * @property {google.protobuf.IDuration|null} [endOffset] VideoMetadata endOffset
+                         * @property {number|null} [fps] VideoMetadata fps
+                         */
+    
+                        /**
+                         * Constructs a new VideoMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a VideoMetadata.
+                         * @implements IVideoMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata=} [properties] Properties to set
+                         */
+                        function VideoMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VideoMetadata startOffset.
+                         * @member {google.protobuf.IDuration|null|undefined} startOffset
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.startOffset = null;
+    
+                        /**
+                         * VideoMetadata endOffset.
+                         * @member {google.protobuf.IDuration|null|undefined} endOffset
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.endOffset = null;
+    
+                        /**
+                         * VideoMetadata fps.
+                         * @member {number} fps
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @instance
+                         */
+                        VideoMetadata.prototype.fps = 0;
+    
+                        /**
+                         * Creates a new VideoMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata instance
+                         */
+                        VideoMetadata.create = function create(properties) {
+                            return new VideoMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startOffset != null && Object.hasOwnProperty.call(message, "startOffset"))
+                                $root.google.protobuf.Duration.encode(message.startOffset, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endOffset != null && Object.hasOwnProperty.call(message, "endOffset"))
+                                $root.google.protobuf.Duration.encode(message.endOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.fps != null && Object.hasOwnProperty.call(message, "fps"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.fps);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VideoMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VideoMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.VideoMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.startOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.fps = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VideoMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VideoMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VideoMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset")) {
+                                var error = $root.google.protobuf.Duration.verify(message.startOffset);
+                                if (error)
+                                    return "startOffset." + error;
+                            }
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset")) {
+                                var error = $root.google.protobuf.Duration.verify(message.endOffset);
+                                if (error)
+                                    return "endOffset." + error;
+                            }
+                            if (message.fps != null && message.hasOwnProperty("fps"))
+                                if (typeof message.fps !== "number")
+                                    return "fps: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         */
+                        VideoMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.VideoMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.VideoMetadata();
+                            if (object.startOffset != null) {
+                                if (typeof object.startOffset !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.VideoMetadata.startOffset: object expected");
+                                message.startOffset = $root.google.protobuf.Duration.fromObject(object.startOffset);
+                            }
+                            if (object.endOffset != null) {
+                                if (typeof object.endOffset !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.VideoMetadata.endOffset: object expected");
+                                message.endOffset = $root.google.protobuf.Duration.fromObject(object.endOffset);
+                            }
+                            if (object.fps != null)
+                                message.fps = Number(object.fps);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.VideoMetadata} message VideoMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VideoMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.startOffset = null;
+                                object.endOffset = null;
+                                object.fps = 0;
+                            }
+                            if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                object.startOffset = $root.google.protobuf.Duration.toObject(message.startOffset, options);
+                            if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                object.endOffset = $root.google.protobuf.Duration.toObject(message.endOffset, options);
+                            if (message.fps != null && message.hasOwnProperty("fps"))
+                                object.fps = options.json && !isFinite(message.fps) ? String(message.fps) : message.fps;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VideoMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VideoMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VideoMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VideoMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.VideoMetadata";
+                        };
+    
+                        return VideoMetadata;
                     })();
     
                     v1beta.ExecutableCode = (function() {
@@ -64417,6 +66314,10 @@
                          * @property {google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval|null} [googleSearchRetrieval] Tool googleSearchRetrieval
                          * @property {google.ai.generativelanguage.v1beta.ICodeExecution|null} [codeExecution] Tool codeExecution
                          * @property {google.ai.generativelanguage.v1beta.Tool.IGoogleSearch|null} [googleSearch] Tool googleSearch
+                         * @property {google.ai.generativelanguage.v1beta.Tool.IComputerUse|null} [computerUse] Tool computerUse
+                         * @property {google.ai.generativelanguage.v1beta.IUrlContext|null} [urlContext] Tool urlContext
+                         * @property {google.ai.generativelanguage.v1beta.IFileSearch|null} [fileSearch] Tool fileSearch
+                         * @property {google.ai.generativelanguage.v1beta.IGoogleMaps|null} [googleMaps] Tool googleMaps
                          */
     
                         /**
@@ -64468,6 +66369,38 @@
                         Tool.prototype.googleSearch = null;
     
                         /**
+                         * Tool computerUse.
+                         * @member {google.ai.generativelanguage.v1beta.Tool.IComputerUse|null|undefined} computerUse
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.computerUse = null;
+    
+                        /**
+                         * Tool urlContext.
+                         * @member {google.ai.generativelanguage.v1beta.IUrlContext|null|undefined} urlContext
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.urlContext = null;
+    
+                        /**
+                         * Tool fileSearch.
+                         * @member {google.ai.generativelanguage.v1beta.IFileSearch|null|undefined} fileSearch
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.fileSearch = null;
+    
+                        /**
+                         * Tool googleMaps.
+                         * @member {google.ai.generativelanguage.v1beta.IGoogleMaps|null|undefined} googleMaps
+                         * @memberof google.ai.generativelanguage.v1beta.Tool
+                         * @instance
+                         */
+                        Tool.prototype.googleMaps = null;
+    
+                        /**
                          * Creates a new Tool instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.Tool
@@ -64500,6 +66433,14 @@
                                 $root.google.ai.generativelanguage.v1beta.CodeExecution.encode(message.codeExecution, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.googleSearch != null && Object.hasOwnProperty.call(message, "googleSearch"))
                                 $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.encode(message.googleSearch, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.computerUse != null && Object.hasOwnProperty.call(message, "computerUse"))
+                                $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.encode(message.computerUse, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.urlContext != null && Object.hasOwnProperty.call(message, "urlContext"))
+                                $root.google.ai.generativelanguage.v1beta.UrlContext.encode(message.urlContext, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.fileSearch != null && Object.hasOwnProperty.call(message, "fileSearch"))
+                                $root.google.ai.generativelanguage.v1beta.FileSearch.encode(message.fileSearch, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.googleMaps != null && Object.hasOwnProperty.call(message, "googleMaps"))
+                                $root.google.ai.generativelanguage.v1beta.GoogleMaps.encode(message.googleMaps, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -64552,6 +66493,22 @@
                                     }
                                 case 4: {
                                         message.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -64613,6 +66570,26 @@
                                 if (error)
                                     return "googleSearch." + error;
                             }
+                            if (message.computerUse != null && message.hasOwnProperty("computerUse")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify(message.computerUse);
+                                if (error)
+                                    return "computerUse." + error;
+                            }
+                            if (message.urlContext != null && message.hasOwnProperty("urlContext")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.UrlContext.verify(message.urlContext);
+                                if (error)
+                                    return "urlContext." + error;
+                            }
+                            if (message.fileSearch != null && message.hasOwnProperty("fileSearch")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.FileSearch.verify(message.fileSearch);
+                                if (error)
+                                    return "fileSearch." + error;
+                            }
+                            if (message.googleMaps != null && message.hasOwnProperty("googleMaps")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.GoogleMaps.verify(message.googleMaps);
+                                if (error)
+                                    return "googleMaps." + error;
+                            }
                             return null;
                         };
     
@@ -64653,6 +66630,26 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Tool.googleSearch: object expected");
                                 message.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.fromObject(object.googleSearch);
                             }
+                            if (object.computerUse != null) {
+                                if (typeof object.computerUse !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.computerUse: object expected");
+                                message.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.fromObject(object.computerUse);
+                            }
+                            if (object.urlContext != null) {
+                                if (typeof object.urlContext !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.urlContext: object expected");
+                                message.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.fromObject(object.urlContext);
+                            }
+                            if (object.fileSearch != null) {
+                                if (typeof object.fileSearch !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.fileSearch: object expected");
+                                message.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.fromObject(object.fileSearch);
+                            }
+                            if (object.googleMaps != null) {
+                                if (typeof object.googleMaps !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Tool.googleMaps: object expected");
+                                message.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.fromObject(object.googleMaps);
+                            }
                             return message;
                         };
     
@@ -64675,6 +66672,10 @@
                                 object.googleSearchRetrieval = null;
                                 object.codeExecution = null;
                                 object.googleSearch = null;
+                                object.computerUse = null;
+                                object.urlContext = null;
+                                object.fileSearch = null;
+                                object.googleMaps = null;
                             }
                             if (message.functionDeclarations && message.functionDeclarations.length) {
                                 object.functionDeclarations = [];
@@ -64687,6 +66688,14 @@
                                 object.codeExecution = $root.google.ai.generativelanguage.v1beta.CodeExecution.toObject(message.codeExecution, options);
                             if (message.googleSearch != null && message.hasOwnProperty("googleSearch"))
                                 object.googleSearch = $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch.toObject(message.googleSearch, options);
+                            if (message.computerUse != null && message.hasOwnProperty("computerUse"))
+                                object.computerUse = $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.toObject(message.computerUse, options);
+                            if (message.urlContext != null && message.hasOwnProperty("urlContext"))
+                                object.urlContext = $root.google.ai.generativelanguage.v1beta.UrlContext.toObject(message.urlContext, options);
+                            if (message.fileSearch != null && message.hasOwnProperty("fileSearch"))
+                                object.fileSearch = $root.google.ai.generativelanguage.v1beta.FileSearch.toObject(message.fileSearch, options);
+                            if (message.googleMaps != null && message.hasOwnProperty("googleMaps"))
+                                object.googleMaps = $root.google.ai.generativelanguage.v1beta.GoogleMaps.toObject(message.googleMaps, options);
                             return object;
                         };
     
@@ -64722,6 +66731,7 @@
                              * Properties of a GoogleSearch.
                              * @memberof google.ai.generativelanguage.v1beta.Tool
                              * @interface IGoogleSearch
+                             * @property {google.type.IInterval|null} [timeRangeFilter] GoogleSearch timeRangeFilter
                              */
     
                             /**
@@ -64738,6 +66748,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * GoogleSearch timeRangeFilter.
+                             * @member {google.type.IInterval|null|undefined} timeRangeFilter
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.GoogleSearch
+                             * @instance
+                             */
+                            GoogleSearch.prototype.timeRangeFilter = null;
     
                             /**
                              * Creates a new GoogleSearch instance using the specified properties.
@@ -64763,6 +66781,8 @@
                             GoogleSearch.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (message.timeRangeFilter != null && Object.hasOwnProperty.call(message, "timeRangeFilter"))
+                                    $root.google.type.Interval.encode(message.timeRangeFilter, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 return writer;
                             };
     
@@ -64799,6 +66819,10 @@
                                     if (tag === error)
                                         break;
                                     switch (tag >>> 3) {
+                                    case 2: {
+                                            message.timeRangeFilter = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -64834,6 +66858,11 @@
                             GoogleSearch.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.timeRangeFilter != null && message.hasOwnProperty("timeRangeFilter")) {
+                                    var error = $root.google.type.Interval.verify(message.timeRangeFilter);
+                                    if (error)
+                                        return "timeRangeFilter." + error;
+                                }
                                 return null;
                             };
     
@@ -64848,7 +66877,13 @@
                             GoogleSearch.fromObject = function fromObject(object) {
                                 if (object instanceof $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch)
                                     return object;
-                                return new $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch();
+                                var message = new $root.google.ai.generativelanguage.v1beta.Tool.GoogleSearch();
+                                if (object.timeRangeFilter != null) {
+                                    if (typeof object.timeRangeFilter !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.Tool.GoogleSearch.timeRangeFilter: object expected");
+                                    message.timeRangeFilter = $root.google.type.Interval.fromObject(object.timeRangeFilter);
+                                }
+                                return message;
                             };
     
                             /**
@@ -64860,8 +66895,15 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            GoogleSearch.toObject = function toObject() {
-                                return {};
+                            GoogleSearch.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.timeRangeFilter = null;
+                                if (message.timeRangeFilter != null && message.hasOwnProperty("timeRangeFilter"))
+                                    object.timeRangeFilter = $root.google.type.Interval.toObject(message.timeRangeFilter, options);
+                                return object;
                             };
     
                             /**
@@ -64893,7 +66935,1369 @@
                             return GoogleSearch;
                         })();
     
+                        Tool.ComputerUse = (function() {
+    
+                            /**
+                             * Properties of a ComputerUse.
+                             * @memberof google.ai.generativelanguage.v1beta.Tool
+                             * @interface IComputerUse
+                             * @property {google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment|null} [environment] ComputerUse environment
+                             * @property {Array.<string>|null} [excludedPredefinedFunctions] ComputerUse excludedPredefinedFunctions
+                             */
+    
+                            /**
+                             * Constructs a new ComputerUse.
+                             * @memberof google.ai.generativelanguage.v1beta.Tool
+                             * @classdesc Represents a ComputerUse.
+                             * @implements IComputerUse
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse=} [properties] Properties to set
+                             */
+                            function ComputerUse(properties) {
+                                this.excludedPredefinedFunctions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ComputerUse environment.
+                             * @member {google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment} environment
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             */
+                            ComputerUse.prototype.environment = 0;
+    
+                            /**
+                             * ComputerUse excludedPredefinedFunctions.
+                             * @member {Array.<string>} excludedPredefinedFunctions
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             */
+                            ComputerUse.prototype.excludedPredefinedFunctions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ComputerUse instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse instance
+                             */
+                            ComputerUse.create = function create(properties) {
+                                return new ComputerUse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ComputerUse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse} message ComputerUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComputerUse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.environment != null && Object.hasOwnProperty.call(message, "environment"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.environment);
+                                if (message.excludedPredefinedFunctions != null && message.excludedPredefinedFunctions.length)
+                                    for (var i = 0; i < message.excludedPredefinedFunctions.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.excludedPredefinedFunctions[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ComputerUse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Tool.ComputerUse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.IComputerUse} message ComputerUse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ComputerUse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ComputerUse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComputerUse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.environment = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.excludedPredefinedFunctions && message.excludedPredefinedFunctions.length))
+                                                message.excludedPredefinedFunctions = [];
+                                            message.excludedPredefinedFunctions.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ComputerUse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ComputerUse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ComputerUse message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ComputerUse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.environment != null && message.hasOwnProperty("environment"))
+                                    switch (message.environment) {
+                                    default:
+                                        return "environment: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.excludedPredefinedFunctions != null && message.hasOwnProperty("excludedPredefinedFunctions")) {
+                                    if (!Array.isArray(message.excludedPredefinedFunctions))
+                                        return "excludedPredefinedFunctions: array expected";
+                                    for (var i = 0; i < message.excludedPredefinedFunctions.length; ++i)
+                                        if (!$util.isString(message.excludedPredefinedFunctions[i]))
+                                            return "excludedPredefinedFunctions: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ComputerUse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.Tool.ComputerUse} ComputerUse
+                             */
+                            ComputerUse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse();
+                                switch (object.environment) {
+                                default:
+                                    if (typeof object.environment === "number") {
+                                        message.environment = object.environment;
+                                        break;
+                                    }
+                                    break;
+                                case "ENVIRONMENT_UNSPECIFIED":
+                                case 0:
+                                    message.environment = 0;
+                                    break;
+                                case "ENVIRONMENT_BROWSER":
+                                case 1:
+                                    message.environment = 1;
+                                    break;
+                                }
+                                if (object.excludedPredefinedFunctions) {
+                                    if (!Array.isArray(object.excludedPredefinedFunctions))
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.Tool.ComputerUse.excludedPredefinedFunctions: array expected");
+                                    message.excludedPredefinedFunctions = [];
+                                    for (var i = 0; i < object.excludedPredefinedFunctions.length; ++i)
+                                        message.excludedPredefinedFunctions[i] = String(object.excludedPredefinedFunctions[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ComputerUse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.Tool.ComputerUse} message ComputerUse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ComputerUse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.excludedPredefinedFunctions = [];
+                                if (options.defaults)
+                                    object.environment = options.enums === String ? "ENVIRONMENT_UNSPECIFIED" : 0;
+                                if (message.environment != null && message.hasOwnProperty("environment"))
+                                    object.environment = options.enums === String ? $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment[message.environment] === undefined ? message.environment : $root.google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment[message.environment] : message.environment;
+                                if (message.excludedPredefinedFunctions && message.excludedPredefinedFunctions.length) {
+                                    object.excludedPredefinedFunctions = [];
+                                    for (var j = 0; j < message.excludedPredefinedFunctions.length; ++j)
+                                        object.excludedPredefinedFunctions[j] = message.excludedPredefinedFunctions[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ComputerUse to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ComputerUse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ComputerUse
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.Tool.ComputerUse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ComputerUse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.Tool.ComputerUse";
+                            };
+    
+                            /**
+                             * Environment enum.
+                             * @name google.ai.generativelanguage.v1beta.Tool.ComputerUse.Environment
+                             * @enum {number}
+                             * @property {number} ENVIRONMENT_UNSPECIFIED=0 ENVIRONMENT_UNSPECIFIED value
+                             * @property {number} ENVIRONMENT_BROWSER=1 ENVIRONMENT_BROWSER value
+                             */
+                            ComputerUse.Environment = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENVIRONMENT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ENVIRONMENT_BROWSER"] = 1;
+                                return values;
+                            })();
+    
+                            return ComputerUse;
+                        })();
+    
                         return Tool;
+                    })();
+    
+                    v1beta.GoogleMaps = (function() {
+    
+                        /**
+                         * Properties of a GoogleMaps.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IGoogleMaps
+                         * @property {boolean|null} [enableWidget] GoogleMaps enableWidget
+                         */
+    
+                        /**
+                         * Constructs a new GoogleMaps.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a GoogleMaps.
+                         * @implements IGoogleMaps
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps=} [properties] Properties to set
+                         */
+                        function GoogleMaps(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleMaps enableWidget.
+                         * @member {boolean} enableWidget
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @instance
+                         */
+                        GoogleMaps.prototype.enableWidget = false;
+    
+                        /**
+                         * Creates a new GoogleMaps instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps instance
+                         */
+                        GoogleMaps.create = function create(properties) {
+                            return new GoogleMaps(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleMaps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps} message GoogleMaps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleMaps.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableWidget != null && Object.hasOwnProperty.call(message, "enableWidget"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableWidget);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleMaps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleMaps.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IGoogleMaps} message GoogleMaps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleMaps.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleMaps message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleMaps.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GoogleMaps();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enableWidget = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleMaps message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleMaps.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleMaps message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleMaps.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableWidget != null && message.hasOwnProperty("enableWidget"))
+                                if (typeof message.enableWidget !== "boolean")
+                                    return "enableWidget: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleMaps message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.GoogleMaps} GoogleMaps
+                         */
+                        GoogleMaps.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GoogleMaps)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.GoogleMaps();
+                            if (object.enableWidget != null)
+                                message.enableWidget = Boolean(object.enableWidget);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleMaps message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.GoogleMaps} message GoogleMaps
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleMaps.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableWidget = false;
+                            if (message.enableWidget != null && message.hasOwnProperty("enableWidget"))
+                                object.enableWidget = message.enableWidget;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleMaps to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleMaps.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleMaps
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.GoogleMaps
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleMaps.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GoogleMaps";
+                        };
+    
+                        return GoogleMaps;
+                    })();
+    
+                    v1beta.UrlContext = (function() {
+    
+                        /**
+                         * Properties of an UrlContext.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IUrlContext
+                         */
+    
+                        /**
+                         * Constructs a new UrlContext.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an UrlContext.
+                         * @implements IUrlContext
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContext=} [properties] Properties to set
+                         */
+                        function UrlContext(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new UrlContext instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContext=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContext} UrlContext instance
+                         */
+                        UrlContext.create = function create(properties) {
+                            return new UrlContext(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContext message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContext.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContext} message UrlContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContext.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContext message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContext.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContext} message UrlContext message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContext.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UrlContext message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContext} UrlContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContext.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UrlContext();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UrlContext message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContext} UrlContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContext.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UrlContext message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UrlContext.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UrlContext message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContext} UrlContext
+                         */
+                        UrlContext.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.UrlContext)
+                                return object;
+                            return new $root.google.ai.generativelanguage.v1beta.UrlContext();
+                        };
+    
+                        /**
+                         * Creates a plain object from an UrlContext message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.UrlContext} message UrlContext
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UrlContext.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this UrlContext to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UrlContext.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UrlContext
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContext
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UrlContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.UrlContext";
+                        };
+    
+                        return UrlContext;
+                    })();
+    
+                    v1beta.FileSearch = (function() {
+    
+                        /**
+                         * Properties of a FileSearch.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IFileSearch
+                         * @property {Array.<google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource>|null} [retrievalResources] FileSearch retrievalResources
+                         * @property {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null} [retrievalConfig] FileSearch retrievalConfig
+                         */
+    
+                        /**
+                         * Constructs a new FileSearch.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a FileSearch.
+                         * @implements IFileSearch
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch=} [properties] Properties to set
+                         */
+                        function FileSearch(properties) {
+                            this.retrievalResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FileSearch retrievalResources.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource>} retrievalResources
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         */
+                        FileSearch.prototype.retrievalResources = $util.emptyArray;
+    
+                        /**
+                         * FileSearch retrievalConfig.
+                         * @member {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig|null|undefined} retrievalConfig
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         */
+                        FileSearch.prototype.retrievalConfig = null;
+    
+                        /**
+                         * Creates a new FileSearch instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch instance
+                         */
+                        FileSearch.create = function create(properties) {
+                            return new FileSearch(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FileSearch message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch} message FileSearch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileSearch.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retrievalResources != null && message.retrievalResources.length)
+                                for (var i = 0; i < message.retrievalResources.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.encode(message.retrievalResources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievalConfig != null && Object.hasOwnProperty.call(message, "retrievalConfig"))
+                                $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.encode(message.retrievalConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FileSearch message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IFileSearch} message FileSearch message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FileSearch.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FileSearch message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileSearch.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.retrievalResources && message.retrievalResources.length))
+                                            message.retrievalResources = [];
+                                        message.retrievalResources.push($root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FileSearch message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FileSearch.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FileSearch message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FileSearch.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retrievalResources != null && message.hasOwnProperty("retrievalResources")) {
+                                if (!Array.isArray(message.retrievalResources))
+                                    return "retrievalResources: array expected";
+                                for (var i = 0; i < message.retrievalResources.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify(message.retrievalResources[i]);
+                                    if (error)
+                                        return "retrievalResources." + error;
+                                }
+                            }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify(message.retrievalConfig);
+                                if (error)
+                                    return "retrievalConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FileSearch message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.FileSearch} FileSearch
+                         */
+                        FileSearch.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.FileSearch();
+                            if (object.retrievalResources) {
+                                if (!Array.isArray(object.retrievalResources))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalResources: array expected");
+                                message.retrievalResources = [];
+                                for (var i = 0; i < object.retrievalResources.length; ++i) {
+                                    if (typeof object.retrievalResources[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalResources: object expected");
+                                    message.retrievalResources[i] = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.fromObject(object.retrievalResources[i]);
+                                }
+                            }
+                            if (object.retrievalConfig != null) {
+                                if (typeof object.retrievalConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FileSearch.retrievalConfig: object expected");
+                                message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.fromObject(object.retrievalConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FileSearch message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.FileSearch} message FileSearch
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FileSearch.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.retrievalResources = [];
+                            if (options.defaults)
+                                object.retrievalConfig = null;
+                            if (message.retrievalResources && message.retrievalResources.length) {
+                                object.retrievalResources = [];
+                                for (var j = 0; j < message.retrievalResources.length; ++j)
+                                    object.retrievalResources[j] = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.toObject(message.retrievalResources[j], options);
+                            }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig"))
+                                object.retrievalConfig = $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.toObject(message.retrievalConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FileSearch to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FileSearch.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FileSearch
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FileSearch.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch";
+                        };
+    
+                        FileSearch.RetrievalResource = (function() {
+    
+                            /**
+                             * Properties of a RetrievalResource.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @interface IRetrievalResource
+                             * @property {string|null} [ragStoreName] RetrievalResource ragStoreName
+                             */
+    
+                            /**
+                             * Constructs a new RetrievalResource.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @classdesc Represents a RetrievalResource.
+                             * @implements IRetrievalResource
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource=} [properties] Properties to set
+                             */
+                            function RetrievalResource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievalResource ragStoreName.
+                             * @member {string} ragStoreName
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @instance
+                             */
+                            RetrievalResource.prototype.ragStoreName = "";
+    
+                            /**
+                             * Creates a new RetrievalResource instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource instance
+                             */
+                            RetrievalResource.create = function create(properties) {
+                                return new RetrievalResource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalResource message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource} message RetrievalResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalResource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ragStoreName != null && Object.hasOwnProperty.call(message, "ragStoreName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ragStoreName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalResource message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalResource} message RetrievalResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievalResource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalResource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.ragStoreName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievalResource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalResource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievalResource message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievalResource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ragStoreName != null && message.hasOwnProperty("ragStoreName"))
+                                    if (!$util.isString(message.ragStoreName))
+                                        return "ragStoreName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievalResource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} RetrievalResource
+                             */
+                            RetrievalResource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource();
+                                if (object.ragStoreName != null)
+                                    message.ragStoreName = String(object.ragStoreName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievalResource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource} message RetrievalResource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievalResource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.ragStoreName = "";
+                                if (message.ragStoreName != null && message.hasOwnProperty("ragStoreName"))
+                                    object.ragStoreName = message.ragStoreName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievalResource to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievalResource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievalResource
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievalResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch.RetrievalResource";
+                            };
+    
+                            return RetrievalResource;
+                        })();
+    
+                        FileSearch.RetrievalConfig = (function() {
+    
+                            /**
+                             * Properties of a RetrievalConfig.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @interface IRetrievalConfig
+                             * @property {number|null} [topK] RetrievalConfig topK
+                             * @property {string|null} [metadataFilter] RetrievalConfig metadataFilter
+                             */
+    
+                            /**
+                             * Constructs a new RetrievalConfig.
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch
+                             * @classdesc Represents a RetrievalConfig.
+                             * @implements IRetrievalConfig
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig=} [properties] Properties to set
+                             */
+                            function RetrievalConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievalConfig topK.
+                             * @member {number|null|undefined} topK
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             */
+                            RetrievalConfig.prototype.topK = null;
+    
+                            /**
+                             * RetrievalConfig metadataFilter.
+                             * @member {string} metadataFilter
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             */
+                            RetrievalConfig.prototype.metadataFilter = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievalConfig.prototype, "_topK", {
+                                get: $util.oneOfGetter($oneOfFields = ["topK"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RetrievalConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig instance
+                             */
+                            RetrievalConfig.create = function create(properties) {
+                                return new RetrievalConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.topK);
+                                if (message.metadataFilter != null && Object.hasOwnProperty.call(message, "metadataFilter"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.metadataFilter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievalConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.topK = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.metadataFilter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievalConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievalConfig message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievalConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.topK != null && message.hasOwnProperty("topK")) {
+                                    properties._topK = 1;
+                                    if (!$util.isInteger(message.topK))
+                                        return "topK: integer expected";
+                                }
+                                if (message.metadataFilter != null && message.hasOwnProperty("metadataFilter"))
+                                    if (!$util.isString(message.metadataFilter))
+                                        return "metadataFilter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} RetrievalConfig
+                             */
+                            RetrievalConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig();
+                                if (object.topK != null)
+                                    message.topK = object.topK | 0;
+                                if (object.metadataFilter != null)
+                                    message.metadataFilter = String(object.metadataFilter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig} message RetrievalConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievalConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.metadataFilter = "";
+                                if (message.topK != null && message.hasOwnProperty("topK")) {
+                                    object.topK = message.topK;
+                                    if (options.oneofs)
+                                        object._topK = "topK";
+                                }
+                                if (message.metadataFilter != null && message.hasOwnProperty("metadataFilter"))
+                                    object.metadataFilter = message.metadataFilter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievalConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievalConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievalConfig
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievalConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FileSearch.RetrievalConfig";
+                            };
+    
+                            return RetrievalConfig;
+                        })();
+    
+                        return FileSearch;
                     })();
     
                     v1beta.GoogleSearchRetrieval = (function() {
@@ -65565,6 +68969,7 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IToolConfig
                          * @property {google.ai.generativelanguage.v1beta.IFunctionCallingConfig|null} [functionCallingConfig] ToolConfig functionCallingConfig
+                         * @property {google.ai.generativelanguage.v1beta.IRetrievalConfig|null} [retrievalConfig] ToolConfig retrievalConfig
                          */
     
                         /**
@@ -65589,6 +68994,14 @@
                          * @instance
                          */
                         ToolConfig.prototype.functionCallingConfig = null;
+    
+                        /**
+                         * ToolConfig retrievalConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IRetrievalConfig|null|undefined} retrievalConfig
+                         * @memberof google.ai.generativelanguage.v1beta.ToolConfig
+                         * @instance
+                         */
+                        ToolConfig.prototype.retrievalConfig = null;
     
                         /**
                          * Creates a new ToolConfig instance using the specified properties.
@@ -65616,6 +69029,8 @@
                                 writer = $Writer.create();
                             if (message.functionCallingConfig != null && Object.hasOwnProperty.call(message, "functionCallingConfig"))
                                 $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.encode(message.functionCallingConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievalConfig != null && Object.hasOwnProperty.call(message, "retrievalConfig"))
+                                $root.google.ai.generativelanguage.v1beta.RetrievalConfig.encode(message.retrievalConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -65654,6 +69069,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -65696,6 +69115,11 @@
                                 if (error)
                                     return "functionCallingConfig." + error;
                             }
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.verify(message.retrievalConfig);
+                                if (error)
+                                    return "retrievalConfig." + error;
+                            }
                             return null;
                         };
     
@@ -65716,6 +69140,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.ToolConfig.functionCallingConfig: object expected");
                                 message.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.fromObject(object.functionCallingConfig);
                             }
+                            if (object.retrievalConfig != null) {
+                                if (typeof object.retrievalConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.ToolConfig.retrievalConfig: object expected");
+                                message.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.fromObject(object.retrievalConfig);
+                            }
                             return message;
                         };
     
@@ -65732,10 +69161,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.functionCallingConfig = null;
+                                object.retrievalConfig = null;
+                            }
                             if (message.functionCallingConfig != null && message.hasOwnProperty("functionCallingConfig"))
                                 object.functionCallingConfig = $root.google.ai.generativelanguage.v1beta.FunctionCallingConfig.toObject(message.functionCallingConfig, options);
+                            if (message.retrievalConfig != null && message.hasOwnProperty("retrievalConfig"))
+                                object.retrievalConfig = $root.google.ai.generativelanguage.v1beta.RetrievalConfig.toObject(message.retrievalConfig, options);
                             return object;
                         };
     
@@ -65766,6 +69199,240 @@
                         };
     
                         return ToolConfig;
+                    })();
+    
+                    v1beta.RetrievalConfig = (function() {
+    
+                        /**
+                         * Properties of a RetrievalConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IRetrievalConfig
+                         * @property {google.type.ILatLng|null} [latLng] RetrievalConfig latLng
+                         * @property {string|null} [languageCode] RetrievalConfig languageCode
+                         */
+    
+                        /**
+                         * Constructs a new RetrievalConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a RetrievalConfig.
+                         * @implements IRetrievalConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig=} [properties] Properties to set
+                         */
+                        function RetrievalConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetrievalConfig latLng.
+                         * @member {google.type.ILatLng|null|undefined} latLng
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         */
+                        RetrievalConfig.prototype.latLng = null;
+    
+                        /**
+                         * RetrievalConfig languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         */
+                        RetrievalConfig.prototype.languageCode = "";
+    
+                        /**
+                         * Creates a new RetrievalConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig instance
+                         */
+                        RetrievalConfig.create = function create(properties) {
+                            return new RetrievalConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrievalConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.latLng != null && Object.hasOwnProperty.call(message, "latLng"))
+                                $root.google.type.LatLng.encode(message.latLng, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IRetrievalConfig} message RetrievalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetrievalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrievalConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.RetrievalConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.latLng = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetrievalConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetrievalConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetrievalConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetrievalConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.latLng != null && message.hasOwnProperty("latLng")) {
+                                var error = $root.google.type.LatLng.verify(message.latLng);
+                                if (error)
+                                    return "latLng." + error;
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.RetrievalConfig} RetrievalConfig
+                         */
+                        RetrievalConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.RetrievalConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.RetrievalConfig();
+                            if (object.latLng != null) {
+                                if (typeof object.latLng !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.RetrievalConfig.latLng: object expected");
+                                message.latLng = $root.google.type.LatLng.fromObject(object.latLng);
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetrievalConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.RetrievalConfig} message RetrievalConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetrievalConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.latLng = null;
+                                object.languageCode = "";
+                            }
+                            if (message.latLng != null && message.hasOwnProperty("latLng"))
+                                object.latLng = $root.google.type.LatLng.toObject(message.latLng, options);
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetrievalConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetrievalConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetrievalConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.RetrievalConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetrievalConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.RetrievalConfig";
+                        };
+    
+                        return RetrievalConfig;
                     })();
     
                     v1beta.FunctionCallingConfig = (function() {
@@ -66076,7 +69743,10 @@
                          * @property {string|null} [name] FunctionDeclaration name
                          * @property {string|null} [description] FunctionDeclaration description
                          * @property {google.ai.generativelanguage.v1beta.ISchema|null} [parameters] FunctionDeclaration parameters
+                         * @property {google.protobuf.IValue|null} [parametersJsonSchema] FunctionDeclaration parametersJsonSchema
                          * @property {google.ai.generativelanguage.v1beta.ISchema|null} [response] FunctionDeclaration response
+                         * @property {google.protobuf.IValue|null} [responseJsonSchema] FunctionDeclaration responseJsonSchema
+                         * @property {google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior|null} [behavior] FunctionDeclaration behavior
                          */
     
                         /**
@@ -66119,12 +69789,36 @@
                         FunctionDeclaration.prototype.parameters = null;
     
                         /**
+                         * FunctionDeclaration parametersJsonSchema.
+                         * @member {google.protobuf.IValue|null|undefined} parametersJsonSchema
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
+                         * @instance
+                         */
+                        FunctionDeclaration.prototype.parametersJsonSchema = null;
+    
+                        /**
                          * FunctionDeclaration response.
                          * @member {google.ai.generativelanguage.v1beta.ISchema|null|undefined} response
                          * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
                          * @instance
                          */
                         FunctionDeclaration.prototype.response = null;
+    
+                        /**
+                         * FunctionDeclaration responseJsonSchema.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchema
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
+                         * @instance
+                         */
+                        FunctionDeclaration.prototype.responseJsonSchema = null;
+    
+                        /**
+                         * FunctionDeclaration behavior.
+                         * @member {google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior} behavior
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionDeclaration
+                         * @instance
+                         */
+                        FunctionDeclaration.prototype.behavior = 0;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -66136,8 +69830,20 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FunctionDeclaration.prototype, "_parametersJsonSchema", {
+                            get: $util.oneOfGetter($oneOfFields = ["parametersJsonSchema"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FunctionDeclaration.prototype, "_response", {
                             get: $util.oneOfGetter($oneOfFields = ["response"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FunctionDeclaration.prototype, "_responseJsonSchema", {
+                            get: $util.oneOfGetter($oneOfFields = ["responseJsonSchema"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -66173,6 +69879,12 @@
                                 $root.google.ai.generativelanguage.v1beta.Schema.encode(message.parameters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.response != null && Object.hasOwnProperty.call(message, "response"))
                                 $root.google.ai.generativelanguage.v1beta.Schema.encode(message.response, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.behavior != null && Object.hasOwnProperty.call(message, "behavior"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.behavior);
+                            if (message.parametersJsonSchema != null && Object.hasOwnProperty.call(message, "parametersJsonSchema"))
+                                $root.google.protobuf.Value.encode(message.parametersJsonSchema, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.responseJsonSchema != null && Object.hasOwnProperty.call(message, "responseJsonSchema"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchema, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -66221,8 +69933,20 @@
                                         message.parameters = $root.google.ai.generativelanguage.v1beta.Schema.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.parametersJsonSchema = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.response = $root.google.ai.generativelanguage.v1beta.Schema.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.responseJsonSchema = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.behavior = reader.int32();
                                         break;
                                     }
                                 default:
@@ -66275,6 +69999,14 @@
                                         return "parameters." + error;
                                 }
                             }
+                            if (message.parametersJsonSchema != null && message.hasOwnProperty("parametersJsonSchema")) {
+                                properties._parametersJsonSchema = 1;
+                                {
+                                    var error = $root.google.protobuf.Value.verify(message.parametersJsonSchema);
+                                    if (error)
+                                        return "parametersJsonSchema." + error;
+                                }
+                            }
                             if (message.response != null && message.hasOwnProperty("response")) {
                                 properties._response = 1;
                                 {
@@ -66283,6 +70015,23 @@
                                         return "response." + error;
                                 }
                             }
+                            if (message.responseJsonSchema != null && message.hasOwnProperty("responseJsonSchema")) {
+                                properties._responseJsonSchema = 1;
+                                {
+                                    var error = $root.google.protobuf.Value.verify(message.responseJsonSchema);
+                                    if (error)
+                                        return "responseJsonSchema." + error;
+                                }
+                            }
+                            if (message.behavior != null && message.hasOwnProperty("behavior"))
+                                switch (message.behavior) {
+                                default:
+                                    return "behavior: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -66307,10 +70056,40 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.FunctionDeclaration.parameters: object expected");
                                 message.parameters = $root.google.ai.generativelanguage.v1beta.Schema.fromObject(object.parameters);
                             }
+                            if (object.parametersJsonSchema != null) {
+                                if (typeof object.parametersJsonSchema !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionDeclaration.parametersJsonSchema: object expected");
+                                message.parametersJsonSchema = $root.google.protobuf.Value.fromObject(object.parametersJsonSchema);
+                            }
                             if (object.response != null) {
                                 if (typeof object.response !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.FunctionDeclaration.response: object expected");
                                 message.response = $root.google.ai.generativelanguage.v1beta.Schema.fromObject(object.response);
+                            }
+                            if (object.responseJsonSchema != null) {
+                                if (typeof object.responseJsonSchema !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionDeclaration.responseJsonSchema: object expected");
+                                message.responseJsonSchema = $root.google.protobuf.Value.fromObject(object.responseJsonSchema);
+                            }
+                            switch (object.behavior) {
+                            default:
+                                if (typeof object.behavior === "number") {
+                                    message.behavior = object.behavior;
+                                    break;
+                                }
+                                break;
+                            case "UNSPECIFIED":
+                            case 0:
+                                message.behavior = 0;
+                                break;
+                            case "BLOCKING":
+                            case 1:
+                                message.behavior = 1;
+                                break;
+                            case "NON_BLOCKING":
+                            case 2:
+                                message.behavior = 2;
+                                break;
                             }
                             return message;
                         };
@@ -66331,6 +70110,7 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.description = "";
+                                object.behavior = options.enums === String ? "UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -66345,6 +70125,18 @@
                                 object.response = $root.google.ai.generativelanguage.v1beta.Schema.toObject(message.response, options);
                                 if (options.oneofs)
                                     object._response = "response";
+                            }
+                            if (message.behavior != null && message.hasOwnProperty("behavior"))
+                                object.behavior = options.enums === String ? $root.google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior[message.behavior] === undefined ? message.behavior : $root.google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior[message.behavior] : message.behavior;
+                            if (message.parametersJsonSchema != null && message.hasOwnProperty("parametersJsonSchema")) {
+                                object.parametersJsonSchema = $root.google.protobuf.Value.toObject(message.parametersJsonSchema, options);
+                                if (options.oneofs)
+                                    object._parametersJsonSchema = "parametersJsonSchema";
+                            }
+                            if (message.responseJsonSchema != null && message.hasOwnProperty("responseJsonSchema")) {
+                                object.responseJsonSchema = $root.google.protobuf.Value.toObject(message.responseJsonSchema, options);
+                                if (options.oneofs)
+                                    object._responseJsonSchema = "responseJsonSchema";
                             }
                             return object;
                         };
@@ -66374,6 +70166,22 @@
                             }
                             return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionDeclaration";
                         };
+    
+                        /**
+                         * Behavior enum.
+                         * @name google.ai.generativelanguage.v1beta.FunctionDeclaration.Behavior
+                         * @enum {number}
+                         * @property {number} UNSPECIFIED=0 UNSPECIFIED value
+                         * @property {number} BLOCKING=1 BLOCKING value
+                         * @property {number} NON_BLOCKING=2 NON_BLOCKING value
+                         */
+                        FunctionDeclaration.Behavior = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCKING"] = 1;
+                            values[valuesById[2] = "NON_BLOCKING"] = 2;
+                            return values;
+                        })();
     
                         return FunctionDeclaration;
                     })();
@@ -66659,6 +70467,9 @@
                          * @property {string|null} [id] FunctionResponse id
                          * @property {string|null} [name] FunctionResponse name
                          * @property {google.protobuf.IStruct|null} [response] FunctionResponse response
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IFunctionResponsePart>|null} [parts] FunctionResponse parts
+                         * @property {boolean|null} [willContinue] FunctionResponse willContinue
+                         * @property {google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|null} [scheduling] FunctionResponse scheduling
                          */
     
                         /**
@@ -66670,6 +70481,7 @@
                          * @param {google.ai.generativelanguage.v1beta.IFunctionResponse=} [properties] Properties to set
                          */
                         function FunctionResponse(properties) {
+                            this.parts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -66701,6 +70513,39 @@
                         FunctionResponse.prototype.response = null;
     
                         /**
+                         * FunctionResponse parts.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IFunctionResponsePart>} parts
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponse
+                         * @instance
+                         */
+                        FunctionResponse.prototype.parts = $util.emptyArray;
+    
+                        /**
+                         * FunctionResponse willContinue.
+                         * @member {boolean} willContinue
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponse
+                         * @instance
+                         */
+                        FunctionResponse.prototype.willContinue = false;
+    
+                        /**
+                         * FunctionResponse scheduling.
+                         * @member {google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling|null|undefined} scheduling
+                         * @memberof google.ai.generativelanguage.v1beta.FunctionResponse
+                         * @instance
+                         */
+                        FunctionResponse.prototype.scheduling = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FunctionResponse.prototype, "_scheduling", {
+                            get: $util.oneOfGetter($oneOfFields = ["scheduling"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new FunctionResponse instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.FunctionResponse
@@ -66730,6 +70575,13 @@
                                 $root.google.protobuf.Struct.encode(message.response, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.id);
+                            if (message.willContinue != null && Object.hasOwnProperty.call(message, "willContinue"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.willContinue);
+                            if (message.scheduling != null && Object.hasOwnProperty.call(message, "scheduling"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.scheduling);
+                            if (message.parts != null && message.parts.length)
+                                for (var i = 0; i < message.parts.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.encode(message.parts[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -66778,6 +70630,20 @@
                                         message.response = $root.google.protobuf.Struct.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        if (!(message.parts && message.parts.length))
+                                            message.parts = [];
+                                        message.parts.push($root.google.ai.generativelanguage.v1beta.FunctionResponsePart.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.willContinue = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.scheduling = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -66813,6 +70679,7 @@
                         FunctionResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
@@ -66823,6 +70690,30 @@
                                 var error = $root.google.protobuf.Struct.verify(message.response);
                                 if (error)
                                     return "response." + error;
+                            }
+                            if (message.parts != null && message.hasOwnProperty("parts")) {
+                                if (!Array.isArray(message.parts))
+                                    return "parts: array expected";
+                                for (var i = 0; i < message.parts.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.verify(message.parts[i]);
+                                    if (error)
+                                        return "parts." + error;
+                                }
+                            }
+                            if (message.willContinue != null && message.hasOwnProperty("willContinue"))
+                                if (typeof message.willContinue !== "boolean")
+                                    return "willContinue: boolean expected";
+                            if (message.scheduling != null && message.hasOwnProperty("scheduling")) {
+                                properties._scheduling = 1;
+                                switch (message.scheduling) {
+                                default:
+                                    return "scheduling: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             }
                             return null;
                         };
@@ -66848,6 +70739,42 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.response: object expected");
                                 message.response = $root.google.protobuf.Struct.fromObject(object.response);
                             }
+                            if (object.parts) {
+                                if (!Array.isArray(object.parts))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.parts: array expected");
+                                message.parts = [];
+                                for (var i = 0; i < object.parts.length; ++i) {
+                                    if (typeof object.parts[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.FunctionResponse.parts: object expected");
+                                    message.parts[i] = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.fromObject(object.parts[i]);
+                                }
+                            }
+                            if (object.willContinue != null)
+                                message.willContinue = Boolean(object.willContinue);
+                            switch (object.scheduling) {
+                            default:
+                                if (typeof object.scheduling === "number") {
+                                    message.scheduling = object.scheduling;
+                                    break;
+                                }
+                                break;
+                            case "SCHEDULING_UNSPECIFIED":
+                            case 0:
+                                message.scheduling = 0;
+                                break;
+                            case "SILENT":
+                            case 1:
+                                message.scheduling = 1;
+                                break;
+                            case "WHEN_IDLE":
+                            case 2:
+                                message.scheduling = 2;
+                                break;
+                            case "INTERRUPT":
+                            case 3:
+                                message.scheduling = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -66864,10 +70791,13 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.parts = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.response = null;
                                 object.id = "";
+                                object.willContinue = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -66875,6 +70805,18 @@
                                 object.response = $root.google.protobuf.Struct.toObject(message.response, options);
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
+                            if (message.willContinue != null && message.hasOwnProperty("willContinue"))
+                                object.willContinue = message.willContinue;
+                            if (message.scheduling != null && message.hasOwnProperty("scheduling")) {
+                                object.scheduling = options.enums === String ? $root.google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling[message.scheduling] === undefined ? message.scheduling : $root.google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling[message.scheduling] : message.scheduling;
+                                if (options.oneofs)
+                                    object._scheduling = "scheduling";
+                            }
+                            if (message.parts && message.parts.length) {
+                                object.parts = [];
+                                for (var j = 0; j < message.parts.length; ++j)
+                                    object.parts[j] = $root.google.ai.generativelanguage.v1beta.FunctionResponsePart.toObject(message.parts[j], options);
+                            }
                             return object;
                         };
     
@@ -66904,6 +70846,24 @@
                             return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.FunctionResponse";
                         };
     
+                        /**
+                         * Scheduling enum.
+                         * @name google.ai.generativelanguage.v1beta.FunctionResponse.Scheduling
+                         * @enum {number}
+                         * @property {number} SCHEDULING_UNSPECIFIED=0 SCHEDULING_UNSPECIFIED value
+                         * @property {number} SILENT=1 SILENT value
+                         * @property {number} WHEN_IDLE=2 WHEN_IDLE value
+                         * @property {number} INTERRUPT=3 INTERRUPT value
+                         */
+                        FunctionResponse.Scheduling = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCHEDULING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SILENT"] = 1;
+                            values[valuesById[2] = "WHEN_IDLE"] = 2;
+                            values[valuesById[3] = "INTERRUPT"] = 3;
+                            return values;
+                        })();
+    
                         return FunctionResponse;
                     })();
     
@@ -66924,8 +70884,14 @@
                          * @property {number|Long|null} [minItems] Schema minItems
                          * @property {Object.<string,google.ai.generativelanguage.v1beta.ISchema>|null} [properties] Schema properties
                          * @property {Array.<string>|null} [required] Schema required
+                         * @property {number|Long|null} [minProperties] Schema minProperties
+                         * @property {number|Long|null} [maxProperties] Schema maxProperties
                          * @property {number|null} [minimum] Schema minimum
                          * @property {number|null} [maximum] Schema maximum
+                         * @property {number|Long|null} [minLength] Schema minLength
+                         * @property {number|Long|null} [maxLength] Schema maxLength
+                         * @property {string|null} [pattern] Schema pattern
+                         * @property {google.protobuf.IValue|null} [example] Schema example
                          * @property {Array.<google.ai.generativelanguage.v1beta.ISchema>|null} [anyOf] Schema anyOf
                          * @property {Array.<string>|null} [propertyOrdering] Schema propertyOrdering
                          * @property {google.protobuf.IValue|null} ["default"] Schema default
@@ -67040,6 +71006,22 @@
                         Schema.prototype.required = $util.emptyArray;
     
                         /**
+                         * Schema minProperties.
+                         * @member {number|Long} minProperties
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.minProperties = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Schema maxProperties.
+                         * @member {number|Long} maxProperties
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.maxProperties = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Schema minimum.
                          * @member {number|null|undefined} minimum
                          * @memberof google.ai.generativelanguage.v1beta.Schema
@@ -67054,6 +71036,38 @@
                          * @instance
                          */
                         Schema.prototype.maximum = null;
+    
+                        /**
+                         * Schema minLength.
+                         * @member {number|Long} minLength
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.minLength = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Schema maxLength.
+                         * @member {number|Long} maxLength
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.maxLength = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Schema pattern.
+                         * @member {string} pattern
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.pattern = "";
+    
+                        /**
+                         * Schema example.
+                         * @member {google.protobuf.IValue|null|undefined} example
+                         * @memberof google.ai.generativelanguage.v1beta.Schema
+                         * @instance
+                         */
+                        Schema.prototype.example = null;
     
                         /**
                          * Schema anyOf.
@@ -67145,10 +71159,22 @@
                             if (message.required != null && message.required.length)
                                 for (var i = 0; i < message.required.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.required[i]);
+                            if (message.minProperties != null && Object.hasOwnProperty.call(message, "minProperties"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.minProperties);
+                            if (message.maxProperties != null && Object.hasOwnProperty.call(message, "maxProperties"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.maxProperties);
                             if (message.minimum != null && Object.hasOwnProperty.call(message, "minimum"))
                                 writer.uint32(/* id 11, wireType 1 =*/89).double(message.minimum);
                             if (message.maximum != null && Object.hasOwnProperty.call(message, "maximum"))
                                 writer.uint32(/* id 12, wireType 1 =*/97).double(message.maximum);
+                            if (message.minLength != null && Object.hasOwnProperty.call(message, "minLength"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int64(message.minLength);
+                            if (message.maxLength != null && Object.hasOwnProperty.call(message, "maxLength"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int64(message.maxLength);
+                            if (message.pattern != null && Object.hasOwnProperty.call(message, "pattern"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.pattern);
+                            if (message.example != null && Object.hasOwnProperty.call(message, "example"))
+                                $root.google.protobuf.Value.encode(message.example, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.anyOf != null && message.anyOf.length)
                                 for (var i = 0; i < message.anyOf.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta.Schema.encode(message.anyOf[i], writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
@@ -67266,12 +71292,36 @@
                                         message.required.push(reader.string());
                                         break;
                                     }
+                                case 9: {
+                                        message.minProperties = reader.int64();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.maxProperties = reader.int64();
+                                        break;
+                                    }
                                 case 11: {
                                         message.minimum = reader.double();
                                         break;
                                     }
                                 case 12: {
                                         message.maximum = reader.double();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.minLength = reader.int64();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.maxLength = reader.int64();
+                                        break;
+                                    }
+                                case 15: {
+                                        message.pattern = reader.string();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.example = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 18: {
@@ -67390,6 +71440,12 @@
                                     if (!$util.isString(message.required[i]))
                                         return "required: string[] expected";
                             }
+                            if (message.minProperties != null && message.hasOwnProperty("minProperties"))
+                                if (!$util.isInteger(message.minProperties) && !(message.minProperties && $util.isInteger(message.minProperties.low) && $util.isInteger(message.minProperties.high)))
+                                    return "minProperties: integer|Long expected";
+                            if (message.maxProperties != null && message.hasOwnProperty("maxProperties"))
+                                if (!$util.isInteger(message.maxProperties) && !(message.maxProperties && $util.isInteger(message.maxProperties.low) && $util.isInteger(message.maxProperties.high)))
+                                    return "maxProperties: integer|Long expected";
                             if (message.minimum != null && message.hasOwnProperty("minimum")) {
                                 properties._minimum = 1;
                                 if (typeof message.minimum !== "number")
@@ -67399,6 +71455,20 @@
                                 properties._maximum = 1;
                                 if (typeof message.maximum !== "number")
                                     return "maximum: number expected";
+                            }
+                            if (message.minLength != null && message.hasOwnProperty("minLength"))
+                                if (!$util.isInteger(message.minLength) && !(message.minLength && $util.isInteger(message.minLength.low) && $util.isInteger(message.minLength.high)))
+                                    return "minLength: integer|Long expected";
+                            if (message.maxLength != null && message.hasOwnProperty("maxLength"))
+                                if (!$util.isInteger(message.maxLength) && !(message.maxLength && $util.isInteger(message.maxLength.low) && $util.isInteger(message.maxLength.high)))
+                                    return "maxLength: integer|Long expected";
+                            if (message.pattern != null && message.hasOwnProperty("pattern"))
+                                if (!$util.isString(message.pattern))
+                                    return "pattern: string expected";
+                            if (message.example != null && message.hasOwnProperty("example")) {
+                                var error = $root.google.protobuf.Value.verify(message.example);
+                                if (error)
+                                    return "example." + error;
                             }
                             if (message.anyOf != null && message.hasOwnProperty("anyOf")) {
                                 if (!Array.isArray(message.anyOf))
@@ -67531,10 +71601,53 @@
                                 for (var i = 0; i < object.required.length; ++i)
                                     message.required[i] = String(object.required[i]);
                             }
+                            if (object.minProperties != null)
+                                if ($util.Long)
+                                    (message.minProperties = $util.Long.fromValue(object.minProperties)).unsigned = false;
+                                else if (typeof object.minProperties === "string")
+                                    message.minProperties = parseInt(object.minProperties, 10);
+                                else if (typeof object.minProperties === "number")
+                                    message.minProperties = object.minProperties;
+                                else if (typeof object.minProperties === "object")
+                                    message.minProperties = new $util.LongBits(object.minProperties.low >>> 0, object.minProperties.high >>> 0).toNumber();
+                            if (object.maxProperties != null)
+                                if ($util.Long)
+                                    (message.maxProperties = $util.Long.fromValue(object.maxProperties)).unsigned = false;
+                                else if (typeof object.maxProperties === "string")
+                                    message.maxProperties = parseInt(object.maxProperties, 10);
+                                else if (typeof object.maxProperties === "number")
+                                    message.maxProperties = object.maxProperties;
+                                else if (typeof object.maxProperties === "object")
+                                    message.maxProperties = new $util.LongBits(object.maxProperties.low >>> 0, object.maxProperties.high >>> 0).toNumber();
                             if (object.minimum != null)
                                 message.minimum = Number(object.minimum);
                             if (object.maximum != null)
                                 message.maximum = Number(object.maximum);
+                            if (object.minLength != null)
+                                if ($util.Long)
+                                    (message.minLength = $util.Long.fromValue(object.minLength)).unsigned = false;
+                                else if (typeof object.minLength === "string")
+                                    message.minLength = parseInt(object.minLength, 10);
+                                else if (typeof object.minLength === "number")
+                                    message.minLength = object.minLength;
+                                else if (typeof object.minLength === "object")
+                                    message.minLength = new $util.LongBits(object.minLength.low >>> 0, object.minLength.high >>> 0).toNumber();
+                            if (object.maxLength != null)
+                                if ($util.Long)
+                                    (message.maxLength = $util.Long.fromValue(object.maxLength)).unsigned = false;
+                                else if (typeof object.maxLength === "string")
+                                    message.maxLength = parseInt(object.maxLength, 10);
+                                else if (typeof object.maxLength === "number")
+                                    message.maxLength = object.maxLength;
+                                else if (typeof object.maxLength === "object")
+                                    message.maxLength = new $util.LongBits(object.maxLength.low >>> 0, object.maxLength.high >>> 0).toNumber();
+                            if (object.pattern != null)
+                                message.pattern = String(object.pattern);
+                            if (object.example != null) {
+                                if (typeof object.example !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Schema.example: object expected");
+                                message.example = $root.google.protobuf.Value.fromObject(object.example);
+                            }
                             if (object.anyOf) {
                                 if (!Array.isArray(object.anyOf))
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Schema.anyOf: array expected");
@@ -67588,6 +71701,28 @@
                                 object.nullable = false;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
+                                    object.minProperties = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.minProperties = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.maxProperties = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.maxProperties = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.minLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.minLength = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.maxLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.maxLength = options.longs === String ? "0" : 0;
+                                object.pattern = "";
+                                object.example = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
                                     object.maxItems = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.maxItems = options.longs === String ? "0" : 0;
@@ -67628,6 +71763,16 @@
                                 for (var j = 0; j < message.required.length; ++j)
                                     object.required[j] = message.required[j];
                             }
+                            if (message.minProperties != null && message.hasOwnProperty("minProperties"))
+                                if (typeof message.minProperties === "number")
+                                    object.minProperties = options.longs === String ? String(message.minProperties) : message.minProperties;
+                                else
+                                    object.minProperties = options.longs === String ? $util.Long.prototype.toString.call(message.minProperties) : options.longs === Number ? new $util.LongBits(message.minProperties.low >>> 0, message.minProperties.high >>> 0).toNumber() : message.minProperties;
+                            if (message.maxProperties != null && message.hasOwnProperty("maxProperties"))
+                                if (typeof message.maxProperties === "number")
+                                    object.maxProperties = options.longs === String ? String(message.maxProperties) : message.maxProperties;
+                                else
+                                    object.maxProperties = options.longs === String ? $util.Long.prototype.toString.call(message.maxProperties) : options.longs === Number ? new $util.LongBits(message.maxProperties.low >>> 0, message.maxProperties.high >>> 0).toNumber() : message.maxProperties;
                             if (message.minimum != null && message.hasOwnProperty("minimum")) {
                                 object.minimum = options.json && !isFinite(message.minimum) ? String(message.minimum) : message.minimum;
                                 if (options.oneofs)
@@ -67638,6 +71783,20 @@
                                 if (options.oneofs)
                                     object._maximum = "maximum";
                             }
+                            if (message.minLength != null && message.hasOwnProperty("minLength"))
+                                if (typeof message.minLength === "number")
+                                    object.minLength = options.longs === String ? String(message.minLength) : message.minLength;
+                                else
+                                    object.minLength = options.longs === String ? $util.Long.prototype.toString.call(message.minLength) : options.longs === Number ? new $util.LongBits(message.minLength.low >>> 0, message.minLength.high >>> 0).toNumber() : message.minLength;
+                            if (message.maxLength != null && message.hasOwnProperty("maxLength"))
+                                if (typeof message.maxLength === "number")
+                                    object.maxLength = options.longs === String ? String(message.maxLength) : message.maxLength;
+                                else
+                                    object.maxLength = options.longs === String ? $util.Long.prototype.toString.call(message.maxLength) : options.longs === Number ? new $util.LongBits(message.maxLength.low >>> 0, message.maxLength.high >>> 0).toNumber() : message.maxLength;
+                            if (message.pattern != null && message.hasOwnProperty("pattern"))
+                                object.pattern = message.pattern;
+                            if (message.example != null && message.hasOwnProperty("example"))
+                                object.example = $root.google.protobuf.Value.toObject(message.example, options);
                             if (message.anyOf && message.anyOf.length) {
                                 object.anyOf = [];
                                 for (var j = 0; j < message.anyOf.length; ++j)
@@ -72291,7 +76450,7 @@
                          * Properties of a File.
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IFile
-                         * @property {google.ai.generativelanguage.v1beta.IVideoMetadata|null} [videoMetadata] File videoMetadata
+                         * @property {google.ai.generativelanguage.v1beta.IVideoFileMetadata|null} [videoMetadata] File videoMetadata
                          * @property {string|null} [name] File name
                          * @property {string|null} [displayName] File displayName
                          * @property {string|null} [mimeType] File mimeType
@@ -72324,7 +76483,7 @@
     
                         /**
                          * File videoMetadata.
-                         * @member {google.ai.generativelanguage.v1beta.IVideoMetadata|null|undefined} videoMetadata
+                         * @member {google.ai.generativelanguage.v1beta.IVideoFileMetadata|null|undefined} videoMetadata
                          * @memberof google.ai.generativelanguage.v1beta.File
                          * @instance
                          */
@@ -72495,7 +76654,7 @@
                             if (message.error != null && Object.hasOwnProperty.call(message, "error"))
                                 $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.videoMetadata != null && Object.hasOwnProperty.call(message, "videoMetadata"))
-                                $root.google.ai.generativelanguage.v1beta.VideoMetadata.encode(message.videoMetadata, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                $root.google.ai.generativelanguage.v1beta.VideoFileMetadata.encode(message.videoMetadata, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.source != null && Object.hasOwnProperty.call(message, "source"))
                                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.source);
                             if (message.downloadUri != null && Object.hasOwnProperty.call(message, "downloadUri"))
@@ -72537,7 +76696,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 12: {
-                                        message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.decode(reader, reader.uint32());
+                                        message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoFileMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -72631,7 +76790,7 @@
                             if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
                                 properties.metadata = 1;
                                 {
-                                    var error = $root.google.ai.generativelanguage.v1beta.VideoMetadata.verify(message.videoMetadata);
+                                    var error = $root.google.ai.generativelanguage.v1beta.VideoFileMetadata.verify(message.videoMetadata);
                                     if (error)
                                         return "videoMetadata." + error;
                                 }
@@ -72689,6 +76848,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.error != null && message.hasOwnProperty("error")) {
@@ -72714,7 +76874,7 @@
                             if (object.videoMetadata != null) {
                                 if (typeof object.videoMetadata !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.File.videoMetadata: object expected");
-                                message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.fromObject(object.videoMetadata);
+                                message.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoFileMetadata.fromObject(object.videoMetadata);
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -72798,6 +76958,10 @@
                             case 2:
                                 message.source = 2;
                                 break;
+                            case "REGISTERED":
+                            case 3:
+                                message.source = 3;
+                                break;
                             }
                             if (object.error != null) {
                                 if (typeof object.error !== "object")
@@ -72871,7 +77035,7 @@
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
                             if (message.videoMetadata != null && message.hasOwnProperty("videoMetadata")) {
-                                object.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoMetadata.toObject(message.videoMetadata, options);
+                                object.videoMetadata = $root.google.ai.generativelanguage.v1beta.VideoFileMetadata.toObject(message.videoMetadata, options);
                                 if (options.oneofs)
                                     object.metadata = "videoMetadata";
                             }
@@ -72933,36 +77097,38 @@
                          * @property {number} SOURCE_UNSPECIFIED=0 SOURCE_UNSPECIFIED value
                          * @property {number} UPLOADED=1 UPLOADED value
                          * @property {number} GENERATED=2 GENERATED value
+                         * @property {number} REGISTERED=3 REGISTERED value
                          */
                         File.Source = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SOURCE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "UPLOADED"] = 1;
                             values[valuesById[2] = "GENERATED"] = 2;
+                            values[valuesById[3] = "REGISTERED"] = 3;
                             return values;
                         })();
     
                         return File;
                     })();
     
-                    v1beta.VideoMetadata = (function() {
+                    v1beta.VideoFileMetadata = (function() {
     
                         /**
-                         * Properties of a VideoMetadata.
+                         * Properties of a VideoFileMetadata.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @interface IVideoMetadata
-                         * @property {google.protobuf.IDuration|null} [videoDuration] VideoMetadata videoDuration
+                         * @interface IVideoFileMetadata
+                         * @property {google.protobuf.IDuration|null} [videoDuration] VideoFileMetadata videoDuration
                          */
     
                         /**
-                         * Constructs a new VideoMetadata.
+                         * Constructs a new VideoFileMetadata.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @classdesc Represents a VideoMetadata.
-                         * @implements IVideoMetadata
+                         * @classdesc Represents a VideoFileMetadata.
+                         * @implements IVideoFileMetadata
                          * @constructor
-                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata=} [properties] Properties to set
+                         * @param {google.ai.generativelanguage.v1beta.IVideoFileMetadata=} [properties] Properties to set
                          */
-                        function VideoMetadata(properties) {
+                        function VideoFileMetadata(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -72970,35 +77136,35 @@
                         }
     
                         /**
-                         * VideoMetadata videoDuration.
+                         * VideoFileMetadata videoDuration.
                          * @member {google.protobuf.IDuration|null|undefined} videoDuration
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @instance
                          */
-                        VideoMetadata.prototype.videoDuration = null;
+                        VideoFileMetadata.prototype.videoDuration = null;
     
                         /**
-                         * Creates a new VideoMetadata instance using the specified properties.
+                         * Creates a new VideoFileMetadata instance using the specified properties.
                          * @function create
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata=} [properties] Properties to set
-                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata instance
+                         * @param {google.ai.generativelanguage.v1beta.IVideoFileMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.VideoFileMetadata} VideoFileMetadata instance
                          */
-                        VideoMetadata.create = function create(properties) {
-                            return new VideoMetadata(properties);
+                        VideoFileMetadata.create = function create(properties) {
+                            return new VideoFileMetadata(properties);
                         };
     
                         /**
-                         * Encodes the specified VideoMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                         * Encodes the specified VideoFileMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoFileMetadata.verify|verify} messages.
                          * @function encode
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IVideoFileMetadata} message VideoFileMetadata message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        VideoMetadata.encode = function encode(message, writer) {
+                        VideoFileMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.videoDuration != null && Object.hasOwnProperty.call(message, "videoDuration"))
@@ -73007,33 +77173,33 @@
                         };
     
                         /**
-                         * Encodes the specified VideoMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoMetadata.verify|verify} messages.
+                         * Encodes the specified VideoFileMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.VideoFileMetadata.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IVideoMetadata} message VideoMetadata message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IVideoFileMetadata} message VideoFileMetadata message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        VideoMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        VideoFileMetadata.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a VideoMetadata message from the specified reader or buffer.
+                         * Decodes a VideoFileMetadata message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         * @returns {google.ai.generativelanguage.v1beta.VideoFileMetadata} VideoFileMetadata
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VideoMetadata.decode = function decode(reader, length, error) {
+                        VideoFileMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.VideoMetadata();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.VideoFileMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -73052,30 +77218,30 @@
                         };
     
                         /**
-                         * Decodes a VideoMetadata message from the specified reader or buffer, length delimited.
+                         * Decodes a VideoFileMetadata message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         * @returns {google.ai.generativelanguage.v1beta.VideoFileMetadata} VideoFileMetadata
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VideoMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        VideoFileMetadata.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a VideoMetadata message.
+                         * Verifies a VideoFileMetadata message.
                          * @function verify
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VideoMetadata.verify = function verify(message) {
+                        VideoFileMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.videoDuration != null && message.hasOwnProperty("videoDuration")) {
@@ -73087,35 +77253,35 @@
                         };
     
                         /**
-                         * Creates a VideoMetadata message from a plain object. Also converts values to their respective internal types.
+                         * Creates a VideoFileMetadata message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.ai.generativelanguage.v1beta.VideoMetadata} VideoMetadata
+                         * @returns {google.ai.generativelanguage.v1beta.VideoFileMetadata} VideoFileMetadata
                          */
-                        VideoMetadata.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.ai.generativelanguage.v1beta.VideoMetadata)
+                        VideoFileMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.VideoFileMetadata)
                                 return object;
-                            var message = new $root.google.ai.generativelanguage.v1beta.VideoMetadata();
+                            var message = new $root.google.ai.generativelanguage.v1beta.VideoFileMetadata();
                             if (object.videoDuration != null) {
                                 if (typeof object.videoDuration !== "object")
-                                    throw TypeError(".google.ai.generativelanguage.v1beta.VideoMetadata.videoDuration: object expected");
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.VideoFileMetadata.videoDuration: object expected");
                                 message.videoDuration = $root.google.protobuf.Duration.fromObject(object.videoDuration);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a VideoMetadata message. Also converts values to other types if specified.
+                         * Creates a plain object from a VideoFileMetadata message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.VideoMetadata} message VideoMetadata
+                         * @param {google.ai.generativelanguage.v1beta.VideoFileMetadata} message VideoFileMetadata
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        VideoMetadata.toObject = function toObject(message, options) {
+                        VideoFileMetadata.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -73127,32 +77293,32 @@
                         };
     
                         /**
-                         * Converts this VideoMetadata to JSON.
+                         * Converts this VideoFileMetadata to JSON.
                          * @function toJSON
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        VideoMetadata.prototype.toJSON = function toJSON() {
+                        VideoFileMetadata.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
                         /**
-                         * Gets the default type url for VideoMetadata
+                         * Gets the default type url for VideoFileMetadata
                          * @function getTypeUrl
-                         * @memberof google.ai.generativelanguage.v1beta.VideoMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.VideoFileMetadata
                          * @static
                          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns {string} The default type url
                          */
-                        VideoMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        VideoFileMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                             if (typeUrlPrefix === undefined) {
                                 typeUrlPrefix = "type.googleapis.com";
                             }
-                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.VideoMetadata";
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.VideoFileMetadata";
                         };
     
-                        return VideoMetadata;
+                        return VideoFileMetadata;
                     })();
     
                     v1beta.FileService = (function() {
@@ -76270,6 +80436,466 @@
                         return VoiceConfig;
                     })();
     
+                    v1beta.SpeakerVoiceConfig = (function() {
+    
+                        /**
+                         * Properties of a SpeakerVoiceConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface ISpeakerVoiceConfig
+                         * @property {string|null} [speaker] SpeakerVoiceConfig speaker
+                         * @property {google.ai.generativelanguage.v1beta.IVoiceConfig|null} [voiceConfig] SpeakerVoiceConfig voiceConfig
+                         */
+    
+                        /**
+                         * Constructs a new SpeakerVoiceConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a SpeakerVoiceConfig.
+                         * @implements ISpeakerVoiceConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig=} [properties] Properties to set
+                         */
+                        function SpeakerVoiceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpeakerVoiceConfig speaker.
+                         * @member {string} speaker
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @instance
+                         */
+                        SpeakerVoiceConfig.prototype.speaker = "";
+    
+                        /**
+                         * SpeakerVoiceConfig voiceConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IVoiceConfig|null|undefined} voiceConfig
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @instance
+                         */
+                        SpeakerVoiceConfig.prototype.voiceConfig = null;
+    
+                        /**
+                         * Creates a new SpeakerVoiceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.SpeakerVoiceConfig} SpeakerVoiceConfig instance
+                         */
+                        SpeakerVoiceConfig.create = function create(properties) {
+                            return new SpeakerVoiceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpeakerVoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig} message SpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeakerVoiceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speaker != null && Object.hasOwnProperty.call(message, "speaker"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.speaker);
+                            if (message.voiceConfig != null && Object.hasOwnProperty.call(message, "voiceConfig"))
+                                $root.google.ai.generativelanguage.v1beta.VoiceConfig.encode(message.voiceConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig} message SpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeakerVoiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpeakerVoiceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.SpeakerVoiceConfig} SpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeakerVoiceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.speaker = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.SpeakerVoiceConfig} SpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeakerVoiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpeakerVoiceConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpeakerVoiceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speaker != null && message.hasOwnProperty("speaker"))
+                                if (!$util.isString(message.speaker))
+                                    return "speaker: string expected";
+                            if (message.voiceConfig != null && message.hasOwnProperty("voiceConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.VoiceConfig.verify(message.voiceConfig);
+                                if (error)
+                                    return "voiceConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.SpeakerVoiceConfig} SpeakerVoiceConfig
+                         */
+                        SpeakerVoiceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig();
+                            if (object.speaker != null)
+                                message.speaker = String(object.speaker);
+                            if (object.voiceConfig != null) {
+                                if (typeof object.voiceConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.voiceConfig: object expected");
+                                message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.fromObject(object.voiceConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpeakerVoiceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.SpeakerVoiceConfig} message SpeakerVoiceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpeakerVoiceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.speaker = "";
+                                object.voiceConfig = null;
+                            }
+                            if (message.speaker != null && message.hasOwnProperty("speaker"))
+                                object.speaker = message.speaker;
+                            if (message.voiceConfig != null && message.hasOwnProperty("voiceConfig"))
+                                object.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.toObject(message.voiceConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpeakerVoiceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpeakerVoiceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpeakerVoiceConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.SpeakerVoiceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpeakerVoiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.SpeakerVoiceConfig";
+                        };
+    
+                        return SpeakerVoiceConfig;
+                    })();
+    
+                    v1beta.MultiSpeakerVoiceConfig = (function() {
+    
+                        /**
+                         * Properties of a MultiSpeakerVoiceConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IMultiSpeakerVoiceConfig
+                         * @property {Array.<google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig>|null} [speakerVoiceConfigs] MultiSpeakerVoiceConfig speakerVoiceConfigs
+                         */
+    
+                        /**
+                         * Constructs a new MultiSpeakerVoiceConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents a MultiSpeakerVoiceConfig.
+                         * @implements IMultiSpeakerVoiceConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         */
+                        function MultiSpeakerVoiceConfig(properties) {
+                            this.speakerVoiceConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiSpeakerVoiceConfig speakerVoiceConfigs.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.ISpeakerVoiceConfig>} speakerVoiceConfigs
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @instance
+                         */
+                        MultiSpeakerVoiceConfig.prototype.speakerVoiceConfigs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MultiSpeakerVoiceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig instance
+                         */
+                        MultiSpeakerVoiceConfig.create = function create(properties) {
+                            return new MultiSpeakerVoiceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speakerVoiceConfigs != null && message.speakerVoiceConfigs.length)
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.encode(message.speakerVoiceConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.speakerVoiceConfigs && message.speakerVoiceConfigs.length))
+                                            message.speakerVoiceConfigs = [];
+                                        message.speakerVoiceConfigs.push($root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiSpeakerVoiceConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiSpeakerVoiceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speakerVoiceConfigs != null && message.hasOwnProperty("speakerVoiceConfigs")) {
+                                if (!Array.isArray(message.speakerVoiceConfigs))
+                                    return "speakerVoiceConfigs: array expected";
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.verify(message.speakerVoiceConfigs[i]);
+                                    if (error)
+                                        return "speakerVoiceConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiSpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         */
+                        MultiSpeakerVoiceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig();
+                            if (object.speakerVoiceConfigs) {
+                                if (!Array.isArray(object.speakerVoiceConfigs))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.speakerVoiceConfigs: array expected");
+                                message.speakerVoiceConfigs = [];
+                                for (var i = 0; i < object.speakerVoiceConfigs.length; ++i) {
+                                    if (typeof object.speakerVoiceConfigs[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.speakerVoiceConfigs: object expected");
+                                    message.speakerVoiceConfigs[i] = $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.fromObject(object.speakerVoiceConfigs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiSpeakerVoiceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiSpeakerVoiceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.speakerVoiceConfigs = [];
+                            if (message.speakerVoiceConfigs && message.speakerVoiceConfigs.length) {
+                                object.speakerVoiceConfigs = [];
+                                for (var j = 0; j < message.speakerVoiceConfigs.length; ++j)
+                                    object.speakerVoiceConfigs[j] = $root.google.ai.generativelanguage.v1beta.SpeakerVoiceConfig.toObject(message.speakerVoiceConfigs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiSpeakerVoiceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiSpeakerVoiceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiSpeakerVoiceConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiSpeakerVoiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig";
+                        };
+    
+                        return MultiSpeakerVoiceConfig;
+                    })();
+    
                     v1beta.SpeechConfig = (function() {
     
                         /**
@@ -76277,6 +80903,7 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface ISpeechConfig
                          * @property {google.ai.generativelanguage.v1beta.IVoiceConfig|null} [voiceConfig] SpeechConfig voiceConfig
+                         * @property {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig|null} [multiSpeakerVoiceConfig] SpeechConfig multiSpeakerVoiceConfig
                          * @property {string|null} [languageCode] SpeechConfig languageCode
                          */
     
@@ -76302,6 +80929,14 @@
                          * @instance
                          */
                         SpeechConfig.prototype.voiceConfig = null;
+    
+                        /**
+                         * SpeechConfig multiSpeakerVoiceConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IMultiSpeakerVoiceConfig|null|undefined} multiSpeakerVoiceConfig
+                         * @memberof google.ai.generativelanguage.v1beta.SpeechConfig
+                         * @instance
+                         */
+                        SpeechConfig.prototype.multiSpeakerVoiceConfig = null;
     
                         /**
                          * SpeechConfig languageCode.
@@ -76339,6 +80974,8 @@
                                 $root.google.ai.generativelanguage.v1beta.VoiceConfig.encode(message.voiceConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            if (message.multiSpeakerVoiceConfig != null && Object.hasOwnProperty.call(message, "multiSpeakerVoiceConfig"))
+                                $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.encode(message.multiSpeakerVoiceConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -76377,6 +81014,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.multiSpeakerVoiceConfig = $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 2: {
@@ -76423,6 +81064,11 @@
                                 if (error)
                                     return "voiceConfig." + error;
                             }
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.verify(message.multiSpeakerVoiceConfig);
+                                if (error)
+                                    return "multiSpeakerVoiceConfig." + error;
+                            }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
@@ -76446,6 +81092,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.SpeechConfig.voiceConfig: object expected");
                                 message.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.fromObject(object.voiceConfig);
                             }
+                            if (object.multiSpeakerVoiceConfig != null) {
+                                if (typeof object.multiSpeakerVoiceConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.SpeechConfig.multiSpeakerVoiceConfig: object expected");
+                                message.multiSpeakerVoiceConfig = $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.fromObject(object.multiSpeakerVoiceConfig);
+                            }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
                             return message;
@@ -76467,11 +81118,14 @@
                             if (options.defaults) {
                                 object.voiceConfig = null;
                                 object.languageCode = "";
+                                object.multiSpeakerVoiceConfig = null;
                             }
                             if (message.voiceConfig != null && message.hasOwnProperty("voiceConfig"))
                                 object.voiceConfig = $root.google.ai.generativelanguage.v1beta.VoiceConfig.toObject(message.voiceConfig, options);
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig"))
+                                object.multiSpeakerVoiceConfig = $root.google.ai.generativelanguage.v1beta.MultiSpeakerVoiceConfig.toObject(message.multiSpeakerVoiceConfig, options);
                             return object;
                         };
     
@@ -76755,6 +81409,224 @@
                         return ThinkingConfig;
                     })();
     
+                    v1beta.ImageConfig = (function() {
+    
+                        /**
+                         * Properties of an ImageConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IImageConfig
+                         * @property {string|null} [aspectRatio] ImageConfig aspectRatio
+                         */
+    
+                        /**
+                         * Constructs a new ImageConfig.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an ImageConfig.
+                         * @implements IImageConfig
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig=} [properties] Properties to set
+                         */
+                        function ImageConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImageConfig aspectRatio.
+                         * @member {string|null|undefined} aspectRatio
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @instance
+                         */
+                        ImageConfig.prototype.aspectRatio = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ImageConfig.prototype, "_aspectRatio", {
+                            get: $util.oneOfGetter($oneOfFields = ["aspectRatio"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImageConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig instance
+                         */
+                        ImageConfig.create = function create(properties) {
+                            return new ImageConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImageConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig} message ImageConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.aspectRatio != null && Object.hasOwnProperty.call(message, "aspectRatio"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.aspectRatio);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImageConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ImageConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IImageConfig} message ImageConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImageConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.ImageConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.aspectRatio = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImageConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImageConfig message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImageConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.aspectRatio != null && message.hasOwnProperty("aspectRatio")) {
+                                properties._aspectRatio = 1;
+                                if (!$util.isString(message.aspectRatio))
+                                    return "aspectRatio: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImageConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.ImageConfig} ImageConfig
+                         */
+                        ImageConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.ImageConfig)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.ImageConfig();
+                            if (object.aspectRatio != null)
+                                message.aspectRatio = String(object.aspectRatio);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImageConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.ImageConfig} message ImageConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImageConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.aspectRatio != null && message.hasOwnProperty("aspectRatio")) {
+                                object.aspectRatio = message.aspectRatio;
+                                if (options.oneofs)
+                                    object._aspectRatio = "aspectRatio";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImageConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImageConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImageConfig
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.ImageConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImageConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.ImageConfig";
+                        };
+    
+                        return ImageConfig;
+                    })();
+    
                     v1beta.GenerationConfig = (function() {
     
                         /**
@@ -76770,6 +81642,8 @@
                          * @property {number|null} [seed] GenerationConfig seed
                          * @property {string|null} [responseMimeType] GenerationConfig responseMimeType
                          * @property {google.ai.generativelanguage.v1beta.ISchema|null} [responseSchema] GenerationConfig responseSchema
+                         * @property {google.protobuf.IValue|null} [responseJsonSchema] GenerationConfig responseJsonSchema
+                         * @property {google.protobuf.IValue|null} [responseJsonSchemaOrdered] GenerationConfig responseJsonSchemaOrdered
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -76778,6 +81652,7 @@
                          * @property {Array.<google.ai.generativelanguage.v1beta.GenerationConfig.Modality>|null} [responseModalities] GenerationConfig responseModalities
                          * @property {google.ai.generativelanguage.v1beta.ISpeechConfig|null} [speechConfig] GenerationConfig speechConfig
                          * @property {google.ai.generativelanguage.v1beta.IThinkingConfig|null} [thinkingConfig] GenerationConfig thinkingConfig
+                         * @property {google.ai.generativelanguage.v1beta.IImageConfig|null} [imageConfig] GenerationConfig imageConfig
                          * @property {google.ai.generativelanguage.v1beta.GenerationConfig.MediaResolution|null} [mediaResolution] GenerationConfig mediaResolution
                          */
     
@@ -76871,6 +81746,22 @@
                         GenerationConfig.prototype.responseSchema = null;
     
                         /**
+                         * GenerationConfig responseJsonSchema.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchema
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchema = null;
+    
+                        /**
+                         * GenerationConfig responseJsonSchemaOrdered.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchemaOrdered
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchemaOrdered = null;
+    
+                        /**
                          * GenerationConfig presencePenalty.
                          * @member {number|null|undefined} presencePenalty
                          * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
@@ -76933,6 +81824,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.thinkingConfig = null;
+    
+                        /**
+                         * GenerationConfig imageConfig.
+                         * @member {google.ai.generativelanguage.v1beta.IImageConfig|null|undefined} imageConfig
+                         * @memberof google.ai.generativelanguage.v1beta.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.imageConfig = null;
     
                         /**
                          * GenerationConfig mediaResolution.
@@ -77024,6 +81923,12 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(GenerationConfig.prototype, "_imageConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["imageConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GenerationConfig.prototype, "_mediaResolution", {
                             get: $util.oneOfGetter($oneOfFields = ["mediaResolution"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -77094,6 +81999,12 @@
                                 $root.google.ai.generativelanguage.v1beta.ThinkingConfig.encode(message.thinkingConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.mediaResolution != null && Object.hasOwnProperty.call(message, "mediaResolution"))
                                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.mediaResolution);
+                            if (message.responseJsonSchema != null && Object.hasOwnProperty.call(message, "responseJsonSchema"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchema, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.imageConfig != null && Object.hasOwnProperty.call(message, "imageConfig"))
+                                $root.google.ai.generativelanguage.v1beta.ImageConfig.encode(message.imageConfig, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                            if (message.responseJsonSchemaOrdered != null && Object.hasOwnProperty.call(message, "responseJsonSchemaOrdered"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchemaOrdered, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -77168,6 +82079,14 @@
                                         message.responseSchema = $root.google.ai.generativelanguage.v1beta.Schema.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 24: {
+                                        message.responseJsonSchema = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 28: {
+                                        message.responseJsonSchemaOrdered = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 15: {
                                         message.presencePenalty = reader.float();
                                         break;
@@ -77205,6 +82124,10 @@
                                     }
                                 case 22: {
                                         message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 27: {
+                                        message.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 23: {
@@ -77292,6 +82215,16 @@
                                 if (error)
                                     return "responseSchema." + error;
                             }
+                            if (message.responseJsonSchema != null && message.hasOwnProperty("responseJsonSchema")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchema);
+                                if (error)
+                                    return "responseJsonSchema." + error;
+                            }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchemaOrdered);
+                                if (error)
+                                    return "responseJsonSchemaOrdered." + error;
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -77347,6 +82280,14 @@
                                         return "thinkingConfig." + error;
                                 }
                             }
+                            if (message.imageConfig != null && message.hasOwnProperty("imageConfig")) {
+                                properties._imageConfig = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.ImageConfig.verify(message.imageConfig);
+                                    if (error)
+                                        return "imageConfig." + error;
+                                }
+                            }
                             if (message.mediaResolution != null && message.hasOwnProperty("mediaResolution")) {
                                 properties._mediaResolution = 1;
                                 switch (message.mediaResolution) {
@@ -77400,6 +82341,16 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.responseSchema: object expected");
                                 message.responseSchema = $root.google.ai.generativelanguage.v1beta.Schema.fromObject(object.responseSchema);
                             }
+                            if (object.responseJsonSchema != null) {
+                                if (typeof object.responseJsonSchema !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.responseJsonSchema: object expected");
+                                message.responseJsonSchema = $root.google.protobuf.Value.fromObject(object.responseJsonSchema);
+                            }
+                            if (object.responseJsonSchemaOrdered != null) {
+                                if (typeof object.responseJsonSchemaOrdered !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.responseJsonSchemaOrdered: object expected");
+                                message.responseJsonSchemaOrdered = $root.google.protobuf.Value.fromObject(object.responseJsonSchemaOrdered);
+                            }
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -77449,6 +82400,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.thinkingConfig: object expected");
                                 message.thinkingConfig = $root.google.ai.generativelanguage.v1beta.ThinkingConfig.fromObject(object.thinkingConfig);
                             }
+                            if (object.imageConfig != null) {
+                                if (typeof object.imageConfig !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerationConfig.imageConfig: object expected");
+                                message.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.fromObject(object.imageConfig);
+                            }
                             switch (object.mediaResolution) {
                             default:
                                 if (typeof object.mediaResolution === "number") {
@@ -77496,6 +82452,8 @@
                             if (options.defaults) {
                                 object.responseMimeType = "";
                                 object.responseSchema = null;
+                                object.responseJsonSchema = null;
+                                object.responseJsonSchemaOrdered = null;
                             }
                             if (message.candidateCount != null && message.hasOwnProperty("candidateCount")) {
                                 object.candidateCount = message.candidateCount;
@@ -77581,6 +82539,15 @@
                                 if (options.oneofs)
                                     object._mediaResolution = "mediaResolution";
                             }
+                            if (message.responseJsonSchema != null && message.hasOwnProperty("responseJsonSchema"))
+                                object.responseJsonSchema = $root.google.protobuf.Value.toObject(message.responseJsonSchema, options);
+                            if (message.imageConfig != null && message.hasOwnProperty("imageConfig")) {
+                                object.imageConfig = $root.google.ai.generativelanguage.v1beta.ImageConfig.toObject(message.imageConfig, options);
+                                if (options.oneofs)
+                                    object._imageConfig = "imageConfig";
+                            }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered"))
+                                object.responseJsonSchemaOrdered = $root.google.protobuf.Value.toObject(message.responseJsonSchemaOrdered, options);
                             return object;
                         };
     
@@ -78008,6 +82975,7 @@
                          * @property {google.ai.generativelanguage.v1beta.GenerateContentResponse.IPromptFeedback|null} [promptFeedback] GenerateContentResponse promptFeedback
                          * @property {google.ai.generativelanguage.v1beta.GenerateContentResponse.IUsageMetadata|null} [usageMetadata] GenerateContentResponse usageMetadata
                          * @property {string|null} [modelVersion] GenerateContentResponse modelVersion
+                         * @property {string|null} [responseId] GenerateContentResponse responseId
                          */
     
                         /**
@@ -78059,6 +83027,14 @@
                         GenerateContentResponse.prototype.modelVersion = "";
     
                         /**
+                         * GenerateContentResponse responseId.
+                         * @member {string} responseId
+                         * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse
+                         * @instance
+                         */
+                        GenerateContentResponse.prototype.responseId = "";
+    
+                        /**
                          * Creates a new GenerateContentResponse instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.GenerateContentResponse
@@ -78091,6 +83067,8 @@
                                 $root.google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.encode(message.usageMetadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.modelVersion != null && Object.hasOwnProperty.call(message, "modelVersion"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.modelVersion);
+                            if (message.responseId != null && Object.hasOwnProperty.call(message, "responseId"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.responseId);
                             return writer;
                         };
     
@@ -78143,6 +83121,10 @@
                                     }
                                 case 4: {
                                         message.modelVersion = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.responseId = reader.string();
                                         break;
                                     }
                                 default:
@@ -78202,6 +83184,9 @@
                             if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
                                 if (!$util.isString(message.modelVersion))
                                     return "modelVersion: string expected";
+                            if (message.responseId != null && message.hasOwnProperty("responseId"))
+                                if (!$util.isString(message.responseId))
+                                    return "responseId: string expected";
                             return null;
                         };
     
@@ -78239,6 +83224,8 @@
                             }
                             if (object.modelVersion != null)
                                 message.modelVersion = String(object.modelVersion);
+                            if (object.responseId != null)
+                                message.responseId = String(object.responseId);
                             return message;
                         };
     
@@ -78261,6 +83248,7 @@
                                 object.promptFeedback = null;
                                 object.usageMetadata = null;
                                 object.modelVersion = "";
+                                object.responseId = "";
                             }
                             if (message.candidates && message.candidates.length) {
                                 object.candidates = [];
@@ -78273,6 +83261,8 @@
                                 object.usageMetadata = $root.google.ai.generativelanguage.v1beta.GenerateContentResponse.UsageMetadata.toObject(message.usageMetadata, options);
                             if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
                                 object.modelVersion = message.modelVersion;
+                            if (message.responseId != null && message.hasOwnProperty("responseId"))
+                                object.responseId = message.responseId;
                             return object;
                         };
     
@@ -79124,6 +84114,7 @@
                          * @property {number|null} [index] Candidate index
                          * @property {google.ai.generativelanguage.v1beta.IContent|null} [content] Candidate content
                          * @property {google.ai.generativelanguage.v1beta.Candidate.FinishReason|null} [finishReason] Candidate finishReason
+                         * @property {string|null} [finishMessage] Candidate finishMessage
                          * @property {Array.<google.ai.generativelanguage.v1beta.ISafetyRating>|null} [safetyRatings] Candidate safetyRatings
                          * @property {google.ai.generativelanguage.v1beta.ICitationMetadata|null} [citationMetadata] Candidate citationMetadata
                          * @property {number|null} [tokenCount] Candidate tokenCount
@@ -79131,6 +84122,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IGroundingMetadata|null} [groundingMetadata] Candidate groundingMetadata
                          * @property {number|null} [avgLogprobs] Candidate avgLogprobs
                          * @property {google.ai.generativelanguage.v1beta.ILogprobsResult|null} [logprobsResult] Candidate logprobsResult
+                         * @property {google.ai.generativelanguage.v1beta.IUrlContextMetadata|null} [urlContextMetadata] Candidate urlContextMetadata
                          */
     
                         /**
@@ -79173,6 +84165,14 @@
                          * @instance
                          */
                         Candidate.prototype.finishReason = 0;
+    
+                        /**
+                         * Candidate finishMessage.
+                         * @member {string|null|undefined} finishMessage
+                         * @memberof google.ai.generativelanguage.v1beta.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.finishMessage = null;
     
                         /**
                          * Candidate safetyRatings.
@@ -79230,12 +84230,26 @@
                          */
                         Candidate.prototype.logprobsResult = null;
     
+                        /**
+                         * Candidate urlContextMetadata.
+                         * @member {google.ai.generativelanguage.v1beta.IUrlContextMetadata|null|undefined} urlContextMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.urlContextMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Candidate.prototype, "_index", {
                             get: $util.oneOfGetter($oneOfFields = ["index"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Candidate.prototype, "_finishMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["finishMessage"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -79269,6 +84283,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.finishReason);
                             if (message.index != null && Object.hasOwnProperty.call(message, "index"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.index);
+                            if (message.finishMessage != null && Object.hasOwnProperty.call(message, "finishMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.finishMessage);
                             if (message.safetyRatings != null && message.safetyRatings.length)
                                 for (var i = 0; i < message.safetyRatings.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -79285,6 +84301,8 @@
                                 writer.uint32(/* id 10, wireType 1 =*/81).double(message.avgLogprobs);
                             if (message.logprobsResult != null && Object.hasOwnProperty.call(message, "logprobsResult"))
                                 $root.google.ai.generativelanguage.v1beta.LogprobsResult.encode(message.logprobsResult, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.urlContextMetadata != null && Object.hasOwnProperty.call(message, "urlContextMetadata"))
+                                $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.encode(message.urlContextMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -79333,6 +84351,10 @@
                                         message.finishReason = reader.int32();
                                         break;
                                     }
+                                case 4: {
+                                        message.finishMessage = reader.string();
+                                        break;
+                                    }
                                 case 5: {
                                         if (!(message.safetyRatings && message.safetyRatings.length))
                                             message.safetyRatings = [];
@@ -79363,6 +84385,10 @@
                                     }
                                 case 11: {
                                         message.logprobsResult = $root.google.ai.generativelanguage.v1beta.LogprobsResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -79427,8 +84453,19 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 14:
+                                case 15:
+                                case 16:
+                                case 17:
+                                case 12:
+                                case 13:
                                     break;
                                 }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                properties._finishMessage = 1;
+                                if (!$util.isString(message.finishMessage))
+                                    return "finishMessage: string expected";
+                            }
                             if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
                                 if (!Array.isArray(message.safetyRatings))
                                     return "safetyRatings: array expected";
@@ -79467,6 +84504,11 @@
                                 var error = $root.google.ai.generativelanguage.v1beta.LogprobsResult.verify(message.logprobsResult);
                                 if (error)
                                     return "logprobsResult." + error;
+                            }
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.verify(message.urlContextMetadata);
+                                if (error)
+                                    return "urlContextMetadata." + error;
                             }
                             return null;
                         };
@@ -79545,7 +84587,33 @@
                             case 11:
                                 message.finishReason = 11;
                                 break;
+                            case "IMAGE_PROHIBITED_CONTENT":
+                            case 14:
+                                message.finishReason = 14;
+                                break;
+                            case "IMAGE_OTHER":
+                            case 15:
+                                message.finishReason = 15;
+                                break;
+                            case "NO_IMAGE":
+                            case 16:
+                                message.finishReason = 16;
+                                break;
+                            case "IMAGE_RECITATION":
+                            case 17:
+                                message.finishReason = 17;
+                                break;
+                            case "UNEXPECTED_TOOL_CALL":
+                            case 12:
+                                message.finishReason = 12;
+                                break;
+                            case "TOO_MANY_TOOL_CALLS":
+                            case 13:
+                                message.finishReason = 13;
+                                break;
                             }
+                            if (object.finishMessage != null)
+                                message.finishMessage = String(object.finishMessage);
                             if (object.safetyRatings) {
                                 if (!Array.isArray(object.safetyRatings))
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Candidate.safetyRatings: array expected");
@@ -79585,6 +84653,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.Candidate.logprobsResult: object expected");
                                 message.logprobsResult = $root.google.ai.generativelanguage.v1beta.LogprobsResult.fromObject(object.logprobsResult);
                             }
+                            if (object.urlContextMetadata != null) {
+                                if (typeof object.urlContextMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.Candidate.urlContextMetadata: object expected");
+                                message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.fromObject(object.urlContextMetadata);
+                            }
                             return message;
                         };
     
@@ -79613,6 +84686,7 @@
                                 object.groundingMetadata = null;
                                 object.avgLogprobs = 0;
                                 object.logprobsResult = null;
+                                object.urlContextMetadata = null;
                             }
                             if (message.content != null && message.hasOwnProperty("content"))
                                 object.content = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.content, options);
@@ -79622,6 +84696,11 @@
                                 object.index = message.index;
                                 if (options.oneofs)
                                     object._index = "index";
+                            }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                object.finishMessage = message.finishMessage;
+                                if (options.oneofs)
+                                    object._finishMessage = "finishMessage";
                             }
                             if (message.safetyRatings && message.safetyRatings.length) {
                                 object.safetyRatings = [];
@@ -79643,6 +84722,8 @@
                                 object.avgLogprobs = options.json && !isFinite(message.avgLogprobs) ? String(message.avgLogprobs) : message.avgLogprobs;
                             if (message.logprobsResult != null && message.hasOwnProperty("logprobsResult"))
                                 object.logprobsResult = $root.google.ai.generativelanguage.v1beta.LogprobsResult.toObject(message.logprobsResult, options);
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata"))
+                                object.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.toObject(message.urlContextMetadata, options);
                             return object;
                         };
     
@@ -79688,6 +84769,12 @@
                          * @property {number} SPII=9 SPII value
                          * @property {number} MALFORMED_FUNCTION_CALL=10 MALFORMED_FUNCTION_CALL value
                          * @property {number} IMAGE_SAFETY=11 IMAGE_SAFETY value
+                         * @property {number} IMAGE_PROHIBITED_CONTENT=14 IMAGE_PROHIBITED_CONTENT value
+                         * @property {number} IMAGE_OTHER=15 IMAGE_OTHER value
+                         * @property {number} NO_IMAGE=16 NO_IMAGE value
+                         * @property {number} IMAGE_RECITATION=17 IMAGE_RECITATION value
+                         * @property {number} UNEXPECTED_TOOL_CALL=12 UNEXPECTED_TOOL_CALL value
+                         * @property {number} TOO_MANY_TOOL_CALLS=13 TOO_MANY_TOOL_CALLS value
                          */
                         Candidate.FinishReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -79703,10 +84790,525 @@
                             values[valuesById[9] = "SPII"] = 9;
                             values[valuesById[10] = "MALFORMED_FUNCTION_CALL"] = 10;
                             values[valuesById[11] = "IMAGE_SAFETY"] = 11;
+                            values[valuesById[14] = "IMAGE_PROHIBITED_CONTENT"] = 14;
+                            values[valuesById[15] = "IMAGE_OTHER"] = 15;
+                            values[valuesById[16] = "NO_IMAGE"] = 16;
+                            values[valuesById[17] = "IMAGE_RECITATION"] = 17;
+                            values[valuesById[12] = "UNEXPECTED_TOOL_CALL"] = 12;
+                            values[valuesById[13] = "TOO_MANY_TOOL_CALLS"] = 13;
                             return values;
                         })();
     
                         return Candidate;
+                    })();
+    
+                    v1beta.UrlContextMetadata = (function() {
+    
+                        /**
+                         * Properties of an UrlContextMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IUrlContextMetadata
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IUrlMetadata>|null} [urlMetadata] UrlContextMetadata urlMetadata
+                         */
+    
+                        /**
+                         * Constructs a new UrlContextMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an UrlContextMetadata.
+                         * @implements IUrlContextMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContextMetadata=} [properties] Properties to set
+                         */
+                        function UrlContextMetadata(properties) {
+                            this.urlMetadata = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UrlContextMetadata urlMetadata.
+                         * @member {Array.<google.ai.generativelanguage.v1beta.IUrlMetadata>} urlMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @instance
+                         */
+                        UrlContextMetadata.prototype.urlMetadata = $util.emptyArray;
+    
+                        /**
+                         * Creates a new UrlContextMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContextMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContextMetadata} UrlContextMetadata instance
+                         */
+                        UrlContextMetadata.create = function create(properties) {
+                            return new UrlContextMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContextMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContextMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContextMetadata} message UrlContextMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContextMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.urlMetadata != null && message.urlMetadata.length)
+                                for (var i = 0; i < message.urlMetadata.length; ++i)
+                                    $root.google.ai.generativelanguage.v1beta.UrlMetadata.encode(message.urlMetadata[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UrlContextMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlContextMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlContextMetadata} message UrlContextMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlContextMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UrlContextMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContextMetadata} UrlContextMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContextMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UrlContextMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.urlMetadata && message.urlMetadata.length))
+                                            message.urlMetadata = [];
+                                        message.urlMetadata.push($root.google.ai.generativelanguage.v1beta.UrlMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UrlContextMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContextMetadata} UrlContextMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlContextMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UrlContextMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UrlContextMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.urlMetadata != null && message.hasOwnProperty("urlMetadata")) {
+                                if (!Array.isArray(message.urlMetadata))
+                                    return "urlMetadata: array expected";
+                                for (var i = 0; i < message.urlMetadata.length; ++i) {
+                                    var error = $root.google.ai.generativelanguage.v1beta.UrlMetadata.verify(message.urlMetadata[i]);
+                                    if (error)
+                                        return "urlMetadata." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UrlContextMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.UrlContextMetadata} UrlContextMetadata
+                         */
+                        UrlContextMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.UrlContextMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.UrlContextMetadata();
+                            if (object.urlMetadata) {
+                                if (!Array.isArray(object.urlMetadata))
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.UrlContextMetadata.urlMetadata: array expected");
+                                message.urlMetadata = [];
+                                for (var i = 0; i < object.urlMetadata.length; ++i) {
+                                    if (typeof object.urlMetadata[i] !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.UrlContextMetadata.urlMetadata: object expected");
+                                    message.urlMetadata[i] = $root.google.ai.generativelanguage.v1beta.UrlMetadata.fromObject(object.urlMetadata[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UrlContextMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.UrlContextMetadata} message UrlContextMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UrlContextMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.urlMetadata = [];
+                            if (message.urlMetadata && message.urlMetadata.length) {
+                                object.urlMetadata = [];
+                                for (var j = 0; j < message.urlMetadata.length; ++j)
+                                    object.urlMetadata[j] = $root.google.ai.generativelanguage.v1beta.UrlMetadata.toObject(message.urlMetadata[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UrlContextMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UrlContextMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UrlContextMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.UrlContextMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UrlContextMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.UrlContextMetadata";
+                        };
+    
+                        return UrlContextMetadata;
+                    })();
+    
+                    v1beta.UrlMetadata = (function() {
+    
+                        /**
+                         * Properties of an UrlMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @interface IUrlMetadata
+                         * @property {string|null} [retrievedUrl] UrlMetadata retrievedUrl
+                         * @property {google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus|null} [urlRetrievalStatus] UrlMetadata urlRetrievalStatus
+                         */
+    
+                        /**
+                         * Constructs a new UrlMetadata.
+                         * @memberof google.ai.generativelanguage.v1beta
+                         * @classdesc Represents an UrlMetadata.
+                         * @implements IUrlMetadata
+                         * @constructor
+                         * @param {google.ai.generativelanguage.v1beta.IUrlMetadata=} [properties] Properties to set
+                         */
+                        function UrlMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UrlMetadata retrievedUrl.
+                         * @member {string} retrievedUrl
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @instance
+                         */
+                        UrlMetadata.prototype.retrievedUrl = "";
+    
+                        /**
+                         * UrlMetadata urlRetrievalStatus.
+                         * @member {google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus} urlRetrievalStatus
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @instance
+                         */
+                        UrlMetadata.prototype.urlRetrievalStatus = 0;
+    
+                        /**
+                         * Creates a new UrlMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlMetadata=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.UrlMetadata} UrlMetadata instance
+                         */
+                        UrlMetadata.create = function create(properties) {
+                            return new UrlMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UrlMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlMetadata} message UrlMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retrievedUrl != null && Object.hasOwnProperty.call(message, "retrievedUrl"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.retrievedUrl);
+                            if (message.urlRetrievalStatus != null && Object.hasOwnProperty.call(message, "urlRetrievalStatus"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.urlRetrievalStatus);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UrlMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UrlMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.IUrlMetadata} message UrlMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UrlMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UrlMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.ai.generativelanguage.v1beta.UrlMetadata} UrlMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.UrlMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retrievedUrl = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.urlRetrievalStatus = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UrlMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.ai.generativelanguage.v1beta.UrlMetadata} UrlMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UrlMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UrlMetadata message.
+                         * @function verify
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UrlMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retrievedUrl != null && message.hasOwnProperty("retrievedUrl"))
+                                if (!$util.isString(message.retrievedUrl))
+                                    return "retrievedUrl: string expected";
+                            if (message.urlRetrievalStatus != null && message.hasOwnProperty("urlRetrievalStatus"))
+                                switch (message.urlRetrievalStatus) {
+                                default:
+                                    return "urlRetrievalStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UrlMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.ai.generativelanguage.v1beta.UrlMetadata} UrlMetadata
+                         */
+                        UrlMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.UrlMetadata)
+                                return object;
+                            var message = new $root.google.ai.generativelanguage.v1beta.UrlMetadata();
+                            if (object.retrievedUrl != null)
+                                message.retrievedUrl = String(object.retrievedUrl);
+                            switch (object.urlRetrievalStatus) {
+                            default:
+                                if (typeof object.urlRetrievalStatus === "number") {
+                                    message.urlRetrievalStatus = object.urlRetrievalStatus;
+                                    break;
+                                }
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.urlRetrievalStatus = 0;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_SUCCESS":
+                            case 1:
+                                message.urlRetrievalStatus = 1;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_ERROR":
+                            case 2:
+                                message.urlRetrievalStatus = 2;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_PAYWALL":
+                            case 3:
+                                message.urlRetrievalStatus = 3;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSAFE":
+                            case 4:
+                                message.urlRetrievalStatus = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UrlMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {google.ai.generativelanguage.v1beta.UrlMetadata} message UrlMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UrlMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.retrievedUrl = "";
+                                object.urlRetrievalStatus = options.enums === String ? "URL_RETRIEVAL_STATUS_UNSPECIFIED" : 0;
+                            }
+                            if (message.retrievedUrl != null && message.hasOwnProperty("retrievedUrl"))
+                                object.retrievedUrl = message.retrievedUrl;
+                            if (message.urlRetrievalStatus != null && message.hasOwnProperty("urlRetrievalStatus"))
+                                object.urlRetrievalStatus = options.enums === String ? $root.google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus[message.urlRetrievalStatus] === undefined ? message.urlRetrievalStatus : $root.google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus[message.urlRetrievalStatus] : message.urlRetrievalStatus;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UrlMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UrlMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UrlMetadata
+                         * @function getTypeUrl
+                         * @memberof google.ai.generativelanguage.v1beta.UrlMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UrlMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.UrlMetadata";
+                        };
+    
+                        /**
+                         * UrlRetrievalStatus enum.
+                         * @name google.ai.generativelanguage.v1beta.UrlMetadata.UrlRetrievalStatus
+                         * @enum {number}
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSPECIFIED=0 URL_RETRIEVAL_STATUS_UNSPECIFIED value
+                         * @property {number} URL_RETRIEVAL_STATUS_SUCCESS=1 URL_RETRIEVAL_STATUS_SUCCESS value
+                         * @property {number} URL_RETRIEVAL_STATUS_ERROR=2 URL_RETRIEVAL_STATUS_ERROR value
+                         * @property {number} URL_RETRIEVAL_STATUS_PAYWALL=3 URL_RETRIEVAL_STATUS_PAYWALL value
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSAFE=4 URL_RETRIEVAL_STATUS_UNSAFE value
+                         */
+                        UrlMetadata.UrlRetrievalStatus = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "URL_RETRIEVAL_STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "URL_RETRIEVAL_STATUS_SUCCESS"] = 1;
+                            values[valuesById[2] = "URL_RETRIEVAL_STATUS_ERROR"] = 2;
+                            values[valuesById[3] = "URL_RETRIEVAL_STATUS_PAYWALL"] = 3;
+                            values[valuesById[4] = "URL_RETRIEVAL_STATUS_UNSAFE"] = 4;
+                            return values;
+                        })();
+    
+                        return UrlMetadata;
                     })();
     
                     v1beta.LogprobsResult = (function() {
@@ -79715,6 +85317,7 @@
                          * Properties of a LogprobsResult.
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface ILogprobsResult
+                         * @property {number|null} [logProbabilitySum] LogprobsResult logProbabilitySum
                          * @property {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates>|null} [topCandidates] LogprobsResult topCandidates
                          * @property {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate>|null} [chosenCandidates] LogprobsResult chosenCandidates
                          */
@@ -79737,6 +85340,14 @@
                         }
     
                         /**
+                         * LogprobsResult logProbabilitySum.
+                         * @member {number|null|undefined} logProbabilitySum
+                         * @memberof google.ai.generativelanguage.v1beta.LogprobsResult
+                         * @instance
+                         */
+                        LogprobsResult.prototype.logProbabilitySum = null;
+    
+                        /**
                          * LogprobsResult topCandidates.
                          * @member {Array.<google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates>} topCandidates
                          * @memberof google.ai.generativelanguage.v1beta.LogprobsResult
@@ -79751,6 +85362,15 @@
                          * @instance
                          */
                         LogprobsResult.prototype.chosenCandidates = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LogprobsResult.prototype, "_logProbabilitySum", {
+                            get: $util.oneOfGetter($oneOfFields = ["logProbabilitySum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new LogprobsResult instance using the specified properties.
@@ -79782,6 +85402,8 @@
                             if (message.chosenCandidates != null && message.chosenCandidates.length)
                                 for (var i = 0; i < message.chosenCandidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.encode(message.chosenCandidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.logProbabilitySum != null && Object.hasOwnProperty.call(message, "logProbabilitySum"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.logProbabilitySum);
                             return writer;
                         };
     
@@ -79818,6 +85440,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.logProbabilitySum = reader.float();
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
                                             message.topCandidates = [];
@@ -79865,6 +85491,12 @@
                         LogprobsResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                properties._logProbabilitySum = 1;
+                                if (typeof message.logProbabilitySum !== "number")
+                                    return "logProbabilitySum: number expected";
+                            }
                             if (message.topCandidates != null && message.hasOwnProperty("topCandidates")) {
                                 if (!Array.isArray(message.topCandidates))
                                     return "topCandidates: array expected";
@@ -79898,6 +85530,8 @@
                             if (object instanceof $root.google.ai.generativelanguage.v1beta.LogprobsResult)
                                 return object;
                             var message = new $root.google.ai.generativelanguage.v1beta.LogprobsResult();
+                            if (object.logProbabilitySum != null)
+                                message.logProbabilitySum = Number(object.logProbabilitySum);
                             if (object.topCandidates) {
                                 if (!Array.isArray(object.topCandidates))
                                     throw TypeError(".google.ai.generativelanguage.v1beta.LogprobsResult.topCandidates: array expected");
@@ -79947,6 +85581,11 @@
                                 object.chosenCandidates = [];
                                 for (var j = 0; j < message.chosenCandidates.length; ++j)
                                     object.chosenCandidates[j] = $root.google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.toObject(message.chosenCandidates[j], options);
+                            }
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                object.logProbabilitySum = options.json && !isFinite(message.logProbabilitySum) ? String(message.logProbabilitySum) : message.logProbabilitySum;
+                                if (options.oneofs)
+                                    object._logProbabilitySum = "logProbabilitySum";
                             }
                             return object;
                         };
@@ -81667,6 +87306,7 @@
                          * @property {Array.<google.ai.generativelanguage.v1beta.IGroundingSupport>|null} [groundingSupports] GroundingMetadata groundingSupports
                          * @property {google.ai.generativelanguage.v1beta.IRetrievalMetadata|null} [retrievalMetadata] GroundingMetadata retrievalMetadata
                          * @property {Array.<string>|null} [webSearchQueries] GroundingMetadata webSearchQueries
+                         * @property {string|null} [googleMapsWidgetContextToken] GroundingMetadata googleMapsWidgetContextToken
                          */
     
                         /**
@@ -81727,6 +87367,14 @@
                          */
                         GroundingMetadata.prototype.webSearchQueries = $util.emptyArray;
     
+                        /**
+                         * GroundingMetadata googleMapsWidgetContextToken.
+                         * @member {string|null|undefined} googleMapsWidgetContextToken
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingMetadata
+                         * @instance
+                         */
+                        GroundingMetadata.prototype.googleMapsWidgetContextToken = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -81739,6 +87387,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GroundingMetadata.prototype, "_retrievalMetadata", {
                             get: $util.oneOfGetter($oneOfFields = ["retrievalMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(GroundingMetadata.prototype, "_googleMapsWidgetContextToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleMapsWidgetContextToken"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -81779,6 +87433,8 @@
                             if (message.webSearchQueries != null && message.webSearchQueries.length)
                                 for (var i = 0; i < message.webSearchQueries.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.webSearchQueries[i]);
+                            if (message.googleMapsWidgetContextToken != null && Object.hasOwnProperty.call(message, "googleMapsWidgetContextToken"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.googleMapsWidgetContextToken);
                             return writer;
                         };
     
@@ -81839,6 +87495,10 @@
                                         if (!(message.webSearchQueries && message.webSearchQueries.length))
                                             message.webSearchQueries = [];
                                         message.webSearchQueries.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.googleMapsWidgetContextToken = reader.string();
                                         break;
                                     }
                                 default:
@@ -81918,6 +87578,11 @@
                                     if (!$util.isString(message.webSearchQueries[i]))
                                         return "webSearchQueries: string[] expected";
                             }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                properties._googleMapsWidgetContextToken = 1;
+                                if (!$util.isString(message.googleMapsWidgetContextToken))
+                                    return "googleMapsWidgetContextToken: string expected";
+                            }
                             return null;
                         };
     
@@ -81970,6 +87635,8 @@
                                 for (var i = 0; i < object.webSearchQueries.length; ++i)
                                     message.webSearchQueries[i] = String(object.webSearchQueries[i]);
                             }
+                            if (object.googleMapsWidgetContextToken != null)
+                                message.googleMapsWidgetContextToken = String(object.googleMapsWidgetContextToken);
                             return message;
                         };
     
@@ -82015,6 +87682,11 @@
                                 object.webSearchQueries = [];
                                 for (var j = 0; j < message.webSearchQueries.length; ++j)
                                     object.webSearchQueries[j] = message.webSearchQueries[j];
+                            }
+                            if (message.googleMapsWidgetContextToken != null && message.hasOwnProperty("googleMapsWidgetContextToken")) {
+                                object.googleMapsWidgetContextToken = message.googleMapsWidgetContextToken;
+                                if (options.oneofs)
+                                    object._googleMapsWidgetContextToken = "googleMapsWidgetContextToken";
                             }
                             return object;
                         };
@@ -82293,6 +87965,8 @@
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IGroundingChunk
                          * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null} [web] GroundingChunk web
+                         * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null} [retrievedContext] GroundingChunk retrievedContext
+                         * @property {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null} [maps] GroundingChunk maps
                          */
     
                         /**
@@ -82318,17 +87992,33 @@
                          */
                         GroundingChunk.prototype.web = null;
     
+                        /**
+                         * GroundingChunk retrievedContext.
+                         * @member {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext|null|undefined} retrievedContext
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                         * @instance
+                         */
+                        GroundingChunk.prototype.retrievedContext = null;
+    
+                        /**
+                         * GroundingChunk maps.
+                         * @member {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps|null|undefined} maps
+                         * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                         * @instance
+                         */
+                        GroundingChunk.prototype.maps = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * GroundingChunk chunkType.
-                         * @member {"web"|undefined} chunkType
+                         * @member {"web"|"retrievedContext"|"maps"|undefined} chunkType
                          * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
                          * @instance
                          */
                         Object.defineProperty(GroundingChunk.prototype, "chunkType", {
-                            get: $util.oneOfGetter($oneOfFields = ["web"]),
+                            get: $util.oneOfGetter($oneOfFields = ["web", "retrievedContext", "maps"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -82358,6 +88048,10 @@
                                 writer = $Writer.create();
                             if (message.web != null && Object.hasOwnProperty.call(message, "web"))
                                 $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.encode(message.web, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.retrievedContext != null && Object.hasOwnProperty.call(message, "retrievedContext"))
+                                $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.encode(message.retrievedContext, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maps != null && Object.hasOwnProperty.call(message, "maps"))
+                                $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.encode(message.maps, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -82396,6 +88090,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -82442,6 +88144,26 @@
                                         return "web." + error;
                                 }
                             }
+                            if (message.retrievedContext != null && message.hasOwnProperty("retrievedContext")) {
+                                if (properties.chunkType === 1)
+                                    return "chunkType: multiple values";
+                                properties.chunkType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify(message.retrievedContext);
+                                    if (error)
+                                        return "retrievedContext." + error;
+                                }
+                            }
+                            if (message.maps != null && message.hasOwnProperty("maps")) {
+                                if (properties.chunkType === 1)
+                                    return "chunkType: multiple values";
+                                properties.chunkType = 1;
+                                {
+                                    var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify(message.maps);
+                                    if (error)
+                                        return "maps." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -82461,6 +88183,16 @@
                                 if (typeof object.web !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.web: object expected");
                                 message.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.fromObject(object.web);
+                            }
+                            if (object.retrievedContext != null) {
+                                if (typeof object.retrievedContext !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.retrievedContext: object expected");
+                                message.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.fromObject(object.retrievedContext);
+                            }
+                            if (object.maps != null) {
+                                if (typeof object.maps !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.maps: object expected");
+                                message.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.fromObject(object.maps);
                             }
                             return message;
                         };
@@ -82482,6 +88214,16 @@
                                 object.web = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Web.toObject(message.web, options);
                                 if (options.oneofs)
                                     object.chunkType = "web";
+                            }
+                            if (message.retrievedContext != null && message.hasOwnProperty("retrievedContext")) {
+                                object.retrievedContext = $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.toObject(message.retrievedContext, options);
+                                if (options.oneofs)
+                                    object.chunkType = "retrievedContext";
+                            }
+                            if (message.maps != null && message.hasOwnProperty("maps")) {
+                                object.maps = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.toObject(message.maps, options);
+                                if (options.oneofs)
+                                    object.chunkType = "maps";
                             }
                             return object;
                         };
@@ -82761,6 +88503,1156 @@
                             };
     
                             return Web;
+                        })();
+    
+                        GroundingChunk.RetrievedContext = (function() {
+    
+                            /**
+                             * Properties of a RetrievedContext.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @interface IRetrievedContext
+                             * @property {string|null} [uri] RetrievedContext uri
+                             * @property {string|null} [title] RetrievedContext title
+                             * @property {string|null} [text] RetrievedContext text
+                             */
+    
+                            /**
+                             * Constructs a new RetrievedContext.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @classdesc Represents a RetrievedContext.
+                             * @implements IRetrievedContext
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext=} [properties] Properties to set
+                             */
+                            function RetrievedContext(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetrievedContext uri.
+                             * @member {string|null|undefined} uri
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.uri = null;
+    
+                            /**
+                             * RetrievedContext title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.title = null;
+    
+                            /**
+                             * RetrievedContext text.
+                             * @member {string|null|undefined} text
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             */
+                            RetrievedContext.prototype.text = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_uri", {
+                                get: $util.oneOfGetter($oneOfFields = ["uri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RetrievedContext.prototype, "_text", {
+                                get: $util.oneOfGetter($oneOfFields = ["text"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RetrievedContext instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext instance
+                             */
+                            RetrievedContext.create = function create(properties) {
+                                return new RetrievedContext(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievedContext message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext} message RetrievedContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievedContext.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetrievedContext message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IRetrievedContext} message RetrievedContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetrievedContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetrievedContext message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievedContext.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetrievedContext message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetrievedContext.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetrievedContext message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetrievedContext.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    properties._uri = 1;
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    properties._text = 1;
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetrievedContext message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} RetrievedContext
+                             */
+                            RetrievedContext.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetrievedContext message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext} message RetrievedContext
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetrievedContext.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    object.uri = message.uri;
+                                    if (options.oneofs)
+                                        object._uri = "uri";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    object.text = message.text;
+                                    if (options.oneofs)
+                                        object._text = "text";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetrievedContext to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetrievedContext.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetrievedContext
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetrievedContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.RetrievedContext";
+                            };
+    
+                            return RetrievedContext;
+                        })();
+    
+                        GroundingChunk.Maps = (function() {
+    
+                            /**
+                             * Properties of a Maps.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @interface IMaps
+                             * @property {string|null} [uri] Maps uri
+                             * @property {string|null} [title] Maps title
+                             * @property {string|null} [text] Maps text
+                             * @property {string|null} [placeId] Maps placeId
+                             * @property {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null} [placeAnswerSources] Maps placeAnswerSources
+                             */
+    
+                            /**
+                             * Constructs a new Maps.
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk
+                             * @classdesc Represents a Maps.
+                             * @implements IMaps
+                             * @constructor
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps=} [properties] Properties to set
+                             */
+                            function Maps(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Maps uri.
+                             * @member {string|null|undefined} uri
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.uri = null;
+    
+                            /**
+                             * Maps title.
+                             * @member {string|null|undefined} title
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.title = null;
+    
+                            /**
+                             * Maps text.
+                             * @member {string|null|undefined} text
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.text = null;
+    
+                            /**
+                             * Maps placeId.
+                             * @member {string|null|undefined} placeId
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.placeId = null;
+    
+                            /**
+                             * Maps placeAnswerSources.
+                             * @member {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources|null|undefined} placeAnswerSources
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             */
+                            Maps.prototype.placeAnswerSources = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_uri", {
+                                get: $util.oneOfGetter($oneOfFields = ["uri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_title", {
+                                get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_text", {
+                                get: $util.oneOfGetter($oneOfFields = ["text"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_placeId", {
+                                get: $util.oneOfGetter($oneOfFields = ["placeId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Maps.prototype, "_placeAnswerSources", {
+                                get: $util.oneOfGetter($oneOfFields = ["placeAnswerSources"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Maps instance using the specified properties.
+                             * @function create
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps=} [properties] Properties to set
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps instance
+                             */
+                            Maps.create = function create(properties) {
+                                return new Maps(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Maps message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps} message Maps message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Maps.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.text);
+                                if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.placeId);
+                                if (message.placeAnswerSources != null && Object.hasOwnProperty.call(message, "placeAnswerSources"))
+                                    $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.encode(message.placeAnswerSources, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Maps message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.IMaps} message Maps message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Maps.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Maps message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Maps.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uri = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.title = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.placeId = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Maps message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Maps.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Maps message.
+                             * @function verify
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Maps.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    properties._uri = 1;
+                                    if (!$util.isString(message.uri))
+                                        return "uri: string expected";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    properties._title = 1;
+                                    if (!$util.isString(message.title))
+                                        return "title: string expected";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    properties._text = 1;
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    properties._placeId = 1;
+                                    if (!$util.isString(message.placeId))
+                                        return "placeId: string expected";
+                                }
+                                if (message.placeAnswerSources != null && message.hasOwnProperty("placeAnswerSources")) {
+                                    properties._placeAnswerSources = 1;
+                                    {
+                                        var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify(message.placeAnswerSources);
+                                        if (error)
+                                            return "placeAnswerSources." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Maps message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} Maps
+                             */
+                            Maps.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps)
+                                    return object;
+                                var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps();
+                                if (object.uri != null)
+                                    message.uri = String(object.uri);
+                                if (object.title != null)
+                                    message.title = String(object.title);
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                if (object.placeId != null)
+                                    message.placeId = String(object.placeId);
+                                if (object.placeAnswerSources != null) {
+                                    if (typeof object.placeAnswerSources !== "object")
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.placeAnswerSources: object expected");
+                                    message.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.fromObject(object.placeAnswerSources);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Maps message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps} message Maps
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Maps.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.uri != null && message.hasOwnProperty("uri")) {
+                                    object.uri = message.uri;
+                                    if (options.oneofs)
+                                        object._uri = "uri";
+                                }
+                                if (message.title != null && message.hasOwnProperty("title")) {
+                                    object.title = message.title;
+                                    if (options.oneofs)
+                                        object._title = "title";
+                                }
+                                if (message.text != null && message.hasOwnProperty("text")) {
+                                    object.text = message.text;
+                                    if (options.oneofs)
+                                        object._text = "text";
+                                }
+                                if (message.placeId != null && message.hasOwnProperty("placeId")) {
+                                    object.placeId = message.placeId;
+                                    if (options.oneofs)
+                                        object._placeId = "placeId";
+                                }
+                                if (message.placeAnswerSources != null && message.hasOwnProperty("placeAnswerSources")) {
+                                    object.placeAnswerSources = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.toObject(message.placeAnswerSources, options);
+                                    if (options.oneofs)
+                                        object._placeAnswerSources = "placeAnswerSources";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Maps to JSON.
+                             * @function toJSON
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Maps.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Maps
+                             * @function getTypeUrl
+                             * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Maps.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps";
+                            };
+    
+                            Maps.PlaceAnswerSources = (function() {
+    
+                                /**
+                                 * Properties of a PlaceAnswerSources.
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                                 * @interface IPlaceAnswerSources
+                                 * @property {Array.<google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet>|null} [reviewSnippets] PlaceAnswerSources reviewSnippets
+                                 */
+    
+                                /**
+                                 * Constructs a new PlaceAnswerSources.
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps
+                                 * @classdesc Represents a PlaceAnswerSources.
+                                 * @implements IPlaceAnswerSources
+                                 * @constructor
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources=} [properties] Properties to set
+                                 */
+                                function PlaceAnswerSources(properties) {
+                                    this.reviewSnippets = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PlaceAnswerSources reviewSnippets.
+                                 * @member {Array.<google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet>} reviewSnippets
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @instance
+                                 */
+                                PlaceAnswerSources.prototype.reviewSnippets = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new PlaceAnswerSources instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources=} [properties] Properties to set
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources instance
+                                 */
+                                PlaceAnswerSources.create = function create(properties) {
+                                    return new PlaceAnswerSources(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PlaceAnswerSources message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources} message PlaceAnswerSources message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlaceAnswerSources.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.reviewSnippets != null && message.reviewSnippets.length)
+                                        for (var i = 0; i < message.reviewSnippets.length; ++i)
+                                            $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.encode(message.reviewSnippets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PlaceAnswerSources message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.IPlaceAnswerSources} message PlaceAnswerSources message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlaceAnswerSources.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PlaceAnswerSources message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlaceAnswerSources.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.reviewSnippets && message.reviewSnippets.length))
+                                                    message.reviewSnippets = [];
+                                                message.reviewSnippets.push($root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PlaceAnswerSources message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlaceAnswerSources.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PlaceAnswerSources message.
+                                 * @function verify
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PlaceAnswerSources.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.reviewSnippets != null && message.hasOwnProperty("reviewSnippets")) {
+                                        if (!Array.isArray(message.reviewSnippets))
+                                            return "reviewSnippets: array expected";
+                                        for (var i = 0; i < message.reviewSnippets.length; ++i) {
+                                            var error = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify(message.reviewSnippets[i]);
+                                            if (error)
+                                                return "reviewSnippets." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PlaceAnswerSources message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} PlaceAnswerSources
+                                 */
+                                PlaceAnswerSources.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources)
+                                        return object;
+                                    var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources();
+                                    if (object.reviewSnippets) {
+                                        if (!Array.isArray(object.reviewSnippets))
+                                            throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.reviewSnippets: array expected");
+                                        message.reviewSnippets = [];
+                                        for (var i = 0; i < object.reviewSnippets.length; ++i) {
+                                            if (typeof object.reviewSnippets[i] !== "object")
+                                                throw TypeError(".google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.reviewSnippets: object expected");
+                                            message.reviewSnippets[i] = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.fromObject(object.reviewSnippets[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PlaceAnswerSources message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources} message PlaceAnswerSources
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PlaceAnswerSources.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.reviewSnippets = [];
+                                    if (message.reviewSnippets && message.reviewSnippets.length) {
+                                        object.reviewSnippets = [];
+                                        for (var j = 0; j < message.reviewSnippets.length; ++j)
+                                            object.reviewSnippets[j] = $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.toObject(message.reviewSnippets[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PlaceAnswerSources to JSON.
+                                 * @function toJSON
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PlaceAnswerSources.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PlaceAnswerSources
+                                 * @function getTypeUrl
+                                 * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PlaceAnswerSources.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources";
+                                };
+    
+                                PlaceAnswerSources.ReviewSnippet = (function() {
+    
+                                    /**
+                                     * Properties of a ReviewSnippet.
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                     * @interface IReviewSnippet
+                                     * @property {string|null} [reviewId] ReviewSnippet reviewId
+                                     * @property {string|null} [googleMapsUri] ReviewSnippet googleMapsUri
+                                     * @property {string|null} [title] ReviewSnippet title
+                                     */
+    
+                                    /**
+                                     * Constructs a new ReviewSnippet.
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources
+                                     * @classdesc Represents a ReviewSnippet.
+                                     * @implements IReviewSnippet
+                                     * @constructor
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet=} [properties] Properties to set
+                                     */
+                                    function ReviewSnippet(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * ReviewSnippet reviewId.
+                                     * @member {string|null|undefined} reviewId
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.reviewId = null;
+    
+                                    /**
+                                     * ReviewSnippet googleMapsUri.
+                                     * @member {string|null|undefined} googleMapsUri
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.googleMapsUri = null;
+    
+                                    /**
+                                     * ReviewSnippet title.
+                                     * @member {string|null|undefined} title
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     */
+                                    ReviewSnippet.prototype.title = null;
+    
+                                    // OneOf field names bound to virtual getters and setters
+                                    var $oneOfFields;
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_reviewId", {
+                                        get: $util.oneOfGetter($oneOfFields = ["reviewId"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_googleMapsUri", {
+                                        get: $util.oneOfGetter($oneOfFields = ["googleMapsUri"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    // Virtual OneOf for proto3 optional field
+                                    Object.defineProperty(ReviewSnippet.prototype, "_title", {
+                                        get: $util.oneOfGetter($oneOfFields = ["title"]),
+                                        set: $util.oneOfSetter($oneOfFields)
+                                    });
+    
+                                    /**
+                                     * Creates a new ReviewSnippet instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet=} [properties] Properties to set
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet instance
+                                     */
+                                    ReviewSnippet.create = function create(properties) {
+                                        return new ReviewSnippet(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ReviewSnippet message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet} message ReviewSnippet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ReviewSnippet.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.reviewId != null && Object.hasOwnProperty.call(message, "reviewId"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.reviewId);
+                                        if (message.googleMapsUri != null && Object.hasOwnProperty.call(message, "googleMapsUri"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.googleMapsUri);
+                                        if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified ReviewSnippet message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.IReviewSnippet} message ReviewSnippet message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    ReviewSnippet.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a ReviewSnippet message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ReviewSnippet.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.reviewId = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.googleMapsUri = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.title = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a ReviewSnippet message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    ReviewSnippet.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a ReviewSnippet message.
+                                     * @function verify
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    ReviewSnippet.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        var properties = {};
+                                        if (message.reviewId != null && message.hasOwnProperty("reviewId")) {
+                                            properties._reviewId = 1;
+                                            if (!$util.isString(message.reviewId))
+                                                return "reviewId: string expected";
+                                        }
+                                        if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri")) {
+                                            properties._googleMapsUri = 1;
+                                            if (!$util.isString(message.googleMapsUri))
+                                                return "googleMapsUri: string expected";
+                                        }
+                                        if (message.title != null && message.hasOwnProperty("title")) {
+                                            properties._title = 1;
+                                            if (!$util.isString(message.title))
+                                                return "title: string expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a ReviewSnippet message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} ReviewSnippet
+                                     */
+                                    ReviewSnippet.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet)
+                                            return object;
+                                        var message = new $root.google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet();
+                                        if (object.reviewId != null)
+                                            message.reviewId = String(object.reviewId);
+                                        if (object.googleMapsUri != null)
+                                            message.googleMapsUri = String(object.googleMapsUri);
+                                        if (object.title != null)
+                                            message.title = String(object.title);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a ReviewSnippet message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet} message ReviewSnippet
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    ReviewSnippet.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (message.reviewId != null && message.hasOwnProperty("reviewId")) {
+                                            object.reviewId = message.reviewId;
+                                            if (options.oneofs)
+                                                object._reviewId = "reviewId";
+                                        }
+                                        if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri")) {
+                                            object.googleMapsUri = message.googleMapsUri;
+                                            if (options.oneofs)
+                                                object._googleMapsUri = "googleMapsUri";
+                                        }
+                                        if (message.title != null && message.hasOwnProperty("title")) {
+                                            object.title = message.title;
+                                            if (options.oneofs)
+                                                object._title = "title";
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this ReviewSnippet to JSON.
+                                     * @function toJSON
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    ReviewSnippet.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for ReviewSnippet
+                                     * @function getTypeUrl
+                                     * @memberof google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    ReviewSnippet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet";
+                                    };
+    
+                                    return ReviewSnippet;
+                                })();
+    
+                                return PlaceAnswerSources;
+                            })();
+    
+                            return Maps;
                         })();
     
                         return GroundingChunk;
@@ -88034,6 +94926,7 @@
                          * @property {google.ai.generativelanguage.v1beta.IRealtimeInputConfig|null} [realtimeInputConfig] BidiGenerateContentSetup realtimeInputConfig
                          * @property {google.ai.generativelanguage.v1beta.ISessionResumptionConfig|null} [sessionResumption] BidiGenerateContentSetup sessionResumption
                          * @property {google.ai.generativelanguage.v1beta.IContextWindowCompressionConfig|null} [contextWindowCompression] BidiGenerateContentSetup contextWindowCompression
+                         * @property {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null} [inputAudioTranscription] BidiGenerateContentSetup inputAudioTranscription
                          * @property {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null} [outputAudioTranscription] BidiGenerateContentSetup outputAudioTranscription
                          */
     
@@ -88110,6 +95003,14 @@
                         BidiGenerateContentSetup.prototype.contextWindowCompression = null;
     
                         /**
+                         * BidiGenerateContentSetup inputAudioTranscription.
+                         * @member {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null|undefined} inputAudioTranscription
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
+                         * @instance
+                         */
+                        BidiGenerateContentSetup.prototype.inputAudioTranscription = null;
+    
+                        /**
                          * BidiGenerateContentSetup outputAudioTranscription.
                          * @member {google.ai.generativelanguage.v1beta.IAudioTranscriptionConfig|null|undefined} outputAudioTranscription
                          * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentSetup
@@ -88156,6 +95057,8 @@
                                 $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.encode(message.sessionResumption, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.contextWindowCompression != null && Object.hasOwnProperty.call(message, "contextWindowCompression"))
                                 $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.encode(message.contextWindowCompression, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.inputAudioTranscription != null && Object.hasOwnProperty.call(message, "inputAudioTranscription"))
+                                $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.encode(message.inputAudioTranscription, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.outputAudioTranscription != null && Object.hasOwnProperty.call(message, "outputAudioTranscription"))
                                 $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.encode(message.outputAudioTranscription, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
@@ -88222,6 +95125,10 @@
                                     }
                                 case 8: {
                                         message.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.inputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 11: {
@@ -88300,6 +95207,11 @@
                                 if (error)
                                     return "contextWindowCompression." + error;
                             }
+                            if (message.inputAudioTranscription != null && message.hasOwnProperty("inputAudioTranscription")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.verify(message.inputAudioTranscription);
+                                if (error)
+                                    return "inputAudioTranscription." + error;
+                            }
                             if (message.outputAudioTranscription != null && message.hasOwnProperty("outputAudioTranscription")) {
                                 var error = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.verify(message.outputAudioTranscription);
                                 if (error)
@@ -88357,6 +95269,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.contextWindowCompression: object expected");
                                 message.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.fromObject(object.contextWindowCompression);
                             }
+                            if (object.inputAudioTranscription != null) {
+                                if (typeof object.inputAudioTranscription !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.inputAudioTranscription: object expected");
+                                message.inputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.fromObject(object.inputAudioTranscription);
+                            }
                             if (object.outputAudioTranscription != null) {
                                 if (typeof object.outputAudioTranscription !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentSetup.outputAudioTranscription: object expected");
@@ -88387,6 +95304,7 @@
                                 object.realtimeInputConfig = null;
                                 object.sessionResumption = null;
                                 object.contextWindowCompression = null;
+                                object.inputAudioTranscription = null;
                                 object.outputAudioTranscription = null;
                             }
                             if (message.model != null && message.hasOwnProperty("model"))
@@ -88406,6 +95324,8 @@
                                 object.sessionResumption = $root.google.ai.generativelanguage.v1beta.SessionResumptionConfig.toObject(message.sessionResumption, options);
                             if (message.contextWindowCompression != null && message.hasOwnProperty("contextWindowCompression"))
                                 object.contextWindowCompression = $root.google.ai.generativelanguage.v1beta.ContextWindowCompressionConfig.toObject(message.contextWindowCompression, options);
+                            if (message.inputAudioTranscription != null && message.hasOwnProperty("inputAudioTranscription"))
+                                object.inputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.toObject(message.inputAudioTranscription, options);
                             if (message.outputAudioTranscription != null && message.hasOwnProperty("outputAudioTranscription"))
                                 object.outputAudioTranscription = $root.google.ai.generativelanguage.v1beta.AudioTranscriptionConfig.toObject(message.outputAudioTranscription, options);
                             return object;
@@ -90202,7 +97122,10 @@
                          * @property {boolean|null} [turnComplete] BidiGenerateContentServerContent turnComplete
                          * @property {boolean|null} [interrupted] BidiGenerateContentServerContent interrupted
                          * @property {google.ai.generativelanguage.v1beta.IGroundingMetadata|null} [groundingMetadata] BidiGenerateContentServerContent groundingMetadata
+                         * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null} [inputTranscription] BidiGenerateContentServerContent inputTranscription
                          * @property {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null} [outputTranscription] BidiGenerateContentServerContent outputTranscription
+                         * @property {google.ai.generativelanguage.v1beta.IUrlContextMetadata|null} [urlContextMetadata] BidiGenerateContentServerContent urlContextMetadata
+                         * @property {boolean|null} [waitingForInput] BidiGenerateContentServerContent waitingForInput
                          */
     
                         /**
@@ -90261,12 +97184,36 @@
                         BidiGenerateContentServerContent.prototype.groundingMetadata = null;
     
                         /**
+                         * BidiGenerateContentServerContent inputTranscription.
+                         * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null|undefined} inputTranscription
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.inputTranscription = null;
+    
+                        /**
                          * BidiGenerateContentServerContent outputTranscription.
                          * @member {google.ai.generativelanguage.v1beta.IBidiGenerateContentTranscription|null|undefined} outputTranscription
                          * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
                          * @instance
                          */
                         BidiGenerateContentServerContent.prototype.outputTranscription = null;
+    
+                        /**
+                         * BidiGenerateContentServerContent urlContextMetadata.
+                         * @member {google.ai.generativelanguage.v1beta.IUrlContextMetadata|null|undefined} urlContextMetadata
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.urlContextMetadata = null;
+    
+                        /**
+                         * BidiGenerateContentServerContent waitingForInput.
+                         * @member {boolean} waitingForInput
+                         * @memberof google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent
+                         * @instance
+                         */
+                        BidiGenerateContentServerContent.prototype.waitingForInput = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -90311,8 +97258,14 @@
                                 $root.google.ai.generativelanguage.v1beta.GroundingMetadata.encode(message.groundingMetadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.generationComplete != null && Object.hasOwnProperty.call(message, "generationComplete"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.generationComplete);
+                            if (message.inputTranscription != null && Object.hasOwnProperty.call(message, "inputTranscription"))
+                                $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.encode(message.inputTranscription, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.outputTranscription != null && Object.hasOwnProperty.call(message, "outputTranscription"))
                                 $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.encode(message.outputTranscription, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.urlContextMetadata != null && Object.hasOwnProperty.call(message, "urlContextMetadata"))
+                                $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.encode(message.urlContextMetadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.waitingForInput != null && Object.hasOwnProperty.call(message, "waitingForInput"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.waitingForInput);
                             return writer;
                         };
     
@@ -90369,8 +97322,20 @@
                                         message.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.inputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 7: {
                                         message.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.waitingForInput = reader.bool();
                                         break;
                                     }
                                 default:
@@ -90431,11 +97396,24 @@
                                 if (error)
                                     return "groundingMetadata." + error;
                             }
+                            if (message.inputTranscription != null && message.hasOwnProperty("inputTranscription")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.verify(message.inputTranscription);
+                                if (error)
+                                    return "inputTranscription." + error;
+                            }
                             if (message.outputTranscription != null && message.hasOwnProperty("outputTranscription")) {
                                 var error = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.verify(message.outputTranscription);
                                 if (error)
                                     return "outputTranscription." + error;
                             }
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.verify(message.urlContextMetadata);
+                                if (error)
+                                    return "urlContextMetadata." + error;
+                            }
+                            if (message.waitingForInput != null && message.hasOwnProperty("waitingForInput"))
+                                if (typeof message.waitingForInput !== "boolean")
+                                    return "waitingForInput: boolean expected";
                             return null;
                         };
     
@@ -90467,11 +97445,23 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.groundingMetadata: object expected");
                                 message.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.fromObject(object.groundingMetadata);
                             }
+                            if (object.inputTranscription != null) {
+                                if (typeof object.inputTranscription !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.inputTranscription: object expected");
+                                message.inputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.fromObject(object.inputTranscription);
+                            }
                             if (object.outputTranscription != null) {
                                 if (typeof object.outputTranscription !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.outputTranscription: object expected");
                                 message.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.fromObject(object.outputTranscription);
                             }
+                            if (object.urlContextMetadata != null) {
+                                if (typeof object.urlContextMetadata !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.BidiGenerateContentServerContent.urlContextMetadata: object expected");
+                                message.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.fromObject(object.urlContextMetadata);
+                            }
+                            if (object.waitingForInput != null)
+                                message.waitingForInput = Boolean(object.waitingForInput);
                             return message;
                         };
     
@@ -90493,7 +97483,10 @@
                                 object.interrupted = false;
                                 object.groundingMetadata = null;
                                 object.generationComplete = false;
+                                object.inputTranscription = null;
                                 object.outputTranscription = null;
+                                object.urlContextMetadata = null;
+                                object.waitingForInput = false;
                             }
                             if (message.modelTurn != null && message.hasOwnProperty("modelTurn")) {
                                 object.modelTurn = $root.google.ai.generativelanguage.v1beta.Content.toObject(message.modelTurn, options);
@@ -90508,8 +97501,14 @@
                                 object.groundingMetadata = $root.google.ai.generativelanguage.v1beta.GroundingMetadata.toObject(message.groundingMetadata, options);
                             if (message.generationComplete != null && message.hasOwnProperty("generationComplete"))
                                 object.generationComplete = message.generationComplete;
+                            if (message.inputTranscription != null && message.hasOwnProperty("inputTranscription"))
+                                object.inputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.toObject(message.inputTranscription, options);
                             if (message.outputTranscription != null && message.hasOwnProperty("outputTranscription"))
                                 object.outputTranscription = $root.google.ai.generativelanguage.v1beta.BidiGenerateContentTranscription.toObject(message.outputTranscription, options);
+                            if (message.urlContextMetadata != null && message.hasOwnProperty("urlContextMetadata"))
+                                object.urlContextMetadata = $root.google.ai.generativelanguage.v1beta.UrlContextMetadata.toObject(message.urlContextMetadata, options);
+                            if (message.waitingForInput != null && message.hasOwnProperty("waitingForInput"))
+                                object.waitingForInput = message.waitingForInput;
                             return object;
                         };
     
@@ -94966,6 +101965,7 @@
                          * @property {number|null} [maxTemperature] Model maxTemperature
                          * @property {number|null} [topP] Model topP
                          * @property {number|null} [topK] Model topK
+                         * @property {boolean|null} [thinking] Model thinking
                          */
     
                         /**
@@ -95080,6 +102080,14 @@
                          */
                         Model.prototype.topK = null;
     
+                        /**
+                         * Model thinking.
+                         * @member {boolean} thinking
+                         * @memberof google.ai.generativelanguage.v1beta.Model
+                         * @instance
+                         */
+                        Model.prototype.thinking = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -95156,6 +102164,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.topK);
                             if (message.maxTemperature != null && Object.hasOwnProperty.call(message, "maxTemperature"))
                                 writer.uint32(/* id 13, wireType 5 =*/109).float(message.maxTemperature);
+                            if (message.thinking != null && Object.hasOwnProperty.call(message, "thinking"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).bool(message.thinking);
                             return writer;
                         };
     
@@ -95242,6 +102252,10 @@
                                         message.topK = reader.int32();
                                         break;
                                     }
+                                case 15: {
+                                        message.thinking = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -95326,6 +102340,9 @@
                                 if (!$util.isInteger(message.topK))
                                     return "topK: integer expected";
                             }
+                            if (message.thinking != null && message.hasOwnProperty("thinking"))
+                                if (typeof message.thinking !== "boolean")
+                                    return "thinking: boolean expected";
                             return null;
                         };
     
@@ -95370,6 +102387,8 @@
                                 message.topP = Number(object.topP);
                             if (object.topK != null)
                                 message.topK = object.topK | 0;
+                            if (object.thinking != null)
+                                message.thinking = Boolean(object.thinking);
                             return message;
                         };
     
@@ -95396,6 +102415,7 @@
                                 object.description = "";
                                 object.inputTokenLimit = 0;
                                 object.outputTokenLimit = 0;
+                                object.thinking = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -95436,6 +102456,8 @@
                                 if (options.oneofs)
                                     object._maxTemperature = "maxTemperature";
                             }
+                            if (message.thinking != null && message.hasOwnProperty("thinking"))
+                                object.thinking = message.thinking;
                             return object;
                         };
     
@@ -103962,7 +110984,7 @@
                          * Properties of a PredictLongRunningResponse.
                          * @memberof google.ai.generativelanguage.v1beta
                          * @interface IPredictLongRunningResponse
-                         * @property {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null} [generateVideoResponse] PredictLongRunningResponse generateVideoResponse
+                         * @property {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null} [generateVideoResponse] PredictLongRunningResponse generateVideoResponse
                          */
     
                         /**
@@ -103982,7 +111004,7 @@
     
                         /**
                          * PredictLongRunningResponse generateVideoResponse.
-                         * @member {google.ai.generativelanguage.v1beta.IGenerateVideoResponse|null|undefined} generateVideoResponse
+                         * @member {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse|null|undefined} generateVideoResponse
                          * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningResponse
                          * @instance
                          */
@@ -104027,7 +111049,7 @@
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.generateVideoResponse != null && Object.hasOwnProperty.call(message, "generateVideoResponse"))
-                                $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.encode(message.generateVideoResponse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.encode(message.generateVideoResponse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             return writer;
                         };
     
@@ -104065,7 +111087,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.decode(reader, reader.uint32());
+                                        message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -104107,7 +111129,7 @@
                             if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
                                 properties.response = 1;
                                 {
-                                    var error = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify(message.generateVideoResponse);
+                                    var error = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify(message.generateVideoResponse);
                                     if (error)
                                         return "generateVideoResponse." + error;
                                 }
@@ -104130,7 +111152,7 @@
                             if (object.generateVideoResponse != null) {
                                 if (typeof object.generateVideoResponse !== "object")
                                     throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningResponse.generateVideoResponse: object expected");
-                                message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.fromObject(object.generateVideoResponse);
+                                message.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.fromObject(object.generateVideoResponse);
                             }
                             return message;
                         };
@@ -104149,7 +111171,7 @@
                                 options = {};
                             var object = {};
                             if (message.generateVideoResponse != null && message.hasOwnProperty("generateVideoResponse")) {
-                                object.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse.toObject(message.generateVideoResponse, options);
+                                object.generateVideoResponse = $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.toObject(message.generateVideoResponse, options);
                                 if (options.oneofs)
                                     object.response = "generateVideoResponse";
                             }
@@ -104846,26 +111868,26 @@
                         return Video;
                     })();
     
-                    v1beta.GenerateVideoResponse = (function() {
+                    v1beta.PredictLongRunningGeneratedVideoResponse = (function() {
     
                         /**
-                         * Properties of a GenerateVideoResponse.
+                         * Properties of a PredictLongRunningGeneratedVideoResponse.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @interface IGenerateVideoResponse
-                         * @property {Array.<google.ai.generativelanguage.v1beta.IMedia>|null} [generatedSamples] GenerateVideoResponse generatedSamples
-                         * @property {number|null} [raiMediaFilteredCount] GenerateVideoResponse raiMediaFilteredCount
-                         * @property {Array.<string>|null} [raiMediaFilteredReasons] GenerateVideoResponse raiMediaFilteredReasons
+                         * @interface IPredictLongRunningGeneratedVideoResponse
+                         * @property {Array.<google.ai.generativelanguage.v1beta.IMedia>|null} [generatedSamples] PredictLongRunningGeneratedVideoResponse generatedSamples
+                         * @property {number|null} [raiMediaFilteredCount] PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount
+                         * @property {Array.<string>|null} [raiMediaFilteredReasons] PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons
                          */
     
                         /**
-                         * Constructs a new GenerateVideoResponse.
+                         * Constructs a new PredictLongRunningGeneratedVideoResponse.
                          * @memberof google.ai.generativelanguage.v1beta
-                         * @classdesc Represents a GenerateVideoResponse.
-                         * @implements IGenerateVideoResponse
+                         * @classdesc Represents a PredictLongRunningGeneratedVideoResponse.
+                         * @implements IPredictLongRunningGeneratedVideoResponse
                          * @constructor
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse=} [properties] Properties to set
                          */
-                        function GenerateVideoResponse(properties) {
+                        function PredictLongRunningGeneratedVideoResponse(properties) {
                             this.generatedSamples = [];
                             this.raiMediaFilteredReasons = [];
                             if (properties)
@@ -104875,51 +111897,51 @@
                         }
     
                         /**
-                         * GenerateVideoResponse generatedSamples.
+                         * PredictLongRunningGeneratedVideoResponse generatedSamples.
                          * @member {Array.<google.ai.generativelanguage.v1beta.IMedia>} generatedSamples
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.generatedSamples = $util.emptyArray;
+                        PredictLongRunningGeneratedVideoResponse.prototype.generatedSamples = $util.emptyArray;
     
                         /**
-                         * GenerateVideoResponse raiMediaFilteredCount.
+                         * PredictLongRunningGeneratedVideoResponse raiMediaFilteredCount.
                          * @member {number} raiMediaFilteredCount
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.raiMediaFilteredCount = 0;
+                        PredictLongRunningGeneratedVideoResponse.prototype.raiMediaFilteredCount = 0;
     
                         /**
-                         * GenerateVideoResponse raiMediaFilteredReasons.
+                         * PredictLongRunningGeneratedVideoResponse raiMediaFilteredReasons.
                          * @member {Array.<string>} raiMediaFilteredReasons
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          */
-                        GenerateVideoResponse.prototype.raiMediaFilteredReasons = $util.emptyArray;
+                        PredictLongRunningGeneratedVideoResponse.prototype.raiMediaFilteredReasons = $util.emptyArray;
     
                         /**
-                         * Creates a new GenerateVideoResponse instance using the specified properties.
+                         * Creates a new PredictLongRunningGeneratedVideoResponse instance using the specified properties.
                          * @function create
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse=} [properties] Properties to set
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse instance
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse=} [properties] Properties to set
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse instance
                          */
-                        GenerateVideoResponse.create = function create(properties) {
-                            return new GenerateVideoResponse(properties);
+                        PredictLongRunningGeneratedVideoResponse.create = function create(properties) {
+                            return new PredictLongRunningGeneratedVideoResponse(properties);
                         };
     
                         /**
-                         * Encodes the specified GenerateVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * Encodes the specified PredictLongRunningGeneratedVideoResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
                          * @function encode
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GenerateVideoResponse.encode = function encode(message, writer) {
+                        PredictLongRunningGeneratedVideoResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.generatedSamples != null && message.generatedSamples.length)
@@ -104934,33 +111956,33 @@
                         };
     
                         /**
-                         * Encodes the specified GenerateVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GenerateVideoResponse.verify|verify} messages.
+                         * Encodes the specified PredictLongRunningGeneratedVideoResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.IGenerateVideoResponse} message GenerateVideoResponse message or plain object to encode
+                         * @param {google.ai.generativelanguage.v1beta.IPredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        GenerateVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        PredictLongRunningGeneratedVideoResponse.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a GenerateVideoResponse message from the specified reader or buffer.
+                         * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateVideoResponse.decode = function decode(reader, length, error) {
+                        PredictLongRunningGeneratedVideoResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 if (tag === error)
@@ -104991,30 +112013,30 @@
                         };
     
                         /**
-                         * Decodes a GenerateVideoResponse message from the specified reader or buffer, length delimited.
+                         * Decodes a PredictLongRunningGeneratedVideoResponse message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateVideoResponse.decodeDelimited = function decodeDelimited(reader) {
+                        PredictLongRunningGeneratedVideoResponse.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a GenerateVideoResponse message.
+                         * Verifies a PredictLongRunningGeneratedVideoResponse message.
                          * @function verify
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GenerateVideoResponse.verify = function verify(message) {
+                        PredictLongRunningGeneratedVideoResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.generatedSamples != null && message.hasOwnProperty("generatedSamples")) {
@@ -105040,24 +112062,24 @@
                         };
     
                         /**
-                         * Creates a GenerateVideoResponse message from a plain object. Also converts values to their respective internal types.
+                         * Creates a PredictLongRunningGeneratedVideoResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.ai.generativelanguage.v1beta.GenerateVideoResponse} GenerateVideoResponse
+                         * @returns {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} PredictLongRunningGeneratedVideoResponse
                          */
-                        GenerateVideoResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse)
+                        PredictLongRunningGeneratedVideoResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse)
                                 return object;
-                            var message = new $root.google.ai.generativelanguage.v1beta.GenerateVideoResponse();
+                            var message = new $root.google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse();
                             if (object.generatedSamples) {
                                 if (!Array.isArray(object.generatedSamples))
-                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: array expected");
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.generatedSamples: array expected");
                                 message.generatedSamples = [];
                                 for (var i = 0; i < object.generatedSamples.length; ++i) {
                                     if (typeof object.generatedSamples[i] !== "object")
-                                        throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.generatedSamples: object expected");
+                                        throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.generatedSamples: object expected");
                                     message.generatedSamples[i] = $root.google.ai.generativelanguage.v1beta.Media.fromObject(object.generatedSamples[i]);
                                 }
                             }
@@ -105065,7 +112087,7 @@
                                 message.raiMediaFilteredCount = object.raiMediaFilteredCount | 0;
                             if (object.raiMediaFilteredReasons) {
                                 if (!Array.isArray(object.raiMediaFilteredReasons))
-                                    throw TypeError(".google.ai.generativelanguage.v1beta.GenerateVideoResponse.raiMediaFilteredReasons: array expected");
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse.raiMediaFilteredReasons: array expected");
                                 message.raiMediaFilteredReasons = [];
                                 for (var i = 0; i < object.raiMediaFilteredReasons.length; ++i)
                                     message.raiMediaFilteredReasons[i] = String(object.raiMediaFilteredReasons[i]);
@@ -105074,15 +112096,15 @@
                         };
     
                         /**
-                         * Creates a plain object from a GenerateVideoResponse message. Also converts values to other types if specified.
+                         * Creates a plain object from a PredictLongRunningGeneratedVideoResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
-                         * @param {google.ai.generativelanguage.v1beta.GenerateVideoResponse} message GenerateVideoResponse
+                         * @param {google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse} message PredictLongRunningGeneratedVideoResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        GenerateVideoResponse.toObject = function toObject(message, options) {
+                        PredictLongRunningGeneratedVideoResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
@@ -105108,32 +112130,32 @@
                         };
     
                         /**
-                         * Converts this GenerateVideoResponse to JSON.
+                         * Converts this PredictLongRunningGeneratedVideoResponse to JSON.
                          * @function toJSON
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        GenerateVideoResponse.prototype.toJSON = function toJSON() {
+                        PredictLongRunningGeneratedVideoResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
                         /**
-                         * Gets the default type url for GenerateVideoResponse
+                         * Gets the default type url for PredictLongRunningGeneratedVideoResponse
                          * @function getTypeUrl
-                         * @memberof google.ai.generativelanguage.v1beta.GenerateVideoResponse
+                         * @memberof google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse
                          * @static
                          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns {string} The default type url
                          */
-                        GenerateVideoResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        PredictLongRunningGeneratedVideoResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                             if (typeUrlPrefix === undefined) {
                                 typeUrlPrefix = "type.googleapis.com";
                             }
-                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.GenerateVideoResponse";
+                            return typeUrlPrefix + "/google.ai.generativelanguage.v1beta.PredictLongRunningGeneratedVideoResponse";
                         };
     
-                        return GenerateVideoResponse;
+                        return PredictLongRunningGeneratedVideoResponse;
                     })();
     
                     v1beta.RetrieverService = (function() {
@@ -107724,6 +114746,7 @@
                          * @interface IRelevantChunk
                          * @property {number|null} [chunkRelevanceScore] RelevantChunk chunkRelevanceScore
                          * @property {google.ai.generativelanguage.v1beta.IChunk|null} [chunk] RelevantChunk chunk
+                         * @property {google.ai.generativelanguage.v1beta.IDocument|null} [document] RelevantChunk document
                          */
     
                         /**
@@ -107758,6 +114781,14 @@
                         RelevantChunk.prototype.chunk = null;
     
                         /**
+                         * RelevantChunk document.
+                         * @member {google.ai.generativelanguage.v1beta.IDocument|null|undefined} document
+                         * @memberof google.ai.generativelanguage.v1beta.RelevantChunk
+                         * @instance
+                         */
+                        RelevantChunk.prototype.document = null;
+    
+                        /**
                          * Creates a new RelevantChunk instance using the specified properties.
                          * @function create
                          * @memberof google.ai.generativelanguage.v1beta.RelevantChunk
@@ -107785,6 +114816,8 @@
                                 writer.uint32(/* id 1, wireType 5 =*/13).float(message.chunkRelevanceScore);
                             if (message.chunk != null && Object.hasOwnProperty.call(message, "chunk"))
                                 $root.google.ai.generativelanguage.v1beta.Chunk.encode(message.chunk, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.document != null && Object.hasOwnProperty.call(message, "document"))
+                                $root.google.ai.generativelanguage.v1beta.Document.encode(message.document, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -107827,6 +114860,10 @@
                                     }
                                 case 2: {
                                         message.chunk = $root.google.ai.generativelanguage.v1beta.Chunk.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.document = $root.google.ai.generativelanguage.v1beta.Document.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -107872,6 +114909,11 @@
                                 if (error)
                                     return "chunk." + error;
                             }
+                            if (message.document != null && message.hasOwnProperty("document")) {
+                                var error = $root.google.ai.generativelanguage.v1beta.Document.verify(message.document);
+                                if (error)
+                                    return "document." + error;
+                            }
                             return null;
                         };
     
@@ -107894,6 +114936,11 @@
                                     throw TypeError(".google.ai.generativelanguage.v1beta.RelevantChunk.chunk: object expected");
                                 message.chunk = $root.google.ai.generativelanguage.v1beta.Chunk.fromObject(object.chunk);
                             }
+                            if (object.document != null) {
+                                if (typeof object.document !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1beta.RelevantChunk.document: object expected");
+                                message.document = $root.google.ai.generativelanguage.v1beta.Document.fromObject(object.document);
+                            }
                             return message;
                         };
     
@@ -107913,11 +114960,14 @@
                             if (options.defaults) {
                                 object.chunkRelevanceScore = 0;
                                 object.chunk = null;
+                                object.document = null;
                             }
                             if (message.chunkRelevanceScore != null && message.hasOwnProperty("chunkRelevanceScore"))
                                 object.chunkRelevanceScore = options.json && !isFinite(message.chunkRelevanceScore) ? String(message.chunkRelevanceScore) : message.chunkRelevanceScore;
                             if (message.chunk != null && message.hasOwnProperty("chunk"))
                                 object.chunk = $root.google.ai.generativelanguage.v1beta.Chunk.toObject(message.chunk, options);
+                            if (message.document != null && message.hasOwnProperty("document"))
+                                object.document = $root.google.ai.generativelanguage.v1beta.Document.toObject(message.document, options);
                             return object;
                         };
     
@@ -159764,6 +166814,486 @@
             })();
     
             return longrunning;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Interval = (function() {
+    
+                /**
+                 * Properties of an Interval.
+                 * @memberof google.type
+                 * @interface IInterval
+                 * @property {google.protobuf.ITimestamp|null} [startTime] Interval startTime
+                 * @property {google.protobuf.ITimestamp|null} [endTime] Interval endTime
+                 */
+    
+                /**
+                 * Constructs a new Interval.
+                 * @memberof google.type
+                 * @classdesc Represents an Interval.
+                 * @implements IInterval
+                 * @constructor
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 */
+                function Interval(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Interval startTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.startTime = null;
+    
+                /**
+                 * Interval endTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.endTime = null;
+    
+                /**
+                 * Creates a new Interval instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 * @returns {google.type.Interval} Interval instance
+                 */
+                Interval.create = function create(properties) {
+                    return new Interval(properties);
+                };
+    
+                /**
+                 * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Interval();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Interval message.
+                 * @function verify
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Interval.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                        if (error)
+                            return "startTime." + error;
+                    }
+                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                        if (error)
+                            return "endTime." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Interval} Interval
+                 */
+                Interval.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Interval)
+                        return object;
+                    var message = new $root.google.type.Interval();
+                    if (object.startTime != null) {
+                        if (typeof object.startTime !== "object")
+                            throw TypeError(".google.type.Interval.startTime: object expected");
+                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                    }
+                    if (object.endTime != null) {
+                        if (typeof object.endTime !== "object")
+                            throw TypeError(".google.type.Interval.endTime: object expected");
+                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.Interval} message Interval
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Interval.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.startTime = null;
+                        object.endTime = null;
+                    }
+                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this Interval to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Interval
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Interval.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Interval
+                 * @function getTypeUrl
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Interval.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Interval";
+                };
+    
+                return Interval;
+            })();
+    
+            type.LatLng = (function() {
+    
+                /**
+                 * Properties of a LatLng.
+                 * @memberof google.type
+                 * @interface ILatLng
+                 * @property {number|null} [latitude] LatLng latitude
+                 * @property {number|null} [longitude] LatLng longitude
+                 */
+    
+                /**
+                 * Constructs a new LatLng.
+                 * @memberof google.type
+                 * @classdesc Represents a LatLng.
+                 * @implements ILatLng
+                 * @constructor
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 */
+                function LatLng(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * LatLng latitude.
+                 * @member {number} latitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.latitude = 0;
+    
+                /**
+                 * LatLng longitude.
+                 * @member {number} longitude
+                 * @memberof google.type.LatLng
+                 * @instance
+                 */
+                LatLng.prototype.longitude = 0;
+    
+                /**
+                 * Creates a new LatLng instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng=} [properties] Properties to set
+                 * @returns {google.type.LatLng} LatLng instance
+                 */
+                LatLng.create = function create(properties) {
+                    return new LatLng(properties);
+                };
+    
+                /**
+                 * Encodes the specified LatLng message. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.latitude != null && Object.hasOwnProperty.call(message, "latitude"))
+                        writer.uint32(/* id 1, wireType 1 =*/9).double(message.latitude);
+                    if (message.longitude != null && Object.hasOwnProperty.call(message, "longitude"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.longitude);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified LatLng message, length delimited. Does not implicitly {@link google.type.LatLng.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.ILatLng} message LatLng message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                LatLng.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LatLng();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.latitude = reader.double();
+                                break;
+                            }
+                        case 2: {
+                                message.longitude = reader.double();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a LatLng message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.LatLng} LatLng
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                LatLng.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a LatLng message.
+                 * @function verify
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                LatLng.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        if (typeof message.latitude !== "number")
+                            return "latitude: number expected";
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        if (typeof message.longitude !== "number")
+                            return "longitude: number expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a LatLng message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.LatLng} LatLng
+                 */
+                LatLng.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.LatLng)
+                        return object;
+                    var message = new $root.google.type.LatLng();
+                    if (object.latitude != null)
+                        message.latitude = Number(object.latitude);
+                    if (object.longitude != null)
+                        message.longitude = Number(object.longitude);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a LatLng message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {google.type.LatLng} message LatLng
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                LatLng.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.latitude = 0;
+                        object.longitude = 0;
+                    }
+                    if (message.latitude != null && message.hasOwnProperty("latitude"))
+                        object.latitude = options.json && !isFinite(message.latitude) ? String(message.latitude) : message.latitude;
+                    if (message.longitude != null && message.hasOwnProperty("longitude"))
+                        object.longitude = options.json && !isFinite(message.longitude) ? String(message.longitude) : message.longitude;
+                    return object;
+                };
+    
+                /**
+                 * Converts this LatLng to JSON.
+                 * @function toJSON
+                 * @memberof google.type.LatLng
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                LatLng.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for LatLng
+                 * @function getTypeUrl
+                 * @memberof google.type.LatLng
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                LatLng.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.LatLng";
+                };
+    
+                return LatLng;
+            })();
+    
+            return type;
         })();
     
         return google;

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,10 +49,9 @@ function main(parent) {
    *  Optional. The name of the instance in which the repository is hosted,
    *  formatted as
    *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-   *  When listing repositories via
-   *  securesourcemanager.googleapis.com (Control Plane API), this field is
-   *  required. When listing repositories via *.sourcemanager.dev (Data Plane
-   *  API), this field is ignored.
+   *  When listing repositories via securesourcemanager.googleapis.com, this
+   *  field is required. When listing repositories via *.sourcemanager.dev, this
+   *  field is ignored.
    */
   // const instance = 'abc123'
 

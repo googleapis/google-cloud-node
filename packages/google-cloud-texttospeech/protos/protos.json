@@ -88,7 +88,8 @@
                         "OGG_OPUS": 3,
                         "MULAW": 5,
                         "ALAW": 6,
-                        "PCM": 7
+                        "PCM": 7,
+                        "M4A": 8
                       }
                     },
                     "ListVoicesRequest": {
@@ -146,6 +147,13 @@
                           "id": 1,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "relaxSafetyFilters": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -283,6 +291,36 @@
                         }
                       }
                     },
+                    "MultispeakerPrebuiltVoice": {
+                      "fields": {
+                        "speakerAlias": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "speakerId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "MultispeakerPrebuiltVoice",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SynthesisInput": {
                       "oneofs": {
                         "inputSource": {
@@ -291,6 +329,11 @@
                             "markup",
                             "ssml",
                             "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
                           ]
                         }
                       },
@@ -310,6 +353,13 @@
                         "multiSpeakerMarkup": {
                           "type": "MultiSpeakerMarkup",
                           "id": 4
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
@@ -344,6 +394,20 @@
                         "voiceClone": {
                           "type": "VoiceCloneParams",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "modelName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -500,7 +564,13 @@
                         "inputSource": {
                           "oneof": [
                             "text",
-                            "markup"
+                            "markup",
+                            "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
                           ]
                         }
                       },
@@ -512,6 +582,17 @@
                         "markup": {
                           "type": "string",
                           "id": 5
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 7
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -718,7 +799,8 @@
                         "OGG_OPUS": 3,
                         "MULAW": 5,
                         "ALAW": 6,
-                        "PCM": 7
+                        "PCM": 7,
+                        "M4A": 8
                       }
                     },
                     "ListVoicesRequest": {
@@ -776,6 +858,13 @@
                           "id": 1,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "relaxSafetyFilters": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -878,7 +967,9 @@
                           "values": {
                             "PHONETIC_ENCODING_UNSPECIFIED": 0,
                             "PHONETIC_ENCODING_IPA": 1,
-                            "PHONETIC_ENCODING_X_SAMPA": 2
+                            "PHONETIC_ENCODING_X_SAMPA": 2,
+                            "PHONETIC_ENCODING_JAPANESE_YOMIGANA": 3,
+                            "PHONETIC_ENCODING_PINYIN": 4
                           }
                         }
                       }
@@ -924,13 +1015,49 @@
                         }
                       }
                     },
+                    "MultispeakerPrebuiltVoice": {
+                      "fields": {
+                        "speakerAlias": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "speakerId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MultiSpeakerVoiceConfig": {
+                      "fields": {
+                        "speakerVoiceConfigs": {
+                          "rule": "repeated",
+                          "type": "MultispeakerPrebuiltVoice",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SynthesisInput": {
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
                             "text",
+                            "markup",
                             "ssml",
                             "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
                           ]
                         }
                       },
@@ -939,6 +1066,10 @@
                           "type": "string",
                           "id": 1
                         },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "ssml": {
                           "type": "string",
                           "id": 2
@@ -946,6 +1077,13 @@
                         "multiSpeakerMarkup": {
                           "type": "MultiSpeakerMarkup",
                           "id": 4
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
@@ -980,6 +1118,20 @@
                         "voiceClone": {
                           "type": "VoiceCloneParams",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "modelName": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiSpeakerVoiceConfig": {
+                          "type": "MultiSpeakerVoiceConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1117,6 +1269,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "speakingRate": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1135,6 +1294,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "customPronunciations": {
+                          "type": "CustomPronunciations",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1142,7 +1308,14 @@
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
-                            "text"
+                            "text",
+                            "markup",
+                            "multiSpeakerMarkup"
+                          ]
+                        },
+                        "_prompt": {
+                          "oneof": [
+                            "prompt"
                           ]
                         }
                       },
@@ -1150,6 +1323,21 @@
                         "text": {
                           "type": "string",
                           "id": 1
+                        },
+                        "markup": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 7
+                        },
+                        "prompt": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },

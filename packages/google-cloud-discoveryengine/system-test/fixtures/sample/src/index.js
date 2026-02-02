@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const assistantServiceClient = new discoveryengine.AssistantServiceClient();
   const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();
@@ -37,6 +38,7 @@ function main() {
   const searchServiceClient = new discoveryengine.SearchServiceClient();
   const searchTuningServiceClient = new discoveryengine.SearchTuningServiceClient();
   const servingConfigServiceClient = new discoveryengine.ServingConfigServiceClient();
+  const sessionServiceClient = new discoveryengine.SessionServiceClient();
   const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
   const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();

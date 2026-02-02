@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11738,6 +11738,9 @@ export namespace google {
 
                     /** VulnerabilityReport updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VulnerabilityReport highestUpgradableCveSeverity */
+                    highestUpgradableCveSeverity?: (google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel|keyof typeof google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel|null);
                 }
 
                 /** Represents a VulnerabilityReport. */
@@ -11757,6 +11760,9 @@ export namespace google {
 
                     /** VulnerabilityReport updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** VulnerabilityReport highestUpgradableCveSeverity. */
+                    public highestUpgradableCveSeverity: (google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel|keyof typeof google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel);
 
                     /**
                      * Creates a new VulnerabilityReport instance using the specified properties.
@@ -12314,6 +12320,17 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** VulnerabilitySeverityLevel enum. */
+                    enum VulnerabilitySeverityLevel {
+                        VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED = 0,
+                        NONE = 1,
+                        MINIMAL = 2,
+                        LOW = 3,
+                        MEDIUM = 4,
+                        HIGH = 5,
+                        CRITICAL = 6
                     }
                 }
 

@@ -2178,13 +2178,11 @@
                 },
                 "v2": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.ServiceControl.V2",
                     "go_package": "google.golang.org/genproto/googleapis/api/servicecontrol/v2;servicecontrol",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceControllerProto",
                     "java_package": "com.google.api.servicecontrol.v2",
-                    "objc_class_prefix": "GASC",
                     "php_namespace": "Google\\Cloud\\ServiceControl\\V2",
                     "ruby_package": "Google::Cloud::ServiceControl::V2"
                   },

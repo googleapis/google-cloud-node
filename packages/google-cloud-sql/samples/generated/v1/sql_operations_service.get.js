@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main() {
+function main(operation, project) {
   // [START sqladmin_v1_generated_SqlOperationsService_Get_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,11 +29,11 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Instance operation ID.
+   *  Required. Instance operation ID.
    */
   // const operation = 'abc123'
   /**
-   *  Project ID of the project that contains the instance.
+   *  Required. Project ID of the project that contains the instance.
    */
   // const project = 'my-project'
 
@@ -46,6 +46,8 @@ function main() {
   async function callGet() {
     // Construct request
     const request = {
+      operation,
+      project,
     };
 
     // Run request

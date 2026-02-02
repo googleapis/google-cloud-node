@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3473,6 +3473,7 @@
                          * @property {boolean|null} [hasUnconfirmedComponents] Verdict hasUnconfirmedComponents
                          * @property {boolean|null} [hasInferredComponents] Verdict hasInferredComponents
                          * @property {boolean|null} [hasReplacedComponents] Verdict hasReplacedComponents
+                         * @property {boolean|null} [hasSpellCorrectedComponents] Verdict hasSpellCorrectedComponents
                          */
     
                         /**
@@ -3547,6 +3548,14 @@
                         Verdict.prototype.hasReplacedComponents = false;
     
                         /**
+                         * Verdict hasSpellCorrectedComponents.
+                         * @member {boolean} hasSpellCorrectedComponents
+                         * @memberof google.maps.addressvalidation.v1.Verdict
+                         * @instance
+                         */
+                        Verdict.prototype.hasSpellCorrectedComponents = false;
+    
+                        /**
                          * Creates a new Verdict instance using the specified properties.
                          * @function create
                          * @memberof google.maps.addressvalidation.v1.Verdict
@@ -3584,6 +3593,8 @@
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.hasInferredComponents);
                             if (message.hasReplacedComponents != null && Object.hasOwnProperty.call(message, "hasReplacedComponents"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hasReplacedComponents);
+                            if (message.hasSpellCorrectedComponents != null && Object.hasOwnProperty.call(message, "hasSpellCorrectedComponents"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.hasSpellCorrectedComponents);
                             return writer;
                         };
     
@@ -3646,6 +3657,10 @@
                                     }
                                 case 7: {
                                         message.hasReplacedComponents = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.hasSpellCorrectedComponents = reader.bool();
                                         break;
                                     }
                                 default:
@@ -3734,6 +3749,9 @@
                             if (message.hasReplacedComponents != null && message.hasOwnProperty("hasReplacedComponents"))
                                 if (typeof message.hasReplacedComponents !== "boolean")
                                     return "hasReplacedComponents: boolean expected";
+                            if (message.hasSpellCorrectedComponents != null && message.hasOwnProperty("hasSpellCorrectedComponents"))
+                                if (typeof message.hasSpellCorrectedComponents !== "boolean")
+                                    return "hasSpellCorrectedComponents: boolean expected";
                             return null;
                         };
     
@@ -3865,6 +3883,8 @@
                                 message.hasInferredComponents = Boolean(object.hasInferredComponents);
                             if (object.hasReplacedComponents != null)
                                 message.hasReplacedComponents = Boolean(object.hasReplacedComponents);
+                            if (object.hasSpellCorrectedComponents != null)
+                                message.hasSpellCorrectedComponents = Boolean(object.hasSpellCorrectedComponents);
                             return message;
                         };
     
@@ -3889,6 +3909,7 @@
                                 object.hasUnconfirmedComponents = false;
                                 object.hasInferredComponents = false;
                                 object.hasReplacedComponents = false;
+                                object.hasSpellCorrectedComponents = false;
                             }
                             if (message.inputGranularity != null && message.hasOwnProperty("inputGranularity"))
                                 object.inputGranularity = options.enums === String ? $root.google.maps.addressvalidation.v1.Verdict.Granularity[message.inputGranularity] === undefined ? message.inputGranularity : $root.google.maps.addressvalidation.v1.Verdict.Granularity[message.inputGranularity] : message.inputGranularity;
@@ -3904,6 +3925,8 @@
                                 object.hasInferredComponents = message.hasInferredComponents;
                             if (message.hasReplacedComponents != null && message.hasOwnProperty("hasReplacedComponents"))
                                 object.hasReplacedComponents = message.hasReplacedComponents;
+                            if (message.hasSpellCorrectedComponents != null && message.hasOwnProperty("hasSpellCorrectedComponents"))
+                                object.hasSpellCorrectedComponents = message.hasSpellCorrectedComponents;
                             return object;
                         };
     

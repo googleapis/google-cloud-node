@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,15 +29,15 @@ function main(parent, externalAccountKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource where this external_account_key will be created.
-   *  Format: projects/[project_id]/locations/[location].
-   *  At present only the "global" location is supported.
+   *  Required. The parent resource where this external_account_key will be
+   *  created. Format: projects/[project_id]/locations/[location]. At present
+   *  only the "global" location is supported.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The external account key to create. This field only exists to future-proof
-   *  the API. At present, all fields in ExternalAccountKey are output only and
-   *  all values are ignored. For the purpose of the
+   *  Required. The external account key to create. This field only exists to
+   *  future-proof the API. At present, all fields in ExternalAccountKey are
+   *  output only and all values are ignored. For the purpose of the
    *  CreateExternalAccountKeyRequest, set it to a default/empty value.
    */
   // const externalAccountKey = {}

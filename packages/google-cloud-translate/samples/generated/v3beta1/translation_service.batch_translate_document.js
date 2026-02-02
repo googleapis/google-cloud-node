@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -109,6 +109,10 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    *  Optional. If true, enable auto rotation correction in DVS.
    */
   // const enableRotationCorrection = true
+  /**
+   *  Optional. If true, only native pdf pages will be translated.
+   */
+  // const pdfNativeOnly = true
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3beta1;

@@ -87,6 +87,84 @@
         }
       }
     },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Jobs": {
       "clients": {
         "grpc": {
@@ -373,6 +451,104 @@
                 "listTasks",
                 "listTasksStream",
                 "listTasksAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "WorkerPools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WorkerPoolsClient",
+          "rpcs": {
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WorkerPoolsClient",
+          "rpcs": {
+            "GetWorkerPool": {
+              "methods": [
+                "getWorkerPool"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
               ]
             }
           }

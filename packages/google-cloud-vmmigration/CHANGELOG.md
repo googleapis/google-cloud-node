@@ -1,5 +1,28 @@
 # Changelog
 
+## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.3.0...vmmigration-v4.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.2.0...vmmigration-v4.3.0) (2025-09-09)
+
+
+### Features
+
+* [vmmigration] Azure as a source ([#6677](https://github.com/googleapis/google-cloud-node/issues/6677)) ([3e0730f](https://github.com/googleapis/google-cloud-node/commit/3e0730f20bc212207398e93605865b5a560addb6))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.1.0...vmmigration-v4.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6424](https://github.com/googleapis/google-cloud-node/issues/6424)) ([9a595a6](https://github.com/googleapis/google-cloud-node/commit/9a595a658b5fc2a02a18ffbca618190eb64d8013))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v4.0.1...vmmigration-v4.1.0) (2025-06-03)
 
 

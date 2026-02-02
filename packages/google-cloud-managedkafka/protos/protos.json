@@ -1059,6 +1059,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "tlsConfig": {
+                          "type": "TlsConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1148,6 +1155,50 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "TlsConfig": {
+                      "fields": {
+                        "trustConfig": {
+                          "type": "TrustConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sslPrincipalMappingRules": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TrustConfig": {
+                      "fields": {
+                        "casConfigs": {
+                          "rule": "repeated",
+                          "type": "CertificateAuthorityServiceConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CertificateAuthorityServiceConfig": {
+                          "fields": {
+                            "caPool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                              }
+                            }
                           }
                         }
                       }

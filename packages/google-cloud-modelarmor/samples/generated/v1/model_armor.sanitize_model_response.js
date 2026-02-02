@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,6 +41,10 @@ function main(name, modelResponseData) {
    *  Optional. User Prompt associated with Model response.
    */
   // const userPrompt = 'abc123'
+  /**
+   *  Optional. Metadata related for multi language detection.
+   */
+  // const multiLanguageDetectionMetadata = {}
 
   // Imports the Modelarmor library
   const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;

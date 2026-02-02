@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -8861,72 +8861,6 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|setAutomatedGa4ConfigurationOptOut}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef SetAutomatedGa4ConfigurationOptOutCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} [response] SetAutomatedGa4ConfigurationOptOutResponse
-                         */
-    
-                        /**
-                         * Calls SetAutomatedGa4ConfigurationOptOut.
-                         * @function setAutomatedGa4ConfigurationOptOut
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest} request SetAutomatedGa4ConfigurationOptOutRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOutCallback} callback Node-style callback called with the error, if any, and SetAutomatedGa4ConfigurationOptOutResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.setAutomatedGa4ConfigurationOptOut = function setAutomatedGa4ConfigurationOptOut(request, callback) {
-                            return this.rpcCall(setAutomatedGa4ConfigurationOptOut, $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest, $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse, request, callback);
-                        }, "name", { value: "SetAutomatedGa4ConfigurationOptOut" });
-    
-                        /**
-                         * Calls SetAutomatedGa4ConfigurationOptOut.
-                         * @function setAutomatedGa4ConfigurationOptOut
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest} request SetAutomatedGa4ConfigurationOptOutRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|fetchAutomatedGa4ConfigurationOptOut}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef FetchAutomatedGa4ConfigurationOptOutCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} [response] FetchAutomatedGa4ConfigurationOptOutResponse
-                         */
-    
-                        /**
-                         * Calls FetchAutomatedGa4ConfigurationOptOut.
-                         * @function fetchAutomatedGa4ConfigurationOptOut
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest} request FetchAutomatedGa4ConfigurationOptOutRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOutCallback} callback Node-style callback called with the error, if any, and FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.fetchAutomatedGa4ConfigurationOptOut = function fetchAutomatedGa4ConfigurationOptOut(request, callback) {
-                            return this.rpcCall(fetchAutomatedGa4ConfigurationOptOut, $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest, $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse, request, callback);
-                        }, "name", { value: "FetchAutomatedGa4ConfigurationOptOut" });
-    
-                        /**
-                         * Calls FetchAutomatedGa4ConfigurationOptOut.
-                         * @function fetchAutomatedGa4ConfigurationOptOut
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest} request FetchAutomatedGa4ConfigurationOptOutRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createBigQueryLink}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef CreateBigQueryLinkCallback
@@ -9154,138 +9088,6 @@
                          * @instance
                          * @param {google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest} request UpdateEnhancedMeasurementSettingsRequest message or plain object
                          * @returns {Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createConnectedSiteTag}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef CreateConnectedSiteTagCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} [response] CreateConnectedSiteTagResponse
-                         */
-    
-                        /**
-                         * Calls CreateConnectedSiteTag.
-                         * @function createConnectedSiteTag
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest} request CreateConnectedSiteTagRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTagCallback} callback Node-style callback called with the error, if any, and CreateConnectedSiteTagResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.createConnectedSiteTag = function createConnectedSiteTag(request, callback) {
-                            return this.rpcCall(createConnectedSiteTag, $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest, $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse, request, callback);
-                        }, "name", { value: "CreateConnectedSiteTag" });
-    
-                        /**
-                         * Calls CreateConnectedSiteTag.
-                         * @function createConnectedSiteTag
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest} request CreateConnectedSiteTagRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteConnectedSiteTag}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef DeleteConnectedSiteTagCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.protobuf.Empty} [response] Empty
-                         */
-    
-                        /**
-                         * Calls DeleteConnectedSiteTag.
-                         * @function deleteConnectedSiteTag
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest} request DeleteConnectedSiteTagRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTagCallback} callback Node-style callback called with the error, if any, and Empty
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.deleteConnectedSiteTag = function deleteConnectedSiteTag(request, callback) {
-                            return this.rpcCall(deleteConnectedSiteTag, $root.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest, $root.google.protobuf.Empty, request, callback);
-                        }, "name", { value: "DeleteConnectedSiteTag" });
-    
-                        /**
-                         * Calls DeleteConnectedSiteTag.
-                         * @function deleteConnectedSiteTag
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest} request DeleteConnectedSiteTagRequest message or plain object
-                         * @returns {Promise<google.protobuf.Empty>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listConnectedSiteTags}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef ListConnectedSiteTagsCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} [response] ListConnectedSiteTagsResponse
-                         */
-    
-                        /**
-                         * Calls ListConnectedSiteTags.
-                         * @function listConnectedSiteTags
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest} request ListConnectedSiteTagsRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTagsCallback} callback Node-style callback called with the error, if any, and ListConnectedSiteTagsResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.listConnectedSiteTags = function listConnectedSiteTags(request, callback) {
-                            return this.rpcCall(listConnectedSiteTags, $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest, $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse, request, callback);
-                        }, "name", { value: "ListConnectedSiteTags" });
-    
-                        /**
-                         * Calls ListConnectedSiteTags.
-                         * @function listConnectedSiteTags
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest} request ListConnectedSiteTagsRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|fetchConnectedGa4Property}.
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @typedef FetchConnectedGa4PropertyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} [response] FetchConnectedGa4PropertyResponse
-                         */
-    
-                        /**
-                         * Calls FetchConnectedGa4Property.
-                         * @function fetchConnectedGa4Property
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest} request FetchConnectedGa4PropertyRequest message or plain object
-                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.FetchConnectedGa4PropertyCallback} callback Node-style callback called with the error, if any, and FetchConnectedGa4PropertyResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AnalyticsAdminService.prototype.fetchConnectedGa4Property = function fetchConnectedGa4Property(request, callback) {
-                            return this.rpcCall(fetchConnectedGa4Property, $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest, $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse, request, callback);
-                        }, "name", { value: "FetchConnectedGa4Property" });
-    
-                        /**
-                         * Calls FetchConnectedGa4Property.
-                         * @function fetchConnectedGa4Property
-                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
-                         * @instance
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest} request FetchConnectedGa4PropertyRequest message or plain object
-                         * @returns {Promise<google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse>} Promise
                          * @variation 2
                          */
     
@@ -10672,6 +10474,39 @@
                          * @instance
                          * @param {google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest} request GetSubpropertySyncConfigRequest message or plain object
                          * @returns {Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getReportingIdentitySettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetReportingIdentitySettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ReportingIdentitySettings} [response] ReportingIdentitySettings
+                         */
+    
+                        /**
+                         * Calls GetReportingIdentitySettings.
+                         * @function getReportingIdentitySettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest} request GetReportingIdentitySettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettingsCallback} callback Node-style callback called with the error, if any, and ReportingIdentitySettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getReportingIdentitySettings = function getReportingIdentitySettings(request, callback) {
+                            return this.rpcCall(getReportingIdentitySettings, $root.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest, $root.google.analytics.admin.v1alpha.ReportingIdentitySettings, request, callback);
+                        }, "name", { value: "GetReportingIdentitySettings" });
+    
+                        /**
+                         * Calls GetReportingIdentitySettings.
+                         * @function getReportingIdentitySettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest} request GetReportingIdentitySettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>} Promise
                          * @variation 2
                          */
     
@@ -18365,6 +18200,7 @@
                                     case 31:
                                     case 32:
                                     case 33:
+                                    case 34:
                                         break;
                                     }
                             }
@@ -18550,6 +18386,10 @@
                                     case "SUBPROPERTY_SYNC_CONFIG":
                                     case 33:
                                         message.resourceType[i] = 33;
+                                        break;
+                                    case "REPORTING_IDENTITY_SETTINGS":
+                                    case 34:
+                                        message.resourceType[i] = 34;
                                         break;
                                     }
                             }
@@ -43096,822 +42936,6 @@
                         return ListChannelGroupsResponse;
                     })();
     
-                    v1alpha.SetAutomatedGa4ConfigurationOptOutRequest = (function() {
-    
-                        /**
-                         * Properties of a SetAutomatedGa4ConfigurationOptOutRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface ISetAutomatedGa4ConfigurationOptOutRequest
-                         * @property {string|null} [property] SetAutomatedGa4ConfigurationOptOutRequest property
-                         * @property {boolean|null} [optOut] SetAutomatedGa4ConfigurationOptOutRequest optOut
-                         */
-    
-                        /**
-                         * Constructs a new SetAutomatedGa4ConfigurationOptOutRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a SetAutomatedGa4ConfigurationOptOutRequest.
-                         * @implements ISetAutomatedGa4ConfigurationOptOutRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest=} [properties] Properties to set
-                         */
-                        function SetAutomatedGa4ConfigurationOptOutRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SetAutomatedGa4ConfigurationOptOutRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @instance
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.prototype.property = "";
-    
-                        /**
-                         * SetAutomatedGa4ConfigurationOptOutRequest optOut.
-                         * @member {boolean} optOut
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @instance
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.prototype.optOut = false;
-    
-                        /**
-                         * Creates a new SetAutomatedGa4ConfigurationOptOutRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest} SetAutomatedGa4ConfigurationOptOutRequest instance
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.create = function create(properties) {
-                            return new SetAutomatedGa4ConfigurationOptOutRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SetAutomatedGa4ConfigurationOptOutRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest} message SetAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            if (message.optOut != null && Object.hasOwnProperty.call(message, "optOut"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.optOut);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SetAutomatedGa4ConfigurationOptOutRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest} message SetAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SetAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest} SetAutomatedGa4ConfigurationOptOutRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.optOut = reader.bool();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SetAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest} SetAutomatedGa4ConfigurationOptOutRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SetAutomatedGa4ConfigurationOptOutRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            if (message.optOut != null && message.hasOwnProperty("optOut"))
-                                if (typeof message.optOut !== "boolean")
-                                    return "optOut: boolean expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SetAutomatedGa4ConfigurationOptOutRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest} SetAutomatedGa4ConfigurationOptOutRequest
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            if (object.optOut != null)
-                                message.optOut = Boolean(object.optOut);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SetAutomatedGa4ConfigurationOptOutRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest} message SetAutomatedGa4ConfigurationOptOutRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.property = "";
-                                object.optOut = false;
-                            }
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            if (message.optOut != null && message.hasOwnProperty("optOut"))
-                                object.optOut = message.optOut;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SetAutomatedGa4ConfigurationOptOutRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SetAutomatedGa4ConfigurationOptOutRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SetAutomatedGa4ConfigurationOptOutRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest";
-                        };
-    
-                        return SetAutomatedGa4ConfigurationOptOutRequest;
-                    })();
-    
-                    v1alpha.SetAutomatedGa4ConfigurationOptOutResponse = (function() {
-    
-                        /**
-                         * Properties of a SetAutomatedGa4ConfigurationOptOutResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface ISetAutomatedGa4ConfigurationOptOutResponse
-                         */
-    
-                        /**
-                         * Constructs a new SetAutomatedGa4ConfigurationOptOutResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a SetAutomatedGa4ConfigurationOptOutResponse.
-                         * @implements ISetAutomatedGa4ConfigurationOptOutResponse
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse=} [properties] Properties to set
-                         */
-                        function SetAutomatedGa4ConfigurationOptOutResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Creates a new SetAutomatedGa4ConfigurationOptOutResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} SetAutomatedGa4ConfigurationOptOutResponse instance
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.create = function create(properties) {
-                            return new SetAutomatedGa4ConfigurationOptOutResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SetAutomatedGa4ConfigurationOptOutResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse} message SetAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SetAutomatedGa4ConfigurationOptOutResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse} message SetAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SetAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} SetAutomatedGa4ConfigurationOptOutResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SetAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} SetAutomatedGa4ConfigurationOptOutResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SetAutomatedGa4ConfigurationOptOutResponse message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SetAutomatedGa4ConfigurationOptOutResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} SetAutomatedGa4ConfigurationOptOutResponse
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse)
-                                return object;
-                            return new $root.google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse();
-                        };
-    
-                        /**
-                         * Creates a plain object from a SetAutomatedGa4ConfigurationOptOutResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse} message SetAutomatedGa4ConfigurationOptOutResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.toObject = function toObject() {
-                            return {};
-                        };
-    
-                        /**
-                         * Converts this SetAutomatedGa4ConfigurationOptOutResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SetAutomatedGa4ConfigurationOptOutResponse
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SetAutomatedGa4ConfigurationOptOutResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse";
-                        };
-    
-                        return SetAutomatedGa4ConfigurationOptOutResponse;
-                    })();
-    
-                    v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest = (function() {
-    
-                        /**
-                         * Properties of a FetchAutomatedGa4ConfigurationOptOutRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IFetchAutomatedGa4ConfigurationOptOutRequest
-                         * @property {string|null} [property] FetchAutomatedGa4ConfigurationOptOutRequest property
-                         */
-    
-                        /**
-                         * Constructs a new FetchAutomatedGa4ConfigurationOptOutRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a FetchAutomatedGa4ConfigurationOptOutRequest.
-                         * @implements IFetchAutomatedGa4ConfigurationOptOutRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest=} [properties] Properties to set
-                         */
-                        function FetchAutomatedGa4ConfigurationOptOutRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FetchAutomatedGa4ConfigurationOptOutRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @instance
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.prototype.property = "";
-    
-                        /**
-                         * Creates a new FetchAutomatedGa4ConfigurationOptOutRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest} FetchAutomatedGa4ConfigurationOptOutRequest instance
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.create = function create(properties) {
-                            return new FetchAutomatedGa4ConfigurationOptOutRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FetchAutomatedGa4ConfigurationOptOutRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest} message FetchAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FetchAutomatedGa4ConfigurationOptOutRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest} message FetchAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FetchAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest} FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FetchAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest} FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FetchAutomatedGa4ConfigurationOptOutRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FetchAutomatedGa4ConfigurationOptOutRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest} FetchAutomatedGa4ConfigurationOptOutRequest
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FetchAutomatedGa4ConfigurationOptOutRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest} message FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.property = "";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FetchAutomatedGa4ConfigurationOptOutRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest";
-                        };
-    
-                        return FetchAutomatedGa4ConfigurationOptOutRequest;
-                    })();
-    
-                    v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse = (function() {
-    
-                        /**
-                         * Properties of a FetchAutomatedGa4ConfigurationOptOutResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IFetchAutomatedGa4ConfigurationOptOutResponse
-                         * @property {boolean|null} [optOut] FetchAutomatedGa4ConfigurationOptOutResponse optOut
-                         */
-    
-                        /**
-                         * Constructs a new FetchAutomatedGa4ConfigurationOptOutResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a FetchAutomatedGa4ConfigurationOptOutResponse.
-                         * @implements IFetchAutomatedGa4ConfigurationOptOutResponse
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse=} [properties] Properties to set
-                         */
-                        function FetchAutomatedGa4ConfigurationOptOutResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FetchAutomatedGa4ConfigurationOptOutResponse optOut.
-                         * @member {boolean} optOut
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @instance
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.prototype.optOut = false;
-    
-                        /**
-                         * Creates a new FetchAutomatedGa4ConfigurationOptOutResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} FetchAutomatedGa4ConfigurationOptOutResponse instance
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.create = function create(properties) {
-                            return new FetchAutomatedGa4ConfigurationOptOutResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FetchAutomatedGa4ConfigurationOptOutResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse} message FetchAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.optOut != null && Object.hasOwnProperty.call(message, "optOut"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.optOut);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FetchAutomatedGa4ConfigurationOptOutResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse} message FetchAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FetchAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.optOut = reader.bool();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FetchAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FetchAutomatedGa4ConfigurationOptOutResponse message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.optOut != null && message.hasOwnProperty("optOut"))
-                                if (typeof message.optOut !== "boolean")
-                                    return "optOut: boolean expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FetchAutomatedGa4ConfigurationOptOutResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} FetchAutomatedGa4ConfigurationOptOutResponse
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse();
-                            if (object.optOut != null)
-                                message.optOut = Boolean(object.optOut);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FetchAutomatedGa4ConfigurationOptOutResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse} message FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.optOut = false;
-                            if (message.optOut != null && message.hasOwnProperty("optOut"))
-                                object.optOut = message.optOut;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FetchAutomatedGa4ConfigurationOptOutResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        FetchAutomatedGa4ConfigurationOptOutResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse";
-                        };
-    
-                        return FetchAutomatedGa4ConfigurationOptOutResponse;
-                    })();
-    
                     v1alpha.CreateBigQueryLinkRequest = (function() {
     
                         /**
@@ -46185,1077 +45209,6 @@
                         return UpdateDataRedactionSettingsRequest;
                     })();
     
-                    v1alpha.CreateConnectedSiteTagRequest = (function() {
-    
-                        /**
-                         * Properties of a CreateConnectedSiteTagRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface ICreateConnectedSiteTagRequest
-                         * @property {string|null} [property] CreateConnectedSiteTagRequest property
-                         * @property {google.analytics.admin.v1alpha.IConnectedSiteTag|null} [connectedSiteTag] CreateConnectedSiteTagRequest connectedSiteTag
-                         */
-    
-                        /**
-                         * Constructs a new CreateConnectedSiteTagRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a CreateConnectedSiteTagRequest.
-                         * @implements ICreateConnectedSiteTagRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest=} [properties] Properties to set
-                         */
-                        function CreateConnectedSiteTagRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CreateConnectedSiteTagRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @instance
-                         */
-                        CreateConnectedSiteTagRequest.prototype.property = "";
-    
-                        /**
-                         * CreateConnectedSiteTagRequest connectedSiteTag.
-                         * @member {google.analytics.admin.v1alpha.IConnectedSiteTag|null|undefined} connectedSiteTag
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @instance
-                         */
-                        CreateConnectedSiteTagRequest.prototype.connectedSiteTag = null;
-    
-                        /**
-                         * Creates a new CreateConnectedSiteTagRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest} CreateConnectedSiteTagRequest instance
-                         */
-                        CreateConnectedSiteTagRequest.create = function create(properties) {
-                            return new CreateConnectedSiteTagRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest} message CreateConnectedSiteTagRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateConnectedSiteTagRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            if (message.connectedSiteTag != null && Object.hasOwnProperty.call(message, "connectedSiteTag"))
-                                $root.google.analytics.admin.v1alpha.ConnectedSiteTag.encode(message.connectedSiteTag, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest} message CreateConnectedSiteTagRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateConnectedSiteTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest} CreateConnectedSiteTagRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateConnectedSiteTagRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.connectedSiteTag = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest} CreateConnectedSiteTagRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateConnectedSiteTagRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateConnectedSiteTagRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateConnectedSiteTagRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            if (message.connectedSiteTag != null && message.hasOwnProperty("connectedSiteTag")) {
-                                var error = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.verify(message.connectedSiteTag);
-                                if (error)
-                                    return "connectedSiteTag." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest} CreateConnectedSiteTagRequest
-                         */
-                        CreateConnectedSiteTagRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            if (object.connectedSiteTag != null) {
-                                if (typeof object.connectedSiteTag !== "object")
-                                    throw TypeError(".google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.connectedSiteTag: object expected");
-                                message.connectedSiteTag = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.fromObject(object.connectedSiteTag);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateConnectedSiteTagRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest} message CreateConnectedSiteTagRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateConnectedSiteTagRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.property = "";
-                                object.connectedSiteTag = null;
-                            }
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            if (message.connectedSiteTag != null && message.hasOwnProperty("connectedSiteTag"))
-                                object.connectedSiteTag = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.toObject(message.connectedSiteTag, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CreateConnectedSiteTagRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateConnectedSiteTagRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateConnectedSiteTagRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateConnectedSiteTagRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest";
-                        };
-    
-                        return CreateConnectedSiteTagRequest;
-                    })();
-    
-                    v1alpha.CreateConnectedSiteTagResponse = (function() {
-    
-                        /**
-                         * Properties of a CreateConnectedSiteTagResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface ICreateConnectedSiteTagResponse
-                         */
-    
-                        /**
-                         * Constructs a new CreateConnectedSiteTagResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a CreateConnectedSiteTagResponse.
-                         * @implements ICreateConnectedSiteTagResponse
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse=} [properties] Properties to set
-                         */
-                        function CreateConnectedSiteTagResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Creates a new CreateConnectedSiteTagResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} CreateConnectedSiteTagResponse instance
-                         */
-                        CreateConnectedSiteTagResponse.create = function create(properties) {
-                            return new CreateConnectedSiteTagResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CreateConnectedSiteTagResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse} message CreateConnectedSiteTagResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateConnectedSiteTagResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CreateConnectedSiteTagResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse} message CreateConnectedSiteTagResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CreateConnectedSiteTagResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} CreateConnectedSiteTagResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateConnectedSiteTagResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} CreateConnectedSiteTagResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CreateConnectedSiteTagResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CreateConnectedSiteTagResponse message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CreateConnectedSiteTagResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CreateConnectedSiteTagResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} CreateConnectedSiteTagResponse
-                         */
-                        CreateConnectedSiteTagResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse)
-                                return object;
-                            return new $root.google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse();
-                        };
-    
-                        /**
-                         * Creates a plain object from a CreateConnectedSiteTagResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse} message CreateConnectedSiteTagResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CreateConnectedSiteTagResponse.toObject = function toObject() {
-                            return {};
-                        };
-    
-                        /**
-                         * Converts this CreateConnectedSiteTagResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CreateConnectedSiteTagResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CreateConnectedSiteTagResponse
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CreateConnectedSiteTagResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse";
-                        };
-    
-                        return CreateConnectedSiteTagResponse;
-                    })();
-    
-                    v1alpha.DeleteConnectedSiteTagRequest = (function() {
-    
-                        /**
-                         * Properties of a DeleteConnectedSiteTagRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IDeleteConnectedSiteTagRequest
-                         * @property {string|null} [property] DeleteConnectedSiteTagRequest property
-                         * @property {string|null} [tagId] DeleteConnectedSiteTagRequest tagId
-                         */
-    
-                        /**
-                         * Constructs a new DeleteConnectedSiteTagRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a DeleteConnectedSiteTagRequest.
-                         * @implements IDeleteConnectedSiteTagRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest=} [properties] Properties to set
-                         */
-                        function DeleteConnectedSiteTagRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeleteConnectedSiteTagRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @instance
-                         */
-                        DeleteConnectedSiteTagRequest.prototype.property = "";
-    
-                        /**
-                         * DeleteConnectedSiteTagRequest tagId.
-                         * @member {string} tagId
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @instance
-                         */
-                        DeleteConnectedSiteTagRequest.prototype.tagId = "";
-    
-                        /**
-                         * Creates a new DeleteConnectedSiteTagRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest} DeleteConnectedSiteTagRequest instance
-                         */
-                        DeleteConnectedSiteTagRequest.create = function create(properties) {
-                            return new DeleteConnectedSiteTagRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest} message DeleteConnectedSiteTagRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteConnectedSiteTagRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            if (message.tagId != null && Object.hasOwnProperty.call(message, "tagId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tagId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeleteConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest} message DeleteConnectedSiteTagRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeleteConnectedSiteTagRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest} DeleteConnectedSiteTagRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteConnectedSiteTagRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.tagId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest} DeleteConnectedSiteTagRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeleteConnectedSiteTagRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeleteConnectedSiteTagRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeleteConnectedSiteTagRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            if (message.tagId != null && message.hasOwnProperty("tagId"))
-                                if (!$util.isString(message.tagId))
-                                    return "tagId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeleteConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest} DeleteConnectedSiteTagRequest
-                         */
-                        DeleteConnectedSiteTagRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            if (object.tagId != null)
-                                message.tagId = String(object.tagId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeleteConnectedSiteTagRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest} message DeleteConnectedSiteTagRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeleteConnectedSiteTagRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.property = "";
-                                object.tagId = "";
-                            }
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            if (message.tagId != null && message.hasOwnProperty("tagId"))
-                                object.tagId = message.tagId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeleteConnectedSiteTagRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeleteConnectedSiteTagRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DeleteConnectedSiteTagRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DeleteConnectedSiteTagRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest";
-                        };
-    
-                        return DeleteConnectedSiteTagRequest;
-                    })();
-    
-                    v1alpha.ListConnectedSiteTagsRequest = (function() {
-    
-                        /**
-                         * Properties of a ListConnectedSiteTagsRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IListConnectedSiteTagsRequest
-                         * @property {string|null} [property] ListConnectedSiteTagsRequest property
-                         */
-    
-                        /**
-                         * Constructs a new ListConnectedSiteTagsRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a ListConnectedSiteTagsRequest.
-                         * @implements IListConnectedSiteTagsRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest=} [properties] Properties to set
-                         */
-                        function ListConnectedSiteTagsRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListConnectedSiteTagsRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @instance
-                         */
-                        ListConnectedSiteTagsRequest.prototype.property = "";
-    
-                        /**
-                         * Creates a new ListConnectedSiteTagsRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest} ListConnectedSiteTagsRequest instance
-                         */
-                        ListConnectedSiteTagsRequest.create = function create(properties) {
-                            return new ListConnectedSiteTagsRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListConnectedSiteTagsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest} message ListConnectedSiteTagsRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListConnectedSiteTagsRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListConnectedSiteTagsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest} message ListConnectedSiteTagsRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListConnectedSiteTagsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest} ListConnectedSiteTagsRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListConnectedSiteTagsRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest} ListConnectedSiteTagsRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListConnectedSiteTagsRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListConnectedSiteTagsRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListConnectedSiteTagsRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListConnectedSiteTagsRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest} ListConnectedSiteTagsRequest
-                         */
-                        ListConnectedSiteTagsRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListConnectedSiteTagsRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest} message ListConnectedSiteTagsRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListConnectedSiteTagsRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.property = "";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListConnectedSiteTagsRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListConnectedSiteTagsRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListConnectedSiteTagsRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListConnectedSiteTagsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest";
-                        };
-    
-                        return ListConnectedSiteTagsRequest;
-                    })();
-    
-                    v1alpha.ListConnectedSiteTagsResponse = (function() {
-    
-                        /**
-                         * Properties of a ListConnectedSiteTagsResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IListConnectedSiteTagsResponse
-                         * @property {Array.<google.analytics.admin.v1alpha.IConnectedSiteTag>|null} [connectedSiteTags] ListConnectedSiteTagsResponse connectedSiteTags
-                         */
-    
-                        /**
-                         * Constructs a new ListConnectedSiteTagsResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a ListConnectedSiteTagsResponse.
-                         * @implements IListConnectedSiteTagsResponse
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse=} [properties] Properties to set
-                         */
-                        function ListConnectedSiteTagsResponse(properties) {
-                            this.connectedSiteTags = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ListConnectedSiteTagsResponse connectedSiteTags.
-                         * @member {Array.<google.analytics.admin.v1alpha.IConnectedSiteTag>} connectedSiteTags
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @instance
-                         */
-                        ListConnectedSiteTagsResponse.prototype.connectedSiteTags = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ListConnectedSiteTagsResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} ListConnectedSiteTagsResponse instance
-                         */
-                        ListConnectedSiteTagsResponse.create = function create(properties) {
-                            return new ListConnectedSiteTagsResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ListConnectedSiteTagsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse} message ListConnectedSiteTagsResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListConnectedSiteTagsResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.connectedSiteTags != null && message.connectedSiteTags.length)
-                                for (var i = 0; i < message.connectedSiteTags.length; ++i)
-                                    $root.google.analytics.admin.v1alpha.ConnectedSiteTag.encode(message.connectedSiteTags[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ListConnectedSiteTagsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse} message ListConnectedSiteTagsResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ListConnectedSiteTagsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} ListConnectedSiteTagsResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListConnectedSiteTagsResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.connectedSiteTags && message.connectedSiteTags.length))
-                                            message.connectedSiteTags = [];
-                                        message.connectedSiteTags.push($root.google.analytics.admin.v1alpha.ConnectedSiteTag.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} ListConnectedSiteTagsResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ListConnectedSiteTagsResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ListConnectedSiteTagsResponse message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ListConnectedSiteTagsResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.connectedSiteTags != null && message.hasOwnProperty("connectedSiteTags")) {
-                                if (!Array.isArray(message.connectedSiteTags))
-                                    return "connectedSiteTags: array expected";
-                                for (var i = 0; i < message.connectedSiteTags.length; ++i) {
-                                    var error = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.verify(message.connectedSiteTags[i]);
-                                    if (error)
-                                        return "connectedSiteTags." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ListConnectedSiteTagsResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} ListConnectedSiteTagsResponse
-                         */
-                        ListConnectedSiteTagsResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse();
-                            if (object.connectedSiteTags) {
-                                if (!Array.isArray(object.connectedSiteTags))
-                                    throw TypeError(".google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.connectedSiteTags: array expected");
-                                message.connectedSiteTags = [];
-                                for (var i = 0; i < object.connectedSiteTags.length; ++i) {
-                                    if (typeof object.connectedSiteTags[i] !== "object")
-                                        throw TypeError(".google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.connectedSiteTags: object expected");
-                                    message.connectedSiteTags[i] = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.fromObject(object.connectedSiteTags[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ListConnectedSiteTagsResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse} message ListConnectedSiteTagsResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ListConnectedSiteTagsResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.connectedSiteTags = [];
-                            if (message.connectedSiteTags && message.connectedSiteTags.length) {
-                                object.connectedSiteTags = [];
-                                for (var j = 0; j < message.connectedSiteTags.length; ++j)
-                                    object.connectedSiteTags[j] = $root.google.analytics.admin.v1alpha.ConnectedSiteTag.toObject(message.connectedSiteTags[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ListConnectedSiteTagsResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ListConnectedSiteTagsResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ListConnectedSiteTagsResponse
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ListConnectedSiteTagsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse";
-                        };
-    
-                        return ListConnectedSiteTagsResponse;
-                    })();
-    
                     v1alpha.CreateAdSenseLinkRequest = (function() {
     
                         /**
@@ -48400,416 +46353,6 @@
                         };
     
                         return ListAdSenseLinksResponse;
-                    })();
-    
-                    v1alpha.FetchConnectedGa4PropertyRequest = (function() {
-    
-                        /**
-                         * Properties of a FetchConnectedGa4PropertyRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IFetchConnectedGa4PropertyRequest
-                         * @property {string|null} [property] FetchConnectedGa4PropertyRequest property
-                         */
-    
-                        /**
-                         * Constructs a new FetchConnectedGa4PropertyRequest.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a FetchConnectedGa4PropertyRequest.
-                         * @implements IFetchConnectedGa4PropertyRequest
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest=} [properties] Properties to set
-                         */
-                        function FetchConnectedGa4PropertyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FetchConnectedGa4PropertyRequest property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @instance
-                         */
-                        FetchConnectedGa4PropertyRequest.prototype.property = "";
-    
-                        /**
-                         * Creates a new FetchConnectedGa4PropertyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest} FetchConnectedGa4PropertyRequest instance
-                         */
-                        FetchConnectedGa4PropertyRequest.create = function create(properties) {
-                            return new FetchConnectedGa4PropertyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FetchConnectedGa4PropertyRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest} message FetchConnectedGa4PropertyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchConnectedGa4PropertyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FetchConnectedGa4PropertyRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest} message FetchConnectedGa4PropertyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchConnectedGa4PropertyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FetchConnectedGa4PropertyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest} FetchConnectedGa4PropertyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchConnectedGa4PropertyRequest.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FetchConnectedGa4PropertyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest} FetchConnectedGa4PropertyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchConnectedGa4PropertyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FetchConnectedGa4PropertyRequest message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FetchConnectedGa4PropertyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FetchConnectedGa4PropertyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest} FetchConnectedGa4PropertyRequest
-                         */
-                        FetchConnectedGa4PropertyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FetchConnectedGa4PropertyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest} message FetchConnectedGa4PropertyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FetchConnectedGa4PropertyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.property = "";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FetchConnectedGa4PropertyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FetchConnectedGa4PropertyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for FetchConnectedGa4PropertyRequest
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        FetchConnectedGa4PropertyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest";
-                        };
-    
-                        return FetchConnectedGa4PropertyRequest;
-                    })();
-    
-                    v1alpha.FetchConnectedGa4PropertyResponse = (function() {
-    
-                        /**
-                         * Properties of a FetchConnectedGa4PropertyResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IFetchConnectedGa4PropertyResponse
-                         * @property {string|null} [property] FetchConnectedGa4PropertyResponse property
-                         */
-    
-                        /**
-                         * Constructs a new FetchConnectedGa4PropertyResponse.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a FetchConnectedGa4PropertyResponse.
-                         * @implements IFetchConnectedGa4PropertyResponse
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse=} [properties] Properties to set
-                         */
-                        function FetchConnectedGa4PropertyResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * FetchConnectedGa4PropertyResponse property.
-                         * @member {string} property
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @instance
-                         */
-                        FetchConnectedGa4PropertyResponse.prototype.property = "";
-    
-                        /**
-                         * Creates a new FetchConnectedGa4PropertyResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} FetchConnectedGa4PropertyResponse instance
-                         */
-                        FetchConnectedGa4PropertyResponse.create = function create(properties) {
-                            return new FetchConnectedGa4PropertyResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified FetchConnectedGa4PropertyResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse} message FetchConnectedGa4PropertyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchConnectedGa4PropertyResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified FetchConnectedGa4PropertyResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse} message FetchConnectedGa4PropertyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        FetchConnectedGa4PropertyResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a FetchConnectedGa4PropertyResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} FetchConnectedGa4PropertyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchConnectedGa4PropertyResponse.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.property = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a FetchConnectedGa4PropertyResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} FetchConnectedGa4PropertyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        FetchConnectedGa4PropertyResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a FetchConnectedGa4PropertyResponse message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        FetchConnectedGa4PropertyResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                if (!$util.isString(message.property))
-                                    return "property: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a FetchConnectedGa4PropertyResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} FetchConnectedGa4PropertyResponse
-                         */
-                        FetchConnectedGa4PropertyResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse();
-                            if (object.property != null)
-                                message.property = String(object.property);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a FetchConnectedGa4PropertyResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse} message FetchConnectedGa4PropertyResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        FetchConnectedGa4PropertyResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.property = "";
-                            if (message.property != null && message.hasOwnProperty("property"))
-                                object.property = message.property;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this FetchConnectedGa4PropertyResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        FetchConnectedGa4PropertyResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for FetchConnectedGa4PropertyResponse
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        FetchConnectedGa4PropertyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse";
-                        };
-    
-                        return FetchConnectedGa4PropertyResponse;
                     })();
     
                     v1alpha.CreateEventCreateRuleRequest = (function() {
@@ -58284,6 +55827,211 @@
                         };
     
                         return UpdateSubpropertySyncConfigRequest;
+                    })();
+    
+                    v1alpha.GetReportingIdentitySettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetReportingIdentitySettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetReportingIdentitySettingsRequest
+                         * @property {string|null} [name] GetReportingIdentitySettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetReportingIdentitySettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetReportingIdentitySettingsRequest.
+                         * @implements IGetReportingIdentitySettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest=} [properties] Properties to set
+                         */
+                        function GetReportingIdentitySettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetReportingIdentitySettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @instance
+                         */
+                        GetReportingIdentitySettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetReportingIdentitySettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest} GetReportingIdentitySettingsRequest instance
+                         */
+                        GetReportingIdentitySettingsRequest.create = function create(properties) {
+                            return new GetReportingIdentitySettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetReportingIdentitySettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest} message GetReportingIdentitySettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReportingIdentitySettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetReportingIdentitySettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest} message GetReportingIdentitySettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetReportingIdentitySettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetReportingIdentitySettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest} GetReportingIdentitySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReportingIdentitySettingsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetReportingIdentitySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest} GetReportingIdentitySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetReportingIdentitySettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetReportingIdentitySettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetReportingIdentitySettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetReportingIdentitySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest} GetReportingIdentitySettingsRequest
+                         */
+                        GetReportingIdentitySettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetReportingIdentitySettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest} message GetReportingIdentitySettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetReportingIdentitySettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetReportingIdentitySettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetReportingIdentitySettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetReportingIdentitySettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetReportingIdentitySettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest";
+                        };
+    
+                        return GetReportingIdentitySettingsRequest;
                     })();
     
                     /**
@@ -67978,6 +65726,7 @@
                      * @property {number} CALCULATED_METRIC=31 CALCULATED_METRIC value
                      * @property {number} REPORTING_DATA_ANNOTATION=32 REPORTING_DATA_ANNOTATION value
                      * @property {number} SUBPROPERTY_SYNC_CONFIG=33 SUBPROPERTY_SYNC_CONFIG value
+                     * @property {number} REPORTING_IDENTITY_SETTINGS=34 REPORTING_IDENTITY_SETTINGS value
                      */
                     v1alpha.ChangeHistoryResourceType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -68010,6 +65759,7 @@
                         values[valuesById[31] = "CALCULATED_METRIC"] = 31;
                         values[valuesById[32] = "REPORTING_DATA_ANNOTATION"] = 32;
                         values[valuesById[33] = "SUBPROPERTY_SYNC_CONFIG"] = 33;
+                        values[valuesById[34] = "REPORTING_IDENTITY_SETTINGS"] = 34;
                         return values;
                     })();
     
@@ -74385,6 +72135,7 @@
                              * @property {google.analytics.admin.v1alpha.ICalculatedMetric|null} [calculatedMetric] ChangeHistoryResource calculatedMetric
                              * @property {google.analytics.admin.v1alpha.IReportingDataAnnotation|null} [reportingDataAnnotation] ChangeHistoryResource reportingDataAnnotation
                              * @property {google.analytics.admin.v1alpha.ISubpropertySyncConfig|null} [subpropertySyncConfig] ChangeHistoryResource subpropertySyncConfig
+                             * @property {google.analytics.admin.v1alpha.IReportingIdentitySettings|null} [reportingIdentitySettings] ChangeHistoryResource reportingIdentitySettings
                              */
     
                             /**
@@ -74626,17 +72377,25 @@
                              */
                             ChangeHistoryResource.prototype.subpropertySyncConfig = null;
     
+                            /**
+                             * ChangeHistoryResource reportingIdentitySettings.
+                             * @member {google.analytics.admin.v1alpha.IReportingIdentitySettings|null|undefined} reportingIdentitySettings
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.reportingIdentitySettings = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * ChangeHistoryResource resource.
-                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|undefined} resource
+                             * @member {"account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings"|undefined} resource
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
                              * @instance
                              */
                             Object.defineProperty(ChangeHistoryResource.prototype, "resource", {
-                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation", "subpropertySyncConfig"]),
+                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "displayVideo_360AdvertiserLink", "displayVideo_360AdvertiserLinkProposal", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric", "dataRetentionSettings", "searchAds_360Link", "dataStream", "attributionSettings", "expandedDataSet", "channelGroup", "bigqueryLink", "enhancedMeasurementSettings", "dataRedactionSettings", "skadnetworkConversionValueSchema", "adsenseLink", "audience", "eventCreateRule", "keyEvent", "calculatedMetric", "reportingDataAnnotation", "subpropertySyncConfig", "reportingIdentitySettings"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -74720,6 +72479,8 @@
                                     $root.google.analytics.admin.v1alpha.ReportingDataAnnotation.encode(message.reportingDataAnnotation, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                                 if (message.subpropertySyncConfig != null && Object.hasOwnProperty.call(message, "subpropertySyncConfig"))
                                     $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.encode(message.subpropertySyncConfig, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                                if (message.reportingIdentitySettings != null && Object.hasOwnProperty.call(message, "reportingIdentitySettings"))
+                                    $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.encode(message.reportingIdentitySettings, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                                 return writer;
                             };
     
@@ -74866,6 +72627,10 @@
                                         }
                                     case 33: {
                                             message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 34: {
+                                            message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -75182,6 +72947,16 @@
                                             return "subpropertySyncConfig." + error;
                                     }
                                 }
+                                if (message.reportingIdentitySettings != null && message.hasOwnProperty("reportingIdentitySettings")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.verify(message.reportingIdentitySettings);
+                                        if (error)
+                                            return "reportingIdentitySettings." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -75336,6 +73111,11 @@
                                     if (typeof object.subpropertySyncConfig !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.subpropertySyncConfig: object expected");
                                     message.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.fromObject(object.subpropertySyncConfig);
+                                }
+                                if (object.reportingIdentitySettings != null) {
+                                    if (typeof object.reportingIdentitySettings !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.reportingIdentitySettings: object expected");
+                                    message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.fromObject(object.reportingIdentitySettings);
                                 }
                                 return message;
                             };
@@ -75492,6 +73272,11 @@
                                     object.subpropertySyncConfig = $root.google.analytics.admin.v1alpha.SubpropertySyncConfig.toObject(message.subpropertySyncConfig, options);
                                     if (options.oneofs)
                                         object.resource = "subpropertySyncConfig";
+                                }
+                                if (message.reportingIdentitySettings != null && message.hasOwnProperty("reportingIdentitySettings")) {
+                                    object.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.toObject(message.reportingIdentitySettings, options);
+                                    if (options.oneofs)
+                                        object.resource = "reportingIdentitySettings";
                                 }
                                 return object;
                             };
@@ -81981,235 +79766,6 @@
                         return EnhancedMeasurementSettings;
                     })();
     
-                    v1alpha.ConnectedSiteTag = (function() {
-    
-                        /**
-                         * Properties of a ConnectedSiteTag.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @interface IConnectedSiteTag
-                         * @property {string|null} [displayName] ConnectedSiteTag displayName
-                         * @property {string|null} [tagId] ConnectedSiteTag tagId
-                         */
-    
-                        /**
-                         * Constructs a new ConnectedSiteTag.
-                         * @memberof google.analytics.admin.v1alpha
-                         * @classdesc Represents a ConnectedSiteTag.
-                         * @implements IConnectedSiteTag
-                         * @constructor
-                         * @param {google.analytics.admin.v1alpha.IConnectedSiteTag=} [properties] Properties to set
-                         */
-                        function ConnectedSiteTag(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ConnectedSiteTag displayName.
-                         * @member {string} displayName
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @instance
-                         */
-                        ConnectedSiteTag.prototype.displayName = "";
-    
-                        /**
-                         * ConnectedSiteTag tagId.
-                         * @member {string} tagId
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @instance
-                         */
-                        ConnectedSiteTag.prototype.tagId = "";
-    
-                        /**
-                         * Creates a new ConnectedSiteTag instance using the specified properties.
-                         * @function create
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IConnectedSiteTag=} [properties] Properties to set
-                         * @returns {google.analytics.admin.v1alpha.ConnectedSiteTag} ConnectedSiteTag instance
-                         */
-                        ConnectedSiteTag.create = function create(properties) {
-                            return new ConnectedSiteTag(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ConnectedSiteTag message. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IConnectedSiteTag} message ConnectedSiteTag message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ConnectedSiteTag.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
-                            if (message.tagId != null && Object.hasOwnProperty.call(message, "tagId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.tagId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ConnectedSiteTag message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.IConnectedSiteTag} message ConnectedSiteTag message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ConnectedSiteTag.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ConnectedSiteTag message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.analytics.admin.v1alpha.ConnectedSiteTag} ConnectedSiteTag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ConnectedSiteTag.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConnectedSiteTag();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.displayName = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.tagId = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ConnectedSiteTag message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.analytics.admin.v1alpha.ConnectedSiteTag} ConnectedSiteTag
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ConnectedSiteTag.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ConnectedSiteTag message.
-                         * @function verify
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ConnectedSiteTag.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            if (message.tagId != null && message.hasOwnProperty("tagId"))
-                                if (!$util.isString(message.tagId))
-                                    return "tagId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ConnectedSiteTag message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.analytics.admin.v1alpha.ConnectedSiteTag} ConnectedSiteTag
-                         */
-                        ConnectedSiteTag.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.analytics.admin.v1alpha.ConnectedSiteTag)
-                                return object;
-                            var message = new $root.google.analytics.admin.v1alpha.ConnectedSiteTag();
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            if (object.tagId != null)
-                                message.tagId = String(object.tagId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ConnectedSiteTag message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {google.analytics.admin.v1alpha.ConnectedSiteTag} message ConnectedSiteTag
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ConnectedSiteTag.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.displayName = "";
-                                object.tagId = "";
-                            }
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.tagId != null && message.hasOwnProperty("tagId"))
-                                object.tagId = message.tagId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ConnectedSiteTag to JSON.
-                         * @function toJSON
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ConnectedSiteTag.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ConnectedSiteTag
-                         * @function getTypeUrl
-                         * @memberof google.analytics.admin.v1alpha.ConnectedSiteTag
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ConnectedSiteTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ConnectedSiteTag";
-                        };
-    
-                        return ConnectedSiteTag;
-                    })();
-    
                     v1alpha.DataRedactionSettings = (function() {
     
                         /**
@@ -83945,6 +81501,282 @@
                         })();
     
                         return SubpropertySyncConfig;
+                    })();
+    
+                    v1alpha.ReportingIdentitySettings = (function() {
+    
+                        /**
+                         * Properties of a ReportingIdentitySettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IReportingIdentitySettings
+                         * @property {string|null} [name] ReportingIdentitySettings name
+                         * @property {google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity|null} [reportingIdentity] ReportingIdentitySettings reportingIdentity
+                         */
+    
+                        /**
+                         * Constructs a new ReportingIdentitySettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ReportingIdentitySettings.
+                         * @implements IReportingIdentitySettings
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IReportingIdentitySettings=} [properties] Properties to set
+                         */
+                        function ReportingIdentitySettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReportingIdentitySettings name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @instance
+                         */
+                        ReportingIdentitySettings.prototype.name = "";
+    
+                        /**
+                         * ReportingIdentitySettings reportingIdentity.
+                         * @member {google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity} reportingIdentity
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @instance
+                         */
+                        ReportingIdentitySettings.prototype.reportingIdentity = 0;
+    
+                        /**
+                         * Creates a new ReportingIdentitySettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IReportingIdentitySettings=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ReportingIdentitySettings} ReportingIdentitySettings instance
+                         */
+                        ReportingIdentitySettings.create = function create(properties) {
+                            return new ReportingIdentitySettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReportingIdentitySettings message. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingIdentitySettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IReportingIdentitySettings} message ReportingIdentitySettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportingIdentitySettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.reportingIdentity != null && Object.hasOwnProperty.call(message, "reportingIdentity"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.reportingIdentity);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReportingIdentitySettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingIdentitySettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IReportingIdentitySettings} message ReportingIdentitySettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReportingIdentitySettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReportingIdentitySettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ReportingIdentitySettings} ReportingIdentitySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportingIdentitySettings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ReportingIdentitySettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.reportingIdentity = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReportingIdentitySettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ReportingIdentitySettings} ReportingIdentitySettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReportingIdentitySettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReportingIdentitySettings message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReportingIdentitySettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.reportingIdentity != null && message.hasOwnProperty("reportingIdentity"))
+                                switch (message.reportingIdentity) {
+                                default:
+                                    return "reportingIdentity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReportingIdentitySettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ReportingIdentitySettings} ReportingIdentitySettings
+                         */
+                        ReportingIdentitySettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ReportingIdentitySettings)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ReportingIdentitySettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.reportingIdentity) {
+                            default:
+                                if (typeof object.reportingIdentity === "number") {
+                                    message.reportingIdentity = object.reportingIdentity;
+                                    break;
+                                }
+                                break;
+                            case "IDENTITY_BLENDING_STRATEGY_UNSPECIFIED":
+                            case 0:
+                                message.reportingIdentity = 0;
+                                break;
+                            case "BLENDED":
+                            case 1:
+                                message.reportingIdentity = 1;
+                                break;
+                            case "OBSERVED":
+                            case 2:
+                                message.reportingIdentity = 2;
+                                break;
+                            case "DEVICE_BASED":
+                            case 3:
+                                message.reportingIdentity = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReportingIdentitySettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ReportingIdentitySettings} message ReportingIdentitySettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReportingIdentitySettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.reportingIdentity = options.enums === String ? "IDENTITY_BLENDING_STRATEGY_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.reportingIdentity != null && message.hasOwnProperty("reportingIdentity"))
+                                object.reportingIdentity = options.enums === String ? $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity[message.reportingIdentity] === undefined ? message.reportingIdentity : $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity[message.reportingIdentity] : message.reportingIdentity;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReportingIdentitySettings to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReportingIdentitySettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReportingIdentitySettings
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.ReportingIdentitySettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReportingIdentitySettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.ReportingIdentitySettings";
+                        };
+    
+                        /**
+                         * ReportingIdentity enum.
+                         * @name google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity
+                         * @enum {number}
+                         * @property {number} IDENTITY_BLENDING_STRATEGY_UNSPECIFIED=0 IDENTITY_BLENDING_STRATEGY_UNSPECIFIED value
+                         * @property {number} BLENDED=1 BLENDED value
+                         * @property {number} OBSERVED=2 OBSERVED value
+                         * @property {number} DEVICE_BASED=3 DEVICE_BASED value
+                         */
+                        ReportingIdentitySettings.ReportingIdentity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "IDENTITY_BLENDING_STRATEGY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLENDED"] = 1;
+                            values[valuesById[2] = "OBSERVED"] = 2;
+                            values[valuesById[3] = "DEVICE_BASED"] = 3;
+                            return values;
+                        })();
+    
+                        return ReportingIdentitySettings;
                     })();
     
                     v1alpha.SubpropertyEventFilterCondition = (function() {

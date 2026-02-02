@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -895,6 +895,8 @@
                              * @property {string|null} [customLlmResponseSafetyErrorMessage] TemplateMetadata customLlmResponseSafetyErrorMessage
                              * @property {boolean|null} [logTemplateOperations] TemplateMetadata logTemplateOperations
                              * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
+                             * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType|null} [enforcementType] TemplateMetadata enforcementType
+                             * @property {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] TemplateMetadata multiLanguageDetection
                              */
     
                             /**
@@ -969,6 +971,22 @@
                             TemplateMetadata.prototype.logSanitizeOperations = false;
     
                             /**
+                             * TemplateMetadata enforcementType.
+                             * @member {google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType} enforcementType
+                             * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.enforcementType = 0;
+    
+                            /**
+                             * TemplateMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
                              * Creates a new TemplateMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
@@ -1006,6 +1024,10 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.logTemplateOperations);
                                 if (message.logSanitizeOperations != null && Object.hasOwnProperty.call(message, "logSanitizeOperations"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.logSanitizeOperations);
+                                if (message.enforcementType != null && Object.hasOwnProperty.call(message, "enforcementType"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.enforcementType);
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1070,6 +1092,14 @@
                                             message.logSanitizeOperations = reader.bool();
                                             break;
                                         }
+                                    case 8: {
+                                            message.enforcementType = reader.int32();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1126,6 +1156,20 @@
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     if (typeof message.logSanitizeOperations !== "boolean")
                                         return "logSanitizeOperations: boolean expected";
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    switch (message.enforcementType) {
+                                    default:
+                                        return "enforcementType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
                                 return null;
                             };
     
@@ -1155,6 +1199,31 @@
                                     message.logTemplateOperations = Boolean(object.logTemplateOperations);
                                 if (object.logSanitizeOperations != null)
                                     message.logSanitizeOperations = Boolean(object.logSanitizeOperations);
+                                switch (object.enforcementType) {
+                                default:
+                                    if (typeof object.enforcementType === "number") {
+                                        message.enforcementType = object.enforcementType;
+                                        break;
+                                    }
+                                    break;
+                                case "ENFORCEMENT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.enforcementType = 0;
+                                    break;
+                                case "INSPECT_ONLY":
+                                case 1:
+                                    message.enforcementType = 1;
+                                    break;
+                                case "INSPECT_AND_BLOCK":
+                                case 2:
+                                    message.enforcementType = 2;
+                                    break;
+                                }
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.Template.TemplateMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
                                 return message;
                             };
     
@@ -1179,6 +1248,8 @@
                                     object.customLlmResponseSafetyErrorMessage = "";
                                     object.logTemplateOperations = false;
                                     object.logSanitizeOperations = false;
+                                    object.enforcementType = options.enums === String ? "ENFORCEMENT_TYPE_UNSPECIFIED" : 0;
+                                    object.multiLanguageDetection = null;
                                 }
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
@@ -1194,6 +1265,10 @@
                                     object.logTemplateOperations = message.logTemplateOperations;
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     object.logSanitizeOperations = message.logSanitizeOperations;
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    object.enforcementType = options.enums === String ? $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] === undefined ? message.enforcementType : $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType[message.enforcementType] : message.enforcementType;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
                                 return object;
                             };
     
@@ -1223,6 +1298,227 @@
                                 return typeUrlPrefix + "/google.cloud.modelarmor.v1.Template.TemplateMetadata";
                             };
     
+                            TemplateMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1.Template.TemplateMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            /**
+                             * EnforcementType enum.
+                             * @name google.cloud.modelarmor.v1.Template.TemplateMetadata.EnforcementType
+                             * @enum {number}
+                             * @property {number} ENFORCEMENT_TYPE_UNSPECIFIED=0 ENFORCEMENT_TYPE_UNSPECIFIED value
+                             * @property {number} INSPECT_ONLY=1 INSPECT_ONLY value
+                             * @property {number} INSPECT_AND_BLOCK=2 INSPECT_AND_BLOCK value
+                             */
+                            TemplateMetadata.EnforcementType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENFORCEMENT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSPECT_ONLY"] = 1;
+                                values[valuesById[2] = "INSPECT_AND_BLOCK"] = 2;
+                                return values;
+                            })();
+    
                             return TemplateMetadata;
                         })();
     
@@ -1240,6 +1536,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FloorSetting updateTime
                          * @property {google.cloud.modelarmor.v1.IFilterConfig|null} [filterConfig] FloorSetting filterConfig
                          * @property {boolean|null} [enableFloorSettingEnforcement] FloorSetting enableFloorSettingEnforcement
+                         * @property {Array.<google.cloud.modelarmor.v1.FloorSetting.IntegratedService>|null} [integratedServices] FloorSetting integratedServices
+                         * @property {google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null} [aiPlatformFloorSetting] FloorSetting aiPlatformFloorSetting
+                         * @property {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null} [floorSettingMetadata] FloorSetting floorSettingMetadata
                          */
     
                         /**
@@ -1251,6 +1550,7 @@
                          * @param {google.cloud.modelarmor.v1.IFloorSetting=} [properties] Properties to set
                          */
                         function FloorSetting(properties) {
+                            this.integratedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1297,12 +1597,42 @@
                          */
                         FloorSetting.prototype.enableFloorSettingEnforcement = null;
     
+                        /**
+                         * FloorSetting integratedServices.
+                         * @member {Array.<google.cloud.modelarmor.v1.FloorSetting.IntegratedService>} integratedServices
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.integratedServices = $util.emptyArray;
+    
+                        /**
+                         * FloorSetting aiPlatformFloorSetting.
+                         * @member {google.cloud.modelarmor.v1.IAiPlatformFloorSetting|null|undefined} aiPlatformFloorSetting
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.aiPlatformFloorSetting = null;
+    
+                        /**
+                         * FloorSetting floorSettingMetadata.
+                         * @member {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null|undefined} floorSettingMetadata
+                         * @memberof google.cloud.modelarmor.v1.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.floorSettingMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FloorSetting.prototype, "_enableFloorSettingEnforcement", {
                             get: $util.oneOfGetter($oneOfFields = ["enableFloorSettingEnforcement"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorSetting.prototype, "_aiPlatformFloorSetting", {
+                            get: $util.oneOfGetter($oneOfFields = ["aiPlatformFloorSetting"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1340,6 +1670,16 @@
                                 $root.google.cloud.modelarmor.v1.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.enableFloorSettingEnforcement != null && Object.hasOwnProperty.call(message, "enableFloorSettingEnforcement"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableFloorSettingEnforcement);
+                            if (message.integratedServices != null && message.integratedServices.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    writer.int32(message.integratedServices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.aiPlatformFloorSetting != null && Object.hasOwnProperty.call(message, "aiPlatformFloorSetting"))
+                                $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.encode(message.aiPlatformFloorSetting, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.floorSettingMetadata != null && Object.hasOwnProperty.call(message, "floorSettingMetadata"))
+                                $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.encode(message.floorSettingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -1394,6 +1734,25 @@
                                     }
                                 case 5: {
                                         message.enableFloorSettingEnforcement = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.integratedServices && message.integratedServices.length))
+                                            message.integratedServices = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.integratedServices.push(reader.int32());
+                                        } else
+                                            message.integratedServices.push(reader.int32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1455,6 +1814,31 @@
                                 if (typeof message.enableFloorSettingEnforcement !== "boolean")
                                     return "enableFloorSettingEnforcement: boolean expected";
                             }
+                            if (message.integratedServices != null && message.hasOwnProperty("integratedServices")) {
+                                if (!Array.isArray(message.integratedServices))
+                                    return "integratedServices: array expected";
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    switch (message.integratedServices[i]) {
+                                    default:
+                                        return "integratedServices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                properties._aiPlatformFloorSetting = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify(message.aiPlatformFloorSetting);
+                                    if (error)
+                                        return "aiPlatformFloorSetting." + error;
+                                }
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify(message.floorSettingMetadata);
+                                if (error)
+                                    return "floorSettingMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -1489,6 +1873,37 @@
                             }
                             if (object.enableFloorSettingEnforcement != null)
                                 message.enableFloorSettingEnforcement = Boolean(object.enableFloorSettingEnforcement);
+                            if (object.integratedServices) {
+                                if (!Array.isArray(object.integratedServices))
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.integratedServices: array expected");
+                                message.integratedServices = [];
+                                for (var i = 0; i < object.integratedServices.length; ++i)
+                                    switch (object.integratedServices[i]) {
+                                    default:
+                                        if (typeof object.integratedServices[i] === "number") {
+                                            message.integratedServices[i] = object.integratedServices[i];
+                                            break;
+                                        }
+                                    case "INTEGRATED_SERVICE_UNSPECIFIED":
+                                    case 0:
+                                        message.integratedServices[i] = 0;
+                                        break;
+                                    case "AI_PLATFORM":
+                                    case 1:
+                                        message.integratedServices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.aiPlatformFloorSetting != null) {
+                                if (typeof object.aiPlatformFloorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.aiPlatformFloorSetting: object expected");
+                                message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.fromObject(object.aiPlatformFloorSetting);
+                            }
+                            if (object.floorSettingMetadata != null) {
+                                if (typeof object.floorSettingMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.floorSettingMetadata: object expected");
+                                message.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.fromObject(object.floorSettingMetadata);
+                            }
                             return message;
                         };
     
@@ -1505,11 +1920,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.integratedServices = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.filterConfig = null;
+                                object.floorSettingMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1524,6 +1942,18 @@
                                 if (options.oneofs)
                                     object._enableFloorSettingEnforcement = "enableFloorSettingEnforcement";
                             }
+                            if (message.integratedServices && message.integratedServices.length) {
+                                object.integratedServices = [];
+                                for (var j = 0; j < message.integratedServices.length; ++j)
+                                    object.integratedServices[j] = options.enums === String ? $root.google.cloud.modelarmor.v1.FloorSetting.IntegratedService[message.integratedServices[j]] === undefined ? message.integratedServices[j] : $root.google.cloud.modelarmor.v1.FloorSetting.IntegratedService[message.integratedServices[j]] : message.integratedServices[j];
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                object.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting.toObject(message.aiPlatformFloorSetting, options);
+                                if (options.oneofs)
+                                    object._aiPlatformFloorSetting = "aiPlatformFloorSetting";
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata"))
+                                object.floorSettingMetadata = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.toObject(message.floorSettingMetadata, options);
                             return object;
                         };
     
@@ -1553,7 +1983,712 @@
                             return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting";
                         };
     
+                        FloorSetting.FloorSettingMetadata = (function() {
+    
+                            /**
+                             * Properties of a FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting
+                             * @interface IFloorSettingMetadata
+                             * @property {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] FloorSettingMetadata multiLanguageDetection
+                             */
+    
+                            /**
+                             * Constructs a new FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting
+                             * @classdesc Represents a FloorSettingMetadata.
+                             * @implements IFloorSettingMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             */
+                            function FloorSettingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FloorSettingMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             */
+                            FloorSettingMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
+                             * Creates a new FloorSettingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata instance
+                             */
+                            FloorSettingMetadata.create = function create(properties) {
+                                return new FloorSettingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FloorSettingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FloorSettingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             */
+                            FloorSettingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata();
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata} message FloorSettingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FloorSettingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.multiLanguageDetection = null;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FloorSettingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FloorSettingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FloorSettingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FloorSettingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata";
+                            };
+    
+                            FloorSettingMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1.FloorSetting.FloorSettingMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            return FloorSettingMetadata;
+                        })();
+    
+                        /**
+                         * IntegratedService enum.
+                         * @name google.cloud.modelarmor.v1.FloorSetting.IntegratedService
+                         * @enum {number}
+                         * @property {number} INTEGRATED_SERVICE_UNSPECIFIED=0 INTEGRATED_SERVICE_UNSPECIFIED value
+                         * @property {number} AI_PLATFORM=1 AI_PLATFORM value
+                         */
+                        FloorSetting.IntegratedService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTEGRATED_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI_PLATFORM"] = 1;
+                            return values;
+                        })();
+    
                         return FloorSetting;
+                    })();
+    
+                    v1.AiPlatformFloorSetting = (function() {
+    
+                        /**
+                         * Properties of an AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface IAiPlatformFloorSetting
+                         * @property {boolean|null} [inspectOnly] AiPlatformFloorSetting inspectOnly
+                         * @property {boolean|null} [inspectAndBlock] AiPlatformFloorSetting inspectAndBlock
+                         * @property {boolean|null} [enableCloudLogging] AiPlatformFloorSetting enableCloudLogging
+                         */
+    
+                        /**
+                         * Constructs a new AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents an AiPlatformFloorSetting.
+                         * @implements IAiPlatformFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting=} [properties] Properties to set
+                         */
+                        function AiPlatformFloorSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AiPlatformFloorSetting inspectOnly.
+                         * @member {boolean|null|undefined} inspectOnly
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectOnly = null;
+    
+                        /**
+                         * AiPlatformFloorSetting inspectAndBlock.
+                         * @member {boolean|null|undefined} inspectAndBlock
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectAndBlock = null;
+    
+                        /**
+                         * AiPlatformFloorSetting enableCloudLogging.
+                         * @member {boolean} enableCloudLogging
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.enableCloudLogging = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AiPlatformFloorSetting enforcementType.
+                         * @member {"inspectOnly"|"inspectAndBlock"|undefined} enforcementType
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(AiPlatformFloorSetting.prototype, "enforcementType", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectOnly", "inspectAndBlock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting instance
+                         */
+                        AiPlatformFloorSetting.create = function create(properties) {
+                            return new AiPlatformFloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectOnly != null && Object.hasOwnProperty.call(message, "inspectOnly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.inspectOnly);
+                            if (message.inspectAndBlock != null && Object.hasOwnProperty.call(message, "inspectAndBlock"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inspectAndBlock);
+                            if (message.enableCloudLogging != null && Object.hasOwnProperty.call(message, "enableCloudLogging"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableCloudLogging);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectOnly = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectAndBlock = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableCloudLogging = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AiPlatformFloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AiPlatformFloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectOnly !== "boolean")
+                                    return "inspectOnly: boolean expected";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                if (properties.enforcementType === 1)
+                                    return "enforcementType: multiple values";
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectAndBlock !== "boolean")
+                                    return "inspectAndBlock: boolean expected";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                if (typeof message.enableCloudLogging !== "boolean")
+                                    return "enableCloudLogging: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         */
+                        AiPlatformFloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1.AiPlatformFloorSetting();
+                            if (object.inspectOnly != null)
+                                message.inspectOnly = Boolean(object.inspectOnly);
+                            if (object.inspectAndBlock != null)
+                                message.inspectAndBlock = Boolean(object.inspectAndBlock);
+                            if (object.enableCloudLogging != null)
+                                message.enableCloudLogging = Boolean(object.enableCloudLogging);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.AiPlatformFloorSetting} message AiPlatformFloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AiPlatformFloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableCloudLogging = false;
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                object.inspectOnly = message.inspectOnly;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectOnly";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                object.inspectAndBlock = message.inspectAndBlock;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectAndBlock";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                object.enableCloudLogging = message.enableCloudLogging;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AiPlatformFloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AiPlatformFloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AiPlatformFloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.AiPlatformFloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AiPlatformFloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.AiPlatformFloorSetting";
+                        };
+    
+                        return AiPlatformFloorSetting;
                     })();
     
                     v1.ListTemplatesRequest = (function() {
@@ -5666,6 +6801,7 @@
                          * @interface ISanitizeUserPromptRequest
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
+                         * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -5700,6 +6836,14 @@
                         SanitizeUserPromptRequest.prototype.userPromptData = null;
     
                         /**
+                         * SanitizeUserPromptRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeUserPromptRequest
@@ -5727,6 +6871,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.userPromptData != null && Object.hasOwnProperty.call(message, "userPromptData"))
                                 $root.google.cloud.modelarmor.v1.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -5769,6 +6915,10 @@
                                     }
                                 case 2: {
                                         message.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5814,6 +6964,11 @@
                                 if (error)
                                     return "userPromptData." + error;
                             }
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -5836,6 +6991,11 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.SanitizeUserPromptRequest.userPromptData: object expected");
                                 message.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.fromObject(object.userPromptData);
                             }
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -5855,11 +7015,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.userPromptData = null;
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.userPromptData != null && message.hasOwnProperty("userPromptData"))
                                 object.userPromptData = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.userPromptData, options);
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -5901,6 +7064,7 @@
                          * @property {string|null} [name] SanitizeModelResponseRequest name
                          * @property {google.cloud.modelarmor.v1.IDataItem|null} [modelResponseData] SanitizeModelResponseRequest modelResponseData
                          * @property {string|null} [userPrompt] SanitizeModelResponseRequest userPrompt
+                         * @property {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeModelResponseRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -5943,6 +7107,14 @@
                         SanitizeModelResponseRequest.prototype.userPrompt = "";
     
                         /**
+                         * SanitizeModelResponseRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
+                         * @instance
+                         */
+                        SanitizeModelResponseRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeModelResponseRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1.SanitizeModelResponseRequest
@@ -5972,6 +7144,8 @@
                                 $root.google.cloud.modelarmor.v1.DataItem.encode(message.modelResponseData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.userPrompt != null && Object.hasOwnProperty.call(message, "userPrompt"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.userPrompt);
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -6020,6 +7194,10 @@
                                         message.userPrompt = reader.string();
                                         break;
                                     }
+                                case 7: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6066,6 +7244,11 @@
                             if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
                                 if (!$util.isString(message.userPrompt))
                                     return "userPrompt: string expected";
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -6090,6 +7273,11 @@
                             }
                             if (object.userPrompt != null)
                                 message.userPrompt = String(object.userPrompt);
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.SanitizeModelResponseRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -6110,6 +7298,7 @@
                                 object.name = "";
                                 object.modelResponseData = null;
                                 object.userPrompt = "";
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6117,6 +7306,8 @@
                                 object.modelResponseData = $root.google.cloud.modelarmor.v1.DataItem.toObject(message.modelResponseData, options);
                             if (message.userPrompt != null && message.hasOwnProperty("userPrompt"))
                                 object.userPrompt = message.userPrompt;
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -7209,6 +8400,235 @@
                         })();
     
                         return SanitizationResult;
+                    })();
+    
+                    v1.MultiLanguageDetectionMetadata = (function() {
+    
+                        /**
+                         * Properties of a MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @interface IMultiLanguageDetectionMetadata
+                         * @property {string|null} [sourceLanguage] MultiLanguageDetectionMetadata sourceLanguage
+                         * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetectionMetadata enableMultiLanguageDetection
+                         */
+    
+                        /**
+                         * Constructs a new MultiLanguageDetectionMetadata.
+                         * @memberof google.cloud.modelarmor.v1
+                         * @classdesc Represents a MultiLanguageDetectionMetadata.
+                         * @implements IMultiLanguageDetectionMetadata
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         */
+                        function MultiLanguageDetectionMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiLanguageDetectionMetadata sourceLanguage.
+                         * @member {string} sourceLanguage
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.sourceLanguage = "";
+    
+                        /**
+                         * MultiLanguageDetectionMetadata enableMultiLanguageDetection.
+                         * @member {boolean} enableMultiLanguageDetection
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.enableMultiLanguageDetection = false;
+    
+                        /**
+                         * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata instance
+                         */
+                        MultiLanguageDetectionMetadata.create = function create(properties) {
+                            return new MultiLanguageDetectionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceLanguage != null && Object.hasOwnProperty.call(message, "sourceLanguage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceLanguage);
+                            if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableMultiLanguageDetection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiLanguageDetectionMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiLanguageDetectionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceLanguage = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableMultiLanguageDetection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiLanguageDetectionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiLanguageDetectionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiLanguageDetectionMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiLanguageDetectionMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                if (!$util.isString(message.sourceLanguage))
+                                    return "sourceLanguage: string expected";
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                    return "enableMultiLanguageDetection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiLanguageDetectionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} MultiLanguageDetectionMetadata
+                         */
+                        MultiLanguageDetectionMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata();
+                            if (object.sourceLanguage != null)
+                                message.sourceLanguage = String(object.sourceLanguage);
+                            if (object.enableMultiLanguageDetection != null)
+                                message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiLanguageDetectionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata} message MultiLanguageDetectionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiLanguageDetectionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceLanguage = "";
+                                object.enableMultiLanguageDetection = false;
+                            }
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                object.sourceLanguage = message.sourceLanguage;
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiLanguageDetectionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiLanguageDetectionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiLanguageDetectionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiLanguageDetectionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1.MultiLanguageDetectionMetadata";
+                        };
+    
+                        return MultiLanguageDetectionMetadata;
                     })();
     
                     v1.FilterResult = (function() {
@@ -9412,6 +10832,8 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.byteData != null && message.hasOwnProperty("byteData"))
@@ -9462,6 +10884,14 @@
                             case "POWERPOINT_DOCUMENT":
                             case 5:
                                 message.byteDataType = 5;
+                                break;
+                            case "TXT":
+                            case 6:
+                                message.byteDataType = 6;
+                                break;
+                            case "CSV":
+                            case 7:
+                                message.byteDataType = 7;
                                 break;
                             }
                             if (object.byteData != null)
@@ -9538,6 +10968,8 @@
                          * @property {number} WORD_DOCUMENT=3 WORD_DOCUMENT value
                          * @property {number} EXCEL_DOCUMENT=4 EXCEL_DOCUMENT value
                          * @property {number} POWERPOINT_DOCUMENT=5 POWERPOINT_DOCUMENT value
+                         * @property {number} TXT=6 TXT value
+                         * @property {number} CSV=7 CSV value
                          */
                         ByteDataItem.ByteItemType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9547,6 +10979,8 @@
                             values[valuesById[3] = "WORD_DOCUMENT"] = 3;
                             values[valuesById[4] = "EXCEL_DOCUMENT"] = 4;
                             values[valuesById[5] = "POWERPOINT_DOCUMENT"] = 5;
+                            values[valuesById[6] = "TXT"] = 6;
+                            values[valuesById[7] = "CSV"] = 7;
                             return values;
                         })();
     
@@ -14030,6 +15464,8 @@
                              * @property {string|null} [customLlmResponseSafetyErrorMessage] TemplateMetadata customLlmResponseSafetyErrorMessage
                              * @property {boolean|null} [logTemplateOperations] TemplateMetadata logTemplateOperations
                              * @property {boolean|null} [logSanitizeOperations] TemplateMetadata logSanitizeOperations
+                             * @property {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType|null} [enforcementType] TemplateMetadata enforcementType
+                             * @property {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] TemplateMetadata multiLanguageDetection
                              */
     
                             /**
@@ -14104,6 +15540,22 @@
                             TemplateMetadata.prototype.logSanitizeOperations = false;
     
                             /**
+                             * TemplateMetadata enforcementType.
+                             * @member {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType} enforcementType
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.enforcementType = 0;
+    
+                            /**
+                             * TemplateMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                             * @instance
+                             */
+                            TemplateMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
                              * Creates a new TemplateMetadata instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
@@ -14141,6 +15593,10 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.logTemplateOperations);
                                 if (message.logSanitizeOperations != null && Object.hasOwnProperty.call(message, "logSanitizeOperations"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.logSanitizeOperations);
+                                if (message.enforcementType != null && Object.hasOwnProperty.call(message, "enforcementType"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int32(message.enforcementType);
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -14205,6 +15661,14 @@
                                             message.logSanitizeOperations = reader.bool();
                                             break;
                                         }
+                                    case 8: {
+                                            message.enforcementType = reader.int32();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -14261,6 +15725,20 @@
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     if (typeof message.logSanitizeOperations !== "boolean")
                                         return "logSanitizeOperations: boolean expected";
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    switch (message.enforcementType) {
+                                    default:
+                                        return "enforcementType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
                                 return null;
                             };
     
@@ -14290,6 +15768,31 @@
                                     message.logTemplateOperations = Boolean(object.logTemplateOperations);
                                 if (object.logSanitizeOperations != null)
                                     message.logSanitizeOperations = Boolean(object.logSanitizeOperations);
+                                switch (object.enforcementType) {
+                                default:
+                                    if (typeof object.enforcementType === "number") {
+                                        message.enforcementType = object.enforcementType;
+                                        break;
+                                    }
+                                    break;
+                                case "ENFORCEMENT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.enforcementType = 0;
+                                    break;
+                                case "INSPECT_ONLY":
+                                case 1:
+                                    message.enforcementType = 1;
+                                    break;
+                                case "INSPECT_AND_BLOCK":
+                                case 2:
+                                    message.enforcementType = 2;
+                                    break;
+                                }
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.Template.TemplateMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
                                 return message;
                             };
     
@@ -14314,6 +15817,8 @@
                                     object.customLlmResponseSafetyErrorMessage = "";
                                     object.logTemplateOperations = false;
                                     object.logSanitizeOperations = false;
+                                    object.enforcementType = options.enums === String ? "ENFORCEMENT_TYPE_UNSPECIFIED" : 0;
+                                    object.multiLanguageDetection = null;
                                 }
                                 if (message.ignorePartialInvocationFailures != null && message.hasOwnProperty("ignorePartialInvocationFailures"))
                                     object.ignorePartialInvocationFailures = message.ignorePartialInvocationFailures;
@@ -14329,6 +15834,10 @@
                                     object.logTemplateOperations = message.logTemplateOperations;
                                 if (message.logSanitizeOperations != null && message.hasOwnProperty("logSanitizeOperations"))
                                     object.logSanitizeOperations = message.logSanitizeOperations;
+                                if (message.enforcementType != null && message.hasOwnProperty("enforcementType"))
+                                    object.enforcementType = options.enums === String ? $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType[message.enforcementType] === undefined ? message.enforcementType : $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType[message.enforcementType] : message.enforcementType;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
                                 return object;
                             };
     
@@ -14358,6 +15867,227 @@
                                 return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template.TemplateMetadata";
                             };
     
+                            TemplateMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.Template.TemplateMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            /**
+                             * EnforcementType enum.
+                             * @name google.cloud.modelarmor.v1beta.Template.TemplateMetadata.EnforcementType
+                             * @enum {number}
+                             * @property {number} ENFORCEMENT_TYPE_UNSPECIFIED=0 ENFORCEMENT_TYPE_UNSPECIFIED value
+                             * @property {number} INSPECT_ONLY=1 INSPECT_ONLY value
+                             * @property {number} INSPECT_AND_BLOCK=2 INSPECT_AND_BLOCK value
+                             */
+                            TemplateMetadata.EnforcementType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENFORCEMENT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INSPECT_ONLY"] = 1;
+                                values[valuesById[2] = "INSPECT_AND_BLOCK"] = 2;
+                                return values;
+                            })();
+    
                             return TemplateMetadata;
                         })();
     
@@ -14375,6 +16105,9 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FloorSetting updateTime
                          * @property {google.cloud.modelarmor.v1beta.IFilterConfig|null} [filterConfig] FloorSetting filterConfig
                          * @property {boolean|null} [enableFloorSettingEnforcement] FloorSetting enableFloorSettingEnforcement
+                         * @property {Array.<google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService>|null} [integratedServices] FloorSetting integratedServices
+                         * @property {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null} [aiPlatformFloorSetting] FloorSetting aiPlatformFloorSetting
+                         * @property {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null} [floorSettingMetadata] FloorSetting floorSettingMetadata
                          */
     
                         /**
@@ -14386,6 +16119,7 @@
                          * @param {google.cloud.modelarmor.v1beta.IFloorSetting=} [properties] Properties to set
                          */
                         function FloorSetting(properties) {
+                            this.integratedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14432,12 +16166,42 @@
                          */
                         FloorSetting.prototype.enableFloorSettingEnforcement = null;
     
+                        /**
+                         * FloorSetting integratedServices.
+                         * @member {Array.<google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService>} integratedServices
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.integratedServices = $util.emptyArray;
+    
+                        /**
+                         * FloorSetting aiPlatformFloorSetting.
+                         * @member {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting|null|undefined} aiPlatformFloorSetting
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.aiPlatformFloorSetting = null;
+    
+                        /**
+                         * FloorSetting floorSettingMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata|null|undefined} floorSettingMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                         * @instance
+                         */
+                        FloorSetting.prototype.floorSettingMetadata = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(FloorSetting.prototype, "_enableFloorSettingEnforcement", {
                             get: $util.oneOfGetter($oneOfFields = ["enableFloorSettingEnforcement"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorSetting.prototype, "_aiPlatformFloorSetting", {
+                            get: $util.oneOfGetter($oneOfFields = ["aiPlatformFloorSetting"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -14475,6 +16239,16 @@
                                 $root.google.cloud.modelarmor.v1beta.FilterConfig.encode(message.filterConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.enableFloorSettingEnforcement != null && Object.hasOwnProperty.call(message, "enableFloorSettingEnforcement"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableFloorSettingEnforcement);
+                            if (message.integratedServices != null && message.integratedServices.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    writer.int32(message.integratedServices[i]);
+                                writer.ldelim();
+                            }
+                            if (message.aiPlatformFloorSetting != null && Object.hasOwnProperty.call(message, "aiPlatformFloorSetting"))
+                                $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.encode(message.aiPlatformFloorSetting, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.floorSettingMetadata != null && Object.hasOwnProperty.call(message, "floorSettingMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.encode(message.floorSettingMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -14529,6 +16303,25 @@
                                     }
                                 case 5: {
                                         message.enableFloorSettingEnforcement = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.integratedServices && message.integratedServices.length))
+                                            message.integratedServices = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.integratedServices.push(reader.int32());
+                                        } else
+                                            message.integratedServices.push(reader.int32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -14590,6 +16383,31 @@
                                 if (typeof message.enableFloorSettingEnforcement !== "boolean")
                                     return "enableFloorSettingEnforcement: boolean expected";
                             }
+                            if (message.integratedServices != null && message.hasOwnProperty("integratedServices")) {
+                                if (!Array.isArray(message.integratedServices))
+                                    return "integratedServices: array expected";
+                                for (var i = 0; i < message.integratedServices.length; ++i)
+                                    switch (message.integratedServices[i]) {
+                                    default:
+                                        return "integratedServices: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                properties._aiPlatformFloorSetting = 1;
+                                {
+                                    var error = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify(message.aiPlatformFloorSetting);
+                                    if (error)
+                                        return "aiPlatformFloorSetting." + error;
+                                }
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify(message.floorSettingMetadata);
+                                if (error)
+                                    return "floorSettingMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -14624,6 +16442,37 @@
                             }
                             if (object.enableFloorSettingEnforcement != null)
                                 message.enableFloorSettingEnforcement = Boolean(object.enableFloorSettingEnforcement);
+                            if (object.integratedServices) {
+                                if (!Array.isArray(object.integratedServices))
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.integratedServices: array expected");
+                                message.integratedServices = [];
+                                for (var i = 0; i < object.integratedServices.length; ++i)
+                                    switch (object.integratedServices[i]) {
+                                    default:
+                                        if (typeof object.integratedServices[i] === "number") {
+                                            message.integratedServices[i] = object.integratedServices[i];
+                                            break;
+                                        }
+                                    case "INTEGRATED_SERVICE_UNSPECIFIED":
+                                    case 0:
+                                        message.integratedServices[i] = 0;
+                                        break;
+                                    case "AI_PLATFORM":
+                                    case 1:
+                                        message.integratedServices[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.aiPlatformFloorSetting != null) {
+                                if (typeof object.aiPlatformFloorSetting !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.aiPlatformFloorSetting: object expected");
+                                message.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.fromObject(object.aiPlatformFloorSetting);
+                            }
+                            if (object.floorSettingMetadata != null) {
+                                if (typeof object.floorSettingMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.floorSettingMetadata: object expected");
+                                message.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.fromObject(object.floorSettingMetadata);
+                            }
                             return message;
                         };
     
@@ -14640,11 +16489,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.integratedServices = [];
                             if (options.defaults) {
                                 object.name = "";
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.filterConfig = null;
+                                object.floorSettingMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14659,6 +16511,18 @@
                                 if (options.oneofs)
                                     object._enableFloorSettingEnforcement = "enableFloorSettingEnforcement";
                             }
+                            if (message.integratedServices && message.integratedServices.length) {
+                                object.integratedServices = [];
+                                for (var j = 0; j < message.integratedServices.length; ++j)
+                                    object.integratedServices[j] = options.enums === String ? $root.google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[message.integratedServices[j]] === undefined ? message.integratedServices[j] : $root.google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService[message.integratedServices[j]] : message.integratedServices[j];
+                            }
+                            if (message.aiPlatformFloorSetting != null && message.hasOwnProperty("aiPlatformFloorSetting")) {
+                                object.aiPlatformFloorSetting = $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.toObject(message.aiPlatformFloorSetting, options);
+                                if (options.oneofs)
+                                    object._aiPlatformFloorSetting = "aiPlatformFloorSetting";
+                            }
+                            if (message.floorSettingMetadata != null && message.hasOwnProperty("floorSettingMetadata"))
+                                object.floorSettingMetadata = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.toObject(message.floorSettingMetadata, options);
                             return object;
                         };
     
@@ -14688,7 +16552,712 @@
                             return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting";
                         };
     
+                        FloorSetting.FloorSettingMetadata = (function() {
+    
+                            /**
+                             * Properties of a FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                             * @interface IFloorSettingMetadata
+                             * @property {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null} [multiLanguageDetection] FloorSettingMetadata multiLanguageDetection
+                             */
+    
+                            /**
+                             * Constructs a new FloorSettingMetadata.
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting
+                             * @classdesc Represents a FloorSettingMetadata.
+                             * @implements IFloorSettingMetadata
+                             * @constructor
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             */
+                            function FloorSettingMetadata(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FloorSettingMetadata multiLanguageDetection.
+                             * @member {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection|null|undefined} multiLanguageDetection
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             */
+                            FloorSettingMetadata.prototype.multiLanguageDetection = null;
+    
+                            /**
+                             * Creates a new FloorSettingMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata instance
+                             */
+                            FloorSettingMetadata.create = function create(properties) {
+                                return new FloorSettingMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiLanguageDetection != null && Object.hasOwnProperty.call(message, "multiLanguageDetection"))
+                                    $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.encode(message.multiLanguageDetection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FloorSettingMetadata message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.IFloorSettingMetadata} message FloorSettingMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FloorSettingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FloorSettingMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FloorSettingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FloorSettingMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FloorSettingMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection")) {
+                                    var error = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify(message.multiLanguageDetection);
+                                    if (error)
+                                        return "multiLanguageDetection." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FloorSettingMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} FloorSettingMetadata
+                             */
+                            FloorSettingMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata();
+                                if (object.multiLanguageDetection != null) {
+                                    if (typeof object.multiLanguageDetection !== "object")
+                                        throw TypeError(".google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.multiLanguageDetection: object expected");
+                                    message.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.fromObject(object.multiLanguageDetection);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FloorSettingMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata} message FloorSettingMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FloorSettingMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.multiLanguageDetection = null;
+                                if (message.multiLanguageDetection != null && message.hasOwnProperty("multiLanguageDetection"))
+                                    object.multiLanguageDetection = $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.toObject(message.multiLanguageDetection, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FloorSettingMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FloorSettingMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FloorSettingMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FloorSettingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata";
+                            };
+    
+                            FloorSettingMetadata.MultiLanguageDetection = (function() {
+    
+                                /**
+                                 * Properties of a MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                                 * @interface IMultiLanguageDetection
+                                 * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetection enableMultiLanguageDetection
+                                 */
+    
+                                /**
+                                 * Constructs a new MultiLanguageDetection.
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata
+                                 * @classdesc Represents a MultiLanguageDetection.
+                                 * @implements IMultiLanguageDetection
+                                 * @constructor
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 */
+                                function MultiLanguageDetection(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * MultiLanguageDetection enableMultiLanguageDetection.
+                                 * @member {boolean} enableMultiLanguageDetection
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 */
+                                MultiLanguageDetection.prototype.enableMultiLanguageDetection = false;
+    
+                                /**
+                                 * Creates a new MultiLanguageDetection instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection=} [properties] Properties to set
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection instance
+                                 */
+                                MultiLanguageDetection.create = function create(properties) {
+                                    return new MultiLanguageDetection(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableMultiLanguageDetection);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified MultiLanguageDetection message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.IMultiLanguageDetection} message MultiLanguageDetection message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                MultiLanguageDetection.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enableMultiLanguageDetection = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a MultiLanguageDetection message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                MultiLanguageDetection.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a MultiLanguageDetection message.
+                                 * @function verify
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                MultiLanguageDetection.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                            return "enableMultiLanguageDetection: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a MultiLanguageDetection message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} MultiLanguageDetection
+                                 */
+                                MultiLanguageDetection.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection)
+                                        return object;
+                                    var message = new $root.google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection();
+                                    if (object.enableMultiLanguageDetection != null)
+                                        message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a MultiLanguageDetection message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection} message MultiLanguageDetection
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                MultiLanguageDetection.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.enableMultiLanguageDetection = false;
+                                    if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                        object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this MultiLanguageDetection to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                MultiLanguageDetection.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for MultiLanguageDetection
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                MultiLanguageDetection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.FloorSetting.FloorSettingMetadata.MultiLanguageDetection";
+                                };
+    
+                                return MultiLanguageDetection;
+                            })();
+    
+                            return FloorSettingMetadata;
+                        })();
+    
+                        /**
+                         * IntegratedService enum.
+                         * @name google.cloud.modelarmor.v1beta.FloorSetting.IntegratedService
+                         * @enum {number}
+                         * @property {number} INTEGRATED_SERVICE_UNSPECIFIED=0 INTEGRATED_SERVICE_UNSPECIFIED value
+                         * @property {number} AI_PLATFORM=1 AI_PLATFORM value
+                         */
+                        FloorSetting.IntegratedService = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTEGRATED_SERVICE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI_PLATFORM"] = 1;
+                            return values;
+                        })();
+    
                         return FloorSetting;
+                    })();
+    
+                    v1beta.AiPlatformFloorSetting = (function() {
+    
+                        /**
+                         * Properties of an AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @interface IAiPlatformFloorSetting
+                         * @property {boolean|null} [inspectOnly] AiPlatformFloorSetting inspectOnly
+                         * @property {boolean|null} [inspectAndBlock] AiPlatformFloorSetting inspectAndBlock
+                         * @property {boolean|null} [enableCloudLogging] AiPlatformFloorSetting enableCloudLogging
+                         */
+    
+                        /**
+                         * Constructs a new AiPlatformFloorSetting.
+                         * @memberof google.cloud.modelarmor.v1beta
+                         * @classdesc Represents an AiPlatformFloorSetting.
+                         * @implements IAiPlatformFloorSetting
+                         * @constructor
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting=} [properties] Properties to set
+                         */
+                        function AiPlatformFloorSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AiPlatformFloorSetting inspectOnly.
+                         * @member {boolean|null|undefined} inspectOnly
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectOnly = null;
+    
+                        /**
+                         * AiPlatformFloorSetting inspectAndBlock.
+                         * @member {boolean|null|undefined} inspectAndBlock
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.inspectAndBlock = null;
+    
+                        /**
+                         * AiPlatformFloorSetting enableCloudLogging.
+                         * @member {boolean} enableCloudLogging
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        AiPlatformFloorSetting.prototype.enableCloudLogging = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AiPlatformFloorSetting enforcementType.
+                         * @member {"inspectOnly"|"inspectAndBlock"|undefined} enforcementType
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         */
+                        Object.defineProperty(AiPlatformFloorSetting.prototype, "enforcementType", {
+                            get: $util.oneOfGetter($oneOfFields = ["inspectOnly", "inspectAndBlock"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AiPlatformFloorSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting=} [properties] Properties to set
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting instance
+                         */
+                        AiPlatformFloorSetting.create = function create(properties) {
+                            return new AiPlatformFloorSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inspectOnly != null && Object.hasOwnProperty.call(message, "inspectOnly"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.inspectOnly);
+                            if (message.inspectAndBlock != null && Object.hasOwnProperty.call(message, "inspectAndBlock"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.inspectAndBlock);
+                            if (message.enableCloudLogging != null && Object.hasOwnProperty.call(message, "enableCloudLogging"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableCloudLogging);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AiPlatformFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1beta.AiPlatformFloorSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.IAiPlatformFloorSetting} message AiPlatformFloorSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiPlatformFloorSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.inspectOnly = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inspectAndBlock = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.enableCloudLogging = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AiPlatformFloorSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiPlatformFloorSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AiPlatformFloorSetting message.
+                         * @function verify
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AiPlatformFloorSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectOnly !== "boolean")
+                                    return "inspectOnly: boolean expected";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                if (properties.enforcementType === 1)
+                                    return "enforcementType: multiple values";
+                                properties.enforcementType = 1;
+                                if (typeof message.inspectAndBlock !== "boolean")
+                                    return "inspectAndBlock: boolean expected";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                if (typeof message.enableCloudLogging !== "boolean")
+                                    return "enableCloudLogging: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AiPlatformFloorSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} AiPlatformFloorSetting
+                         */
+                        AiPlatformFloorSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting)
+                                return object;
+                            var message = new $root.google.cloud.modelarmor.v1beta.AiPlatformFloorSetting();
+                            if (object.inspectOnly != null)
+                                message.inspectOnly = Boolean(object.inspectOnly);
+                            if (object.inspectAndBlock != null)
+                                message.inspectAndBlock = Boolean(object.inspectAndBlock);
+                            if (object.enableCloudLogging != null)
+                                message.enableCloudLogging = Boolean(object.enableCloudLogging);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AiPlatformFloorSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {google.cloud.modelarmor.v1beta.AiPlatformFloorSetting} message AiPlatformFloorSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AiPlatformFloorSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableCloudLogging = false;
+                            if (message.inspectOnly != null && message.hasOwnProperty("inspectOnly")) {
+                                object.inspectOnly = message.inspectOnly;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectOnly";
+                            }
+                            if (message.inspectAndBlock != null && message.hasOwnProperty("inspectAndBlock")) {
+                                object.inspectAndBlock = message.inspectAndBlock;
+                                if (options.oneofs)
+                                    object.enforcementType = "inspectAndBlock";
+                            }
+                            if (message.enableCloudLogging != null && message.hasOwnProperty("enableCloudLogging"))
+                                object.enableCloudLogging = message.enableCloudLogging;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AiPlatformFloorSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AiPlatformFloorSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AiPlatformFloorSetting
+                         * @function getTypeUrl
+                         * @memberof google.cloud.modelarmor.v1beta.AiPlatformFloorSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AiPlatformFloorSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.modelarmor.v1beta.AiPlatformFloorSetting";
+                        };
+    
+                        return AiPlatformFloorSetting;
                     })();
     
                     v1beta.ListTemplatesRequest = (function() {
@@ -18801,6 +21370,7 @@
                          * @interface ISanitizeUserPromptRequest
                          * @property {string|null} [name] SanitizeUserPromptRequest name
                          * @property {google.cloud.modelarmor.v1beta.IDataItem|null} [userPromptData] SanitizeUserPromptRequest userPromptData
+                         * @property {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null} [multiLanguageDetectionMetadata] SanitizeUserPromptRequest multiLanguageDetectionMetadata
                          */
     
                         /**
@@ -18835,6 +21405,14 @@
                         SanitizeUserPromptRequest.prototype.userPromptData = null;
     
                         /**
+                         * SanitizeUserPromptRequest multiLanguageDetectionMetadata.
+                         * @member {google.cloud.modelarmor.v1beta.IMultiLanguageDetectionMetadata|null|undefined} multiLanguageDetectionMetadata
+                         * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
+                         * @instance
+                         */
+                        SanitizeUserPromptRequest.prototype.multiLanguageDetectionMetadata = null;
+    
+                        /**
                          * Creates a new SanitizeUserPromptRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest
@@ -18862,6 +21440,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.userPromptData != null && Object.hasOwnProperty.call(message, "userPromptData"))
                                 $root.google.cloud.modelarmor.v1beta.DataItem.encode(message.userPromptData, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.multiLanguageDetectionMetadata != null && Object.hasOwnProperty.call(message, "multiLanguageDetectionMetadata"))
+                                $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.encode(message.multiLanguageDetectionMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -18904,6 +21484,10 @@
                                     }
                                 case 2: {
                                         message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -18949,6 +21533,11 @@
                                 if (error)
                                     return "userPromptData." + error;
                             }
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata")) {
+                                var error = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.verify(message.multiLanguageDetectionMetadata);
+                                if (error)
+                                    return "multiLanguageDetectionMetadata." + error;
+                            }
                             return null;
                         };
     
@@ -18971,6 +21560,11 @@
                                     throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.userPromptData: object expected");
                                 message.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.fromObject(object.userPromptData);
                             }
+                            if (object.multiLanguageDetectionMetadata != null) {
+                                if (typeof object.multiLanguageDetectionMetadata !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1beta.SanitizeUserPromptRequest.multiLanguageDetectionMetadata: object expected");
+                                message.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.fromObject(object.multiLanguageDetectionMetadata);
+                            }
                             return message;
                         };
     
@@ -18990,11 +21584,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.userPromptData = null;
+                                object.multiLanguageDetectionMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.userPromptData != null && message.hasOwnProperty("userPromptData"))
                                 object.userPromptData = $root.google.cloud.modelarmor.v1beta.DataItem.toObject(message.userPromptData, options);
+                            if (message.multiLanguageDetectionMetadata != null && message.hasOwnProperty("multiLanguageDetectionMetadata"))
+                                object.multiLanguageDetectionMetadata = $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata.toObject(message.multiLanguageDetectionMetadata, options);
                             return object;
                         };
     
@@ -20380,6 +22977,8 @@
                          * Properties of a MultiLanguageDetectionMetadata.
                          * @memberof google.cloud.modelarmor.v1beta
                          * @interface IMultiLanguageDetectionMetadata
+                         * @property {string|null} [sourceLanguage] MultiLanguageDetectionMetadata sourceLanguage
+                         * @property {boolean|null} [enableMultiLanguageDetection] MultiLanguageDetectionMetadata enableMultiLanguageDetection
                          */
     
                         /**
@@ -20396,6 +22995,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * MultiLanguageDetectionMetadata sourceLanguage.
+                         * @member {string} sourceLanguage
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.sourceLanguage = "";
+    
+                        /**
+                         * MultiLanguageDetectionMetadata enableMultiLanguageDetection.
+                         * @member {boolean} enableMultiLanguageDetection
+                         * @memberof google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata
+                         * @instance
+                         */
+                        MultiLanguageDetectionMetadata.prototype.enableMultiLanguageDetection = false;
     
                         /**
                          * Creates a new MultiLanguageDetectionMetadata instance using the specified properties.
@@ -20421,6 +23036,10 @@
                         MultiLanguageDetectionMetadata.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
+                            if (message.sourceLanguage != null && Object.hasOwnProperty.call(message, "sourceLanguage"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceLanguage);
+                            if (message.enableMultiLanguageDetection != null && Object.hasOwnProperty.call(message, "enableMultiLanguageDetection"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableMultiLanguageDetection);
                             return writer;
                         };
     
@@ -20457,6 +23076,14 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceLanguage = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableMultiLanguageDetection = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20492,6 +23119,12 @@
                         MultiLanguageDetectionMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                if (!$util.isString(message.sourceLanguage))
+                                    return "sourceLanguage: string expected";
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                if (typeof message.enableMultiLanguageDetection !== "boolean")
+                                    return "enableMultiLanguageDetection: boolean expected";
                             return null;
                         };
     
@@ -20506,7 +23139,12 @@
                         MultiLanguageDetectionMetadata.fromObject = function fromObject(object) {
                             if (object instanceof $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata)
                                 return object;
-                            return new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                            var message = new $root.google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata();
+                            if (object.sourceLanguage != null)
+                                message.sourceLanguage = String(object.sourceLanguage);
+                            if (object.enableMultiLanguageDetection != null)
+                                message.enableMultiLanguageDetection = Boolean(object.enableMultiLanguageDetection);
+                            return message;
                         };
     
                         /**
@@ -20518,8 +23156,19 @@
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        MultiLanguageDetectionMetadata.toObject = function toObject() {
-                            return {};
+                        MultiLanguageDetectionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceLanguage = "";
+                                object.enableMultiLanguageDetection = false;
+                            }
+                            if (message.sourceLanguage != null && message.hasOwnProperty("sourceLanguage"))
+                                object.sourceLanguage = message.sourceLanguage;
+                            if (message.enableMultiLanguageDetection != null && message.hasOwnProperty("enableMultiLanguageDetection"))
+                                object.enableMultiLanguageDetection = message.enableMultiLanguageDetection;
+                            return object;
                         };
     
                         /**

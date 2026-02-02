@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Data_foundry_service.generate_synthetic_data](#data_foundry_service.generate_synthetic_data)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
   * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
@@ -60,6 +61,7 @@
   * [Feature_online_store_admin_service.sync_feature_view](#feature_online_store_admin_service.sync_feature_view)
   * [Feature_online_store_admin_service.update_feature_online_store](#feature_online_store_admin_service.update_feature_online_store)
   * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
+  * [Feature_online_store_service.feature_view_direct_write](#feature_online_store_service.feature_view_direct_write)
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
   * [Feature_registry_service.batch_create_features](#feature_registry_service.batch_create_features)
@@ -598,6 +600,7 @@
   * [Model_service.list_model_versions](#model_service.list_model_versions)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
+  * [Model_service.recommend_spec](#model_service.recommend_spec)
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
@@ -750,6 +753,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Data_foundry_service.generate_synthetic_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/data_foundry_service.generate_synthetic_data.js`
+
+
+-----
+
 
 
 
@@ -1562,6 +1582,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_admin_service.update_feature_view.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_service.feature_view_direct_write
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.feature_view_direct_write.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.feature_view_direct_write.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.feature_view_direct_write.js`
 
 
 -----
@@ -10708,6 +10745,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.merge_version_aliases.js`
+
+
+-----
+
+
+
+
+### Model_service.recommend_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.recommend_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.recommend_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.recommend_spec.js`
 
 
 -----

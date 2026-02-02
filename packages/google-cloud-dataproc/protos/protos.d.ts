@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4941,6 +4941,7 @@ export namespace google {
                     HUDI = 18,
                     ICEBERG = 19,
                     JUPYTER = 1,
+                    JUPYTER_KERNEL_GATEWAY = 22,
                     PIG = 21,
                     PRESTO = 6,
                     TRINO = 17,

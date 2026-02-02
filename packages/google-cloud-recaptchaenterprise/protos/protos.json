@@ -516,6 +516,24 @@
                         }
                       }
                     },
+                    "PhoneAuthenticationEvent": {
+                      "fields": {
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "AnnotateAssessmentRequest": {
                       "fields": {
                         "name": {
@@ -558,6 +576,13 @@
                         "transactionEvent": {
                           "type": "TransactionEvent",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "phoneAuthenticationEvent": {
+                          "type": "PhoneAuthenticationEvent",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1297,6 +1322,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "verifiedBots": {
+                          "rule": "repeated",
+                          "type": "Bot",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1318,6 +1351,34 @@
                             "NOCAPTCHA": 1,
                             "PASSED": 2,
                             "FAILED": 3
+                          }
+                        }
+                      }
+                    },
+                    "Bot": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "botType": {
+                          "type": "BotType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BotType": {
+                          "values": {
+                            "BOT_TYPE_UNSPECIFIED": 0,
+                            "AI_AGENT": 1,
+                            "CONTENT_SCRAPER": 2,
+                            "SEARCH_INDEXER": 3
                           }
                         }
                       }
@@ -1383,7 +1444,8 @@
                             "EXPIRED": 3,
                             "DUPE": 4,
                             "MISSING": 5,
-                            "BROWSER_ERROR": 6
+                            "BROWSER_ERROR": 6,
+                            "UNEXPECTED_ACTION": 7
                           }
                         }
                       }
@@ -1393,6 +1455,14 @@
                         "transactionRisk": {
                           "type": "float",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "riskReasons": {
+                          "rule": "repeated",
+                          "type": "RiskReason",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1420,6 +1490,29 @@
                         }
                       },
                       "nested": {
+                        "RiskReason": {
+                          "fields": {
+                            "reason": {
+                              "type": "Reason",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Reason": {
+                              "values": {
+                                "REASON_UNSPECIFIED": 0,
+                                "HIGH_TRANSACTION_VELOCITY": 1,
+                                "EXCESSIVE_ENUMERATION_PATTERN": 2,
+                                "SHORT_IDENTITY_HISTORY": 3,
+                                "GEOLOCATION_DISCREPANCY": 4,
+                                "ASSOCIATED_WITH_FRAUD_CLUSTER": 5
+                              }
+                            }
+                          }
+                        },
                         "StolenInstrumentVerdict": {
                           "fields": {
                             "risk": {
@@ -2025,6 +2118,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "challengeSettings": {
+                          "type": "ChallengeSettings",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2033,7 +2133,8 @@
                             "INTEGRATION_TYPE_UNSPECIFIED": 0,
                             "SCORE": 1,
                             "CHECKBOX": 2,
-                            "INVISIBLE": 3
+                            "INVISIBLE": 3,
+                            "POLICY_BASED_CHALLENGE": 5
                           }
                         },
                         "ChallengeSecurityPreference": {
@@ -2042,6 +2143,36 @@
                             "USABILITY": 1,
                             "BALANCE": 2,
                             "SECURITY": 3
+                          }
+                        },
+                        "ActionSettings": {
+                          "fields": {
+                            "scoreThreshold": {
+                              "type": "float",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "ChallengeSettings": {
+                          "fields": {
+                            "defaultSettings": {
+                              "type": "ActionSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "actionSettings": {
+                              "keyType": "string",
+                              "type": "ActionSettings",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -2594,6 +2725,11 @@
                       },
                       "nested": {
                         "WafFeature": {
+                          "valuesOptions": {
+                            "EXPRESS": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "WAF_FEATURE_UNSPECIFIED": 0,
                             "CHALLENGE_PAGE": 1,

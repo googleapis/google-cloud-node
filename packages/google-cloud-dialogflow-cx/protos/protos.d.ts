@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -971,6 +971,9 @@ export namespace google {
                         /** Agent startFlow */
                         startFlow?: (string|null);
 
+                        /** Agent startPlaybook */
+                        startPlaybook?: (string|null);
+
                         /** Agent securitySettings */
                         securitySettings?: (string|null);
 
@@ -1048,7 +1051,10 @@ export namespace google {
                         public speechToTextSettings?: (google.cloud.dialogflow.cx.v3.ISpeechToTextSettings|null);
 
                         /** Agent startFlow. */
-                        public startFlow: string;
+                        public startFlow?: (string|null);
+
+                        /** Agent startPlaybook. */
+                        public startPlaybook?: (string|null);
 
                         /** Agent securitySettings. */
                         public securitySettings: string;
@@ -1091,6 +1097,9 @@ export namespace google {
 
                         /** Agent satisfiesPzi. */
                         public satisfiesPzi?: (boolean|null);
+
+                        /** Agent sessionEntryResource. */
+                        public sessionEntryResource?: ("startFlow"|"startPlaybook");
 
                         /**
                          * Creates a new Agent instance using the specified properties.
@@ -4730,6 +4739,12 @@ export namespace google {
                         /** Flow knowledgeConnectorSettings */
                         knowledgeConnectorSettings?: (google.cloud.dialogflow.cx.v3.IKnowledgeConnectorSettings|null);
 
+                        /** Flow inputParameterDefinitions */
+                        inputParameterDefinitions?: (google.cloud.dialogflow.cx.v3.IParameterDefinition[]|null);
+
+                        /** Flow outputParameterDefinitions */
+                        outputParameterDefinitions?: (google.cloud.dialogflow.cx.v3.IParameterDefinition[]|null);
+
                         /** Flow multiLanguageSettings */
                         multiLanguageSettings?: (google.cloud.dialogflow.cx.v3.Flow.IMultiLanguageSettings|null);
 
@@ -4772,6 +4787,12 @@ export namespace google {
 
                         /** Flow knowledgeConnectorSettings. */
                         public knowledgeConnectorSettings?: (google.cloud.dialogflow.cx.v3.IKnowledgeConnectorSettings|null);
+
+                        /** Flow inputParameterDefinitions. */
+                        public inputParameterDefinitions: google.cloud.dialogflow.cx.v3.IParameterDefinition[];
+
+                        /** Flow outputParameterDefinitions. */
+                        public outputParameterDefinitions: google.cloud.dialogflow.cx.v3.IParameterDefinition[];
 
                         /** Flow multiLanguageSettings. */
                         public multiLanguageSettings?: (google.cloud.dialogflow.cx.v3.Flow.IMultiLanguageSettings|null);
@@ -7212,6 +7233,9 @@ export namespace google {
 
                         /** EventHandler targetFlow */
                         targetFlow?: (string|null);
+
+                        /** EventHandler targetPlaybook */
+                        targetPlaybook?: (string|null);
                     }
 
                     /** Represents an EventHandler. */
@@ -7238,8 +7262,11 @@ export namespace google {
                         /** EventHandler targetFlow. */
                         public targetFlow?: (string|null);
 
+                        /** EventHandler targetPlaybook. */
+                        public targetPlaybook?: (string|null);
+
                         /** EventHandler target. */
-                        public target?: ("targetPage"|"targetFlow");
+                        public target?: ("targetPage"|"targetFlow"|"targetPlaybook");
 
                         /**
                          * Creates a new EventHandler instance using the specified properties.
@@ -8605,6 +8632,9 @@ export namespace google {
 
                             /** SearchSnippet text */
                             text?: (string|null);
+
+                            /** SearchSnippet metadata */
+                            metadata?: (google.protobuf.IStruct|null);
                         }
 
                         /** Represents a SearchSnippet. */
@@ -8624,6 +8654,9 @@ export namespace google {
 
                             /** SearchSnippet text. */
                             public text: string;
+
+                            /** SearchSnippet metadata. */
+                            public metadata?: (google.protobuf.IStruct|null);
 
                             /**
                              * Creates a new SearchSnippet instance using the specified properties.
@@ -9302,6 +9335,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback */
                         enableGenerativeFallback?: (boolean|null);
+
+                        /** Fulfillment generators */
+                        generators?: (google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings[]|null);
                     }
 
                     /** Represents a Fulfillment. */
@@ -9336,6 +9372,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback. */
                         public enableGenerativeFallback: boolean;
+
+                        /** Fulfillment generators. */
+                        public generators: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings[];
 
                         /**
                          * Creates a new Fulfillment instance using the specified properties.
@@ -9831,6 +9870,115 @@ export namespace google {
                                 }
                             }
                         }
+
+                        /** Properties of a GeneratorSettings. */
+                        interface IGeneratorSettings {
+
+                            /** GeneratorSettings generator */
+                            generator?: (string|null);
+
+                            /** GeneratorSettings inputParameters */
+                            inputParameters?: ({ [k: string]: string }|null);
+
+                            /** GeneratorSettings outputParameter */
+                            outputParameter?: (string|null);
+                        }
+
+                        /** Represents a GeneratorSettings. */
+                        class GeneratorSettings implements IGeneratorSettings {
+
+                            /**
+                             * Constructs a new GeneratorSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings);
+
+                            /** GeneratorSettings generator. */
+                            public generator: string;
+
+                            /** GeneratorSettings inputParameters. */
+                            public inputParameters: { [k: string]: string };
+
+                            /** GeneratorSettings outputParameter. */
+                            public outputParameter: string;
+
+                            /**
+                             * Creates a new GeneratorSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GeneratorSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Verifies a GeneratorSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GeneratorSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GeneratorSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Creates a plain object from a GeneratorSettings message. Also converts values to other types if specified.
+                             * @param message GeneratorSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GeneratorSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GeneratorSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ResponseMessage. */
@@ -9865,6 +10013,9 @@ export namespace google {
 
                         /** ResponseMessage knowledgeInfoCard */
                         knowledgeInfoCard?: (google.cloud.dialogflow.cx.v3.ResponseMessage.IKnowledgeInfoCard|null);
+
+                        /** ResponseMessage toolCall */
+                        toolCall?: (google.cloud.dialogflow.cx.v3.IToolCall|null);
 
                         /** ResponseMessage responseType */
                         responseType?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|null);
@@ -9912,6 +10063,9 @@ export namespace google {
                         /** ResponseMessage knowledgeInfoCard. */
                         public knowledgeInfoCard?: (google.cloud.dialogflow.cx.v3.ResponseMessage.IKnowledgeInfoCard|null);
 
+                        /** ResponseMessage toolCall. */
+                        public toolCall?: (google.cloud.dialogflow.cx.v3.IToolCall|null);
+
                         /** ResponseMessage responseType. */
                         public responseType: (google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType);
 
@@ -9919,7 +10073,7 @@ export namespace google {
                         public channel: string;
 
                         /** ResponseMessage message. */
-                        public message?: ("text"|"payload"|"conversationSuccess"|"outputAudioText"|"liveAgentHandoff"|"endInteraction"|"playAudio"|"mixedAudio"|"telephonyTransferCall"|"knowledgeInfoCard");
+                        public message?: ("text"|"payload"|"conversationSuccess"|"outputAudioText"|"liveAgentHandoff"|"endInteraction"|"playAudio"|"mixedAudio"|"telephonyTransferCall"|"knowledgeInfoCard"|"toolCall");
 
                         /**
                          * Creates a new ResponseMessage instance using the specified properties.
@@ -11016,6 +11170,786 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ToolCall. */
+                    interface IToolCall {
+
+                        /** ToolCall tool */
+                        tool?: (string|null);
+
+                        /** ToolCall action */
+                        action?: (string|null);
+
+                        /** ToolCall inputParameters */
+                        inputParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ToolCall. */
+                    class ToolCall implements IToolCall {
+
+                        /**
+                         * Constructs a new ToolCall.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IToolCall);
+
+                        /** ToolCall tool. */
+                        public tool: string;
+
+                        /** ToolCall action. */
+                        public action: string;
+
+                        /** ToolCall inputParameters. */
+                        public inputParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ToolCall instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ToolCall instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IToolCall): google.cloud.dialogflow.cx.v3.ToolCall;
+
+                        /**
+                         * Encodes the specified ToolCall message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCall.verify|verify} messages.
+                         * @param message ToolCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ToolCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCall.verify|verify} messages.
+                         * @param message ToolCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ToolCall message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ToolCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ToolCall;
+
+                        /**
+                         * Decodes a ToolCall message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ToolCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ToolCall;
+
+                        /**
+                         * Verifies a ToolCall message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ToolCall message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ToolCall
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ToolCall;
+
+                        /**
+                         * Creates a plain object from a ToolCall message. Also converts values to other types if specified.
+                         * @param message ToolCall
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ToolCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ToolCall to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ToolCall
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ToolCallResult. */
+                    interface IToolCallResult {
+
+                        /** ToolCallResult tool */
+                        tool?: (string|null);
+
+                        /** ToolCallResult action */
+                        action?: (string|null);
+
+                        /** ToolCallResult error */
+                        error?: (google.cloud.dialogflow.cx.v3.ToolCallResult.IError|null);
+
+                        /** ToolCallResult outputParameters */
+                        outputParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ToolCallResult. */
+                    class ToolCallResult implements IToolCallResult {
+
+                        /**
+                         * Constructs a new ToolCallResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IToolCallResult);
+
+                        /** ToolCallResult tool. */
+                        public tool: string;
+
+                        /** ToolCallResult action. */
+                        public action: string;
+
+                        /** ToolCallResult error. */
+                        public error?: (google.cloud.dialogflow.cx.v3.ToolCallResult.IError|null);
+
+                        /** ToolCallResult outputParameters. */
+                        public outputParameters?: (google.protobuf.IStruct|null);
+
+                        /** ToolCallResult result. */
+                        public result?: ("error"|"outputParameters");
+
+                        /**
+                         * Creates a new ToolCallResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ToolCallResult instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IToolCallResult): google.cloud.dialogflow.cx.v3.ToolCallResult;
+
+                        /**
+                         * Encodes the specified ToolCallResult message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCallResult.verify|verify} messages.
+                         * @param message ToolCallResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IToolCallResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ToolCallResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCallResult.verify|verify} messages.
+                         * @param message ToolCallResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IToolCallResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ToolCallResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ToolCallResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ToolCallResult;
+
+                        /**
+                         * Decodes a ToolCallResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ToolCallResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ToolCallResult;
+
+                        /**
+                         * Verifies a ToolCallResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ToolCallResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ToolCallResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ToolCallResult;
+
+                        /**
+                         * Creates a plain object from a ToolCallResult message. Also converts values to other types if specified.
+                         * @param message ToolCallResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ToolCallResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ToolCallResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ToolCallResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ToolCallResult {
+
+                        /** Properties of an Error. */
+                        interface IError {
+
+                            /** Error message */
+                            message?: (string|null);
+                        }
+
+                        /** Represents an Error. */
+                        class Error implements IError {
+
+                            /**
+                             * Constructs a new Error.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.ToolCallResult.IError);
+
+                            /** Error message. */
+                            public message: string;
+
+                            /**
+                             * Creates a new Error instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Error instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.ToolCallResult.IError): google.cloud.dialogflow.cx.v3.ToolCallResult.Error;
+
+                            /**
+                             * Encodes the specified Error message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCallResult.Error.verify|verify} messages.
+                             * @param message Error message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.ToolCallResult.IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Error message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolCallResult.Error.verify|verify} messages.
+                             * @param message Error message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ToolCallResult.IError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Error message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Error
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ToolCallResult.Error;
+
+                            /**
+                             * Decodes an Error message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Error
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ToolCallResult.Error;
+
+                            /**
+                             * Verifies an Error message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Error message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Error
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ToolCallResult.Error;
+
+                            /**
+                             * Creates a plain object from an Error message. Also converts values to other types if specified.
+                             * @param message Error
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.ToolCallResult.Error, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Error to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Error
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ParameterDefinition. */
+                    interface IParameterDefinition {
+
+                        /** ParameterDefinition name */
+                        name?: (string|null);
+
+                        /** ParameterDefinition type */
+                        type?: (google.cloud.dialogflow.cx.v3.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3.ParameterDefinition.ParameterType|null);
+
+                        /** ParameterDefinition typeSchema */
+                        typeSchema?: (google.cloud.dialogflow.cx.v3.ITypeSchema|null);
+
+                        /** ParameterDefinition description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a ParameterDefinition. */
+                    class ParameterDefinition implements IParameterDefinition {
+
+                        /**
+                         * Constructs a new ParameterDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IParameterDefinition);
+
+                        /** ParameterDefinition name. */
+                        public name: string;
+
+                        /** ParameterDefinition type. */
+                        public type: (google.cloud.dialogflow.cx.v3.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3.ParameterDefinition.ParameterType);
+
+                        /** ParameterDefinition typeSchema. */
+                        public typeSchema?: (google.cloud.dialogflow.cx.v3.ITypeSchema|null);
+
+                        /** ParameterDefinition description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new ParameterDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParameterDefinition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IParameterDefinition): google.cloud.dialogflow.cx.v3.ParameterDefinition;
+
+                        /**
+                         * Encodes the specified ParameterDefinition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ParameterDefinition.verify|verify} messages.
+                         * @param message ParameterDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParameterDefinition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ParameterDefinition.verify|verify} messages.
+                         * @param message ParameterDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParameterDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParameterDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ParameterDefinition;
+
+                        /**
+                         * Decodes a ParameterDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParameterDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ParameterDefinition;
+
+                        /**
+                         * Verifies a ParameterDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParameterDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParameterDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ParameterDefinition;
+
+                        /**
+                         * Creates a plain object from a ParameterDefinition message. Also converts values to other types if specified.
+                         * @param message ParameterDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ParameterDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParameterDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParameterDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ParameterDefinition {
+
+                        /** ParameterType enum. */
+                        enum ParameterType {
+                            PARAMETER_TYPE_UNSPECIFIED = 0,
+                            STRING = 1,
+                            NUMBER = 2,
+                            BOOLEAN = 3,
+                            NULL = 4,
+                            OBJECT = 5,
+                            LIST = 6
+                        }
+                    }
+
+                    /** Properties of a TypeSchema. */
+                    interface ITypeSchema {
+
+                        /** TypeSchema inlineSchema */
+                        inlineSchema?: (google.cloud.dialogflow.cx.v3.IInlineSchema|null);
+
+                        /** TypeSchema schemaReference */
+                        schemaReference?: (google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference|null);
+                    }
+
+                    /** Represents a TypeSchema. */
+                    class TypeSchema implements ITypeSchema {
+
+                        /**
+                         * Constructs a new TypeSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ITypeSchema);
+
+                        /** TypeSchema inlineSchema. */
+                        public inlineSchema?: (google.cloud.dialogflow.cx.v3.IInlineSchema|null);
+
+                        /** TypeSchema schemaReference. */
+                        public schemaReference?: (google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference|null);
+
+                        /** TypeSchema schema. */
+                        public schema?: ("inlineSchema"|"schemaReference");
+
+                        /**
+                         * Creates a new TypeSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TypeSchema instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ITypeSchema): google.cloud.dialogflow.cx.v3.TypeSchema;
+
+                        /**
+                         * Encodes the specified TypeSchema message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TypeSchema.verify|verify} messages.
+                         * @param message TypeSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ITypeSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TypeSchema message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TypeSchema.verify|verify} messages.
+                         * @param message TypeSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ITypeSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TypeSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TypeSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.TypeSchema;
+
+                        /**
+                         * Decodes a TypeSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TypeSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.TypeSchema;
+
+                        /**
+                         * Verifies a TypeSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TypeSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TypeSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.TypeSchema;
+
+                        /**
+                         * Creates a plain object from a TypeSchema message. Also converts values to other types if specified.
+                         * @param message TypeSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.TypeSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TypeSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TypeSchema
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TypeSchema {
+
+                        /** Properties of a SchemaReference. */
+                        interface ISchemaReference {
+
+                            /** SchemaReference tool */
+                            tool?: (string|null);
+
+                            /** SchemaReference schema */
+                            schema?: (string|null);
+                        }
+
+                        /** Represents a SchemaReference. */
+                        class SchemaReference implements ISchemaReference {
+
+                            /**
+                             * Constructs a new SchemaReference.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference);
+
+                            /** SchemaReference tool. */
+                            public tool: string;
+
+                            /** SchemaReference schema. */
+                            public schema: string;
+
+                            /**
+                             * Creates a new SchemaReference instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SchemaReference instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference): google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference;
+
+                            /**
+                             * Encodes the specified SchemaReference message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference.verify|verify} messages.
+                             * @param message SchemaReference message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SchemaReference message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference.verify|verify} messages.
+                             * @param message SchemaReference message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.TypeSchema.ISchemaReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SchemaReference message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SchemaReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference;
+
+                            /**
+                             * Decodes a SchemaReference message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SchemaReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference;
+
+                            /**
+                             * Verifies a SchemaReference message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SchemaReference message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SchemaReference
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference;
+
+                            /**
+                             * Creates a plain object from a SchemaReference message. Also converts values to other types if specified.
+                             * @param message SchemaReference
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.TypeSchema.SchemaReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SchemaReference to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SchemaReference
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an InlineSchema. */
+                    interface IInlineSchema {
+
+                        /** InlineSchema type */
+                        type?: (google.cloud.dialogflow.cx.v3.DataType|keyof typeof google.cloud.dialogflow.cx.v3.DataType|null);
+
+                        /** InlineSchema items */
+                        items?: (google.cloud.dialogflow.cx.v3.ITypeSchema|null);
+                    }
+
+                    /** Represents an InlineSchema. */
+                    class InlineSchema implements IInlineSchema {
+
+                        /**
+                         * Constructs a new InlineSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IInlineSchema);
+
+                        /** InlineSchema type. */
+                        public type: (google.cloud.dialogflow.cx.v3.DataType|keyof typeof google.cloud.dialogflow.cx.v3.DataType);
+
+                        /** InlineSchema items. */
+                        public items?: (google.cloud.dialogflow.cx.v3.ITypeSchema|null);
+
+                        /**
+                         * Creates a new InlineSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InlineSchema instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IInlineSchema): google.cloud.dialogflow.cx.v3.InlineSchema;
+
+                        /**
+                         * Encodes the specified InlineSchema message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.InlineSchema.verify|verify} messages.
+                         * @param message InlineSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IInlineSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InlineSchema message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.InlineSchema.verify|verify} messages.
+                         * @param message InlineSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IInlineSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InlineSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InlineSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.InlineSchema;
+
+                        /**
+                         * Decodes an InlineSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InlineSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.InlineSchema;
+
+                        /**
+                         * Verifies an InlineSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InlineSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InlineSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.InlineSchema;
+
+                        /**
+                         * Creates a plain object from an InlineSchema message. Also converts values to other types if specified.
+                         * @param message InlineSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.InlineSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InlineSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InlineSchema
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DataType enum. */
+                    enum DataType {
+                        DATA_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        NUMBER = 2,
+                        BOOLEAN = 3,
+                        ARRAY = 6
+                    }
+
                     /** Properties of a ValidationMessage. */
                     interface IValidationMessage {
 
@@ -11287,6 +12221,9 @@ export namespace google {
 
                         /** GenerativeSettings languageCode */
                         languageCode?: (string|null);
+
+                        /** GenerativeSettings llmModelSettings */
+                        llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
                     }
 
                     /** Represents a GenerativeSettings. */
@@ -11312,6 +12249,9 @@ export namespace google {
 
                         /** GenerativeSettings languageCode. */
                         public languageCode: string;
+
+                        /** GenerativeSettings llmModelSettings. */
+                        public llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
 
                         /**
                          * Creates a new GenerativeSettings instance using the specified properties.
@@ -11736,11 +12676,126 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a LlmModelSettings. */
+                    interface ILlmModelSettings {
+
+                        /** LlmModelSettings model */
+                        model?: (string|null);
+
+                        /** LlmModelSettings promptText */
+                        promptText?: (string|null);
+                    }
+
+                    /** Represents a LlmModelSettings. */
+                    class LlmModelSettings implements ILlmModelSettings {
+
+                        /**
+                         * Constructs a new LlmModelSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ILlmModelSettings);
+
+                        /** LlmModelSettings model. */
+                        public model: string;
+
+                        /** LlmModelSettings promptText. */
+                        public promptText: string;
+
+                        /**
+                         * Creates a new LlmModelSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LlmModelSettings instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ILlmModelSettings): google.cloud.dialogflow.cx.v3.LlmModelSettings;
+
+                        /**
+                         * Encodes the specified LlmModelSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.LlmModelSettings.verify|verify} messages.
+                         * @param message LlmModelSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ILlmModelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LlmModelSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.LlmModelSettings.verify|verify} messages.
+                         * @param message LlmModelSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ILlmModelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LlmModelSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LlmModelSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.LlmModelSettings;
+
+                        /**
+                         * Decodes a LlmModelSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LlmModelSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.LlmModelSettings;
+
+                        /**
+                         * Verifies a LlmModelSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LlmModelSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LlmModelSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.LlmModelSettings;
+
+                        /**
+                         * Creates a plain object from a LlmModelSettings message. Also converts values to other types if specified.
+                         * @param message LlmModelSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.LlmModelSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LlmModelSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LlmModelSettings
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a SafetySettings. */
                     interface ISafetySettings {
 
+                        /** SafetySettings defaultBannedPhraseMatchStrategy */
+                        defaultBannedPhraseMatchStrategy?: (google.cloud.dialogflow.cx.v3.SafetySettings.PhraseMatchStrategy|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.PhraseMatchStrategy|null);
+
                         /** SafetySettings bannedPhrases */
                         bannedPhrases?: (google.cloud.dialogflow.cx.v3.SafetySettings.IPhrase[]|null);
+
+                        /** SafetySettings raiSettings */
+                        raiSettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings */
+                        defaultRaiSettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings promptSecuritySettings */
+                        promptSecuritySettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings|null);
                     }
 
                     /** Represents a SafetySettings. */
@@ -11752,8 +12807,20 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.dialogflow.cx.v3.ISafetySettings);
 
+                        /** SafetySettings defaultBannedPhraseMatchStrategy. */
+                        public defaultBannedPhraseMatchStrategy: (google.cloud.dialogflow.cx.v3.SafetySettings.PhraseMatchStrategy|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.PhraseMatchStrategy);
+
                         /** SafetySettings bannedPhrases. */
                         public bannedPhrases: google.cloud.dialogflow.cx.v3.SafetySettings.IPhrase[];
+
+                        /** SafetySettings raiSettings. */
+                        public raiSettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings. */
+                        public defaultRaiSettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings promptSecuritySettings. */
+                        public promptSecuritySettings?: (google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings|null);
 
                         /**
                          * Creates a new SafetySettings instance using the specified properties.
@@ -11932,6 +12999,331 @@ export namespace google {
 
                             /**
                              * Gets the default type url for Phrase
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** PhraseMatchStrategy enum. */
+                        enum PhraseMatchStrategy {
+                            PHRASE_MATCH_STRATEGY_UNSPECIFIED = 0,
+                            PARTIAL_MATCH = 1,
+                            WORD_MATCH = 2
+                        }
+
+                        /** Properties of a RaiSettings. */
+                        interface IRaiSettings {
+
+                            /** RaiSettings categoryFilters */
+                            categoryFilters?: (google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter[]|null);
+                        }
+
+                        /** Represents a RaiSettings. */
+                        class RaiSettings implements IRaiSettings {
+
+                            /**
+                             * Constructs a new RaiSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings);
+
+                            /** RaiSettings categoryFilters. */
+                            public categoryFilters: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter[];
+
+                            /**
+                             * Creates a new RaiSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RaiSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings;
+
+                            /**
+                             * Encodes the specified RaiSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RaiSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings;
+
+                            /**
+                             * Verifies a RaiSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RaiSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RaiSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings;
+
+                            /**
+                             * Creates a plain object from a RaiSettings message. Also converts values to other types if specified.
+                             * @param message RaiSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RaiSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RaiSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RaiSettings {
+
+                            /** SafetyFilterLevel enum. */
+                            enum SafetyFilterLevel {
+                                SAFETY_FILTER_LEVEL_UNSPECIFIED = 0,
+                                BLOCK_NONE = 1,
+                                BLOCK_FEW = 2,
+                                BLOCK_SOME = 3,
+                                BLOCK_MOST = 4
+                            }
+
+                            /** SafetyCategory enum. */
+                            enum SafetyCategory {
+                                SAFETY_CATEGORY_UNSPECIFIED = 0,
+                                DANGEROUS_CONTENT = 1,
+                                HATE_SPEECH = 2,
+                                HARASSMENT = 3,
+                                SEXUALLY_EXPLICIT_CONTENT = 4
+                            }
+
+                            /** Properties of a CategoryFilter. */
+                            interface ICategoryFilter {
+
+                                /** CategoryFilter category */
+                                category?: (google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyCategory|null);
+
+                                /** CategoryFilter filterLevel */
+                                filterLevel?: (google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyFilterLevel|null);
+                            }
+
+                            /** Represents a CategoryFilter. */
+                            class CategoryFilter implements ICategoryFilter {
+
+                                /**
+                                 * Constructs a new CategoryFilter.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter);
+
+                                /** CategoryFilter category. */
+                                public category: (google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyCategory);
+
+                                /** CategoryFilter filterLevel. */
+                                public filterLevel: (google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.SafetyFilterLevel);
+
+                                /**
+                                 * Creates a new CategoryFilter instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CategoryFilter instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Verifies a CategoryFilter message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CategoryFilter message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CategoryFilter
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Creates a plain object from a CategoryFilter message. Also converts values to other types if specified.
+                                 * @param message CategoryFilter
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.SafetySettings.RaiSettings.CategoryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CategoryFilter to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CategoryFilter
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a PromptSecuritySettings. */
+                        interface IPromptSecuritySettings {
+
+                            /** PromptSecuritySettings enablePromptSecurity */
+                            enablePromptSecurity?: (boolean|null);
+                        }
+
+                        /** Represents a PromptSecuritySettings. */
+                        class PromptSecuritySettings implements IPromptSecuritySettings {
+
+                            /**
+                             * Constructs a new PromptSecuritySettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings);
+
+                            /** PromptSecuritySettings enablePromptSecurity. */
+                            public enablePromptSecurity: boolean;
+
+                            /**
+                             * Creates a new PromptSecuritySettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PromptSecuritySettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings): google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Encodes the specified PromptSecuritySettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings.verify|verify} messages.
+                             * @param message PromptSecuritySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PromptSecuritySettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings.verify|verify} messages.
+                             * @param message PromptSecuritySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.SafetySettings.IPromptSecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PromptSecuritySettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PromptSecuritySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Decodes a PromptSecuritySettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PromptSecuritySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Verifies a PromptSecuritySettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PromptSecuritySettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PromptSecuritySettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Creates a plain object from a PromptSecuritySettings message. Also converts values to other types if specified.
+                             * @param message PromptSecuritySettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.SafetySettings.PromptSecuritySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PromptSecuritySettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PromptSecuritySettings
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -12453,6 +13845,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Changelog
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CodeBlock. */
+                    interface ICodeBlock {
+
+                        /** CodeBlock code */
+                        code?: (string|null);
+                    }
+
+                    /** Represents a CodeBlock. */
+                    class CodeBlock implements ICodeBlock {
+
+                        /**
+                         * Constructs a new CodeBlock.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICodeBlock);
+
+                        /** CodeBlock code. */
+                        public code: string;
+
+                        /**
+                         * Creates a new CodeBlock instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CodeBlock instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICodeBlock): google.cloud.dialogflow.cx.v3.CodeBlock;
+
+                        /**
+                         * Encodes the specified CodeBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CodeBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CodeBlock;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CodeBlock;
+
+                        /**
+                         * Verifies a CodeBlock message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CodeBlock message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CodeBlock
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CodeBlock;
+
+                        /**
+                         * Creates a plain object from a CodeBlock message. Also converts values to other types if specified.
+                         * @param message CodeBlock
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CodeBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CodeBlock to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CodeBlock
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -24788,6 +26277,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig */
                         outputAudioConfig?: (google.cloud.dialogflow.cx.v3.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3.DetectIntentResponseView|null);
                     }
 
                     /** Represents a DetectIntentRequest. */
@@ -24810,6 +26302,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig. */
                         public outputAudioConfig?: (google.cloud.dialogflow.cx.v3.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3.DetectIntentResponseView);
 
                         /**
                          * Creates a new DetectIntentRequest instance using the specified properties.
@@ -25046,6 +26541,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo */
                         enableDebuggingInfo?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3.DetectIntentResponseView|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -25074,6 +26572,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo. */
                         public enableDebuggingInfo: boolean;
+
+                        /** StreamingDetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3.DetectIntentResponseView);
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -25631,6 +27132,9 @@ export namespace google {
                         /** QueryParameters parameters */
                         parameters?: (google.protobuf.IStruct|null);
 
+                        /** QueryParameters parameterScope */
+                        parameterScope?: (string|null);
+
                         /** QueryParameters currentPage */
                         currentPage?: (string|null);
 
@@ -25645,6 +27149,12 @@ export namespace google {
 
                         /** QueryParameters flowVersions */
                         flowVersions?: (string[]|null);
+
+                        /** QueryParameters currentPlaybook */
+                        currentPlaybook?: (string|null);
+
+                        /** QueryParameters llmModelSettings */
+                        llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
 
                         /** QueryParameters channel */
                         channel?: (string|null);
@@ -25686,6 +27196,9 @@ export namespace google {
                         /** QueryParameters parameters. */
                         public parameters?: (google.protobuf.IStruct|null);
 
+                        /** QueryParameters parameterScope. */
+                        public parameterScope: string;
+
                         /** QueryParameters currentPage. */
                         public currentPage: string;
 
@@ -25700,6 +27213,12 @@ export namespace google {
 
                         /** QueryParameters flowVersions. */
                         public flowVersions: string[];
+
+                        /** QueryParameters currentPlaybook. */
+                        public currentPlaybook: string;
+
+                        /** QueryParameters llmModelSettings. */
+                        public llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
 
                         /** QueryParameters channel. */
                         public channel: string;
@@ -26567,6 +28086,9 @@ export namespace google {
                         /** QueryInput dtmf */
                         dtmf?: (google.cloud.dialogflow.cx.v3.IDtmfInput|null);
 
+                        /** QueryInput toolCallResult */
+                        toolCallResult?: (google.cloud.dialogflow.cx.v3.IToolCallResult|null);
+
                         /** QueryInput languageCode */
                         languageCode?: (string|null);
                     }
@@ -26595,11 +28117,14 @@ export namespace google {
                         /** QueryInput dtmf. */
                         public dtmf?: (google.cloud.dialogflow.cx.v3.IDtmfInput|null);
 
+                        /** QueryInput toolCallResult. */
+                        public toolCallResult?: (google.cloud.dialogflow.cx.v3.IToolCallResult|null);
+
                         /** QueryInput languageCode. */
                         public languageCode: string;
 
                         /** QueryInput input. */
-                        public input?: ("text"|"intent"|"audio"|"event"|"dtmf");
+                        public input?: ("text"|"intent"|"audio"|"event"|"dtmf"|"toolCallResult");
 
                         /**
                          * Creates a new QueryInput instance using the specified properties.
@@ -26706,18 +28231,6 @@ export namespace google {
                         /** QueryResult responseMessages */
                         responseMessages?: (google.cloud.dialogflow.cx.v3.IResponseMessage[]|null);
 
-                        /** QueryResult webhookIds */
-                        webhookIds?: (string[]|null);
-
-                        /** QueryResult webhookDisplayNames */
-                        webhookDisplayNames?: (string[]|null);
-
-                        /** QueryResult webhookLatencies */
-                        webhookLatencies?: (google.protobuf.IDuration[]|null);
-
-                        /** QueryResult webhookTags */
-                        webhookTags?: (string[]|null);
-
                         /** QueryResult webhookStatuses */
                         webhookStatuses?: (google.rpc.IStatus[]|null);
 
@@ -26787,18 +28300,6 @@ export namespace google {
 
                         /** QueryResult responseMessages. */
                         public responseMessages: google.cloud.dialogflow.cx.v3.IResponseMessage[];
-
-                        /** QueryResult webhookIds. */
-                        public webhookIds: string[];
-
-                        /** QueryResult webhookDisplayNames. */
-                        public webhookDisplayNames: string[];
-
-                        /** QueryResult webhookLatencies. */
-                        public webhookLatencies: google.protobuf.IDuration[];
-
-                        /** QueryResult webhookTags. */
-                        public webhookTags: string[];
 
                         /** QueryResult webhookStatuses. */
                         public webhookStatuses: google.rpc.IStatus[];
@@ -28127,6 +29628,14 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DetectIntentResponseView enum. */
+                    enum DetectIntentResponseView {
+                        DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED = 0,
+                        DETECT_INTENT_RESPONSE_VIEW_FULL = 1,
+                        DETECT_INTENT_RESPONSE_VIEW_BASIC = 2,
+                        DETECT_INTENT_RESPONSE_VIEW_DEFAULT = 3
                     }
 
                     /** Represents a SessionEntityTypes */
@@ -30142,8 +31651,14 @@ export namespace google {
                             /** GenericWebService password */
                             password?: (string|null);
 
+                            /** GenericWebService secretVersionForUsernamePassword */
+                            secretVersionForUsernamePassword?: (string|null);
+
                             /** GenericWebService requestHeaders */
                             requestHeaders?: ({ [k: string]: string }|null);
+
+                            /** GenericWebService secretVersionsForRequestHeaders */
+                            secretVersionsForRequestHeaders?: ({ [k: string]: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue }|null);
 
                             /** GenericWebService allowedCaCerts */
                             allowedCaCerts?: (Uint8Array[]|null);
@@ -30153,6 +31668,9 @@ export namespace google {
 
                             /** GenericWebService serviceAgentAuth */
                             serviceAgentAuth?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAgentAuth|null);
+
+                            /** GenericWebService serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
 
                             /** GenericWebService webhookType */
                             webhookType?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|null);
@@ -30185,8 +31703,14 @@ export namespace google {
                             /** GenericWebService password. */
                             public password: string;
 
+                            /** GenericWebService secretVersionForUsernamePassword. */
+                            public secretVersionForUsernamePassword: string;
+
                             /** GenericWebService requestHeaders. */
                             public requestHeaders: { [k: string]: string };
+
+                            /** GenericWebService secretVersionsForRequestHeaders. */
+                            public secretVersionsForRequestHeaders: { [k: string]: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue };
 
                             /** GenericWebService allowedCaCerts. */
                             public allowedCaCerts: Uint8Array[];
@@ -30196,6 +31720,9 @@ export namespace google {
 
                             /** GenericWebService serviceAgentAuth. */
                             public serviceAgentAuth: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAgentAuth);
+
+                            /** GenericWebService serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
 
                             /** GenericWebService webhookType. */
                             public webhookType: (google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.WebhookType);
@@ -30289,6 +31816,103 @@ export namespace google {
 
                         namespace GenericWebService {
 
+                            /** Properties of a SecretVersionHeaderValue. */
+                            interface ISecretVersionHeaderValue {
+
+                                /** SecretVersionHeaderValue secretVersion */
+                                secretVersion?: (string|null);
+                            }
+
+                            /** Represents a SecretVersionHeaderValue. */
+                            class SecretVersionHeaderValue implements ISecretVersionHeaderValue {
+
+                                /**
+                                 * Constructs a new SecretVersionHeaderValue.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue);
+
+                                /** SecretVersionHeaderValue secretVersion. */
+                                public secretVersion: string;
+
+                                /**
+                                 * Creates a new SecretVersionHeaderValue instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns SecretVersionHeaderValue instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Encodes the specified SecretVersionHeaderValue message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue.verify|verify} messages.
+                                 * @param message SecretVersionHeaderValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified SecretVersionHeaderValue message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue.verify|verify} messages.
+                                 * @param message SecretVersionHeaderValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ISecretVersionHeaderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a SecretVersionHeaderValue message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns SecretVersionHeaderValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Decodes a SecretVersionHeaderValue message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns SecretVersionHeaderValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Verifies a SecretVersionHeaderValue message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a SecretVersionHeaderValue message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns SecretVersionHeaderValue
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Creates a plain object from a SecretVersionHeaderValue message. Also converts values to other types if specified.
+                                 * @param message SecretVersionHeaderValue
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this SecretVersionHeaderValue to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for SecretVersionHeaderValue
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
                             /** Properties of a OAuthConfig. */
                             interface IOAuthConfig {
 
@@ -30297,6 +31921,9 @@ export namespace google {
 
                                 /** OAuthConfig clientSecret */
                                 clientSecret?: (string|null);
+
+                                /** OAuthConfig secretVersionForClientSecret */
+                                secretVersionForClientSecret?: (string|null);
 
                                 /** OAuthConfig tokenEndpoint */
                                 tokenEndpoint?: (string|null);
@@ -30319,6 +31946,9 @@ export namespace google {
 
                                 /** OAuthConfig clientSecret. */
                                 public clientSecret: string;
+
+                                /** OAuthConfig secretVersionForClientSecret. */
+                                public secretVersionForClientSecret: string;
 
                                 /** OAuthConfig tokenEndpoint. */
                                 public tokenEndpoint: string;
@@ -30410,6 +32040,103 @@ export namespace google {
                                 NONE = 1,
                                 ID_TOKEN = 2,
                                 ACCESS_TOKEN = 3
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             /** WebhookType enum. */
@@ -32562,6 +34289,2001 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Represents an Examples */
+                    class Examples extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Examples service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Examples service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Examples;
+
+                        /**
+                         * Calls CreateExample.
+                         * @param request CreateExampleRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Example
+                         */
+                        public createExample(request: google.cloud.dialogflow.cx.v3.ICreateExampleRequest, callback: google.cloud.dialogflow.cx.v3.Examples.CreateExampleCallback): void;
+
+                        /**
+                         * Calls CreateExample.
+                         * @param request CreateExampleRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createExample(request: google.cloud.dialogflow.cx.v3.ICreateExampleRequest): Promise<google.cloud.dialogflow.cx.v3.Example>;
+
+                        /**
+                         * Calls DeleteExample.
+                         * @param request DeleteExampleRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteExample(request: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest, callback: google.cloud.dialogflow.cx.v3.Examples.DeleteExampleCallback): void;
+
+                        /**
+                         * Calls DeleteExample.
+                         * @param request DeleteExampleRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteExample(request: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls ListExamples.
+                         * @param request ListExamplesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListExamplesResponse
+                         */
+                        public listExamples(request: google.cloud.dialogflow.cx.v3.IListExamplesRequest, callback: google.cloud.dialogflow.cx.v3.Examples.ListExamplesCallback): void;
+
+                        /**
+                         * Calls ListExamples.
+                         * @param request ListExamplesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listExamples(request: google.cloud.dialogflow.cx.v3.IListExamplesRequest): Promise<google.cloud.dialogflow.cx.v3.ListExamplesResponse>;
+
+                        /**
+                         * Calls GetExample.
+                         * @param request GetExampleRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Example
+                         */
+                        public getExample(request: google.cloud.dialogflow.cx.v3.IGetExampleRequest, callback: google.cloud.dialogflow.cx.v3.Examples.GetExampleCallback): void;
+
+                        /**
+                         * Calls GetExample.
+                         * @param request GetExampleRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getExample(request: google.cloud.dialogflow.cx.v3.IGetExampleRequest): Promise<google.cloud.dialogflow.cx.v3.Example>;
+
+                        /**
+                         * Calls UpdateExample.
+                         * @param request UpdateExampleRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Example
+                         */
+                        public updateExample(request: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest, callback: google.cloud.dialogflow.cx.v3.Examples.UpdateExampleCallback): void;
+
+                        /**
+                         * Calls UpdateExample.
+                         * @param request UpdateExampleRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateExample(request: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest): Promise<google.cloud.dialogflow.cx.v3.Example>;
+                    }
+
+                    namespace Examples {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Examples|createExample}.
+                         * @param error Error, if any
+                         * @param [response] Example
+                         */
+                        type CreateExampleCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Example) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Examples|deleteExample}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteExampleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Examples|listExamples}.
+                         * @param error Error, if any
+                         * @param [response] ListExamplesResponse
+                         */
+                        type ListExamplesCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListExamplesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Examples|getExample}.
+                         * @param error Error, if any
+                         * @param [response] Example
+                         */
+                        type GetExampleCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Example) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Examples|updateExample}.
+                         * @param error Error, if any
+                         * @param [response] Example
+                         */
+                        type UpdateExampleCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Example) => void;
+                    }
+
+                    /** Properties of a CreateExampleRequest. */
+                    interface ICreateExampleRequest {
+
+                        /** CreateExampleRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateExampleRequest example */
+                        example?: (google.cloud.dialogflow.cx.v3.IExample|null);
+                    }
+
+                    /** Represents a CreateExampleRequest. */
+                    class CreateExampleRequest implements ICreateExampleRequest {
+
+                        /**
+                         * Constructs a new CreateExampleRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateExampleRequest);
+
+                        /** CreateExampleRequest parent. */
+                        public parent: string;
+
+                        /** CreateExampleRequest example. */
+                        public example?: (google.cloud.dialogflow.cx.v3.IExample|null);
+
+                        /**
+                         * Creates a new CreateExampleRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateExampleRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateExampleRequest): google.cloud.dialogflow.cx.v3.CreateExampleRequest;
+
+                        /**
+                         * Encodes the specified CreateExampleRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateExampleRequest.verify|verify} messages.
+                         * @param message CreateExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateExampleRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateExampleRequest.verify|verify} messages.
+                         * @param message CreateExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateExampleRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateExampleRequest;
+
+                        /**
+                         * Decodes a CreateExampleRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateExampleRequest;
+
+                        /**
+                         * Verifies a CreateExampleRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateExampleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateExampleRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateExampleRequest;
+
+                        /**
+                         * Creates a plain object from a CreateExampleRequest message. Also converts values to other types if specified.
+                         * @param message CreateExampleRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateExampleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateExampleRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateExampleRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteExampleRequest. */
+                    interface IDeleteExampleRequest {
+
+                        /** DeleteExampleRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteExampleRequest. */
+                    class DeleteExampleRequest implements IDeleteExampleRequest {
+
+                        /**
+                         * Constructs a new DeleteExampleRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest);
+
+                        /** DeleteExampleRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteExampleRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteExampleRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest): google.cloud.dialogflow.cx.v3.DeleteExampleRequest;
+
+                        /**
+                         * Encodes the specified DeleteExampleRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteExampleRequest.verify|verify} messages.
+                         * @param message DeleteExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteExampleRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteExampleRequest.verify|verify} messages.
+                         * @param message DeleteExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteExampleRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteExampleRequest;
+
+                        /**
+                         * Decodes a DeleteExampleRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteExampleRequest;
+
+                        /**
+                         * Verifies a DeleteExampleRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteExampleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteExampleRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteExampleRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteExampleRequest message. Also converts values to other types if specified.
+                         * @param message DeleteExampleRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteExampleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteExampleRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteExampleRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListExamplesRequest. */
+                    interface IListExamplesRequest {
+
+                        /** ListExamplesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListExamplesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListExamplesRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListExamplesRequest languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a ListExamplesRequest. */
+                    class ListExamplesRequest implements IListExamplesRequest {
+
+                        /**
+                         * Constructs a new ListExamplesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListExamplesRequest);
+
+                        /** ListExamplesRequest parent. */
+                        public parent: string;
+
+                        /** ListExamplesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListExamplesRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListExamplesRequest languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new ListExamplesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListExamplesRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListExamplesRequest): google.cloud.dialogflow.cx.v3.ListExamplesRequest;
+
+                        /**
+                         * Encodes the specified ListExamplesRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListExamplesRequest.verify|verify} messages.
+                         * @param message ListExamplesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListExamplesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListExamplesRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListExamplesRequest.verify|verify} messages.
+                         * @param message ListExamplesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListExamplesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListExamplesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListExamplesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListExamplesRequest;
+
+                        /**
+                         * Decodes a ListExamplesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListExamplesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListExamplesRequest;
+
+                        /**
+                         * Verifies a ListExamplesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListExamplesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListExamplesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListExamplesRequest;
+
+                        /**
+                         * Creates a plain object from a ListExamplesRequest message. Also converts values to other types if specified.
+                         * @param message ListExamplesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListExamplesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListExamplesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListExamplesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListExamplesResponse. */
+                    interface IListExamplesResponse {
+
+                        /** ListExamplesResponse examples */
+                        examples?: (google.cloud.dialogflow.cx.v3.IExample[]|null);
+
+                        /** ListExamplesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListExamplesResponse. */
+                    class ListExamplesResponse implements IListExamplesResponse {
+
+                        /**
+                         * Constructs a new ListExamplesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListExamplesResponse);
+
+                        /** ListExamplesResponse examples. */
+                        public examples: google.cloud.dialogflow.cx.v3.IExample[];
+
+                        /** ListExamplesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListExamplesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListExamplesResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListExamplesResponse): google.cloud.dialogflow.cx.v3.ListExamplesResponse;
+
+                        /**
+                         * Encodes the specified ListExamplesResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListExamplesResponse.verify|verify} messages.
+                         * @param message ListExamplesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListExamplesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListExamplesResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListExamplesResponse.verify|verify} messages.
+                         * @param message ListExamplesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListExamplesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListExamplesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListExamplesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListExamplesResponse;
+
+                        /**
+                         * Decodes a ListExamplesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListExamplesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListExamplesResponse;
+
+                        /**
+                         * Verifies a ListExamplesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListExamplesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListExamplesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListExamplesResponse;
+
+                        /**
+                         * Creates a plain object from a ListExamplesResponse message. Also converts values to other types if specified.
+                         * @param message ListExamplesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListExamplesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListExamplesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListExamplesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetExampleRequest. */
+                    interface IGetExampleRequest {
+
+                        /** GetExampleRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetExampleRequest. */
+                    class GetExampleRequest implements IGetExampleRequest {
+
+                        /**
+                         * Constructs a new GetExampleRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetExampleRequest);
+
+                        /** GetExampleRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetExampleRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetExampleRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetExampleRequest): google.cloud.dialogflow.cx.v3.GetExampleRequest;
+
+                        /**
+                         * Encodes the specified GetExampleRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetExampleRequest.verify|verify} messages.
+                         * @param message GetExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetExampleRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetExampleRequest.verify|verify} messages.
+                         * @param message GetExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetExampleRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetExampleRequest;
+
+                        /**
+                         * Decodes a GetExampleRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetExampleRequest;
+
+                        /**
+                         * Verifies a GetExampleRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetExampleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetExampleRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetExampleRequest;
+
+                        /**
+                         * Creates a plain object from a GetExampleRequest message. Also converts values to other types if specified.
+                         * @param message GetExampleRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetExampleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetExampleRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetExampleRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateExampleRequest. */
+                    interface IUpdateExampleRequest {
+
+                        /** UpdateExampleRequest example */
+                        example?: (google.cloud.dialogflow.cx.v3.IExample|null);
+
+                        /** UpdateExampleRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateExampleRequest. */
+                    class UpdateExampleRequest implements IUpdateExampleRequest {
+
+                        /**
+                         * Constructs a new UpdateExampleRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest);
+
+                        /** UpdateExampleRequest example. */
+                        public example?: (google.cloud.dialogflow.cx.v3.IExample|null);
+
+                        /** UpdateExampleRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateExampleRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateExampleRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest): google.cloud.dialogflow.cx.v3.UpdateExampleRequest;
+
+                        /**
+                         * Encodes the specified UpdateExampleRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateExampleRequest.verify|verify} messages.
+                         * @param message UpdateExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateExampleRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateExampleRequest.verify|verify} messages.
+                         * @param message UpdateExampleRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdateExampleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateExampleRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdateExampleRequest;
+
+                        /**
+                         * Decodes an UpdateExampleRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateExampleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdateExampleRequest;
+
+                        /**
+                         * Verifies an UpdateExampleRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateExampleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateExampleRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdateExampleRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateExampleRequest message. Also converts values to other types if specified.
+                         * @param message UpdateExampleRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdateExampleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateExampleRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateExampleRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Example. */
+                    interface IExample {
+
+                        /** Example name */
+                        name?: (string|null);
+
+                        /** Example playbookInput */
+                        playbookInput?: (google.cloud.dialogflow.cx.v3.IPlaybookInput|null);
+
+                        /** Example playbookOutput */
+                        playbookOutput?: (google.cloud.dialogflow.cx.v3.IPlaybookOutput|null);
+
+                        /** Example actions */
+                        actions?: (google.cloud.dialogflow.cx.v3.IAction[]|null);
+
+                        /** Example displayName */
+                        displayName?: (string|null);
+
+                        /** Example description */
+                        description?: (string|null);
+
+                        /** Example tokenCount */
+                        tokenCount?: (number|Long|string|null);
+
+                        /** Example createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Example updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Example conversationState */
+                        conversationState?: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState|null);
+
+                        /** Example languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents an Example. */
+                    class Example implements IExample {
+
+                        /**
+                         * Constructs a new Example.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IExample);
+
+                        /** Example name. */
+                        public name: string;
+
+                        /** Example playbookInput. */
+                        public playbookInput?: (google.cloud.dialogflow.cx.v3.IPlaybookInput|null);
+
+                        /** Example playbookOutput. */
+                        public playbookOutput?: (google.cloud.dialogflow.cx.v3.IPlaybookOutput|null);
+
+                        /** Example actions. */
+                        public actions: google.cloud.dialogflow.cx.v3.IAction[];
+
+                        /** Example displayName. */
+                        public displayName: string;
+
+                        /** Example description. */
+                        public description: string;
+
+                        /** Example tokenCount. */
+                        public tokenCount: (number|Long|string);
+
+                        /** Example createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Example updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Example conversationState. */
+                        public conversationState: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState);
+
+                        /** Example languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new Example instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Example instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IExample): google.cloud.dialogflow.cx.v3.Example;
+
+                        /**
+                         * Encodes the specified Example message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Example.verify|verify} messages.
+                         * @param message Example message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Example message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Example.verify|verify} messages.
+                         * @param message Example message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Example message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Example
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Example;
+
+                        /**
+                         * Decodes an Example message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Example
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Example;
+
+                        /**
+                         * Verifies an Example message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Example message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Example
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Example;
+
+                        /**
+                         * Creates a plain object from an Example message. Also converts values to other types if specified.
+                         * @param message Example
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Example, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Example to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Example
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookInput. */
+                    interface IPlaybookInput {
+
+                        /** PlaybookInput precedingConversationSummary */
+                        precedingConversationSummary?: (string|null);
+                    }
+
+                    /** Represents a PlaybookInput. */
+                    class PlaybookInput implements IPlaybookInput {
+
+                        /**
+                         * Constructs a new PlaybookInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookInput);
+
+                        /** PlaybookInput precedingConversationSummary. */
+                        public precedingConversationSummary: string;
+
+                        /**
+                         * Creates a new PlaybookInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookInput instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookInput): google.cloud.dialogflow.cx.v3.PlaybookInput;
+
+                        /**
+                         * Encodes the specified PlaybookInput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
+                         * @param message PlaybookInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInput.verify|verify} messages.
+                         * @param message PlaybookInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookInput;
+
+                        /**
+                         * Decodes a PlaybookInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookInput;
+
+                        /**
+                         * Verifies a PlaybookInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookInput;
+
+                        /**
+                         * Creates a plain object from a PlaybookInput message. Also converts values to other types if specified.
+                         * @param message PlaybookInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookOutput. */
+                    interface IPlaybookOutput {
+
+                        /** PlaybookOutput executionSummary */
+                        executionSummary?: (string|null);
+                    }
+
+                    /** Represents a PlaybookOutput. */
+                    class PlaybookOutput implements IPlaybookOutput {
+
+                        /**
+                         * Constructs a new PlaybookOutput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookOutput);
+
+                        /** PlaybookOutput executionSummary. */
+                        public executionSummary: string;
+
+                        /**
+                         * Creates a new PlaybookOutput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookOutput instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookOutput): google.cloud.dialogflow.cx.v3.PlaybookOutput;
+
+                        /**
+                         * Encodes the specified PlaybookOutput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
+                         * @param message PlaybookOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookOutput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookOutput.verify|verify} messages.
+                         * @param message PlaybookOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookOutput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookOutput;
+
+                        /**
+                         * Decodes a PlaybookOutput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookOutput;
+
+                        /**
+                         * Verifies a PlaybookOutput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookOutput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookOutput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookOutput;
+
+                        /**
+                         * Creates a plain object from a PlaybookOutput message. Also converts values to other types if specified.
+                         * @param message PlaybookOutput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookOutput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookOutput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Action. */
+                    interface IAction {
+
+                        /** Action userUtterance */
+                        userUtterance?: (google.cloud.dialogflow.cx.v3.IUserUtterance|null);
+
+                        /** Action agentUtterance */
+                        agentUtterance?: (google.cloud.dialogflow.cx.v3.IAgentUtterance|null);
+
+                        /** Action toolUse */
+                        toolUse?: (google.cloud.dialogflow.cx.v3.IToolUse|null);
+
+                        /** Action playbookInvocation */
+                        playbookInvocation?: (google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null);
+
+                        /** Action flowInvocation */
+                        flowInvocation?: (google.cloud.dialogflow.cx.v3.IFlowInvocation|null);
+
+                        /** Action playbookTransition */
+                        playbookTransition?: (google.cloud.dialogflow.cx.v3.IPlaybookTransition|null);
+
+                        /** Action flowTransition */
+                        flowTransition?: (google.cloud.dialogflow.cx.v3.IFlowTransition|null);
+                    }
+
+                    /** Represents an Action. */
+                    class Action implements IAction {
+
+                        /**
+                         * Constructs a new Action.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IAction);
+
+                        /** Action userUtterance. */
+                        public userUtterance?: (google.cloud.dialogflow.cx.v3.IUserUtterance|null);
+
+                        /** Action agentUtterance. */
+                        public agentUtterance?: (google.cloud.dialogflow.cx.v3.IAgentUtterance|null);
+
+                        /** Action toolUse. */
+                        public toolUse?: (google.cloud.dialogflow.cx.v3.IToolUse|null);
+
+                        /** Action playbookInvocation. */
+                        public playbookInvocation?: (google.cloud.dialogflow.cx.v3.IPlaybookInvocation|null);
+
+                        /** Action flowInvocation. */
+                        public flowInvocation?: (google.cloud.dialogflow.cx.v3.IFlowInvocation|null);
+
+                        /** Action playbookTransition. */
+                        public playbookTransition?: (google.cloud.dialogflow.cx.v3.IPlaybookTransition|null);
+
+                        /** Action flowTransition. */
+                        public flowTransition?: (google.cloud.dialogflow.cx.v3.IFlowTransition|null);
+
+                        /** Action action. */
+                        public action?: ("userUtterance"|"agentUtterance"|"toolUse"|"playbookInvocation"|"flowInvocation"|"playbookTransition"|"flowTransition");
+
+                        /**
+                         * Creates a new Action instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Action instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IAction): google.cloud.dialogflow.cx.v3.Action;
+
+                        /**
+                         * Encodes the specified Action message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
+                         * @param message Action message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Action message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Action.verify|verify} messages.
+                         * @param message Action message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Action message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Action
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Action;
+
+                        /**
+                         * Decodes an Action message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Action
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Action;
+
+                        /**
+                         * Verifies an Action message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Action message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Action
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Action;
+
+                        /**
+                         * Creates a plain object from an Action message. Also converts values to other types if specified.
+                         * @param message Action
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Action, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Action to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Action
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserUtterance. */
+                    interface IUserUtterance {
+
+                        /** UserUtterance text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents a UserUtterance. */
+                    class UserUtterance implements IUserUtterance {
+
+                        /**
+                         * Constructs a new UserUtterance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUserUtterance);
+
+                        /** UserUtterance text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new UserUtterance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserUtterance instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUserUtterance): google.cloud.dialogflow.cx.v3.UserUtterance;
+
+                        /**
+                         * Encodes the specified UserUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
+                         * @param message UserUtterance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUserUtterance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UserUtterance.verify|verify} messages.
+                         * @param message UserUtterance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUserUtterance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserUtterance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserUtterance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UserUtterance;
+
+                        /**
+                         * Decodes a UserUtterance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserUtterance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UserUtterance;
+
+                        /**
+                         * Verifies a UserUtterance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserUtterance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserUtterance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UserUtterance;
+
+                        /**
+                         * Creates a plain object from a UserUtterance message. Also converts values to other types if specified.
+                         * @param message UserUtterance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UserUtterance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserUtterance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserUtterance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AgentUtterance. */
+                    interface IAgentUtterance {
+
+                        /** AgentUtterance text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents an AgentUtterance. */
+                    class AgentUtterance implements IAgentUtterance {
+
+                        /**
+                         * Constructs a new AgentUtterance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IAgentUtterance);
+
+                        /** AgentUtterance text. */
+                        public text: string;
+
+                        /**
+                         * Creates a new AgentUtterance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AgentUtterance instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IAgentUtterance): google.cloud.dialogflow.cx.v3.AgentUtterance;
+
+                        /**
+                         * Encodes the specified AgentUtterance message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
+                         * @param message AgentUtterance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IAgentUtterance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AgentUtterance message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AgentUtterance.verify|verify} messages.
+                         * @param message AgentUtterance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IAgentUtterance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AgentUtterance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AgentUtterance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.AgentUtterance;
+
+                        /**
+                         * Decodes an AgentUtterance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AgentUtterance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.AgentUtterance;
+
+                        /**
+                         * Verifies an AgentUtterance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AgentUtterance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AgentUtterance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.AgentUtterance;
+
+                        /**
+                         * Creates a plain object from an AgentUtterance message. Also converts values to other types if specified.
+                         * @param message AgentUtterance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.AgentUtterance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AgentUtterance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AgentUtterance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ToolUse. */
+                    interface IToolUse {
+
+                        /** ToolUse tool */
+                        tool?: (string|null);
+
+                        /** ToolUse displayName */
+                        displayName?: (string|null);
+
+                        /** ToolUse action */
+                        action?: (string|null);
+
+                        /** ToolUse inputActionParameters */
+                        inputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /** ToolUse outputActionParameters */
+                        outputActionParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a ToolUse. */
+                    class ToolUse implements IToolUse {
+
+                        /**
+                         * Constructs a new ToolUse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IToolUse);
+
+                        /** ToolUse tool. */
+                        public tool: string;
+
+                        /** ToolUse displayName. */
+                        public displayName: string;
+
+                        /** ToolUse action. */
+                        public action: string;
+
+                        /** ToolUse inputActionParameters. */
+                        public inputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /** ToolUse outputActionParameters. */
+                        public outputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new ToolUse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ToolUse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IToolUse): google.cloud.dialogflow.cx.v3.ToolUse;
+
+                        /**
+                         * Encodes the specified ToolUse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
+                         * @param message ToolUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IToolUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ToolUse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolUse.verify|verify} messages.
+                         * @param message ToolUse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IToolUse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ToolUse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ToolUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ToolUse;
+
+                        /**
+                         * Decodes a ToolUse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ToolUse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ToolUse;
+
+                        /**
+                         * Verifies a ToolUse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ToolUse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ToolUse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ToolUse;
+
+                        /**
+                         * Creates a plain object from a ToolUse message. Also converts values to other types if specified.
+                         * @param message ToolUse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ToolUse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ToolUse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ToolUse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookInvocation. */
+                    interface IPlaybookInvocation {
+
+                        /** PlaybookInvocation playbook */
+                        playbook?: (string|null);
+
+                        /** PlaybookInvocation displayName */
+                        displayName?: (string|null);
+
+                        /** PlaybookInvocation playbookInput */
+                        playbookInput?: (google.cloud.dialogflow.cx.v3.IPlaybookInput|null);
+
+                        /** PlaybookInvocation playbookOutput */
+                        playbookOutput?: (google.cloud.dialogflow.cx.v3.IPlaybookOutput|null);
+
+                        /** PlaybookInvocation playbookState */
+                        playbookState?: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState|null);
+                    }
+
+                    /** Represents a PlaybookInvocation. */
+                    class PlaybookInvocation implements IPlaybookInvocation {
+
+                        /**
+                         * Constructs a new PlaybookInvocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookInvocation);
+
+                        /** PlaybookInvocation playbook. */
+                        public playbook: string;
+
+                        /** PlaybookInvocation displayName. */
+                        public displayName: string;
+
+                        /** PlaybookInvocation playbookInput. */
+                        public playbookInput?: (google.cloud.dialogflow.cx.v3.IPlaybookInput|null);
+
+                        /** PlaybookInvocation playbookOutput. */
+                        public playbookOutput?: (google.cloud.dialogflow.cx.v3.IPlaybookOutput|null);
+
+                        /** PlaybookInvocation playbookState. */
+                        public playbookState: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState);
+
+                        /**
+                         * Creates a new PlaybookInvocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookInvocation instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookInvocation): google.cloud.dialogflow.cx.v3.PlaybookInvocation;
+
+                        /**
+                         * Encodes the specified PlaybookInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
+                         * @param message PlaybookInvocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookInvocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookInvocation.verify|verify} messages.
+                         * @param message PlaybookInvocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookInvocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookInvocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookInvocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookInvocation;
+
+                        /**
+                         * Decodes a PlaybookInvocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookInvocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookInvocation;
+
+                        /**
+                         * Verifies a PlaybookInvocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookInvocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookInvocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookInvocation;
+
+                        /**
+                         * Creates a plain object from a PlaybookInvocation message. Also converts values to other types if specified.
+                         * @param message PlaybookInvocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookInvocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookInvocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookInvocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FlowInvocation. */
+                    interface IFlowInvocation {
+
+                        /** FlowInvocation flow */
+                        flow?: (string|null);
+
+                        /** FlowInvocation displayName */
+                        displayName?: (string|null);
+
+                        /** FlowInvocation flowState */
+                        flowState?: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState|null);
+                    }
+
+                    /** Represents a FlowInvocation. */
+                    class FlowInvocation implements IFlowInvocation {
+
+                        /**
+                         * Constructs a new FlowInvocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IFlowInvocation);
+
+                        /** FlowInvocation flow. */
+                        public flow: string;
+
+                        /** FlowInvocation displayName. */
+                        public displayName: string;
+
+                        /** FlowInvocation flowState. */
+                        public flowState: (google.cloud.dialogflow.cx.v3.OutputState|keyof typeof google.cloud.dialogflow.cx.v3.OutputState);
+
+                        /**
+                         * Creates a new FlowInvocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowInvocation instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IFlowInvocation): google.cloud.dialogflow.cx.v3.FlowInvocation;
+
+                        /**
+                         * Encodes the specified FlowInvocation message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
+                         * @param message FlowInvocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IFlowInvocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowInvocation message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowInvocation.verify|verify} messages.
+                         * @param message FlowInvocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IFlowInvocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowInvocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowInvocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.FlowInvocation;
+
+                        /**
+                         * Decodes a FlowInvocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowInvocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.FlowInvocation;
+
+                        /**
+                         * Verifies a FlowInvocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowInvocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowInvocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.FlowInvocation;
+
+                        /**
+                         * Creates a plain object from a FlowInvocation message. Also converts values to other types if specified.
+                         * @param message FlowInvocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.FlowInvocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowInvocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowInvocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookTransition. */
+                    interface IPlaybookTransition {
+
+                        /** PlaybookTransition playbook */
+                        playbook?: (string|null);
+
+                        /** PlaybookTransition displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a PlaybookTransition. */
+                    class PlaybookTransition implements IPlaybookTransition {
+
+                        /**
+                         * Constructs a new PlaybookTransition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookTransition);
+
+                        /** PlaybookTransition playbook. */
+                        public playbook: string;
+
+                        /** PlaybookTransition displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new PlaybookTransition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookTransition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookTransition): google.cloud.dialogflow.cx.v3.PlaybookTransition;
+
+                        /**
+                         * Encodes the specified PlaybookTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
+                         * @param message PlaybookTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookTransition.verify|verify} messages.
+                         * @param message PlaybookTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookTransition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookTransition;
+
+                        /**
+                         * Decodes a PlaybookTransition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookTransition;
+
+                        /**
+                         * Verifies a PlaybookTransition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookTransition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookTransition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookTransition;
+
+                        /**
+                         * Creates a plain object from a PlaybookTransition message. Also converts values to other types if specified.
+                         * @param message PlaybookTransition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookTransition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookTransition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookTransition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FlowTransition. */
+                    interface IFlowTransition {
+
+                        /** FlowTransition flow */
+                        flow?: (string|null);
+
+                        /** FlowTransition displayName */
+                        displayName?: (string|null);
+                    }
+
+                    /** Represents a FlowTransition. */
+                    class FlowTransition implements IFlowTransition {
+
+                        /**
+                         * Constructs a new FlowTransition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IFlowTransition);
+
+                        /** FlowTransition flow. */
+                        public flow: string;
+
+                        /** FlowTransition displayName. */
+                        public displayName: string;
+
+                        /**
+                         * Creates a new FlowTransition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowTransition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IFlowTransition): google.cloud.dialogflow.cx.v3.FlowTransition;
+
+                        /**
+                         * Encodes the specified FlowTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
+                         * @param message FlowTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IFlowTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowTransition.verify|verify} messages.
+                         * @param message FlowTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IFlowTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowTransition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.FlowTransition;
+
+                        /**
+                         * Decodes a FlowTransition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.FlowTransition;
+
+                        /**
+                         * Verifies a FlowTransition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowTransition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowTransition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.FlowTransition;
+
+                        /**
+                         * Creates a plain object from a FlowTransition message. Also converts values to other types if specified.
+                         * @param message FlowTransition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.FlowTransition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowTransition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowTransition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** OutputState enum. */
+                    enum OutputState {
+                        OUTPUT_STATE_UNSPECIFIED = 0,
+                        OUTPUT_STATE_OK = 1,
+                        OUTPUT_STATE_CANCELLED = 2,
+                        OUTPUT_STATE_FAILED = 3,
+                        OUTPUT_STATE_ESCALATED = 4,
+                        OUTPUT_STATE_PENDING = 5
                     }
 
                     /** Represents an Experiments */
@@ -35101,6 +38823,9 @@ export namespace google {
                         /** Generator placeholders */
                         placeholders?: (google.cloud.dialogflow.cx.v3.Generator.IPlaceholder[]|null);
 
+                        /** Generator llmModelSettings */
+                        llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
+
                         /** Generator modelParameter */
                         modelParameter?: (google.cloud.dialogflow.cx.v3.Generator.IModelParameter|null);
                     }
@@ -35125,6 +38850,9 @@ export namespace google {
 
                         /** Generator placeholders. */
                         public placeholders: google.cloud.dialogflow.cx.v3.Generator.IPlaceholder[];
+
+                        /** Generator llmModelSettings. */
+                        public llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
 
                         /** Generator modelParameter. */
                         public modelParameter?: (google.cloud.dialogflow.cx.v3.Generator.IModelParameter|null);
@@ -36165,6 +39893,3124 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Represents a Playbooks */
+                    class Playbooks extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Playbooks service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Playbooks service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Playbooks;
+
+                        /**
+                         * Calls CreatePlaybook.
+                         * @param request CreatePlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Playbook
+                         */
+                        public createPlaybook(request: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.CreatePlaybookCallback): void;
+
+                        /**
+                         * Calls CreatePlaybook.
+                         * @param request CreatePlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createPlaybook(request: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest): Promise<google.cloud.dialogflow.cx.v3.Playbook>;
+
+                        /**
+                         * Calls DeletePlaybook.
+                         * @param request DeletePlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deletePlaybook(request: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.DeletePlaybookCallback): void;
+
+                        /**
+                         * Calls DeletePlaybook.
+                         * @param request DeletePlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deletePlaybook(request: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls ListPlaybooks.
+                         * @param request ListPlaybooksRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListPlaybooksResponse
+                         */
+                        public listPlaybooks(request: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.ListPlaybooksCallback): void;
+
+                        /**
+                         * Calls ListPlaybooks.
+                         * @param request ListPlaybooksRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listPlaybooks(request: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest): Promise<google.cloud.dialogflow.cx.v3.ListPlaybooksResponse>;
+
+                        /**
+                         * Calls GetPlaybook.
+                         * @param request GetPlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Playbook
+                         */
+                        public getPlaybook(request: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.GetPlaybookCallback): void;
+
+                        /**
+                         * Calls GetPlaybook.
+                         * @param request GetPlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getPlaybook(request: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest): Promise<google.cloud.dialogflow.cx.v3.Playbook>;
+
+                        /**
+                         * Calls ExportPlaybook.
+                         * @param request ExportPlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public exportPlaybook(request: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.ExportPlaybookCallback): void;
+
+                        /**
+                         * Calls ExportPlaybook.
+                         * @param request ExportPlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public exportPlaybook(request: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ImportPlaybook.
+                         * @param request ImportPlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public importPlaybook(request: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.ImportPlaybookCallback): void;
+
+                        /**
+                         * Calls ImportPlaybook.
+                         * @param request ImportPlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public importPlaybook(request: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls UpdatePlaybook.
+                         * @param request UpdatePlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Playbook
+                         */
+                        public updatePlaybook(request: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.UpdatePlaybookCallback): void;
+
+                        /**
+                         * Calls UpdatePlaybook.
+                         * @param request UpdatePlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updatePlaybook(request: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest): Promise<google.cloud.dialogflow.cx.v3.Playbook>;
+
+                        /**
+                         * Calls CreatePlaybookVersion.
+                         * @param request CreatePlaybookVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and PlaybookVersion
+                         */
+                        public createPlaybookVersion(request: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.CreatePlaybookVersionCallback): void;
+
+                        /**
+                         * Calls CreatePlaybookVersion.
+                         * @param request CreatePlaybookVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createPlaybookVersion(request: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest): Promise<google.cloud.dialogflow.cx.v3.PlaybookVersion>;
+
+                        /**
+                         * Calls GetPlaybookVersion.
+                         * @param request GetPlaybookVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and PlaybookVersion
+                         */
+                        public getPlaybookVersion(request: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.GetPlaybookVersionCallback): void;
+
+                        /**
+                         * Calls GetPlaybookVersion.
+                         * @param request GetPlaybookVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getPlaybookVersion(request: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest): Promise<google.cloud.dialogflow.cx.v3.PlaybookVersion>;
+
+                        /**
+                         * Calls RestorePlaybookVersion.
+                         * @param request RestorePlaybookVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RestorePlaybookVersionResponse
+                         */
+                        public restorePlaybookVersion(request: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.RestorePlaybookVersionCallback): void;
+
+                        /**
+                         * Calls RestorePlaybookVersion.
+                         * @param request RestorePlaybookVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public restorePlaybookVersion(request: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest): Promise<google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse>;
+
+                        /**
+                         * Calls ListPlaybookVersions.
+                         * @param request ListPlaybookVersionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListPlaybookVersionsResponse
+                         */
+                        public listPlaybookVersions(request: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.ListPlaybookVersionsCallback): void;
+
+                        /**
+                         * Calls ListPlaybookVersions.
+                         * @param request ListPlaybookVersionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listPlaybookVersions(request: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest): Promise<google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse>;
+
+                        /**
+                         * Calls DeletePlaybookVersion.
+                         * @param request DeletePlaybookVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deletePlaybookVersion(request: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest, callback: google.cloud.dialogflow.cx.v3.Playbooks.DeletePlaybookVersionCallback): void;
+
+                        /**
+                         * Calls DeletePlaybookVersion.
+                         * @param request DeletePlaybookVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deletePlaybookVersion(request: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace Playbooks {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|createPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Playbook
+                         */
+                        type CreatePlaybookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Playbook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|deletePlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeletePlaybookCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|listPlaybooks}.
+                         * @param error Error, if any
+                         * @param [response] ListPlaybooksResponse
+                         */
+                        type ListPlaybooksCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListPlaybooksResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|getPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Playbook
+                         */
+                        type GetPlaybookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Playbook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|exportPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ExportPlaybookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|importPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ImportPlaybookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|updatePlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Playbook
+                         */
+                        type UpdatePlaybookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Playbook) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|createPlaybookVersion}.
+                         * @param error Error, if any
+                         * @param [response] PlaybookVersion
+                         */
+                        type CreatePlaybookVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.PlaybookVersion) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|getPlaybookVersion}.
+                         * @param error Error, if any
+                         * @param [response] PlaybookVersion
+                         */
+                        type GetPlaybookVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.PlaybookVersion) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|restorePlaybookVersion}.
+                         * @param error Error, if any
+                         * @param [response] RestorePlaybookVersionResponse
+                         */
+                        type RestorePlaybookVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|listPlaybookVersions}.
+                         * @param error Error, if any
+                         * @param [response] ListPlaybookVersionsResponse
+                         */
+                        type ListPlaybookVersionsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Playbooks|deletePlaybookVersion}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeletePlaybookVersionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a CreatePlaybookRequest. */
+                    interface ICreatePlaybookRequest {
+
+                        /** CreatePlaybookRequest parent */
+                        parent?: (string|null);
+
+                        /** CreatePlaybookRequest playbook */
+                        playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+                    }
+
+                    /** Represents a CreatePlaybookRequest. */
+                    class CreatePlaybookRequest implements ICreatePlaybookRequest {
+
+                        /**
+                         * Constructs a new CreatePlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest);
+
+                        /** CreatePlaybookRequest parent. */
+                        public parent: string;
+
+                        /** CreatePlaybookRequest playbook. */
+                        public playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /**
+                         * Creates a new CreatePlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreatePlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest): google.cloud.dialogflow.cx.v3.CreatePlaybookRequest;
+
+                        /**
+                         * Encodes the specified CreatePlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreatePlaybookRequest.verify|verify} messages.
+                         * @param message CreatePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreatePlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreatePlaybookRequest.verify|verify} messages.
+                         * @param message CreatePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreatePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreatePlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreatePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreatePlaybookRequest;
+
+                        /**
+                         * Decodes a CreatePlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreatePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreatePlaybookRequest;
+
+                        /**
+                         * Verifies a CreatePlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreatePlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreatePlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreatePlaybookRequest;
+
+                        /**
+                         * Creates a plain object from a CreatePlaybookRequest message. Also converts values to other types if specified.
+                         * @param message CreatePlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreatePlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreatePlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreatePlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeletePlaybookRequest. */
+                    interface IDeletePlaybookRequest {
+
+                        /** DeletePlaybookRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeletePlaybookRequest. */
+                    class DeletePlaybookRequest implements IDeletePlaybookRequest {
+
+                        /**
+                         * Constructs a new DeletePlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest);
+
+                        /** DeletePlaybookRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeletePlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeletePlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest): google.cloud.dialogflow.cx.v3.DeletePlaybookRequest;
+
+                        /**
+                         * Encodes the specified DeletePlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeletePlaybookRequest.verify|verify} messages.
+                         * @param message DeletePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeletePlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeletePlaybookRequest.verify|verify} messages.
+                         * @param message DeletePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeletePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeletePlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeletePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeletePlaybookRequest;
+
+                        /**
+                         * Decodes a DeletePlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeletePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeletePlaybookRequest;
+
+                        /**
+                         * Verifies a DeletePlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeletePlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeletePlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeletePlaybookRequest;
+
+                        /**
+                         * Creates a plain object from a DeletePlaybookRequest message. Also converts values to other types if specified.
+                         * @param message DeletePlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeletePlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeletePlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeletePlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListPlaybooksRequest. */
+                    interface IListPlaybooksRequest {
+
+                        /** ListPlaybooksRequest parent */
+                        parent?: (string|null);
+
+                        /** ListPlaybooksRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListPlaybooksRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListPlaybooksRequest. */
+                    class ListPlaybooksRequest implements IListPlaybooksRequest {
+
+                        /**
+                         * Constructs a new ListPlaybooksRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest);
+
+                        /** ListPlaybooksRequest parent. */
+                        public parent: string;
+
+                        /** ListPlaybooksRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListPlaybooksRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListPlaybooksRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListPlaybooksRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest): google.cloud.dialogflow.cx.v3.ListPlaybooksRequest;
+
+                        /**
+                         * Encodes the specified ListPlaybooksRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybooksRequest.verify|verify} messages.
+                         * @param message ListPlaybooksRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListPlaybooksRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybooksRequest.verify|verify} messages.
+                         * @param message ListPlaybooksRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListPlaybooksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListPlaybooksRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListPlaybooksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListPlaybooksRequest;
+
+                        /**
+                         * Decodes a ListPlaybooksRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListPlaybooksRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListPlaybooksRequest;
+
+                        /**
+                         * Verifies a ListPlaybooksRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListPlaybooksRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListPlaybooksRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListPlaybooksRequest;
+
+                        /**
+                         * Creates a plain object from a ListPlaybooksRequest message. Also converts values to other types if specified.
+                         * @param message ListPlaybooksRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListPlaybooksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListPlaybooksRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListPlaybooksRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListPlaybooksResponse. */
+                    interface IListPlaybooksResponse {
+
+                        /** ListPlaybooksResponse playbooks */
+                        playbooks?: (google.cloud.dialogflow.cx.v3.IPlaybook[]|null);
+
+                        /** ListPlaybooksResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListPlaybooksResponse. */
+                    class ListPlaybooksResponse implements IListPlaybooksResponse {
+
+                        /**
+                         * Constructs a new ListPlaybooksResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListPlaybooksResponse);
+
+                        /** ListPlaybooksResponse playbooks. */
+                        public playbooks: google.cloud.dialogflow.cx.v3.IPlaybook[];
+
+                        /** ListPlaybooksResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListPlaybooksResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListPlaybooksResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListPlaybooksResponse): google.cloud.dialogflow.cx.v3.ListPlaybooksResponse;
+
+                        /**
+                         * Encodes the specified ListPlaybooksResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybooksResponse.verify|verify} messages.
+                         * @param message ListPlaybooksResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListPlaybooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListPlaybooksResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybooksResponse.verify|verify} messages.
+                         * @param message ListPlaybooksResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListPlaybooksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListPlaybooksResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListPlaybooksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListPlaybooksResponse;
+
+                        /**
+                         * Decodes a ListPlaybooksResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListPlaybooksResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListPlaybooksResponse;
+
+                        /**
+                         * Verifies a ListPlaybooksResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListPlaybooksResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListPlaybooksResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListPlaybooksResponse;
+
+                        /**
+                         * Creates a plain object from a ListPlaybooksResponse message. Also converts values to other types if specified.
+                         * @param message ListPlaybooksResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListPlaybooksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListPlaybooksResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListPlaybooksResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetPlaybookRequest. */
+                    interface IGetPlaybookRequest {
+
+                        /** GetPlaybookRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetPlaybookRequest. */
+                    class GetPlaybookRequest implements IGetPlaybookRequest {
+
+                        /**
+                         * Constructs a new GetPlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest);
+
+                        /** GetPlaybookRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetPlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetPlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest): google.cloud.dialogflow.cx.v3.GetPlaybookRequest;
+
+                        /**
+                         * Encodes the specified GetPlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetPlaybookRequest.verify|verify} messages.
+                         * @param message GetPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetPlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetPlaybookRequest.verify|verify} messages.
+                         * @param message GetPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetPlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetPlaybookRequest;
+
+                        /**
+                         * Decodes a GetPlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetPlaybookRequest;
+
+                        /**
+                         * Verifies a GetPlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetPlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetPlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetPlaybookRequest;
+
+                        /**
+                         * Creates a plain object from a GetPlaybookRequest message. Also converts values to other types if specified.
+                         * @param message GetPlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetPlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetPlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetPlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdatePlaybookRequest. */
+                    interface IUpdatePlaybookRequest {
+
+                        /** UpdatePlaybookRequest playbook */
+                        playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /** UpdatePlaybookRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdatePlaybookRequest. */
+                    class UpdatePlaybookRequest implements IUpdatePlaybookRequest {
+
+                        /**
+                         * Constructs a new UpdatePlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest);
+
+                        /** UpdatePlaybookRequest playbook. */
+                        public playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /** UpdatePlaybookRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdatePlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdatePlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest): google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest;
+
+                        /**
+                         * Encodes the specified UpdatePlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest.verify|verify} messages.
+                         * @param message UpdatePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdatePlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest.verify|verify} messages.
+                         * @param message UpdatePlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdatePlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdatePlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdatePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest;
+
+                        /**
+                         * Decodes an UpdatePlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdatePlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest;
+
+                        /**
+                         * Verifies an UpdatePlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdatePlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdatePlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest;
+
+                        /**
+                         * Creates a plain object from an UpdatePlaybookRequest message. Also converts values to other types if specified.
+                         * @param message UpdatePlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdatePlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdatePlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdatePlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Playbook. */
+                    interface IPlaybook {
+
+                        /** Playbook name */
+                        name?: (string|null);
+
+                        /** Playbook displayName */
+                        displayName?: (string|null);
+
+                        /** Playbook goal */
+                        goal?: (string|null);
+
+                        /** Playbook inputParameterDefinitions */
+                        inputParameterDefinitions?: (google.cloud.dialogflow.cx.v3.IParameterDefinition[]|null);
+
+                        /** Playbook outputParameterDefinitions */
+                        outputParameterDefinitions?: (google.cloud.dialogflow.cx.v3.IParameterDefinition[]|null);
+
+                        /** Playbook instruction */
+                        instruction?: (google.cloud.dialogflow.cx.v3.Playbook.IInstruction|null);
+
+                        /** Playbook tokenCount */
+                        tokenCount?: (number|Long|string|null);
+
+                        /** Playbook createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Playbook updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Playbook referencedPlaybooks */
+                        referencedPlaybooks?: (string[]|null);
+
+                        /** Playbook referencedFlows */
+                        referencedFlows?: (string[]|null);
+
+                        /** Playbook referencedTools */
+                        referencedTools?: (string[]|null);
+
+                        /** Playbook inlineActions */
+                        inlineActions?: (string[]|null);
+
+                        /** Playbook codeBlock */
+                        codeBlock?: (google.cloud.dialogflow.cx.v3.ICodeBlock|null);
+
+                        /** Playbook llmModelSettings */
+                        llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
+
+                        /** Playbook handlers */
+                        handlers?: (google.cloud.dialogflow.cx.v3.IHandler[]|null);
+
+                        /** Playbook playbookType */
+                        playbookType?: (google.cloud.dialogflow.cx.v3.Playbook.PlaybookType|keyof typeof google.cloud.dialogflow.cx.v3.Playbook.PlaybookType|null);
+                    }
+
+                    /** Represents a Playbook. */
+                    class Playbook implements IPlaybook {
+
+                        /**
+                         * Constructs a new Playbook.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybook);
+
+                        /** Playbook name. */
+                        public name: string;
+
+                        /** Playbook displayName. */
+                        public displayName: string;
+
+                        /** Playbook goal. */
+                        public goal: string;
+
+                        /** Playbook inputParameterDefinitions. */
+                        public inputParameterDefinitions: google.cloud.dialogflow.cx.v3.IParameterDefinition[];
+
+                        /** Playbook outputParameterDefinitions. */
+                        public outputParameterDefinitions: google.cloud.dialogflow.cx.v3.IParameterDefinition[];
+
+                        /** Playbook instruction. */
+                        public instruction?: (google.cloud.dialogflow.cx.v3.Playbook.IInstruction|null);
+
+                        /** Playbook tokenCount. */
+                        public tokenCount: (number|Long|string);
+
+                        /** Playbook createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Playbook updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Playbook referencedPlaybooks. */
+                        public referencedPlaybooks: string[];
+
+                        /** Playbook referencedFlows. */
+                        public referencedFlows: string[];
+
+                        /** Playbook referencedTools. */
+                        public referencedTools: string[];
+
+                        /** Playbook inlineActions. */
+                        public inlineActions: string[];
+
+                        /** Playbook codeBlock. */
+                        public codeBlock?: (google.cloud.dialogflow.cx.v3.ICodeBlock|null);
+
+                        /** Playbook llmModelSettings. */
+                        public llmModelSettings?: (google.cloud.dialogflow.cx.v3.ILlmModelSettings|null);
+
+                        /** Playbook handlers. */
+                        public handlers: google.cloud.dialogflow.cx.v3.IHandler[];
+
+                        /** Playbook playbookType. */
+                        public playbookType: (google.cloud.dialogflow.cx.v3.Playbook.PlaybookType|keyof typeof google.cloud.dialogflow.cx.v3.Playbook.PlaybookType);
+
+                        /**
+                         * Creates a new Playbook instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Playbook instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybook): google.cloud.dialogflow.cx.v3.Playbook;
+
+                        /**
+                         * Encodes the specified Playbook message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.verify|verify} messages.
+                         * @param message Playbook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Playbook message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.verify|verify} messages.
+                         * @param message Playbook message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybook, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Playbook message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Playbook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Playbook;
+
+                        /**
+                         * Decodes a Playbook message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Playbook
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Playbook;
+
+                        /**
+                         * Verifies a Playbook message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Playbook message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Playbook
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Playbook;
+
+                        /**
+                         * Creates a plain object from a Playbook message. Also converts values to other types if specified.
+                         * @param message Playbook
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Playbook, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Playbook to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Playbook
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Playbook {
+
+                        /** Properties of a Step. */
+                        interface IStep {
+
+                            /** Step text */
+                            text?: (string|null);
+
+                            /** Step steps */
+                            steps?: (google.cloud.dialogflow.cx.v3.Playbook.IStep[]|null);
+                        }
+
+                        /** Represents a Step. */
+                        class Step implements IStep {
+
+                            /**
+                             * Constructs a new Step.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Playbook.IStep);
+
+                            /** Step text. */
+                            public text?: (string|null);
+
+                            /** Step steps. */
+                            public steps: google.cloud.dialogflow.cx.v3.Playbook.IStep[];
+
+                            /** Step instruction. */
+                            public instruction?: "text";
+
+                            /**
+                             * Creates a new Step instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Step instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Playbook.IStep): google.cloud.dialogflow.cx.v3.Playbook.Step;
+
+                            /**
+                             * Encodes the specified Step message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.Step.verify|verify} messages.
+                             * @param message Step message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Playbook.IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Step message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.Step.verify|verify} messages.
+                             * @param message Step message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Playbook.IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Step message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Step
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Playbook.Step;
+
+                            /**
+                             * Decodes a Step message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Step
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Playbook.Step;
+
+                            /**
+                             * Verifies a Step message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Step message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Step
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Playbook.Step;
+
+                            /**
+                             * Creates a plain object from a Step message. Also converts values to other types if specified.
+                             * @param message Step
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Playbook.Step, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Step to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Step
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an Instruction. */
+                        interface IInstruction {
+
+                            /** Instruction guidelines */
+                            guidelines?: (string|null);
+
+                            /** Instruction steps */
+                            steps?: (google.cloud.dialogflow.cx.v3.Playbook.IStep[]|null);
+                        }
+
+                        /** Represents an Instruction. */
+                        class Instruction implements IInstruction {
+
+                            /**
+                             * Constructs a new Instruction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Playbook.IInstruction);
+
+                            /** Instruction guidelines. */
+                            public guidelines: string;
+
+                            /** Instruction steps. */
+                            public steps: google.cloud.dialogflow.cx.v3.Playbook.IStep[];
+
+                            /**
+                             * Creates a new Instruction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Instruction instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Playbook.IInstruction): google.cloud.dialogflow.cx.v3.Playbook.Instruction;
+
+                            /**
+                             * Encodes the specified Instruction message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.Instruction.verify|verify} messages.
+                             * @param message Instruction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Playbook.IInstruction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Instruction message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Playbook.Instruction.verify|verify} messages.
+                             * @param message Instruction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Playbook.IInstruction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Instruction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Instruction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Playbook.Instruction;
+
+                            /**
+                             * Decodes an Instruction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Instruction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Playbook.Instruction;
+
+                            /**
+                             * Verifies an Instruction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Instruction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Instruction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Playbook.Instruction;
+
+                            /**
+                             * Creates a plain object from an Instruction message. Also converts values to other types if specified.
+                             * @param message Instruction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Playbook.Instruction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Instruction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Instruction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** PlaybookType enum. */
+                        enum PlaybookType {
+                            PLAYBOOK_TYPE_UNSPECIFIED = 0,
+                            TASK = 1,
+                            ROUTINE = 3
+                        }
+                    }
+
+                    /** Properties of a CreatePlaybookVersionRequest. */
+                    interface ICreatePlaybookVersionRequest {
+
+                        /** CreatePlaybookVersionRequest parent */
+                        parent?: (string|null);
+
+                        /** CreatePlaybookVersionRequest playbookVersion */
+                        playbookVersion?: (google.cloud.dialogflow.cx.v3.IPlaybookVersion|null);
+                    }
+
+                    /** Represents a CreatePlaybookVersionRequest. */
+                    class CreatePlaybookVersionRequest implements ICreatePlaybookVersionRequest {
+
+                        /**
+                         * Constructs a new CreatePlaybookVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest);
+
+                        /** CreatePlaybookVersionRequest parent. */
+                        public parent: string;
+
+                        /** CreatePlaybookVersionRequest playbookVersion. */
+                        public playbookVersion?: (google.cloud.dialogflow.cx.v3.IPlaybookVersion|null);
+
+                        /**
+                         * Creates a new CreatePlaybookVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreatePlaybookVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest): google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest;
+
+                        /**
+                         * Encodes the specified CreatePlaybookVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest.verify|verify} messages.
+                         * @param message CreatePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreatePlaybookVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest.verify|verify} messages.
+                         * @param message CreatePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreatePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreatePlaybookVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreatePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest;
+
+                        /**
+                         * Decodes a CreatePlaybookVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreatePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest;
+
+                        /**
+                         * Verifies a CreatePlaybookVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreatePlaybookVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreatePlaybookVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest;
+
+                        /**
+                         * Creates a plain object from a CreatePlaybookVersionRequest message. Also converts values to other types if specified.
+                         * @param message CreatePlaybookVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreatePlaybookVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreatePlaybookVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreatePlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookVersion. */
+                    interface IPlaybookVersion {
+
+                        /** PlaybookVersion name */
+                        name?: (string|null);
+
+                        /** PlaybookVersion description */
+                        description?: (string|null);
+
+                        /** PlaybookVersion playbook */
+                        playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /** PlaybookVersion examples */
+                        examples?: (google.cloud.dialogflow.cx.v3.IExample[]|null);
+
+                        /** PlaybookVersion updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a PlaybookVersion. */
+                    class PlaybookVersion implements IPlaybookVersion {
+
+                        /**
+                         * Constructs a new PlaybookVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookVersion);
+
+                        /** PlaybookVersion name. */
+                        public name: string;
+
+                        /** PlaybookVersion description. */
+                        public description: string;
+
+                        /** PlaybookVersion playbook. */
+                        public playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /** PlaybookVersion examples. */
+                        public examples: google.cloud.dialogflow.cx.v3.IExample[];
+
+                        /** PlaybookVersion updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new PlaybookVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookVersion instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookVersion): google.cloud.dialogflow.cx.v3.PlaybookVersion;
+
+                        /**
+                         * Encodes the specified PlaybookVersion message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookVersion.verify|verify} messages.
+                         * @param message PlaybookVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookVersion message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookVersion.verify|verify} messages.
+                         * @param message PlaybookVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookVersion;
+
+                        /**
+                         * Decodes a PlaybookVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookVersion;
+
+                        /**
+                         * Verifies a PlaybookVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookVersion;
+
+                        /**
+                         * Creates a plain object from a PlaybookVersion message. Also converts values to other types if specified.
+                         * @param message PlaybookVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookVersion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetPlaybookVersionRequest. */
+                    interface IGetPlaybookVersionRequest {
+
+                        /** GetPlaybookVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetPlaybookVersionRequest. */
+                    class GetPlaybookVersionRequest implements IGetPlaybookVersionRequest {
+
+                        /**
+                         * Constructs a new GetPlaybookVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest);
+
+                        /** GetPlaybookVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetPlaybookVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetPlaybookVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest): google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest;
+
+                        /**
+                         * Encodes the specified GetPlaybookVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest.verify|verify} messages.
+                         * @param message GetPlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetPlaybookVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest.verify|verify} messages.
+                         * @param message GetPlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetPlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetPlaybookVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetPlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest;
+
+                        /**
+                         * Decodes a GetPlaybookVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetPlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest;
+
+                        /**
+                         * Verifies a GetPlaybookVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetPlaybookVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetPlaybookVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest;
+
+                        /**
+                         * Creates a plain object from a GetPlaybookVersionRequest message. Also converts values to other types if specified.
+                         * @param message GetPlaybookVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetPlaybookVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetPlaybookVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetPlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestorePlaybookVersionRequest. */
+                    interface IRestorePlaybookVersionRequest {
+
+                        /** RestorePlaybookVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RestorePlaybookVersionRequest. */
+                    class RestorePlaybookVersionRequest implements IRestorePlaybookVersionRequest {
+
+                        /**
+                         * Constructs a new RestorePlaybookVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest);
+
+                        /** RestorePlaybookVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RestorePlaybookVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestorePlaybookVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest.verify|verify} messages.
+                         * @param message RestorePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest.verify|verify} messages.
+                         * @param message RestorePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestorePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestorePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Verifies a RestorePlaybookVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestorePlaybookVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestorePlaybookVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Creates a plain object from a RestorePlaybookVersionRequest message. Also converts values to other types if specified.
+                         * @param message RestorePlaybookVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RestorePlaybookVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestorePlaybookVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestorePlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestorePlaybookVersionResponse. */
+                    interface IRestorePlaybookVersionResponse {
+
+                        /** RestorePlaybookVersionResponse playbook */
+                        playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+                    }
+
+                    /** Represents a RestorePlaybookVersionResponse. */
+                    class RestorePlaybookVersionResponse implements IRestorePlaybookVersionResponse {
+
+                        /**
+                         * Constructs a new RestorePlaybookVersionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionResponse);
+
+                        /** RestorePlaybookVersionResponse playbook. */
+                        public playbook?: (google.cloud.dialogflow.cx.v3.IPlaybook|null);
+
+                        /**
+                         * Creates a new RestorePlaybookVersionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestorePlaybookVersionResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionResponse): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse.verify|verify} messages.
+                         * @param message RestorePlaybookVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse.verify|verify} messages.
+                         * @param message RestorePlaybookVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRestorePlaybookVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestorePlaybookVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestorePlaybookVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Verifies a RestorePlaybookVersionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestorePlaybookVersionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestorePlaybookVersionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Creates a plain object from a RestorePlaybookVersionResponse message. Also converts values to other types if specified.
+                         * @param message RestorePlaybookVersionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RestorePlaybookVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestorePlaybookVersionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestorePlaybookVersionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListPlaybookVersionsRequest. */
+                    interface IListPlaybookVersionsRequest {
+
+                        /** ListPlaybookVersionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListPlaybookVersionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListPlaybookVersionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListPlaybookVersionsRequest. */
+                    class ListPlaybookVersionsRequest implements IListPlaybookVersionsRequest {
+
+                        /**
+                         * Constructs a new ListPlaybookVersionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest);
+
+                        /** ListPlaybookVersionsRequest parent. */
+                        public parent: string;
+
+                        /** ListPlaybookVersionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListPlaybookVersionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListPlaybookVersionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListPlaybookVersionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest;
+
+                        /**
+                         * Encodes the specified ListPlaybookVersionsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest.verify|verify} messages.
+                         * @param message ListPlaybookVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListPlaybookVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest.verify|verify} messages.
+                         * @param message ListPlaybookVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListPlaybookVersionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListPlaybookVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest;
+
+                        /**
+                         * Decodes a ListPlaybookVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListPlaybookVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest;
+
+                        /**
+                         * Verifies a ListPlaybookVersionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListPlaybookVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListPlaybookVersionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListPlaybookVersionsRequest message. Also converts values to other types if specified.
+                         * @param message ListPlaybookVersionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListPlaybookVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListPlaybookVersionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListPlaybookVersionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListPlaybookVersionsResponse. */
+                    interface IListPlaybookVersionsResponse {
+
+                        /** ListPlaybookVersionsResponse playbookVersions */
+                        playbookVersions?: (google.cloud.dialogflow.cx.v3.IPlaybookVersion[]|null);
+
+                        /** ListPlaybookVersionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListPlaybookVersionsResponse. */
+                    class ListPlaybookVersionsResponse implements IListPlaybookVersionsResponse {
+
+                        /**
+                         * Constructs a new ListPlaybookVersionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsResponse);
+
+                        /** ListPlaybookVersionsResponse playbookVersions. */
+                        public playbookVersions: google.cloud.dialogflow.cx.v3.IPlaybookVersion[];
+
+                        /** ListPlaybookVersionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListPlaybookVersionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListPlaybookVersionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsResponse): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse;
+
+                        /**
+                         * Encodes the specified ListPlaybookVersionsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse.verify|verify} messages.
+                         * @param message ListPlaybookVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListPlaybookVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse.verify|verify} messages.
+                         * @param message ListPlaybookVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListPlaybookVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListPlaybookVersionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListPlaybookVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse;
+
+                        /**
+                         * Decodes a ListPlaybookVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListPlaybookVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse;
+
+                        /**
+                         * Verifies a ListPlaybookVersionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListPlaybookVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListPlaybookVersionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListPlaybookVersionsResponse message. Also converts values to other types if specified.
+                         * @param message ListPlaybookVersionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListPlaybookVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListPlaybookVersionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListPlaybookVersionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeletePlaybookVersionRequest. */
+                    interface IDeletePlaybookVersionRequest {
+
+                        /** DeletePlaybookVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeletePlaybookVersionRequest. */
+                    class DeletePlaybookVersionRequest implements IDeletePlaybookVersionRequest {
+
+                        /**
+                         * Constructs a new DeletePlaybookVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest);
+
+                        /** DeletePlaybookVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeletePlaybookVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeletePlaybookVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest): google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest;
+
+                        /**
+                         * Encodes the specified DeletePlaybookVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest.verify|verify} messages.
+                         * @param message DeletePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeletePlaybookVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest.verify|verify} messages.
+                         * @param message DeletePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeletePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeletePlaybookVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeletePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest;
+
+                        /**
+                         * Decodes a DeletePlaybookVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeletePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest;
+
+                        /**
+                         * Verifies a DeletePlaybookVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeletePlaybookVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeletePlaybookVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest;
+
+                        /**
+                         * Creates a plain object from a DeletePlaybookVersionRequest message. Also converts values to other types if specified.
+                         * @param message DeletePlaybookVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeletePlaybookVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeletePlaybookVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeletePlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportPlaybookRequest. */
+                    interface IExportPlaybookRequest {
+
+                        /** ExportPlaybookRequest name */
+                        name?: (string|null);
+
+                        /** ExportPlaybookRequest playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ExportPlaybookRequest dataFormat */
+                        dataFormat?: (google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.DataFormat|null);
+                    }
+
+                    /** Represents an ExportPlaybookRequest. */
+                    class ExportPlaybookRequest implements IExportPlaybookRequest {
+
+                        /**
+                         * Constructs a new ExportPlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest);
+
+                        /** ExportPlaybookRequest name. */
+                        public name: string;
+
+                        /** ExportPlaybookRequest playbookUri. */
+                        public playbookUri: string;
+
+                        /** ExportPlaybookRequest dataFormat. */
+                        public dataFormat: (google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.DataFormat);
+
+                        /**
+                         * Creates a new ExportPlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest): google.cloud.dialogflow.cx.v3.ExportPlaybookRequest;
+
+                        /**
+                         * Encodes the specified ExportPlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.verify|verify} messages.
+                         * @param message ExportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportPlaybookRequest.verify|verify} messages.
+                         * @param message ExportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IExportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ExportPlaybookRequest;
+
+                        /**
+                         * Decodes an ExportPlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ExportPlaybookRequest;
+
+                        /**
+                         * Verifies an ExportPlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ExportPlaybookRequest;
+
+                        /**
+                         * Creates a plain object from an ExportPlaybookRequest message. Also converts values to other types if specified.
+                         * @param message ExportPlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ExportPlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ExportPlaybookRequest {
+
+                        /** DataFormat enum. */
+                        enum DataFormat {
+                            DATA_FORMAT_UNSPECIFIED = 0,
+                            BLOB = 1,
+                            JSON = 2
+                        }
+                    }
+
+                    /** Properties of an ImportPlaybookRequest. */
+                    interface IImportPlaybookRequest {
+
+                        /** ImportPlaybookRequest parent */
+                        parent?: (string|null);
+
+                        /** ImportPlaybookRequest playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ImportPlaybookRequest playbookContent */
+                        playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ImportPlaybookRequest importStrategy */
+                        importStrategy?: (google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy|null);
+                    }
+
+                    /** Represents an ImportPlaybookRequest. */
+                    class ImportPlaybookRequest implements IImportPlaybookRequest {
+
+                        /**
+                         * Constructs a new ImportPlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest);
+
+                        /** ImportPlaybookRequest parent. */
+                        public parent: string;
+
+                        /** ImportPlaybookRequest playbookUri. */
+                        public playbookUri?: (string|null);
+
+                        /** ImportPlaybookRequest playbookContent. */
+                        public playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ImportPlaybookRequest importStrategy. */
+                        public importStrategy?: (google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy|null);
+
+                        /** ImportPlaybookRequest playbook. */
+                        public playbook?: ("playbookUri"|"playbookContent");
+
+                        /**
+                         * Creates a new ImportPlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportPlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest): google.cloud.dialogflow.cx.v3.ImportPlaybookRequest;
+
+                        /**
+                         * Encodes the specified ImportPlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookRequest.verify|verify} messages.
+                         * @param message ImportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportPlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookRequest.verify|verify} messages.
+                         * @param message ImportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IImportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportPlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ImportPlaybookRequest;
+
+                        /**
+                         * Decodes an ImportPlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ImportPlaybookRequest;
+
+                        /**
+                         * Verifies an ImportPlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportPlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportPlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ImportPlaybookRequest;
+
+                        /**
+                         * Creates a plain object from an ImportPlaybookRequest message. Also converts values to other types if specified.
+                         * @param message ImportPlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ImportPlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportPlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportPlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookImportStrategy. */
+                    interface IPlaybookImportStrategy {
+
+                        /** PlaybookImportStrategy mainPlaybookImportStrategy */
+                        mainPlaybookImportStrategy?: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy|null);
+
+                        /** PlaybookImportStrategy nestedResourceImportStrategy */
+                        nestedResourceImportStrategy?: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy|null);
+
+                        /** PlaybookImportStrategy toolImportStrategy */
+                        toolImportStrategy?: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy|null);
+                    }
+
+                    /** Represents a PlaybookImportStrategy. */
+                    class PlaybookImportStrategy implements IPlaybookImportStrategy {
+
+                        /**
+                         * Constructs a new PlaybookImportStrategy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy);
+
+                        /** PlaybookImportStrategy mainPlaybookImportStrategy. */
+                        public mainPlaybookImportStrategy: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy);
+
+                        /** PlaybookImportStrategy nestedResourceImportStrategy. */
+                        public nestedResourceImportStrategy: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy);
+
+                        /** PlaybookImportStrategy toolImportStrategy. */
+                        public toolImportStrategy: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy);
+
+                        /**
+                         * Creates a new PlaybookImportStrategy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookImportStrategy instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy): google.cloud.dialogflow.cx.v3.PlaybookImportStrategy;
+
+                        /**
+                         * Encodes the specified PlaybookImportStrategy message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookImportStrategy.verify|verify} messages.
+                         * @param message PlaybookImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookImportStrategy message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.PlaybookImportStrategy.verify|verify} messages.
+                         * @param message PlaybookImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IPlaybookImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookImportStrategy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.PlaybookImportStrategy;
+
+                        /**
+                         * Decodes a PlaybookImportStrategy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.PlaybookImportStrategy;
+
+                        /**
+                         * Verifies a PlaybookImportStrategy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookImportStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookImportStrategy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.PlaybookImportStrategy;
+
+                        /**
+                         * Creates a plain object from a PlaybookImportStrategy message. Also converts values to other types if specified.
+                         * @param message PlaybookImportStrategy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.PlaybookImportStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookImportStrategy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookImportStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ImportPlaybookResponse. */
+                    interface IImportPlaybookResponse {
+
+                        /** ImportPlaybookResponse playbook */
+                        playbook?: (string|null);
+
+                        /** ImportPlaybookResponse conflictingResources */
+                        conflictingResources?: (google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources|null);
+                    }
+
+                    /** Represents an ImportPlaybookResponse. */
+                    class ImportPlaybookResponse implements IImportPlaybookResponse {
+
+                        /**
+                         * Constructs a new ImportPlaybookResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IImportPlaybookResponse);
+
+                        /** ImportPlaybookResponse playbook. */
+                        public playbook: string;
+
+                        /** ImportPlaybookResponse conflictingResources. */
+                        public conflictingResources?: (google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources|null);
+
+                        /**
+                         * Creates a new ImportPlaybookResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportPlaybookResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IImportPlaybookResponse): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse;
+
+                        /**
+                         * Encodes the specified ImportPlaybookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.verify|verify} messages.
+                         * @param message ImportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IImportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportPlaybookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.verify|verify} messages.
+                         * @param message ImportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IImportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportPlaybookResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse;
+
+                        /**
+                         * Decodes an ImportPlaybookResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse;
+
+                        /**
+                         * Verifies an ImportPlaybookResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportPlaybookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportPlaybookResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse;
+
+                        /**
+                         * Creates a plain object from an ImportPlaybookResponse message. Also converts values to other types if specified.
+                         * @param message ImportPlaybookResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportPlaybookResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportPlaybookResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ImportPlaybookResponse {
+
+                        /** Properties of a ConflictingResources. */
+                        interface IConflictingResources {
+
+                            /** ConflictingResources mainPlaybookDisplayName */
+                            mainPlaybookDisplayName?: (string|null);
+
+                            /** ConflictingResources nestedPlaybookDisplayNames */
+                            nestedPlaybookDisplayNames?: (string[]|null);
+
+                            /** ConflictingResources toolDisplayNames */
+                            toolDisplayNames?: (string[]|null);
+                        }
+
+                        /** Represents a ConflictingResources. */
+                        class ConflictingResources implements IConflictingResources {
+
+                            /**
+                             * Constructs a new ConflictingResources.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources);
+
+                            /** ConflictingResources mainPlaybookDisplayName. */
+                            public mainPlaybookDisplayName: string;
+
+                            /** ConflictingResources nestedPlaybookDisplayNames. */
+                            public nestedPlaybookDisplayNames: string[];
+
+                            /** ConflictingResources toolDisplayNames. */
+                            public toolDisplayNames: string[];
+
+                            /**
+                             * Creates a new ConflictingResources instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConflictingResources instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Encodes the specified ConflictingResources message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources.verify|verify} messages.
+                             * @param message ConflictingResources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConflictingResources message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources.verify|verify} messages.
+                             * @param message ConflictingResources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.IConflictingResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConflictingResources message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConflictingResources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Decodes a ConflictingResources message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConflictingResources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Verifies a ConflictingResources message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConflictingResources message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConflictingResources
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Creates a plain object from a ConflictingResources message. Also converts values to other types if specified.
+                             * @param message ConflictingResources
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.ImportPlaybookResponse.ConflictingResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConflictingResources to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConflictingResources
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an ExportPlaybookResponse. */
+                    interface IExportPlaybookResponse {
+
+                        /** ExportPlaybookResponse playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ExportPlaybookResponse playbookContent */
+                        playbookContent?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents an ExportPlaybookResponse. */
+                    class ExportPlaybookResponse implements IExportPlaybookResponse {
+
+                        /**
+                         * Constructs a new ExportPlaybookResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IExportPlaybookResponse);
+
+                        /** ExportPlaybookResponse playbookUri. */
+                        public playbookUri?: (string|null);
+
+                        /** ExportPlaybookResponse playbookContent. */
+                        public playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ExportPlaybookResponse playbook. */
+                        public playbook?: ("playbookUri"|"playbookContent");
+
+                        /**
+                         * Creates a new ExportPlaybookResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPlaybookResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IExportPlaybookResponse): google.cloud.dialogflow.cx.v3.ExportPlaybookResponse;
+
+                        /**
+                         * Encodes the specified ExportPlaybookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportPlaybookResponse.verify|verify} messages.
+                         * @param message ExportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IExportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPlaybookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ExportPlaybookResponse.verify|verify} messages.
+                         * @param message ExportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IExportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPlaybookResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ExportPlaybookResponse;
+
+                        /**
+                         * Decodes an ExportPlaybookResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ExportPlaybookResponse;
+
+                        /**
+                         * Verifies an ExportPlaybookResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPlaybookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPlaybookResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ExportPlaybookResponse;
+
+                        /**
+                         * Creates a plain object from an ExportPlaybookResponse message. Also converts values to other types if specified.
+                         * @param message ExportPlaybookResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ExportPlaybookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPlaybookResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPlaybookResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Handler. */
+                    interface IHandler {
+
+                        /** Handler eventHandler */
+                        eventHandler?: (google.cloud.dialogflow.cx.v3.Handler.IEventHandler|null);
+
+                        /** Handler lifecycleHandler */
+                        lifecycleHandler?: (google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler|null);
+                    }
+
+                    /** Represents a Handler. */
+                    class Handler implements IHandler {
+
+                        /**
+                         * Constructs a new Handler.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IHandler);
+
+                        /** Handler eventHandler. */
+                        public eventHandler?: (google.cloud.dialogflow.cx.v3.Handler.IEventHandler|null);
+
+                        /** Handler lifecycleHandler. */
+                        public lifecycleHandler?: (google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler|null);
+
+                        /** Handler handler. */
+                        public handler?: ("eventHandler"|"lifecycleHandler");
+
+                        /**
+                         * Creates a new Handler instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Handler instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IHandler): google.cloud.dialogflow.cx.v3.Handler;
+
+                        /**
+                         * Encodes the specified Handler message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.verify|verify} messages.
+                         * @param message Handler message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Handler message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.verify|verify} messages.
+                         * @param message Handler message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Handler message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Handler
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Handler;
+
+                        /**
+                         * Decodes a Handler message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Handler
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Handler;
+
+                        /**
+                         * Verifies a Handler message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Handler message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Handler
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Handler;
+
+                        /**
+                         * Creates a plain object from a Handler message. Also converts values to other types if specified.
+                         * @param message Handler
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Handler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Handler to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Handler
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Handler {
+
+                        /** Properties of an EventHandler. */
+                        interface IEventHandler {
+
+                            /** EventHandler event */
+                            event?: (string|null);
+
+                            /** EventHandler condition */
+                            condition?: (string|null);
+
+                            /** EventHandler fulfillment */
+                            fulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
+                        }
+
+                        /** Represents an EventHandler. */
+                        class EventHandler implements IEventHandler {
+
+                            /**
+                             * Constructs a new EventHandler.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Handler.IEventHandler);
+
+                            /** EventHandler event. */
+                            public event: string;
+
+                            /** EventHandler condition. */
+                            public condition: string;
+
+                            /** EventHandler fulfillment. */
+                            public fulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
+
+                            /**
+                             * Creates a new EventHandler instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EventHandler instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Handler.IEventHandler): google.cloud.dialogflow.cx.v3.Handler.EventHandler;
+
+                            /**
+                             * Encodes the specified EventHandler message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.EventHandler.verify|verify} messages.
+                             * @param message EventHandler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Handler.IEventHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EventHandler message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.EventHandler.verify|verify} messages.
+                             * @param message EventHandler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Handler.IEventHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EventHandler message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EventHandler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Handler.EventHandler;
+
+                            /**
+                             * Decodes an EventHandler message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EventHandler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Handler.EventHandler;
+
+                            /**
+                             * Verifies an EventHandler message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EventHandler message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EventHandler
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Handler.EventHandler;
+
+                            /**
+                             * Creates a plain object from an EventHandler message. Also converts values to other types if specified.
+                             * @param message EventHandler
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Handler.EventHandler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EventHandler to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EventHandler
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a LifecycleHandler. */
+                        interface ILifecycleHandler {
+
+                            /** LifecycleHandler lifecycleStage */
+                            lifecycleStage?: (string|null);
+
+                            /** LifecycleHandler condition */
+                            condition?: (string|null);
+
+                            /** LifecycleHandler fulfillment */
+                            fulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
+                        }
+
+                        /** Represents a LifecycleHandler. */
+                        class LifecycleHandler implements ILifecycleHandler {
+
+                            /**
+                             * Constructs a new LifecycleHandler.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler);
+
+                            /** LifecycleHandler lifecycleStage. */
+                            public lifecycleStage: string;
+
+                            /** LifecycleHandler condition. */
+                            public condition: string;
+
+                            /** LifecycleHandler fulfillment. */
+                            public fulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
+
+                            /**
+                             * Creates a new LifecycleHandler instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LifecycleHandler instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler): google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler;
+
+                            /**
+                             * Encodes the specified LifecycleHandler message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler.verify|verify} messages.
+                             * @param message LifecycleHandler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LifecycleHandler message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler.verify|verify} messages.
+                             * @param message LifecycleHandler message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Handler.ILifecycleHandler, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LifecycleHandler message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LifecycleHandler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler;
+
+                            /**
+                             * Decodes a LifecycleHandler message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LifecycleHandler
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler;
+
+                            /**
+                             * Verifies a LifecycleHandler message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LifecycleHandler message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LifecycleHandler
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler;
+
+                            /**
+                             * Creates a plain object from a LifecycleHandler message. Also converts values to other types if specified.
+                             * @param message LifecycleHandler
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Handler.LifecycleHandler, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LifecycleHandler to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LifecycleHandler
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Represents a SecuritySettingsService */
@@ -37322,6 +44168,3244 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** Represents a Tools */
+                    class Tools extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new Tools service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new Tools service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Tools;
+
+                        /**
+                         * Calls CreateTool.
+                         * @param request CreateToolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Tool
+                         */
+                        public createTool(request: google.cloud.dialogflow.cx.v3.ICreateToolRequest, callback: google.cloud.dialogflow.cx.v3.Tools.CreateToolCallback): void;
+
+                        /**
+                         * Calls CreateTool.
+                         * @param request CreateToolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createTool(request: google.cloud.dialogflow.cx.v3.ICreateToolRequest): Promise<google.cloud.dialogflow.cx.v3.Tool>;
+
+                        /**
+                         * Calls ListTools.
+                         * @param request ListToolsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListToolsResponse
+                         */
+                        public listTools(request: google.cloud.dialogflow.cx.v3.IListToolsRequest, callback: google.cloud.dialogflow.cx.v3.Tools.ListToolsCallback): void;
+
+                        /**
+                         * Calls ListTools.
+                         * @param request ListToolsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listTools(request: google.cloud.dialogflow.cx.v3.IListToolsRequest): Promise<google.cloud.dialogflow.cx.v3.ListToolsResponse>;
+
+                        /**
+                         * Calls GetTool.
+                         * @param request GetToolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Tool
+                         */
+                        public getTool(request: google.cloud.dialogflow.cx.v3.IGetToolRequest, callback: google.cloud.dialogflow.cx.v3.Tools.GetToolCallback): void;
+
+                        /**
+                         * Calls GetTool.
+                         * @param request GetToolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getTool(request: google.cloud.dialogflow.cx.v3.IGetToolRequest): Promise<google.cloud.dialogflow.cx.v3.Tool>;
+
+                        /**
+                         * Calls UpdateTool.
+                         * @param request UpdateToolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Tool
+                         */
+                        public updateTool(request: google.cloud.dialogflow.cx.v3.IUpdateToolRequest, callback: google.cloud.dialogflow.cx.v3.Tools.UpdateToolCallback): void;
+
+                        /**
+                         * Calls UpdateTool.
+                         * @param request UpdateToolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateTool(request: google.cloud.dialogflow.cx.v3.IUpdateToolRequest): Promise<google.cloud.dialogflow.cx.v3.Tool>;
+
+                        /**
+                         * Calls DeleteTool.
+                         * @param request DeleteToolRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteTool(request: google.cloud.dialogflow.cx.v3.IDeleteToolRequest, callback: google.cloud.dialogflow.cx.v3.Tools.DeleteToolCallback): void;
+
+                        /**
+                         * Calls DeleteTool.
+                         * @param request DeleteToolRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteTool(request: google.cloud.dialogflow.cx.v3.IDeleteToolRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls ListToolVersions.
+                         * @param request ListToolVersionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListToolVersionsResponse
+                         */
+                        public listToolVersions(request: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest, callback: google.cloud.dialogflow.cx.v3.Tools.ListToolVersionsCallback): void;
+
+                        /**
+                         * Calls ListToolVersions.
+                         * @param request ListToolVersionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listToolVersions(request: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest): Promise<google.cloud.dialogflow.cx.v3.ListToolVersionsResponse>;
+
+                        /**
+                         * Calls CreateToolVersion.
+                         * @param request CreateToolVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ToolVersion
+                         */
+                        public createToolVersion(request: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest, callback: google.cloud.dialogflow.cx.v3.Tools.CreateToolVersionCallback): void;
+
+                        /**
+                         * Calls CreateToolVersion.
+                         * @param request CreateToolVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createToolVersion(request: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest): Promise<google.cloud.dialogflow.cx.v3.ToolVersion>;
+
+                        /**
+                         * Calls GetToolVersion.
+                         * @param request GetToolVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ToolVersion
+                         */
+                        public getToolVersion(request: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest, callback: google.cloud.dialogflow.cx.v3.Tools.GetToolVersionCallback): void;
+
+                        /**
+                         * Calls GetToolVersion.
+                         * @param request GetToolVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getToolVersion(request: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest): Promise<google.cloud.dialogflow.cx.v3.ToolVersion>;
+
+                        /**
+                         * Calls DeleteToolVersion.
+                         * @param request DeleteToolVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteToolVersion(request: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest, callback: google.cloud.dialogflow.cx.v3.Tools.DeleteToolVersionCallback): void;
+
+                        /**
+                         * Calls DeleteToolVersion.
+                         * @param request DeleteToolVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteToolVersion(request: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls RestoreToolVersion.
+                         * @param request RestoreToolVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RestoreToolVersionResponse
+                         */
+                        public restoreToolVersion(request: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest, callback: google.cloud.dialogflow.cx.v3.Tools.RestoreToolVersionCallback): void;
+
+                        /**
+                         * Calls RestoreToolVersion.
+                         * @param request RestoreToolVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public restoreToolVersion(request: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest): Promise<google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse>;
+                    }
+
+                    namespace Tools {
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|createTool}.
+                         * @param error Error, if any
+                         * @param [response] Tool
+                         */
+                        type CreateToolCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Tool) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|listTools}.
+                         * @param error Error, if any
+                         * @param [response] ListToolsResponse
+                         */
+                        type ListToolsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListToolsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|getTool}.
+                         * @param error Error, if any
+                         * @param [response] Tool
+                         */
+                        type GetToolCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Tool) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|updateTool}.
+                         * @param error Error, if any
+                         * @param [response] Tool
+                         */
+                        type UpdateToolCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.Tool) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|deleteTool}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteToolCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|listToolVersions}.
+                         * @param error Error, if any
+                         * @param [response] ListToolVersionsResponse
+                         */
+                        type ListToolVersionsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListToolVersionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|createToolVersion}.
+                         * @param error Error, if any
+                         * @param [response] ToolVersion
+                         */
+                        type CreateToolVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ToolVersion) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|getToolVersion}.
+                         * @param error Error, if any
+                         * @param [response] ToolVersion
+                         */
+                        type GetToolVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ToolVersion) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|deleteToolVersion}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteToolVersionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Tools|restoreToolVersion}.
+                         * @param error Error, if any
+                         * @param [response] RestoreToolVersionResponse
+                         */
+                        type RestoreToolVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse) => void;
+                    }
+
+                    /** Properties of a CreateToolRequest. */
+                    interface ICreateToolRequest {
+
+                        /** CreateToolRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateToolRequest tool */
+                        tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+                    }
+
+                    /** Represents a CreateToolRequest. */
+                    class CreateToolRequest implements ICreateToolRequest {
+
+                        /**
+                         * Constructs a new CreateToolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateToolRequest);
+
+                        /** CreateToolRequest parent. */
+                        public parent: string;
+
+                        /** CreateToolRequest tool. */
+                        public tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /**
+                         * Creates a new CreateToolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateToolRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateToolRequest): google.cloud.dialogflow.cx.v3.CreateToolRequest;
+
+                        /**
+                         * Encodes the specified CreateToolRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateToolRequest.verify|verify} messages.
+                         * @param message CreateToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateToolRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateToolRequest.verify|verify} messages.
+                         * @param message CreateToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateToolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateToolRequest;
+
+                        /**
+                         * Decodes a CreateToolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateToolRequest;
+
+                        /**
+                         * Verifies a CreateToolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateToolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateToolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateToolRequest;
+
+                        /**
+                         * Creates a plain object from a CreateToolRequest message. Also converts values to other types if specified.
+                         * @param message CreateToolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateToolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateToolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateToolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListToolsRequest. */
+                    interface IListToolsRequest {
+
+                        /** ListToolsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListToolsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListToolsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListToolsRequest. */
+                    class ListToolsRequest implements IListToolsRequest {
+
+                        /**
+                         * Constructs a new ListToolsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListToolsRequest);
+
+                        /** ListToolsRequest parent. */
+                        public parent: string;
+
+                        /** ListToolsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListToolsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListToolsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListToolsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListToolsRequest): google.cloud.dialogflow.cx.v3.ListToolsRequest;
+
+                        /**
+                         * Encodes the specified ListToolsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolsRequest.verify|verify} messages.
+                         * @param message ListToolsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListToolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListToolsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolsRequest.verify|verify} messages.
+                         * @param message ListToolsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListToolsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListToolsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListToolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListToolsRequest;
+
+                        /**
+                         * Decodes a ListToolsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListToolsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListToolsRequest;
+
+                        /**
+                         * Verifies a ListToolsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListToolsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListToolsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListToolsRequest;
+
+                        /**
+                         * Creates a plain object from a ListToolsRequest message. Also converts values to other types if specified.
+                         * @param message ListToolsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListToolsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListToolsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListToolsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListToolsResponse. */
+                    interface IListToolsResponse {
+
+                        /** ListToolsResponse tools */
+                        tools?: (google.cloud.dialogflow.cx.v3.ITool[]|null);
+
+                        /** ListToolsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListToolsResponse. */
+                    class ListToolsResponse implements IListToolsResponse {
+
+                        /**
+                         * Constructs a new ListToolsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListToolsResponse);
+
+                        /** ListToolsResponse tools. */
+                        public tools: google.cloud.dialogflow.cx.v3.ITool[];
+
+                        /** ListToolsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListToolsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListToolsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListToolsResponse): google.cloud.dialogflow.cx.v3.ListToolsResponse;
+
+                        /**
+                         * Encodes the specified ListToolsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolsResponse.verify|verify} messages.
+                         * @param message ListToolsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListToolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListToolsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolsResponse.verify|verify} messages.
+                         * @param message ListToolsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListToolsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListToolsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListToolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListToolsResponse;
+
+                        /**
+                         * Decodes a ListToolsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListToolsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListToolsResponse;
+
+                        /**
+                         * Verifies a ListToolsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListToolsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListToolsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListToolsResponse;
+
+                        /**
+                         * Creates a plain object from a ListToolsResponse message. Also converts values to other types if specified.
+                         * @param message ListToolsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListToolsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListToolsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListToolsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetToolRequest. */
+                    interface IGetToolRequest {
+
+                        /** GetToolRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetToolRequest. */
+                    class GetToolRequest implements IGetToolRequest {
+
+                        /**
+                         * Constructs a new GetToolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetToolRequest);
+
+                        /** GetToolRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetToolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetToolRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetToolRequest): google.cloud.dialogflow.cx.v3.GetToolRequest;
+
+                        /**
+                         * Encodes the specified GetToolRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetToolRequest.verify|verify} messages.
+                         * @param message GetToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetToolRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetToolRequest.verify|verify} messages.
+                         * @param message GetToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetToolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetToolRequest;
+
+                        /**
+                         * Decodes a GetToolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetToolRequest;
+
+                        /**
+                         * Verifies a GetToolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetToolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetToolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetToolRequest;
+
+                        /**
+                         * Creates a plain object from a GetToolRequest message. Also converts values to other types if specified.
+                         * @param message GetToolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetToolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetToolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetToolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateToolRequest. */
+                    interface IUpdateToolRequest {
+
+                        /** UpdateToolRequest tool */
+                        tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /** UpdateToolRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateToolRequest. */
+                    class UpdateToolRequest implements IUpdateToolRequest {
+
+                        /**
+                         * Constructs a new UpdateToolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IUpdateToolRequest);
+
+                        /** UpdateToolRequest tool. */
+                        public tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /** UpdateToolRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateToolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateToolRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IUpdateToolRequest): google.cloud.dialogflow.cx.v3.UpdateToolRequest;
+
+                        /**
+                         * Encodes the specified UpdateToolRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateToolRequest.verify|verify} messages.
+                         * @param message UpdateToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IUpdateToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateToolRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.UpdateToolRequest.verify|verify} messages.
+                         * @param message UpdateToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IUpdateToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateToolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.UpdateToolRequest;
+
+                        /**
+                         * Decodes an UpdateToolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.UpdateToolRequest;
+
+                        /**
+                         * Verifies an UpdateToolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateToolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateToolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.UpdateToolRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateToolRequest message. Also converts values to other types if specified.
+                         * @param message UpdateToolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.UpdateToolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateToolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateToolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteToolRequest. */
+                    interface IDeleteToolRequest {
+
+                        /** DeleteToolRequest name */
+                        name?: (string|null);
+
+                        /** DeleteToolRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteToolRequest. */
+                    class DeleteToolRequest implements IDeleteToolRequest {
+
+                        /**
+                         * Constructs a new DeleteToolRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteToolRequest);
+
+                        /** DeleteToolRequest name. */
+                        public name: string;
+
+                        /** DeleteToolRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteToolRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteToolRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteToolRequest): google.cloud.dialogflow.cx.v3.DeleteToolRequest;
+
+                        /**
+                         * Encodes the specified DeleteToolRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteToolRequest.verify|verify} messages.
+                         * @param message DeleteToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteToolRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteToolRequest.verify|verify} messages.
+                         * @param message DeleteToolRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteToolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteToolRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteToolRequest;
+
+                        /**
+                         * Decodes a DeleteToolRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteToolRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteToolRequest;
+
+                        /**
+                         * Verifies a DeleteToolRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteToolRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteToolRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteToolRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteToolRequest message. Also converts values to other types if specified.
+                         * @param message DeleteToolRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteToolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteToolRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteToolRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Tool. */
+                    interface ITool {
+
+                        /** Tool name */
+                        name?: (string|null);
+
+                        /** Tool displayName */
+                        displayName?: (string|null);
+
+                        /** Tool description */
+                        description?: (string|null);
+
+                        /** Tool openApiSpec */
+                        openApiSpec?: (google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool|null);
+
+                        /** Tool dataStoreSpec */
+                        dataStoreSpec?: (google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool|null);
+
+                        /** Tool functionSpec */
+                        functionSpec?: (google.cloud.dialogflow.cx.v3.Tool.IFunctionTool|null);
+
+                        /** Tool toolType */
+                        toolType?: (google.cloud.dialogflow.cx.v3.Tool.ToolType|keyof typeof google.cloud.dialogflow.cx.v3.Tool.ToolType|null);
+                    }
+
+                    /** Represents a Tool. */
+                    class Tool implements ITool {
+
+                        /**
+                         * Constructs a new Tool.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ITool);
+
+                        /** Tool name. */
+                        public name: string;
+
+                        /** Tool displayName. */
+                        public displayName: string;
+
+                        /** Tool description. */
+                        public description: string;
+
+                        /** Tool openApiSpec. */
+                        public openApiSpec?: (google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool|null);
+
+                        /** Tool dataStoreSpec. */
+                        public dataStoreSpec?: (google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool|null);
+
+                        /** Tool functionSpec. */
+                        public functionSpec?: (google.cloud.dialogflow.cx.v3.Tool.IFunctionTool|null);
+
+                        /** Tool toolType. */
+                        public toolType: (google.cloud.dialogflow.cx.v3.Tool.ToolType|keyof typeof google.cloud.dialogflow.cx.v3.Tool.ToolType);
+
+                        /** Tool specification. */
+                        public specification?: ("openApiSpec"|"dataStoreSpec"|"functionSpec");
+
+                        /**
+                         * Creates a new Tool instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Tool instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ITool): google.cloud.dialogflow.cx.v3.Tool;
+
+                        /**
+                         * Encodes the specified Tool message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.verify|verify} messages.
+                         * @param message Tool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ITool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Tool message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.verify|verify} messages.
+                         * @param message Tool message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ITool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Tool message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Tool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool;
+
+                        /**
+                         * Decodes a Tool message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Tool
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool;
+
+                        /**
+                         * Verifies a Tool message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Tool message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Tool
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool;
+
+                        /**
+                         * Creates a plain object from a Tool message. Also converts values to other types if specified.
+                         * @param message Tool
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.Tool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Tool to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Tool
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Tool {
+
+                        /** Properties of an OpenApiTool. */
+                        interface IOpenApiTool {
+
+                            /** OpenApiTool textSchema */
+                            textSchema?: (string|null);
+
+                            /** OpenApiTool authentication */
+                            authentication?: (google.cloud.dialogflow.cx.v3.Tool.IAuthentication|null);
+
+                            /** OpenApiTool tlsConfig */
+                            tlsConfig?: (google.cloud.dialogflow.cx.v3.Tool.ITLSConfig|null);
+
+                            /** OpenApiTool serviceDirectoryConfig */
+                            serviceDirectoryConfig?: (google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig|null);
+                        }
+
+                        /** Represents an OpenApiTool. */
+                        class OpenApiTool implements IOpenApiTool {
+
+                            /**
+                             * Constructs a new OpenApiTool.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool);
+
+                            /** OpenApiTool textSchema. */
+                            public textSchema?: (string|null);
+
+                            /** OpenApiTool authentication. */
+                            public authentication?: (google.cloud.dialogflow.cx.v3.Tool.IAuthentication|null);
+
+                            /** OpenApiTool tlsConfig. */
+                            public tlsConfig?: (google.cloud.dialogflow.cx.v3.Tool.ITLSConfig|null);
+
+                            /** OpenApiTool serviceDirectoryConfig. */
+                            public serviceDirectoryConfig?: (google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig|null);
+
+                            /** OpenApiTool schema. */
+                            public schema?: "textSchema";
+
+                            /**
+                             * Creates a new OpenApiTool instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OpenApiTool instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool): google.cloud.dialogflow.cx.v3.Tool.OpenApiTool;
+
+                            /**
+                             * Encodes the specified OpenApiTool message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.OpenApiTool.verify|verify} messages.
+                             * @param message OpenApiTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OpenApiTool message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.OpenApiTool.verify|verify} messages.
+                             * @param message OpenApiTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.IOpenApiTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OpenApiTool message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OpenApiTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.OpenApiTool;
+
+                            /**
+                             * Decodes an OpenApiTool message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OpenApiTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.OpenApiTool;
+
+                            /**
+                             * Verifies an OpenApiTool message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OpenApiTool message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OpenApiTool
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.OpenApiTool;
+
+                            /**
+                             * Creates a plain object from an OpenApiTool message. Also converts values to other types if specified.
+                             * @param message OpenApiTool
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.OpenApiTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OpenApiTool to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OpenApiTool
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DataStoreTool. */
+                        interface IDataStoreTool {
+
+                            /** DataStoreTool dataStoreConnections */
+                            dataStoreConnections?: (google.cloud.dialogflow.cx.v3.IDataStoreConnection[]|null);
+
+                            /** DataStoreTool fallbackPrompt */
+                            fallbackPrompt?: (google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt|null);
+                        }
+
+                        /** Represents a DataStoreTool. */
+                        class DataStoreTool implements IDataStoreTool {
+
+                            /**
+                             * Constructs a new DataStoreTool.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool);
+
+                            /** DataStoreTool dataStoreConnections. */
+                            public dataStoreConnections: google.cloud.dialogflow.cx.v3.IDataStoreConnection[];
+
+                            /** DataStoreTool fallbackPrompt. */
+                            public fallbackPrompt?: (google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt|null);
+
+                            /**
+                             * Creates a new DataStoreTool instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataStoreTool instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool;
+
+                            /**
+                             * Encodes the specified DataStoreTool message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.verify|verify} messages.
+                             * @param message DataStoreTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataStoreTool message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.verify|verify} messages.
+                             * @param message DataStoreTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.IDataStoreTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataStoreTool message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataStoreTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool;
+
+                            /**
+                             * Decodes a DataStoreTool message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataStoreTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool;
+
+                            /**
+                             * Verifies a DataStoreTool message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataStoreTool message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataStoreTool
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool;
+
+                            /**
+                             * Creates a plain object from a DataStoreTool message. Also converts values to other types if specified.
+                             * @param message DataStoreTool
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataStoreTool to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataStoreTool
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace DataStoreTool {
+
+                            /** Properties of a FallbackPrompt. */
+                            interface IFallbackPrompt {
+                            }
+
+                            /** Represents a FallbackPrompt. */
+                            class FallbackPrompt implements IFallbackPrompt {
+
+                                /**
+                                 * Constructs a new FallbackPrompt.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt);
+
+                                /**
+                                 * Creates a new FallbackPrompt instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns FallbackPrompt instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt;
+
+                                /**
+                                 * Encodes the specified FallbackPrompt message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt.verify|verify} messages.
+                                 * @param message FallbackPrompt message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified FallbackPrompt message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt.verify|verify} messages.
+                                 * @param message FallbackPrompt message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.IFallbackPrompt, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a FallbackPrompt message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns FallbackPrompt
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt;
+
+                                /**
+                                 * Decodes a FallbackPrompt message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns FallbackPrompt
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt;
+
+                                /**
+                                 * Verifies a FallbackPrompt message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a FallbackPrompt message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns FallbackPrompt
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt;
+
+                                /**
+                                 * Creates a plain object from a FallbackPrompt message. Also converts values to other types if specified.
+                                 * @param message FallbackPrompt
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.DataStoreTool.FallbackPrompt, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this FallbackPrompt to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for FallbackPrompt
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a FunctionTool. */
+                        interface IFunctionTool {
+
+                            /** FunctionTool inputSchema */
+                            inputSchema?: (google.protobuf.IStruct|null);
+
+                            /** FunctionTool outputSchema */
+                            outputSchema?: (google.protobuf.IStruct|null);
+                        }
+
+                        /** Represents a FunctionTool. */
+                        class FunctionTool implements IFunctionTool {
+
+                            /**
+                             * Constructs a new FunctionTool.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.IFunctionTool);
+
+                            /** FunctionTool inputSchema. */
+                            public inputSchema?: (google.protobuf.IStruct|null);
+
+                            /** FunctionTool outputSchema. */
+                            public outputSchema?: (google.protobuf.IStruct|null);
+
+                            /**
+                             * Creates a new FunctionTool instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FunctionTool instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.IFunctionTool): google.cloud.dialogflow.cx.v3.Tool.FunctionTool;
+
+                            /**
+                             * Encodes the specified FunctionTool message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.FunctionTool.verify|verify} messages.
+                             * @param message FunctionTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.IFunctionTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FunctionTool message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.FunctionTool.verify|verify} messages.
+                             * @param message FunctionTool message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.IFunctionTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FunctionTool message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FunctionTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.FunctionTool;
+
+                            /**
+                             * Decodes a FunctionTool message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FunctionTool
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.FunctionTool;
+
+                            /**
+                             * Verifies a FunctionTool message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FunctionTool message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FunctionTool
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.FunctionTool;
+
+                            /**
+                             * Creates a plain object from a FunctionTool message. Also converts values to other types if specified.
+                             * @param message FunctionTool
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.FunctionTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FunctionTool to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FunctionTool
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an Authentication. */
+                        interface IAuthentication {
+
+                            /** Authentication apiKeyConfig */
+                            apiKeyConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig|null);
+
+                            /** Authentication oauthConfig */
+                            oauthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig|null);
+
+                            /** Authentication serviceAgentAuthConfig */
+                            serviceAgentAuthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig|null);
+
+                            /** Authentication bearerTokenConfig */
+                            bearerTokenConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig|null);
+
+                            /** Authentication serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig|null);
+                        }
+
+                        /** Represents an Authentication. */
+                        class Authentication implements IAuthentication {
+
+                            /**
+                             * Constructs a new Authentication.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.IAuthentication);
+
+                            /** Authentication apiKeyConfig. */
+                            public apiKeyConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig|null);
+
+                            /** Authentication oauthConfig. */
+                            public oauthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig|null);
+
+                            /** Authentication serviceAgentAuthConfig. */
+                            public serviceAgentAuthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig|null);
+
+                            /** Authentication bearerTokenConfig. */
+                            public bearerTokenConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig|null);
+
+                            /** Authentication serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig|null);
+
+                            /** Authentication authConfig. */
+                            public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig"|"serviceAccountAuthConfig");
+
+                            /**
+                             * Creates a new Authentication instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Authentication instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.IAuthentication): google.cloud.dialogflow.cx.v3.Tool.Authentication;
+
+                            /**
+                             * Encodes the specified Authentication message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.verify|verify} messages.
+                             * @param message Authentication message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.IAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Authentication message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.verify|verify} messages.
+                             * @param message Authentication message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.IAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Authentication message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Authentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication;
+
+                            /**
+                             * Decodes an Authentication message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Authentication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication;
+
+                            /**
+                             * Verifies an Authentication message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Authentication message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Authentication
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication;
+
+                            /**
+                             * Creates a plain object from an Authentication message. Also converts values to other types if specified.
+                             * @param message Authentication
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Authentication to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Authentication
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Authentication {
+
+                            /** Properties of an ApiKeyConfig. */
+                            interface IApiKeyConfig {
+
+                                /** ApiKeyConfig keyName */
+                                keyName?: (string|null);
+
+                                /** ApiKeyConfig apiKey */
+                                apiKey?: (string|null);
+
+                                /** ApiKeyConfig secretVersionForApiKey */
+                                secretVersionForApiKey?: (string|null);
+
+                                /** ApiKeyConfig requestLocation */
+                                requestLocation?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.RequestLocation|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.RequestLocation|null);
+                            }
+
+                            /** Represents an ApiKeyConfig. */
+                            class ApiKeyConfig implements IApiKeyConfig {
+
+                                /**
+                                 * Constructs a new ApiKeyConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig);
+
+                                /** ApiKeyConfig keyName. */
+                                public keyName: string;
+
+                                /** ApiKeyConfig apiKey. */
+                                public apiKey: string;
+
+                                /** ApiKeyConfig secretVersionForApiKey. */
+                                public secretVersionForApiKey: string;
+
+                                /** ApiKeyConfig requestLocation. */
+                                public requestLocation: (google.cloud.dialogflow.cx.v3.Tool.Authentication.RequestLocation|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.RequestLocation);
+
+                                /**
+                                 * Creates a new ApiKeyConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ApiKeyConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig): google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig;
+
+                                /**
+                                 * Encodes the specified ApiKeyConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig.verify|verify} messages.
+                                 * @param message ApiKeyConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ApiKeyConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig.verify|verify} messages.
+                                 * @param message ApiKeyConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IApiKeyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an ApiKeyConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ApiKeyConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig;
+
+                                /**
+                                 * Decodes an ApiKeyConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ApiKeyConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig;
+
+                                /**
+                                 * Verifies an ApiKeyConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an ApiKeyConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ApiKeyConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig;
+
+                                /**
+                                 * Creates a plain object from an ApiKeyConfig message. Also converts values to other types if specified.
+                                 * @param message ApiKeyConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.ApiKeyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ApiKeyConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ApiKeyConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** RequestLocation enum. */
+                            enum RequestLocation {
+                                REQUEST_LOCATION_UNSPECIFIED = 0,
+                                HEADER = 1,
+                                QUERY_STRING = 2
+                            }
+
+                            /** Properties of a OAuthConfig. */
+                            interface IOAuthConfig {
+
+                                /** OAuthConfig oauthGrantType */
+                                oauthGrantType?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.OauthGrantType|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.OauthGrantType|null);
+
+                                /** OAuthConfig clientId */
+                                clientId?: (string|null);
+
+                                /** OAuthConfig clientSecret */
+                                clientSecret?: (string|null);
+
+                                /** OAuthConfig secretVersionForClientSecret */
+                                secretVersionForClientSecret?: (string|null);
+
+                                /** OAuthConfig tokenEndpoint */
+                                tokenEndpoint?: (string|null);
+
+                                /** OAuthConfig scopes */
+                                scopes?: (string[]|null);
+                            }
+
+                            /** Represents a OAuthConfig. */
+                            class OAuthConfig implements IOAuthConfig {
+
+                                /**
+                                 * Constructs a new OAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig);
+
+                                /** OAuthConfig oauthGrantType. */
+                                public oauthGrantType: (google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.OauthGrantType|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.OauthGrantType);
+
+                                /** OAuthConfig clientId. */
+                                public clientId: string;
+
+                                /** OAuthConfig clientSecret. */
+                                public clientSecret: string;
+
+                                /** OAuthConfig secretVersionForClientSecret. */
+                                public secretVersionForClientSecret: string;
+
+                                /** OAuthConfig tokenEndpoint. */
+                                public tokenEndpoint: string;
+
+                                /** OAuthConfig scopes. */
+                                public scopes: string[];
+
+                                /**
+                                 * Creates a new OAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns OAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig): google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig;
+
+                                /**
+                                 * Encodes the specified OAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.verify|verify} messages.
+                                 * @param message OAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified OAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig.verify|verify} messages.
+                                 * @param message OAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a OAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns OAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig;
+
+                                /**
+                                 * Decodes a OAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns OAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig;
+
+                                /**
+                                 * Verifies a OAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a OAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns OAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a OAuthConfig message. Also converts values to other types if specified.
+                                 * @param message OAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.OAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this OAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for OAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace OAuthConfig {
+
+                                /** OauthGrantType enum. */
+                                enum OauthGrantType {
+                                    OAUTH_GRANT_TYPE_UNSPECIFIED = 0,
+                                    CLIENT_CREDENTIAL = 1
+                                }
+                            }
+
+                            /** Properties of a ServiceAgentAuthConfig. */
+                            interface IServiceAgentAuthConfig {
+
+                                /** ServiceAgentAuthConfig serviceAgentAuth */
+                                serviceAgentAuth?: (google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.ServiceAgentAuth|null);
+                            }
+
+                            /** Represents a ServiceAgentAuthConfig. */
+                            class ServiceAgentAuthConfig implements IServiceAgentAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAgentAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig);
+
+                                /** ServiceAgentAuthConfig serviceAgentAuth. */
+                                public serviceAgentAuth: (google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.ServiceAgentAuth);
+
+                                /**
+                                 * Creates a new ServiceAgentAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAgentAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAgentAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAgentAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAgentAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAgentAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAgentAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAgentAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAgentAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAgentAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAgentAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAgentAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAgentAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAgentAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAgentAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAgentAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAgentAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAgentAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAgentAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace ServiceAgentAuthConfig {
+
+                                /** ServiceAgentAuth enum. */
+                                enum ServiceAgentAuth {
+                                    SERVICE_AGENT_AUTH_UNSPECIFIED = 0,
+                                    ID_TOKEN = 1,
+                                    ACCESS_TOKEN = 2
+                                }
+                            }
+
+                            /** Properties of a BearerTokenConfig. */
+                            interface IBearerTokenConfig {
+
+                                /** BearerTokenConfig token */
+                                token?: (string|null);
+
+                                /** BearerTokenConfig secretVersionForToken */
+                                secretVersionForToken?: (string|null);
+                            }
+
+                            /** Represents a BearerTokenConfig. */
+                            class BearerTokenConfig implements IBearerTokenConfig {
+
+                                /**
+                                 * Constructs a new BearerTokenConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig);
+
+                                /** BearerTokenConfig token. */
+                                public token: string;
+
+                                /** BearerTokenConfig secretVersionForToken. */
+                                public secretVersionForToken: string;
+
+                                /**
+                                 * Creates a new BearerTokenConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns BearerTokenConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig): google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig;
+
+                                /**
+                                 * Encodes the specified BearerTokenConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig.verify|verify} messages.
+                                 * @param message BearerTokenConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified BearerTokenConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig.verify|verify} messages.
+                                 * @param message BearerTokenConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IBearerTokenConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a BearerTokenConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns BearerTokenConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig;
+
+                                /**
+                                 * Decodes a BearerTokenConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns BearerTokenConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig;
+
+                                /**
+                                 * Verifies a BearerTokenConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a BearerTokenConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns BearerTokenConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig;
+
+                                /**
+                                 * Creates a plain object from a BearerTokenConfig message. Also converts values to other types if specified.
+                                 * @param message BearerTokenConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.BearerTokenConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this BearerTokenConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for BearerTokenConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.Authentication.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a TLSConfig. */
+                        interface ITLSConfig {
+
+                            /** TLSConfig caCerts */
+                            caCerts?: (google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert[]|null);
+                        }
+
+                        /** Represents a TLSConfig. */
+                        class TLSConfig implements ITLSConfig {
+
+                            /**
+                             * Constructs a new TLSConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.ITLSConfig);
+
+                            /** TLSConfig caCerts. */
+                            public caCerts: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert[];
+
+                            /**
+                             * Creates a new TLSConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TLSConfig instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.ITLSConfig): google.cloud.dialogflow.cx.v3.Tool.TLSConfig;
+
+                            /**
+                             * Encodes the specified TLSConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.TLSConfig.verify|verify} messages.
+                             * @param message TLSConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.ITLSConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TLSConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.TLSConfig.verify|verify} messages.
+                             * @param message TLSConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.ITLSConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TLSConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TLSConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.TLSConfig;
+
+                            /**
+                             * Decodes a TLSConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TLSConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.TLSConfig;
+
+                            /**
+                             * Verifies a TLSConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TLSConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TLSConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.TLSConfig;
+
+                            /**
+                             * Creates a plain object from a TLSConfig message. Also converts values to other types if specified.
+                             * @param message TLSConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.TLSConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TLSConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TLSConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace TLSConfig {
+
+                            /** Properties of a CACert. */
+                            interface ICACert {
+
+                                /** CACert displayName */
+                                displayName?: (string|null);
+
+                                /** CACert cert */
+                                cert?: (Uint8Array|Buffer|string|null);
+                            }
+
+                            /** Represents a CACert. */
+                            class CACert implements ICACert {
+
+                                /**
+                                 * Constructs a new CACert.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert);
+
+                                /** CACert displayName. */
+                                public displayName: string;
+
+                                /** CACert cert. */
+                                public cert: (Uint8Array|Buffer|string);
+
+                                /**
+                                 * Creates a new CACert instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CACert instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert): google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert;
+
+                                /**
+                                 * Encodes the specified CACert message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert.verify|verify} messages.
+                                 * @param message CACert message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CACert message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert.verify|verify} messages.
+                                 * @param message CACert message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.ICACert, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CACert message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CACert
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert;
+
+                                /**
+                                 * Decodes a CACert message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CACert
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert;
+
+                                /**
+                                 * Verifies a CACert message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CACert message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CACert
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert;
+
+                                /**
+                                 * Creates a plain object from a CACert message. Also converts values to other types if specified.
+                                 * @param message CACert
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.TLSConfig.CACert, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CACert to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CACert
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a ServiceDirectoryConfig. */
+                        interface IServiceDirectoryConfig {
+
+                            /** ServiceDirectoryConfig service */
+                            service?: (string|null);
+                        }
+
+                        /** Represents a ServiceDirectoryConfig. */
+                        class ServiceDirectoryConfig implements IServiceDirectoryConfig {
+
+                            /**
+                             * Constructs a new ServiceDirectoryConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig);
+
+                            /** ServiceDirectoryConfig service. */
+                            public service: string;
+
+                            /**
+                             * Creates a new ServiceDirectoryConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ServiceDirectoryConfig instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig): google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ServiceDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig.verify|verify} messages.
+                             * @param message ServiceDirectoryConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.Tool.IServiceDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig;
+
+                            /**
+                             * Decodes a ServiceDirectoryConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ServiceDirectoryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig;
+
+                            /**
+                             * Verifies a ServiceDirectoryConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ServiceDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ServiceDirectoryConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig;
+
+                            /**
+                             * Creates a plain object from a ServiceDirectoryConfig message. Also converts values to other types if specified.
+                             * @param message ServiceDirectoryConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.Tool.ServiceDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ServiceDirectoryConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ServiceDirectoryConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** ToolType enum. */
+                        enum ToolType {
+                            TOOL_TYPE_UNSPECIFIED = 0,
+                            CUSTOMIZED_TOOL = 1,
+                            BUILTIN_TOOL = 2
+                        }
+                    }
+
+                    /** Properties of a ListToolVersionsRequest. */
+                    interface IListToolVersionsRequest {
+
+                        /** ListToolVersionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListToolVersionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListToolVersionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListToolVersionsRequest. */
+                    class ListToolVersionsRequest implements IListToolVersionsRequest {
+
+                        /**
+                         * Constructs a new ListToolVersionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest);
+
+                        /** ListToolVersionsRequest parent. */
+                        public parent: string;
+
+                        /** ListToolVersionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListToolVersionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListToolVersionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListToolVersionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest): google.cloud.dialogflow.cx.v3.ListToolVersionsRequest;
+
+                        /**
+                         * Encodes the specified ListToolVersionsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolVersionsRequest.verify|verify} messages.
+                         * @param message ListToolVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListToolVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolVersionsRequest.verify|verify} messages.
+                         * @param message ListToolVersionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListToolVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListToolVersionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListToolVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListToolVersionsRequest;
+
+                        /**
+                         * Decodes a ListToolVersionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListToolVersionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListToolVersionsRequest;
+
+                        /**
+                         * Verifies a ListToolVersionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListToolVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListToolVersionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListToolVersionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListToolVersionsRequest message. Also converts values to other types if specified.
+                         * @param message ListToolVersionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListToolVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListToolVersionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListToolVersionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListToolVersionsResponse. */
+                    interface IListToolVersionsResponse {
+
+                        /** ListToolVersionsResponse toolVersions */
+                        toolVersions?: (google.cloud.dialogflow.cx.v3.IToolVersion[]|null);
+
+                        /** ListToolVersionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListToolVersionsResponse. */
+                    class ListToolVersionsResponse implements IListToolVersionsResponse {
+
+                        /**
+                         * Constructs a new ListToolVersionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListToolVersionsResponse);
+
+                        /** ListToolVersionsResponse toolVersions. */
+                        public toolVersions: google.cloud.dialogflow.cx.v3.IToolVersion[];
+
+                        /** ListToolVersionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListToolVersionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListToolVersionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListToolVersionsResponse): google.cloud.dialogflow.cx.v3.ListToolVersionsResponse;
+
+                        /**
+                         * Encodes the specified ListToolVersionsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolVersionsResponse.verify|verify} messages.
+                         * @param message ListToolVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListToolVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListToolVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListToolVersionsResponse.verify|verify} messages.
+                         * @param message ListToolVersionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListToolVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListToolVersionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListToolVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListToolVersionsResponse;
+
+                        /**
+                         * Decodes a ListToolVersionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListToolVersionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListToolVersionsResponse;
+
+                        /**
+                         * Verifies a ListToolVersionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListToolVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListToolVersionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListToolVersionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListToolVersionsResponse message. Also converts values to other types if specified.
+                         * @param message ListToolVersionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListToolVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListToolVersionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListToolVersionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateToolVersionRequest. */
+                    interface ICreateToolVersionRequest {
+
+                        /** CreateToolVersionRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateToolVersionRequest toolVersion */
+                        toolVersion?: (google.cloud.dialogflow.cx.v3.IToolVersion|null);
+                    }
+
+                    /** Represents a CreateToolVersionRequest. */
+                    class CreateToolVersionRequest implements ICreateToolVersionRequest {
+
+                        /**
+                         * Constructs a new CreateToolVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest);
+
+                        /** CreateToolVersionRequest parent. */
+                        public parent: string;
+
+                        /** CreateToolVersionRequest toolVersion. */
+                        public toolVersion?: (google.cloud.dialogflow.cx.v3.IToolVersion|null);
+
+                        /**
+                         * Creates a new CreateToolVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateToolVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest): google.cloud.dialogflow.cx.v3.CreateToolVersionRequest;
+
+                        /**
+                         * Encodes the specified CreateToolVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateToolVersionRequest.verify|verify} messages.
+                         * @param message CreateToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateToolVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.CreateToolVersionRequest.verify|verify} messages.
+                         * @param message CreateToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.ICreateToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateToolVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.CreateToolVersionRequest;
+
+                        /**
+                         * Decodes a CreateToolVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.CreateToolVersionRequest;
+
+                        /**
+                         * Verifies a CreateToolVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateToolVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateToolVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.CreateToolVersionRequest;
+
+                        /**
+                         * Creates a plain object from a CreateToolVersionRequest message. Also converts values to other types if specified.
+                         * @param message CreateToolVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.CreateToolVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateToolVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateToolVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetToolVersionRequest. */
+                    interface IGetToolVersionRequest {
+
+                        /** GetToolVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetToolVersionRequest. */
+                    class GetToolVersionRequest implements IGetToolVersionRequest {
+
+                        /**
+                         * Constructs a new GetToolVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest);
+
+                        /** GetToolVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetToolVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetToolVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest): google.cloud.dialogflow.cx.v3.GetToolVersionRequest;
+
+                        /**
+                         * Encodes the specified GetToolVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetToolVersionRequest.verify|verify} messages.
+                         * @param message GetToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetToolVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.GetToolVersionRequest.verify|verify} messages.
+                         * @param message GetToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IGetToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetToolVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.GetToolVersionRequest;
+
+                        /**
+                         * Decodes a GetToolVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.GetToolVersionRequest;
+
+                        /**
+                         * Verifies a GetToolVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetToolVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetToolVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.GetToolVersionRequest;
+
+                        /**
+                         * Creates a plain object from a GetToolVersionRequest message. Also converts values to other types if specified.
+                         * @param message GetToolVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.GetToolVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetToolVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetToolVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteToolVersionRequest. */
+                    interface IDeleteToolVersionRequest {
+
+                        /** DeleteToolVersionRequest name */
+                        name?: (string|null);
+
+                        /** DeleteToolVersionRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteToolVersionRequest. */
+                    class DeleteToolVersionRequest implements IDeleteToolVersionRequest {
+
+                        /**
+                         * Constructs a new DeleteToolVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest);
+
+                        /** DeleteToolVersionRequest name. */
+                        public name: string;
+
+                        /** DeleteToolVersionRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteToolVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteToolVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest): google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest;
+
+                        /**
+                         * Encodes the specified DeleteToolVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest.verify|verify} messages.
+                         * @param message DeleteToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteToolVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest.verify|verify} messages.
+                         * @param message DeleteToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IDeleteToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteToolVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest;
+
+                        /**
+                         * Decodes a DeleteToolVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest;
+
+                        /**
+                         * Verifies a DeleteToolVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteToolVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteToolVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteToolVersionRequest message. Also converts values to other types if specified.
+                         * @param message DeleteToolVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.DeleteToolVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteToolVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteToolVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestoreToolVersionRequest. */
+                    interface IRestoreToolVersionRequest {
+
+                        /** RestoreToolVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RestoreToolVersionRequest. */
+                    class RestoreToolVersionRequest implements IRestoreToolVersionRequest {
+
+                        /**
+                         * Constructs a new RestoreToolVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest);
+
+                        /** RestoreToolVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RestoreToolVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestoreToolVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest): google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest;
+
+                        /**
+                         * Encodes the specified RestoreToolVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest.verify|verify} messages.
+                         * @param message RestoreToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestoreToolVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest.verify|verify} messages.
+                         * @param message RestoreToolVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRestoreToolVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestoreToolVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestoreToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest;
+
+                        /**
+                         * Decodes a RestoreToolVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestoreToolVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest;
+
+                        /**
+                         * Verifies a RestoreToolVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestoreToolVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestoreToolVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest;
+
+                        /**
+                         * Creates a plain object from a RestoreToolVersionRequest message. Also converts values to other types if specified.
+                         * @param message RestoreToolVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RestoreToolVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestoreToolVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestoreToolVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestoreToolVersionResponse. */
+                    interface IRestoreToolVersionResponse {
+
+                        /** RestoreToolVersionResponse tool */
+                        tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+                    }
+
+                    /** Represents a RestoreToolVersionResponse. */
+                    class RestoreToolVersionResponse implements IRestoreToolVersionResponse {
+
+                        /**
+                         * Constructs a new RestoreToolVersionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRestoreToolVersionResponse);
+
+                        /** RestoreToolVersionResponse tool. */
+                        public tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /**
+                         * Creates a new RestoreToolVersionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestoreToolVersionResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRestoreToolVersionResponse): google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse;
+
+                        /**
+                         * Encodes the specified RestoreToolVersionResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse.verify|verify} messages.
+                         * @param message RestoreToolVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRestoreToolVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestoreToolVersionResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse.verify|verify} messages.
+                         * @param message RestoreToolVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRestoreToolVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestoreToolVersionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestoreToolVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse;
+
+                        /**
+                         * Decodes a RestoreToolVersionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestoreToolVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse;
+
+                        /**
+                         * Verifies a RestoreToolVersionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestoreToolVersionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestoreToolVersionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse;
+
+                        /**
+                         * Creates a plain object from a RestoreToolVersionResponse message. Also converts values to other types if specified.
+                         * @param message RestoreToolVersionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RestoreToolVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestoreToolVersionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestoreToolVersionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ToolVersion. */
+                    interface IToolVersion {
+
+                        /** ToolVersion name */
+                        name?: (string|null);
+
+                        /** ToolVersion displayName */
+                        displayName?: (string|null);
+
+                        /** ToolVersion tool */
+                        tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /** ToolVersion createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ToolVersion updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ToolVersion. */
+                    class ToolVersion implements IToolVersion {
+
+                        /**
+                         * Constructs a new ToolVersion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IToolVersion);
+
+                        /** ToolVersion name. */
+                        public name: string;
+
+                        /** ToolVersion displayName. */
+                        public displayName: string;
+
+                        /** ToolVersion tool. */
+                        public tool?: (google.cloud.dialogflow.cx.v3.ITool|null);
+
+                        /** ToolVersion createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ToolVersion updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ToolVersion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ToolVersion instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IToolVersion): google.cloud.dialogflow.cx.v3.ToolVersion;
+
+                        /**
+                         * Encodes the specified ToolVersion message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolVersion.verify|verify} messages.
+                         * @param message ToolVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IToolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ToolVersion message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ToolVersion.verify|verify} messages.
+                         * @param message ToolVersion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IToolVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ToolVersion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ToolVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ToolVersion;
+
+                        /**
+                         * Decodes a ToolVersion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ToolVersion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ToolVersion;
+
+                        /**
+                         * Verifies a ToolVersion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ToolVersion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ToolVersion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ToolVersion;
+
+                        /**
+                         * Creates a plain object from a ToolVersion message. Also converts values to other types if specified.
+                         * @param message ToolVersion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ToolVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ToolVersion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ToolVersion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Represents a Versions */
@@ -43616,6 +53700,12 @@ export namespace google {
                         /** Flow knowledgeConnectorSettings */
                         knowledgeConnectorSettings?: (google.cloud.dialogflow.cx.v3beta1.IKnowledgeConnectorSettings|null);
 
+                        /** Flow inputParameterDefinitions */
+                        inputParameterDefinitions?: (google.cloud.dialogflow.cx.v3beta1.IParameterDefinition[]|null);
+
+                        /** Flow outputParameterDefinitions */
+                        outputParameterDefinitions?: (google.cloud.dialogflow.cx.v3beta1.IParameterDefinition[]|null);
+
                         /** Flow multiLanguageSettings */
                         multiLanguageSettings?: (google.cloud.dialogflow.cx.v3beta1.Flow.IMultiLanguageSettings|null);
 
@@ -43658,6 +53748,12 @@ export namespace google {
 
                         /** Flow knowledgeConnectorSettings. */
                         public knowledgeConnectorSettings?: (google.cloud.dialogflow.cx.v3beta1.IKnowledgeConnectorSettings|null);
+
+                        /** Flow inputParameterDefinitions. */
+                        public inputParameterDefinitions: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition[];
+
+                        /** Flow outputParameterDefinitions. */
+                        public outputParameterDefinitions: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition[];
 
                         /** Flow multiLanguageSettings. */
                         public multiLanguageSettings?: (google.cloud.dialogflow.cx.v3beta1.Flow.IMultiLanguageSettings|null);
@@ -47489,6 +57585,9 @@ export namespace google {
 
                             /** SearchSnippet text */
                             text?: (string|null);
+
+                            /** SearchSnippet metadata */
+                            metadata?: (google.protobuf.IStruct|null);
                         }
 
                         /** Represents a SearchSnippet. */
@@ -47508,6 +57607,9 @@ export namespace google {
 
                             /** SearchSnippet text. */
                             public text: string;
+
+                            /** SearchSnippet metadata. */
+                            public metadata?: (google.protobuf.IStruct|null);
 
                             /**
                              * Creates a new SearchSnippet instance using the specified properties.
@@ -48194,6 +58296,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback */
                         enableGenerativeFallback?: (boolean|null);
+
+                        /** Fulfillment generators */
+                        generators?: (google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings[]|null);
                     }
 
                     /** Represents a Fulfillment. */
@@ -48228,6 +58333,9 @@ export namespace google {
 
                         /** Fulfillment enableGenerativeFallback. */
                         public enableGenerativeFallback: boolean;
+
+                        /** Fulfillment generators. */
+                        public generators: google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings[];
 
                         /**
                          * Creates a new Fulfillment instance using the specified properties.
@@ -48722,6 +58830,115 @@ export namespace google {
                                     public static getTypeUrl(typeUrlPrefix?: string): string;
                                 }
                             }
+                        }
+
+                        /** Properties of a GeneratorSettings. */
+                        interface IGeneratorSettings {
+
+                            /** GeneratorSettings generator */
+                            generator?: (string|null);
+
+                            /** GeneratorSettings inputParameters */
+                            inputParameters?: ({ [k: string]: string }|null);
+
+                            /** GeneratorSettings outputParameter */
+                            outputParameter?: (string|null);
+                        }
+
+                        /** Represents a GeneratorSettings. */
+                        class GeneratorSettings implements IGeneratorSettings {
+
+                            /**
+                             * Constructs a new GeneratorSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings);
+
+                            /** GeneratorSettings generator. */
+                            public generator: string;
+
+                            /** GeneratorSettings inputParameters. */
+                            public inputParameters: { [k: string]: string };
+
+                            /** GeneratorSettings outputParameter. */
+                            public outputParameter: string;
+
+                            /**
+                             * Creates a new GeneratorSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GeneratorSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings): google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GeneratorSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings.verify|verify} messages.
+                             * @param message GeneratorSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Fulfillment.IGeneratorSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Decodes a GeneratorSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GeneratorSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Verifies a GeneratorSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GeneratorSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GeneratorSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings;
+
+                            /**
+                             * Creates a plain object from a GeneratorSettings message. Also converts values to other types if specified.
+                             * @param message GeneratorSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Fulfillment.GeneratorSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GeneratorSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GeneratorSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -50227,6 +60444,459 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ParameterDefinition. */
+                    interface IParameterDefinition {
+
+                        /** ParameterDefinition name */
+                        name?: (string|null);
+
+                        /** ParameterDefinition type */
+                        type?: (google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|null);
+
+                        /** ParameterDefinition typeSchema */
+                        typeSchema?: (google.cloud.dialogflow.cx.v3beta1.ITypeSchema|null);
+
+                        /** ParameterDefinition description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a ParameterDefinition. */
+                    class ParameterDefinition implements IParameterDefinition {
+
+                        /**
+                         * Constructs a new ParameterDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition);
+
+                        /** ParameterDefinition name. */
+                        public name: string;
+
+                        /** ParameterDefinition type. */
+                        public type: (google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType);
+
+                        /** ParameterDefinition typeSchema. */
+                        public typeSchema?: (google.cloud.dialogflow.cx.v3beta1.ITypeSchema|null);
+
+                        /** ParameterDefinition description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new ParameterDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParameterDefinition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
+
+                        /**
+                         * Encodes the specified ParameterDefinition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.verify|verify} messages.
+                         * @param message ParameterDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParameterDefinition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.verify|verify} messages.
+                         * @param message ParameterDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParameterDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParameterDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
+
+                        /**
+                         * Decodes a ParameterDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParameterDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
+
+                        /**
+                         * Verifies a ParameterDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParameterDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParameterDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
+
+                        /**
+                         * Creates a plain object from a ParameterDefinition message. Also converts values to other types if specified.
+                         * @param message ParameterDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ParameterDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParameterDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParameterDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ParameterDefinition {
+
+                        /** ParameterType enum. */
+                        enum ParameterType {
+                            PARAMETER_TYPE_UNSPECIFIED = 0,
+                            STRING = 1,
+                            NUMBER = 2,
+                            BOOLEAN = 3,
+                            NULL = 4,
+                            OBJECT = 5,
+                            LIST = 6
+                        }
+                    }
+
+                    /** Properties of a TypeSchema. */
+                    interface ITypeSchema {
+
+                        /** TypeSchema inlineSchema */
+                        inlineSchema?: (google.cloud.dialogflow.cx.v3beta1.IInlineSchema|null);
+
+                        /** TypeSchema schemaReference */
+                        schemaReference?: (google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference|null);
+                    }
+
+                    /** Represents a TypeSchema. */
+                    class TypeSchema implements ITypeSchema {
+
+                        /**
+                         * Constructs a new TypeSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ITypeSchema);
+
+                        /** TypeSchema inlineSchema. */
+                        public inlineSchema?: (google.cloud.dialogflow.cx.v3beta1.IInlineSchema|null);
+
+                        /** TypeSchema schemaReference. */
+                        public schemaReference?: (google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference|null);
+
+                        /** TypeSchema schema. */
+                        public schema?: ("inlineSchema"|"schemaReference");
+
+                        /**
+                         * Creates a new TypeSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TypeSchema instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ITypeSchema): google.cloud.dialogflow.cx.v3beta1.TypeSchema;
+
+                        /**
+                         * Encodes the specified TypeSchema message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TypeSchema.verify|verify} messages.
+                         * @param message TypeSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ITypeSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TypeSchema message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TypeSchema.verify|verify} messages.
+                         * @param message TypeSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ITypeSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TypeSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TypeSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.TypeSchema;
+
+                        /**
+                         * Decodes a TypeSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TypeSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.TypeSchema;
+
+                        /**
+                         * Verifies a TypeSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TypeSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TypeSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.TypeSchema;
+
+                        /**
+                         * Creates a plain object from a TypeSchema message. Also converts values to other types if specified.
+                         * @param message TypeSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.TypeSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TypeSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TypeSchema
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TypeSchema {
+
+                        /** Properties of a SchemaReference. */
+                        interface ISchemaReference {
+
+                            /** SchemaReference tool */
+                            tool?: (string|null);
+
+                            /** SchemaReference schema */
+                            schema?: (string|null);
+                        }
+
+                        /** Represents a SchemaReference. */
+                        class SchemaReference implements ISchemaReference {
+
+                            /**
+                             * Constructs a new SchemaReference.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference);
+
+                            /** SchemaReference tool. */
+                            public tool: string;
+
+                            /** SchemaReference schema. */
+                            public schema: string;
+
+                            /**
+                             * Creates a new SchemaReference instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SchemaReference instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference): google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference;
+
+                            /**
+                             * Encodes the specified SchemaReference message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference.verify|verify} messages.
+                             * @param message SchemaReference message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SchemaReference message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference.verify|verify} messages.
+                             * @param message SchemaReference message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.TypeSchema.ISchemaReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SchemaReference message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SchemaReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference;
+
+                            /**
+                             * Decodes a SchemaReference message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SchemaReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference;
+
+                            /**
+                             * Verifies a SchemaReference message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SchemaReference message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SchemaReference
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference;
+
+                            /**
+                             * Creates a plain object from a SchemaReference message. Also converts values to other types if specified.
+                             * @param message SchemaReference
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.TypeSchema.SchemaReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SchemaReference to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SchemaReference
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an InlineSchema. */
+                    interface IInlineSchema {
+
+                        /** InlineSchema type */
+                        type?: (google.cloud.dialogflow.cx.v3beta1.DataType|keyof typeof google.cloud.dialogflow.cx.v3beta1.DataType|null);
+
+                        /** InlineSchema items */
+                        items?: (google.cloud.dialogflow.cx.v3beta1.ITypeSchema|null);
+                    }
+
+                    /** Represents an InlineSchema. */
+                    class InlineSchema implements IInlineSchema {
+
+                        /**
+                         * Constructs a new InlineSchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IInlineSchema);
+
+                        /** InlineSchema type. */
+                        public type: (google.cloud.dialogflow.cx.v3beta1.DataType|keyof typeof google.cloud.dialogflow.cx.v3beta1.DataType);
+
+                        /** InlineSchema items. */
+                        public items?: (google.cloud.dialogflow.cx.v3beta1.ITypeSchema|null);
+
+                        /**
+                         * Creates a new InlineSchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InlineSchema instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IInlineSchema): google.cloud.dialogflow.cx.v3beta1.InlineSchema;
+
+                        /**
+                         * Encodes the specified InlineSchema message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InlineSchema.verify|verify} messages.
+                         * @param message InlineSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IInlineSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InlineSchema message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.InlineSchema.verify|verify} messages.
+                         * @param message InlineSchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IInlineSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InlineSchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InlineSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.InlineSchema;
+
+                        /**
+                         * Decodes an InlineSchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InlineSchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.InlineSchema;
+
+                        /**
+                         * Verifies an InlineSchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InlineSchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InlineSchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.InlineSchema;
+
+                        /**
+                         * Creates a plain object from an InlineSchema message. Also converts values to other types if specified.
+                         * @param message InlineSchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.InlineSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InlineSchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InlineSchema
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DataType enum. */
+                    enum DataType {
+                        DATA_TYPE_UNSPECIFIED = 0,
+                        STRING = 1,
+                        NUMBER = 2,
+                        BOOLEAN = 3,
+                        ARRAY = 6
+                    }
+
                     /** Properties of a ValidationMessage. */
                     interface IValidationMessage {
 
@@ -50961,6 +61631,9 @@ export namespace google {
 
                         /** LlmModelSettings promptText */
                         promptText?: (string|null);
+
+                        /** LlmModelSettings parameters */
+                        parameters?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters|null);
                     }
 
                     /** Represents a LlmModelSettings. */
@@ -50977,6 +61650,9 @@ export namespace google {
 
                         /** LlmModelSettings promptText. */
                         public promptText: string;
+
+                        /** LlmModelSettings parameters. */
+                        public parameters?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters|null);
 
                         /**
                          * Creates a new LlmModelSettings instance using the specified properties.
@@ -51056,6 +61732,137 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    namespace LlmModelSettings {
+
+                        /** Properties of a Parameters. */
+                        interface IParameters {
+
+                            /** Parameters temperature */
+                            temperature?: (number|null);
+
+                            /** Parameters inputTokenLimit */
+                            inputTokenLimit?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.InputTokenLimit|keyof typeof google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.InputTokenLimit|null);
+
+                            /** Parameters outputTokenLimit */
+                            outputTokenLimit?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.OutputTokenLimit|keyof typeof google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.OutputTokenLimit|null);
+                        }
+
+                        /** Represents a Parameters. */
+                        class Parameters implements IParameters {
+
+                            /**
+                             * Constructs a new Parameters.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters);
+
+                            /** Parameters temperature. */
+                            public temperature?: (number|null);
+
+                            /** Parameters inputTokenLimit. */
+                            public inputTokenLimit?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.InputTokenLimit|keyof typeof google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.InputTokenLimit|null);
+
+                            /** Parameters outputTokenLimit. */
+                            public outputTokenLimit?: (google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.OutputTokenLimit|keyof typeof google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.OutputTokenLimit|null);
+
+                            /**
+                             * Creates a new Parameters instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Parameters instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters): google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters;
+
+                            /**
+                             * Encodes the specified Parameters message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.verify|verify} messages.
+                             * @param message Parameters message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Parameters message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters.verify|verify} messages.
+                             * @param message Parameters message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.IParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Parameters message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Parameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters;
+
+                            /**
+                             * Decodes a Parameters message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Parameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters;
+
+                            /**
+                             * Verifies a Parameters message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Parameters message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Parameters
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters;
+
+                            /**
+                             * Creates a plain object from a Parameters message. Also converts values to other types if specified.
+                             * @param message Parameters
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.LlmModelSettings.Parameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Parameters to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Parameters
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Parameters {
+
+                            /** InputTokenLimit enum. */
+                            enum InputTokenLimit {
+                                INPUT_TOKEN_LIMIT_UNSPECIFIED = 0,
+                                INPUT_TOKEN_LIMIT_SHORT = 1,
+                                INPUT_TOKEN_LIMIT_MEDIUM = 2,
+                                INPUT_TOKEN_LIMIT_LONG = 3
+                            }
+
+                            /** OutputTokenLimit enum. */
+                            enum OutputTokenLimit {
+                                OUTPUT_TOKEN_LIMIT_UNSPECIFIED = 0,
+                                OUTPUT_TOKEN_LIMIT_SHORT = 1,
+                                OUTPUT_TOKEN_LIMIT_MEDIUM = 2,
+                                OUTPUT_TOKEN_LIMIT_LONG = 3
+                            }
+                        }
+                    }
+
                     /** Properties of a SafetySettings. */
                     interface ISafetySettings {
 
@@ -51064,6 +61871,15 @@ export namespace google {
 
                         /** SafetySettings bannedPhrases */
                         bannedPhrases?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPhrase[]|null);
+
+                        /** SafetySettings raiSettings */
+                        raiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings */
+                        defaultRaiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings promptSecuritySettings */
+                        promptSecuritySettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings|null);
                     }
 
                     /** Represents a SafetySettings. */
@@ -51080,6 +61896,15 @@ export namespace google {
 
                         /** SafetySettings bannedPhrases. */
                         public bannedPhrases: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPhrase[];
+
+                        /** SafetySettings raiSettings. */
+                        public raiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings defaultRaiSettings. */
+                        public defaultRaiSettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings|null);
+
+                        /** SafetySettings promptSecuritySettings. */
+                        public promptSecuritySettings?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings|null);
 
                         /**
                          * Creates a new SafetySettings instance using the specified properties.
@@ -51269,6 +62094,324 @@ export namespace google {
                             PHRASE_MATCH_STRATEGY_UNSPECIFIED = 0,
                             PARTIAL_MATCH = 1,
                             WORD_MATCH = 2
+                        }
+
+                        /** Properties of a RaiSettings. */
+                        interface IRaiSettings {
+
+                            /** RaiSettings categoryFilters */
+                            categoryFilters?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter[]|null);
+                        }
+
+                        /** Represents a RaiSettings. */
+                        class RaiSettings implements IRaiSettings {
+
+                            /**
+                             * Constructs a new RaiSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings);
+
+                            /** RaiSettings categoryFilters. */
+                            public categoryFilters: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter[];
+
+                            /**
+                             * Creates a new RaiSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RaiSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Encodes the specified RaiSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RaiSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.verify|verify} messages.
+                             * @param message RaiSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IRaiSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Decodes a RaiSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RaiSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Verifies a RaiSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RaiSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RaiSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings;
+
+                            /**
+                             * Creates a plain object from a RaiSettings message. Also converts values to other types if specified.
+                             * @param message RaiSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RaiSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RaiSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RaiSettings {
+
+                            /** SafetyFilterLevel enum. */
+                            enum SafetyFilterLevel {
+                                SAFETY_FILTER_LEVEL_UNSPECIFIED = 0,
+                                BLOCK_NONE = 1,
+                                BLOCK_FEW = 2,
+                                BLOCK_SOME = 3,
+                                BLOCK_MOST = 4
+                            }
+
+                            /** SafetyCategory enum. */
+                            enum SafetyCategory {
+                                SAFETY_CATEGORY_UNSPECIFIED = 0,
+                                DANGEROUS_CONTENT = 1,
+                                HATE_SPEECH = 2,
+                                HARASSMENT = 3,
+                                SEXUALLY_EXPLICIT_CONTENT = 4
+                            }
+
+                            /** Properties of a CategoryFilter. */
+                            interface ICategoryFilter {
+
+                                /** CategoryFilter category */
+                                category?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|null);
+
+                                /** CategoryFilter filterLevel */
+                                filterLevel?: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|null);
+                            }
+
+                            /** Represents a CategoryFilter. */
+                            class CategoryFilter implements ICategoryFilter {
+
+                                /**
+                                 * Constructs a new CategoryFilter.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter);
+
+                                /** CategoryFilter category. */
+                                public category: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyCategory);
+
+                                /** CategoryFilter filterLevel. */
+                                public filterLevel: (google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel|keyof typeof google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.SafetyFilterLevel);
+
+                                /**
+                                 * Creates a new CategoryFilter instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CategoryFilter instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CategoryFilter message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter.verify|verify} messages.
+                                 * @param message CategoryFilter message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.ICategoryFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Decodes a CategoryFilter message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CategoryFilter
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Verifies a CategoryFilter message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CategoryFilter message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CategoryFilter
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter;
+
+                                /**
+                                 * Creates a plain object from a CategoryFilter message. Also converts values to other types if specified.
+                                 * @param message CategoryFilter
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.RaiSettings.CategoryFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CategoryFilter to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CategoryFilter
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a PromptSecuritySettings. */
+                        interface IPromptSecuritySettings {
+
+                            /** PromptSecuritySettings enablePromptSecurity */
+                            enablePromptSecurity?: (boolean|null);
+                        }
+
+                        /** Represents a PromptSecuritySettings. */
+                        class PromptSecuritySettings implements IPromptSecuritySettings {
+
+                            /**
+                             * Constructs a new PromptSecuritySettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings);
+
+                            /** PromptSecuritySettings enablePromptSecurity. */
+                            public enablePromptSecurity: boolean;
+
+                            /**
+                             * Creates a new PromptSecuritySettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PromptSecuritySettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings): google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Encodes the specified PromptSecuritySettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings.verify|verify} messages.
+                             * @param message PromptSecuritySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PromptSecuritySettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings.verify|verify} messages.
+                             * @param message PromptSecuritySettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.IPromptSecuritySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PromptSecuritySettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PromptSecuritySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Decodes a PromptSecuritySettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PromptSecuritySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Verifies a PromptSecuritySettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PromptSecuritySettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PromptSecuritySettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings;
+
+                            /**
+                             * Creates a plain object from a PromptSecuritySettings message. Also converts values to other types if specified.
+                             * @param message PromptSecuritySettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SafetySettings.PromptSecuritySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PromptSecuritySettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PromptSecuritySettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -51786,6 +62929,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Changelog
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CodeBlock. */
+                    interface ICodeBlock {
+
+                        /** CodeBlock code */
+                        code?: (string|null);
+                    }
+
+                    /** Represents a CodeBlock. */
+                    class CodeBlock implements ICodeBlock {
+
+                        /**
+                         * Constructs a new CodeBlock.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ICodeBlock);
+
+                        /** CodeBlock code. */
+                        public code: string;
+
+                        /**
+                         * Creates a new CodeBlock instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CodeBlock instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ICodeBlock): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Encodes the specified CodeBlock message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CodeBlock message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.CodeBlock.verify|verify} messages.
+                         * @param message CodeBlock message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ICodeBlock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Decodes a CodeBlock message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CodeBlock
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Verifies a CodeBlock message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CodeBlock message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CodeBlock
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.CodeBlock;
+
+                        /**
+                         * Creates a plain object from a CodeBlock message. Also converts values to other types if specified.
+                         * @param message CodeBlock
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.CodeBlock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CodeBlock to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CodeBlock
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -62991,6 +74231,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig */
                         outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|null);
                     }
 
                     /** Represents a DetectIntentRequest. */
@@ -63013,6 +74256,9 @@ export namespace google {
 
                         /** DetectIntentRequest outputAudioConfig. */
                         public outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView);
 
                         /**
                          * Creates a new DetectIntentRequest instance using the specified properties.
@@ -63249,6 +74495,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo */
                         enableDebuggingInfo?: (boolean|null);
+
+                        /** StreamingDetectIntentRequest responseView */
+                        responseView?: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -63277,6 +74526,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest enableDebuggingInfo. */
                         public enableDebuggingInfo: boolean;
+
+                        /** StreamingDetectIntentRequest responseView. */
+                        public responseView: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponseView);
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.
@@ -63834,6 +75086,9 @@ export namespace google {
                         /** QueryParameters parameters */
                         parameters?: (google.protobuf.IStruct|null);
 
+                        /** QueryParameters parameterScope */
+                        parameterScope?: (string|null);
+
                         /** QueryParameters currentPage */
                         currentPage?: (string|null);
 
@@ -63894,6 +75149,9 @@ export namespace google {
 
                         /** QueryParameters parameters. */
                         public parameters?: (google.protobuf.IStruct|null);
+
+                        /** QueryParameters parameterScope. */
+                        public parameterScope: string;
 
                         /** QueryParameters currentPage. */
                         public currentPage: string;
@@ -66459,6 +77717,13 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** DetectIntentResponseView enum. */
+                    enum DetectIntentResponseView {
+                        DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED = 0,
+                        DETECT_INTENT_RESPONSE_VIEW_FULL = 1,
+                        DETECT_INTENT_RESPONSE_VIEW_BASIC = 2
+                    }
+
                     /** Represents an Examples */
                     class Examples extends $protobuf.rpc.Service {
 
@@ -67363,217 +78628,14 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a PlaybookInput. */
-                    interface IPlaybookInput {
-
-                        /** PlaybookInput precedingConversationSummary */
-                        precedingConversationSummary?: (string|null);
-
-                        /** PlaybookInput actionParameters */
-                        actionParameters?: (google.protobuf.IStruct|null);
-                    }
-
-                    /** Represents a PlaybookInput. */
-                    class PlaybookInput implements IPlaybookInput {
-
-                        /**
-                         * Constructs a new PlaybookInput.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput);
-
-                        /** PlaybookInput precedingConversationSummary. */
-                        public precedingConversationSummary: string;
-
-                        /** PlaybookInput actionParameters. */
-                        public actionParameters?: (google.protobuf.IStruct|null);
-
-                        /**
-                         * Creates a new PlaybookInput instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PlaybookInput instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
-
-                        /**
-                         * Encodes the specified PlaybookInput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookInput.verify|verify} messages.
-                         * @param message PlaybookInput message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PlaybookInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookInput.verify|verify} messages.
-                         * @param message PlaybookInput message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PlaybookInput message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PlaybookInput
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
-
-                        /**
-                         * Decodes a PlaybookInput message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PlaybookInput
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
-
-                        /**
-                         * Verifies a PlaybookInput message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PlaybookInput message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PlaybookInput
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
-
-                        /**
-                         * Creates a plain object from a PlaybookInput message. Also converts values to other types if specified.
-                         * @param message PlaybookInput
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PlaybookInput to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for PlaybookInput
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** Properties of a PlaybookOutput. */
-                    interface IPlaybookOutput {
-
-                        /** PlaybookOutput executionSummary */
-                        executionSummary?: (string|null);
-
-                        /** PlaybookOutput actionParameters */
-                        actionParameters?: (google.protobuf.IStruct|null);
-                    }
-
-                    /** Represents a PlaybookOutput. */
-                    class PlaybookOutput implements IPlaybookOutput {
-
-                        /**
-                         * Constructs a new PlaybookOutput.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput);
-
-                        /** PlaybookOutput executionSummary. */
-                        public executionSummary: string;
-
-                        /** PlaybookOutput actionParameters. */
-                        public actionParameters?: (google.protobuf.IStruct|null);
-
-                        /**
-                         * Creates a new PlaybookOutput instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns PlaybookOutput instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
-
-                        /**
-                         * Encodes the specified PlaybookOutput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.verify|verify} messages.
-                         * @param message PlaybookOutput message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified PlaybookOutput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.verify|verify} messages.
-                         * @param message PlaybookOutput message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a PlaybookOutput message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns PlaybookOutput
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
-
-                        /**
-                         * Decodes a PlaybookOutput message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns PlaybookOutput
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
-
-                        /**
-                         * Verifies a PlaybookOutput message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a PlaybookOutput message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns PlaybookOutput
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
-
-                        /**
-                         * Creates a plain object from a PlaybookOutput message. Also converts values to other types if specified.
-                         * @param message PlaybookOutput
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this PlaybookOutput to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for PlaybookOutput
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** Properties of an Action. */
                     interface IAction {
 
                         /** Action userUtterance */
                         userUtterance?: (google.cloud.dialogflow.cx.v3beta1.IUserUtterance|null);
+
+                        /** Action event */
+                        event?: (google.cloud.dialogflow.cx.v3beta1.IEvent|null);
 
                         /** Action agentUtterance */
                         agentUtterance?: (google.cloud.dialogflow.cx.v3beta1.IAgentUtterance|null);
@@ -67581,11 +78643,47 @@ export namespace google {
                         /** Action toolUse */
                         toolUse?: (google.cloud.dialogflow.cx.v3beta1.IToolUse|null);
 
+                        /** Action llmCall */
+                        llmCall?: (google.cloud.dialogflow.cx.v3beta1.ILlmCall|null);
+
+                        /** Action intentMatch */
+                        intentMatch?: (google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch|null);
+
+                        /** Action flowStateUpdate */
+                        flowStateUpdate?: (google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate|null);
+
                         /** Action playbookInvocation */
                         playbookInvocation?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookInvocation|null);
 
                         /** Action flowInvocation */
                         flowInvocation?: (google.cloud.dialogflow.cx.v3beta1.IFlowInvocation|null);
+
+                        /** Action playbookTransition */
+                        playbookTransition?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition|null);
+
+                        /** Action flowTransition */
+                        flowTransition?: (google.cloud.dialogflow.cx.v3beta1.IFlowTransition|null);
+
+                        /** Action tts */
+                        tts?: (google.cloud.dialogflow.cx.v3beta1.Action.ITTS|null);
+
+                        /** Action stt */
+                        stt?: (google.cloud.dialogflow.cx.v3beta1.Action.ISTT|null);
+
+                        /** Action displayName */
+                        displayName?: (string|null);
+
+                        /** Action startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Action completeTime */
+                        completeTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Action subExecutionSteps */
+                        subExecutionSteps?: (google.cloud.dialogflow.cx.v3beta1.ISpan[]|null);
+
+                        /** Action status */
+                        status?: (google.cloud.dialogflow.cx.v3beta1.IStatus|null);
                     }
 
                     /** Represents an Action. */
@@ -67600,11 +78698,23 @@ export namespace google {
                         /** Action userUtterance. */
                         public userUtterance?: (google.cloud.dialogflow.cx.v3beta1.IUserUtterance|null);
 
+                        /** Action event. */
+                        public event?: (google.cloud.dialogflow.cx.v3beta1.IEvent|null);
+
                         /** Action agentUtterance. */
                         public agentUtterance?: (google.cloud.dialogflow.cx.v3beta1.IAgentUtterance|null);
 
                         /** Action toolUse. */
                         public toolUse?: (google.cloud.dialogflow.cx.v3beta1.IToolUse|null);
+
+                        /** Action llmCall. */
+                        public llmCall?: (google.cloud.dialogflow.cx.v3beta1.ILlmCall|null);
+
+                        /** Action intentMatch. */
+                        public intentMatch?: (google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch|null);
+
+                        /** Action flowStateUpdate. */
+                        public flowStateUpdate?: (google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate|null);
 
                         /** Action playbookInvocation. */
                         public playbookInvocation?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookInvocation|null);
@@ -67612,8 +78722,35 @@ export namespace google {
                         /** Action flowInvocation. */
                         public flowInvocation?: (google.cloud.dialogflow.cx.v3beta1.IFlowInvocation|null);
 
+                        /** Action playbookTransition. */
+                        public playbookTransition?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition|null);
+
+                        /** Action flowTransition. */
+                        public flowTransition?: (google.cloud.dialogflow.cx.v3beta1.IFlowTransition|null);
+
+                        /** Action tts. */
+                        public tts?: (google.cloud.dialogflow.cx.v3beta1.Action.ITTS|null);
+
+                        /** Action stt. */
+                        public stt?: (google.cloud.dialogflow.cx.v3beta1.Action.ISTT|null);
+
+                        /** Action displayName. */
+                        public displayName: string;
+
+                        /** Action startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Action completeTime. */
+                        public completeTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Action subExecutionSteps. */
+                        public subExecutionSteps: google.cloud.dialogflow.cx.v3beta1.ISpan[];
+
+                        /** Action status. */
+                        public status?: (google.cloud.dialogflow.cx.v3beta1.IStatus|null);
+
                         /** Action action. */
-                        public action?: ("userUtterance"|"agentUtterance"|"toolUse"|"playbookInvocation"|"flowInvocation");
+                        public action?: ("userUtterance"|"event"|"agentUtterance"|"toolUse"|"llmCall"|"intentMatch"|"flowStateUpdate"|"playbookInvocation"|"flowInvocation"|"playbookTransition"|"flowTransition"|"tts"|"stt");
 
                         /**
                          * Creates a new Action instance using the specified properties.
@@ -67693,11 +78830,747 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    namespace Action {
+
+                        /** Properties of an IntentMatch. */
+                        interface IIntentMatch {
+
+                            /** IntentMatch matchedIntents */
+                            matchedIntents?: (google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent[]|null);
+                        }
+
+                        /** Represents an IntentMatch. */
+                        class IntentMatch implements IIntentMatch {
+
+                            /**
+                             * Constructs a new IntentMatch.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch);
+
+                            /** IntentMatch matchedIntents. */
+                            public matchedIntents: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent[];
+
+                            /**
+                             * Creates a new IntentMatch instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns IntentMatch instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch;
+
+                            /**
+                             * Encodes the specified IntentMatch message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.verify|verify} messages.
+                             * @param message IntentMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified IntentMatch message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.verify|verify} messages.
+                             * @param message IntentMatch message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.IIntentMatch, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an IntentMatch message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns IntentMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch;
+
+                            /**
+                             * Decodes an IntentMatch message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns IntentMatch
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch;
+
+                            /**
+                             * Verifies an IntentMatch message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an IntentMatch message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns IntentMatch
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch;
+
+                            /**
+                             * Creates a plain object from an IntentMatch message. Also converts values to other types if specified.
+                             * @param message IntentMatch
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this IntentMatch to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for IntentMatch
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace IntentMatch {
+
+                            /** Properties of a MatchedIntent. */
+                            interface IMatchedIntent {
+
+                                /** MatchedIntent intentId */
+                                intentId?: (string|null);
+
+                                /** MatchedIntent displayName */
+                                displayName?: (string|null);
+
+                                /** MatchedIntent score */
+                                score?: (number|null);
+
+                                /** MatchedIntent generativeFallback */
+                                generativeFallback?: (google.protobuf.IStruct|null);
+                            }
+
+                            /** Represents a MatchedIntent. */
+                            class MatchedIntent implements IMatchedIntent {
+
+                                /**
+                                 * Constructs a new MatchedIntent.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent);
+
+                                /** MatchedIntent intentId. */
+                                public intentId: string;
+
+                                /** MatchedIntent displayName. */
+                                public displayName: string;
+
+                                /** MatchedIntent score. */
+                                public score: number;
+
+                                /** MatchedIntent generativeFallback. */
+                                public generativeFallback?: (google.protobuf.IStruct|null);
+
+                                /**
+                                 * Creates a new MatchedIntent instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns MatchedIntent instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent;
+
+                                /**
+                                 * Encodes the specified MatchedIntent message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent.verify|verify} messages.
+                                 * @param message MatchedIntent message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified MatchedIntent message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent.verify|verify} messages.
+                                 * @param message MatchedIntent message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.IMatchedIntent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a MatchedIntent message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns MatchedIntent
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent;
+
+                                /**
+                                 * Decodes a MatchedIntent message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns MatchedIntent
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent;
+
+                                /**
+                                 * Verifies a MatchedIntent message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a MatchedIntent message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns MatchedIntent
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent;
+
+                                /**
+                                 * Creates a plain object from a MatchedIntent message. Also converts values to other types if specified.
+                                 * @param message MatchedIntent
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.IntentMatch.MatchedIntent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this MatchedIntent to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for MatchedIntent
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a FlowStateUpdate. */
+                        interface IFlowStateUpdate {
+
+                            /** FlowStateUpdate eventType */
+                            eventType?: (string|null);
+
+                            /** FlowStateUpdate pageState */
+                            pageState?: (google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState|null);
+
+                            /** FlowStateUpdate updatedParameters */
+                            updatedParameters?: (google.protobuf.IStruct|null);
+
+                            /** FlowStateUpdate destination */
+                            destination?: (string|null);
+
+                            /** FlowStateUpdate functionCall */
+                            functionCall?: (google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall|null);
+                        }
+
+                        /** Represents a FlowStateUpdate. */
+                        class FlowStateUpdate implements IFlowStateUpdate {
+
+                            /**
+                             * Constructs a new FlowStateUpdate.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate);
+
+                            /** FlowStateUpdate eventType. */
+                            public eventType: string;
+
+                            /** FlowStateUpdate pageState. */
+                            public pageState?: (google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState|null);
+
+                            /** FlowStateUpdate updatedParameters. */
+                            public updatedParameters?: (google.protobuf.IStruct|null);
+
+                            /** FlowStateUpdate destination. */
+                            public destination: string;
+
+                            /** FlowStateUpdate functionCall. */
+                            public functionCall?: (google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall|null);
+
+                            /**
+                             * Creates a new FlowStateUpdate instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FlowStateUpdate instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate;
+
+                            /**
+                             * Encodes the specified FlowStateUpdate message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.verify|verify} messages.
+                             * @param message FlowStateUpdate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FlowStateUpdate message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.verify|verify} messages.
+                             * @param message FlowStateUpdate message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.IFlowStateUpdate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FlowStateUpdate message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FlowStateUpdate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate;
+
+                            /**
+                             * Decodes a FlowStateUpdate message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FlowStateUpdate
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate;
+
+                            /**
+                             * Verifies a FlowStateUpdate message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FlowStateUpdate message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FlowStateUpdate
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate;
+
+                            /**
+                             * Creates a plain object from a FlowStateUpdate message. Also converts values to other types if specified.
+                             * @param message FlowStateUpdate
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FlowStateUpdate to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FlowStateUpdate
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace FlowStateUpdate {
+
+                            /** Properties of a PageState. */
+                            interface IPageState {
+
+                                /** PageState page */
+                                page?: (string|null);
+
+                                /** PageState displayName */
+                                displayName?: (string|null);
+
+                                /** PageState status */
+                                status?: (string|null);
+                            }
+
+                            /** Represents a PageState. */
+                            class PageState implements IPageState {
+
+                                /**
+                                 * Constructs a new PageState.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState);
+
+                                /** PageState page. */
+                                public page: string;
+
+                                /** PageState displayName. */
+                                public displayName: string;
+
+                                /** PageState status. */
+                                public status: string;
+
+                                /**
+                                 * Creates a new PageState instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns PageState instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState;
+
+                                /**
+                                 * Encodes the specified PageState message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState.verify|verify} messages.
+                                 * @param message PageState message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified PageState message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState.verify|verify} messages.
+                                 * @param message PageState message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IPageState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a PageState message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns PageState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState;
+
+                                /**
+                                 * Decodes a PageState message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns PageState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState;
+
+                                /**
+                                 * Verifies a PageState message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a PageState message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns PageState
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState;
+
+                                /**
+                                 * Creates a plain object from a PageState message. Also converts values to other types if specified.
+                                 * @param message PageState
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.PageState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this PageState to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for PageState
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a FunctionCall. */
+                            interface IFunctionCall {
+
+                                /** FunctionCall name */
+                                name?: (string|null);
+                            }
+
+                            /** Represents a FunctionCall. */
+                            class FunctionCall implements IFunctionCall {
+
+                                /**
+                                 * Constructs a new FunctionCall.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall);
+
+                                /** FunctionCall name. */
+                                public name: string;
+
+                                /**
+                                 * Creates a new FunctionCall instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns FunctionCall instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall;
+
+                                /**
+                                 * Encodes the specified FunctionCall message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall.verify|verify} messages.
+                                 * @param message FunctionCall message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified FunctionCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall.verify|verify} messages.
+                                 * @param message FunctionCall message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.IFunctionCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a FunctionCall message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns FunctionCall
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall;
+
+                                /**
+                                 * Decodes a FunctionCall message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns FunctionCall
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall;
+
+                                /**
+                                 * Verifies a FunctionCall message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a FunctionCall message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns FunctionCall
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall;
+
+                                /**
+                                 * Creates a plain object from a FunctionCall message. Also converts values to other types if specified.
+                                 * @param message FunctionCall
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.FlowStateUpdate.FunctionCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this FunctionCall to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for FunctionCall
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a TTS. */
+                        interface ITTS {
+                        }
+
+                        /** Represents a TTS. */
+                        class TTS implements ITTS {
+
+                            /**
+                             * Constructs a new TTS.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.ITTS);
+
+                            /**
+                             * Creates a new TTS instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TTS instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.ITTS): google.cloud.dialogflow.cx.v3beta1.Action.TTS;
+
+                            /**
+                             * Encodes the specified TTS message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.TTS.verify|verify} messages.
+                             * @param message TTS message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.ITTS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TTS message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.TTS.verify|verify} messages.
+                             * @param message TTS message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.ITTS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TTS message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TTS
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.TTS;
+
+                            /**
+                             * Decodes a TTS message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TTS
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.TTS;
+
+                            /**
+                             * Verifies a TTS message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TTS message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TTS
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.TTS;
+
+                            /**
+                             * Creates a plain object from a TTS message. Also converts values to other types if specified.
+                             * @param message TTS
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.TTS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TTS to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TTS
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a STT. */
+                        interface ISTT {
+                        }
+
+                        /** Represents a STT. */
+                        class STT implements ISTT {
+
+                            /**
+                             * Constructs a new STT.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Action.ISTT);
+
+                            /**
+                             * Creates a new STT instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns STT instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Action.ISTT): google.cloud.dialogflow.cx.v3beta1.Action.STT;
+
+                            /**
+                             * Encodes the specified STT message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.STT.verify|verify} messages.
+                             * @param message STT message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.Action.ISTT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified STT message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Action.STT.verify|verify} messages.
+                             * @param message STT message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Action.ISTT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a STT message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns STT
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Action.STT;
+
+                            /**
+                             * Decodes a STT message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns STT
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Action.STT;
+
+                            /**
+                             * Verifies a STT message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a STT message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns STT
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Action.STT;
+
+                            /**
+                             * Creates a plain object from a STT message. Also converts values to other types if specified.
+                             * @param message STT
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Action.STT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this STT to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for STT
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
                     /** Properties of a UserUtterance. */
                     interface IUserUtterance {
 
                         /** UserUtterance text */
                         text?: (string|null);
+
+                        /** UserUtterance audioTokens */
+                        audioTokens?: (number[]|null);
+
+                        /** UserUtterance audio */
+                        audio?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a UserUtterance. */
@@ -67711,6 +79584,12 @@ export namespace google {
 
                         /** UserUtterance text. */
                         public text: string;
+
+                        /** UserUtterance audioTokens. */
+                        public audioTokens: number[];
+
+                        /** UserUtterance audio. */
+                        public audio: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new UserUtterance instance using the specified properties.
@@ -67790,11 +79669,120 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an Event. */
+                    interface IEvent {
+
+                        /** Event event */
+                        event?: (string|null);
+
+                        /** Event text */
+                        text?: (string|null);
+                    }
+
+                    /** Represents an Event. */
+                    class Event implements IEvent {
+
+                        /**
+                         * Constructs a new Event.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IEvent);
+
+                        /** Event event. */
+                        public event: string;
+
+                        /** Event text. */
+                        public text?: (string|null);
+
+                        /** Event payload. */
+                        public payload?: "text";
+
+                        /**
+                         * Creates a new Event instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Event instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IEvent): google.cloud.dialogflow.cx.v3beta1.Event;
+
+                        /**
+                         * Encodes the specified Event message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Event.verify|verify} messages.
+                         * @param message Event message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Event message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Event.verify|verify} messages.
+                         * @param message Event message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Event message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Event
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Event;
+
+                        /**
+                         * Decodes an Event message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Event
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Event;
+
+                        /**
+                         * Verifies an Event message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Event message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Event
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Event;
+
+                        /**
+                         * Creates a plain object from an Event message. Also converts values to other types if specified.
+                         * @param message Event
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Event to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Event
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an AgentUtterance. */
                     interface IAgentUtterance {
 
                         /** AgentUtterance text */
                         text?: (string|null);
+
+                        /** AgentUtterance requireGeneration */
+                        requireGeneration?: (boolean|null);
                     }
 
                     /** Represents an AgentUtterance. */
@@ -67808,6 +79796,9 @@ export namespace google {
 
                         /** AgentUtterance text. */
                         public text: string;
+
+                        /** AgentUtterance requireGeneration. */
+                        public requireGeneration: boolean;
 
                         /**
                          * Creates a new AgentUtterance instance using the specified properties.
@@ -67904,6 +79895,12 @@ export namespace google {
 
                         /** ToolUse outputActionParameters */
                         outputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /** ToolUse dataStoreToolTrace */
+                        dataStoreToolTrace?: (google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace|null);
+
+                        /** ToolUse webhookToolTrace */
+                        webhookToolTrace?: (google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace|null);
                     }
 
                     /** Represents a ToolUse. */
@@ -67929,6 +79926,15 @@ export namespace google {
 
                         /** ToolUse outputActionParameters. */
                         public outputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /** ToolUse dataStoreToolTrace. */
+                        public dataStoreToolTrace?: (google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace|null);
+
+                        /** ToolUse webhookToolTrace. */
+                        public webhookToolTrace?: (google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace|null);
+
+                        /** ToolUse ToolTrace. */
+                        public ToolTrace?: ("dataStoreToolTrace"|"webhookToolTrace");
 
                         /**
                          * Creates a new ToolUse instance using the specified properties.
@@ -68006,6 +80012,557 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ToolUse {
+
+                        /** Properties of a DataStoreToolTrace. */
+                        interface IDataStoreToolTrace {
+
+                            /** DataStoreToolTrace dataStoreConnectionSignals */
+                            dataStoreConnectionSignals?: (google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null);
+                        }
+
+                        /** Represents a DataStoreToolTrace. */
+                        class DataStoreToolTrace implements IDataStoreToolTrace {
+
+                            /**
+                             * Constructs a new DataStoreToolTrace.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace);
+
+                            /** DataStoreToolTrace dataStoreConnectionSignals. */
+                            public dataStoreConnectionSignals?: (google.cloud.dialogflow.cx.v3beta1.IDataStoreConnectionSignals|null);
+
+                            /**
+                             * Creates a new DataStoreToolTrace instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DataStoreToolTrace instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace): google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace;
+
+                            /**
+                             * Encodes the specified DataStoreToolTrace message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace.verify|verify} messages.
+                             * @param message DataStoreToolTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DataStoreToolTrace message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace.verify|verify} messages.
+                             * @param message DataStoreToolTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.IDataStoreToolTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DataStoreToolTrace message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DataStoreToolTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace;
+
+                            /**
+                             * Decodes a DataStoreToolTrace message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DataStoreToolTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace;
+
+                            /**
+                             * Verifies a DataStoreToolTrace message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DataStoreToolTrace message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DataStoreToolTrace
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace;
+
+                            /**
+                             * Creates a plain object from a DataStoreToolTrace message. Also converts values to other types if specified.
+                             * @param message DataStoreToolTrace
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.DataStoreToolTrace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DataStoreToolTrace to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DataStoreToolTrace
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a WebhookToolTrace. */
+                        interface IWebhookToolTrace {
+
+                            /** WebhookToolTrace webhookTag */
+                            webhookTag?: (string|null);
+
+                            /** WebhookToolTrace webhookUri */
+                            webhookUri?: (string|null);
+                        }
+
+                        /** Represents a WebhookToolTrace. */
+                        class WebhookToolTrace implements IWebhookToolTrace {
+
+                            /**
+                             * Constructs a new WebhookToolTrace.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace);
+
+                            /** WebhookToolTrace webhookTag. */
+                            public webhookTag: string;
+
+                            /** WebhookToolTrace webhookUri. */
+                            public webhookUri: string;
+
+                            /**
+                             * Creates a new WebhookToolTrace instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns WebhookToolTrace instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace): google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace;
+
+                            /**
+                             * Encodes the specified WebhookToolTrace message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace.verify|verify} messages.
+                             * @param message WebhookToolTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified WebhookToolTrace message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace.verify|verify} messages.
+                             * @param message WebhookToolTrace message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.IWebhookToolTrace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a WebhookToolTrace message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns WebhookToolTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace;
+
+                            /**
+                             * Decodes a WebhookToolTrace message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns WebhookToolTrace
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace;
+
+                            /**
+                             * Verifies a WebhookToolTrace message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a WebhookToolTrace message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns WebhookToolTrace
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace;
+
+                            /**
+                             * Creates a plain object from a WebhookToolTrace message. Also converts values to other types if specified.
+                             * @param message WebhookToolTrace
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ToolUse.WebhookToolTrace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this WebhookToolTrace to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for WebhookToolTrace
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a LlmCall. */
+                    interface ILlmCall {
+
+                        /** LlmCall retrievedExamples */
+                        retrievedExamples?: (google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample[]|null);
+
+                        /** LlmCall tokenCount */
+                        tokenCount?: (google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount|null);
+
+                        /** LlmCall model */
+                        model?: (string|null);
+
+                        /** LlmCall temperature */
+                        temperature?: (number|null);
+                    }
+
+                    /** Represents a LlmCall. */
+                    class LlmCall implements ILlmCall {
+
+                        /**
+                         * Constructs a new LlmCall.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ILlmCall);
+
+                        /** LlmCall retrievedExamples. */
+                        public retrievedExamples: google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample[];
+
+                        /** LlmCall tokenCount. */
+                        public tokenCount?: (google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount|null);
+
+                        /** LlmCall model. */
+                        public model: string;
+
+                        /** LlmCall temperature. */
+                        public temperature: number;
+
+                        /**
+                         * Creates a new LlmCall instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LlmCall instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ILlmCall): google.cloud.dialogflow.cx.v3beta1.LlmCall;
+
+                        /**
+                         * Encodes the specified LlmCall message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.verify|verify} messages.
+                         * @param message LlmCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ILlmCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LlmCall message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.verify|verify} messages.
+                         * @param message LlmCall message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ILlmCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LlmCall message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LlmCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.LlmCall;
+
+                        /**
+                         * Decodes a LlmCall message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LlmCall
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.LlmCall;
+
+                        /**
+                         * Verifies a LlmCall message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LlmCall message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LlmCall
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.LlmCall;
+
+                        /**
+                         * Creates a plain object from a LlmCall message. Also converts values to other types if specified.
+                         * @param message LlmCall
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.LlmCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LlmCall to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LlmCall
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LlmCall {
+
+                        /** Properties of a RetrievedExample. */
+                        interface IRetrievedExample {
+
+                            /** RetrievedExample exampleId */
+                            exampleId?: (string|null);
+
+                            /** RetrievedExample exampleDisplayName */
+                            exampleDisplayName?: (string|null);
+
+                            /** RetrievedExample retrievalStrategy */
+                            retrievalStrategy?: (google.cloud.dialogflow.cx.v3beta1.RetrievalStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.RetrievalStrategy|null);
+
+                            /** RetrievedExample matchedRetrievalLabel */
+                            matchedRetrievalLabel?: (string|null);
+                        }
+
+                        /** Represents a RetrievedExample. */
+                        class RetrievedExample implements IRetrievedExample {
+
+                            /**
+                             * Constructs a new RetrievedExample.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample);
+
+                            /** RetrievedExample exampleId. */
+                            public exampleId: string;
+
+                            /** RetrievedExample exampleDisplayName. */
+                            public exampleDisplayName: string;
+
+                            /** RetrievedExample retrievalStrategy. */
+                            public retrievalStrategy: (google.cloud.dialogflow.cx.v3beta1.RetrievalStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.RetrievalStrategy);
+
+                            /** RetrievedExample matchedRetrievalLabel. */
+                            public matchedRetrievalLabel: string;
+
+                            /**
+                             * Creates a new RetrievedExample instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RetrievedExample instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample): google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample;
+
+                            /**
+                             * Encodes the specified RetrievedExample message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample.verify|verify} messages.
+                             * @param message RetrievedExample message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RetrievedExample message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample.verify|verify} messages.
+                             * @param message RetrievedExample message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.IRetrievedExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RetrievedExample message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RetrievedExample
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample;
+
+                            /**
+                             * Decodes a RetrievedExample message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RetrievedExample
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample;
+
+                            /**
+                             * Verifies a RetrievedExample message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RetrievedExample message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RetrievedExample
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample;
+
+                            /**
+                             * Creates a plain object from a RetrievedExample message. Also converts values to other types if specified.
+                             * @param message RetrievedExample
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.RetrievedExample, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RetrievedExample to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RetrievedExample
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TokenCount. */
+                        interface ITokenCount {
+
+                            /** TokenCount totalInputTokenCount */
+                            totalInputTokenCount?: (number|Long|string|null);
+
+                            /** TokenCount conversationContextTokenCount */
+                            conversationContextTokenCount?: (number|Long|string|null);
+
+                            /** TokenCount exampleTokenCount */
+                            exampleTokenCount?: (number|Long|string|null);
+
+                            /** TokenCount totalOutputTokenCount */
+                            totalOutputTokenCount?: (number|Long|string|null);
+                        }
+
+                        /** Represents a TokenCount. */
+                        class TokenCount implements ITokenCount {
+
+                            /**
+                             * Constructs a new TokenCount.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount);
+
+                            /** TokenCount totalInputTokenCount. */
+                            public totalInputTokenCount: (number|Long|string);
+
+                            /** TokenCount conversationContextTokenCount. */
+                            public conversationContextTokenCount: (number|Long|string);
+
+                            /** TokenCount exampleTokenCount. */
+                            public exampleTokenCount: (number|Long|string);
+
+                            /** TokenCount totalOutputTokenCount. */
+                            public totalOutputTokenCount: (number|Long|string);
+
+                            /**
+                             * Creates a new TokenCount instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TokenCount instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount): google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount;
+
+                            /**
+                             * Encodes the specified TokenCount message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount.verify|verify} messages.
+                             * @param message TokenCount message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TokenCount message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount.verify|verify} messages.
+                             * @param message TokenCount message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.ITokenCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TokenCount message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TokenCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount;
+
+                            /**
+                             * Decodes a TokenCount message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TokenCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount;
+
+                            /**
+                             * Verifies a TokenCount message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TokenCount message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TokenCount
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount;
+
+                            /**
+                             * Creates a plain object from a TokenCount message. Also converts values to other types if specified.
+                             * @param message TokenCount
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.LlmCall.TokenCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TokenCount to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TokenCount
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a PlaybookInvocation. */
@@ -68250,6 +80807,872 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a PlaybookTransition. */
+                    interface IPlaybookTransition {
+
+                        /** PlaybookTransition playbook */
+                        playbook?: (string|null);
+
+                        /** PlaybookTransition displayName */
+                        displayName?: (string|null);
+
+                        /** PlaybookTransition inputActionParameters */
+                        inputActionParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a PlaybookTransition. */
+                    class PlaybookTransition implements IPlaybookTransition {
+
+                        /**
+                         * Constructs a new PlaybookTransition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition);
+
+                        /** PlaybookTransition playbook. */
+                        public playbook: string;
+
+                        /** PlaybookTransition displayName. */
+                        public displayName: string;
+
+                        /** PlaybookTransition inputActionParameters. */
+                        public inputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new PlaybookTransition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookTransition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition): google.cloud.dialogflow.cx.v3beta1.PlaybookTransition;
+
+                        /**
+                         * Encodes the specified PlaybookTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTransition.verify|verify} messages.
+                         * @param message PlaybookTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookTransition.verify|verify} messages.
+                         * @param message PlaybookTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookTransition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookTransition;
+
+                        /**
+                         * Decodes a PlaybookTransition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookTransition;
+
+                        /**
+                         * Verifies a PlaybookTransition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookTransition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookTransition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookTransition;
+
+                        /**
+                         * Creates a plain object from a PlaybookTransition message. Also converts values to other types if specified.
+                         * @param message PlaybookTransition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookTransition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookTransition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookTransition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FlowTransition. */
+                    interface IFlowTransition {
+
+                        /** FlowTransition flow */
+                        flow?: (string|null);
+
+                        /** FlowTransition displayName */
+                        displayName?: (string|null);
+
+                        /** FlowTransition inputActionParameters */
+                        inputActionParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a FlowTransition. */
+                    class FlowTransition implements IFlowTransition {
+
+                        /**
+                         * Constructs a new FlowTransition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowTransition);
+
+                        /** FlowTransition flow. */
+                        public flow: string;
+
+                        /** FlowTransition displayName. */
+                        public displayName: string;
+
+                        /** FlowTransition inputActionParameters. */
+                        public inputActionParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new FlowTransition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowTransition instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowTransition): google.cloud.dialogflow.cx.v3beta1.FlowTransition;
+
+                        /**
+                         * Encodes the specified FlowTransition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTransition.verify|verify} messages.
+                         * @param message FlowTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IFlowTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowTransition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowTransition.verify|verify} messages.
+                         * @param message FlowTransition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IFlowTransition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowTransition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.FlowTransition;
+
+                        /**
+                         * Decodes a FlowTransition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowTransition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.FlowTransition;
+
+                        /**
+                         * Verifies a FlowTransition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowTransition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowTransition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.FlowTransition;
+
+                        /**
+                         * Creates a plain object from a FlowTransition message. Also converts values to other types if specified.
+                         * @param message FlowTransition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.FlowTransition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowTransition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowTransition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookInput. */
+                    interface IPlaybookInput {
+
+                        /** PlaybookInput precedingConversationSummary */
+                        precedingConversationSummary?: (string|null);
+
+                        /** PlaybookInput actionParameters */
+                        actionParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a PlaybookInput. */
+                    class PlaybookInput implements IPlaybookInput {
+
+                        /**
+                         * Constructs a new PlaybookInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput);
+
+                        /** PlaybookInput precedingConversationSummary. */
+                        public precedingConversationSummary: string;
+
+                        /** PlaybookInput actionParameters. */
+                        public actionParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new PlaybookInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookInput instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
+
+                        /**
+                         * Encodes the specified PlaybookInput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookInput.verify|verify} messages.
+                         * @param message PlaybookInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookInput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookInput.verify|verify} messages.
+                         * @param message PlaybookInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
+
+                        /**
+                         * Decodes a PlaybookInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
+
+                        /**
+                         * Verifies a PlaybookInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookInput;
+
+                        /**
+                         * Creates a plain object from a PlaybookInput message. Also converts values to other types if specified.
+                         * @param message PlaybookInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookOutput. */
+                    interface IPlaybookOutput {
+
+                        /** PlaybookOutput executionSummary */
+                        executionSummary?: (string|null);
+
+                        /** PlaybookOutput state */
+                        state?: (google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.State|keyof typeof google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.State|null);
+
+                        /** PlaybookOutput actionParameters */
+                        actionParameters?: (google.protobuf.IStruct|null);
+                    }
+
+                    /** Represents a PlaybookOutput. */
+                    class PlaybookOutput implements IPlaybookOutput {
+
+                        /**
+                         * Constructs a new PlaybookOutput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput);
+
+                        /** PlaybookOutput executionSummary. */
+                        public executionSummary: string;
+
+                        /** PlaybookOutput state. */
+                        public state: (google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.State|keyof typeof google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.State);
+
+                        /** PlaybookOutput actionParameters. */
+                        public actionParameters?: (google.protobuf.IStruct|null);
+
+                        /**
+                         * Creates a new PlaybookOutput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookOutput instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
+
+                        /**
+                         * Encodes the specified PlaybookOutput message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.verify|verify} messages.
+                         * @param message PlaybookOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookOutput message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookOutput.verify|verify} messages.
+                         * @param message PlaybookOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookOutput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
+
+                        /**
+                         * Decodes a PlaybookOutput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
+
+                        /**
+                         * Verifies a PlaybookOutput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookOutput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookOutput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookOutput;
+
+                        /**
+                         * Creates a plain object from a PlaybookOutput message. Also converts values to other types if specified.
+                         * @param message PlaybookOutput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookOutput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookOutput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PlaybookOutput {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            OK = 1,
+                            CANCELLED = 2,
+                            FAILED = 3,
+                            ESCALATED = 4
+                        }
+                    }
+
+                    /** Properties of a Span. */
+                    interface ISpan {
+
+                        /** Span name */
+                        name?: (string|null);
+
+                        /** Span tags */
+                        tags?: (string[]|null);
+
+                        /** Span metrics */
+                        metrics?: (google.cloud.dialogflow.cx.v3beta1.INamedMetric[]|null);
+
+                        /** Span startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Span completeTime */
+                        completeTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a Span. */
+                    class Span implements ISpan {
+
+                        /**
+                         * Constructs a new Span.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ISpan);
+
+                        /** Span name. */
+                        public name: string;
+
+                        /** Span tags. */
+                        public tags: string[];
+
+                        /** Span metrics. */
+                        public metrics: google.cloud.dialogflow.cx.v3beta1.INamedMetric[];
+
+                        /** Span startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Span completeTime. */
+                        public completeTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new Span instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Span instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ISpan): google.cloud.dialogflow.cx.v3beta1.Span;
+
+                        /**
+                         * Encodes the specified Span message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Span.verify|verify} messages.
+                         * @param message Span message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.ISpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Span message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Span.verify|verify} messages.
+                         * @param message Span message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ISpan, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Span message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Span
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Span;
+
+                        /**
+                         * Decodes a Span message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Span
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Span;
+
+                        /**
+                         * Verifies a Span message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Span message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Span
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Span;
+
+                        /**
+                         * Creates a plain object from a Span message. Also converts values to other types if specified.
+                         * @param message Span
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Span, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Span to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Span
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NamedMetric. */
+                    interface INamedMetric {
+
+                        /** NamedMetric name */
+                        name?: (string|null);
+
+                        /** NamedMetric value */
+                        value?: (google.protobuf.IValue|null);
+
+                        /** NamedMetric unit */
+                        unit?: (string|null);
+                    }
+
+                    /** Represents a NamedMetric. */
+                    class NamedMetric implements INamedMetric {
+
+                        /**
+                         * Constructs a new NamedMetric.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.INamedMetric);
+
+                        /** NamedMetric name. */
+                        public name: string;
+
+                        /** NamedMetric value. */
+                        public value?: (google.protobuf.IValue|null);
+
+                        /** NamedMetric unit. */
+                        public unit: string;
+
+                        /**
+                         * Creates a new NamedMetric instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NamedMetric instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.INamedMetric): google.cloud.dialogflow.cx.v3beta1.NamedMetric;
+
+                        /**
+                         * Encodes the specified NamedMetric message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.NamedMetric.verify|verify} messages.
+                         * @param message NamedMetric message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.INamedMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NamedMetric message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.NamedMetric.verify|verify} messages.
+                         * @param message NamedMetric message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.INamedMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NamedMetric message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NamedMetric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.NamedMetric;
+
+                        /**
+                         * Decodes a NamedMetric message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NamedMetric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.NamedMetric;
+
+                        /**
+                         * Verifies a NamedMetric message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NamedMetric message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NamedMetric
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.NamedMetric;
+
+                        /**
+                         * Creates a plain object from a NamedMetric message. Also converts values to other types if specified.
+                         * @param message NamedMetric
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.NamedMetric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NamedMetric to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NamedMetric
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Status. */
+                    interface IStatus {
+
+                        /** Status exception */
+                        exception?: (google.cloud.dialogflow.cx.v3beta1.IExceptionDetail|null);
+                    }
+
+                    /** Represents a Status. */
+                    class Status implements IStatus {
+
+                        /**
+                         * Constructs a new Status.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IStatus);
+
+                        /** Status exception. */
+                        public exception?: (google.cloud.dialogflow.cx.v3beta1.IExceptionDetail|null);
+
+                        /**
+                         * Creates a new Status instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Status instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IStatus): google.cloud.dialogflow.cx.v3beta1.Status;
+
+                        /**
+                         * Encodes the specified Status message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Status.verify|verify} messages.
+                         * @param message Status message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Status message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Status.verify|verify} messages.
+                         * @param message Status message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Status message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Status;
+
+                        /**
+                         * Decodes a Status message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Status
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Status;
+
+                        /**
+                         * Verifies a Status message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Status
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Status;
+
+                        /**
+                         * Creates a plain object from a Status message. Also converts values to other types if specified.
+                         * @param message Status
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Status to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Status
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExceptionDetail. */
+                    interface IExceptionDetail {
+
+                        /** ExceptionDetail errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents an ExceptionDetail. */
+                    class ExceptionDetail implements IExceptionDetail {
+
+                        /**
+                         * Constructs a new ExceptionDetail.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExceptionDetail);
+
+                        /** ExceptionDetail errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new ExceptionDetail instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExceptionDetail instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IExceptionDetail): google.cloud.dialogflow.cx.v3beta1.ExceptionDetail;
+
+                        /**
+                         * Encodes the specified ExceptionDetail message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExceptionDetail.verify|verify} messages.
+                         * @param message ExceptionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IExceptionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExceptionDetail message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExceptionDetail.verify|verify} messages.
+                         * @param message ExceptionDetail message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IExceptionDetail, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExceptionDetail message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExceptionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExceptionDetail;
+
+                        /**
+                         * Decodes an ExceptionDetail message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExceptionDetail
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExceptionDetail;
+
+                        /**
+                         * Verifies an ExceptionDetail message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExceptionDetail message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExceptionDetail
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExceptionDetail;
+
+                        /**
+                         * Creates a plain object from an ExceptionDetail message. Also converts values to other types if specified.
+                         * @param message ExceptionDetail
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExceptionDetail, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExceptionDetail to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExceptionDetail
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** OutputState enum. */
                     enum OutputState {
                         OUTPUT_STATE_UNSPECIFIED = 0,
@@ -68258,6 +81681,14 @@ export namespace google {
                         OUTPUT_STATE_FAILED = 3,
                         OUTPUT_STATE_ESCALATED = 4,
                         OUTPUT_STATE_PENDING = 5
+                    }
+
+                    /** RetrievalStrategy enum. */
+                    enum RetrievalStrategy {
+                        RETRIEVAL_STRATEGY_UNSPECIFIED = 0,
+                        DEFAULT = 1,
+                        STATIC = 2,
+                        NEVER = 3
                     }
 
                     /** Represents a SessionEntityTypes */
@@ -72216,8 +85647,14 @@ export namespace google {
                             /** GenericWebService password */
                             password?: (string|null);
 
+                            /** GenericWebService secretVersionForUsernamePassword */
+                            secretVersionForUsernamePassword?: (string|null);
+
                             /** GenericWebService requestHeaders */
                             requestHeaders?: ({ [k: string]: string }|null);
+
+                            /** GenericWebService secretVersionsForRequestHeaders */
+                            secretVersionsForRequestHeaders?: ({ [k: string]: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue }|null);
 
                             /** GenericWebService allowedCaCerts */
                             allowedCaCerts?: (Uint8Array[]|null);
@@ -72227,6 +85664,9 @@ export namespace google {
 
                             /** GenericWebService serviceAgentAuth */
                             serviceAgentAuth?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|null);
+
+                            /** GenericWebService serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
 
                             /** GenericWebService webhookType */
                             webhookType?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|null);
@@ -72259,8 +85699,14 @@ export namespace google {
                             /** GenericWebService password. */
                             public password: string;
 
+                            /** GenericWebService secretVersionForUsernamePassword. */
+                            public secretVersionForUsernamePassword: string;
+
                             /** GenericWebService requestHeaders. */
                             public requestHeaders: { [k: string]: string };
+
+                            /** GenericWebService secretVersionsForRequestHeaders. */
+                            public secretVersionsForRequestHeaders: { [k: string]: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue };
 
                             /** GenericWebService allowedCaCerts. */
                             public allowedCaCerts: Uint8Array[];
@@ -72270,6 +85716,9 @@ export namespace google {
 
                             /** GenericWebService serviceAgentAuth. */
                             public serviceAgentAuth: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAgentAuth);
+
+                            /** GenericWebService serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig|null);
 
                             /** GenericWebService webhookType. */
                             public webhookType: (google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.WebhookType);
@@ -72363,6 +85812,103 @@ export namespace google {
 
                         namespace GenericWebService {
 
+                            /** Properties of a SecretVersionHeaderValue. */
+                            interface ISecretVersionHeaderValue {
+
+                                /** SecretVersionHeaderValue secretVersion */
+                                secretVersion?: (string|null);
+                            }
+
+                            /** Represents a SecretVersionHeaderValue. */
+                            class SecretVersionHeaderValue implements ISecretVersionHeaderValue {
+
+                                /**
+                                 * Constructs a new SecretVersionHeaderValue.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue);
+
+                                /** SecretVersionHeaderValue secretVersion. */
+                                public secretVersion: string;
+
+                                /**
+                                 * Creates a new SecretVersionHeaderValue instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns SecretVersionHeaderValue instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Encodes the specified SecretVersionHeaderValue message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue.verify|verify} messages.
+                                 * @param message SecretVersionHeaderValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified SecretVersionHeaderValue message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue.verify|verify} messages.
+                                 * @param message SecretVersionHeaderValue message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ISecretVersionHeaderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a SecretVersionHeaderValue message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns SecretVersionHeaderValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Decodes a SecretVersionHeaderValue message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns SecretVersionHeaderValue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Verifies a SecretVersionHeaderValue message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a SecretVersionHeaderValue message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns SecretVersionHeaderValue
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue;
+
+                                /**
+                                 * Creates a plain object from a SecretVersionHeaderValue message. Also converts values to other types if specified.
+                                 * @param message SecretVersionHeaderValue
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.SecretVersionHeaderValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this SecretVersionHeaderValue to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for SecretVersionHeaderValue
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
                             /** Properties of a OAuthConfig. */
                             interface IOAuthConfig {
 
@@ -72371,6 +85917,9 @@ export namespace google {
 
                                 /** OAuthConfig clientSecret */
                                 clientSecret?: (string|null);
+
+                                /** OAuthConfig secretVersionForClientSecret */
+                                secretVersionForClientSecret?: (string|null);
 
                                 /** OAuthConfig tokenEndpoint */
                                 tokenEndpoint?: (string|null);
@@ -72393,6 +85942,9 @@ export namespace google {
 
                                 /** OAuthConfig clientSecret. */
                                 public clientSecret: string;
+
+                                /** OAuthConfig secretVersionForClientSecret. */
+                                public secretVersionForClientSecret: string;
 
                                 /** OAuthConfig tokenEndpoint. */
                                 public tokenEndpoint: string;
@@ -72484,6 +86036,103 @@ export namespace google {
                                 NONE = 1,
                                 ID_TOKEN = 2,
                                 ACCESS_TOKEN = 3
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Webhook.GenericWebService.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
 
                             /** WebhookType enum. */
@@ -78863,129 +92512,6 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
-                    /** Properties of a ParameterDefinition. */
-                    interface IParameterDefinition {
-
-                        /** ParameterDefinition name */
-                        name?: (string|null);
-
-                        /** ParameterDefinition type */
-                        type?: (google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|null);
-
-                        /** ParameterDefinition description */
-                        description?: (string|null);
-                    }
-
-                    /** Represents a ParameterDefinition. */
-                    class ParameterDefinition implements IParameterDefinition {
-
-                        /**
-                         * Constructs a new ParameterDefinition.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition);
-
-                        /** ParameterDefinition name. */
-                        public name: string;
-
-                        /** ParameterDefinition type. */
-                        public type: (google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType|keyof typeof google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.ParameterType);
-
-                        /** ParameterDefinition description. */
-                        public description: string;
-
-                        /**
-                         * Creates a new ParameterDefinition instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ParameterDefinition instance
-                         */
-                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
-
-                        /**
-                         * Encodes the specified ParameterDefinition message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.verify|verify} messages.
-                         * @param message ParameterDefinition message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ParameterDefinition message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ParameterDefinition.verify|verify} messages.
-                         * @param message ParameterDefinition message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IParameterDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ParameterDefinition message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ParameterDefinition
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
-
-                        /**
-                         * Decodes a ParameterDefinition message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ParameterDefinition
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
-
-                        /**
-                         * Verifies a ParameterDefinition message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ParameterDefinition message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ParameterDefinition
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ParameterDefinition;
-
-                        /**
-                         * Creates a plain object from a ParameterDefinition message. Also converts values to other types if specified.
-                         * @param message ParameterDefinition
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ParameterDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ParameterDefinition to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ParameterDefinition
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace ParameterDefinition {
-
-                        /** ParameterType enum. */
-                        enum ParameterType {
-                            PARAMETER_TYPE_UNSPECIFIED = 0,
-                            STRING = 1,
-                            NUMBER = 2,
-                            BOOLEAN = 3,
-                            NULL = 4,
-                            OBJECT = 5,
-                            LIST = 6
-                        }
-                    }
-
                     /** Represents a Playbooks */
                     class Playbooks extends $protobuf.rpc.Service {
 
@@ -79063,6 +92589,34 @@ export namespace google {
                         public getPlaybook(request: google.cloud.dialogflow.cx.v3beta1.IGetPlaybookRequest): Promise<google.cloud.dialogflow.cx.v3beta1.Playbook>;
 
                         /**
+                         * Calls ExportPlaybook.
+                         * @param request ExportPlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public exportPlaybook(request: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest, callback: google.cloud.dialogflow.cx.v3beta1.Playbooks.ExportPlaybookCallback): void;
+
+                        /**
+                         * Calls ExportPlaybook.
+                         * @param request ExportPlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public exportPlaybook(request: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ImportPlaybook.
+                         * @param request ImportPlaybookRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public importPlaybook(request: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest, callback: google.cloud.dialogflow.cx.v3beta1.Playbooks.ImportPlaybookCallback): void;
+
+                        /**
+                         * Calls ImportPlaybook.
+                         * @param request ImportPlaybookRequest message or plain object
+                         * @returns Promise
+                         */
+                        public importPlaybook(request: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest): Promise<google.longrunning.Operation>;
+
+                        /**
                          * Calls UpdatePlaybook.
                          * @param request UpdatePlaybookRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Playbook
@@ -79103,6 +92657,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public getPlaybookVersion(request: google.cloud.dialogflow.cx.v3beta1.IGetPlaybookVersionRequest): Promise<google.cloud.dialogflow.cx.v3beta1.PlaybookVersion>;
+
+                        /**
+                         * Calls RestorePlaybookVersion.
+                         * @param request RestorePlaybookVersionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RestorePlaybookVersionResponse
+                         */
+                        public restorePlaybookVersion(request: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest, callback: google.cloud.dialogflow.cx.v3beta1.Playbooks.RestorePlaybookVersionCallback): void;
+
+                        /**
+                         * Calls RestorePlaybookVersion.
+                         * @param request RestorePlaybookVersionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public restorePlaybookVersion(request: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest): Promise<google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse>;
 
                         /**
                          * Calls ListPlaybookVersions.
@@ -79164,6 +92732,20 @@ export namespace google {
                         type GetPlaybookCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.Playbook) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Playbooks|exportPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ExportPlaybookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Playbooks|importPlaybook}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type ImportPlaybookCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Playbooks|updatePlaybook}.
                          * @param error Error, if any
                          * @param [response] Playbook
@@ -79183,6 +92765,13 @@ export namespace google {
                          * @param [response] PlaybookVersion
                          */
                         type GetPlaybookVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.PlaybookVersion) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Playbooks|restorePlaybookVersion}.
+                         * @param error Error, if any
+                         * @param [response] RestorePlaybookVersionResponse
+                         */
+                        type RestorePlaybookVersionCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.dialogflow.cx.v3beta1.Playbooks|listPlaybookVersions}.
@@ -79850,6 +93439,12 @@ export namespace google {
                         /** Playbook referencedTools */
                         referencedTools?: (string[]|null);
 
+                        /** Playbook inlineActions */
+                        inlineActions?: (string[]|null);
+
+                        /** Playbook codeBlock */
+                        codeBlock?: (google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null);
+
                         /** Playbook llmModelSettings */
                         llmModelSettings?: (google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null);
 
@@ -79858,6 +93453,9 @@ export namespace google {
 
                         /** Playbook handlers */
                         handlers?: (google.cloud.dialogflow.cx.v3beta1.IHandler[]|null);
+
+                        /** Playbook playbookType */
+                        playbookType?: (google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType|null);
                     }
 
                     /** Represents a Playbook. */
@@ -79905,6 +93503,12 @@ export namespace google {
                         /** Playbook referencedTools. */
                         public referencedTools: string[];
 
+                        /** Playbook inlineActions. */
+                        public inlineActions: string[];
+
+                        /** Playbook codeBlock. */
+                        public codeBlock?: (google.cloud.dialogflow.cx.v3beta1.ICodeBlock|null);
+
                         /** Playbook llmModelSettings. */
                         public llmModelSettings?: (google.cloud.dialogflow.cx.v3beta1.ILlmModelSettings|null);
 
@@ -79913,6 +93517,9 @@ export namespace google {
 
                         /** Playbook handlers. */
                         public handlers: google.cloud.dialogflow.cx.v3beta1.IHandler[];
+
+                        /** Playbook playbookType. */
+                        public playbookType: (google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Playbook.PlaybookType);
 
                         /**
                          * Creates a new Playbook instance using the specified properties.
@@ -80201,6 +93808,13 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** PlaybookType enum. */
+                        enum PlaybookType {
+                            PLAYBOOK_TYPE_UNSPECIFIED = 0,
+                            TASK = 1,
+                            ROUTINE = 3
                         }
                     }
 
@@ -80525,6 +94139,200 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a RestorePlaybookVersionRequest. */
+                    interface IRestorePlaybookVersionRequest {
+
+                        /** RestorePlaybookVersionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RestorePlaybookVersionRequest. */
+                    class RestorePlaybookVersionRequest implements IRestorePlaybookVersionRequest {
+
+                        /**
+                         * Constructs a new RestorePlaybookVersionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest);
+
+                        /** RestorePlaybookVersionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RestorePlaybookVersionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestorePlaybookVersionRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest.verify|verify} messages.
+                         * @param message RestorePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest.verify|verify} messages.
+                         * @param message RestorePlaybookVersionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestorePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestorePlaybookVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Verifies a RestorePlaybookVersionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestorePlaybookVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestorePlaybookVersionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest;
+
+                        /**
+                         * Creates a plain object from a RestorePlaybookVersionRequest message. Also converts values to other types if specified.
+                         * @param message RestorePlaybookVersionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestorePlaybookVersionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestorePlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RestorePlaybookVersionResponse. */
+                    interface IRestorePlaybookVersionResponse {
+
+                        /** RestorePlaybookVersionResponse playbook */
+                        playbook?: (google.cloud.dialogflow.cx.v3beta1.IPlaybook|null);
+                    }
+
+                    /** Represents a RestorePlaybookVersionResponse. */
+                    class RestorePlaybookVersionResponse implements IRestorePlaybookVersionResponse {
+
+                        /**
+                         * Constructs a new RestorePlaybookVersionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse);
+
+                        /** RestorePlaybookVersionResponse playbook. */
+                        public playbook?: (google.cloud.dialogflow.cx.v3beta1.IPlaybook|null);
+
+                        /**
+                         * Creates a new RestorePlaybookVersionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RestorePlaybookVersionResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse.verify|verify} messages.
+                         * @param message RestorePlaybookVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RestorePlaybookVersionResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse.verify|verify} messages.
+                         * @param message RestorePlaybookVersionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RestorePlaybookVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Decodes a RestorePlaybookVersionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RestorePlaybookVersionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Verifies a RestorePlaybookVersionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RestorePlaybookVersionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RestorePlaybookVersionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse;
+
+                        /**
+                         * Creates a plain object from a RestorePlaybookVersionResponse message. Also converts values to other types if specified.
+                         * @param message RestorePlaybookVersionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RestorePlaybookVersionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RestorePlaybookVersionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a ListPlaybookVersionsRequest. */
                     interface IListPlaybookVersionsRequest {
 
@@ -80828,6 +94636,673 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeletePlaybookVersionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportPlaybookRequest. */
+                    interface IExportPlaybookRequest {
+
+                        /** ExportPlaybookRequest name */
+                        name?: (string|null);
+
+                        /** ExportPlaybookRequest playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ExportPlaybookRequest dataFormat */
+                        dataFormat?: (google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat|null);
+                    }
+
+                    /** Represents an ExportPlaybookRequest. */
+                    class ExportPlaybookRequest implements IExportPlaybookRequest {
+
+                        /**
+                         * Constructs a new ExportPlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest);
+
+                        /** ExportPlaybookRequest name. */
+                        public name: string;
+
+                        /** ExportPlaybookRequest playbookUri. */
+                        public playbookUri: string;
+
+                        /** ExportPlaybookRequest dataFormat. */
+                        public dataFormat: (google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat);
+
+                        /**
+                         * Creates a new ExportPlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest;
+
+                        /**
+                         * Encodes the specified ExportPlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.verify|verify} messages.
+                         * @param message ExportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.verify|verify} messages.
+                         * @param message ExportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest;
+
+                        /**
+                         * Decodes an ExportPlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest;
+
+                        /**
+                         * Verifies an ExportPlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest;
+
+                        /**
+                         * Creates a plain object from an ExportPlaybookRequest message. Also converts values to other types if specified.
+                         * @param message ExportPlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ExportPlaybookRequest {
+
+                        /** DataFormat enum. */
+                        enum DataFormat {
+                            DATA_FORMAT_UNSPECIFIED = 0,
+                            BLOB = 1,
+                            JSON = 2
+                        }
+                    }
+
+                    /** Properties of an ImportPlaybookRequest. */
+                    interface IImportPlaybookRequest {
+
+                        /** ImportPlaybookRequest parent */
+                        parent?: (string|null);
+
+                        /** ImportPlaybookRequest playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ImportPlaybookRequest playbookContent */
+                        playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ImportPlaybookRequest importStrategy */
+                        importStrategy?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy|null);
+                    }
+
+                    /** Represents an ImportPlaybookRequest. */
+                    class ImportPlaybookRequest implements IImportPlaybookRequest {
+
+                        /**
+                         * Constructs a new ImportPlaybookRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest);
+
+                        /** ImportPlaybookRequest parent. */
+                        public parent: string;
+
+                        /** ImportPlaybookRequest playbookUri. */
+                        public playbookUri?: (string|null);
+
+                        /** ImportPlaybookRequest playbookContent. */
+                        public playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ImportPlaybookRequest importStrategy. */
+                        public importStrategy?: (google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy|null);
+
+                        /** ImportPlaybookRequest playbook. */
+                        public playbook?: ("playbookUri"|"playbookContent");
+
+                        /**
+                         * Creates a new ImportPlaybookRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportPlaybookRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest;
+
+                        /**
+                         * Encodes the specified ImportPlaybookRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest.verify|verify} messages.
+                         * @param message ImportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportPlaybookRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest.verify|verify} messages.
+                         * @param message ImportPlaybookRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportPlaybookRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest;
+
+                        /**
+                         * Decodes an ImportPlaybookRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportPlaybookRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest;
+
+                        /**
+                         * Verifies an ImportPlaybookRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportPlaybookRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportPlaybookRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest;
+
+                        /**
+                         * Creates a plain object from an ImportPlaybookRequest message. Also converts values to other types if specified.
+                         * @param message ImportPlaybookRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportPlaybookRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportPlaybookRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PlaybookImportStrategy. */
+                    interface IPlaybookImportStrategy {
+
+                        /** PlaybookImportStrategy mainPlaybookImportStrategy */
+                        mainPlaybookImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy|null);
+
+                        /** PlaybookImportStrategy nestedResourceImportStrategy */
+                        nestedResourceImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy|null);
+
+                        /** PlaybookImportStrategy toolImportStrategy */
+                        toolImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy|null);
+                    }
+
+                    /** Represents a PlaybookImportStrategy. */
+                    class PlaybookImportStrategy implements IPlaybookImportStrategy {
+
+                        /**
+                         * Constructs a new PlaybookImportStrategy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy);
+
+                        /** PlaybookImportStrategy mainPlaybookImportStrategy. */
+                        public mainPlaybookImportStrategy: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy);
+
+                        /** PlaybookImportStrategy nestedResourceImportStrategy. */
+                        public nestedResourceImportStrategy: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy);
+
+                        /** PlaybookImportStrategy toolImportStrategy. */
+                        public toolImportStrategy: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy);
+
+                        /**
+                         * Creates a new PlaybookImportStrategy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PlaybookImportStrategy instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy): google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy;
+
+                        /**
+                         * Encodes the specified PlaybookImportStrategy message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy.verify|verify} messages.
+                         * @param message PlaybookImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PlaybookImportStrategy message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy.verify|verify} messages.
+                         * @param message PlaybookImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IPlaybookImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PlaybookImportStrategy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PlaybookImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy;
+
+                        /**
+                         * Decodes a PlaybookImportStrategy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PlaybookImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy;
+
+                        /**
+                         * Verifies a PlaybookImportStrategy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PlaybookImportStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PlaybookImportStrategy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy;
+
+                        /**
+                         * Creates a plain object from a PlaybookImportStrategy message. Also converts values to other types if specified.
+                         * @param message PlaybookImportStrategy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PlaybookImportStrategy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PlaybookImportStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ImportPlaybookResponse. */
+                    interface IImportPlaybookResponse {
+
+                        /** ImportPlaybookResponse playbook */
+                        playbook?: (string|null);
+
+                        /** ImportPlaybookResponse conflictingResources */
+                        conflictingResources?: (google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources|null);
+                    }
+
+                    /** Represents an ImportPlaybookResponse. */
+                    class ImportPlaybookResponse implements IImportPlaybookResponse {
+
+                        /**
+                         * Constructs a new ImportPlaybookResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse);
+
+                        /** ImportPlaybookResponse playbook. */
+                        public playbook: string;
+
+                        /** ImportPlaybookResponse conflictingResources. */
+                        public conflictingResources?: (google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources|null);
+
+                        /**
+                         * Creates a new ImportPlaybookResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImportPlaybookResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse;
+
+                        /**
+                         * Encodes the specified ImportPlaybookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.verify|verify} messages.
+                         * @param message ImportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImportPlaybookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.verify|verify} messages.
+                         * @param message ImportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImportPlaybookResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse;
+
+                        /**
+                         * Decodes an ImportPlaybookResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse;
+
+                        /**
+                         * Verifies an ImportPlaybookResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImportPlaybookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImportPlaybookResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse;
+
+                        /**
+                         * Creates a plain object from an ImportPlaybookResponse message. Also converts values to other types if specified.
+                         * @param message ImportPlaybookResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImportPlaybookResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImportPlaybookResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ImportPlaybookResponse {
+
+                        /** Properties of a ConflictingResources. */
+                        interface IConflictingResources {
+
+                            /** ConflictingResources mainPlaybookDisplayName */
+                            mainPlaybookDisplayName?: (string|null);
+
+                            /** ConflictingResources nestedPlaybookDisplayNames */
+                            nestedPlaybookDisplayNames?: (string[]|null);
+
+                            /** ConflictingResources toolDisplayNames */
+                            toolDisplayNames?: (string[]|null);
+                        }
+
+                        /** Represents a ConflictingResources. */
+                        class ConflictingResources implements IConflictingResources {
+
+                            /**
+                             * Constructs a new ConflictingResources.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources);
+
+                            /** ConflictingResources mainPlaybookDisplayName. */
+                            public mainPlaybookDisplayName: string;
+
+                            /** ConflictingResources nestedPlaybookDisplayNames. */
+                            public nestedPlaybookDisplayNames: string[];
+
+                            /** ConflictingResources toolDisplayNames. */
+                            public toolDisplayNames: string[];
+
+                            /**
+                             * Creates a new ConflictingResources instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConflictingResources instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Encodes the specified ConflictingResources message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources.verify|verify} messages.
+                             * @param message ConflictingResources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConflictingResources message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources.verify|verify} messages.
+                             * @param message ConflictingResources message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.IConflictingResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConflictingResources message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConflictingResources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Decodes a ConflictingResources message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConflictingResources
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Verifies a ConflictingResources message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConflictingResources message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConflictingResources
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources;
+
+                            /**
+                             * Creates a plain object from a ConflictingResources message. Also converts values to other types if specified.
+                             * @param message ConflictingResources
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse.ConflictingResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConflictingResources to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConflictingResources
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an ExportPlaybookResponse. */
+                    interface IExportPlaybookResponse {
+
+                        /** ExportPlaybookResponse playbookUri */
+                        playbookUri?: (string|null);
+
+                        /** ExportPlaybookResponse playbookContent */
+                        playbookContent?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents an ExportPlaybookResponse. */
+                    class ExportPlaybookResponse implements IExportPlaybookResponse {
+
+                        /**
+                         * Constructs a new ExportPlaybookResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse);
+
+                        /** ExportPlaybookResponse playbookUri. */
+                        public playbookUri?: (string|null);
+
+                        /** ExportPlaybookResponse playbookContent. */
+                        public playbookContent?: (Uint8Array|Buffer|string|null);
+
+                        /** ExportPlaybookResponse playbook. */
+                        public playbook?: ("playbookUri"|"playbookContent");
+
+                        /**
+                         * Creates a new ExportPlaybookResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPlaybookResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse;
+
+                        /**
+                         * Encodes the specified ExportPlaybookResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse.verify|verify} messages.
+                         * @param message ExportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPlaybookResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse.verify|verify} messages.
+                         * @param message ExportPlaybookResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPlaybookResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse;
+
+                        /**
+                         * Decodes an ExportPlaybookResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPlaybookResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse;
+
+                        /**
+                         * Verifies an ExportPlaybookResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPlaybookResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPlaybookResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse;
+
+                        /**
+                         * Creates a plain object from an ExportPlaybookResponse message. Also converts values to other types if specified.
+                         * @param message ExportPlaybookResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPlaybookResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPlaybookResponse
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -83114,8 +97589,7 @@ export namespace google {
                         /** DataFormat enum. */
                         enum DataFormat {
                             DATA_FORMAT_UNSPECIFIED = 0,
-                            BLOB = 1,
-                            JSON = 2
+                            BLOB = 1
                         }
                     }
 
@@ -84459,6 +98933,9 @@ export namespace google {
 
                             /** Authentication bearerTokenConfig */
                             bearerTokenConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IBearerTokenConfig|null);
+
+                            /** Authentication serviceAccountAuthConfig */
+                            serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null);
                         }
 
                         /** Represents an Authentication. */
@@ -84482,8 +98959,11 @@ export namespace google {
                             /** Authentication bearerTokenConfig. */
                             public bearerTokenConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IBearerTokenConfig|null);
 
+                            /** Authentication serviceAccountAuthConfig. */
+                            public serviceAccountAuthConfig?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig|null);
+
                             /** Authentication authConfig. */
-                            public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig");
+                            public authConfig?: ("apiKeyConfig"|"oauthConfig"|"serviceAgentAuthConfig"|"bearerTokenConfig"|"serviceAccountAuthConfig");
 
                             /**
                              * Creates a new Authentication instance using the specified properties.
@@ -84574,6 +99054,9 @@ export namespace google {
                                 /** ApiKeyConfig apiKey */
                                 apiKey?: (string|null);
 
+                                /** ApiKeyConfig secretVersionForApiKey */
+                                secretVersionForApiKey?: (string|null);
+
                                 /** ApiKeyConfig requestLocation */
                                 requestLocation?: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.RequestLocation|keyof typeof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.RequestLocation|null);
                             }
@@ -84592,6 +99075,9 @@ export namespace google {
 
                                 /** ApiKeyConfig apiKey. */
                                 public apiKey: string;
+
+                                /** ApiKeyConfig secretVersionForApiKey. */
+                                public secretVersionForApiKey: string;
 
                                 /** ApiKeyConfig requestLocation. */
                                 public requestLocation: (google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.RequestLocation|keyof typeof google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.RequestLocation);
@@ -84693,6 +99179,9 @@ export namespace google {
                                 /** OAuthConfig clientSecret */
                                 clientSecret?: (string|null);
 
+                                /** OAuthConfig secretVersionForClientSecret */
+                                secretVersionForClientSecret?: (string|null);
+
                                 /** OAuthConfig tokenEndpoint */
                                 tokenEndpoint?: (string|null);
 
@@ -84717,6 +99206,9 @@ export namespace google {
 
                                 /** OAuthConfig clientSecret. */
                                 public clientSecret: string;
+
+                                /** OAuthConfig secretVersionForClientSecret. */
+                                public secretVersionForClientSecret: string;
 
                                 /** OAuthConfig tokenEndpoint. */
                                 public tokenEndpoint: string;
@@ -84923,6 +99415,9 @@ export namespace google {
 
                                 /** BearerTokenConfig token */
                                 token?: (string|null);
+
+                                /** BearerTokenConfig secretVersionForToken */
+                                secretVersionForToken?: (string|null);
                             }
 
                             /** Represents a BearerTokenConfig. */
@@ -84936,6 +99431,9 @@ export namespace google {
 
                                 /** BearerTokenConfig token. */
                                 public token: string;
+
+                                /** BearerTokenConfig secretVersionForToken. */
+                                public secretVersionForToken: string;
 
                                 /**
                                  * Creates a new BearerTokenConfig instance using the specified properties.
@@ -85009,6 +99507,103 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for BearerTokenConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a ServiceAccountAuthConfig. */
+                            interface IServiceAccountAuthConfig {
+
+                                /** ServiceAccountAuthConfig serviceAccount */
+                                serviceAccount?: (string|null);
+                            }
+
+                            /** Represents a ServiceAccountAuthConfig. */
+                            class ServiceAccountAuthConfig implements IServiceAccountAuthConfig {
+
+                                /**
+                                 * Constructs a new ServiceAccountAuthConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig);
+
+                                /** ServiceAccountAuthConfig serviceAccount. */
+                                public serviceAccount: string;
+
+                                /**
+                                 * Creates a new ServiceAccountAuthConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns ServiceAccountAuthConfig instance
+                                 */
+                                public static create(properties?: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified ServiceAccountAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig.verify|verify} messages.
+                                 * @param message ServiceAccountAuthConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.IServiceAccountAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Decodes a ServiceAccountAuthConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns ServiceAccountAuthConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Verifies a ServiceAccountAuthConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a ServiceAccountAuthConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns ServiceAccountAuthConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig;
+
+                                /**
+                                 * Creates a plain object from a ServiceAccountAuthConfig message. Also converts values to other types if specified.
+                                 * @param message ServiceAccountAuthConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dialogflow.cx.v3beta1.Tool.Authentication.ServiceAccountAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this ServiceAccountAuthConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for ServiceAccountAuthConfig
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */

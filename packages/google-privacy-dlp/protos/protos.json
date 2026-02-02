@@ -2026,6 +2026,14 @@
                         "byteItem": {
                           "type": "ByteContentItem",
                           "id": 7
+                        },
+                        "inspectTemplate": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2221,7 +2229,8 @@
                       "oneofs": {
                         "type": {
                           "oneof": [
-                            "table"
+                            "table",
+                            "storagePath"
                           ]
                         }
                       },
@@ -2229,6 +2238,10 @@
                         "table": {
                           "type": "BigQueryTable",
                           "id": 1
+                        },
+                        "storagePath": {
+                          "type": "CloudStoragePath",
+                          "id": 5
                         },
                         "outputSchema": {
                           "type": "OutputSchema",
@@ -2413,6 +2426,28 @@
                         }
                       }
                     },
+                    "LocationSupport": {
+                      "fields": {
+                        "regionalizationScope": {
+                          "type": "RegionalizationScope",
+                          "id": 1
+                        },
+                        "locations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RegionalizationScope": {
+                          "values": {
+                            "REGIONALIZATION_SCOPE_UNSPECIFIED": 0,
+                            "REGIONAL": 1,
+                            "ANY_LOCATION": 2
+                          }
+                        }
+                      }
+                    },
                     "InfoTypeDescription": {
                       "fields": {
                         "name": {
@@ -2431,6 +2466,10 @@
                         "description": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationSupport": {
+                          "type": "LocationSupport",
+                          "id": 6
                         },
                         "example": {
                           "type": "string",
@@ -2489,6 +2528,7 @@
                             "ARGENTINA": 2,
                             "ARMENIA": 51,
                             "AUSTRALIA": 3,
+                            "AUSTRIA": 53,
                             "AZERBAIJAN": 48,
                             "BELARUS": 50,
                             "BELGIUM": 4,
@@ -4448,6 +4488,7 @@
                             "pubSub",
                             "publishSummaryToCscc",
                             "publishFindingsToCloudDataCatalog",
+                            "publishFindingsToDataplexCatalog",
                             "deidentify",
                             "jobNotificationEmails",
                             "publishToStackdriver"
@@ -4469,7 +4510,14 @@
                         },
                         "publishFindingsToCloudDataCatalog": {
                           "type": "PublishFindingsToCloudDataCatalog",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "publishFindingsToDataplexCatalog": {
+                          "type": "PublishFindingsToDataplexCatalog",
+                          "id": 10
                         },
                         "deidentify": {
                           "type": "Deidentify",
@@ -4505,6 +4553,9 @@
                           "fields": {}
                         },
                         "PublishFindingsToCloudDataCatalog": {
+                          "fields": {}
+                        },
+                        "PublishFindingsToDataplexCatalog": {
                           "fields": {}
                         },
                         "Deidentify": {
@@ -5941,6 +5992,13 @@
                         "includeRegexes": {
                           "type": "FileStoreRegexes",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeTags": {
+                          "type": "TagFilters",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7540,6 +7598,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 41
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 47
                         }
                       },
                       "nested": {
@@ -7862,6 +7925,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 26
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 27
                         }
                       },
                       "nested": {
@@ -7887,6 +7955,38 @@
                         "value": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "TagFilters": {
+                      "fields": {
+                        "tagFilters": {
+                          "rule": "repeated",
+                          "type": "TagFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagFilter": {
+                      "oneofs": {
+                        "format": {
+                          "oneof": [
+                            "namespacedTagValue",
+                            "namespacedTagKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "namespacedTagValue": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "namespacedTagKey": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -8439,10 +8539,7 @@
                       "fields": {
                         "dataSource": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 1
                         }
                       }
                     },
@@ -8483,6 +8580,10 @@
                         "imageFallbackLocation": {
                           "type": "ImageFallbackLocation",
                           "id": 1
+                        },
+                        "documentFallbackLocation": {
+                          "type": "DocumentFallbackLocation",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -8503,6 +8604,18 @@
                               "id": 200
                             }
                           }
+                        },
+                        "DocumentFallbackLocation": {
+                          "fields": {
+                            "multiRegionProcessing": {
+                              "type": "MultiRegionProcessing",
+                              "id": 100
+                            },
+                            "globalProcessing": {
+                              "type": "GlobalProcessing",
+                              "id": 200
+                            }
+                          }
                         }
                       }
                     },
@@ -8512,6 +8625,39 @@
                           "rule": "repeated",
                           "type": "Finding",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Domain": {
+                      "fields": {
+                        "category": {
+                          "type": "Category",
+                          "id": 1
+                        },
+                        "signals": {
+                          "rule": "repeated",
+                          "type": "Signal",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "AI": 1,
+                            "CODE": 2
+                          }
+                        },
+                        "Signal": {
+                          "values": {
+                            "SIGNAL_UNSPECIFIED": 0,
+                            "MODEL": 1,
+                            "TEXT_EMBEDDING": 2,
+                            "VERTEX_PLUGIN": 3,
+                            "VECTOR_PLUGIN": 4,
+                            "SOURCE_CODE": 5,
+                            "SERVICE": 6
+                          }
                         }
                       }
                     },

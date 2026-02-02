@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -812,6 +812,114 @@ describe('v3beta1.TranslationServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.getGlossary(request), expectedError);
+        });
+    });
+
+    describe('refineText', () => {
+        it('invokes refineText without error', async () => {
+            const client = new translationserviceModule.v3beta1.TranslationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.translation.v3beta1.RefineTextRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextResponse()
+            );
+            client.innerApiCalls.refineText = stubSimpleCall(expectedResponse);
+            const [response] = await client.refineText(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes refineText without error using callback', async () => {
+            const client = new translationserviceModule.v3beta1.TranslationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.translation.v3beta1.RefineTextRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextResponse()
+            );
+            client.innerApiCalls.refineText = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.refineText(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.translation.v3beta1.IRefineTextResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes refineText with error', async () => {
+            const client = new translationserviceModule.v3beta1.TranslationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.translation.v3beta1.RefineTextRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.refineText = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.refineText(request), expectedError);
+            const actualRequest = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.refineText as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes refineText with closed client', async () => {
+            const client = new translationserviceModule.v3beta1.TranslationServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.translation.v3beta1.RefineTextRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.translation.v3beta1.RefineTextRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.refineText(request), expectedError);
         });
     });
 

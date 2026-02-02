@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -185,6 +185,9 @@ export class BuildsClient {
     this.pathTemplates = {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
+      ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}'
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
@@ -378,6 +381,14 @@ export class BuildsClient {
  *   worker pool.
  * @param {string[]} [request.tags]
  *   Optional. Additional tags to annotate the build.
+ * @param {string} [request.machineType]
+ *   Optional. The machine type from default pool to use for the build. If left
+ *   blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+ *   is supported. If worker_pool is set, this field will be ignored.
+ * @param {google.api.LaunchStage} [request.releaseTrack]
+ *   Optional. The release track of the client that initiated the build request.
+ * @param {string} [request.client]
+ *   Optional. The client that initiated the build request.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -608,6 +619,55 @@ export class BuildsClient {
    */
   matchExecutionFromExecutionName(executionName: string) {
     return this.pathTemplates.executionPathTemplate.match(executionName).execution;
+  }
+
+  /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project:string,location:string,instance:string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the location from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).location;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
   }
 
   /**

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -209,6 +209,7 @@
                          * @property {google.type.ILatLng|null} [location] FindClosestBuildingInsightsRequest location
                          * @property {google.maps.solar.v1.ImageryQuality|null} [requiredQuality] FindClosestBuildingInsightsRequest requiredQuality
                          * @property {boolean|null} [exactQualityRequired] FindClosestBuildingInsightsRequest exactQualityRequired
+                         * @property {Array.<google.maps.solar.v1.Experiment>|null} [experiments] FindClosestBuildingInsightsRequest experiments
                          */
     
                         /**
@@ -220,6 +221,7 @@
                          * @param {google.maps.solar.v1.IFindClosestBuildingInsightsRequest=} [properties] Properties to set
                          */
                         function FindClosestBuildingInsightsRequest(properties) {
+                            this.experiments = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -251,6 +253,14 @@
                         FindClosestBuildingInsightsRequest.prototype.exactQualityRequired = false;
     
                         /**
+                         * FindClosestBuildingInsightsRequest experiments.
+                         * @member {Array.<google.maps.solar.v1.Experiment>} experiments
+                         * @memberof google.maps.solar.v1.FindClosestBuildingInsightsRequest
+                         * @instance
+                         */
+                        FindClosestBuildingInsightsRequest.prototype.experiments = $util.emptyArray;
+    
+                        /**
                          * Creates a new FindClosestBuildingInsightsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.solar.v1.FindClosestBuildingInsightsRequest
@@ -280,6 +290,12 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.requiredQuality);
                             if (message.exactQualityRequired != null && Object.hasOwnProperty.call(message, "exactQualityRequired"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.exactQualityRequired);
+                            if (message.experiments != null && message.experiments.length) {
+                                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                                for (var i = 0; i < message.experiments.length; ++i)
+                                    writer.int32(message.experiments[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -326,6 +342,17 @@
                                     }
                                 case 4: {
                                         message.exactQualityRequired = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.experiments && message.experiments.length))
+                                            message.experiments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.experiments.push(reader.int32());
+                                        } else
+                                            message.experiments.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -376,11 +403,24 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.exactQualityRequired != null && message.hasOwnProperty("exactQualityRequired"))
                                 if (typeof message.exactQualityRequired !== "boolean")
                                     return "exactQualityRequired: boolean expected";
+                            if (message.experiments != null && message.hasOwnProperty("experiments")) {
+                                if (!Array.isArray(message.experiments))
+                                    return "experiments: array expected";
+                                for (var i = 0; i < message.experiments.length; ++i)
+                                    switch (message.experiments[i]) {
+                                    default:
+                                        return "experiments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -424,9 +464,34 @@
                             case 3:
                                 message.requiredQuality = 3;
                                 break;
+                            case "BASE":
+                            case 4:
+                                message.requiredQuality = 4;
+                                break;
                             }
                             if (object.exactQualityRequired != null)
                                 message.exactQualityRequired = Boolean(object.exactQualityRequired);
+                            if (object.experiments) {
+                                if (!Array.isArray(object.experiments))
+                                    throw TypeError(".google.maps.solar.v1.FindClosestBuildingInsightsRequest.experiments: array expected");
+                                message.experiments = [];
+                                for (var i = 0; i < object.experiments.length; ++i)
+                                    switch (object.experiments[i]) {
+                                    default:
+                                        if (typeof object.experiments[i] === "number") {
+                                            message.experiments[i] = object.experiments[i];
+                                            break;
+                                        }
+                                    case "EXPERIMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.experiments[i] = 0;
+                                        break;
+                                    case "EXPANDED_COVERAGE":
+                                    case 1:
+                                        message.experiments[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -443,6 +508,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.experiments = [];
                             if (options.defaults) {
                                 object.location = null;
                                 object.requiredQuality = options.enums === String ? "IMAGERY_QUALITY_UNSPECIFIED" : 0;
@@ -454,6 +521,11 @@
                                 object.requiredQuality = options.enums === String ? $root.google.maps.solar.v1.ImageryQuality[message.requiredQuality] === undefined ? message.requiredQuality : $root.google.maps.solar.v1.ImageryQuality[message.requiredQuality] : message.requiredQuality;
                             if (message.exactQualityRequired != null && message.hasOwnProperty("exactQualityRequired"))
                                 object.exactQualityRequired = message.exactQualityRequired;
+                            if (message.experiments && message.experiments.length) {
+                                object.experiments = [];
+                                for (var j = 0; j < message.experiments.length; ++j)
+                                    object.experiments[j] = options.enums === String ? $root.google.maps.solar.v1.Experiment[message.experiments[j]] === undefined ? message.experiments[j] : $root.google.maps.solar.v1.Experiment[message.experiments[j]] : message.experiments[j];
+                            }
                             return object;
                         };
     
@@ -1056,6 +1128,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -1130,6 +1203,10 @@
                             case "LOW":
                             case 3:
                                 message.imageryQuality = 3;
+                                break;
+                            case "BASE":
+                            case 4:
+                                message.imageryQuality = 4;
                                 break;
                             }
                             return message;
@@ -5525,6 +5602,7 @@
                          * @property {google.maps.solar.v1.ImageryQuality|null} [requiredQuality] GetDataLayersRequest requiredQuality
                          * @property {number|null} [pixelSizeMeters] GetDataLayersRequest pixelSizeMeters
                          * @property {boolean|null} [exactQualityRequired] GetDataLayersRequest exactQualityRequired
+                         * @property {Array.<google.maps.solar.v1.Experiment>|null} [experiments] GetDataLayersRequest experiments
                          */
     
                         /**
@@ -5536,6 +5614,7 @@
                          * @param {google.maps.solar.v1.IGetDataLayersRequest=} [properties] Properties to set
                          */
                         function GetDataLayersRequest(properties) {
+                            this.experiments = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5591,6 +5670,14 @@
                         GetDataLayersRequest.prototype.exactQualityRequired = false;
     
                         /**
+                         * GetDataLayersRequest experiments.
+                         * @member {Array.<google.maps.solar.v1.Experiment>} experiments
+                         * @memberof google.maps.solar.v1.GetDataLayersRequest
+                         * @instance
+                         */
+                        GetDataLayersRequest.prototype.experiments = $util.emptyArray;
+    
+                        /**
                          * Creates a new GetDataLayersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.solar.v1.GetDataLayersRequest
@@ -5626,6 +5713,12 @@
                                 writer.uint32(/* id 6, wireType 5 =*/53).float(message.pixelSizeMeters);
                             if (message.exactQualityRequired != null && Object.hasOwnProperty.call(message, "exactQualityRequired"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.exactQualityRequired);
+                            if (message.experiments != null && message.experiments.length) {
+                                writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                                for (var i = 0; i < message.experiments.length; ++i)
+                                    writer.int32(message.experiments[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -5684,6 +5777,17 @@
                                     }
                                 case 7: {
                                         message.exactQualityRequired = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.experiments && message.experiments.length))
+                                            message.experiments = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.experiments.push(reader.int32());
+                                        } else
+                                            message.experiments.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -5749,6 +5853,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.pixelSizeMeters != null && message.hasOwnProperty("pixelSizeMeters"))
@@ -5757,6 +5862,18 @@
                             if (message.exactQualityRequired != null && message.hasOwnProperty("exactQualityRequired"))
                                 if (typeof message.exactQualityRequired !== "boolean")
                                     return "exactQualityRequired: boolean expected";
+                            if (message.experiments != null && message.hasOwnProperty("experiments")) {
+                                if (!Array.isArray(message.experiments))
+                                    return "experiments: array expected";
+                                for (var i = 0; i < message.experiments.length; ++i)
+                                    switch (message.experiments[i]) {
+                                    default:
+                                        return "experiments: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -5834,11 +5951,36 @@
                             case 3:
                                 message.requiredQuality = 3;
                                 break;
+                            case "BASE":
+                            case 4:
+                                message.requiredQuality = 4;
+                                break;
                             }
                             if (object.pixelSizeMeters != null)
                                 message.pixelSizeMeters = Number(object.pixelSizeMeters);
                             if (object.exactQualityRequired != null)
                                 message.exactQualityRequired = Boolean(object.exactQualityRequired);
+                            if (object.experiments) {
+                                if (!Array.isArray(object.experiments))
+                                    throw TypeError(".google.maps.solar.v1.GetDataLayersRequest.experiments: array expected");
+                                message.experiments = [];
+                                for (var i = 0; i < object.experiments.length; ++i)
+                                    switch (object.experiments[i]) {
+                                    default:
+                                        if (typeof object.experiments[i] === "number") {
+                                            message.experiments[i] = object.experiments[i];
+                                            break;
+                                        }
+                                    case "EXPERIMENT_UNSPECIFIED":
+                                    case 0:
+                                        message.experiments[i] = 0;
+                                        break;
+                                    case "EXPANDED_COVERAGE":
+                                    case 1:
+                                        message.experiments[i] = 1;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -5855,6 +5997,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.experiments = [];
                             if (options.defaults) {
                                 object.location = null;
                                 object.radiusMeters = 0;
@@ -5875,6 +6019,11 @@
                                 object.pixelSizeMeters = options.json && !isFinite(message.pixelSizeMeters) ? String(message.pixelSizeMeters) : message.pixelSizeMeters;
                             if (message.exactQualityRequired != null && message.hasOwnProperty("exactQualityRequired"))
                                 object.exactQualityRequired = message.exactQualityRequired;
+                            if (message.experiments && message.experiments.length) {
+                                object.experiments = [];
+                                for (var j = 0; j < message.experiments.length; ++j)
+                                    object.experiments[j] = options.enums === String ? $root.google.maps.solar.v1.Experiment[message.experiments[j]] === undefined ? message.experiments[j] : $root.google.maps.solar.v1.Experiment[message.experiments[j]] : message.experiments[j];
+                            }
                             return object;
                         };
     
@@ -6204,6 +6353,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -6270,6 +6420,10 @@
                             case "LOW":
                             case 3:
                                 message.imageryQuality = 3;
+                                break;
+                            case "BASE":
+                            case 4:
+                                message.imageryQuality = 4;
                                 break;
                             }
                             return message;
@@ -6588,6 +6742,7 @@
                      * @property {number} HIGH=1 HIGH value
                      * @property {number} MEDIUM=2 MEDIUM value
                      * @property {number} LOW=3 LOW value
+                     * @property {number} BASE=4 BASE value
                      */
                     v1.ImageryQuality = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -6595,6 +6750,7 @@
                         values[valuesById[1] = "HIGH"] = 1;
                         values[valuesById[2] = "MEDIUM"] = 2;
                         values[valuesById[3] = "LOW"] = 3;
+                        values[valuesById[4] = "BASE"] = 4;
                         return values;
                     })();
     
@@ -6611,6 +6767,20 @@
                         values[valuesById[0] = "SOLAR_PANEL_ORIENTATION_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "LANDSCAPE"] = 1;
                         values[valuesById[2] = "PORTRAIT"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * Experiment enum.
+                     * @name google.maps.solar.v1.Experiment
+                     * @enum {number}
+                     * @property {number} EXPERIMENT_UNSPECIFIED=0 EXPERIMENT_UNSPECIFIED value
+                     * @property {number} EXPANDED_COVERAGE=1 EXPANDED_COVERAGE value
+                     */
+                    v1.Experiment = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EXPERIMENT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXPANDED_COVERAGE"] = 1;
                         return values;
                     })();
     

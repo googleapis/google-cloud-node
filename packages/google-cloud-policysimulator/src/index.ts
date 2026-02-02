@@ -18,10 +18,12 @@
 
 import * as v1 from './v1';
 
+const OrgPolicyViolationsPreviewServiceClient = v1.OrgPolicyViolationsPreviewServiceClient;
+type OrgPolicyViolationsPreviewServiceClient = v1.OrgPolicyViolationsPreviewServiceClient;
 const SimulatorClient = v1.SimulatorClient;
 type SimulatorClient = v1.SimulatorClient;
 
-export {v1, SimulatorClient};
-export default {v1, SimulatorClient};
+export {v1, OrgPolicyViolationsPreviewServiceClient, SimulatorClient};
+export default {v1, OrgPolicyViolationsPreviewServiceClient, SimulatorClient};
 import * as protos from '../protos/protos';
 export {protos};

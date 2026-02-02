@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -227,8 +227,8 @@ export class ModelServiceClient {
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=tunedModels/*/operations/*}',additional_bindings: [{get: '/v1beta/{name=generatedFiles/*/operations/*}',},{get: '/v1beta/{name=models/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=tunedModels/*}/operations',additional_bindings: [{get: '/v1beta/{name=models/*}/operations',}],
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=batches/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=batches/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=tunedModels/*/operations/*}',additional_bindings: [{get: '/v1beta/{name=generatedFiles/*/operations/*}',},{get: '/v1beta/{name=batches/*}',},{get: '/v1beta/{name=models/*/operations/*}',},{get: '/v1beta/{name=corpora/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=tunedModels/*}/operations',additional_bindings: [{get: '/v1beta/{name=batches}',},{get: '/v1beta/{name=models/*}/operations',}],
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);

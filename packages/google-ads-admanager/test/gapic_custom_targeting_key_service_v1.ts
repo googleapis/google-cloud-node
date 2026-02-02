@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -378,6 +378,658 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
         });
     });
 
+    describe('createCustomTargetingKey', () => {
+        it('invokes createCustomTargetingKey without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.createCustomTargetingKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createCustomTargetingKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomTargetingKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createCustomTargetingKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createCustomTargetingKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createCustomTargetingKey with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CreateCustomTargetingKeyRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.CreateCustomTargetingKeyRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createCustomTargetingKey(request), expectedError);
+        });
+    });
+
+    describe('batchCreateCustomTargetingKeys', () => {
+        it('invokes batchCreateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchCreateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchCreateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchCreateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchCreateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchCreateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchCreateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchCreateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchCreateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchCreateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('updateCustomTargetingKey', () => {
+        it('invokes updateCustomTargetingKey without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCall(expectedResponse);
+            const [response] = await client.updateCustomTargetingKey(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.CustomTargetingKey()
+            );
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateCustomTargetingKey(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.ICustomTargetingKey|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedHeaderRequestParams = `custom_targeting_key.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateCustomTargetingKey = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.updateCustomTargetingKey(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateCustomTargetingKey as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateCustomTargetingKey with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest()
+            );
+            request.customTargetingKey ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.UpdateCustomTargetingKeyRequest', ['customTargetingKey', 'name']);
+            request.customTargetingKey.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.updateCustomTargetingKey(request), expectedError);
+        });
+    });
+
+    describe('batchUpdateCustomTargetingKeys', () => {
+        it('invokes batchUpdateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchUpdateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchUpdateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchUpdateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchUpdateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchUpdateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchUpdateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchUpdateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchUpdateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchUpdateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('batchActivateCustomTargetingKeys', () => {
+        it('invokes batchActivateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchActivateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchActivateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchActivateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchActivateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchActivateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchActivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchActivateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchActivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchActivateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
+    describe('batchDeactivateCustomTargetingKeys', () => {
+        it('invokes batchDeactivateCustomTargetingKeys without error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCall(expectedResponse);
+            const [response] = await client.batchDeactivateCustomTargetingKeys(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys without error using callback', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysResponse()
+            );
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.batchDeactivateCustomTargetingKeys(
+                    request,
+                    (err?: Error|null, result?: protos.google.ads.admanager.v1.IBatchDeactivateCustomTargetingKeysResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys with error', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.batchDeactivateCustomTargetingKeys = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.batchDeactivateCustomTargetingKeys(request), expectedError);
+            const actualRequest = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.batchDeactivateCustomTargetingKeys as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes batchDeactivateCustomTargetingKeys with closed client', async () => {
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.ads.admanager.v1.BatchDeactivateCustomTargetingKeysRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.batchDeactivateCustomTargetingKeys(request), expectedError);
+        });
+    });
+
     describe('listCustomTargetingKeys', () => {
         it('invokes listCustomTargetingKeys without error', async () => {
             const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
@@ -671,6 +1323,52 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
             });
         });
 
+        describe('adReviewCenterAd', async () => {
+            const fakePath = "/rendered/path/adReviewCenterAd";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property_code: "webPropertyCodeValue",
+                ad_review_center_ad: "adReviewCenterAdValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.adReviewCenterAdPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.adReviewCenterAdPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('adReviewCenterAdPath', () => {
+                const result = client.adReviewCenterAdPath("networkCodeValue", "webPropertyCodeValue", "adReviewCenterAdValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchNetworkCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyCodeFromAdReviewCenterAdName', () => {
+                const result = client.matchWebPropertyCodeFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "webPropertyCodeValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAdReviewCenterAdFromAdReviewCenterAdName', () => {
+                const result = client.matchAdReviewCenterAdFromAdReviewCenterAdName(fakePath);
+                assert.strictEqual(result, "adReviewCenterAdValue");
+                assert((client.pathTemplates.adReviewCenterAdPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('adUnit', async () => {
             const fakePath = "/rendered/path/adUnit";
             const expectedParameters = {
@@ -709,6 +1407,82 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
             });
         });
 
+        describe('application', async () => {
+            const fakePath = "/rendered/path/application";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                application: "applicationValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.applicationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.applicationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('applicationPath', () => {
+                const result = client.applicationPath("networkCodeValue", "applicationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.applicationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromApplicationName', () => {
+                const result = client.matchNetworkCodeFromApplicationName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchApplicationFromApplicationName', () => {
+                const result = client.matchApplicationFromApplicationName(fakePath);
+                assert.strictEqual(result, "applicationValue");
+                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('audienceSegment', async () => {
+            const fakePath = "/rendered/path/audienceSegment";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                audience_segment: "audienceSegmentValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.audienceSegmentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.audienceSegmentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('audienceSegmentPath', () => {
+                const result = client.audienceSegmentPath("networkCodeValue", "audienceSegmentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.audienceSegmentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromAudienceSegmentName', () => {
+                const result = client.matchNetworkCodeFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchAudienceSegmentFromAudienceSegmentName', () => {
+                const result = client.matchAudienceSegmentFromAudienceSegmentName(fakePath);
+                assert.strictEqual(result, "audienceSegmentValue");
+                assert((client.pathTemplates.audienceSegmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('bandwidthGroup', async () => {
             const fakePath = "/rendered/path/bandwidthGroup";
             const expectedParameters = {
@@ -743,6 +1517,158 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchBandwidthGroupFromBandwidthGroupName(fakePath);
                 assert.strictEqual(result, "bandwidthGroupValue");
                 assert((client.pathTemplates.bandwidthGroupPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browser', async () => {
+            const fakePath = "/rendered/path/browser";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser: "browserValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserPath', () => {
+                const result = client.browserPath("networkCodeValue", "browserValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserName', () => {
+                const result = client.matchNetworkCodeFromBrowserName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserFromBrowserName', () => {
+                const result = client.matchBrowserFromBrowserName(fakePath);
+                assert.strictEqual(result, "browserValue");
+                assert((client.pathTemplates.browserPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('browserLanguage', async () => {
+            const fakePath = "/rendered/path/browserLanguage";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                browser_language: "browserLanguageValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.browserLanguagePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.browserLanguagePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('browserLanguagePath', () => {
+                const result = client.browserLanguagePath("networkCodeValue", "browserLanguageValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.browserLanguagePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromBrowserLanguageName', () => {
+                const result = client.matchNetworkCodeFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchBrowserLanguageFromBrowserLanguageName', () => {
+                const result = client.matchBrowserLanguageFromBrowserLanguageName(fakePath);
+                assert.strictEqual(result, "browserLanguageValue");
+                assert((client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataKey', async () => {
+            const fakePath = "/rendered/path/cmsMetadataKey";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_key: "cmsMetadataKeyValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataKeyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataKeyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataKeyPath', () => {
+                const result = client.cmsMetadataKeyPath("networkCodeValue", "cmsMetadataKeyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataKeyName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataKeyFromCmsMetadataKeyName', () => {
+                const result = client.matchCmsMetadataKeyFromCmsMetadataKeyName(fakePath);
+                assert.strictEqual(result, "cmsMetadataKeyValue");
+                assert((client.pathTemplates.cmsMetadataKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('cmsMetadataValue', async () => {
+            const fakePath = "/rendered/path/cmsMetadataValue";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                cms_metadata_value: "cmsMetadataValueValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.cmsMetadataValuePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.cmsMetadataValuePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('cmsMetadataValuePath', () => {
+                const result = client.cmsMetadataValuePath("networkCodeValue", "cmsMetadataValueValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCmsMetadataValueName', () => {
+                const result = client.matchNetworkCodeFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCmsMetadataValueFromCmsMetadataValueName', () => {
+                const result = client.matchCmsMetadataValueFromCmsMetadataValueName(fakePath);
+                assert.strictEqual(result, "cmsMetadataValueValue");
+                assert((client.pathTemplates.cmsMetadataValuePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -819,6 +1745,158 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchContactFromContactName(fakePath);
                 assert.strictEqual(result, "contactValue");
                 assert((client.pathTemplates.contactPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('content', async () => {
+            const fakePath = "/rendered/path/content";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content: "contentValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentPath', () => {
+                const result = client.contentPath("networkCodeValue", "contentValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentName', () => {
+                const result = client.matchNetworkCodeFromContentName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentFromContentName', () => {
+                const result = client.matchContentFromContentName(fakePath);
+                assert.strictEqual(result, "contentValue");
+                assert((client.pathTemplates.contentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentBundle', async () => {
+            const fakePath = "/rendered/path/contentBundle";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_bundle: "contentBundleValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentBundlePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentBundlePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentBundlePath', () => {
+                const result = client.contentBundlePath("networkCodeValue", "contentBundleValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentBundlePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentBundleName', () => {
+                const result = client.matchNetworkCodeFromContentBundleName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentBundleFromContentBundleName', () => {
+                const result = client.matchContentBundleFromContentBundleName(fakePath);
+                assert.strictEqual(result, "contentBundleValue");
+                assert((client.pathTemplates.contentBundlePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('contentLabel', async () => {
+            const fakePath = "/rendered/path/contentLabel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                content_label: "contentLabelValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.contentLabelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.contentLabelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('contentLabelPath', () => {
+                const result = client.contentLabelPath("networkCodeValue", "contentLabelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.contentLabelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromContentLabelName', () => {
+                const result = client.matchNetworkCodeFromContentLabelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchContentLabelFromContentLabelName', () => {
+                const result = client.matchContentLabelFromContentLabelName(fakePath);
+                assert.strictEqual(result, "contentLabelValue");
+                assert((client.pathTemplates.contentLabelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('creativeTemplate', async () => {
+            const fakePath = "/rendered/path/creativeTemplate";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                creative_template: "creativeTemplateValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.creativeTemplatePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.creativeTemplatePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('creativeTemplatePath', () => {
+                const result = client.creativeTemplatePath("networkCodeValue", "creativeTemplateValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.creativeTemplatePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromCreativeTemplateName', () => {
+                const result = client.matchNetworkCodeFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCreativeTemplateFromCreativeTemplateName', () => {
+                const result = client.matchCreativeTemplateFromCreativeTemplateName(fakePath);
+                assert.strictEqual(result, "creativeTemplateValue");
+                assert((client.pathTemplates.creativeTemplatePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -937,6 +2015,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
             });
         });
 
+        describe('deviceCapability', async () => {
+            const fakePath = "/rendered/path/deviceCapability";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_capability: "deviceCapabilityValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceCapabilityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceCapabilityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceCapabilityPath', () => {
+                const result = client.deviceCapabilityPath("networkCodeValue", "deviceCapabilityValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceCapabilityName', () => {
+                const result = client.matchNetworkCodeFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceCapabilityFromDeviceCapabilityName', () => {
+                const result = client.matchDeviceCapabilityFromDeviceCapabilityName(fakePath);
+                assert.strictEqual(result, "deviceCapabilityValue");
+                assert((client.pathTemplates.deviceCapabilityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('deviceCategory', async () => {
             const fakePath = "/rendered/path/deviceCategory";
             const expectedParameters = {
@@ -971,6 +2087,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchDeviceCategoryFromDeviceCategoryName(fakePath);
                 assert.strictEqual(result, "deviceCategoryValue");
                 assert((client.pathTemplates.deviceCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('deviceManufacturer', async () => {
+            const fakePath = "/rendered/path/deviceManufacturer";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                device_manufacturer: "deviceManufacturerValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.deviceManufacturerPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.deviceManufacturerPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('deviceManufacturerPath', () => {
+                const result = client.deviceManufacturerPath("networkCodeValue", "deviceManufacturerValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromDeviceManufacturerName', () => {
+                const result = client.matchNetworkCodeFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDeviceManufacturerFromDeviceManufacturerName', () => {
+                const result = client.matchDeviceManufacturerFromDeviceManufacturerName(fakePath);
+                assert.strictEqual(result, "deviceManufacturerValue");
+                assert((client.pathTemplates.deviceManufacturerPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1089,6 +2243,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
             });
         });
 
+        describe('lineItem', async () => {
+            const fakePath = "/rendered/path/lineItem";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                line_item: "lineItemValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.lineItemPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.lineItemPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('lineItemPath', () => {
+                const result = client.lineItemPath("networkCodeValue", "lineItemValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.lineItemPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromLineItemName', () => {
+                const result = client.matchNetworkCodeFromLineItemName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLineItemFromLineItemName', () => {
+                const result = client.matchLineItemFromLineItemName(fakePath);
+                assert.strictEqual(result, "lineItemValue");
+                assert((client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('liveStreamEvent', async () => {
             const fakePath = "/rendered/path/liveStreamEvent";
             const expectedParameters = {
@@ -1123,6 +2315,120 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchLiveStreamEventFromLiveStreamEventName(fakePath);
                 assert.strictEqual(result, "liveStreamEventValue");
                 assert((client.pathTemplates.liveStreamEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileCarrier', async () => {
+            const fakePath = "/rendered/path/mobileCarrier";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_carrier: "mobileCarrierValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileCarrierPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileCarrierPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileCarrierPath', () => {
+                const result = client.mobileCarrierPath("networkCodeValue", "mobileCarrierValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileCarrierPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileCarrierName', () => {
+                const result = client.matchNetworkCodeFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileCarrierFromMobileCarrierName', () => {
+                const result = client.matchMobileCarrierFromMobileCarrierName(fakePath);
+                assert.strictEqual(result, "mobileCarrierValue");
+                assert((client.pathTemplates.mobileCarrierPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDevice', async () => {
+            const fakePath = "/rendered/path/mobileDevice";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device: "mobileDeviceValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDevicePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDevicePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDevicePath', () => {
+                const result = client.mobileDevicePath("networkCodeValue", "mobileDeviceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDevicePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceFromMobileDeviceName', () => {
+                const result = client.matchMobileDeviceFromMobileDeviceName(fakePath);
+                assert.strictEqual(result, "mobileDeviceValue");
+                assert((client.pathTemplates.mobileDevicePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('mobileDeviceSubmodel', async () => {
+            const fakePath = "/rendered/path/mobileDeviceSubmodel";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                mobile_device_submodel: "mobileDeviceSubmodelValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.mobileDeviceSubmodelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('mobileDeviceSubmodelPath', () => {
+                const result = client.mobileDeviceSubmodelPath("networkCodeValue", "mobileDeviceSubmodelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromMobileDeviceSubmodelName', () => {
+                const result = client.matchNetworkCodeFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMobileDeviceSubmodelFromMobileDeviceSubmodelName', () => {
+                const result = client.matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(fakePath);
+                assert.strictEqual(result, "mobileDeviceSubmodelValue");
+                assert((client.pathTemplates.mobileDeviceSubmodelPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -1499,6 +2805,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
             });
         });
 
+        describe('site', async () => {
+            const fakePath = "/rendered/path/site";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                site: "siteValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sitePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sitePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sitePath', () => {
+                const result = client.sitePath("networkCodeValue", "siteValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sitePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromSiteName', () => {
+                const result = client.matchNetworkCodeFromSiteName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSiteFromSiteName', () => {
+                const result = client.matchSiteFromSiteName(fakePath);
+                assert.strictEqual(result, "siteValue");
+                assert((client.pathTemplates.sitePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('taxonomyCategory', async () => {
             const fakePath = "/rendered/path/taxonomyCategory";
             const expectedParameters = {
@@ -1609,6 +2953,44 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
                 const result = client.matchUserFromUserName(fakePath);
                 assert.strictEqual(result, "userValue");
                 assert((client.pathTemplates.userPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('webProperty', async () => {
+            const fakePath = "/rendered/path/webProperty";
+            const expectedParameters = {
+                network_code: "networkCodeValue",
+                web_property: "webPropertyValue",
+            };
+            const client = new customtargetingkeyserviceModule.v1.CustomTargetingKeyServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.webPropertyPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.webPropertyPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('webPropertyPath', () => {
+                const result = client.webPropertyPath("networkCodeValue", "webPropertyValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.webPropertyPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchNetworkCodeFromWebPropertyName', () => {
+                const result = client.matchNetworkCodeFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "networkCodeValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchWebPropertyFromWebPropertyName', () => {
+                const result = client.matchWebPropertyFromWebPropertyName(fakePath);
+                assert.strictEqual(result, "webPropertyValue");
+                assert((client.pathTemplates.webPropertyPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

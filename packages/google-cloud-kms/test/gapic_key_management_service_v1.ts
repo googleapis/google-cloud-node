@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2751,6 +2751,114 @@ describe('v1.KeyManagementServiceClient', () => {
         });
     });
 
+    describe('decapsulate', () => {
+        it('invokes decapsulate without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateResponse()
+            );
+            client.innerApiCalls.decapsulate = stubSimpleCall(expectedResponse);
+            const [response] = await client.decapsulate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateResponse()
+            );
+            client.innerApiCalls.decapsulate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.decapsulate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.kms.v1.IDecapsulateResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.decapsulate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.decapsulate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate with closed client', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.decapsulate(request), expectedError);
+        });
+    });
+
     describe('generateRandomBytes', () => {
         it('invokes generateRandomBytes without error', async () => {
             const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
@@ -4755,6 +4863,106 @@ describe('v1.KeyManagementServiceClient', () => {
                 const result = client.matchCryptoKeyVersionFromPublicKeyName(fakePath);
                 assert.strictEqual(result, "cryptoKeyVersionValue");
                 assert((client.pathTemplates.publicKeyPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('singleTenantHsmInstance', async () => {
+            const fakePath = "/rendered/path/singleTenantHsmInstance";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                single_tenant_hsm_instance: "singleTenantHsmInstanceValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.singleTenantHsmInstancePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.singleTenantHsmInstancePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('singleTenantHsmInstancePath', () => {
+                const result = client.singleTenantHsmInstancePath("projectValue", "locationValue", "singleTenantHsmInstanceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchProjectFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchLocationFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceName', () => {
+                const result = client.matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceName(fakePath);
+                assert.strictEqual(result, "singleTenantHsmInstanceValue");
+                assert((client.pathTemplates.singleTenantHsmInstancePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('singleTenantHsmInstanceProposal', async () => {
+            const fakePath = "/rendered/path/singleTenantHsmInstanceProposal";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                single_tenant_hsm_instance: "singleTenantHsmInstanceValue",
+                proposal: "proposalValue",
+            };
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('singleTenantHsmInstanceProposalPath', () => {
+                const result = client.singleTenantHsmInstanceProposalPath("projectValue", "locationValue", "singleTenantHsmInstanceValue", "proposalValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchProjectFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchLocationFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchSingleTenantHsmInstanceFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "singleTenantHsmInstanceValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchProposalFromSingleTenantHsmInstanceProposalName', () => {
+                const result = client.matchProposalFromSingleTenantHsmInstanceProposalName(fakePath);
+                assert.strictEqual(result, "proposalValue");
+                assert((client.pathTemplates.singleTenantHsmInstanceProposalPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

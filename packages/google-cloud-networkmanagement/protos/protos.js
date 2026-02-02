@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -700,6 +700,7 @@
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
+                         * @property {string|null} [gkePod] Endpoint gkePod
                          * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
                          * @property {google.cloud.networkmanagement.v1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
                          * @property {google.cloud.networkmanagement.v1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
@@ -818,6 +819,14 @@
                          * @instance
                          */
                         Endpoint.prototype.redisCluster = "";
+    
+                        /**
+                         * Endpoint gkePod.
+                         * @member {string} gkePod
+                         * @memberof google.cloud.networkmanagement.v1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.gkePod = "";
     
                         /**
                          * Endpoint cloudFunction.
@@ -948,6 +957,8 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.redisCluster);
                             if (message.fqdn != null && Object.hasOwnProperty.call(message, "fqdn"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.gkePod);
                             return writer;
                         };
     
@@ -1030,6 +1041,10 @@
                                     }
                                 case 18: {
                                         message.redisCluster = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.gkePod = reader.string();
                                         break;
                                     }
                                 case 10: {
@@ -1156,6 +1171,9 @@
                             if (message.redisCluster != null && message.hasOwnProperty("redisCluster"))
                                 if (!$util.isString(message.redisCluster))
                                     return "redisCluster: string expected";
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                if (!$util.isString(message.gkePod))
+                                    return "gkePod: string expected";
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
                                 var error = $root.google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
                                 if (error)
@@ -1181,6 +1199,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -1301,6 +1320,8 @@
                                 message.redisInstance = String(object.redisInstance);
                             if (object.redisCluster != null)
                                 message.redisCluster = String(object.redisCluster);
+                            if (object.gkePod != null)
+                                message.gkePod = String(object.gkePod);
                             if (object.cloudFunction != null) {
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Endpoint.cloudFunction: object expected");
@@ -1337,6 +1358,10 @@
                             case 2:
                                 message.networkType = 2;
                                 break;
+                            case "INTERNET":
+                            case 3:
+                                message.networkType = 3;
+                                break;
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
@@ -1372,6 +1397,7 @@
                                 object.redisInstance = "";
                                 object.redisCluster = "";
                                 object.fqdn = "";
+                                object.gkePod = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -1418,6 +1444,8 @@
                                 object.redisCluster = message.redisCluster;
                             if (message.fqdn != null && message.hasOwnProperty("fqdn"))
                                 object.fqdn = message.fqdn;
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                object.gkePod = message.gkePod;
                             return object;
                         };
     
@@ -1454,12 +1482,14 @@
                          * @property {number} NETWORK_TYPE_UNSPECIFIED=0 NETWORK_TYPE_UNSPECIFIED value
                          * @property {number} GCP_NETWORK=1 GCP_NETWORK value
                          * @property {number} NON_GCP_NETWORK=2 NON_GCP_NETWORK value
+                         * @property {number} INTERNET=3 INTERNET value
                          */
                         Endpoint.NetworkType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            values[valuesById[3] = "INTERNET"] = 3;
                             return values;
                         })();
     
@@ -1900,6 +1930,7 @@
                              * @memberof google.cloud.networkmanagement.v1.Endpoint
                              * @interface ICloudRunRevisionEndpoint
                              * @property {string|null} [uri] CloudRunRevisionEndpoint uri
+                             * @property {string|null} [serviceUri] CloudRunRevisionEndpoint serviceUri
                              */
     
                             /**
@@ -1924,6 +1955,14 @@
                              * @instance
                              */
                             CloudRunRevisionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * CloudRunRevisionEndpoint serviceUri.
+                             * @member {string} serviceUri
+                             * @memberof google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             */
+                            CloudRunRevisionEndpoint.prototype.serviceUri = "";
     
                             /**
                              * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
@@ -1951,6 +1990,8 @@
                                     writer = $Writer.create();
                                 if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUri);
                                 return writer;
                             };
     
@@ -1991,6 +2032,10 @@
                                             message.uri = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.serviceUri = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2029,6 +2074,9 @@
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     if (!$util.isString(message.uri))
                                         return "uri: string expected";
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    if (!$util.isString(message.serviceUri))
+                                        return "serviceUri: string expected";
                                 return null;
                             };
     
@@ -2046,6 +2094,8 @@
                                 var message = new $root.google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint();
                                 if (object.uri != null)
                                     message.uri = String(object.uri);
+                                if (object.serviceUri != null)
+                                    message.serviceUri = String(object.serviceUri);
                                 return message;
                             };
     
@@ -2062,10 +2112,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.uri = "";
+                                    object.serviceUri = "";
+                                }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     object.uri = message.uri;
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    object.serviceUri = message.serviceUri;
                                 return object;
                             };
     
@@ -2946,6 +3000,8 @@
                          * @property {google.cloud.networkmanagement.v1.IEndpointInfo|null} [endpointInfo] ProbingDetails endpointInfo
                          * @property {google.cloud.networkmanagement.v1.ILatencyDistribution|null} [probingLatency] ProbingDetails probingLatency
                          * @property {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null} [destinationEgressLocation] ProbingDetails destinationEgressLocation
+                         * @property {Array.<google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse>|null} [edgeResponses] ProbingDetails edgeResponses
+                         * @property {boolean|null} [probedAllDevices] ProbingDetails probedAllDevices
                          */
     
                         /**
@@ -2957,6 +3013,7 @@
                          * @param {google.cloud.networkmanagement.v1.IProbingDetails=} [properties] Properties to set
                          */
                         function ProbingDetails(properties) {
+                            this.edgeResponses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3036,6 +3093,22 @@
                         ProbingDetails.prototype.destinationEgressLocation = null;
     
                         /**
+                         * ProbingDetails edgeResponses.
+                         * @member {Array.<google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse>} edgeResponses
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.edgeResponses = $util.emptyArray;
+    
+                        /**
+                         * ProbingDetails probedAllDevices.
+                         * @member {boolean} probedAllDevices
+                         * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.probedAllDevices = false;
+    
+                        /**
                          * Creates a new ProbingDetails instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.ProbingDetails
@@ -3077,6 +3150,11 @@
                                 $root.google.cloud.networkmanagement.v1.LatencyDistribution.encode(message.probingLatency, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.destinationEgressLocation != null && Object.hasOwnProperty.call(message, "destinationEgressLocation"))
                                 $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.encode(message.destinationEgressLocation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.edgeResponses != null && message.edgeResponses.length)
+                                for (var i = 0; i < message.edgeResponses.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.encode(message.edgeResponses[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.probedAllDevices != null && Object.hasOwnProperty.call(message, "probedAllDevices"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.probedAllDevices);
                             return writer;
                         };
     
@@ -3147,6 +3225,16 @@
                                     }
                                 case 9: {
                                         message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.edgeResponses && message.edgeResponses.length))
+                                            message.edgeResponses = [];
+                                        message.edgeResponses.push($root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        message.probedAllDevices = reader.bool();
                                         break;
                                     }
                                 default:
@@ -3235,6 +3323,18 @@
                                 if (error)
                                     return "destinationEgressLocation." + error;
                             }
+                            if (message.edgeResponses != null && message.hasOwnProperty("edgeResponses")) {
+                                if (!Array.isArray(message.edgeResponses))
+                                    return "edgeResponses: array expected";
+                                for (var i = 0; i < message.edgeResponses.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.verify(message.edgeResponses[i]);
+                                    if (error)
+                                        return "edgeResponses." + error;
+                                }
+                            }
+                            if (message.probedAllDevices != null && message.hasOwnProperty("probedAllDevices"))
+                                if (typeof message.probedAllDevices !== "boolean")
+                                    return "probedAllDevices: boolean expected";
                             return null;
                         };
     
@@ -3327,6 +3427,18 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.destinationEgressLocation: object expected");
                                 message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.fromObject(object.destinationEgressLocation);
                             }
+                            if (object.edgeResponses) {
+                                if (!Array.isArray(object.edgeResponses))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.edgeResponses: array expected");
+                                message.edgeResponses = [];
+                                for (var i = 0; i < object.edgeResponses.length; ++i) {
+                                    if (typeof object.edgeResponses[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.edgeResponses: object expected");
+                                    message.edgeResponses[i] = $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.fromObject(object.edgeResponses[i]);
+                                }
+                            }
+                            if (object.probedAllDevices != null)
+                                message.probedAllDevices = Boolean(object.probedAllDevices);
                             return message;
                         };
     
@@ -3343,6 +3455,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.edgeResponses = [];
                             if (options.defaults) {
                                 object.result = options.enums === String ? "PROBING_RESULT_UNSPECIFIED" : 0;
                                 object.verifyTime = null;
@@ -3353,6 +3467,7 @@
                                 object.endpointInfo = null;
                                 object.probingLatency = null;
                                 object.destinationEgressLocation = null;
+                                object.probedAllDevices = false;
                             }
                             if (message.result != null && message.hasOwnProperty("result"))
                                 object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] : message.result;
@@ -3372,6 +3487,13 @@
                                 object.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.toObject(message.probingLatency, options);
                             if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation"))
                                 object.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.toObject(message.destinationEgressLocation, options);
+                            if (message.edgeResponses && message.edgeResponses.length) {
+                                object.edgeResponses = [];
+                                for (var j = 0; j < message.edgeResponses.length; ++j)
+                                    object.edgeResponses[j] = $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.toObject(message.edgeResponses[j], options);
+                            }
+                            if (message.probedAllDevices != null && message.hasOwnProperty("probedAllDevices"))
+                                object.probedAllDevices = message.probedAllDevices;
                             return object;
                         };
     
@@ -3640,6 +3762,371 @@
                             };
     
                             return EdgeLocation;
+                        })();
+    
+                        ProbingDetails.SingleEdgeResponse = (function() {
+    
+                            /**
+                             * Properties of a SingleEdgeResponse.
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                             * @interface ISingleEdgeResponse
+                             * @property {google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult|null} [result] SingleEdgeResponse result
+                             * @property {number|null} [sentProbeCount] SingleEdgeResponse sentProbeCount
+                             * @property {number|null} [successfulProbeCount] SingleEdgeResponse successfulProbeCount
+                             * @property {google.cloud.networkmanagement.v1.ILatencyDistribution|null} [probingLatency] SingleEdgeResponse probingLatency
+                             * @property {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null} [destinationEgressLocation] SingleEdgeResponse destinationEgressLocation
+                             * @property {string|null} [destinationRouter] SingleEdgeResponse destinationRouter
+                             */
+    
+                            /**
+                             * Constructs a new SingleEdgeResponse.
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails
+                             * @classdesc Represents a SingleEdgeResponse.
+                             * @implements ISingleEdgeResponse
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse=} [properties] Properties to set
+                             */
+                            function SingleEdgeResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SingleEdgeResponse result.
+                             * @member {google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult} result
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.result = 0;
+    
+                            /**
+                             * SingleEdgeResponse sentProbeCount.
+                             * @member {number} sentProbeCount
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.sentProbeCount = 0;
+    
+                            /**
+                             * SingleEdgeResponse successfulProbeCount.
+                             * @member {number} successfulProbeCount
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.successfulProbeCount = 0;
+    
+                            /**
+                             * SingleEdgeResponse probingLatency.
+                             * @member {google.cloud.networkmanagement.v1.ILatencyDistribution|null|undefined} probingLatency
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.probingLatency = null;
+    
+                            /**
+                             * SingleEdgeResponse destinationEgressLocation.
+                             * @member {google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null|undefined} destinationEgressLocation
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.destinationEgressLocation = null;
+    
+                            /**
+                             * SingleEdgeResponse destinationRouter.
+                             * @member {string} destinationRouter
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.destinationRouter = "";
+    
+                            /**
+                             * Creates a new SingleEdgeResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse instance
+                             */
+                            SingleEdgeResponse.create = function create(properties) {
+                                return new SingleEdgeResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SingleEdgeResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse} message SingleEdgeResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleEdgeResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result);
+                                if (message.sentProbeCount != null && Object.hasOwnProperty.call(message, "sentProbeCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sentProbeCount);
+                                if (message.successfulProbeCount != null && Object.hasOwnProperty.call(message, "successfulProbeCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.successfulProbeCount);
+                                if (message.probingLatency != null && Object.hasOwnProperty.call(message, "probingLatency"))
+                                    $root.google.cloud.networkmanagement.v1.LatencyDistribution.encode(message.probingLatency, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.destinationEgressLocation != null && Object.hasOwnProperty.call(message, "destinationEgressLocation"))
+                                    $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.encode(message.destinationEgressLocation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.destinationRouter != null && Object.hasOwnProperty.call(message, "destinationRouter"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.destinationRouter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SingleEdgeResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse} message SingleEdgeResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleEdgeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SingleEdgeResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleEdgeResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.result = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sentProbeCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.successfulProbeCount = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.destinationRouter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SingleEdgeResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleEdgeResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SingleEdgeResponse message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SingleEdgeResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.result != null && message.hasOwnProperty("result"))
+                                    switch (message.result) {
+                                    default:
+                                        return "result: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                    if (!$util.isInteger(message.sentProbeCount))
+                                        return "sentProbeCount: integer expected";
+                                if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                    if (!$util.isInteger(message.successfulProbeCount))
+                                        return "successfulProbeCount: integer expected";
+                                if (message.probingLatency != null && message.hasOwnProperty("probingLatency")) {
+                                    var error = $root.google.cloud.networkmanagement.v1.LatencyDistribution.verify(message.probingLatency);
+                                    if (error)
+                                        return "probingLatency." + error;
+                                }
+                                if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation")) {
+                                    var error = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.verify(message.destinationEgressLocation);
+                                    if (error)
+                                        return "destinationEgressLocation." + error;
+                                }
+                                if (message.destinationRouter != null && message.hasOwnProperty("destinationRouter"))
+                                    if (!$util.isString(message.destinationRouter))
+                                        return "destinationRouter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SingleEdgeResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             */
+                            SingleEdgeResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse();
+                                switch (object.result) {
+                                default:
+                                    if (typeof object.result === "number") {
+                                        message.result = object.result;
+                                        break;
+                                    }
+                                    break;
+                                case "PROBING_RESULT_UNSPECIFIED":
+                                case 0:
+                                    message.result = 0;
+                                    break;
+                                case "REACHABLE":
+                                case 1:
+                                    message.result = 1;
+                                    break;
+                                case "UNREACHABLE":
+                                case 2:
+                                    message.result = 2;
+                                    break;
+                                case "REACHABILITY_INCONSISTENT":
+                                case 3:
+                                    message.result = 3;
+                                    break;
+                                case "UNDETERMINED":
+                                case 4:
+                                    message.result = 4;
+                                    break;
+                                }
+                                if (object.sentProbeCount != null)
+                                    message.sentProbeCount = object.sentProbeCount | 0;
+                                if (object.successfulProbeCount != null)
+                                    message.successfulProbeCount = object.successfulProbeCount | 0;
+                                if (object.probingLatency != null) {
+                                    if (typeof object.probingLatency !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.probingLatency: object expected");
+                                    message.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.fromObject(object.probingLatency);
+                                }
+                                if (object.destinationEgressLocation != null) {
+                                    if (typeof object.destinationEgressLocation !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.destinationEgressLocation: object expected");
+                                    message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.fromObject(object.destinationEgressLocation);
+                                }
+                                if (object.destinationRouter != null)
+                                    message.destinationRouter = String(object.destinationRouter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SingleEdgeResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse} message SingleEdgeResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SingleEdgeResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.result = options.enums === String ? "PROBING_RESULT_UNSPECIFIED" : 0;
+                                    object.sentProbeCount = 0;
+                                    object.successfulProbeCount = 0;
+                                    object.probingLatency = null;
+                                    object.destinationEgressLocation = null;
+                                    object.destinationRouter = "";
+                                }
+                                if (message.result != null && message.hasOwnProperty("result"))
+                                    object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult[message.result] : message.result;
+                                if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                    object.sentProbeCount = message.sentProbeCount;
+                                if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                    object.successfulProbeCount = message.successfulProbeCount;
+                                if (message.probingLatency != null && message.hasOwnProperty("probingLatency"))
+                                    object.probingLatency = $root.google.cloud.networkmanagement.v1.LatencyDistribution.toObject(message.probingLatency, options);
+                                if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation"))
+                                    object.destinationEgressLocation = $root.google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation.toObject(message.destinationEgressLocation, options);
+                                if (message.destinationRouter != null && message.hasOwnProperty("destinationRouter"))
+                                    object.destinationRouter = message.destinationRouter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SingleEdgeResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SingleEdgeResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SingleEdgeResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SingleEdgeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse";
+                            };
+    
+                            return SingleEdgeResponse;
                         })();
     
                         return ProbingDetails;
@@ -3940,8 +4427,10 @@
                          * @property {google.cloud.networkmanagement.v1.IEndpointInfo|null} [endpoint] Step endpoint
                          * @property {google.cloud.networkmanagement.v1.IGoogleServiceInfo|null} [googleService] Step googleService
                          * @property {google.cloud.networkmanagement.v1.IForwardingRuleInfo|null} [forwardingRule] Step forwardingRule
+                         * @property {google.cloud.networkmanagement.v1.IHybridSubnetInfo|null} [hybridSubnet] Step hybridSubnet
                          * @property {google.cloud.networkmanagement.v1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
+                         * @property {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo|null} [interconnectAttachment] Step interconnectAttachment
                          * @property {google.cloud.networkmanagement.v1.IVpcConnectorInfo|null} [vpcConnector] Step vpcConnector
                          * @property {google.cloud.networkmanagement.v1.IDirectVpcEgressConnectionInfo|null} [directVpcEgressConnection] Step directVpcEgressConnection
                          * @property {google.cloud.networkmanagement.v1.IServerlessExternalConnectionInfo|null} [serverlessExternalConnection] Step serverlessExternalConnection
@@ -3952,6 +4441,8 @@
                          * @property {google.cloud.networkmanagement.v1.ILoadBalancerInfo|null} [loadBalancer] Step loadBalancer
                          * @property {google.cloud.networkmanagement.v1.INetworkInfo|null} [network] Step network
                          * @property {google.cloud.networkmanagement.v1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
+                         * @property {google.cloud.networkmanagement.v1.IGkePodInfo|null} [gkePod] Step gkePod
+                         * @property {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null} [ipMasqueradingSkipped] Step ipMasqueradingSkipped
                          * @property {google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1.IRedisInstanceInfo|null} [redisInstance] Step redisInstance
                          * @property {google.cloud.networkmanagement.v1.IRedisClusterInfo|null} [redisCluster] Step redisCluster
@@ -4061,6 +4552,14 @@
                         Step.prototype.forwardingRule = null;
     
                         /**
+                         * Step hybridSubnet.
+                         * @member {google.cloud.networkmanagement.v1.IHybridSubnetInfo|null|undefined} hybridSubnet
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.hybridSubnet = null;
+    
+                        /**
                          * Step vpnGateway.
                          * @member {google.cloud.networkmanagement.v1.IVpnGatewayInfo|null|undefined} vpnGateway
                          * @memberof google.cloud.networkmanagement.v1.Step
@@ -4075,6 +4574,14 @@
                          * @instance
                          */
                         Step.prototype.vpnTunnel = null;
+    
+                        /**
+                         * Step interconnectAttachment.
+                         * @member {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.interconnectAttachment = null;
     
                         /**
                          * Step vpcConnector.
@@ -4155,6 +4662,22 @@
                          * @instance
                          */
                         Step.prototype.gkeMaster = null;
+    
+                        /**
+                         * Step gkePod.
+                         * @member {google.cloud.networkmanagement.v1.IGkePodInfo|null|undefined} gkePod
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkePod = null;
+    
+                        /**
+                         * Step ipMasqueradingSkipped.
+                         * @member {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null|undefined} ipMasqueradingSkipped
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.ipMasqueradingSkipped = null;
     
                         /**
                          * Step cloudSqlInstance.
@@ -4249,12 +4772,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4348,6 +4871,14 @@
                                 $root.google.cloud.networkmanagement.v1.DirectVpcEgressConnectionInfo.encode(message.directVpcEgressConnection, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                             if (message.serverlessExternalConnection != null && Object.hasOwnProperty.call(message, "serverlessExternalConnection"))
                                 $root.google.cloud.networkmanagement.v1.ServerlessExternalConnectionInfo.encode(message.serverlessExternalConnection, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.encode(message.interconnectAttachment, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                            if (message.hybridSubnet != null && Object.hasOwnProperty.call(message, "hybridSubnet"))
+                                $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.encode(message.hybridSubnet, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                $root.google.cloud.networkmanagement.v1.GkePodInfo.encode(message.gkePod, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.ipMasqueradingSkipped != null && Object.hasOwnProperty.call(message, "ipMasqueradingSkipped"))
+                                $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.encode(message.ipMasqueradingSkipped, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
                             return writer;
                         };
     
@@ -4424,12 +4955,20 @@
                                         message.forwardingRule = $root.google.cloud.networkmanagement.v1.ForwardingRuleInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 36: {
+                                        message.hybridSubnet = $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 10: {
                                         message.vpnGateway = $root.google.cloud.networkmanagement.v1.VpnGatewayInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 11: {
                                         message.vpnTunnel = $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 35: {
+                                        message.interconnectAttachment = $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 21: {
@@ -4470,6 +5009,14 @@
                                     }
                                 case 18: {
                                         message.gkeMaster = $root.google.cloud.networkmanagement.v1.GKEMasterInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 37: {
+                                        message.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 38: {
+                                        message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 19: {
@@ -4566,6 +5113,7 @@
                                 case 3:
                                 case 21:
                                 case 22:
+                                case 39:
                                 case 32:
                                 case 33:
                                 case 23:
@@ -4583,12 +5131,15 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 38:
                                 case 12:
                                 case 13:
+                                case 37:
                                 case 24:
                                 case 35:
                                 case 36:
                                 case 14:
+                                case 40:
                                 case 15:
                                 case 16:
                                 case 17:
@@ -4661,6 +5212,16 @@
                                         return "forwardingRule." + error;
                                 }
                             }
+                            if (message.hybridSubnet != null && message.hasOwnProperty("hybridSubnet")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.verify(message.hybridSubnet);
+                                    if (error)
+                                        return "hybridSubnet." + error;
+                                }
+                            }
                             if (message.vpnGateway != null && message.hasOwnProperty("vpnGateway")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -4679,6 +5240,16 @@
                                     var error = $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.verify(message.vpnTunnel);
                                     if (error)
                                         return "vpnTunnel." + error;
+                                }
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.verify(message.interconnectAttachment);
+                                    if (error)
+                                        return "interconnectAttachment." + error;
                                 }
                             }
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector")) {
@@ -4779,6 +5350,26 @@
                                     var error = $root.google.cloud.networkmanagement.v1.GKEMasterInfo.verify(message.gkeMaster);
                                     if (error)
                                         return "gkeMaster." + error;
+                                }
+                            }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.GkePodInfo.verify(message.gkePod);
+                                    if (error)
+                                        return "gkePod." + error;
+                                }
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify(message.ipMasqueradingSkipped);
+                                    if (error)
+                                        return "ipMasqueradingSkipped." + error;
                                 }
                             }
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance")) {
@@ -4943,6 +5534,10 @@
                             case 22:
                                 message.state = 22;
                                 break;
+                            case "START_FROM_GKE_POD":
+                            case 39:
+                                message.state = 39;
+                                break;
                             case "START_FROM_REDIS_INSTANCE":
                             case 32:
                                 message.state = 32;
@@ -5011,6 +5606,10 @@
                             case 11:
                                 message.state = 11;
                                 break;
+                            case "ARRIVE_AT_HYBRID_SUBNET":
+                            case 38:
+                                message.state = 38;
+                                break;
                             case "ARRIVE_AT_VPN_GATEWAY":
                             case 12:
                                 message.state = 12;
@@ -5018,6 +5617,10 @@
                             case "ARRIVE_AT_VPN_TUNNEL":
                             case 13:
                                 message.state = 13;
+                                break;
+                            case "ARRIVE_AT_INTERCONNECT_ATTACHMENT":
+                            case 37:
+                                message.state = 37;
                                 break;
                             case "ARRIVE_AT_VPC_CONNECTOR":
                             case 24:
@@ -5034,6 +5637,10 @@
                             case "NAT":
                             case 14:
                                 message.state = 14;
+                                break;
+                            case "SKIP_GKE_POD_IP_MASQUERADING":
+                            case 40:
+                                message.state = 40;
                                 break;
                             case "PROXY_CONNECTION":
                             case 15:
@@ -5094,6 +5701,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.forwardingRule: object expected");
                                 message.forwardingRule = $root.google.cloud.networkmanagement.v1.ForwardingRuleInfo.fromObject(object.forwardingRule);
                             }
+                            if (object.hybridSubnet != null) {
+                                if (typeof object.hybridSubnet !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.hybridSubnet: object expected");
+                                message.hybridSubnet = $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.fromObject(object.hybridSubnet);
+                            }
                             if (object.vpnGateway != null) {
                                 if (typeof object.vpnGateway !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.vpnGateway: object expected");
@@ -5103,6 +5715,11 @@
                                 if (typeof object.vpnTunnel !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.vpnTunnel: object expected");
                                 message.vpnTunnel = $root.google.cloud.networkmanagement.v1.VpnTunnelInfo.fromObject(object.vpnTunnel);
+                            }
+                            if (object.interconnectAttachment != null) {
+                                if (typeof object.interconnectAttachment !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.interconnectAttachment: object expected");
+                                message.interconnectAttachment = $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.fromObject(object.interconnectAttachment);
                             }
                             if (object.vpcConnector != null) {
                                 if (typeof object.vpcConnector !== "object")
@@ -5153,6 +5770,16 @@
                                 if (typeof object.gkeMaster !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.gkeMaster: object expected");
                                 message.gkeMaster = $root.google.cloud.networkmanagement.v1.GKEMasterInfo.fromObject(object.gkeMaster);
+                            }
+                            if (object.gkePod != null) {
+                                if (typeof object.gkePod !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.gkePod: object expected");
+                                message.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.fromObject(object.gkePod);
+                            }
+                            if (object.ipMasqueradingSkipped != null) {
+                                if (typeof object.ipMasqueradingSkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.ipMasqueradingSkipped: object expected");
+                                message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.fromObject(object.ipMasqueradingSkipped);
                             }
                             if (object.cloudSqlInstance != null) {
                                 if (typeof object.cloudSqlInstance !== "object")
@@ -5384,6 +6011,26 @@
                                 if (options.oneofs)
                                     object.stepInfo = "serverlessExternalConnection";
                             }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.toObject(message.interconnectAttachment, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "interconnectAttachment";
+                            }
+                            if (message.hybridSubnet != null && message.hasOwnProperty("hybridSubnet")) {
+                                object.hybridSubnet = $root.google.cloud.networkmanagement.v1.HybridSubnetInfo.toObject(message.hybridSubnet, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "hybridSubnet";
+                            }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                object.gkePod = $root.google.cloud.networkmanagement.v1.GkePodInfo.toObject(message.gkePod, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkePod";
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                object.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.toObject(message.ipMasqueradingSkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ipMasqueradingSkipped";
+                            }
                             return object;
                         };
     
@@ -5424,6 +6071,7 @@
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
+                         * @property {number} START_FROM_GKE_POD=39 START_FROM_GKE_POD value
                          * @property {number} START_FROM_REDIS_INSTANCE=32 START_FROM_REDIS_INSTANCE value
                          * @property {number} START_FROM_REDIS_CLUSTER=33 START_FROM_REDIS_CLUSTER value
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
@@ -5441,12 +6089,15 @@
                          * @property {number} ARRIVE_AT_INSTANCE=9 ARRIVE_AT_INSTANCE value
                          * @property {number} ARRIVE_AT_INTERNAL_LOAD_BALANCER=10 ARRIVE_AT_INTERNAL_LOAD_BALANCER value
                          * @property {number} ARRIVE_AT_EXTERNAL_LOAD_BALANCER=11 ARRIVE_AT_EXTERNAL_LOAD_BALANCER value
+                         * @property {number} ARRIVE_AT_HYBRID_SUBNET=38 ARRIVE_AT_HYBRID_SUBNET value
                          * @property {number} ARRIVE_AT_VPN_GATEWAY=12 ARRIVE_AT_VPN_GATEWAY value
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
+                         * @property {number} ARRIVE_AT_INTERCONNECT_ATTACHMENT=37 ARRIVE_AT_INTERCONNECT_ATTACHMENT value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
                          * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
                          * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
                          * @property {number} NAT=14 NAT value
+                         * @property {number} SKIP_GKE_POD_IP_MASQUERADING=40 SKIP_GKE_POD_IP_MASQUERADING value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
                          * @property {number} DROP=17 DROP value
@@ -5463,6 +6114,7 @@
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
+                            values[valuesById[39] = "START_FROM_GKE_POD"] = 39;
                             values[valuesById[32] = "START_FROM_REDIS_INSTANCE"] = 32;
                             values[valuesById[33] = "START_FROM_REDIS_CLUSTER"] = 33;
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
@@ -5480,12 +6132,15 @@
                             values[valuesById[9] = "ARRIVE_AT_INSTANCE"] = 9;
                             values[valuesById[10] = "ARRIVE_AT_INTERNAL_LOAD_BALANCER"] = 10;
                             values[valuesById[11] = "ARRIVE_AT_EXTERNAL_LOAD_BALANCER"] = 11;
+                            values[valuesById[38] = "ARRIVE_AT_HYBRID_SUBNET"] = 38;
                             values[valuesById[12] = "ARRIVE_AT_VPN_GATEWAY"] = 12;
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
+                            values[valuesById[37] = "ARRIVE_AT_INTERCONNECT_ATTACHMENT"] = 37;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
                             values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
                             values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
                             values[valuesById[14] = "NAT"] = 14;
+                            values[valuesById[40] = "SKIP_GKE_POD_IP_MASQUERADING"] = 40;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
                             values[valuesById[17] = "DROP"] = 17;
@@ -5513,6 +6168,8 @@
                          * @property {Array.<string>|null} [networkTags] InstanceInfo networkTags
                          * @property {string|null} [serviceAccount] InstanceInfo serviceAccount
                          * @property {string|null} [pscNetworkAttachmentUri] InstanceInfo pscNetworkAttachmentUri
+                         * @property {boolean|null} [running] InstanceInfo running
+                         * @property {google.cloud.networkmanagement.v1.InstanceInfo.Status|null} [status] InstanceInfo status
                          */
     
                         /**
@@ -5604,6 +6261,22 @@
                         InstanceInfo.prototype.pscNetworkAttachmentUri = "";
     
                         /**
+                         * InstanceInfo running.
+                         * @member {boolean} running
+                         * @memberof google.cloud.networkmanagement.v1.InstanceInfo
+                         * @instance
+                         */
+                        InstanceInfo.prototype.running = false;
+    
+                        /**
+                         * InstanceInfo status.
+                         * @member {google.cloud.networkmanagement.v1.InstanceInfo.Status} status
+                         * @memberof google.cloud.networkmanagement.v1.InstanceInfo
+                         * @instance
+                         */
+                        InstanceInfo.prototype.status = 0;
+    
+                        /**
                          * Creates a new InstanceInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.InstanceInfo
@@ -5646,6 +6319,10 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.serviceAccount);
                             if (message.pscNetworkAttachmentUri != null && Object.hasOwnProperty.call(message, "pscNetworkAttachmentUri"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.pscNetworkAttachmentUri);
+                            if (message.running != null && Object.hasOwnProperty.call(message, "running"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.running);
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.status);
                             return writer;
                         };
     
@@ -5720,6 +6397,14 @@
                                         message.pscNetworkAttachmentUri = reader.string();
                                         break;
                                     }
+                                case 10: {
+                                        message.running = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.status = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5786,6 +6471,18 @@
                             if (message.pscNetworkAttachmentUri != null && message.hasOwnProperty("pscNetworkAttachmentUri"))
                                 if (!$util.isString(message.pscNetworkAttachmentUri))
                                     return "pscNetworkAttachmentUri: string expected";
+                            if (message.running != null && message.hasOwnProperty("running"))
+                                if (typeof message.running !== "boolean")
+                                    return "running: boolean expected";
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                switch (message.status) {
+                                default:
+                                    return "status: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5824,6 +6521,28 @@
                                 message.serviceAccount = String(object.serviceAccount);
                             if (object.pscNetworkAttachmentUri != null)
                                 message.pscNetworkAttachmentUri = String(object.pscNetworkAttachmentUri);
+                            if (object.running != null)
+                                message.running = Boolean(object.running);
+                            switch (object.status) {
+                            default:
+                                if (typeof object.status === "number") {
+                                    message.status = object.status;
+                                    break;
+                                }
+                                break;
+                            case "STATUS_UNSPECIFIED":
+                            case 0:
+                                message.status = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.status = 1;
+                                break;
+                            case "NOT_RUNNING":
+                            case 2:
+                                message.status = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5851,6 +6570,8 @@
                                 object.externalIp = "";
                                 object.serviceAccount = "";
                                 object.pscNetworkAttachmentUri = "";
+                                object.running = false;
+                                object.status = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -5873,6 +6594,10 @@
                                 object.serviceAccount = message.serviceAccount;
                             if (message.pscNetworkAttachmentUri != null && message.hasOwnProperty("pscNetworkAttachmentUri"))
                                 object.pscNetworkAttachmentUri = message.pscNetworkAttachmentUri;
+                            if (message.running != null && message.hasOwnProperty("running"))
+                                object.running = message.running;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = options.enums === String ? $root.google.cloud.networkmanagement.v1.InstanceInfo.Status[message.status] === undefined ? message.status : $root.google.cloud.networkmanagement.v1.InstanceInfo.Status[message.status] : message.status;
                             return object;
                         };
     
@@ -5901,6 +6626,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.networkmanagement.v1.InstanceInfo";
                         };
+    
+                        /**
+                         * Status enum.
+                         * @name google.cloud.networkmanagement.v1.InstanceInfo.Status
+                         * @enum {number}
+                         * @property {number} STATUS_UNSPECIFIED=0 STATUS_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} NOT_RUNNING=2 NOT_RUNNING value
+                         */
+                        InstanceInfo.Status = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "NOT_RUNNING"] = 2;
+                            return values;
+                        })();
     
                         return InstanceInfo;
                     })();
@@ -6220,6 +6961,8 @@
                          * @property {string|null} [policy] FirewallInfo policy
                          * @property {string|null} [policyUri] FirewallInfo policyUri
                          * @property {google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType|null} [firewallRuleType] FirewallInfo firewallRuleType
+                         * @property {number|null} [policyPriority] FirewallInfo policyPriority
+                         * @property {google.cloud.networkmanagement.v1.FirewallInfo.TargetType|null} [targetType] FirewallInfo targetType
                          */
     
                         /**
@@ -6328,6 +7071,22 @@
                         FirewallInfo.prototype.firewallRuleType = 0;
     
                         /**
+                         * FirewallInfo policyPriority.
+                         * @member {number} policyPriority
+                         * @memberof google.cloud.networkmanagement.v1.FirewallInfo
+                         * @instance
+                         */
+                        FirewallInfo.prototype.policyPriority = 0;
+    
+                        /**
+                         * FirewallInfo targetType.
+                         * @member {google.cloud.networkmanagement.v1.FirewallInfo.TargetType} targetType
+                         * @memberof google.cloud.networkmanagement.v1.FirewallInfo
+                         * @instance
+                         */
+                        FirewallInfo.prototype.targetType = 0;
+    
+                        /**
                          * Creates a new FirewallInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.FirewallInfo
@@ -6375,6 +7134,10 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.firewallRuleType);
                             if (message.policyUri != null && Object.hasOwnProperty.call(message, "policyUri"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.policyUri);
+                            if (message.policyPriority != null && Object.hasOwnProperty.call(message, "policyPriority"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.policyPriority);
+                            if (message.targetType != null && Object.hasOwnProperty.call(message, "targetType"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.targetType);
                             return writer;
                         };
     
@@ -6457,6 +7220,14 @@
                                     }
                                 case 10: {
                                         message.firewallRuleType = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.policyPriority = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.targetType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -6543,9 +7314,23 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                 case 100:
                                 case 101:
                                 case 102:
+                                    break;
+                                }
+                            if (message.policyPriority != null && message.hasOwnProperty("policyPriority"))
+                                if (!$util.isInteger(message.policyPriority))
+                                    return "policyPriority: integer expected";
+                            if (message.targetType != null && message.hasOwnProperty("targetType"))
+                                switch (message.targetType) {
+                                default:
+                                    return "targetType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -6628,6 +7413,14 @@
                             case 6:
                                 message.firewallRuleType = 6;
                                 break;
+                            case "SYSTEM_NETWORK_FIREWALL_POLICY_RULE":
+                            case 7:
+                                message.firewallRuleType = 7;
+                                break;
+                            case "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE":
+                            case 8:
+                                message.firewallRuleType = 8;
+                                break;
                             case "UNSUPPORTED_FIREWALL_POLICY_RULE":
                             case 100:
                                 message.firewallRuleType = 100;
@@ -6639,6 +7432,28 @@
                             case "ANALYSIS_SKIPPED":
                             case 102:
                                 message.firewallRuleType = 102;
+                                break;
+                            }
+                            if (object.policyPriority != null)
+                                message.policyPriority = object.policyPriority | 0;
+                            switch (object.targetType) {
+                            default:
+                                if (typeof object.targetType === "number") {
+                                    message.targetType = object.targetType;
+                                    break;
+                                }
+                                break;
+                            case "TARGET_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.targetType = 0;
+                                break;
+                            case "INSTANCES":
+                            case 1:
+                                message.targetType = 1;
+                                break;
+                            case "INTERNAL_MANAGED_LB":
+                            case 2:
+                                message.targetType = 2;
                                 break;
                             }
                             return message;
@@ -6671,6 +7486,8 @@
                                 object.policy = "";
                                 object.firewallRuleType = options.enums === String ? "FIREWALL_RULE_TYPE_UNSPECIFIED" : 0;
                                 object.policyUri = "";
+                                object.policyPriority = 0;
+                                object.targetType = options.enums === String ? "TARGET_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -6700,6 +7517,10 @@
                                 object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType[message.firewallRuleType] === undefined ? message.firewallRuleType : $root.google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
                             if (message.policyUri != null && message.hasOwnProperty("policyUri"))
                                 object.policyUri = message.policyUri;
+                            if (message.policyPriority != null && message.hasOwnProperty("policyPriority"))
+                                object.policyPriority = message.policyPriority;
+                            if (message.targetType != null && message.hasOwnProperty("targetType"))
+                                object.targetType = options.enums === String ? $root.google.cloud.networkmanagement.v1.FirewallInfo.TargetType[message.targetType] === undefined ? message.targetType : $root.google.cloud.networkmanagement.v1.FirewallInfo.TargetType[message.targetType] : message.targetType;
                             return object;
                         };
     
@@ -6740,6 +7561,8 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_NETWORK_FIREWALL_POLICY_RULE=7 SYSTEM_NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE=8 SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
@@ -6753,9 +7576,27 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[7] = "SYSTEM_NETWORK_FIREWALL_POLICY_RULE"] = 7;
+                            values[valuesById[8] = "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE"] = 8;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
+                            return values;
+                        })();
+    
+                        /**
+                         * TargetType enum.
+                         * @name google.cloud.networkmanagement.v1.FirewallInfo.TargetType
+                         * @enum {number}
+                         * @property {number} TARGET_TYPE_UNSPECIFIED=0 TARGET_TYPE_UNSPECIFIED value
+                         * @property {number} INSTANCES=1 INSTANCES value
+                         * @property {number} INTERNAL_MANAGED_LB=2 INTERNAL_MANAGED_LB value
+                         */
+                        FirewallInfo.TargetType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TARGET_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCES"] = 1;
+                            values[valuesById[2] = "INTERNAL_MANAGED_LB"] = 2;
                             return values;
                         })();
     
@@ -7316,6 +8157,7 @@
                                 case 10:
                                 case 11:
                                 case 12:
+                                case 13:
                                     break;
                                 }
                             if (message.routeScope != null && message.hasOwnProperty("routeScope"))
@@ -7531,6 +8373,10 @@
                             case "NEXT_HOP_NCC_HUB":
                             case 12:
                                 message.nextHopType = 12;
+                                break;
+                            case "SECURE_WEB_PROXY_GATEWAY":
+                            case 13:
+                                message.nextHopType = 13;
                                 break;
                             }
                             switch (object.routeScope) {
@@ -7801,6 +8647,7 @@
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
                          * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
+                         * @property {number} SECURE_WEB_PROXY_GATEWAY=13 SECURE_WEB_PROXY_GATEWAY value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7817,6 +8664,7 @@
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
                             values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            values[valuesById[13] = "SECURE_WEB_PROXY_GATEWAY"] = 13;
                             return values;
                         })();
     
@@ -9379,6 +10227,258 @@
                         return LoadBalancerBackend;
                     })();
     
+                    v1.HybridSubnetInfo = (function() {
+    
+                        /**
+                         * Properties of a HybridSubnetInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IHybridSubnetInfo
+                         * @property {string|null} [displayName] HybridSubnetInfo displayName
+                         * @property {string|null} [uri] HybridSubnetInfo uri
+                         * @property {string|null} [region] HybridSubnetInfo region
+                         */
+    
+                        /**
+                         * Constructs a new HybridSubnetInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a HybridSubnetInfo.
+                         * @implements IHybridSubnetInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IHybridSubnetInfo=} [properties] Properties to set
+                         */
+                        function HybridSubnetInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridSubnetInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.displayName = "";
+    
+                        /**
+                         * HybridSubnetInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.uri = "";
+    
+                        /**
+                         * HybridSubnetInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.region = "";
+    
+                        /**
+                         * Creates a new HybridSubnetInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IHybridSubnetInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.HybridSubnetInfo} HybridSubnetInfo instance
+                         */
+                        HybridSubnetInfo.create = function create(properties) {
+                            return new HybridSubnetInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridSubnetInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.HybridSubnetInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IHybridSubnetInfo} message HybridSubnetInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridSubnetInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridSubnetInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.HybridSubnetInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IHybridSubnetInfo} message HybridSubnetInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridSubnetInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridSubnetInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.HybridSubnetInfo} HybridSubnetInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridSubnetInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.HybridSubnetInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridSubnetInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.HybridSubnetInfo} HybridSubnetInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridSubnetInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridSubnetInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridSubnetInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridSubnetInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.HybridSubnetInfo} HybridSubnetInfo
+                         */
+                        HybridSubnetInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.HybridSubnetInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.HybridSubnetInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridSubnetInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.HybridSubnetInfo} message HybridSubnetInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridSubnetInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.region = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridSubnetInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridSubnetInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HybridSubnetInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.HybridSubnetInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HybridSubnetInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.HybridSubnetInfo";
+                        };
+    
+                        return HybridSubnetInfo;
+                    })();
+    
                     v1.VpnGatewayInfo = (function() {
     
                         /**
@@ -10137,6 +11237,404 @@
                         return VpnTunnelInfo;
                     })();
     
+                    v1.InterconnectAttachmentInfo = (function() {
+    
+                        /**
+                         * Properties of an InterconnectAttachmentInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IInterconnectAttachmentInfo
+                         * @property {string|null} [displayName] InterconnectAttachmentInfo displayName
+                         * @property {string|null} [uri] InterconnectAttachmentInfo uri
+                         * @property {string|null} [interconnectUri] InterconnectAttachmentInfo interconnectUri
+                         * @property {string|null} [region] InterconnectAttachmentInfo region
+                         * @property {string|null} [cloudRouterUri] InterconnectAttachmentInfo cloudRouterUri
+                         * @property {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type|null} [type] InterconnectAttachmentInfo type
+                         * @property {string|null} [l2AttachmentMatchedIpAddress] InterconnectAttachmentInfo l2AttachmentMatchedIpAddress
+                         */
+    
+                        /**
+                         * Constructs a new InterconnectAttachmentInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an InterconnectAttachmentInfo.
+                         * @implements IInterconnectAttachmentInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo=} [properties] Properties to set
+                         */
+                        function InterconnectAttachmentInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InterconnectAttachmentInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.displayName = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.uri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo interconnectUri.
+                         * @member {string} interconnectUri
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.interconnectUri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.region = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo cloudRouterUri.
+                         * @member {string} cloudRouterUri
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.cloudRouterUri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo type.
+                         * @member {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type} type
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.type = 0;
+    
+                        /**
+                         * InterconnectAttachmentInfo l2AttachmentMatchedIpAddress.
+                         * @member {string} l2AttachmentMatchedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.l2AttachmentMatchedIpAddress = "";
+    
+                        /**
+                         * Creates a new InterconnectAttachmentInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo} InterconnectAttachmentInfo instance
+                         */
+                        InterconnectAttachmentInfo.create = function create(properties) {
+                            return new InterconnectAttachmentInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InterconnectAttachmentInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo} message InterconnectAttachmentInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InterconnectAttachmentInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.interconnectUri != null && Object.hasOwnProperty.call(message, "interconnectUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.interconnectUri);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.region);
+                            if (message.cloudRouterUri != null && Object.hasOwnProperty.call(message, "cloudRouterUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.cloudRouterUri);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
+                            if (message.l2AttachmentMatchedIpAddress != null && Object.hasOwnProperty.call(message, "l2AttachmentMatchedIpAddress"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.l2AttachmentMatchedIpAddress);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InterconnectAttachmentInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo} message InterconnectAttachmentInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InterconnectAttachmentInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InterconnectAttachmentInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.interconnectUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cloudRouterUri = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.l2AttachmentMatchedIpAddress = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InterconnectAttachmentInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InterconnectAttachmentInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InterconnectAttachmentInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.interconnectUri != null && message.hasOwnProperty("interconnectUri"))
+                                if (!$util.isString(message.interconnectUri))
+                                    return "interconnectUri: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.cloudRouterUri != null && message.hasOwnProperty("cloudRouterUri"))
+                                if (!$util.isString(message.cloudRouterUri))
+                                    return "cloudRouterUri: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.l2AttachmentMatchedIpAddress != null && message.hasOwnProperty("l2AttachmentMatchedIpAddress"))
+                                if (!$util.isString(message.l2AttachmentMatchedIpAddress))
+                                    return "l2AttachmentMatchedIpAddress: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InterconnectAttachmentInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         */
+                        InterconnectAttachmentInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.interconnectUri != null)
+                                message.interconnectUri = String(object.interconnectUri);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.cloudRouterUri != null)
+                                message.cloudRouterUri = String(object.cloudRouterUri);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "DEDICATED":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "PARTNER":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "PARTNER_PROVIDER":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "L2_DEDICATED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.l2AttachmentMatchedIpAddress != null)
+                                message.l2AttachmentMatchedIpAddress = String(object.l2AttachmentMatchedIpAddress);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InterconnectAttachmentInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.InterconnectAttachmentInfo} message InterconnectAttachmentInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InterconnectAttachmentInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.interconnectUri = "";
+                                object.region = "";
+                                object.cloudRouterUri = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.l2AttachmentMatchedIpAddress = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.interconnectUri != null && message.hasOwnProperty("interconnectUri"))
+                                object.interconnectUri = message.interconnectUri;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.cloudRouterUri != null && message.hasOwnProperty("cloudRouterUri"))
+                                object.cloudRouterUri = message.cloudRouterUri;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type[message.type] : message.type;
+                            if (message.l2AttachmentMatchedIpAddress != null && message.hasOwnProperty("l2AttachmentMatchedIpAddress"))
+                                object.l2AttachmentMatchedIpAddress = message.l2AttachmentMatchedIpAddress;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InterconnectAttachmentInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InterconnectAttachmentInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InterconnectAttachmentInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InterconnectAttachmentInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.InterconnectAttachmentInfo";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} DEDICATED=1 DEDICATED value
+                         * @property {number} PARTNER=2 PARTNER value
+                         * @property {number} PARTNER_PROVIDER=3 PARTNER_PROVIDER value
+                         * @property {number} L2_DEDICATED=4 L2_DEDICATED value
+                         */
+                        InterconnectAttachmentInfo.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEDICATED"] = 1;
+                            values[valuesById[2] = "PARTNER"] = 2;
+                            values[valuesById[3] = "PARTNER_PROVIDER"] = 3;
+                            values[valuesById[4] = "L2_DEDICATED"] = 4;
+                            return values;
+                        })();
+    
+                        return InterconnectAttachmentInfo;
+                    })();
+    
                     v1.EndpointInfo = (function() {
     
                         /**
@@ -10515,6 +12013,7 @@
                          * @property {string|null} [ipAddress] DeliverInfo ipAddress
                          * @property {string|null} [storageBucket] DeliverInfo storageBucket
                          * @property {string|null} [pscGoogleApiTarget] DeliverInfo pscGoogleApiTarget
+                         * @property {google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType|null} [googleServiceType] DeliverInfo googleServiceType
                          */
     
                         /**
@@ -10573,6 +12072,14 @@
                         DeliverInfo.prototype.pscGoogleApiTarget = "";
     
                         /**
+                         * DeliverInfo googleServiceType.
+                         * @member {google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType} googleServiceType
+                         * @memberof google.cloud.networkmanagement.v1.DeliverInfo
+                         * @instance
+                         */
+                        DeliverInfo.prototype.googleServiceType = 0;
+    
+                        /**
                          * Creates a new DeliverInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.DeliverInfo
@@ -10606,6 +12113,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.storageBucket);
                             if (message.pscGoogleApiTarget != null && Object.hasOwnProperty.call(message, "pscGoogleApiTarget"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.pscGoogleApiTarget);
+                            if (message.googleServiceType != null && Object.hasOwnProperty.call(message, "googleServiceType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.googleServiceType);
                             return writer;
                         };
     
@@ -10660,6 +12169,10 @@
                                     }
                                 case 5: {
                                         message.pscGoogleApiTarget = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.googleServiceType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -10719,6 +12232,7 @@
                                 case 15:
                                 case 16:
                                 case 17:
+                                case 19:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -10733,6 +12247,18 @@
                             if (message.pscGoogleApiTarget != null && message.hasOwnProperty("pscGoogleApiTarget"))
                                 if (!$util.isString(message.pscGoogleApiTarget))
                                     return "pscGoogleApiTarget: string expected";
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                switch (message.googleServiceType) {
+                                default:
+                                    return "googleServiceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -10827,6 +12353,10 @@
                             case 17:
                                 message.target = 17;
                                 break;
+                            case "GKE_POD":
+                            case 19:
+                                message.target = 19;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -10836,6 +12366,38 @@
                                 message.storageBucket = String(object.storageBucket);
                             if (object.pscGoogleApiTarget != null)
                                 message.pscGoogleApiTarget = String(object.pscGoogleApiTarget);
+                            switch (object.googleServiceType) {
+                            default:
+                                if (typeof object.googleServiceType === "number") {
+                                    message.googleServiceType = object.googleServiceType;
+                                    break;
+                                }
+                                break;
+                            case "GOOGLE_SERVICE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.googleServiceType = 0;
+                                break;
+                            case "IAP":
+                            case 1:
+                                message.googleServiceType = 1;
+                                break;
+                            case "GFE_PROXY_OR_HEALTH_CHECK_PROBER":
+                            case 2:
+                                message.googleServiceType = 2;
+                                break;
+                            case "CLOUD_DNS":
+                            case 3:
+                                message.googleServiceType = 3;
+                                break;
+                            case "PRIVATE_GOOGLE_ACCESS":
+                            case 4:
+                                message.googleServiceType = 4;
+                                break;
+                            case "SERVERLESS_VPC_ACCESS":
+                            case 5:
+                                message.googleServiceType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -10858,6 +12420,7 @@
                                 object.ipAddress = "";
                                 object.storageBucket = "";
                                 object.pscGoogleApiTarget = "";
+                                object.googleServiceType = options.enums === String ? "GOOGLE_SERVICE_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1.DeliverInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1.DeliverInfo.Target[message.target] : message.target;
@@ -10869,6 +12432,8 @@
                                 object.storageBucket = message.storageBucket;
                             if (message.pscGoogleApiTarget != null && message.hasOwnProperty("pscGoogleApiTarget"))
                                 object.pscGoogleApiTarget = message.pscGoogleApiTarget;
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                object.googleServiceType = options.enums === String ? $root.google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType[message.googleServiceType] === undefined ? message.googleServiceType : $root.google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType[message.googleServiceType] : message.googleServiceType;
                             return object;
                         };
     
@@ -10920,6 +12485,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE=15 GOOGLE_MANAGED_SERVICE value
                          * @property {number} REDIS_INSTANCE=16 REDIS_INSTANCE value
                          * @property {number} REDIS_CLUSTER=17 REDIS_CLUSTER value
+                         * @property {number} GKE_POD=19 GKE_POD value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10941,6 +12507,29 @@
                             values[valuesById[15] = "GOOGLE_MANAGED_SERVICE"] = 15;
                             values[valuesById[16] = "REDIS_INSTANCE"] = 16;
                             values[valuesById[17] = "REDIS_CLUSTER"] = 17;
+                            values[valuesById[19] = "GKE_POD"] = 19;
+                            return values;
+                        })();
+    
+                        /**
+                         * GoogleServiceType enum.
+                         * @name google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType
+                         * @enum {number}
+                         * @property {number} GOOGLE_SERVICE_TYPE_UNSPECIFIED=0 GOOGLE_SERVICE_TYPE_UNSPECIFIED value
+                         * @property {number} IAP=1 IAP value
+                         * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
+                         * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         * @property {number} PRIVATE_GOOGLE_ACCESS=4 PRIVATE_GOOGLE_ACCESS value
+                         * @property {number} SERVERLESS_VPC_ACCESS=5 SERVERLESS_VPC_ACCESS value
+                         */
+                        DeliverInfo.GoogleServiceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GOOGLE_SERVICE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IAP"] = 1;
+                            values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
+                            values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            values[valuesById[4] = "PRIVATE_GOOGLE_ACCESS"] = 4;
+                            values[valuesById[5] = "SERVERLESS_VPC_ACCESS"] = 5;
                             return values;
                         })();
     
@@ -11124,6 +12713,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -11193,6 +12783,10 @@
                             case "ROUTER_APPLIANCE":
                             case 9:
                                 message.target = 9;
+                                break;
+                            case "SECURE_WEB_PROXY_GATEWAY":
+                            case 10:
+                                message.target = 10;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -11269,6 +12863,7 @@
                          * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
                          * @property {number} NCC_HUB=8 NCC_HUB value
                          * @property {number} ROUTER_APPLIANCE=9 ROUTER_APPLIANCE value
+                         * @property {number} SECURE_WEB_PROXY_GATEWAY=10 SECURE_WEB_PROXY_GATEWAY value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11282,6 +12877,7 @@
                             values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
                             values[valuesById[8] = "NCC_HUB"] = 8;
                             values[valuesById[9] = "ROUTER_APPLIANCE"] = 9;
+                            values[valuesById[10] = "SECURE_WEB_PROXY_GATEWAY"] = 10;
                             return values;
                         })();
     
@@ -11491,6 +13087,9 @@
                                 case 29:
                                 case 36:
                                 case 5:
+                                case 42:
+                                case 43:
+                                case 44:
                                 case 6:
                                 case 9:
                                 case 10:
@@ -11503,7 +13102,9 @@
                                 case 26:
                                 case 27:
                                 case 19:
+                                case 39:
                                 case 20:
+                                case 45:
                                 case 34:
                                 case 35:
                                 case 21:
@@ -11511,6 +13112,8 @@
                                 case 30:
                                 case 31:
                                 case 37:
+                                case 40:
+                                case 41:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -11616,6 +13219,18 @@
                             case 5:
                                 message.cause = 5;
                                 break;
+                            case "NO_SOURCE_GCP_NETWORK_LOCATION":
+                            case 42:
+                                message.cause = 42;
+                                break;
+                            case "NO_SOURCE_NON_GCP_NETWORK_LOCATION":
+                            case 43:
+                                message.cause = 43;
+                                break;
+                            case "NO_SOURCE_INTERNET_LOCATION":
+                            case 44:
+                                message.cause = 44;
+                                break;
                             case "INVALID_ARGUMENT":
                             case 6:
                                 message.cause = 6;
@@ -11664,9 +13279,17 @@
                             case 19:
                                 message.cause = 19;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT":
+                            case 39:
+                                message.cause = 39;
+                                break;
                             case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
                             case 20:
                                 message.cause = 20;
+                                break;
+                            case "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED":
+                            case 45:
+                                message.cause = 45;
                                 break;
                             case "SOURCE_REDIS_CLUSTER_UNSUPPORTED":
                             case 34:
@@ -11695,6 +13318,14 @@
                             case "NO_SERVERLESS_IP_RANGES":
                             case 37:
                                 message.cause = 37;
+                                break;
+                            case "IP_VERSION_PROTOCOL_MISMATCH":
+                            case 40:
+                                message.cause = 40;
+                                break;
+                            case "GKE_POD_UNKNOWN_ENDPOINT_LOCATION":
+                            case 41:
+                                message.cause = 41;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -11792,6 +13423,9 @@
                          * @property {number} PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS=29 PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS value
                          * @property {number} PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS=36 PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS value
                          * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
+                         * @property {number} NO_SOURCE_GCP_NETWORK_LOCATION=42 NO_SOURCE_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_NON_GCP_NETWORK_LOCATION=43 NO_SOURCE_NON_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_INTERNET_LOCATION=44 NO_SOURCE_INTERNET_LOCATION value
                          * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
                          * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
                          * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
@@ -11804,7 +13438,9 @@
                          * @property {number} FIREWALL_CONFIG_NOT_FOUND=26 FIREWALL_CONFIG_NOT_FOUND value
                          * @property {number} ROUTE_CONFIG_NOT_FOUND=27 ROUTE_CONFIG_NOT_FOUND value
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT=39 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT value
                          * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED=45 SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_CLUSTER_UNSUPPORTED=34 SOURCE_REDIS_CLUSTER_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_INSTANCE_UNSUPPORTED=35 SOURCE_REDIS_INSTANCE_UNSUPPORTED value
                          * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
@@ -11812,6 +13448,8 @@
                          * @property {number} UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT=30 UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT value
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
                          * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
+                         * @property {number} IP_VERSION_PROTOCOL_MISMATCH=40 IP_VERSION_PROTOCOL_MISMATCH value
+                         * @property {number} GKE_POD_UNKNOWN_ENDPOINT_LOCATION=41 GKE_POD_UNKNOWN_ENDPOINT_LOCATION value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11832,6 +13470,9 @@
                             values[valuesById[29] = "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"] = 29;
                             values[valuesById[36] = "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"] = 36;
                             values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
+                            values[valuesById[42] = "NO_SOURCE_GCP_NETWORK_LOCATION"] = 42;
+                            values[valuesById[43] = "NO_SOURCE_NON_GCP_NETWORK_LOCATION"] = 43;
+                            values[valuesById[44] = "NO_SOURCE_INTERNET_LOCATION"] = 44;
                             values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
                             values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
                             values[valuesById[10] = "INTERNAL_ERROR"] = 10;
@@ -11844,7 +13485,9 @@
                             values[valuesById[26] = "FIREWALL_CONFIG_NOT_FOUND"] = 26;
                             values[valuesById[27] = "ROUTE_CONFIG_NOT_FOUND"] = 27;
                             values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[39] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT"] = 39;
                             values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[45] = "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED"] = 45;
                             values[valuesById[34] = "SOURCE_REDIS_CLUSTER_UNSUPPORTED"] = 34;
                             values[valuesById[35] = "SOURCE_REDIS_INSTANCE_UNSUPPORTED"] = 35;
                             values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
@@ -11852,6 +13495,8 @@
                             values[valuesById[30] = "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"] = 30;
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
                             values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
+                            values[valuesById[40] = "IP_VERSION_PROTOCOL_MISMATCH"] = 40;
+                            values[valuesById[41] = "GKE_POD_UNKNOWN_ENDPOINT_LOCATION"] = 41;
                             return values;
                         })();
     
@@ -11869,6 +13514,8 @@
                          * @property {string|null} [sourceIp] DropInfo sourceIp
                          * @property {string|null} [destinationIp] DropInfo destinationIp
                          * @property {string|null} [region] DropInfo region
+                         * @property {string|null} [sourceGeolocationCode] DropInfo sourceGeolocationCode
+                         * @property {string|null} [destinationGeolocationCode] DropInfo destinationGeolocationCode
                          */
     
                         /**
@@ -11927,6 +13574,22 @@
                         DropInfo.prototype.region = "";
     
                         /**
+                         * DropInfo sourceGeolocationCode.
+                         * @member {string} sourceGeolocationCode
+                         * @memberof google.cloud.networkmanagement.v1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.sourceGeolocationCode = "";
+    
+                        /**
+                         * DropInfo destinationGeolocationCode.
+                         * @member {string} destinationGeolocationCode
+                         * @memberof google.cloud.networkmanagement.v1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.destinationGeolocationCode = "";
+    
+                        /**
                          * Creates a new DropInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.DropInfo
@@ -11960,6 +13623,10 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationIp);
                             if (message.region != null && Object.hasOwnProperty.call(message, "region"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
+                            if (message.sourceGeolocationCode != null && Object.hasOwnProperty.call(message, "sourceGeolocationCode"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceGeolocationCode);
+                            if (message.destinationGeolocationCode != null && Object.hasOwnProperty.call(message, "destinationGeolocationCode"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.destinationGeolocationCode);
                             return writer;
                         };
     
@@ -12016,6 +13683,14 @@
                                         message.region = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.sourceGeolocationCode = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.destinationGeolocationCode = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12070,6 +13745,8 @@
                                 case 52:
                                 case 53:
                                 case 44:
+                                case 109:
+                                case 98:
                                 case 45:
                                 case 46:
                                 case 7:
@@ -12083,6 +13760,7 @@
                                 case 85:
                                 case 14:
                                 case 27:
+                                case 103:
                                 case 28:
                                 case 68:
                                 case 69:
@@ -12143,6 +13821,18 @@
                                 case 86:
                                 case 87:
                                 case 88:
+                                case 89:
+                                case 90:
+                                case 107:
+                                case 96:
+                                case 97:
+                                case 99:
+                                case 100:
+                                case 101:
+                                case 102:
+                                case 104:
+                                case 105:
+                                case 106:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -12157,6 +13847,12 @@
                             if (message.region != null && message.hasOwnProperty("region"))
                                 if (!$util.isString(message.region))
                                     return "region: string expected";
+                            if (message.sourceGeolocationCode != null && message.hasOwnProperty("sourceGeolocationCode"))
+                                if (!$util.isString(message.sourceGeolocationCode))
+                                    return "sourceGeolocationCode: string expected";
+                            if (message.destinationGeolocationCode != null && message.hasOwnProperty("destinationGeolocationCode"))
+                                if (!$util.isString(message.destinationGeolocationCode))
+                                    return "destinationGeolocationCode: string expected";
                             return null;
                         };
     
@@ -12239,6 +13935,14 @@
                             case 44:
                                 message.cause = 44;
                                 break;
+                            case "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS":
+                            case 109:
+                                message.cause = 109;
+                                break;
+                            case "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS":
+                            case 98:
+                                message.cause = 98;
+                                break;
                             case "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH":
                             case 45:
                                 message.cause = 45;
@@ -12290,6 +13994,10 @@
                             case "GKE_CLUSTER_NOT_RUNNING":
                             case 27:
                                 message.cause = 27;
+                                break;
+                            case "GKE_POD_NOT_RUNNING":
+                            case 103:
+                                message.cause = 103;
                                 break;
                             case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
                             case 28:
@@ -12531,6 +14239,54 @@
                             case 88:
                                 message.cause = 88;
                                 break;
+                            case "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED":
+                            case 89:
+                                message.cause = 89;
+                                break;
+                            case "NO_MATCHING_NAT64_GATEWAY":
+                            case 90:
+                                message.cause = 90;
+                                break;
+                            case "NO_CONFIGURED_PRIVATE_NAT64_RULE":
+                            case 107:
+                                message.cause = 107;
+                                break;
+                            case "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH":
+                            case 96:
+                                message.cause = 96;
+                                break;
+                            case "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION":
+                            case 97:
+                                message.cause = 97;
+                                break;
+                            case "CLOUD_NAT_PROTOCOL_UNSUPPORTED":
+                            case 99:
+                                message.cause = 99;
+                                break;
+                            case "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL":
+                            case 100:
+                                message.cause = 100;
+                                break;
+                            case "L2_INTERCONNECT_UNSUPPORTED_PORT":
+                            case 101:
+                                message.cause = 101;
+                                break;
+                            case "L2_INTERCONNECT_DESTINATION_IP_MISMATCH":
+                            case 102:
+                                message.cause = 102;
+                                break;
+                            case "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED":
+                            case 104:
+                                message.cause = 104;
+                                break;
+                            case "HYBRID_SUBNET_REGION_MISMATCH":
+                            case 105:
+                                message.cause = 105;
+                                break;
+                            case "HYBRID_SUBNET_NO_ROUTE":
+                            case 106:
+                                message.cause = 106;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -12540,6 +14296,10 @@
                                 message.destinationIp = String(object.destinationIp);
                             if (object.region != null)
                                 message.region = String(object.region);
+                            if (object.sourceGeolocationCode != null)
+                                message.sourceGeolocationCode = String(object.sourceGeolocationCode);
+                            if (object.destinationGeolocationCode != null)
+                                message.destinationGeolocationCode = String(object.destinationGeolocationCode);
                             return message;
                         };
     
@@ -12562,6 +14322,8 @@
                                 object.sourceIp = "";
                                 object.destinationIp = "";
                                 object.region = "";
+                                object.sourceGeolocationCode = "";
+                                object.destinationGeolocationCode = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1.DropInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1.DropInfo.Cause[message.cause] : message.cause;
@@ -12573,6 +14335,10 @@
                                 object.destinationIp = message.destinationIp;
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
+                            if (message.sourceGeolocationCode != null && message.hasOwnProperty("sourceGeolocationCode"))
+                                object.sourceGeolocationCode = message.sourceGeolocationCode;
+                            if (message.destinationGeolocationCode != null && message.hasOwnProperty("destinationGeolocationCode"))
+                                object.destinationGeolocationCode = message.destinationGeolocationCode;
                             return object;
                         };
     
@@ -12621,6 +14387,8 @@
                          * @property {number} ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED=52 ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED value
                          * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID=53 ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID value
                          * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS=44 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS=109 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS=98 NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS value
                          * @property {number} VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH=45 VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH value
                          * @property {number} VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH=46 VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH value
                          * @property {number} PRIVATE_TRAFFIC_TO_INTERNET=7 PRIVATE_TRAFFIC_TO_INTERNET value
@@ -12634,6 +14402,7 @@
                          * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} GKE_POD_NOT_RUNNING=103 GKE_POD_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_INSTANCE_NOT_RUNNING=68 REDIS_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_CLUSTER_NOT_RUNNING=69 REDIS_CLUSTER_NOT_RUNNING value
@@ -12694,6 +14463,18 @@
                          * @property {number} PSC_PORT_MAPPING_PORT_MISMATCH=86 PSC_PORT_MAPPING_PORT_MISMATCH value
                          * @property {number} PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED=87 PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED value
                          * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
+                         * @property {number} TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED=89 TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED value
+                         * @property {number} NO_MATCHING_NAT64_GATEWAY=90 NO_MATCHING_NAT64_GATEWAY value
+                         * @property {number} NO_CONFIGURED_PRIVATE_NAT64_RULE=107 NO_CONFIGURED_PRIVATE_NAT64_RULE value
+                         * @property {number} LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH=96 LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH value
+                         * @property {number} NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION=97 NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION value
+                         * @property {number} CLOUD_NAT_PROTOCOL_UNSUPPORTED=99 CLOUD_NAT_PROTOCOL_UNSUPPORTED value
+                         * @property {number} L2_INTERCONNECT_UNSUPPORTED_PROTOCOL=100 L2_INTERCONNECT_UNSUPPORTED_PROTOCOL value
+                         * @property {number} L2_INTERCONNECT_UNSUPPORTED_PORT=101 L2_INTERCONNECT_UNSUPPORTED_PORT value
+                         * @property {number} L2_INTERCONNECT_DESTINATION_IP_MISMATCH=102 L2_INTERCONNECT_DESTINATION_IP_MISMATCH value
+                         * @property {number} NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED=104 NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED value
+                         * @property {number} HYBRID_SUBNET_REGION_MISMATCH=105 HYBRID_SUBNET_REGION_MISMATCH value
+                         * @property {number} HYBRID_SUBNET_NO_ROUTE=106 HYBRID_SUBNET_NO_ROUTE value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12712,6 +14493,8 @@
                             values[valuesById[52] = "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"] = 52;
                             values[valuesById[53] = "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"] = 53;
                             values[valuesById[44] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"] = 44;
+                            values[valuesById[109] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS"] = 109;
+                            values[valuesById[98] = "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS"] = 98;
                             values[valuesById[45] = "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"] = 45;
                             values[valuesById[46] = "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"] = 46;
                             values[valuesById[7] = "PRIVATE_TRAFFIC_TO_INTERNET"] = 7;
@@ -12725,6 +14508,7 @@
                             values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[103] = "GKE_POD_NOT_RUNNING"] = 103;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[68] = "REDIS_INSTANCE_NOT_RUNNING"] = 68;
                             values[valuesById[69] = "REDIS_CLUSTER_NOT_RUNNING"] = 69;
@@ -12785,6 +14569,18 @@
                             values[valuesById[86] = "PSC_PORT_MAPPING_PORT_MISMATCH"] = 86;
                             values[valuesById[87] = "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED"] = 87;
                             values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
+                            values[valuesById[89] = "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED"] = 89;
+                            values[valuesById[90] = "NO_MATCHING_NAT64_GATEWAY"] = 90;
+                            values[valuesById[107] = "NO_CONFIGURED_PRIVATE_NAT64_RULE"] = 107;
+                            values[valuesById[96] = "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH"] = 96;
+                            values[valuesById[97] = "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION"] = 97;
+                            values[valuesById[99] = "CLOUD_NAT_PROTOCOL_UNSUPPORTED"] = 99;
+                            values[valuesById[100] = "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL"] = 100;
+                            values[valuesById[101] = "L2_INTERCONNECT_UNSUPPORTED_PORT"] = 101;
+                            values[valuesById[102] = "L2_INTERCONNECT_DESTINATION_IP_MISMATCH"] = 102;
+                            values[valuesById[104] = "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED"] = 104;
+                            values[valuesById[105] = "HYBRID_SUBNET_REGION_MISMATCH"] = 105;
+                            values[valuesById[106] = "HYBRID_SUBNET_NO_ROUTE"] = 106;
                             return values;
                         })();
     
@@ -13087,6 +14883,562 @@
                         };
     
                         return GKEMasterInfo;
+                    })();
+    
+                    v1.GkePodInfo = (function() {
+    
+                        /**
+                         * Properties of a GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IGkePodInfo
+                         * @property {string|null} [podUri] GkePodInfo podUri
+                         * @property {string|null} [ipAddress] GkePodInfo ipAddress
+                         * @property {string|null} [networkUri] GkePodInfo networkUri
+                         */
+    
+                        /**
+                         * Constructs a new GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a GkePodInfo.
+                         * @implements IGkePodInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo=} [properties] Properties to set
+                         */
+                        function GkePodInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkePodInfo podUri.
+                         * @member {string} podUri
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.podUri = "";
+    
+                        /**
+                         * GkePodInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.ipAddress = "";
+    
+                        /**
+                         * GkePodInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.networkUri = "";
+    
+                        /**
+                         * Creates a new GkePodInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo instance
+                         */
+                        GkePodInfo.create = function create(properties) {
+                            return new GkePodInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.podUri != null && Object.hasOwnProperty.call(message, "podUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.podUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipAddress);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.GkePodInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.podUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ipAddress = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkePodInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkePodInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                if (!$util.isString(message.podUri))
+                                    return "podUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.GkePodInfo} GkePodInfo
+                         */
+                        GkePodInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.GkePodInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.GkePodInfo();
+                            if (object.podUri != null)
+                                message.podUri = String(object.podUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.GkePodInfo} message GkePodInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkePodInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.podUri = "";
+                                object.ipAddress = "";
+                                object.networkUri = "";
+                            }
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                object.podUri = message.podUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkePodInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkePodInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkePodInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.GkePodInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkePodInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.GkePodInfo";
+                        };
+    
+                        return GkePodInfo;
+                    })();
+    
+                    v1.IpMasqueradingSkippedInfo = (function() {
+    
+                        /**
+                         * Properties of an IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IIpMasqueradingSkippedInfo
+                         * @property {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|null} [reason] IpMasqueradingSkippedInfo reason
+                         * @property {string|null} [nonMasqueradeRange] IpMasqueradingSkippedInfo nonMasqueradeRange
+                         */
+    
+                        /**
+                         * Constructs a new IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an IpMasqueradingSkippedInfo.
+                         * @implements IIpMasqueradingSkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         */
+                        function IpMasqueradingSkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpMasqueradingSkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * IpMasqueradingSkippedInfo nonMasqueradeRange.
+                         * @member {string} nonMasqueradeRange
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.nonMasqueradeRange = "";
+    
+                        /**
+                         * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo instance
+                         */
+                        IpMasqueradingSkippedInfo.create = function create(properties) {
+                            return new IpMasqueradingSkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            if (message.nonMasqueradeRange != null && Object.hasOwnProperty.call(message, "nonMasqueradeRange"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonMasqueradeRange);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nonMasqueradeRange = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpMasqueradingSkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpMasqueradingSkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                if (!$util.isString(message.nonMasqueradeRange))
+                                    return "nonMasqueradeRange: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         */
+                        IpMasqueradingSkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "DESTINATION_ON_SAME_NODE":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "DEFAULT_SNAT_DISABLED":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NO_MASQUERADING_FOR_IPV6":
+                            case 5:
+                                message.reason = 5;
+                                break;
+                            case "POD_USES_NODE_NETWORK_NAMESPACE":
+                            case 6:
+                                message.reason = 6;
+                                break;
+                            case "NO_MASQUERADING_FOR_RETURN_PACKET":
+                            case 7:
+                                message.reason = 7;
+                                break;
+                            }
+                            if (object.nonMasqueradeRange != null)
+                                message.nonMasqueradeRange = String(object.nonMasqueradeRange);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpMasqueradingSkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                                object.nonMasqueradeRange = "";
+                            }
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason[message.reason] : message.reason;
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                object.nonMasqueradeRange = message.nonMasqueradeRange;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpMasqueradingSkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpMasqueradingSkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpMasqueradingSkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpMasqueradingSkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE=1 DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE=2 DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_ON_SAME_NODE=3 DESTINATION_ON_SAME_NODE value
+                         * @property {number} DEFAULT_SNAT_DISABLED=4 DEFAULT_SNAT_DISABLED value
+                         * @property {number} NO_MASQUERADING_FOR_IPV6=5 NO_MASQUERADING_FOR_IPV6 value
+                         * @property {number} POD_USES_NODE_NETWORK_NAMESPACE=6 POD_USES_NODE_NETWORK_NAMESPACE value
+                         * @property {number} NO_MASQUERADING_FOR_RETURN_PACKET=7 NO_MASQUERADING_FOR_RETURN_PACKET value
+                         */
+                        IpMasqueradingSkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE"] = 1;
+                            values[valuesById[2] = "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE"] = 2;
+                            values[valuesById[3] = "DESTINATION_ON_SAME_NODE"] = 3;
+                            values[valuesById[4] = "DEFAULT_SNAT_DISABLED"] = 4;
+                            values[valuesById[5] = "NO_MASQUERADING_FOR_IPV6"] = 5;
+                            values[valuesById[6] = "POD_USES_NODE_NETWORK_NAMESPACE"] = 6;
+                            values[valuesById[7] = "NO_MASQUERADING_FOR_RETURN_PACKET"] = 7;
+                            return values;
+                        })();
+    
+                        return IpMasqueradingSkippedInfo;
                     })();
     
                     v1.CloudSQLInstanceInfo = (function() {
@@ -15665,6 +18017,7 @@
                          * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
                          * @property {string|null} [routerUri] NatInfo routerUri
                          * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         * @property {google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|null} [cloudNatGatewayType] NatInfo cloudNatGatewayType
                          */
     
                         /**
@@ -15787,6 +18140,14 @@
                         NatInfo.prototype.natGatewayName = "";
     
                         /**
+                         * NatInfo cloudNatGatewayType.
+                         * @member {google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType} cloudNatGatewayType
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.cloudNatGatewayType = 0;
+    
+                        /**
                          * Creates a new NatInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.NatInfo
@@ -15836,6 +18197,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
                             if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            if (message.cloudNatGatewayType != null && Object.hasOwnProperty.call(message, "cloudNatGatewayType"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.cloudNatGatewayType);
                             return writer;
                         };
     
@@ -15924,6 +18287,10 @@
                                         message.natGatewayName = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.cloudNatGatewayType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -15968,6 +18335,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.protocol != null && message.hasOwnProperty("protocol"))
@@ -16006,6 +18374,18 @@
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 if (!$util.isString(message.natGatewayName))
                                     return "natGatewayName: string expected";
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                switch (message.cloudNatGatewayType) {
+                                default:
+                                    return "cloudNatGatewayType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -16048,6 +18428,10 @@
                             case 4:
                                 message.type = 4;
                                 break;
+                            case "GKE_POD_IP_MASQUERADING":
+                            case 5:
+                                message.type = 5;
+                                break;
                             }
                             if (object.protocol != null)
                                 message.protocol = String(object.protocol);
@@ -16073,6 +18457,38 @@
                                 message.routerUri = String(object.routerUri);
                             if (object.natGatewayName != null)
                                 message.natGatewayName = String(object.natGatewayName);
+                            switch (object.cloudNatGatewayType) {
+                            default:
+                                if (typeof object.cloudNatGatewayType === "number") {
+                                    message.cloudNatGatewayType = object.cloudNatGatewayType;
+                                    break;
+                                }
+                                break;
+                            case "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.cloudNatGatewayType = 0;
+                                break;
+                            case "PUBLIC_NAT44":
+                            case 1:
+                                message.cloudNatGatewayType = 1;
+                                break;
+                            case "PUBLIC_NAT64":
+                            case 2:
+                                message.cloudNatGatewayType = 2;
+                                break;
+                            case "PRIVATE_NAT_NCC":
+                            case 3:
+                                message.cloudNatGatewayType = 3;
+                                break;
+                            case "PRIVATE_NAT_HYBRID":
+                            case 4:
+                                message.cloudNatGatewayType = 4;
+                                break;
+                            case "PRIVATE_NAT64":
+                            case 5:
+                                message.cloudNatGatewayType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -16103,6 +18519,7 @@
                                 object.newDestinationPort = 0;
                                 object.routerUri = "";
                                 object.natGatewayName = "";
+                                object.cloudNatGatewayType = options.enums === String ? "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] : message.type;
@@ -16130,6 +18547,8 @@
                                 object.routerUri = message.routerUri;
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 object.natGatewayName = message.natGatewayName;
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                object.cloudNatGatewayType = options.enums === String ? $root.google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] === undefined ? message.cloudNatGatewayType : $root.google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] : message.cloudNatGatewayType;
                             return object;
                         };
     
@@ -16168,6 +18587,7 @@
                          * @property {number} EXTERNAL_TO_INTERNAL=2 EXTERNAL_TO_INTERNAL value
                          * @property {number} CLOUD_NAT=3 CLOUD_NAT value
                          * @property {number} PRIVATE_SERVICE_CONNECT=4 PRIVATE_SERVICE_CONNECT value
+                         * @property {number} GKE_POD_IP_MASQUERADING=5 GKE_POD_IP_MASQUERADING value
                          */
                         NatInfo.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16176,6 +18596,29 @@
                             values[valuesById[2] = "EXTERNAL_TO_INTERNAL"] = 2;
                             values[valuesById[3] = "CLOUD_NAT"] = 3;
                             values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
+                            values[valuesById[5] = "GKE_POD_IP_MASQUERADING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * CloudNatGatewayType enum.
+                         * @name google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType
+                         * @enum {number}
+                         * @property {number} CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED=0 CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED value
+                         * @property {number} PUBLIC_NAT44=1 PUBLIC_NAT44 value
+                         * @property {number} PUBLIC_NAT64=2 PUBLIC_NAT64 value
+                         * @property {number} PRIVATE_NAT_NCC=3 PRIVATE_NAT_NCC value
+                         * @property {number} PRIVATE_NAT_HYBRID=4 PRIVATE_NAT_HYBRID value
+                         * @property {number} PRIVATE_NAT64=5 PRIVATE_NAT64 value
+                         */
+                        NatInfo.CloudNatGatewayType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PUBLIC_NAT44"] = 1;
+                            values[valuesById[2] = "PUBLIC_NAT64"] = 2;
+                            values[valuesById[3] = "PRIVATE_NAT_NCC"] = 3;
+                            values[valuesById[4] = "PRIVATE_NAT_HYBRID"] = 4;
+                            values[valuesById[5] = "PRIVATE_NAT64"] = 5;
                             return values;
                         })();
     
@@ -20010,7 +22453,273 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.VpcFlowLogsService|queryOrgVpcFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @typedef QueryOrgVpcFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} [response] QueryOrgVpcFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls QueryOrgVpcFlowLogsConfigs.
+                         * @function queryOrgVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest} request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.VpcFlowLogsService.QueryOrgVpcFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and QueryOrgVpcFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.queryOrgVpcFlowLogsConfigs = function queryOrgVpcFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(queryOrgVpcFlowLogsConfigs, $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "QueryOrgVpcFlowLogsConfigs" });
+    
+                        /**
+                         * Calls QueryOrgVpcFlowLogsConfigs.
+                         * @function queryOrgVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest} request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.VpcFlowLogsService|showEffectiveFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @typedef ShowEffectiveFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} [response] ShowEffectiveFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ShowEffectiveFlowLogsConfigs.
+                         * @function showEffectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest} request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.VpcFlowLogsService.ShowEffectiveFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and ShowEffectiveFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.showEffectiveFlowLogsConfigs = function showEffectiveFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(showEffectiveFlowLogsConfigs, $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "ShowEffectiveFlowLogsConfigs" });
+    
+                        /**
+                         * Calls ShowEffectiveFlowLogsConfigs.
+                         * @function showEffectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest} request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return VpcFlowLogsService;
+                    })();
+    
+                    v1.OrganizationVpcFlowLogsService = (function() {
+    
+                        /**
+                         * Constructs a new OrganizationVpcFlowLogsService service.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an OrganizationVpcFlowLogsService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function OrganizationVpcFlowLogsService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (OrganizationVpcFlowLogsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OrganizationVpcFlowLogsService;
+    
+                        /**
+                         * Creates new OrganizationVpcFlowLogsService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {OrganizationVpcFlowLogsService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        OrganizationVpcFlowLogsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|listVpcFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @typedef ListVpcFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsResponse} [response] ListVpcFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.ListVpcFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and ListVpcFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.listVpcFlowLogsConfigs = function listVpcFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(listVpcFlowLogsConfigs, $root.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "ListVpcFlowLogsConfigs" });
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|getVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @typedef GetVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1.VpcFlowLogsConfig} [response] VpcFlowLogsConfig
+                         */
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.GetVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and VpcFlowLogsConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.getVpcFlowLogsConfig = function getVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(getVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1.GetVpcFlowLogsConfigRequest, $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig, request, callback);
+                        }, "name", { value: "GetVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1.VpcFlowLogsConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|createVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @typedef CreateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.CreateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.createVpcFlowLogsConfig = function createVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(createVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1.CreateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|updateVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @typedef UpdateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.UpdateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.updateVpcFlowLogsConfig = function updateVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(updateVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1.UpdateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|deleteVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @typedef DeleteVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.DeleteVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.deleteVpcFlowLogsConfig = function deleteVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(deleteVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1.DeleteVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return OrganizationVpcFlowLogsService;
                     })();
     
                     v1.ListVpcFlowLogsConfigsRequest = (function() {
@@ -21507,6 +24216,1159 @@
                         return DeleteVpcFlowLogsConfigRequest;
                     })();
     
+                    v1.QueryOrgVpcFlowLogsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryOrgVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IQueryOrgVpcFlowLogsConfigsRequest
+                         * @property {string|null} [parent] QueryOrgVpcFlowLogsConfigsRequest parent
+                         * @property {number|null} [pageSize] QueryOrgVpcFlowLogsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] QueryOrgVpcFlowLogsConfigsRequest pageToken
+                         * @property {string|null} [filter] QueryOrgVpcFlowLogsConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new QueryOrgVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a QueryOrgVpcFlowLogsConfigsRequest.
+                         * @implements IQueryOrgVpcFlowLogsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         */
+                        function QueryOrgVpcFlowLogsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new QueryOrgVpcFlowLogsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.create = function create(properties) {
+                            return new QueryOrgVpcFlowLogsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOrgVpcFlowLogsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOrgVpcFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOrgVpcFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOrgVpcFlowLogsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOrgVpcFlowLogsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest";
+                        };
+    
+                        return QueryOrgVpcFlowLogsConfigsRequest;
+                    })();
+    
+                    v1.QueryOrgVpcFlowLogsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryOrgVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IQueryOrgVpcFlowLogsConfigsResponse
+                         * @property {Array.<google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>|null} [vpcFlowLogsConfigs] QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs
+                         * @property {string|null} [nextPageToken] QueryOrgVpcFlowLogsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] QueryOrgVpcFlowLogsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new QueryOrgVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a QueryOrgVpcFlowLogsConfigsResponse.
+                         * @implements IQueryOrgVpcFlowLogsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         */
+                        function QueryOrgVpcFlowLogsConfigsResponse(properties) {
+                            this.vpcFlowLogsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs.
+                         * @member {Array.<google.cloud.networkmanagement.v1.IVpcFlowLogsConfig>} vpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.vpcFlowLogsConfigs = $util.emptyArray;
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryOrgVpcFlowLogsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.create = function create(properties) {
+                            return new QueryOrgVpcFlowLogsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vpcFlowLogsConfigs != null && message.vpcFlowLogsConfigs.length)
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.encode(message.vpcFlowLogsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length))
+                                            message.vpcFlowLogsConfigs = [];
+                                        message.vpcFlowLogsConfigs.push($root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOrgVpcFlowLogsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vpcFlowLogsConfigs != null && message.hasOwnProperty("vpcFlowLogsConfigs")) {
+                                if (!Array.isArray(message.vpcFlowLogsConfigs))
+                                    return "vpcFlowLogsConfigs: array expected";
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.verify(message.vpcFlowLogsConfigs[i]);
+                                    if (error)
+                                        return "vpcFlowLogsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOrgVpcFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse();
+                            if (object.vpcFlowLogsConfigs) {
+                                if (!Array.isArray(object.vpcFlowLogsConfigs))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: array expected");
+                                message.vpcFlowLogsConfigs = [];
+                                for (var i = 0; i < object.vpcFlowLogsConfigs.length; ++i) {
+                                    if (typeof object.vpcFlowLogsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: object expected");
+                                    message.vpcFlowLogsConfigs[i] = $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.fromObject(object.vpcFlowLogsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOrgVpcFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.vpcFlowLogsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length) {
+                                object.vpcFlowLogsConfigs = [];
+                                for (var j = 0; j < message.vpcFlowLogsConfigs.length; ++j)
+                                    object.vpcFlowLogsConfigs[j] = $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.toObject(message.vpcFlowLogsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOrgVpcFlowLogsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOrgVpcFlowLogsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse";
+                        };
+    
+                        return QueryOrgVpcFlowLogsConfigsResponse;
+                    })();
+    
+                    v1.ShowEffectiveFlowLogsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ShowEffectiveFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IShowEffectiveFlowLogsConfigsRequest
+                         * @property {string|null} [parent] ShowEffectiveFlowLogsConfigsRequest parent
+                         * @property {string|null} [resource] ShowEffectiveFlowLogsConfigsRequest resource
+                         * @property {number|null} [pageSize] ShowEffectiveFlowLogsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ShowEffectiveFlowLogsConfigsRequest pageToken
+                         * @property {string|null} [filter] ShowEffectiveFlowLogsConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ShowEffectiveFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a ShowEffectiveFlowLogsConfigsRequest.
+                         * @implements IShowEffectiveFlowLogsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest=} [properties] Properties to set
+                         */
+                        function ShowEffectiveFlowLogsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest resource.
+                         * @member {string} resource
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.resource = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ShowEffectiveFlowLogsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.create = function create(properties) {
+                            return new ShowEffectiveFlowLogsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resource);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resource = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShowEffectiveFlowLogsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShowEffectiveFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShowEffectiveFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.resource = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = message.resource;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShowEffectiveFlowLogsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShowEffectiveFlowLogsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest";
+                        };
+    
+                        return ShowEffectiveFlowLogsConfigsRequest;
+                    })();
+    
+                    v1.ShowEffectiveFlowLogsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ShowEffectiveFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IShowEffectiveFlowLogsConfigsResponse
+                         * @property {Array.<google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>|null} [effectiveFlowLogsConfigs] ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs
+                         * @property {string|null} [nextPageToken] ShowEffectiveFlowLogsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ShowEffectiveFlowLogsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ShowEffectiveFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a ShowEffectiveFlowLogsConfigsResponse.
+                         * @implements IShowEffectiveFlowLogsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse=} [properties] Properties to set
+                         */
+                        function ShowEffectiveFlowLogsConfigsResponse(properties) {
+                            this.effectiveFlowLogsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs.
+                         * @member {Array.<google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig>} effectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.effectiveFlowLogsConfigs = $util.emptyArray;
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ShowEffectiveFlowLogsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.create = function create(properties) {
+                            return new ShowEffectiveFlowLogsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.effectiveFlowLogsConfigs != null && message.effectiveFlowLogsConfigs.length)
+                                for (var i = 0; i < message.effectiveFlowLogsConfigs.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.encode(message.effectiveFlowLogsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.effectiveFlowLogsConfigs && message.effectiveFlowLogsConfigs.length))
+                                            message.effectiveFlowLogsConfigs = [];
+                                        message.effectiveFlowLogsConfigs.push($root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShowEffectiveFlowLogsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.effectiveFlowLogsConfigs != null && message.hasOwnProperty("effectiveFlowLogsConfigs")) {
+                                if (!Array.isArray(message.effectiveFlowLogsConfigs))
+                                    return "effectiveFlowLogsConfigs: array expected";
+                                for (var i = 0; i < message.effectiveFlowLogsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.verify(message.effectiveFlowLogsConfigs[i]);
+                                    if (error)
+                                        return "effectiveFlowLogsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShowEffectiveFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse();
+                            if (object.effectiveFlowLogsConfigs) {
+                                if (!Array.isArray(object.effectiveFlowLogsConfigs))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.effectiveFlowLogsConfigs: array expected");
+                                message.effectiveFlowLogsConfigs = [];
+                                for (var i = 0; i < object.effectiveFlowLogsConfigs.length; ++i) {
+                                    if (typeof object.effectiveFlowLogsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.effectiveFlowLogsConfigs: object expected");
+                                    message.effectiveFlowLogsConfigs[i] = $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.fromObject(object.effectiveFlowLogsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShowEffectiveFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.effectiveFlowLogsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.effectiveFlowLogsConfigs && message.effectiveFlowLogsConfigs.length) {
+                                object.effectiveFlowLogsConfigs = [];
+                                for (var j = 0; j < message.effectiveFlowLogsConfigs.length; ++j)
+                                    object.effectiveFlowLogsConfigs[j] = $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.toObject(message.effectiveFlowLogsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShowEffectiveFlowLogsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShowEffectiveFlowLogsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse";
+                        };
+    
+                        return ShowEffectiveFlowLogsConfigsResponse;
+                    })();
+    
                     v1.VpcFlowLogsConfig = (function() {
     
                         /**
@@ -21521,7 +25383,10 @@
                          * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|null} [metadata] VpcFlowLogsConfig metadata
                          * @property {Array.<string>|null} [metadataFields] VpcFlowLogsConfig metadataFields
                          * @property {string|null} [filterExpr] VpcFlowLogsConfig filterExpr
+                         * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null} [crossProjectMetadata] VpcFlowLogsConfig crossProjectMetadata
                          * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|null} [targetResourceState] VpcFlowLogsConfig targetResourceState
+                         * @property {string|null} [network] VpcFlowLogsConfig network
+                         * @property {string|null} [subnet] VpcFlowLogsConfig subnet
                          * @property {string|null} [interconnectAttachment] VpcFlowLogsConfig interconnectAttachment
                          * @property {string|null} [vpnTunnel] VpcFlowLogsConfig vpnTunnel
                          * @property {Object.<string,string>|null} [labels] VpcFlowLogsConfig labels
@@ -21611,12 +25476,36 @@
                         VpcFlowLogsConfig.prototype.filterExpr = null;
     
                         /**
+                         * VpcFlowLogsConfig crossProjectMetadata.
+                         * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null|undefined} crossProjectMetadata
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.crossProjectMetadata = null;
+    
+                        /**
                          * VpcFlowLogsConfig targetResourceState.
                          * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|null|undefined} targetResourceState
                          * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsConfig
                          * @instance
                          */
                         VpcFlowLogsConfig.prototype.targetResourceState = null;
+    
+                        /**
+                         * VpcFlowLogsConfig network.
+                         * @member {string|null|undefined} network
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.network = null;
+    
+                        /**
+                         * VpcFlowLogsConfig subnet.
+                         * @member {string|null|undefined} subnet
+                         * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.subnet = null;
     
                         /**
                          * VpcFlowLogsConfig interconnectAttachment.
@@ -21698,6 +25587,12 @@
                         });
     
                         // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_crossProjectMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["crossProjectMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(VpcFlowLogsConfig.prototype, "_targetResourceState", {
                             get: $util.oneOfGetter($oneOfFields = ["targetResourceState"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -21705,12 +25600,12 @@
     
                         /**
                          * VpcFlowLogsConfig targetResource.
-                         * @member {"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
+                         * @member {"network"|"subnet"|"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
                          * @memberof google.cloud.networkmanagement.v1.VpcFlowLogsConfig
                          * @instance
                          */
                         Object.defineProperty(VpcFlowLogsConfig.prototype, "targetResource", {
-                            get: $util.oneOfGetter($oneOfFields = ["interconnectAttachment", "vpnTunnel"]),
+                            get: $util.oneOfGetter($oneOfFields = ["network", "subnet", "interconnectAttachment", "vpnTunnel"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21764,6 +25659,12 @@
                                     writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.targetResourceState != null && Object.hasOwnProperty.call(message, "targetResourceState"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.targetResourceState);
+                            if (message.crossProjectMetadata != null && Object.hasOwnProperty.call(message, "crossProjectMetadata"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.crossProjectMetadata);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 100, wireType 2 =*/802).string(message.network);
+                            if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
+                                writer.uint32(/* id 101, wireType 2 =*/810).string(message.subnet);
                             if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
                                 writer.uint32(/* id 102, wireType 2 =*/818).string(message.interconnectAttachment);
                             if (message.vpnTunnel != null && Object.hasOwnProperty.call(message, "vpnTunnel"))
@@ -21838,8 +25739,20 @@
                                         message.filterExpr = reader.string();
                                         break;
                                     }
+                                case 13: {
+                                        message.crossProjectMetadata = reader.int32();
+                                        break;
+                                    }
                                 case 12: {
                                         message.targetResourceState = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 101: {
+                                        message.subnet = reader.string();
                                         break;
                                     }
                                 case 102: {
@@ -21980,6 +25893,17 @@
                                 if (!$util.isString(message.filterExpr))
                                     return "filterExpr: string expected";
                             }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                properties._crossProjectMetadata = 1;
+                                switch (message.crossProjectMetadata) {
+                                default:
+                                    return "crossProjectMetadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
                             if (message.targetResourceState != null && message.hasOwnProperty("targetResourceState")) {
                                 properties._targetResourceState = 1;
                                 switch (message.targetResourceState) {
@@ -21991,7 +25915,21 @@
                                     break;
                                 }
                             }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.subnet))
+                                    return "subnet: string expected";
+                            }
                             if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
                                 properties.targetResource = 1;
                                 if (!$util.isString(message.interconnectAttachment))
                                     return "interconnectAttachment: string expected";
@@ -22131,6 +26069,26 @@
                             }
                             if (object.filterExpr != null)
                                 message.filterExpr = String(object.filterExpr);
+                            switch (object.crossProjectMetadata) {
+                            default:
+                                if (typeof object.crossProjectMetadata === "number") {
+                                    message.crossProjectMetadata = object.crossProjectMetadata;
+                                    break;
+                                }
+                                break;
+                            case "CROSS_PROJECT_METADATA_UNSPECIFIED":
+                            case 0:
+                                message.crossProjectMetadata = 0;
+                                break;
+                            case "CROSS_PROJECT_METADATA_ENABLED":
+                            case 1:
+                                message.crossProjectMetadata = 1;
+                                break;
+                            case "CROSS_PROJECT_METADATA_DISABLED":
+                            case 2:
+                                message.crossProjectMetadata = 2;
+                                break;
+                            }
                             switch (object.targetResourceState) {
                             default:
                                 if (typeof object.targetResourceState === "number") {
@@ -22151,6 +26109,10 @@
                                 message.targetResourceState = 2;
                                 break;
                             }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnet != null)
+                                message.subnet = String(object.subnet);
                             if (object.interconnectAttachment != null)
                                 message.interconnectAttachment = String(object.interconnectAttachment);
                             if (object.vpnTunnel != null)
@@ -22248,6 +26210,21 @@
                                 object.targetResourceState = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState[message.targetResourceState] === undefined ? message.targetResourceState : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState[message.targetResourceState] : message.targetResourceState;
                                 if (options.oneofs)
                                     object._targetResourceState = "targetResourceState";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                object.crossProjectMetadata = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] === undefined ? message.crossProjectMetadata : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] : message.crossProjectMetadata;
+                                if (options.oneofs)
+                                    object._crossProjectMetadata = "crossProjectMetadata";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                object.network = message.network;
+                                if (options.oneofs)
+                                    object.targetResource = "network";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                object.subnet = message.subnet;
+                                if (options.oneofs)
+                                    object.targetResource = "subnet";
                             }
                             if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
                                 object.interconnectAttachment = message.interconnectAttachment;
@@ -22347,6 +26324,22 @@
                         })();
     
                         /**
+                         * CrossProjectMetadata enum.
+                         * @name google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata
+                         * @enum {number}
+                         * @property {number} CROSS_PROJECT_METADATA_UNSPECIFIED=0 CROSS_PROJECT_METADATA_UNSPECIFIED value
+                         * @property {number} CROSS_PROJECT_METADATA_ENABLED=1 CROSS_PROJECT_METADATA_ENABLED value
+                         * @property {number} CROSS_PROJECT_METADATA_DISABLED=2 CROSS_PROJECT_METADATA_DISABLED value
+                         */
+                        VpcFlowLogsConfig.CrossProjectMetadata = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CROSS_PROJECT_METADATA_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CROSS_PROJECT_METADATA_ENABLED"] = 1;
+                            values[valuesById[2] = "CROSS_PROJECT_METADATA_DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
                          * TargetResourceState enum.
                          * @name google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState
                          * @enum {number}
@@ -22363,6 +26356,800 @@
                         })();
     
                         return VpcFlowLogsConfig;
+                    })();
+    
+                    v1.EffectiveVpcFlowLogsConfig = (function() {
+    
+                        /**
+                         * Properties of an EffectiveVpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IEffectiveVpcFlowLogsConfig
+                         * @property {string|null} [name] EffectiveVpcFlowLogsConfig name
+                         * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|null} [state] EffectiveVpcFlowLogsConfig state
+                         * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|null} [aggregationInterval] EffectiveVpcFlowLogsConfig aggregationInterval
+                         * @property {number|null} [flowSampling] EffectiveVpcFlowLogsConfig flowSampling
+                         * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|null} [metadata] EffectiveVpcFlowLogsConfig metadata
+                         * @property {Array.<string>|null} [metadataFields] EffectiveVpcFlowLogsConfig metadataFields
+                         * @property {string|null} [filterExpr] EffectiveVpcFlowLogsConfig filterExpr
+                         * @property {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null} [crossProjectMetadata] EffectiveVpcFlowLogsConfig crossProjectMetadata
+                         * @property {string|null} [network] EffectiveVpcFlowLogsConfig network
+                         * @property {string|null} [subnet] EffectiveVpcFlowLogsConfig subnet
+                         * @property {string|null} [interconnectAttachment] EffectiveVpcFlowLogsConfig interconnectAttachment
+                         * @property {string|null} [vpnTunnel] EffectiveVpcFlowLogsConfig vpnTunnel
+                         * @property {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|null} [scope] EffectiveVpcFlowLogsConfig scope
+                         */
+    
+                        /**
+                         * Constructs a new EffectiveVpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents an EffectiveVpcFlowLogsConfig.
+                         * @implements IEffectiveVpcFlowLogsConfig
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig=} [properties] Properties to set
+                         */
+                        function EffectiveVpcFlowLogsConfig(properties) {
+                            this.metadataFields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.name = "";
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig state.
+                         * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|null|undefined} state
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.state = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig aggregationInterval.
+                         * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|null|undefined} aggregationInterval
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.aggregationInterval = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig flowSampling.
+                         * @member {number|null|undefined} flowSampling
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.flowSampling = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig metadata.
+                         * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|null|undefined} metadata
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.metadata = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig metadataFields.
+                         * @member {Array.<string>} metadataFields
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.metadataFields = $util.emptyArray;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig filterExpr.
+                         * @member {string|null|undefined} filterExpr
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.filterExpr = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig crossProjectMetadata.
+                         * @member {google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null|undefined} crossProjectMetadata
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.crossProjectMetadata = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig network.
+                         * @member {string|null|undefined} network
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.network = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig subnet.
+                         * @member {string|null|undefined} subnet
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.subnet = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig interconnectAttachment.
+                         * @member {string|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.interconnectAttachment = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig vpnTunnel.
+                         * @member {string|null|undefined} vpnTunnel
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.vpnTunnel = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig scope.
+                         * @member {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|null|undefined} scope
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.scope = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_state", {
+                            get: $util.oneOfGetter($oneOfFields = ["state"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_aggregationInterval", {
+                            get: $util.oneOfGetter($oneOfFields = ["aggregationInterval"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_flowSampling", {
+                            get: $util.oneOfGetter($oneOfFields = ["flowSampling"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["metadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_filterExpr", {
+                            get: $util.oneOfGetter($oneOfFields = ["filterExpr"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_crossProjectMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["crossProjectMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig targetResource.
+                         * @member {"network"|"subnet"|"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "targetResource", {
+                            get: $util.oneOfGetter($oneOfFields = ["network", "subnet", "interconnectAttachment", "vpnTunnel"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_scope", {
+                            get: $util.oneOfGetter($oneOfFields = ["scope"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new EffectiveVpcFlowLogsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig instance
+                         */
+                        EffectiveVpcFlowLogsConfig.create = function create(properties) {
+                            return new EffectiveVpcFlowLogsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveVpcFlowLogsConfig message. Does not implicitly {@link google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveVpcFlowLogsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.aggregationInterval != null && Object.hasOwnProperty.call(message, "aggregationInterval"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.aggregationInterval);
+                            if (message.flowSampling != null && Object.hasOwnProperty.call(message, "flowSampling"))
+                                writer.uint32(/* id 5, wireType 5 =*/45).float(message.flowSampling);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.metadata);
+                            if (message.metadataFields != null && message.metadataFields.length)
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.metadataFields[i]);
+                            if (message.filterExpr != null && Object.hasOwnProperty.call(message, "filterExpr"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.filterExpr);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.scope);
+                            if (message.crossProjectMetadata != null && Object.hasOwnProperty.call(message, "crossProjectMetadata"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.crossProjectMetadata);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 100, wireType 2 =*/802).string(message.network);
+                            if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
+                                writer.uint32(/* id 101, wireType 2 =*/810).string(message.subnet);
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                writer.uint32(/* id 102, wireType 2 =*/818).string(message.interconnectAttachment);
+                            if (message.vpnTunnel != null && Object.hasOwnProperty.call(message, "vpnTunnel"))
+                                writer.uint32(/* id 103, wireType 2 =*/826).string(message.vpnTunnel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveVpcFlowLogsConfig message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveVpcFlowLogsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveVpcFlowLogsConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.aggregationInterval = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.flowSampling = reader.float();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadata = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.metadataFields && message.metadataFields.length))
+                                            message.metadataFields = [];
+                                        message.metadataFields.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.filterExpr = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.crossProjectMetadata = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 101: {
+                                        message.subnet = reader.string();
+                                        break;
+                                    }
+                                case 102: {
+                                        message.interconnectAttachment = reader.string();
+                                        break;
+                                    }
+                                case 103: {
+                                        message.vpnTunnel = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.scope = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveVpcFlowLogsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EffectiveVpcFlowLogsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EffectiveVpcFlowLogsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                properties._state = 1;
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                properties._aggregationInterval = 1;
+                                switch (message.aggregationInterval) {
+                                default:
+                                    return "aggregationInterval: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                properties._flowSampling = 1;
+                                if (typeof message.flowSampling !== "number")
+                                    return "flowSampling: number expected";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                properties._metadata = 1;
+                                switch (message.metadata) {
+                                default:
+                                    return "metadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.metadataFields != null && message.hasOwnProperty("metadataFields")) {
+                                if (!Array.isArray(message.metadataFields))
+                                    return "metadataFields: array expected";
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    if (!$util.isString(message.metadataFields[i]))
+                                        return "metadataFields: string[] expected";
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                properties._filterExpr = 1;
+                                if (!$util.isString(message.filterExpr))
+                                    return "filterExpr: string expected";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                properties._crossProjectMetadata = 1;
+                                switch (message.crossProjectMetadata) {
+                                default:
+                                    return "crossProjectMetadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.subnet))
+                                    return "subnet: string expected";
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.interconnectAttachment))
+                                    return "interconnectAttachment: string expected";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.vpnTunnel))
+                                    return "vpnTunnel: string expected";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope")) {
+                                properties._scope = 1;
+                                switch (message.scope) {
+                                default:
+                                    return "scope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EffectiveVpcFlowLogsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         */
+                        EffectiveVpcFlowLogsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            switch (object.aggregationInterval) {
+                            default:
+                                if (typeof object.aggregationInterval === "number") {
+                                    message.aggregationInterval = object.aggregationInterval;
+                                    break;
+                                }
+                                break;
+                            case "AGGREGATION_INTERVAL_UNSPECIFIED":
+                            case 0:
+                                message.aggregationInterval = 0;
+                                break;
+                            case "INTERVAL_5_SEC":
+                            case 1:
+                                message.aggregationInterval = 1;
+                                break;
+                            case "INTERVAL_30_SEC":
+                            case 2:
+                                message.aggregationInterval = 2;
+                                break;
+                            case "INTERVAL_1_MIN":
+                            case 3:
+                                message.aggregationInterval = 3;
+                                break;
+                            case "INTERVAL_5_MIN":
+                            case 4:
+                                message.aggregationInterval = 4;
+                                break;
+                            case "INTERVAL_10_MIN":
+                            case 5:
+                                message.aggregationInterval = 5;
+                                break;
+                            case "INTERVAL_15_MIN":
+                            case 6:
+                                message.aggregationInterval = 6;
+                                break;
+                            }
+                            if (object.flowSampling != null)
+                                message.flowSampling = Number(object.flowSampling);
+                            switch (object.metadata) {
+                            default:
+                                if (typeof object.metadata === "number") {
+                                    message.metadata = object.metadata;
+                                    break;
+                                }
+                                break;
+                            case "METADATA_UNSPECIFIED":
+                            case 0:
+                                message.metadata = 0;
+                                break;
+                            case "INCLUDE_ALL_METADATA":
+                            case 1:
+                                message.metadata = 1;
+                                break;
+                            case "EXCLUDE_ALL_METADATA":
+                            case 2:
+                                message.metadata = 2;
+                                break;
+                            case "CUSTOM_METADATA":
+                            case 3:
+                                message.metadata = 3;
+                                break;
+                            }
+                            if (object.metadataFields) {
+                                if (!Array.isArray(object.metadataFields))
+                                    throw TypeError(".google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.metadataFields: array expected");
+                                message.metadataFields = [];
+                                for (var i = 0; i < object.metadataFields.length; ++i)
+                                    message.metadataFields[i] = String(object.metadataFields[i]);
+                            }
+                            if (object.filterExpr != null)
+                                message.filterExpr = String(object.filterExpr);
+                            switch (object.crossProjectMetadata) {
+                            default:
+                                if (typeof object.crossProjectMetadata === "number") {
+                                    message.crossProjectMetadata = object.crossProjectMetadata;
+                                    break;
+                                }
+                                break;
+                            case "CROSS_PROJECT_METADATA_UNSPECIFIED":
+                            case 0:
+                                message.crossProjectMetadata = 0;
+                                break;
+                            case "CROSS_PROJECT_METADATA_ENABLED":
+                            case 1:
+                                message.crossProjectMetadata = 1;
+                                break;
+                            case "CROSS_PROJECT_METADATA_DISABLED":
+                            case 2:
+                                message.crossProjectMetadata = 2;
+                                break;
+                            }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnet != null)
+                                message.subnet = String(object.subnet);
+                            if (object.interconnectAttachment != null)
+                                message.interconnectAttachment = String(object.interconnectAttachment);
+                            if (object.vpnTunnel != null)
+                                message.vpnTunnel = String(object.vpnTunnel);
+                            switch (object.scope) {
+                            default:
+                                if (typeof object.scope === "number") {
+                                    message.scope = object.scope;
+                                    break;
+                                }
+                                break;
+                            case "SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.scope = 0;
+                                break;
+                            case "SUBNET":
+                            case 1:
+                                message.scope = 1;
+                                break;
+                            case "COMPUTE_API_SUBNET":
+                            case 2:
+                                message.scope = 2;
+                                break;
+                            case "NETWORK":
+                            case 3:
+                                message.scope = 3;
+                                break;
+                            case "VPN_TUNNEL":
+                            case 4:
+                                message.scope = 4;
+                                break;
+                            case "INTERCONNECT_ATTACHMENT":
+                            case 5:
+                                message.scope = 5;
+                                break;
+                            case "ORGANIZATION":
+                            case 6:
+                                message.scope = 6;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EffectiveVpcFlowLogsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EffectiveVpcFlowLogsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metadataFields = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State[message.state] === undefined ? message.state : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State[message.state] : message.state;
+                                if (options.oneofs)
+                                    object._state = "state";
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                object.aggregationInterval = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] === undefined ? message.aggregationInterval : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] : message.aggregationInterval;
+                                if (options.oneofs)
+                                    object._aggregationInterval = "aggregationInterval";
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                object.flowSampling = options.json && !isFinite(message.flowSampling) ? String(message.flowSampling) : message.flowSampling;
+                                if (options.oneofs)
+                                    object._flowSampling = "flowSampling";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                object.metadata = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata[message.metadata] === undefined ? message.metadata : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata[message.metadata] : message.metadata;
+                                if (options.oneofs)
+                                    object._metadata = "metadata";
+                            }
+                            if (message.metadataFields && message.metadataFields.length) {
+                                object.metadataFields = [];
+                                for (var j = 0; j < message.metadataFields.length; ++j)
+                                    object.metadataFields[j] = message.metadataFields[j];
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                object.filterExpr = message.filterExpr;
+                                if (options.oneofs)
+                                    object._filterExpr = "filterExpr";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope")) {
+                                object.scope = options.enums === String ? $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope[message.scope] === undefined ? message.scope : $root.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope[message.scope] : message.scope;
+                                if (options.oneofs)
+                                    object._scope = "scope";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                object.crossProjectMetadata = options.enums === String ? $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] === undefined ? message.crossProjectMetadata : $root.google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] : message.crossProjectMetadata;
+                                if (options.oneofs)
+                                    object._crossProjectMetadata = "crossProjectMetadata";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                object.network = message.network;
+                                if (options.oneofs)
+                                    object.targetResource = "network";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                object.subnet = message.subnet;
+                                if (options.oneofs)
+                                    object.targetResource = "subnet";
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = message.interconnectAttachment;
+                                if (options.oneofs)
+                                    object.targetResource = "interconnectAttachment";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                object.vpnTunnel = message.vpnTunnel;
+                                if (options.oneofs)
+                                    object.targetResource = "vpnTunnel";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EffectiveVpcFlowLogsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EffectiveVpcFlowLogsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EffectiveVpcFlowLogsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig";
+                        };
+    
+                        /**
+                         * Scope enum.
+                         * @name google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope
+                         * @enum {number}
+                         * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                         * @property {number} SUBNET=1 SUBNET value
+                         * @property {number} COMPUTE_API_SUBNET=2 COMPUTE_API_SUBNET value
+                         * @property {number} NETWORK=3 NETWORK value
+                         * @property {number} VPN_TUNNEL=4 VPN_TUNNEL value
+                         * @property {number} INTERCONNECT_ATTACHMENT=5 INTERCONNECT_ATTACHMENT value
+                         * @property {number} ORGANIZATION=6 ORGANIZATION value
+                         */
+                        EffectiveVpcFlowLogsConfig.Scope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SUBNET"] = 1;
+                            values[valuesById[2] = "COMPUTE_API_SUBNET"] = 2;
+                            values[valuesById[3] = "NETWORK"] = 3;
+                            values[valuesById[4] = "VPN_TUNNEL"] = 4;
+                            values[valuesById[5] = "INTERCONNECT_ATTACHMENT"] = 5;
+                            values[valuesById[6] = "ORGANIZATION"] = 6;
+                            return values;
+                        })();
+    
+                        return EffectiveVpcFlowLogsConfig;
                     })();
     
                     return v1;
@@ -23011,6 +27798,7 @@
                          * @property {string|null} [cloudSqlInstance] Endpoint cloudSqlInstance
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
+                         * @property {string|null} [gkePod] Endpoint gkePod
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
@@ -23129,6 +27917,14 @@
                          * @instance
                          */
                         Endpoint.prototype.redisCluster = "";
+    
+                        /**
+                         * Endpoint gkePod.
+                         * @member {string} gkePod
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.gkePod = "";
     
                         /**
                          * Endpoint cloudFunction.
@@ -23259,6 +28055,8 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.redisCluster);
                             if (message.fqdn != null && Object.hasOwnProperty.call(message, "fqdn"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.gkePod);
                             return writer;
                         };
     
@@ -23341,6 +28139,10 @@
                                     }
                                 case 18: {
                                         message.redisCluster = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.gkePod = reader.string();
                                         break;
                                     }
                                 case 10: {
@@ -23467,6 +28269,9 @@
                             if (message.redisCluster != null && message.hasOwnProperty("redisCluster"))
                                 if (!$util.isString(message.redisCluster))
                                     return "redisCluster: string expected";
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                if (!$util.isString(message.gkePod))
+                                    return "gkePod: string expected";
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
                                 var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction);
                                 if (error)
@@ -23492,6 +28297,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
@@ -23612,6 +28418,8 @@
                                 message.redisInstance = String(object.redisInstance);
                             if (object.redisCluster != null)
                                 message.redisCluster = String(object.redisCluster);
+                            if (object.gkePod != null)
+                                message.gkePod = String(object.gkePod);
                             if (object.cloudFunction != null) {
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.cloudFunction: object expected");
@@ -23648,6 +28456,10 @@
                             case 2:
                                 message.networkType = 2;
                                 break;
+                            case "INTERNET":
+                            case 3:
+                                message.networkType = 3;
+                                break;
                             }
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
@@ -23683,6 +28495,7 @@
                                 object.redisInstance = "";
                                 object.redisCluster = "";
                                 object.fqdn = "";
+                                object.gkePod = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
                                 object.ipAddress = message.ipAddress;
@@ -23729,6 +28542,8 @@
                                 object.redisCluster = message.redisCluster;
                             if (message.fqdn != null && message.hasOwnProperty("fqdn"))
                                 object.fqdn = message.fqdn;
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod"))
+                                object.gkePod = message.gkePod;
                             return object;
                         };
     
@@ -23765,12 +28580,14 @@
                          * @property {number} NETWORK_TYPE_UNSPECIFIED=0 NETWORK_TYPE_UNSPECIFIED value
                          * @property {number} GCP_NETWORK=1 GCP_NETWORK value
                          * @property {number} NON_GCP_NETWORK=2 NON_GCP_NETWORK value
+                         * @property {number} INTERNET=3 INTERNET value
                          */
                         Endpoint.NetworkType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "NETWORK_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GCP_NETWORK"] = 1;
                             values[valuesById[2] = "NON_GCP_NETWORK"] = 2;
+                            values[valuesById[3] = "INTERNET"] = 3;
                             return values;
                         })();
     
@@ -24211,6 +29028,7 @@
                              * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
                              * @interface ICloudRunRevisionEndpoint
                              * @property {string|null} [uri] CloudRunRevisionEndpoint uri
+                             * @property {string|null} [serviceUri] CloudRunRevisionEndpoint serviceUri
                              */
     
                             /**
@@ -24235,6 +29053,14 @@
                              * @instance
                              */
                             CloudRunRevisionEndpoint.prototype.uri = "";
+    
+                            /**
+                             * CloudRunRevisionEndpoint serviceUri.
+                             * @member {string} serviceUri
+                             * @memberof google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint
+                             * @instance
+                             */
+                            CloudRunRevisionEndpoint.prototype.serviceUri = "";
     
                             /**
                              * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
@@ -24262,6 +29088,8 @@
                                     writer = $Writer.create();
                                 if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                                if (message.serviceUri != null && Object.hasOwnProperty.call(message, "serviceUri"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUri);
                                 return writer;
                             };
     
@@ -24302,6 +29130,10 @@
                                             message.uri = reader.string();
                                             break;
                                         }
+                                    case 2: {
+                                            message.serviceUri = reader.string();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -24340,6 +29172,9 @@
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     if (!$util.isString(message.uri))
                                         return "uri: string expected";
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    if (!$util.isString(message.serviceUri))
+                                        return "serviceUri: string expected";
                                 return null;
                             };
     
@@ -24357,6 +29192,8 @@
                                 var message = new $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudRunRevisionEndpoint();
                                 if (object.uri != null)
                                     message.uri = String(object.uri);
+                                if (object.serviceUri != null)
+                                    message.serviceUri = String(object.serviceUri);
                                 return message;
                             };
     
@@ -24373,10 +29210,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.uri = "";
+                                    object.serviceUri = "";
+                                }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
                                     object.uri = message.uri;
+                                if (message.serviceUri != null && message.hasOwnProperty("serviceUri"))
+                                    object.serviceUri = message.serviceUri;
                                 return object;
                             };
     
@@ -25257,6 +30098,8 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IEndpointInfo|null} [endpointInfo] ProbingDetails endpointInfo
                          * @property {google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null} [probingLatency] ProbingDetails probingLatency
                          * @property {google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null} [destinationEgressLocation] ProbingDetails destinationEgressLocation
+                         * @property {Array.<google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse>|null} [edgeResponses] ProbingDetails edgeResponses
+                         * @property {boolean|null} [probedAllDevices] ProbingDetails probedAllDevices
                          */
     
                         /**
@@ -25268,6 +30111,7 @@
                          * @param {google.cloud.networkmanagement.v1beta1.IProbingDetails=} [properties] Properties to set
                          */
                         function ProbingDetails(properties) {
+                            this.edgeResponses = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -25347,6 +30191,22 @@
                         ProbingDetails.prototype.destinationEgressLocation = null;
     
                         /**
+                         * ProbingDetails edgeResponses.
+                         * @member {Array.<google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse>} edgeResponses
+                         * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.edgeResponses = $util.emptyArray;
+    
+                        /**
+                         * ProbingDetails probedAllDevices.
+                         * @member {boolean} probedAllDevices
+                         * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails
+                         * @instance
+                         */
+                        ProbingDetails.prototype.probedAllDevices = false;
+    
+                        /**
                          * Creates a new ProbingDetails instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails
@@ -25388,6 +30248,11 @@
                                 $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.encode(message.probingLatency, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.destinationEgressLocation != null && Object.hasOwnProperty.call(message, "destinationEgressLocation"))
                                 $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.encode(message.destinationEgressLocation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.edgeResponses != null && message.edgeResponses.length)
+                                for (var i = 0; i < message.edgeResponses.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.encode(message.edgeResponses[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.probedAllDevices != null && Object.hasOwnProperty.call(message, "probedAllDevices"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.probedAllDevices);
                             return writer;
                         };
     
@@ -25458,6 +30323,16 @@
                                     }
                                 case 9: {
                                         message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        if (!(message.edgeResponses && message.edgeResponses.length))
+                                            message.edgeResponses = [];
+                                        message.edgeResponses.push($root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 11: {
+                                        message.probedAllDevices = reader.bool();
                                         break;
                                     }
                                 default:
@@ -25546,6 +30421,18 @@
                                 if (error)
                                     return "destinationEgressLocation." + error;
                             }
+                            if (message.edgeResponses != null && message.hasOwnProperty("edgeResponses")) {
+                                if (!Array.isArray(message.edgeResponses))
+                                    return "edgeResponses: array expected";
+                                for (var i = 0; i < message.edgeResponses.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.verify(message.edgeResponses[i]);
+                                    if (error)
+                                        return "edgeResponses." + error;
+                                }
+                            }
+                            if (message.probedAllDevices != null && message.hasOwnProperty("probedAllDevices"))
+                                if (typeof message.probedAllDevices !== "boolean")
+                                    return "probedAllDevices: boolean expected";
                             return null;
                         };
     
@@ -25638,6 +30525,18 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.ProbingDetails.destinationEgressLocation: object expected");
                                 message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.fromObject(object.destinationEgressLocation);
                             }
+                            if (object.edgeResponses) {
+                                if (!Array.isArray(object.edgeResponses))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ProbingDetails.edgeResponses: array expected");
+                                message.edgeResponses = [];
+                                for (var i = 0; i < object.edgeResponses.length; ++i) {
+                                    if (typeof object.edgeResponses[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.ProbingDetails.edgeResponses: object expected");
+                                    message.edgeResponses[i] = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.fromObject(object.edgeResponses[i]);
+                                }
+                            }
+                            if (object.probedAllDevices != null)
+                                message.probedAllDevices = Boolean(object.probedAllDevices);
                             return message;
                         };
     
@@ -25654,6 +30553,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.edgeResponses = [];
                             if (options.defaults) {
                                 object.result = options.enums === String ? "PROBING_RESULT_UNSPECIFIED" : 0;
                                 object.verifyTime = null;
@@ -25664,6 +30565,7 @@
                                 object.endpointInfo = null;
                                 object.probingLatency = null;
                                 object.destinationEgressLocation = null;
+                                object.probedAllDevices = false;
                             }
                             if (message.result != null && message.hasOwnProperty("result"))
                                 object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] : message.result;
@@ -25683,6 +30585,13 @@
                                 object.probingLatency = $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.toObject(message.probingLatency, options);
                             if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation"))
                                 object.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.toObject(message.destinationEgressLocation, options);
+                            if (message.edgeResponses && message.edgeResponses.length) {
+                                object.edgeResponses = [];
+                                for (var j = 0; j < message.edgeResponses.length; ++j)
+                                    object.edgeResponses[j] = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.toObject(message.edgeResponses[j], options);
+                            }
+                            if (message.probedAllDevices != null && message.hasOwnProperty("probedAllDevices"))
+                                object.probedAllDevices = message.probedAllDevices;
                             return object;
                         };
     
@@ -25951,6 +30860,371 @@
                             };
     
                             return EdgeLocation;
+                        })();
+    
+                        ProbingDetails.SingleEdgeResponse = (function() {
+    
+                            /**
+                             * Properties of a SingleEdgeResponse.
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails
+                             * @interface ISingleEdgeResponse
+                             * @property {google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult|null} [result] SingleEdgeResponse result
+                             * @property {number|null} [sentProbeCount] SingleEdgeResponse sentProbeCount
+                             * @property {number|null} [successfulProbeCount] SingleEdgeResponse successfulProbeCount
+                             * @property {google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null} [probingLatency] SingleEdgeResponse probingLatency
+                             * @property {google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null} [destinationEgressLocation] SingleEdgeResponse destinationEgressLocation
+                             * @property {string|null} [destinationRouter] SingleEdgeResponse destinationRouter
+                             */
+    
+                            /**
+                             * Constructs a new SingleEdgeResponse.
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails
+                             * @classdesc Represents a SingleEdgeResponse.
+                             * @implements ISingleEdgeResponse
+                             * @constructor
+                             * @param {google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse=} [properties] Properties to set
+                             */
+                            function SingleEdgeResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SingleEdgeResponse result.
+                             * @member {google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult} result
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.result = 0;
+    
+                            /**
+                             * SingleEdgeResponse sentProbeCount.
+                             * @member {number} sentProbeCount
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.sentProbeCount = 0;
+    
+                            /**
+                             * SingleEdgeResponse successfulProbeCount.
+                             * @member {number} successfulProbeCount
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.successfulProbeCount = 0;
+    
+                            /**
+                             * SingleEdgeResponse probingLatency.
+                             * @member {google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null|undefined} probingLatency
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.probingLatency = null;
+    
+                            /**
+                             * SingleEdgeResponse destinationEgressLocation.
+                             * @member {google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null|undefined} destinationEgressLocation
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.destinationEgressLocation = null;
+    
+                            /**
+                             * SingleEdgeResponse destinationRouter.
+                             * @member {string} destinationRouter
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             */
+                            SingleEdgeResponse.prototype.destinationRouter = "";
+    
+                            /**
+                             * Creates a new SingleEdgeResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse=} [properties] Properties to set
+                             * @returns {google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse instance
+                             */
+                            SingleEdgeResponse.create = function create(properties) {
+                                return new SingleEdgeResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SingleEdgeResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse} message SingleEdgeResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleEdgeResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.result);
+                                if (message.sentProbeCount != null && Object.hasOwnProperty.call(message, "sentProbeCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sentProbeCount);
+                                if (message.successfulProbeCount != null && Object.hasOwnProperty.call(message, "successfulProbeCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.successfulProbeCount);
+                                if (message.probingLatency != null && Object.hasOwnProperty.call(message, "probingLatency"))
+                                    $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.encode(message.probingLatency, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.destinationEgressLocation != null && Object.hasOwnProperty.call(message, "destinationEgressLocation"))
+                                    $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.encode(message.destinationEgressLocation, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.destinationRouter != null && Object.hasOwnProperty.call(message, "destinationRouter"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.destinationRouter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SingleEdgeResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse} message SingleEdgeResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SingleEdgeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SingleEdgeResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleEdgeResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.result = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sentProbeCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.successfulProbeCount = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.probingLatency = $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.destinationRouter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SingleEdgeResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SingleEdgeResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SingleEdgeResponse message.
+                             * @function verify
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SingleEdgeResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.result != null && message.hasOwnProperty("result"))
+                                    switch (message.result) {
+                                    default:
+                                        return "result: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                    if (!$util.isInteger(message.sentProbeCount))
+                                        return "sentProbeCount: integer expected";
+                                if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                    if (!$util.isInteger(message.successfulProbeCount))
+                                        return "successfulProbeCount: integer expected";
+                                if (message.probingLatency != null && message.hasOwnProperty("probingLatency")) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.verify(message.probingLatency);
+                                    if (error)
+                                        return "probingLatency." + error;
+                                }
+                                if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation")) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.verify(message.destinationEgressLocation);
+                                    if (error)
+                                        return "destinationEgressLocation." + error;
+                                }
+                                if (message.destinationRouter != null && message.hasOwnProperty("destinationRouter"))
+                                    if (!$util.isString(message.destinationRouter))
+                                        return "destinationRouter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SingleEdgeResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse} SingleEdgeResponse
+                             */
+                            SingleEdgeResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse)
+                                    return object;
+                                var message = new $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse();
+                                switch (object.result) {
+                                default:
+                                    if (typeof object.result === "number") {
+                                        message.result = object.result;
+                                        break;
+                                    }
+                                    break;
+                                case "PROBING_RESULT_UNSPECIFIED":
+                                case 0:
+                                    message.result = 0;
+                                    break;
+                                case "REACHABLE":
+                                case 1:
+                                    message.result = 1;
+                                    break;
+                                case "UNREACHABLE":
+                                case 2:
+                                    message.result = 2;
+                                    break;
+                                case "REACHABILITY_INCONSISTENT":
+                                case 3:
+                                    message.result = 3;
+                                    break;
+                                case "UNDETERMINED":
+                                case 4:
+                                    message.result = 4;
+                                    break;
+                                }
+                                if (object.sentProbeCount != null)
+                                    message.sentProbeCount = object.sentProbeCount | 0;
+                                if (object.successfulProbeCount != null)
+                                    message.successfulProbeCount = object.successfulProbeCount | 0;
+                                if (object.probingLatency != null) {
+                                    if (typeof object.probingLatency !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.probingLatency: object expected");
+                                    message.probingLatency = $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.fromObject(object.probingLatency);
+                                }
+                                if (object.destinationEgressLocation != null) {
+                                    if (typeof object.destinationEgressLocation !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.destinationEgressLocation: object expected");
+                                    message.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.fromObject(object.destinationEgressLocation);
+                                }
+                                if (object.destinationRouter != null)
+                                    message.destinationRouter = String(object.destinationRouter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SingleEdgeResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse} message SingleEdgeResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SingleEdgeResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.result = options.enums === String ? "PROBING_RESULT_UNSPECIFIED" : 0;
+                                    object.sentProbeCount = 0;
+                                    object.successfulProbeCount = 0;
+                                    object.probingLatency = null;
+                                    object.destinationEgressLocation = null;
+                                    object.destinationRouter = "";
+                                }
+                                if (message.result != null && message.hasOwnProperty("result"))
+                                    object.result = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] === undefined ? message.result : $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult[message.result] : message.result;
+                                if (message.sentProbeCount != null && message.hasOwnProperty("sentProbeCount"))
+                                    object.sentProbeCount = message.sentProbeCount;
+                                if (message.successfulProbeCount != null && message.hasOwnProperty("successfulProbeCount"))
+                                    object.successfulProbeCount = message.successfulProbeCount;
+                                if (message.probingLatency != null && message.hasOwnProperty("probingLatency"))
+                                    object.probingLatency = $root.google.cloud.networkmanagement.v1beta1.LatencyDistribution.toObject(message.probingLatency, options);
+                                if (message.destinationEgressLocation != null && message.hasOwnProperty("destinationEgressLocation"))
+                                    object.destinationEgressLocation = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.EdgeLocation.toObject(message.destinationEgressLocation, options);
+                                if (message.destinationRouter != null && message.hasOwnProperty("destinationRouter"))
+                                    object.destinationRouter = message.destinationRouter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SingleEdgeResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SingleEdgeResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SingleEdgeResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SingleEdgeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse";
+                            };
+    
+                            return SingleEdgeResponse;
                         })();
     
                         return ProbingDetails;
@@ -26251,8 +31525,10 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IEndpointInfo|null} [endpoint] Step endpoint
                          * @property {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo|null} [googleService] Step googleService
                          * @property {google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null} [forwardingRule] Step forwardingRule
+                         * @property {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo|null} [hybridSubnet] Step hybridSubnet
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
+                         * @property {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo|null} [interconnectAttachment] Step interconnectAttachment
                          * @property {google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null} [vpcConnector] Step vpcConnector
                          * @property {google.cloud.networkmanagement.v1beta1.IDirectVpcEgressConnectionInfo|null} [directVpcEgressConnection] Step directVpcEgressConnection
                          * @property {google.cloud.networkmanagement.v1beta1.IServerlessExternalConnectionInfo|null} [serverlessExternalConnection] Step serverlessExternalConnection
@@ -26263,6 +31539,8 @@
                          * @property {google.cloud.networkmanagement.v1beta1.ILoadBalancerInfo|null} [loadBalancer] Step loadBalancer
                          * @property {google.cloud.networkmanagement.v1beta1.INetworkInfo|null} [network] Step network
                          * @property {google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null} [gkeMaster] Step gkeMaster
+                         * @property {google.cloud.networkmanagement.v1beta1.IGkePodInfo|null} [gkePod] Step gkePod
+                         * @property {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null} [ipMasqueradingSkipped] Step ipMasqueradingSkipped
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null} [cloudSqlInstance] Step cloudSqlInstance
                          * @property {google.cloud.networkmanagement.v1beta1.IRedisInstanceInfo|null} [redisInstance] Step redisInstance
                          * @property {google.cloud.networkmanagement.v1beta1.IRedisClusterInfo|null} [redisCluster] Step redisCluster
@@ -26372,6 +31650,14 @@
                         Step.prototype.forwardingRule = null;
     
                         /**
+                         * Step hybridSubnet.
+                         * @member {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo|null|undefined} hybridSubnet
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.hybridSubnet = null;
+    
+                        /**
                          * Step vpnGateway.
                          * @member {google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null|undefined} vpnGateway
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
@@ -26386,6 +31672,14 @@
                          * @instance
                          */
                         Step.prototype.vpnTunnel = null;
+    
+                        /**
+                         * Step interconnectAttachment.
+                         * @member {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.interconnectAttachment = null;
     
                         /**
                          * Step vpcConnector.
@@ -26466,6 +31760,22 @@
                          * @instance
                          */
                         Step.prototype.gkeMaster = null;
+    
+                        /**
+                         * Step gkePod.
+                         * @member {google.cloud.networkmanagement.v1beta1.IGkePodInfo|null|undefined} gkePod
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.gkePod = null;
+    
+                        /**
+                         * Step ipMasqueradingSkipped.
+                         * @member {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null|undefined} ipMasqueradingSkipped
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.ipMasqueradingSkipped = null;
     
                         /**
                          * Step cloudSqlInstance.
@@ -26560,12 +31870,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26659,6 +31969,14 @@
                                 $root.google.cloud.networkmanagement.v1beta1.DirectVpcEgressConnectionInfo.encode(message.directVpcEgressConnection, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
                             if (message.serverlessExternalConnection != null && Object.hasOwnProperty.call(message, "serverlessExternalConnection"))
                                 $root.google.cloud.networkmanagement.v1beta1.ServerlessExternalConnectionInfo.encode(message.serverlessExternalConnection, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.encode(message.interconnectAttachment, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                            if (message.hybridSubnet != null && Object.hasOwnProperty.call(message, "hybridSubnet"))
+                                $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.encode(message.hybridSubnet, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
+                            if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
+                                $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.encode(message.gkePod, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                            if (message.ipMasqueradingSkipped != null && Object.hasOwnProperty.call(message, "ipMasqueradingSkipped"))
+                                $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.encode(message.ipMasqueradingSkipped, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
                             return writer;
                         };
     
@@ -26735,12 +32053,20 @@
                                         message.forwardingRule = $root.google.cloud.networkmanagement.v1beta1.ForwardingRuleInfo.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 36: {
+                                        message.hybridSubnet = $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 10: {
                                         message.vpnGateway = $root.google.cloud.networkmanagement.v1beta1.VpnGatewayInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 11: {
                                         message.vpnTunnel = $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 35: {
+                                        message.interconnectAttachment = $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 21: {
@@ -26781,6 +32107,14 @@
                                     }
                                 case 18: {
                                         message.gkeMaster = $root.google.cloud.networkmanagement.v1beta1.GKEMasterInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 37: {
+                                        message.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 38: {
+                                        message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 19: {
@@ -26877,6 +32211,7 @@
                                 case 3:
                                 case 21:
                                 case 22:
+                                case 39:
                                 case 32:
                                 case 33:
                                 case 23:
@@ -26894,12 +32229,15 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 38:
                                 case 12:
                                 case 13:
+                                case 37:
                                 case 24:
                                 case 35:
                                 case 36:
                                 case 14:
+                                case 40:
                                 case 15:
                                 case 16:
                                 case 17:
@@ -26972,6 +32310,16 @@
                                         return "forwardingRule." + error;
                                 }
                             }
+                            if (message.hybridSubnet != null && message.hasOwnProperty("hybridSubnet")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.verify(message.hybridSubnet);
+                                    if (error)
+                                        return "hybridSubnet." + error;
+                                }
+                            }
                             if (message.vpnGateway != null && message.hasOwnProperty("vpnGateway")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -26990,6 +32338,16 @@
                                     var error = $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.verify(message.vpnTunnel);
                                     if (error)
                                         return "vpnTunnel." + error;
+                                }
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.verify(message.interconnectAttachment);
+                                    if (error)
+                                        return "interconnectAttachment." + error;
                                 }
                             }
                             if (message.vpcConnector != null && message.hasOwnProperty("vpcConnector")) {
@@ -27090,6 +32448,26 @@
                                     var error = $root.google.cloud.networkmanagement.v1beta1.GKEMasterInfo.verify(message.gkeMaster);
                                     if (error)
                                         return "gkeMaster." + error;
+                                }
+                            }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.verify(message.gkePod);
+                                    if (error)
+                                        return "gkePod." + error;
+                                }
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify(message.ipMasqueradingSkipped);
+                                    if (error)
+                                        return "ipMasqueradingSkipped." + error;
                                 }
                             }
                             if (message.cloudSqlInstance != null && message.hasOwnProperty("cloudSqlInstance")) {
@@ -27254,6 +32632,10 @@
                             case 22:
                                 message.state = 22;
                                 break;
+                            case "START_FROM_GKE_POD":
+                            case 39:
+                                message.state = 39;
+                                break;
                             case "START_FROM_REDIS_INSTANCE":
                             case 32:
                                 message.state = 32;
@@ -27322,6 +32704,10 @@
                             case 11:
                                 message.state = 11;
                                 break;
+                            case "ARRIVE_AT_HYBRID_SUBNET":
+                            case 38:
+                                message.state = 38;
+                                break;
                             case "ARRIVE_AT_VPN_GATEWAY":
                             case 12:
                                 message.state = 12;
@@ -27329,6 +32715,10 @@
                             case "ARRIVE_AT_VPN_TUNNEL":
                             case 13:
                                 message.state = 13;
+                                break;
+                            case "ARRIVE_AT_INTERCONNECT_ATTACHMENT":
+                            case 37:
+                                message.state = 37;
                                 break;
                             case "ARRIVE_AT_VPC_CONNECTOR":
                             case 24:
@@ -27345,6 +32735,10 @@
                             case "NAT":
                             case 14:
                                 message.state = 14;
+                                break;
+                            case "SKIP_GKE_POD_IP_MASQUERADING":
+                            case 40:
+                                message.state = 40;
                                 break;
                             case "PROXY_CONNECTION":
                             case 15:
@@ -27405,6 +32799,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.forwardingRule: object expected");
                                 message.forwardingRule = $root.google.cloud.networkmanagement.v1beta1.ForwardingRuleInfo.fromObject(object.forwardingRule);
                             }
+                            if (object.hybridSubnet != null) {
+                                if (typeof object.hybridSubnet !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.hybridSubnet: object expected");
+                                message.hybridSubnet = $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.fromObject(object.hybridSubnet);
+                            }
                             if (object.vpnGateway != null) {
                                 if (typeof object.vpnGateway !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.vpnGateway: object expected");
@@ -27414,6 +32813,11 @@
                                 if (typeof object.vpnTunnel !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.vpnTunnel: object expected");
                                 message.vpnTunnel = $root.google.cloud.networkmanagement.v1beta1.VpnTunnelInfo.fromObject(object.vpnTunnel);
+                            }
+                            if (object.interconnectAttachment != null) {
+                                if (typeof object.interconnectAttachment !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.interconnectAttachment: object expected");
+                                message.interconnectAttachment = $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.fromObject(object.interconnectAttachment);
                             }
                             if (object.vpcConnector != null) {
                                 if (typeof object.vpcConnector !== "object")
@@ -27464,6 +32868,16 @@
                                 if (typeof object.gkeMaster !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkeMaster: object expected");
                                 message.gkeMaster = $root.google.cloud.networkmanagement.v1beta1.GKEMasterInfo.fromObject(object.gkeMaster);
+                            }
+                            if (object.gkePod != null) {
+                                if (typeof object.gkePod !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.gkePod: object expected");
+                                message.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.fromObject(object.gkePod);
+                            }
+                            if (object.ipMasqueradingSkipped != null) {
+                                if (typeof object.ipMasqueradingSkipped !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.ipMasqueradingSkipped: object expected");
+                                message.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.fromObject(object.ipMasqueradingSkipped);
                             }
                             if (object.cloudSqlInstance != null) {
                                 if (typeof object.cloudSqlInstance !== "object")
@@ -27695,6 +33109,26 @@
                                 if (options.oneofs)
                                     object.stepInfo = "serverlessExternalConnection";
                             }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.toObject(message.interconnectAttachment, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "interconnectAttachment";
+                            }
+                            if (message.hybridSubnet != null && message.hasOwnProperty("hybridSubnet")) {
+                                object.hybridSubnet = $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.toObject(message.hybridSubnet, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "hybridSubnet";
+                            }
+                            if (message.gkePod != null && message.hasOwnProperty("gkePod")) {
+                                object.gkePod = $root.google.cloud.networkmanagement.v1beta1.GkePodInfo.toObject(message.gkePod, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "gkePod";
+                            }
+                            if (message.ipMasqueradingSkipped != null && message.hasOwnProperty("ipMasqueradingSkipped")) {
+                                object.ipMasqueradingSkipped = $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.toObject(message.ipMasqueradingSkipped, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "ipMasqueradingSkipped";
+                            }
                             return object;
                         };
     
@@ -27735,6 +33169,7 @@
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
+                         * @property {number} START_FROM_GKE_POD=39 START_FROM_GKE_POD value
                          * @property {number} START_FROM_REDIS_INSTANCE=32 START_FROM_REDIS_INSTANCE value
                          * @property {number} START_FROM_REDIS_CLUSTER=33 START_FROM_REDIS_CLUSTER value
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
@@ -27752,12 +33187,15 @@
                          * @property {number} ARRIVE_AT_INSTANCE=9 ARRIVE_AT_INSTANCE value
                          * @property {number} ARRIVE_AT_INTERNAL_LOAD_BALANCER=10 ARRIVE_AT_INTERNAL_LOAD_BALANCER value
                          * @property {number} ARRIVE_AT_EXTERNAL_LOAD_BALANCER=11 ARRIVE_AT_EXTERNAL_LOAD_BALANCER value
+                         * @property {number} ARRIVE_AT_HYBRID_SUBNET=38 ARRIVE_AT_HYBRID_SUBNET value
                          * @property {number} ARRIVE_AT_VPN_GATEWAY=12 ARRIVE_AT_VPN_GATEWAY value
                          * @property {number} ARRIVE_AT_VPN_TUNNEL=13 ARRIVE_AT_VPN_TUNNEL value
+                         * @property {number} ARRIVE_AT_INTERCONNECT_ATTACHMENT=37 ARRIVE_AT_INTERCONNECT_ATTACHMENT value
                          * @property {number} ARRIVE_AT_VPC_CONNECTOR=24 ARRIVE_AT_VPC_CONNECTOR value
                          * @property {number} DIRECT_VPC_EGRESS_CONNECTION=35 DIRECT_VPC_EGRESS_CONNECTION value
                          * @property {number} SERVERLESS_EXTERNAL_CONNECTION=36 SERVERLESS_EXTERNAL_CONNECTION value
                          * @property {number} NAT=14 NAT value
+                         * @property {number} SKIP_GKE_POD_IP_MASQUERADING=40 SKIP_GKE_POD_IP_MASQUERADING value
                          * @property {number} PROXY_CONNECTION=15 PROXY_CONNECTION value
                          * @property {number} DELIVER=16 DELIVER value
                          * @property {number} DROP=17 DROP value
@@ -27774,6 +33212,7 @@
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
+                            values[valuesById[39] = "START_FROM_GKE_POD"] = 39;
                             values[valuesById[32] = "START_FROM_REDIS_INSTANCE"] = 32;
                             values[valuesById[33] = "START_FROM_REDIS_CLUSTER"] = 33;
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
@@ -27791,12 +33230,15 @@
                             values[valuesById[9] = "ARRIVE_AT_INSTANCE"] = 9;
                             values[valuesById[10] = "ARRIVE_AT_INTERNAL_LOAD_BALANCER"] = 10;
                             values[valuesById[11] = "ARRIVE_AT_EXTERNAL_LOAD_BALANCER"] = 11;
+                            values[valuesById[38] = "ARRIVE_AT_HYBRID_SUBNET"] = 38;
                             values[valuesById[12] = "ARRIVE_AT_VPN_GATEWAY"] = 12;
                             values[valuesById[13] = "ARRIVE_AT_VPN_TUNNEL"] = 13;
+                            values[valuesById[37] = "ARRIVE_AT_INTERCONNECT_ATTACHMENT"] = 37;
                             values[valuesById[24] = "ARRIVE_AT_VPC_CONNECTOR"] = 24;
                             values[valuesById[35] = "DIRECT_VPC_EGRESS_CONNECTION"] = 35;
                             values[valuesById[36] = "SERVERLESS_EXTERNAL_CONNECTION"] = 36;
                             values[valuesById[14] = "NAT"] = 14;
+                            values[valuesById[40] = "SKIP_GKE_POD_IP_MASQUERADING"] = 40;
                             values[valuesById[15] = "PROXY_CONNECTION"] = 15;
                             values[valuesById[16] = "DELIVER"] = 16;
                             values[valuesById[17] = "DROP"] = 17;
@@ -27824,6 +33266,8 @@
                          * @property {Array.<string>|null} [networkTags] InstanceInfo networkTags
                          * @property {string|null} [serviceAccount] InstanceInfo serviceAccount
                          * @property {string|null} [pscNetworkAttachmentUri] InstanceInfo pscNetworkAttachmentUri
+                         * @property {boolean|null} [running] InstanceInfo running
+                         * @property {google.cloud.networkmanagement.v1beta1.InstanceInfo.Status|null} [status] InstanceInfo status
                          */
     
                         /**
@@ -27915,6 +33359,22 @@
                         InstanceInfo.prototype.pscNetworkAttachmentUri = "";
     
                         /**
+                         * InstanceInfo running.
+                         * @member {boolean} running
+                         * @memberof google.cloud.networkmanagement.v1beta1.InstanceInfo
+                         * @instance
+                         */
+                        InstanceInfo.prototype.running = false;
+    
+                        /**
+                         * InstanceInfo status.
+                         * @member {google.cloud.networkmanagement.v1beta1.InstanceInfo.Status} status
+                         * @memberof google.cloud.networkmanagement.v1beta1.InstanceInfo
+                         * @instance
+                         */
+                        InstanceInfo.prototype.status = 0;
+    
+                        /**
                          * Creates a new InstanceInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.InstanceInfo
@@ -27957,6 +33417,10 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.serviceAccount);
                             if (message.pscNetworkAttachmentUri != null && Object.hasOwnProperty.call(message, "pscNetworkAttachmentUri"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.pscNetworkAttachmentUri);
+                            if (message.running != null && Object.hasOwnProperty.call(message, "running"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.running);
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.status);
                             return writer;
                         };
     
@@ -28031,6 +33495,14 @@
                                         message.pscNetworkAttachmentUri = reader.string();
                                         break;
                                     }
+                                case 10: {
+                                        message.running = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.status = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -28097,6 +33569,18 @@
                             if (message.pscNetworkAttachmentUri != null && message.hasOwnProperty("pscNetworkAttachmentUri"))
                                 if (!$util.isString(message.pscNetworkAttachmentUri))
                                     return "pscNetworkAttachmentUri: string expected";
+                            if (message.running != null && message.hasOwnProperty("running"))
+                                if (typeof message.running !== "boolean")
+                                    return "running: boolean expected";
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                switch (message.status) {
+                                default:
+                                    return "status: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -28135,6 +33619,28 @@
                                 message.serviceAccount = String(object.serviceAccount);
                             if (object.pscNetworkAttachmentUri != null)
                                 message.pscNetworkAttachmentUri = String(object.pscNetworkAttachmentUri);
+                            if (object.running != null)
+                                message.running = Boolean(object.running);
+                            switch (object.status) {
+                            default:
+                                if (typeof object.status === "number") {
+                                    message.status = object.status;
+                                    break;
+                                }
+                                break;
+                            case "STATUS_UNSPECIFIED":
+                            case 0:
+                                message.status = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.status = 1;
+                                break;
+                            case "NOT_RUNNING":
+                            case 2:
+                                message.status = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -28162,6 +33668,8 @@
                                 object.externalIp = "";
                                 object.serviceAccount = "";
                                 object.pscNetworkAttachmentUri = "";
+                                object.running = false;
+                                object.status = options.enums === String ? "STATUS_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -28184,6 +33692,10 @@
                                 object.serviceAccount = message.serviceAccount;
                             if (message.pscNetworkAttachmentUri != null && message.hasOwnProperty("pscNetworkAttachmentUri"))
                                 object.pscNetworkAttachmentUri = message.pscNetworkAttachmentUri;
+                            if (message.running != null && message.hasOwnProperty("running"))
+                                object.running = message.running;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.InstanceInfo.Status[message.status] === undefined ? message.status : $root.google.cloud.networkmanagement.v1beta1.InstanceInfo.Status[message.status] : message.status;
                             return object;
                         };
     
@@ -28212,6 +33724,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.InstanceInfo";
                         };
+    
+                        /**
+                         * Status enum.
+                         * @name google.cloud.networkmanagement.v1beta1.InstanceInfo.Status
+                         * @enum {number}
+                         * @property {number} STATUS_UNSPECIFIED=0 STATUS_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} NOT_RUNNING=2 NOT_RUNNING value
+                         */
+                        InstanceInfo.Status = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "NOT_RUNNING"] = 2;
+                            return values;
+                        })();
     
                         return InstanceInfo;
                     })();
@@ -28531,6 +34059,8 @@
                          * @property {string|null} [policy] FirewallInfo policy
                          * @property {string|null} [policyUri] FirewallInfo policyUri
                          * @property {google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType|null} [firewallRuleType] FirewallInfo firewallRuleType
+                         * @property {number|null} [policyPriority] FirewallInfo policyPriority
+                         * @property {google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType|null} [targetType] FirewallInfo targetType
                          */
     
                         /**
@@ -28639,6 +34169,22 @@
                         FirewallInfo.prototype.firewallRuleType = 0;
     
                         /**
+                         * FirewallInfo policyPriority.
+                         * @member {number} policyPriority
+                         * @memberof google.cloud.networkmanagement.v1beta1.FirewallInfo
+                         * @instance
+                         */
+                        FirewallInfo.prototype.policyPriority = 0;
+    
+                        /**
+                         * FirewallInfo targetType.
+                         * @member {google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType} targetType
+                         * @memberof google.cloud.networkmanagement.v1beta1.FirewallInfo
+                         * @instance
+                         */
+                        FirewallInfo.prototype.targetType = 0;
+    
+                        /**
                          * Creates a new FirewallInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.FirewallInfo
@@ -28686,6 +34232,10 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.firewallRuleType);
                             if (message.policyUri != null && Object.hasOwnProperty.call(message, "policyUri"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.policyUri);
+                            if (message.policyPriority != null && Object.hasOwnProperty.call(message, "policyPriority"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.policyPriority);
+                            if (message.targetType != null && Object.hasOwnProperty.call(message, "targetType"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.targetType);
                             return writer;
                         };
     
@@ -28768,6 +34318,14 @@
                                     }
                                 case 10: {
                                         message.firewallRuleType = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.policyPriority = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.targetType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -28854,9 +34412,23 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                 case 100:
                                 case 101:
                                 case 102:
+                                    break;
+                                }
+                            if (message.policyPriority != null && message.hasOwnProperty("policyPriority"))
+                                if (!$util.isInteger(message.policyPriority))
+                                    return "policyPriority: integer expected";
+                            if (message.targetType != null && message.hasOwnProperty("targetType"))
+                                switch (message.targetType) {
+                                default:
+                                    return "targetType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -28939,6 +34511,14 @@
                             case 6:
                                 message.firewallRuleType = 6;
                                 break;
+                            case "SYSTEM_NETWORK_FIREWALL_POLICY_RULE":
+                            case 7:
+                                message.firewallRuleType = 7;
+                                break;
+                            case "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE":
+                            case 8:
+                                message.firewallRuleType = 8;
+                                break;
                             case "UNSUPPORTED_FIREWALL_POLICY_RULE":
                             case 100:
                                 message.firewallRuleType = 100;
@@ -28950,6 +34530,28 @@
                             case "ANALYSIS_SKIPPED":
                             case 102:
                                 message.firewallRuleType = 102;
+                                break;
+                            }
+                            if (object.policyPriority != null)
+                                message.policyPriority = object.policyPriority | 0;
+                            switch (object.targetType) {
+                            default:
+                                if (typeof object.targetType === "number") {
+                                    message.targetType = object.targetType;
+                                    break;
+                                }
+                                break;
+                            case "TARGET_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.targetType = 0;
+                                break;
+                            case "INSTANCES":
+                            case 1:
+                                message.targetType = 1;
+                                break;
+                            case "INTERNAL_MANAGED_LB":
+                            case 2:
+                                message.targetType = 2;
                                 break;
                             }
                             return message;
@@ -28982,6 +34584,8 @@
                                 object.policy = "";
                                 object.firewallRuleType = options.enums === String ? "FIREWALL_RULE_TYPE_UNSPECIFIED" : 0;
                                 object.policyUri = "";
+                                object.policyPriority = 0;
+                                object.targetType = options.enums === String ? "TARGET_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
@@ -29011,6 +34615,10 @@
                                 object.firewallRuleType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType[message.firewallRuleType] === undefined ? message.firewallRuleType : $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType[message.firewallRuleType] : message.firewallRuleType;
                             if (message.policyUri != null && message.hasOwnProperty("policyUri"))
                                 object.policyUri = message.policyUri;
+                            if (message.policyPriority != null && message.hasOwnProperty("policyPriority"))
+                                object.policyPriority = message.policyPriority;
+                            if (message.targetType != null && message.hasOwnProperty("targetType"))
+                                object.targetType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType[message.targetType] === undefined ? message.targetType : $root.google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType[message.targetType] : message.targetType;
                             return object;
                         };
     
@@ -29051,6 +34659,8 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_NETWORK_FIREWALL_POLICY_RULE=7 SYSTEM_NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE=8 SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} UNSUPPORTED_FIREWALL_POLICY_RULE=100 UNSUPPORTED_FIREWALL_POLICY_RULE value
                          * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          * @property {number} ANALYSIS_SKIPPED=102 ANALYSIS_SKIPPED value
@@ -29064,9 +34674,27 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[7] = "SYSTEM_NETWORK_FIREWALL_POLICY_RULE"] = 7;
+                            values[valuesById[8] = "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE"] = 8;
                             values[valuesById[100] = "UNSUPPORTED_FIREWALL_POLICY_RULE"] = 100;
                             values[valuesById[101] = "TRACKING_STATE"] = 101;
                             values[valuesById[102] = "ANALYSIS_SKIPPED"] = 102;
+                            return values;
+                        })();
+    
+                        /**
+                         * TargetType enum.
+                         * @name google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType
+                         * @enum {number}
+                         * @property {number} TARGET_TYPE_UNSPECIFIED=0 TARGET_TYPE_UNSPECIFIED value
+                         * @property {number} INSTANCES=1 INSTANCES value
+                         * @property {number} INTERNAL_MANAGED_LB=2 INTERNAL_MANAGED_LB value
+                         */
+                        FirewallInfo.TargetType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TARGET_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INSTANCES"] = 1;
+                            values[valuesById[2] = "INTERNAL_MANAGED_LB"] = 2;
                             return values;
                         })();
     
@@ -29627,6 +35255,7 @@
                                 case 10:
                                 case 11:
                                 case 12:
+                                case 13:
                                     break;
                                 }
                             if (message.routeScope != null && message.hasOwnProperty("routeScope"))
@@ -29842,6 +35471,10 @@
                             case "NEXT_HOP_NCC_HUB":
                             case 12:
                                 message.nextHopType = 12;
+                                break;
+                            case "SECURE_WEB_PROXY_GATEWAY":
+                            case 13:
+                                message.nextHopType = 13;
                                 break;
                             }
                             switch (object.routeScope) {
@@ -30112,6 +35745,7 @@
                          * @property {number} NEXT_HOP_ILB=10 NEXT_HOP_ILB value
                          * @property {number} NEXT_HOP_ROUTER_APPLIANCE=11 NEXT_HOP_ROUTER_APPLIANCE value
                          * @property {number} NEXT_HOP_NCC_HUB=12 NEXT_HOP_NCC_HUB value
+                         * @property {number} SECURE_WEB_PROXY_GATEWAY=13 SECURE_WEB_PROXY_GATEWAY value
                          */
                         RouteInfo.NextHopType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -30128,6 +35762,7 @@
                             values[valuesById[10] = "NEXT_HOP_ILB"] = 10;
                             values[valuesById[11] = "NEXT_HOP_ROUTER_APPLIANCE"] = 11;
                             values[valuesById[12] = "NEXT_HOP_NCC_HUB"] = 12;
+                            values[valuesById[13] = "SECURE_WEB_PROXY_GATEWAY"] = 13;
                             return values;
                         })();
     
@@ -31690,6 +37325,258 @@
                         return LoadBalancerBackend;
                     })();
     
+                    v1beta1.HybridSubnetInfo = (function() {
+    
+                        /**
+                         * Properties of a HybridSubnetInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IHybridSubnetInfo
+                         * @property {string|null} [displayName] HybridSubnetInfo displayName
+                         * @property {string|null} [uri] HybridSubnetInfo uri
+                         * @property {string|null} [region] HybridSubnetInfo region
+                         */
+    
+                        /**
+                         * Constructs a new HybridSubnetInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a HybridSubnetInfo.
+                         * @implements IHybridSubnetInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo=} [properties] Properties to set
+                         */
+                        function HybridSubnetInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HybridSubnetInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.displayName = "";
+    
+                        /**
+                         * HybridSubnetInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.uri = "";
+    
+                        /**
+                         * HybridSubnetInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @instance
+                         */
+                        HybridSubnetInfo.prototype.region = "";
+    
+                        /**
+                         * Creates a new HybridSubnetInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.HybridSubnetInfo} HybridSubnetInfo instance
+                         */
+                        HybridSubnetInfo.create = function create(properties) {
+                            return new HybridSubnetInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HybridSubnetInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo} message HybridSubnetInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridSubnetInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HybridSubnetInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo} message HybridSubnetInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HybridSubnetInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HybridSubnetInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.HybridSubnetInfo} HybridSubnetInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridSubnetInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HybridSubnetInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.HybridSubnetInfo} HybridSubnetInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HybridSubnetInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HybridSubnetInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HybridSubnetInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HybridSubnetInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.HybridSubnetInfo} HybridSubnetInfo
+                         */
+                        HybridSubnetInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.HybridSubnetInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HybridSubnetInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.HybridSubnetInfo} message HybridSubnetInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HybridSubnetInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.region = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HybridSubnetInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HybridSubnetInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HybridSubnetInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.HybridSubnetInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HybridSubnetInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.HybridSubnetInfo";
+                        };
+    
+                        return HybridSubnetInfo;
+                    })();
+    
                     v1beta1.VpnGatewayInfo = (function() {
     
                         /**
@@ -32448,6 +38335,404 @@
                         return VpnTunnelInfo;
                     })();
     
+                    v1beta1.InterconnectAttachmentInfo = (function() {
+    
+                        /**
+                         * Properties of an InterconnectAttachmentInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IInterconnectAttachmentInfo
+                         * @property {string|null} [displayName] InterconnectAttachmentInfo displayName
+                         * @property {string|null} [uri] InterconnectAttachmentInfo uri
+                         * @property {string|null} [interconnectUri] InterconnectAttachmentInfo interconnectUri
+                         * @property {string|null} [region] InterconnectAttachmentInfo region
+                         * @property {string|null} [cloudRouterUri] InterconnectAttachmentInfo cloudRouterUri
+                         * @property {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type|null} [type] InterconnectAttachmentInfo type
+                         * @property {string|null} [l2AttachmentMatchedIpAddress] InterconnectAttachmentInfo l2AttachmentMatchedIpAddress
+                         */
+    
+                        /**
+                         * Constructs a new InterconnectAttachmentInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an InterconnectAttachmentInfo.
+                         * @implements IInterconnectAttachmentInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo=} [properties] Properties to set
+                         */
+                        function InterconnectAttachmentInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InterconnectAttachmentInfo displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.displayName = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.uri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo interconnectUri.
+                         * @member {string} interconnectUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.interconnectUri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.region = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo cloudRouterUri.
+                         * @member {string} cloudRouterUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.cloudRouterUri = "";
+    
+                        /**
+                         * InterconnectAttachmentInfo type.
+                         * @member {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type} type
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.type = 0;
+    
+                        /**
+                         * InterconnectAttachmentInfo l2AttachmentMatchedIpAddress.
+                         * @member {string} l2AttachmentMatchedIpAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         */
+                        InterconnectAttachmentInfo.prototype.l2AttachmentMatchedIpAddress = "";
+    
+                        /**
+                         * Creates a new InterconnectAttachmentInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo} InterconnectAttachmentInfo instance
+                         */
+                        InterconnectAttachmentInfo.create = function create(properties) {
+                            return new InterconnectAttachmentInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InterconnectAttachmentInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo} message InterconnectAttachmentInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InterconnectAttachmentInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                            if (message.interconnectUri != null && Object.hasOwnProperty.call(message, "interconnectUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.interconnectUri);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.region);
+                            if (message.cloudRouterUri != null && Object.hasOwnProperty.call(message, "cloudRouterUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.cloudRouterUri);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
+                            if (message.l2AttachmentMatchedIpAddress != null && Object.hasOwnProperty.call(message, "l2AttachmentMatchedIpAddress"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.l2AttachmentMatchedIpAddress);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InterconnectAttachmentInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo} message InterconnectAttachmentInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InterconnectAttachmentInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InterconnectAttachmentInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.interconnectUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.region = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cloudRouterUri = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.l2AttachmentMatchedIpAddress = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InterconnectAttachmentInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InterconnectAttachmentInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InterconnectAttachmentInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.interconnectUri != null && message.hasOwnProperty("interconnectUri"))
+                                if (!$util.isString(message.interconnectUri))
+                                    return "interconnectUri: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            if (message.cloudRouterUri != null && message.hasOwnProperty("cloudRouterUri"))
+                                if (!$util.isString(message.cloudRouterUri))
+                                    return "cloudRouterUri: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.l2AttachmentMatchedIpAddress != null && message.hasOwnProperty("l2AttachmentMatchedIpAddress"))
+                                if (!$util.isString(message.l2AttachmentMatchedIpAddress))
+                                    return "l2AttachmentMatchedIpAddress: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InterconnectAttachmentInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo} InterconnectAttachmentInfo
+                         */
+                        InterconnectAttachmentInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.interconnectUri != null)
+                                message.interconnectUri = String(object.interconnectUri);
+                            if (object.region != null)
+                                message.region = String(object.region);
+                            if (object.cloudRouterUri != null)
+                                message.cloudRouterUri = String(object.cloudRouterUri);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "DEDICATED":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "PARTNER":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "PARTNER_PROVIDER":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "L2_DEDICATED":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.l2AttachmentMatchedIpAddress != null)
+                                message.l2AttachmentMatchedIpAddress = String(object.l2AttachmentMatchedIpAddress);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InterconnectAttachmentInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo} message InterconnectAttachmentInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InterconnectAttachmentInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.displayName = "";
+                                object.uri = "";
+                                object.interconnectUri = "";
+                                object.region = "";
+                                object.cloudRouterUri = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.l2AttachmentMatchedIpAddress = "";
+                            }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.interconnectUri != null && message.hasOwnProperty("interconnectUri"))
+                                object.interconnectUri = message.interconnectUri;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
+                            if (message.cloudRouterUri != null && message.hasOwnProperty("cloudRouterUri"))
+                                object.cloudRouterUri = message.cloudRouterUri;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type[message.type] : message.type;
+                            if (message.l2AttachmentMatchedIpAddress != null && message.hasOwnProperty("l2AttachmentMatchedIpAddress"))
+                                object.l2AttachmentMatchedIpAddress = message.l2AttachmentMatchedIpAddress;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InterconnectAttachmentInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InterconnectAttachmentInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InterconnectAttachmentInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InterconnectAttachmentInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} DEDICATED=1 DEDICATED value
+                         * @property {number} PARTNER=2 PARTNER value
+                         * @property {number} PARTNER_PROVIDER=3 PARTNER_PROVIDER value
+                         * @property {number} L2_DEDICATED=4 L2_DEDICATED value
+                         */
+                        InterconnectAttachmentInfo.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEDICATED"] = 1;
+                            values[valuesById[2] = "PARTNER"] = 2;
+                            values[valuesById[3] = "PARTNER_PROVIDER"] = 3;
+                            values[valuesById[4] = "L2_DEDICATED"] = 4;
+                            return values;
+                        })();
+    
+                        return InterconnectAttachmentInfo;
+                    })();
+    
                     v1beta1.EndpointInfo = (function() {
     
                         /**
@@ -32826,6 +39111,7 @@
                          * @property {string|null} [ipAddress] DeliverInfo ipAddress
                          * @property {string|null} [storageBucket] DeliverInfo storageBucket
                          * @property {string|null} [pscGoogleApiTarget] DeliverInfo pscGoogleApiTarget
+                         * @property {google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType|null} [googleServiceType] DeliverInfo googleServiceType
                          */
     
                         /**
@@ -32884,6 +39170,14 @@
                         DeliverInfo.prototype.pscGoogleApiTarget = "";
     
                         /**
+                         * DeliverInfo googleServiceType.
+                         * @member {google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType} googleServiceType
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeliverInfo
+                         * @instance
+                         */
+                        DeliverInfo.prototype.googleServiceType = 0;
+    
+                        /**
                          * Creates a new DeliverInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.DeliverInfo
@@ -32917,6 +39211,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.storageBucket);
                             if (message.pscGoogleApiTarget != null && Object.hasOwnProperty.call(message, "pscGoogleApiTarget"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.pscGoogleApiTarget);
+                            if (message.googleServiceType != null && Object.hasOwnProperty.call(message, "googleServiceType"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.googleServiceType);
                             return writer;
                         };
     
@@ -32971,6 +39267,10 @@
                                     }
                                 case 5: {
                                         message.pscGoogleApiTarget = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.googleServiceType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -33030,6 +39330,7 @@
                                 case 15:
                                 case 16:
                                 case 17:
+                                case 19:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -33044,6 +39345,18 @@
                             if (message.pscGoogleApiTarget != null && message.hasOwnProperty("pscGoogleApiTarget"))
                                 if (!$util.isString(message.pscGoogleApiTarget))
                                     return "pscGoogleApiTarget: string expected";
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                switch (message.googleServiceType) {
+                                default:
+                                    return "googleServiceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -33138,6 +39451,10 @@
                             case 17:
                                 message.target = 17;
                                 break;
+                            case "GKE_POD":
+                            case 19:
+                                message.target = 19;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -33147,6 +39464,38 @@
                                 message.storageBucket = String(object.storageBucket);
                             if (object.pscGoogleApiTarget != null)
                                 message.pscGoogleApiTarget = String(object.pscGoogleApiTarget);
+                            switch (object.googleServiceType) {
+                            default:
+                                if (typeof object.googleServiceType === "number") {
+                                    message.googleServiceType = object.googleServiceType;
+                                    break;
+                                }
+                                break;
+                            case "GOOGLE_SERVICE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.googleServiceType = 0;
+                                break;
+                            case "IAP":
+                            case 1:
+                                message.googleServiceType = 1;
+                                break;
+                            case "GFE_PROXY_OR_HEALTH_CHECK_PROBER":
+                            case 2:
+                                message.googleServiceType = 2;
+                                break;
+                            case "CLOUD_DNS":
+                            case 3:
+                                message.googleServiceType = 3;
+                                break;
+                            case "PRIVATE_GOOGLE_ACCESS":
+                            case 4:
+                                message.googleServiceType = 4;
+                                break;
+                            case "SERVERLESS_VPC_ACCESS":
+                            case 5:
+                                message.googleServiceType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -33169,6 +39518,7 @@
                                 object.ipAddress = "";
                                 object.storageBucket = "";
                                 object.pscGoogleApiTarget = "";
+                                object.googleServiceType = options.enums === String ? "GOOGLE_SERVICE_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] : message.target;
@@ -33180,6 +39530,8 @@
                                 object.storageBucket = message.storageBucket;
                             if (message.pscGoogleApiTarget != null && message.hasOwnProperty("pscGoogleApiTarget"))
                                 object.pscGoogleApiTarget = message.pscGoogleApiTarget;
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                object.googleServiceType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType[message.googleServiceType] === undefined ? message.googleServiceType : $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType[message.googleServiceType] : message.googleServiceType;
                             return object;
                         };
     
@@ -33231,6 +39583,7 @@
                          * @property {number} GOOGLE_MANAGED_SERVICE=15 GOOGLE_MANAGED_SERVICE value
                          * @property {number} REDIS_INSTANCE=16 REDIS_INSTANCE value
                          * @property {number} REDIS_CLUSTER=17 REDIS_CLUSTER value
+                         * @property {number} GKE_POD=19 GKE_POD value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -33252,6 +39605,29 @@
                             values[valuesById[15] = "GOOGLE_MANAGED_SERVICE"] = 15;
                             values[valuesById[16] = "REDIS_INSTANCE"] = 16;
                             values[valuesById[17] = "REDIS_CLUSTER"] = 17;
+                            values[valuesById[19] = "GKE_POD"] = 19;
+                            return values;
+                        })();
+    
+                        /**
+                         * GoogleServiceType enum.
+                         * @name google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType
+                         * @enum {number}
+                         * @property {number} GOOGLE_SERVICE_TYPE_UNSPECIFIED=0 GOOGLE_SERVICE_TYPE_UNSPECIFIED value
+                         * @property {number} IAP=1 IAP value
+                         * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
+                         * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         * @property {number} PRIVATE_GOOGLE_ACCESS=4 PRIVATE_GOOGLE_ACCESS value
+                         * @property {number} SERVERLESS_VPC_ACCESS=5 SERVERLESS_VPC_ACCESS value
+                         */
+                        DeliverInfo.GoogleServiceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GOOGLE_SERVICE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IAP"] = 1;
+                            values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
+                            values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            values[valuesById[4] = "PRIVATE_GOOGLE_ACCESS"] = 4;
+                            values[valuesById[5] = "SERVERLESS_VPC_ACCESS"] = 5;
                             return values;
                         })();
     
@@ -33435,6 +39811,7 @@
                                 case 7:
                                 case 8:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -33504,6 +39881,10 @@
                             case "ROUTER_APPLIANCE":
                             case 9:
                                 message.target = 9;
+                                break;
+                            case "SECURE_WEB_PROXY_GATEWAY":
+                            case 10:
+                                message.target = 10;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -33580,6 +39961,7 @@
                          * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
                          * @property {number} NCC_HUB=8 NCC_HUB value
                          * @property {number} ROUTER_APPLIANCE=9 ROUTER_APPLIANCE value
+                         * @property {number} SECURE_WEB_PROXY_GATEWAY=10 SECURE_WEB_PROXY_GATEWAY value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -33593,6 +39975,7 @@
                             values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
                             values[valuesById[8] = "NCC_HUB"] = 8;
                             values[valuesById[9] = "ROUTER_APPLIANCE"] = 9;
+                            values[valuesById[10] = "SECURE_WEB_PROXY_GATEWAY"] = 10;
                             return values;
                         })();
     
@@ -33802,6 +40185,9 @@
                                 case 29:
                                 case 36:
                                 case 5:
+                                case 42:
+                                case 43:
+                                case 44:
                                 case 6:
                                 case 9:
                                 case 10:
@@ -33814,7 +40200,9 @@
                                 case 26:
                                 case 27:
                                 case 19:
+                                case 39:
                                 case 20:
+                                case 45:
                                 case 34:
                                 case 35:
                                 case 21:
@@ -33822,6 +40210,8 @@
                                 case 30:
                                 case 31:
                                 case 37:
+                                case 40:
+                                case 41:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -33927,6 +40317,18 @@
                             case 5:
                                 message.cause = 5;
                                 break;
+                            case "NO_SOURCE_GCP_NETWORK_LOCATION":
+                            case 42:
+                                message.cause = 42;
+                                break;
+                            case "NO_SOURCE_NON_GCP_NETWORK_LOCATION":
+                            case 43:
+                                message.cause = 43;
+                                break;
+                            case "NO_SOURCE_INTERNET_LOCATION":
+                            case 44:
+                                message.cause = 44;
+                                break;
                             case "INVALID_ARGUMENT":
                             case 6:
                                 message.cause = 6;
@@ -33975,9 +40377,17 @@
                             case 19:
                                 message.cause = 19;
                                 break;
+                            case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT":
+                            case 39:
+                                message.cause = 39;
+                                break;
                             case "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED":
                             case 20:
                                 message.cause = 20;
+                                break;
+                            case "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED":
+                            case 45:
+                                message.cause = 45;
                                 break;
                             case "SOURCE_REDIS_CLUSTER_UNSUPPORTED":
                             case 34:
@@ -34006,6 +40416,14 @@
                             case "NO_SERVERLESS_IP_RANGES":
                             case 37:
                                 message.cause = 37;
+                                break;
+                            case "IP_VERSION_PROTOCOL_MISMATCH":
+                            case 40:
+                                message.cause = 40;
+                                break;
+                            case "GKE_POD_UNKNOWN_ENDPOINT_LOCATION":
+                            case 41:
+                                message.cause = 41;
                                 break;
                             }
                             if (object.resourceUri != null)
@@ -34103,6 +40521,9 @@
                          * @property {number} PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS=29 PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS value
                          * @property {number} PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS=36 PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS value
                          * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
+                         * @property {number} NO_SOURCE_GCP_NETWORK_LOCATION=42 NO_SOURCE_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_NON_GCP_NETWORK_LOCATION=43 NO_SOURCE_NON_GCP_NETWORK_LOCATION value
+                         * @property {number} NO_SOURCE_INTERNET_LOCATION=44 NO_SOURCE_INTERNET_LOCATION value
                          * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
                          * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
                          * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
@@ -34115,7 +40536,9 @@
                          * @property {number} FIREWALL_CONFIG_NOT_FOUND=26 FIREWALL_CONFIG_NOT_FOUND value
                          * @property {number} ROUTE_CONFIG_NOT_FOUND=27 ROUTE_CONFIG_NOT_FOUND value
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
+                         * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT=39 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT value
                          * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
+                         * @property {number} SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED=45 SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_CLUSTER_UNSUPPORTED=34 SOURCE_REDIS_CLUSTER_UNSUPPORTED value
                          * @property {number} SOURCE_REDIS_INSTANCE_UNSUPPORTED=35 SOURCE_REDIS_INSTANCE_UNSUPPORTED value
                          * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
@@ -34123,6 +40546,8 @@
                          * @property {number} UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT=30 UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT value
                          * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
                          * @property {number} NO_SERVERLESS_IP_RANGES=37 NO_SERVERLESS_IP_RANGES value
+                         * @property {number} IP_VERSION_PROTOCOL_MISMATCH=40 IP_VERSION_PROTOCOL_MISMATCH value
+                         * @property {number} GKE_POD_UNKNOWN_ENDPOINT_LOCATION=41 GKE_POD_UNKNOWN_ENDPOINT_LOCATION value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -34143,6 +40568,9 @@
                             values[valuesById[29] = "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"] = 29;
                             values[valuesById[36] = "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"] = 36;
                             values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
+                            values[valuesById[42] = "NO_SOURCE_GCP_NETWORK_LOCATION"] = 42;
+                            values[valuesById[43] = "NO_SOURCE_NON_GCP_NETWORK_LOCATION"] = 43;
+                            values[valuesById[44] = "NO_SOURCE_INTERNET_LOCATION"] = 44;
                             values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
                             values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
                             values[valuesById[10] = "INTERNAL_ERROR"] = 10;
@@ -34155,7 +40583,9 @@
                             values[valuesById[26] = "FIREWALL_CONFIG_NOT_FOUND"] = 26;
                             values[valuesById[27] = "ROUTE_CONFIG_NOT_FOUND"] = 27;
                             values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
+                            values[valuesById[39] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT"] = 39;
                             values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
+                            values[valuesById[45] = "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED"] = 45;
                             values[valuesById[34] = "SOURCE_REDIS_CLUSTER_UNSUPPORTED"] = 34;
                             values[valuesById[35] = "SOURCE_REDIS_INSTANCE_UNSUPPORTED"] = 35;
                             values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
@@ -34163,6 +40593,8 @@
                             values[valuesById[30] = "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"] = 30;
                             values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
                             values[valuesById[37] = "NO_SERVERLESS_IP_RANGES"] = 37;
+                            values[valuesById[40] = "IP_VERSION_PROTOCOL_MISMATCH"] = 40;
+                            values[valuesById[41] = "GKE_POD_UNKNOWN_ENDPOINT_LOCATION"] = 41;
                             return values;
                         })();
     
@@ -34180,6 +40612,8 @@
                          * @property {string|null} [sourceIp] DropInfo sourceIp
                          * @property {string|null} [destinationIp] DropInfo destinationIp
                          * @property {string|null} [region] DropInfo region
+                         * @property {string|null} [sourceGeolocationCode] DropInfo sourceGeolocationCode
+                         * @property {string|null} [destinationGeolocationCode] DropInfo destinationGeolocationCode
                          */
     
                         /**
@@ -34238,6 +40672,22 @@
                         DropInfo.prototype.region = "";
     
                         /**
+                         * DropInfo sourceGeolocationCode.
+                         * @member {string} sourceGeolocationCode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.sourceGeolocationCode = "";
+    
+                        /**
+                         * DropInfo destinationGeolocationCode.
+                         * @member {string} destinationGeolocationCode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.destinationGeolocationCode = "";
+    
+                        /**
                          * Creates a new DropInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
@@ -34271,6 +40721,10 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationIp);
                             if (message.region != null && Object.hasOwnProperty.call(message, "region"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
+                            if (message.sourceGeolocationCode != null && Object.hasOwnProperty.call(message, "sourceGeolocationCode"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceGeolocationCode);
+                            if (message.destinationGeolocationCode != null && Object.hasOwnProperty.call(message, "destinationGeolocationCode"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.destinationGeolocationCode);
                             return writer;
                         };
     
@@ -34327,6 +40781,14 @@
                                         message.region = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.sourceGeolocationCode = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.destinationGeolocationCode = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -34381,6 +40843,8 @@
                                 case 52:
                                 case 53:
                                 case 44:
+                                case 109:
+                                case 98:
                                 case 45:
                                 case 46:
                                 case 7:
@@ -34394,6 +40858,7 @@
                                 case 85:
                                 case 14:
                                 case 27:
+                                case 103:
                                 case 28:
                                 case 68:
                                 case 69:
@@ -34454,6 +40919,18 @@
                                 case 86:
                                 case 87:
                                 case 88:
+                                case 89:
+                                case 90:
+                                case 107:
+                                case 96:
+                                case 97:
+                                case 99:
+                                case 100:
+                                case 101:
+                                case 102:
+                                case 104:
+                                case 105:
+                                case 106:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -34468,6 +40945,12 @@
                             if (message.region != null && message.hasOwnProperty("region"))
                                 if (!$util.isString(message.region))
                                     return "region: string expected";
+                            if (message.sourceGeolocationCode != null && message.hasOwnProperty("sourceGeolocationCode"))
+                                if (!$util.isString(message.sourceGeolocationCode))
+                                    return "sourceGeolocationCode: string expected";
+                            if (message.destinationGeolocationCode != null && message.hasOwnProperty("destinationGeolocationCode"))
+                                if (!$util.isString(message.destinationGeolocationCode))
+                                    return "destinationGeolocationCode: string expected";
                             return null;
                         };
     
@@ -34550,6 +41033,14 @@
                             case 44:
                                 message.cause = 44;
                                 break;
+                            case "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS":
+                            case 109:
+                                message.cause = 109;
+                                break;
+                            case "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS":
+                            case 98:
+                                message.cause = 98;
+                                break;
                             case "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH":
                             case 45:
                                 message.cause = 45;
@@ -34601,6 +41092,10 @@
                             case "GKE_CLUSTER_NOT_RUNNING":
                             case 27:
                                 message.cause = 27;
+                                break;
+                            case "GKE_POD_NOT_RUNNING":
+                            case 103:
+                                message.cause = 103;
                                 break;
                             case "CLOUD_SQL_INSTANCE_NOT_RUNNING":
                             case 28:
@@ -34842,6 +41337,54 @@
                             case 88:
                                 message.cause = 88;
                                 break;
+                            case "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED":
+                            case 89:
+                                message.cause = 89;
+                                break;
+                            case "NO_MATCHING_NAT64_GATEWAY":
+                            case 90:
+                                message.cause = 90;
+                                break;
+                            case "NO_CONFIGURED_PRIVATE_NAT64_RULE":
+                            case 107:
+                                message.cause = 107;
+                                break;
+                            case "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH":
+                            case 96:
+                                message.cause = 96;
+                                break;
+                            case "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION":
+                            case 97:
+                                message.cause = 97;
+                                break;
+                            case "CLOUD_NAT_PROTOCOL_UNSUPPORTED":
+                            case 99:
+                                message.cause = 99;
+                                break;
+                            case "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL":
+                            case 100:
+                                message.cause = 100;
+                                break;
+                            case "L2_INTERCONNECT_UNSUPPORTED_PORT":
+                            case 101:
+                                message.cause = 101;
+                                break;
+                            case "L2_INTERCONNECT_DESTINATION_IP_MISMATCH":
+                            case 102:
+                                message.cause = 102;
+                                break;
+                            case "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED":
+                            case 104:
+                                message.cause = 104;
+                                break;
+                            case "HYBRID_SUBNET_REGION_MISMATCH":
+                            case 105:
+                                message.cause = 105;
+                                break;
+                            case "HYBRID_SUBNET_NO_ROUTE":
+                            case 106:
+                                message.cause = 106;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -34851,6 +41394,10 @@
                                 message.destinationIp = String(object.destinationIp);
                             if (object.region != null)
                                 message.region = String(object.region);
+                            if (object.sourceGeolocationCode != null)
+                                message.sourceGeolocationCode = String(object.sourceGeolocationCode);
+                            if (object.destinationGeolocationCode != null)
+                                message.destinationGeolocationCode = String(object.destinationGeolocationCode);
                             return message;
                         };
     
@@ -34873,6 +41420,8 @@
                                 object.sourceIp = "";
                                 object.destinationIp = "";
                                 object.region = "";
+                                object.sourceGeolocationCode = "";
+                                object.destinationGeolocationCode = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] : message.cause;
@@ -34884,6 +41433,10 @@
                                 object.destinationIp = message.destinationIp;
                             if (message.region != null && message.hasOwnProperty("region"))
                                 object.region = message.region;
+                            if (message.sourceGeolocationCode != null && message.hasOwnProperty("sourceGeolocationCode"))
+                                object.sourceGeolocationCode = message.sourceGeolocationCode;
+                            if (message.destinationGeolocationCode != null && message.hasOwnProperty("destinationGeolocationCode"))
+                                object.destinationGeolocationCode = message.destinationGeolocationCode;
                             return object;
                         };
     
@@ -34932,6 +41485,8 @@
                          * @property {number} ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED=52 ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED value
                          * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID=53 ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID value
                          * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS=44 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS=109 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS value
+                         * @property {number} NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS=98 NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS value
                          * @property {number} VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH=45 VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH value
                          * @property {number} VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH=46 VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH value
                          * @property {number} PRIVATE_TRAFFIC_TO_INTERNET=7 PRIVATE_TRAFFIC_TO_INTERNET value
@@ -34945,6 +41500,7 @@
                          * @property {number} INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS=85 INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
                          * @property {number} GKE_CLUSTER_NOT_RUNNING=27 GKE_CLUSTER_NOT_RUNNING value
+                         * @property {number} GKE_POD_NOT_RUNNING=103 GKE_POD_NOT_RUNNING value
                          * @property {number} CLOUD_SQL_INSTANCE_NOT_RUNNING=28 CLOUD_SQL_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_INSTANCE_NOT_RUNNING=68 REDIS_INSTANCE_NOT_RUNNING value
                          * @property {number} REDIS_CLUSTER_NOT_RUNNING=69 REDIS_CLUSTER_NOT_RUNNING value
@@ -35005,6 +41561,18 @@
                          * @property {number} PSC_PORT_MAPPING_PORT_MISMATCH=86 PSC_PORT_MAPPING_PORT_MISMATCH value
                          * @property {number} PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED=87 PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED value
                          * @property {number} UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION=88 UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION value
+                         * @property {number} TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED=89 TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED value
+                         * @property {number} NO_MATCHING_NAT64_GATEWAY=90 NO_MATCHING_NAT64_GATEWAY value
+                         * @property {number} NO_CONFIGURED_PRIVATE_NAT64_RULE=107 NO_CONFIGURED_PRIVATE_NAT64_RULE value
+                         * @property {number} LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH=96 LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH value
+                         * @property {number} NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION=97 NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION value
+                         * @property {number} CLOUD_NAT_PROTOCOL_UNSUPPORTED=99 CLOUD_NAT_PROTOCOL_UNSUPPORTED value
+                         * @property {number} L2_INTERCONNECT_UNSUPPORTED_PROTOCOL=100 L2_INTERCONNECT_UNSUPPORTED_PROTOCOL value
+                         * @property {number} L2_INTERCONNECT_UNSUPPORTED_PORT=101 L2_INTERCONNECT_UNSUPPORTED_PORT value
+                         * @property {number} L2_INTERCONNECT_DESTINATION_IP_MISMATCH=102 L2_INTERCONNECT_DESTINATION_IP_MISMATCH value
+                         * @property {number} NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED=104 NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED value
+                         * @property {number} HYBRID_SUBNET_REGION_MISMATCH=105 HYBRID_SUBNET_REGION_MISMATCH value
+                         * @property {number} HYBRID_SUBNET_NO_ROUTE=106 HYBRID_SUBNET_NO_ROUTE value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -35023,6 +41591,8 @@
                             values[valuesById[52] = "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"] = 52;
                             values[valuesById[53] = "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"] = 53;
                             values[valuesById[44] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"] = 44;
+                            values[valuesById[109] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS"] = 109;
+                            values[valuesById[98] = "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS"] = 98;
                             values[valuesById[45] = "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"] = 45;
                             values[valuesById[46] = "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"] = 46;
                             values[valuesById[7] = "PRIVATE_TRAFFIC_TO_INTERNET"] = 7;
@@ -35036,6 +41606,7 @@
                             values[valuesById[85] = "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"] = 85;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
                             values[valuesById[27] = "GKE_CLUSTER_NOT_RUNNING"] = 27;
+                            values[valuesById[103] = "GKE_POD_NOT_RUNNING"] = 103;
                             values[valuesById[28] = "CLOUD_SQL_INSTANCE_NOT_RUNNING"] = 28;
                             values[valuesById[68] = "REDIS_INSTANCE_NOT_RUNNING"] = 68;
                             values[valuesById[69] = "REDIS_CLUSTER_NOT_RUNNING"] = 69;
@@ -35096,6 +41667,18 @@
                             values[valuesById[86] = "PSC_PORT_MAPPING_PORT_MISMATCH"] = 86;
                             values[valuesById[87] = "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED"] = 87;
                             values[valuesById[88] = "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"] = 88;
+                            values[valuesById[89] = "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED"] = 89;
+                            values[valuesById[90] = "NO_MATCHING_NAT64_GATEWAY"] = 90;
+                            values[valuesById[107] = "NO_CONFIGURED_PRIVATE_NAT64_RULE"] = 107;
+                            values[valuesById[96] = "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH"] = 96;
+                            values[valuesById[97] = "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION"] = 97;
+                            values[valuesById[99] = "CLOUD_NAT_PROTOCOL_UNSUPPORTED"] = 99;
+                            values[valuesById[100] = "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL"] = 100;
+                            values[valuesById[101] = "L2_INTERCONNECT_UNSUPPORTED_PORT"] = 101;
+                            values[valuesById[102] = "L2_INTERCONNECT_DESTINATION_IP_MISMATCH"] = 102;
+                            values[valuesById[104] = "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED"] = 104;
+                            values[valuesById[105] = "HYBRID_SUBNET_REGION_MISMATCH"] = 105;
+                            values[valuesById[106] = "HYBRID_SUBNET_NO_ROUTE"] = 106;
                             return values;
                         })();
     
@@ -35398,6 +41981,562 @@
                         };
     
                         return GKEMasterInfo;
+                    })();
+    
+                    v1beta1.GkePodInfo = (function() {
+    
+                        /**
+                         * Properties of a GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGkePodInfo
+                         * @property {string|null} [podUri] GkePodInfo podUri
+                         * @property {string|null} [ipAddress] GkePodInfo ipAddress
+                         * @property {string|null} [networkUri] GkePodInfo networkUri
+                         */
+    
+                        /**
+                         * Constructs a new GkePodInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GkePodInfo.
+                         * @implements IGkePodInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo=} [properties] Properties to set
+                         */
+                        function GkePodInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkePodInfo podUri.
+                         * @member {string} podUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.podUri = "";
+    
+                        /**
+                         * GkePodInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.ipAddress = "";
+    
+                        /**
+                         * GkePodInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         */
+                        GkePodInfo.prototype.networkUri = "";
+    
+                        /**
+                         * Creates a new GkePodInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo instance
+                         */
+                        GkePodInfo.create = function create(properties) {
+                            return new GkePodInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.podUri != null && Object.hasOwnProperty.call(message, "podUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.podUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ipAddress);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGkePodInfo} message GkePodInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkePodInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GkePodInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.podUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ipAddress = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkePodInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkePodInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkePodInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                if (!$util.isString(message.podUri))
+                                    return "podUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GkePodInfo} GkePodInfo
+                         */
+                        GkePodInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GkePodInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GkePodInfo();
+                            if (object.podUri != null)
+                                message.podUri = String(object.podUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GkePodInfo} message GkePodInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkePodInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.podUri = "";
+                                object.ipAddress = "";
+                                object.networkUri = "";
+                            }
+                            if (message.podUri != null && message.hasOwnProperty("podUri"))
+                                object.podUri = message.podUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkePodInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkePodInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkePodInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GkePodInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkePodInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GkePodInfo";
+                        };
+    
+                        return GkePodInfo;
+                    })();
+    
+                    v1beta1.IpMasqueradingSkippedInfo = (function() {
+    
+                        /**
+                         * Properties of an IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IIpMasqueradingSkippedInfo
+                         * @property {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|null} [reason] IpMasqueradingSkippedInfo reason
+                         * @property {string|null} [nonMasqueradeRange] IpMasqueradingSkippedInfo nonMasqueradeRange
+                         */
+    
+                        /**
+                         * Constructs a new IpMasqueradingSkippedInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an IpMasqueradingSkippedInfo.
+                         * @implements IIpMasqueradingSkippedInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         */
+                        function IpMasqueradingSkippedInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpMasqueradingSkippedInfo reason.
+                         * @member {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason} reason
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.reason = 0;
+    
+                        /**
+                         * IpMasqueradingSkippedInfo nonMasqueradeRange.
+                         * @member {string} nonMasqueradeRange
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         */
+                        IpMasqueradingSkippedInfo.prototype.nonMasqueradeRange = "";
+    
+                        /**
+                         * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo instance
+                         */
+                        IpMasqueradingSkippedInfo.create = function create(properties) {
+                            return new IpMasqueradingSkippedInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reason != null && Object.hasOwnProperty.call(message, "reason"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.reason);
+                            if (message.nonMasqueradeRange != null && Object.hasOwnProperty.call(message, "nonMasqueradeRange"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonMasqueradeRange);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpMasqueradingSkippedInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reason = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nonMasqueradeRange = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpMasqueradingSkippedInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpMasqueradingSkippedInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpMasqueradingSkippedInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                switch (message.reason) {
+                                default:
+                                    return "reason: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                if (!$util.isString(message.nonMasqueradeRange))
+                                    return "nonMasqueradeRange: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} IpMasqueradingSkippedInfo
+                         */
+                        IpMasqueradingSkippedInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo();
+                            switch (object.reason) {
+                            default:
+                                if (typeof object.reason === "number") {
+                                    message.reason = object.reason;
+                                    break;
+                                }
+                                break;
+                            case "REASON_UNSPECIFIED":
+                            case 0:
+                                message.reason = 0;
+                                break;
+                            case "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE":
+                            case 1:
+                                message.reason = 1;
+                                break;
+                            case "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE":
+                            case 2:
+                                message.reason = 2;
+                                break;
+                            case "DESTINATION_ON_SAME_NODE":
+                            case 3:
+                                message.reason = 3;
+                                break;
+                            case "DEFAULT_SNAT_DISABLED":
+                            case 4:
+                                message.reason = 4;
+                                break;
+                            case "NO_MASQUERADING_FOR_IPV6":
+                            case 5:
+                                message.reason = 5;
+                                break;
+                            case "POD_USES_NODE_NETWORK_NAMESPACE":
+                            case 6:
+                                message.reason = 6;
+                                break;
+                            case "NO_MASQUERADING_FOR_RETURN_PACKET":
+                            case 7:
+                                message.reason = 7;
+                                break;
+                            }
+                            if (object.nonMasqueradeRange != null)
+                                message.nonMasqueradeRange = String(object.nonMasqueradeRange);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo} message IpMasqueradingSkippedInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpMasqueradingSkippedInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reason = options.enums === String ? "REASON_UNSPECIFIED" : 0;
+                                object.nonMasqueradeRange = "";
+                            }
+                            if (message.reason != null && message.hasOwnProperty("reason"))
+                                object.reason = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason[message.reason] === undefined ? message.reason : $root.google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason[message.reason] : message.reason;
+                            if (message.nonMasqueradeRange != null && message.hasOwnProperty("nonMasqueradeRange"))
+                                object.nonMasqueradeRange = message.nonMasqueradeRange;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpMasqueradingSkippedInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpMasqueradingSkippedInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpMasqueradingSkippedInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpMasqueradingSkippedInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo";
+                        };
+    
+                        /**
+                         * Reason enum.
+                         * @name google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason
+                         * @enum {number}
+                         * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                         * @property {number} DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE=1 DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE=2 DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE value
+                         * @property {number} DESTINATION_ON_SAME_NODE=3 DESTINATION_ON_SAME_NODE value
+                         * @property {number} DEFAULT_SNAT_DISABLED=4 DEFAULT_SNAT_DISABLED value
+                         * @property {number} NO_MASQUERADING_FOR_IPV6=5 NO_MASQUERADING_FOR_IPV6 value
+                         * @property {number} POD_USES_NODE_NETWORK_NAMESPACE=6 POD_USES_NODE_NETWORK_NAMESPACE value
+                         * @property {number} NO_MASQUERADING_FOR_RETURN_PACKET=7 NO_MASQUERADING_FOR_RETURN_PACKET value
+                         */
+                        IpMasqueradingSkippedInfo.Reason = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE"] = 1;
+                            values[valuesById[2] = "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE"] = 2;
+                            values[valuesById[3] = "DESTINATION_ON_SAME_NODE"] = 3;
+                            values[valuesById[4] = "DEFAULT_SNAT_DISABLED"] = 4;
+                            values[valuesById[5] = "NO_MASQUERADING_FOR_IPV6"] = 5;
+                            values[valuesById[6] = "POD_USES_NODE_NETWORK_NAMESPACE"] = 6;
+                            values[valuesById[7] = "NO_MASQUERADING_FOR_RETURN_PACKET"] = 7;
+                            return values;
+                        })();
+    
+                        return IpMasqueradingSkippedInfo;
                     })();
     
                     v1beta1.CloudSQLInstanceInfo = (function() {
@@ -37976,6 +45115,7 @@
                          * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
                          * @property {string|null} [routerUri] NatInfo routerUri
                          * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         * @property {google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|null} [cloudNatGatewayType] NatInfo cloudNatGatewayType
                          */
     
                         /**
@@ -38098,6 +45238,14 @@
                         NatInfo.prototype.natGatewayName = "";
     
                         /**
+                         * NatInfo cloudNatGatewayType.
+                         * @member {google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType} cloudNatGatewayType
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.cloudNatGatewayType = 0;
+    
+                        /**
                          * Creates a new NatInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
@@ -38147,6 +45295,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
                             if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            if (message.cloudNatGatewayType != null && Object.hasOwnProperty.call(message, "cloudNatGatewayType"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.cloudNatGatewayType);
                             return writer;
                         };
     
@@ -38235,6 +45385,10 @@
                                         message.natGatewayName = reader.string();
                                         break;
                                     }
+                                case 14: {
+                                        message.cloudNatGatewayType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -38279,6 +45433,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.protocol != null && message.hasOwnProperty("protocol"))
@@ -38317,6 +45472,18 @@
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 if (!$util.isString(message.natGatewayName))
                                     return "natGatewayName: string expected";
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                switch (message.cloudNatGatewayType) {
+                                default:
+                                    return "cloudNatGatewayType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -38359,6 +45526,10 @@
                             case 4:
                                 message.type = 4;
                                 break;
+                            case "GKE_POD_IP_MASQUERADING":
+                            case 5:
+                                message.type = 5;
+                                break;
                             }
                             if (object.protocol != null)
                                 message.protocol = String(object.protocol);
@@ -38384,6 +45555,38 @@
                                 message.routerUri = String(object.routerUri);
                             if (object.natGatewayName != null)
                                 message.natGatewayName = String(object.natGatewayName);
+                            switch (object.cloudNatGatewayType) {
+                            default:
+                                if (typeof object.cloudNatGatewayType === "number") {
+                                    message.cloudNatGatewayType = object.cloudNatGatewayType;
+                                    break;
+                                }
+                                break;
+                            case "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.cloudNatGatewayType = 0;
+                                break;
+                            case "PUBLIC_NAT44":
+                            case 1:
+                                message.cloudNatGatewayType = 1;
+                                break;
+                            case "PUBLIC_NAT64":
+                            case 2:
+                                message.cloudNatGatewayType = 2;
+                                break;
+                            case "PRIVATE_NAT_NCC":
+                            case 3:
+                                message.cloudNatGatewayType = 3;
+                                break;
+                            case "PRIVATE_NAT_HYBRID":
+                            case 4:
+                                message.cloudNatGatewayType = 4;
+                                break;
+                            case "PRIVATE_NAT64":
+                            case 5:
+                                message.cloudNatGatewayType = 5;
+                                break;
+                            }
                             return message;
                         };
     
@@ -38414,6 +45617,7 @@
                                 object.newDestinationPort = 0;
                                 object.routerUri = "";
                                 object.natGatewayName = "";
+                                object.cloudNatGatewayType = options.enums === String ? "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] : message.type;
@@ -38441,6 +45645,8 @@
                                 object.routerUri = message.routerUri;
                             if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
                                 object.natGatewayName = message.natGatewayName;
+                            if (message.cloudNatGatewayType != null && message.hasOwnProperty("cloudNatGatewayType"))
+                                object.cloudNatGatewayType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] === undefined ? message.cloudNatGatewayType : $root.google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType[message.cloudNatGatewayType] : message.cloudNatGatewayType;
                             return object;
                         };
     
@@ -38479,6 +45685,7 @@
                          * @property {number} EXTERNAL_TO_INTERNAL=2 EXTERNAL_TO_INTERNAL value
                          * @property {number} CLOUD_NAT=3 CLOUD_NAT value
                          * @property {number} PRIVATE_SERVICE_CONNECT=4 PRIVATE_SERVICE_CONNECT value
+                         * @property {number} GKE_POD_IP_MASQUERADING=5 GKE_POD_IP_MASQUERADING value
                          */
                         NatInfo.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -38487,6 +45694,29 @@
                             values[valuesById[2] = "EXTERNAL_TO_INTERNAL"] = 2;
                             values[valuesById[3] = "CLOUD_NAT"] = 3;
                             values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
+                            values[valuesById[5] = "GKE_POD_IP_MASQUERADING"] = 5;
+                            return values;
+                        })();
+    
+                        /**
+                         * CloudNatGatewayType enum.
+                         * @name google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType
+                         * @enum {number}
+                         * @property {number} CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED=0 CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED value
+                         * @property {number} PUBLIC_NAT44=1 PUBLIC_NAT44 value
+                         * @property {number} PUBLIC_NAT64=2 PUBLIC_NAT64 value
+                         * @property {number} PRIVATE_NAT_NCC=3 PRIVATE_NAT_NCC value
+                         * @property {number} PRIVATE_NAT_HYBRID=4 PRIVATE_NAT_HYBRID value
+                         * @property {number} PRIVATE_NAT64=5 PRIVATE_NAT64 value
+                         */
+                        NatInfo.CloudNatGatewayType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PUBLIC_NAT44"] = 1;
+                            values[valuesById[2] = "PUBLIC_NAT64"] = 2;
+                            values[valuesById[3] = "PRIVATE_NAT_NCC"] = 3;
+                            values[valuesById[4] = "PRIVATE_NAT_HYBRID"] = 4;
+                            values[valuesById[5] = "PRIVATE_NAT64"] = 5;
                             return values;
                         })();
     
@@ -42321,7 +49551,273 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|queryOrgVpcFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef QueryOrgVpcFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} [response] QueryOrgVpcFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls QueryOrgVpcFlowLogsConfigs.
+                         * @function queryOrgVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest} request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.QueryOrgVpcFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and QueryOrgVpcFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.queryOrgVpcFlowLogsConfigs = function queryOrgVpcFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(queryOrgVpcFlowLogsConfigs, $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "QueryOrgVpcFlowLogsConfigs" });
+    
+                        /**
+                         * Calls QueryOrgVpcFlowLogsConfigs.
+                         * @function queryOrgVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest} request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|showEffectiveFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef ShowEffectiveFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} [response] ShowEffectiveFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ShowEffectiveFlowLogsConfigs.
+                         * @function showEffectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest} request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.ShowEffectiveFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and ShowEffectiveFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.showEffectiveFlowLogsConfigs = function showEffectiveFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(showEffectiveFlowLogsConfigs, $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "ShowEffectiveFlowLogsConfigs" });
+    
+                        /**
+                         * Calls ShowEffectiveFlowLogsConfigs.
+                         * @function showEffectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest} request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return VpcFlowLogsService;
+                    })();
+    
+                    v1beta1.OrganizationVpcFlowLogsService = (function() {
+    
+                        /**
+                         * Constructs a new OrganizationVpcFlowLogsService service.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an OrganizationVpcFlowLogsService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function OrganizationVpcFlowLogsService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (OrganizationVpcFlowLogsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = OrganizationVpcFlowLogsService;
+    
+                        /**
+                         * Creates new OrganizationVpcFlowLogsService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {OrganizationVpcFlowLogsService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        OrganizationVpcFlowLogsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|listVpcFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @typedef ListVpcFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} [response] ListVpcFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.ListVpcFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and ListVpcFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.listVpcFlowLogsConfigs = function listVpcFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(listVpcFlowLogsConfigs, $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "ListVpcFlowLogsConfigs" });
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|getVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @typedef GetVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} [response] VpcFlowLogsConfig
+                         */
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.GetVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and VpcFlowLogsConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.getVpcFlowLogsConfig = function getVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(getVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest, $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig, request, callback);
+                        }, "name", { value: "GetVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|createVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @typedef CreateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.CreateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.createVpcFlowLogsConfig = function createVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(createVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|updateVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @typedef UpdateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.UpdateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.updateVpcFlowLogsConfig = function updateVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(updateVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|deleteVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @typedef DeleteVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.DeleteVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OrganizationVpcFlowLogsService.prototype.deleteVpcFlowLogsConfig = function deleteVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(deleteVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return OrganizationVpcFlowLogsService;
                     })();
     
                     v1beta1.ListVpcFlowLogsConfigsRequest = (function() {
@@ -43818,6 +51314,1159 @@
                         return DeleteVpcFlowLogsConfigRequest;
                     })();
     
+                    v1beta1.QueryOrgVpcFlowLogsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryOrgVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IQueryOrgVpcFlowLogsConfigsRequest
+                         * @property {string|null} [parent] QueryOrgVpcFlowLogsConfigsRequest parent
+                         * @property {number|null} [pageSize] QueryOrgVpcFlowLogsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] QueryOrgVpcFlowLogsConfigsRequest pageToken
+                         * @property {string|null} [filter] QueryOrgVpcFlowLogsConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new QueryOrgVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a QueryOrgVpcFlowLogsConfigsRequest.
+                         * @implements IQueryOrgVpcFlowLogsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         */
+                        function QueryOrgVpcFlowLogsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new QueryOrgVpcFlowLogsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.create = function create(properties) {
+                            return new QueryOrgVpcFlowLogsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOrgVpcFlowLogsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOrgVpcFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest} QueryOrgVpcFlowLogsConfigsRequest
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOrgVpcFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest} message QueryOrgVpcFlowLogsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOrgVpcFlowLogsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOrgVpcFlowLogsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOrgVpcFlowLogsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest";
+                        };
+    
+                        return QueryOrgVpcFlowLogsConfigsRequest;
+                    })();
+    
+                    v1beta1.QueryOrgVpcFlowLogsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryOrgVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IQueryOrgVpcFlowLogsConfigsResponse
+                         * @property {Array.<google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>|null} [vpcFlowLogsConfigs] QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs
+                         * @property {string|null} [nextPageToken] QueryOrgVpcFlowLogsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] QueryOrgVpcFlowLogsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new QueryOrgVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a QueryOrgVpcFlowLogsConfigsResponse.
+                         * @implements IQueryOrgVpcFlowLogsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         */
+                        function QueryOrgVpcFlowLogsConfigsResponse(properties) {
+                            this.vpcFlowLogsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs.
+                         * @member {Array.<google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>} vpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.vpcFlowLogsConfigs = $util.emptyArray;
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * QueryOrgVpcFlowLogsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryOrgVpcFlowLogsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse instance
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.create = function create(properties) {
+                            return new QueryOrgVpcFlowLogsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vpcFlowLogsConfigs != null && message.vpcFlowLogsConfigs.length)
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.encode(message.vpcFlowLogsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length))
+                                            message.vpcFlowLogsConfigs = [];
+                                        message.vpcFlowLogsConfigs.push($root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryOrgVpcFlowLogsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vpcFlowLogsConfigs != null && message.hasOwnProperty("vpcFlowLogsConfigs")) {
+                                if (!Array.isArray(message.vpcFlowLogsConfigs))
+                                    return "vpcFlowLogsConfigs: array expected";
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify(message.vpcFlowLogsConfigs[i]);
+                                    if (error)
+                                        return "vpcFlowLogsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryOrgVpcFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} QueryOrgVpcFlowLogsConfigsResponse
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse();
+                            if (object.vpcFlowLogsConfigs) {
+                                if (!Array.isArray(object.vpcFlowLogsConfigs))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: array expected");
+                                message.vpcFlowLogsConfigs = [];
+                                for (var i = 0; i < object.vpcFlowLogsConfigs.length; ++i) {
+                                    if (typeof object.vpcFlowLogsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: object expected");
+                                    message.vpcFlowLogsConfigs[i] = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.fromObject(object.vpcFlowLogsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryOrgVpcFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse} message QueryOrgVpcFlowLogsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.vpcFlowLogsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length) {
+                                object.vpcFlowLogsConfigs = [];
+                                for (var j = 0; j < message.vpcFlowLogsConfigs.length; ++j)
+                                    object.vpcFlowLogsConfigs[j] = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.toObject(message.vpcFlowLogsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryOrgVpcFlowLogsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryOrgVpcFlowLogsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryOrgVpcFlowLogsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse";
+                        };
+    
+                        return QueryOrgVpcFlowLogsConfigsResponse;
+                    })();
+    
+                    v1beta1.ShowEffectiveFlowLogsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ShowEffectiveFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IShowEffectiveFlowLogsConfigsRequest
+                         * @property {string|null} [parent] ShowEffectiveFlowLogsConfigsRequest parent
+                         * @property {string|null} [resource] ShowEffectiveFlowLogsConfigsRequest resource
+                         * @property {number|null} [pageSize] ShowEffectiveFlowLogsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ShowEffectiveFlowLogsConfigsRequest pageToken
+                         * @property {string|null} [filter] ShowEffectiveFlowLogsConfigsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ShowEffectiveFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a ShowEffectiveFlowLogsConfigsRequest.
+                         * @implements IShowEffectiveFlowLogsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest=} [properties] Properties to set
+                         */
+                        function ShowEffectiveFlowLogsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest resource.
+                         * @member {string} resource
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.resource = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ShowEffectiveFlowLogsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest instance
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.create = function create(properties) {
+                            return new ShowEffectiveFlowLogsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.resource);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.resource = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShowEffectiveFlowLogsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShowEffectiveFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest} ShowEffectiveFlowLogsConfigsRequest
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShowEffectiveFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest} message ShowEffectiveFlowLogsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.resource = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = message.resource;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShowEffectiveFlowLogsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShowEffectiveFlowLogsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShowEffectiveFlowLogsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest";
+                        };
+    
+                        return ShowEffectiveFlowLogsConfigsRequest;
+                    })();
+    
+                    v1beta1.ShowEffectiveFlowLogsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ShowEffectiveFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IShowEffectiveFlowLogsConfigsResponse
+                         * @property {Array.<google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>|null} [effectiveFlowLogsConfigs] ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs
+                         * @property {string|null} [nextPageToken] ShowEffectiveFlowLogsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ShowEffectiveFlowLogsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ShowEffectiveFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a ShowEffectiveFlowLogsConfigsResponse.
+                         * @implements IShowEffectiveFlowLogsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse=} [properties] Properties to set
+                         */
+                        function ShowEffectiveFlowLogsConfigsResponse(properties) {
+                            this.effectiveFlowLogsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs.
+                         * @member {Array.<google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig>} effectiveFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.effectiveFlowLogsConfigs = $util.emptyArray;
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ShowEffectiveFlowLogsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ShowEffectiveFlowLogsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse instance
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.create = function create(properties) {
+                            return new ShowEffectiveFlowLogsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.effectiveFlowLogsConfigs != null && message.effectiveFlowLogsConfigs.length)
+                                for (var i = 0; i < message.effectiveFlowLogsConfigs.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.encode(message.effectiveFlowLogsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.effectiveFlowLogsConfigs && message.effectiveFlowLogsConfigs.length))
+                                            message.effectiveFlowLogsConfigs = [];
+                                        message.effectiveFlowLogsConfigs.push($root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShowEffectiveFlowLogsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.effectiveFlowLogsConfigs != null && message.hasOwnProperty("effectiveFlowLogsConfigs")) {
+                                if (!Array.isArray(message.effectiveFlowLogsConfigs))
+                                    return "effectiveFlowLogsConfigs: array expected";
+                                for (var i = 0; i < message.effectiveFlowLogsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.verify(message.effectiveFlowLogsConfigs[i]);
+                                    if (error)
+                                        return "effectiveFlowLogsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShowEffectiveFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} ShowEffectiveFlowLogsConfigsResponse
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse();
+                            if (object.effectiveFlowLogsConfigs) {
+                                if (!Array.isArray(object.effectiveFlowLogsConfigs))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.effectiveFlowLogsConfigs: array expected");
+                                message.effectiveFlowLogsConfigs = [];
+                                for (var i = 0; i < object.effectiveFlowLogsConfigs.length; ++i) {
+                                    if (typeof object.effectiveFlowLogsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.effectiveFlowLogsConfigs: object expected");
+                                    message.effectiveFlowLogsConfigs[i] = $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.fromObject(object.effectiveFlowLogsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShowEffectiveFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse} message ShowEffectiveFlowLogsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.effectiveFlowLogsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.effectiveFlowLogsConfigs && message.effectiveFlowLogsConfigs.length) {
+                                object.effectiveFlowLogsConfigs = [];
+                                for (var j = 0; j < message.effectiveFlowLogsConfigs.length; ++j)
+                                    object.effectiveFlowLogsConfigs[j] = $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.toObject(message.effectiveFlowLogsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShowEffectiveFlowLogsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShowEffectiveFlowLogsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShowEffectiveFlowLogsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse";
+                        };
+    
+                        return ShowEffectiveFlowLogsConfigsResponse;
+                    })();
+    
                     v1beta1.VpcFlowLogsConfig = (function() {
     
                         /**
@@ -43832,6 +52481,10 @@
                          * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null} [metadata] VpcFlowLogsConfig metadata
                          * @property {Array.<string>|null} [metadataFields] VpcFlowLogsConfig metadataFields
                          * @property {string|null} [filterExpr] VpcFlowLogsConfig filterExpr
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null} [crossProjectMetadata] VpcFlowLogsConfig crossProjectMetadata
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|null} [targetResourceState] VpcFlowLogsConfig targetResourceState
+                         * @property {string|null} [network] VpcFlowLogsConfig network
+                         * @property {string|null} [subnet] VpcFlowLogsConfig subnet
                          * @property {string|null} [interconnectAttachment] VpcFlowLogsConfig interconnectAttachment
                          * @property {string|null} [vpnTunnel] VpcFlowLogsConfig vpnTunnel
                          * @property {Object.<string,string>|null} [labels] VpcFlowLogsConfig labels
@@ -43921,6 +52574,38 @@
                         VpcFlowLogsConfig.prototype.filterExpr = null;
     
                         /**
+                         * VpcFlowLogsConfig crossProjectMetadata.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null|undefined} crossProjectMetadata
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.crossProjectMetadata = null;
+    
+                        /**
+                         * VpcFlowLogsConfig targetResourceState.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|null|undefined} targetResourceState
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.targetResourceState = null;
+    
+                        /**
+                         * VpcFlowLogsConfig network.
+                         * @member {string|null|undefined} network
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.network = null;
+    
+                        /**
+                         * VpcFlowLogsConfig subnet.
+                         * @member {string|null|undefined} subnet
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.subnet = null;
+    
+                        /**
                          * VpcFlowLogsConfig interconnectAttachment.
                          * @member {string|null|undefined} interconnectAttachment
                          * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
@@ -43999,14 +52684,26 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_crossProjectMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["crossProjectMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_targetResourceState", {
+                            get: $util.oneOfGetter($oneOfFields = ["targetResourceState"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * VpcFlowLogsConfig targetResource.
-                         * @member {"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
+                         * @member {"network"|"subnet"|"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
                          * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
                          * @instance
                          */
                         Object.defineProperty(VpcFlowLogsConfig.prototype, "targetResource", {
-                            get: $util.oneOfGetter($oneOfFields = ["interconnectAttachment", "vpnTunnel"]),
+                            get: $util.oneOfGetter($oneOfFields = ["network", "subnet", "interconnectAttachment", "vpnTunnel"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -44058,6 +52755,14 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.targetResourceState != null && Object.hasOwnProperty.call(message, "targetResourceState"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.targetResourceState);
+                            if (message.crossProjectMetadata != null && Object.hasOwnProperty.call(message, "crossProjectMetadata"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.crossProjectMetadata);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 100, wireType 2 =*/802).string(message.network);
+                            if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
+                                writer.uint32(/* id 101, wireType 2 =*/810).string(message.subnet);
                             if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
                                 writer.uint32(/* id 102, wireType 2 =*/818).string(message.interconnectAttachment);
                             if (message.vpnTunnel != null && Object.hasOwnProperty.call(message, "vpnTunnel"))
@@ -44130,6 +52835,22 @@
                                     }
                                 case 8: {
                                         message.filterExpr = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.crossProjectMetadata = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.targetResourceState = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 101: {
+                                        message.subnet = reader.string();
                                         break;
                                     }
                                 case 102: {
@@ -44270,7 +52991,43 @@
                                 if (!$util.isString(message.filterExpr))
                                     return "filterExpr: string expected";
                             }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                properties._crossProjectMetadata = 1;
+                                switch (message.crossProjectMetadata) {
+                                default:
+                                    return "crossProjectMetadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.targetResourceState != null && message.hasOwnProperty("targetResourceState")) {
+                                properties._targetResourceState = 1;
+                                switch (message.targetResourceState) {
+                                default:
+                                    return "targetResourceState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.subnet))
+                                    return "subnet: string expected";
+                            }
                             if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
                                 properties.targetResource = 1;
                                 if (!$util.isString(message.interconnectAttachment))
                                     return "interconnectAttachment: string expected";
@@ -44410,6 +53167,50 @@
                             }
                             if (object.filterExpr != null)
                                 message.filterExpr = String(object.filterExpr);
+                            switch (object.crossProjectMetadata) {
+                            default:
+                                if (typeof object.crossProjectMetadata === "number") {
+                                    message.crossProjectMetadata = object.crossProjectMetadata;
+                                    break;
+                                }
+                                break;
+                            case "CROSS_PROJECT_METADATA_UNSPECIFIED":
+                            case 0:
+                                message.crossProjectMetadata = 0;
+                                break;
+                            case "CROSS_PROJECT_METADATA_ENABLED":
+                            case 1:
+                                message.crossProjectMetadata = 1;
+                                break;
+                            case "CROSS_PROJECT_METADATA_DISABLED":
+                            case 2:
+                                message.crossProjectMetadata = 2;
+                                break;
+                            }
+                            switch (object.targetResourceState) {
+                            default:
+                                if (typeof object.targetResourceState === "number") {
+                                    message.targetResourceState = object.targetResourceState;
+                                    break;
+                                }
+                                break;
+                            case "TARGET_RESOURCE_STATE_UNSPECIFIED":
+                            case 0:
+                                message.targetResourceState = 0;
+                                break;
+                            case "TARGET_RESOURCE_EXISTS":
+                            case 1:
+                                message.targetResourceState = 1;
+                                break;
+                            case "TARGET_RESOURCE_DOES_NOT_EXIST":
+                            case 2:
+                                message.targetResourceState = 2;
+                                break;
+                            }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnet != null)
+                                message.subnet = String(object.subnet);
                             if (object.interconnectAttachment != null)
                                 message.interconnectAttachment = String(object.interconnectAttachment);
                             if (object.vpnTunnel != null)
@@ -44502,6 +53303,26 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.targetResourceState != null && message.hasOwnProperty("targetResourceState")) {
+                                object.targetResourceState = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState[message.targetResourceState] === undefined ? message.targetResourceState : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState[message.targetResourceState] : message.targetResourceState;
+                                if (options.oneofs)
+                                    object._targetResourceState = "targetResourceState";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                object.crossProjectMetadata = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] === undefined ? message.crossProjectMetadata : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] : message.crossProjectMetadata;
+                                if (options.oneofs)
+                                    object._crossProjectMetadata = "crossProjectMetadata";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                object.network = message.network;
+                                if (options.oneofs)
+                                    object.targetResource = "network";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                object.subnet = message.subnet;
+                                if (options.oneofs)
+                                    object.targetResource = "subnet";
                             }
                             if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
                                 object.interconnectAttachment = message.interconnectAttachment;
@@ -44600,7 +53421,833 @@
                             return values;
                         })();
     
+                        /**
+                         * CrossProjectMetadata enum.
+                         * @name google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata
+                         * @enum {number}
+                         * @property {number} CROSS_PROJECT_METADATA_UNSPECIFIED=0 CROSS_PROJECT_METADATA_UNSPECIFIED value
+                         * @property {number} CROSS_PROJECT_METADATA_ENABLED=1 CROSS_PROJECT_METADATA_ENABLED value
+                         * @property {number} CROSS_PROJECT_METADATA_DISABLED=2 CROSS_PROJECT_METADATA_DISABLED value
+                         */
+                        VpcFlowLogsConfig.CrossProjectMetadata = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CROSS_PROJECT_METADATA_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CROSS_PROJECT_METADATA_ENABLED"] = 1;
+                            values[valuesById[2] = "CROSS_PROJECT_METADATA_DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * TargetResourceState enum.
+                         * @name google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState
+                         * @enum {number}
+                         * @property {number} TARGET_RESOURCE_STATE_UNSPECIFIED=0 TARGET_RESOURCE_STATE_UNSPECIFIED value
+                         * @property {number} TARGET_RESOURCE_EXISTS=1 TARGET_RESOURCE_EXISTS value
+                         * @property {number} TARGET_RESOURCE_DOES_NOT_EXIST=2 TARGET_RESOURCE_DOES_NOT_EXIST value
+                         */
+                        VpcFlowLogsConfig.TargetResourceState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TARGET_RESOURCE_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TARGET_RESOURCE_EXISTS"] = 1;
+                            values[valuesById[2] = "TARGET_RESOURCE_DOES_NOT_EXIST"] = 2;
+                            return values;
+                        })();
+    
                         return VpcFlowLogsConfig;
+                    })();
+    
+                    v1beta1.EffectiveVpcFlowLogsConfig = (function() {
+    
+                        /**
+                         * Properties of an EffectiveVpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IEffectiveVpcFlowLogsConfig
+                         * @property {string|null} [name] EffectiveVpcFlowLogsConfig name
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null} [state] EffectiveVpcFlowLogsConfig state
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null} [aggregationInterval] EffectiveVpcFlowLogsConfig aggregationInterval
+                         * @property {number|null} [flowSampling] EffectiveVpcFlowLogsConfig flowSampling
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null} [metadata] EffectiveVpcFlowLogsConfig metadata
+                         * @property {Array.<string>|null} [metadataFields] EffectiveVpcFlowLogsConfig metadataFields
+                         * @property {string|null} [filterExpr] EffectiveVpcFlowLogsConfig filterExpr
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null} [crossProjectMetadata] EffectiveVpcFlowLogsConfig crossProjectMetadata
+                         * @property {string|null} [network] EffectiveVpcFlowLogsConfig network
+                         * @property {string|null} [subnet] EffectiveVpcFlowLogsConfig subnet
+                         * @property {string|null} [interconnectAttachment] EffectiveVpcFlowLogsConfig interconnectAttachment
+                         * @property {string|null} [vpnTunnel] EffectiveVpcFlowLogsConfig vpnTunnel
+                         * @property {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|null} [scope] EffectiveVpcFlowLogsConfig scope
+                         */
+    
+                        /**
+                         * Constructs a new EffectiveVpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an EffectiveVpcFlowLogsConfig.
+                         * @implements IEffectiveVpcFlowLogsConfig
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig=} [properties] Properties to set
+                         */
+                        function EffectiveVpcFlowLogsConfig(properties) {
+                            this.metadataFields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.name = "";
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig state.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null|undefined} state
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.state = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig aggregationInterval.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null|undefined} aggregationInterval
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.aggregationInterval = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig flowSampling.
+                         * @member {number|null|undefined} flowSampling
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.flowSampling = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig metadata.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null|undefined} metadata
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.metadata = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig metadataFields.
+                         * @member {Array.<string>} metadataFields
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.metadataFields = $util.emptyArray;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig filterExpr.
+                         * @member {string|null|undefined} filterExpr
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.filterExpr = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig crossProjectMetadata.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null|undefined} crossProjectMetadata
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.crossProjectMetadata = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig network.
+                         * @member {string|null|undefined} network
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.network = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig subnet.
+                         * @member {string|null|undefined} subnet
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.subnet = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig interconnectAttachment.
+                         * @member {string|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.interconnectAttachment = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig vpnTunnel.
+                         * @member {string|null|undefined} vpnTunnel
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.vpnTunnel = null;
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig scope.
+                         * @member {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|null|undefined} scope
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.scope = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_state", {
+                            get: $util.oneOfGetter($oneOfFields = ["state"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_aggregationInterval", {
+                            get: $util.oneOfGetter($oneOfFields = ["aggregationInterval"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_flowSampling", {
+                            get: $util.oneOfGetter($oneOfFields = ["flowSampling"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["metadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_filterExpr", {
+                            get: $util.oneOfGetter($oneOfFields = ["filterExpr"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_crossProjectMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["crossProjectMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * EffectiveVpcFlowLogsConfig targetResource.
+                         * @member {"network"|"subnet"|"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "targetResource", {
+                            get: $util.oneOfGetter($oneOfFields = ["network", "subnet", "interconnectAttachment", "vpnTunnel"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(EffectiveVpcFlowLogsConfig.prototype, "_scope", {
+                            get: $util.oneOfGetter($oneOfFields = ["scope"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new EffectiveVpcFlowLogsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig instance
+                         */
+                        EffectiveVpcFlowLogsConfig.create = function create(properties) {
+                            return new EffectiveVpcFlowLogsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveVpcFlowLogsConfig message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveVpcFlowLogsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.aggregationInterval != null && Object.hasOwnProperty.call(message, "aggregationInterval"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.aggregationInterval);
+                            if (message.flowSampling != null && Object.hasOwnProperty.call(message, "flowSampling"))
+                                writer.uint32(/* id 5, wireType 5 =*/45).float(message.flowSampling);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.metadata);
+                            if (message.metadataFields != null && message.metadataFields.length)
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.metadataFields[i]);
+                            if (message.filterExpr != null && Object.hasOwnProperty.call(message, "filterExpr"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.filterExpr);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.scope);
+                            if (message.crossProjectMetadata != null && Object.hasOwnProperty.call(message, "crossProjectMetadata"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.crossProjectMetadata);
+                            if (message.network != null && Object.hasOwnProperty.call(message, "network"))
+                                writer.uint32(/* id 100, wireType 2 =*/802).string(message.network);
+                            if (message.subnet != null && Object.hasOwnProperty.call(message, "subnet"))
+                                writer.uint32(/* id 101, wireType 2 =*/810).string(message.subnet);
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                writer.uint32(/* id 102, wireType 2 =*/818).string(message.interconnectAttachment);
+                            if (message.vpnTunnel != null && Object.hasOwnProperty.call(message, "vpnTunnel"))
+                                writer.uint32(/* id 103, wireType 2 =*/826).string(message.vpnTunnel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EffectiveVpcFlowLogsConfig message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EffectiveVpcFlowLogsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveVpcFlowLogsConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.aggregationInterval = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.flowSampling = reader.float();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadata = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.metadataFields && message.metadataFields.length))
+                                            message.metadataFields = [];
+                                        message.metadataFields.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.filterExpr = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.crossProjectMetadata = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.network = reader.string();
+                                        break;
+                                    }
+                                case 101: {
+                                        message.subnet = reader.string();
+                                        break;
+                                    }
+                                case 102: {
+                                        message.interconnectAttachment = reader.string();
+                                        break;
+                                    }
+                                case 103: {
+                                        message.vpnTunnel = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.scope = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EffectiveVpcFlowLogsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EffectiveVpcFlowLogsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EffectiveVpcFlowLogsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                properties._state = 1;
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                properties._aggregationInterval = 1;
+                                switch (message.aggregationInterval) {
+                                default:
+                                    return "aggregationInterval: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                properties._flowSampling = 1;
+                                if (typeof message.flowSampling !== "number")
+                                    return "flowSampling: number expected";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                properties._metadata = 1;
+                                switch (message.metadata) {
+                                default:
+                                    return "metadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.metadataFields != null && message.hasOwnProperty("metadataFields")) {
+                                if (!Array.isArray(message.metadataFields))
+                                    return "metadataFields: array expected";
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    if (!$util.isString(message.metadataFields[i]))
+                                        return "metadataFields: string[] expected";
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                properties._filterExpr = 1;
+                                if (!$util.isString(message.filterExpr))
+                                    return "filterExpr: string expected";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                properties._crossProjectMetadata = 1;
+                                switch (message.crossProjectMetadata) {
+                                default:
+                                    return "crossProjectMetadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.network))
+                                    return "network: string expected";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.subnet))
+                                    return "subnet: string expected";
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.interconnectAttachment))
+                                    return "interconnectAttachment: string expected";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.vpnTunnel))
+                                    return "vpnTunnel: string expected";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope")) {
+                                properties._scope = 1;
+                                switch (message.scope) {
+                                default:
+                                    return "scope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EffectiveVpcFlowLogsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig} EffectiveVpcFlowLogsConfig
+                         */
+                        EffectiveVpcFlowLogsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            switch (object.aggregationInterval) {
+                            default:
+                                if (typeof object.aggregationInterval === "number") {
+                                    message.aggregationInterval = object.aggregationInterval;
+                                    break;
+                                }
+                                break;
+                            case "AGGREGATION_INTERVAL_UNSPECIFIED":
+                            case 0:
+                                message.aggregationInterval = 0;
+                                break;
+                            case "INTERVAL_5_SEC":
+                            case 1:
+                                message.aggregationInterval = 1;
+                                break;
+                            case "INTERVAL_30_SEC":
+                            case 2:
+                                message.aggregationInterval = 2;
+                                break;
+                            case "INTERVAL_1_MIN":
+                            case 3:
+                                message.aggregationInterval = 3;
+                                break;
+                            case "INTERVAL_5_MIN":
+                            case 4:
+                                message.aggregationInterval = 4;
+                                break;
+                            case "INTERVAL_10_MIN":
+                            case 5:
+                                message.aggregationInterval = 5;
+                                break;
+                            case "INTERVAL_15_MIN":
+                            case 6:
+                                message.aggregationInterval = 6;
+                                break;
+                            }
+                            if (object.flowSampling != null)
+                                message.flowSampling = Number(object.flowSampling);
+                            switch (object.metadata) {
+                            default:
+                                if (typeof object.metadata === "number") {
+                                    message.metadata = object.metadata;
+                                    break;
+                                }
+                                break;
+                            case "METADATA_UNSPECIFIED":
+                            case 0:
+                                message.metadata = 0;
+                                break;
+                            case "INCLUDE_ALL_METADATA":
+                            case 1:
+                                message.metadata = 1;
+                                break;
+                            case "EXCLUDE_ALL_METADATA":
+                            case 2:
+                                message.metadata = 2;
+                                break;
+                            case "CUSTOM_METADATA":
+                            case 3:
+                                message.metadata = 3;
+                                break;
+                            }
+                            if (object.metadataFields) {
+                                if (!Array.isArray(object.metadataFields))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.metadataFields: array expected");
+                                message.metadataFields = [];
+                                for (var i = 0; i < object.metadataFields.length; ++i)
+                                    message.metadataFields[i] = String(object.metadataFields[i]);
+                            }
+                            if (object.filterExpr != null)
+                                message.filterExpr = String(object.filterExpr);
+                            switch (object.crossProjectMetadata) {
+                            default:
+                                if (typeof object.crossProjectMetadata === "number") {
+                                    message.crossProjectMetadata = object.crossProjectMetadata;
+                                    break;
+                                }
+                                break;
+                            case "CROSS_PROJECT_METADATA_UNSPECIFIED":
+                            case 0:
+                                message.crossProjectMetadata = 0;
+                                break;
+                            case "CROSS_PROJECT_METADATA_ENABLED":
+                            case 1:
+                                message.crossProjectMetadata = 1;
+                                break;
+                            case "CROSS_PROJECT_METADATA_DISABLED":
+                            case 2:
+                                message.crossProjectMetadata = 2;
+                                break;
+                            }
+                            if (object.network != null)
+                                message.network = String(object.network);
+                            if (object.subnet != null)
+                                message.subnet = String(object.subnet);
+                            if (object.interconnectAttachment != null)
+                                message.interconnectAttachment = String(object.interconnectAttachment);
+                            if (object.vpnTunnel != null)
+                                message.vpnTunnel = String(object.vpnTunnel);
+                            switch (object.scope) {
+                            default:
+                                if (typeof object.scope === "number") {
+                                    message.scope = object.scope;
+                                    break;
+                                }
+                                break;
+                            case "SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.scope = 0;
+                                break;
+                            case "SUBNET":
+                            case 1:
+                                message.scope = 1;
+                                break;
+                            case "COMPUTE_API_SUBNET":
+                            case 2:
+                                message.scope = 2;
+                                break;
+                            case "NETWORK":
+                            case 3:
+                                message.scope = 3;
+                                break;
+                            case "VPN_TUNNEL":
+                            case 4:
+                                message.scope = 4;
+                                break;
+                            case "INTERCONNECT_ATTACHMENT":
+                            case 5:
+                                message.scope = 5;
+                                break;
+                            case "ORGANIZATION":
+                            case 6:
+                                message.scope = 6;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EffectiveVpcFlowLogsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig} message EffectiveVpcFlowLogsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EffectiveVpcFlowLogsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metadataFields = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State[message.state] === undefined ? message.state : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State[message.state] : message.state;
+                                if (options.oneofs)
+                                    object._state = "state";
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                object.aggregationInterval = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] === undefined ? message.aggregationInterval : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] : message.aggregationInterval;
+                                if (options.oneofs)
+                                    object._aggregationInterval = "aggregationInterval";
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                object.flowSampling = options.json && !isFinite(message.flowSampling) ? String(message.flowSampling) : message.flowSampling;
+                                if (options.oneofs)
+                                    object._flowSampling = "flowSampling";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                object.metadata = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata[message.metadata] === undefined ? message.metadata : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata[message.metadata] : message.metadata;
+                                if (options.oneofs)
+                                    object._metadata = "metadata";
+                            }
+                            if (message.metadataFields && message.metadataFields.length) {
+                                object.metadataFields = [];
+                                for (var j = 0; j < message.metadataFields.length; ++j)
+                                    object.metadataFields[j] = message.metadataFields[j];
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                object.filterExpr = message.filterExpr;
+                                if (options.oneofs)
+                                    object._filterExpr = "filterExpr";
+                            }
+                            if (message.scope != null && message.hasOwnProperty("scope")) {
+                                object.scope = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope[message.scope] === undefined ? message.scope : $root.google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope[message.scope] : message.scope;
+                                if (options.oneofs)
+                                    object._scope = "scope";
+                            }
+                            if (message.crossProjectMetadata != null && message.hasOwnProperty("crossProjectMetadata")) {
+                                object.crossProjectMetadata = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] === undefined ? message.crossProjectMetadata : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata[message.crossProjectMetadata] : message.crossProjectMetadata;
+                                if (options.oneofs)
+                                    object._crossProjectMetadata = "crossProjectMetadata";
+                            }
+                            if (message.network != null && message.hasOwnProperty("network")) {
+                                object.network = message.network;
+                                if (options.oneofs)
+                                    object.targetResource = "network";
+                            }
+                            if (message.subnet != null && message.hasOwnProperty("subnet")) {
+                                object.subnet = message.subnet;
+                                if (options.oneofs)
+                                    object.targetResource = "subnet";
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = message.interconnectAttachment;
+                                if (options.oneofs)
+                                    object.targetResource = "interconnectAttachment";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                object.vpnTunnel = message.vpnTunnel;
+                                if (options.oneofs)
+                                    object.targetResource = "vpnTunnel";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EffectiveVpcFlowLogsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EffectiveVpcFlowLogsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EffectiveVpcFlowLogsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EffectiveVpcFlowLogsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig";
+                        };
+    
+                        /**
+                         * Scope enum.
+                         * @name google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope
+                         * @enum {number}
+                         * @property {number} SCOPE_UNSPECIFIED=0 SCOPE_UNSPECIFIED value
+                         * @property {number} SUBNET=1 SUBNET value
+                         * @property {number} COMPUTE_API_SUBNET=2 COMPUTE_API_SUBNET value
+                         * @property {number} NETWORK=3 NETWORK value
+                         * @property {number} VPN_TUNNEL=4 VPN_TUNNEL value
+                         * @property {number} INTERCONNECT_ATTACHMENT=5 INTERCONNECT_ATTACHMENT value
+                         * @property {number} ORGANIZATION=6 ORGANIZATION value
+                         */
+                        EffectiveVpcFlowLogsConfig.Scope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SUBNET"] = 1;
+                            values[valuesById[2] = "COMPUTE_API_SUBNET"] = 2;
+                            values[valuesById[3] = "NETWORK"] = 3;
+                            values[valuesById[4] = "VPN_TUNNEL"] = 4;
+                            values[valuesById[5] = "INTERCONNECT_ATTACHMENT"] = 5;
+                            values[valuesById[6] = "ORGANIZATION"] = 6;
+                            return values;
+                        })();
+    
+                        return EffectiveVpcFlowLogsConfig;
                     })();
     
                     return v1beta1;

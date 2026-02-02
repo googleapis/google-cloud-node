@@ -10,7 +10,6 @@
                   "nested": {
                     "v1": {
                       "options": {
-                        "cc_enable_arenas": true,
                         "csharp_namespace": "Google.Cloud.Security.PrivateCA.V1",
                         "go_package": "cloud.google.com/go/security/privateca/apiv1/privatecapb;privatecapb",
                         "java_multiple_files": true,
@@ -30,7 +29,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
                             "type": {
@@ -147,6 +146,27 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "userDefinedAccessUrls": {
+                              "type": "UserDefinedAccessUrls",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -212,6 +232,26 @@
                                 "EC_P256_SHA256": 4,
                                 "EC_P384_SHA384": 5
                               }
+                            },
+                            "UserDefinedAccessUrls": {
+                              "fields": {
+                                "aiaIssuingCertificateUrls": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "crlAccessUrls": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -225,7 +265,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
                             "tier": {
@@ -306,6 +346,13 @@
                                   "rule": "repeated",
                                   "type": "AllowedKeyType",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "backdateDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 7,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -440,7 +487,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
                             "sequenceNumber": {
@@ -556,8 +603,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                "(google.api.resource_reference).type": "privateca.googleapis.com/Certificate"
+                                "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
                             "pemCsr": {
@@ -681,8 +727,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY",
-                                "(google.api.resource_reference).type": "privateca.googleapis.com/CertificateTemplate"
+                                "(google.api.field_behavior)": "IDENTIFIER"
                               }
                             },
                             "maximumLifetime": {
@@ -1040,6 +1085,10 @@
                             "certFingerprint": {
                               "type": "CertificateFingerprint",
                               "id": 8
+                            },
+                            "tbsCertificateDigest": {
+                              "type": "string",
+                              "id": 9
                             }
                           },
                           "nested": {
@@ -1216,6 +1265,39 @@
                             }
                           }
                         },
+                        "AttributeTypeAndValue": {
+                          "oneofs": {
+                            "attributeType": {
+                              "oneof": [
+                                "type",
+                                "objectId"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "type": {
+                              "type": "AttributeType",
+                              "id": 1
+                            },
+                            "objectId": {
+                              "type": "ObjectId",
+                              "id": 2
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "RelativeDistinguishedName": {
+                          "fields": {
+                            "attributes": {
+                              "rule": "repeated",
+                              "type": "AttributeTypeAndValue",
+                              "id": 1
+                            }
+                          }
+                        },
                         "Subject": {
                           "fields": {
                             "commonName": {
@@ -1249,6 +1331,11 @@
                             "postalCode": {
                               "type": "string",
                               "id": 8
+                            },
+                            "rdnSequence": {
+                              "rule": "repeated",
+                              "type": "RelativeDistinguishedName",
+                              "id": 9
                             }
                           }
                         },
@@ -1353,6 +1440,19 @@
                             }
                           }
                         },
+                        "AttributeType": {
+                          "values": {
+                            "ATTRIBUTE_TYPE_UNSPECIFIED": 0,
+                            "COMMON_NAME": 1,
+                            "COUNTRY_CODE": 2,
+                            "ORGANIZATION": 3,
+                            "ORGANIZATIONAL_UNIT": 4,
+                            "LOCALITY": 5,
+                            "PROVINCE": 6,
+                            "STREET_ADDRESS": 7,
+                            "POSTAL_CODE": 8
+                          }
+                        },
                         "RevocationReason": {
                           "values": {
                             "REVOCATION_REASON_UNSPECIFIED": 0,
@@ -1370,6 +1470,7 @@
                           "values": {
                             "SUBJECT_REQUEST_MODE_UNSPECIFIED": 0,
                             "DEFAULT": 1,
+                            "RDN_SEQUENCE": 3,
                             "REFLECTED_SPIFFE": 2
                           }
                         },
@@ -2241,6 +2342,7 @@
                               "type": "string",
                               "id": 4,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2293,6 +2395,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
@@ -2319,6 +2422,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2431,6 +2535,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2450,6 +2555,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
@@ -2496,6 +2602,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2529,6 +2636,7 @@
                               "type": "string",
                               "id": 4,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2554,6 +2662,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2573,6 +2682,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
@@ -2817,6 +2927,7 @@
                               "type": "string",
                               "id": 4,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2836,6 +2947,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -2931,6 +3043,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
+                                "(google.api.field_info).format": "UUID4",
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
@@ -5229,9 +5342,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -5725,6 +5838,30 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }

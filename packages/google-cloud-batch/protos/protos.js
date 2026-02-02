@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4829,6 +4829,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.taskPack != null && message.hasOwnProperty("taskPack"))
@@ -4878,6 +4880,14 @@
                                 case "PREEMPTIBLE":
                                 case 3:
                                     message.provisioningModel = 3;
+                                    break;
+                                case "RESERVATION_BOUND":
+                                case 4:
+                                    message.provisioningModel = 4;
+                                    break;
+                                case "FLEX_START":
+                                case 5:
+                                    message.provisioningModel = 5;
                                     break;
                                 }
                                 if (object.taskPack != null)
@@ -7723,6 +7733,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.accelerators != null && message.hasOwnProperty("accelerators")) {
@@ -7792,6 +7804,14 @@
                                 case "PREEMPTIBLE":
                                 case 3:
                                     message.provisioningModel = 3;
+                                    break;
+                                case "RESERVATION_BOUND":
+                                case 4:
+                                    message.provisioningModel = 4;
+                                    break;
+                                case "FLEX_START":
+                                case 5:
+                                    message.provisioningModel = 5;
                                     break;
                                 }
                                 if (object.accelerators) {
@@ -8958,6 +8978,8 @@
                          * @property {number} STANDARD=1 STANDARD value
                          * @property {number} SPOT=2 SPOT value
                          * @property {number} PREEMPTIBLE=3 PREEMPTIBLE value
+                         * @property {number} RESERVATION_BOUND=4 RESERVATION_BOUND value
+                         * @property {number} FLEX_START=5 FLEX_START value
                          */
                         AllocationPolicy.ProvisioningModel = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -8965,6 +8987,8 @@
                             values[valuesById[1] = "STANDARD"] = 1;
                             values[valuesById[2] = "SPOT"] = 2;
                             values[valuesById[3] = "PREEMPTIBLE"] = 3;
+                            values[valuesById[4] = "RESERVATION_BOUND"] = 4;
+                            values[valuesById[5] = "FLEX_START"] = 5;
                             return values;
                         })();
     
@@ -22106,6 +22130,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.taskPack != null && message.hasOwnProperty("taskPack"))
@@ -22155,6 +22181,14 @@
                                 case "PREEMPTIBLE":
                                 case 3:
                                     message.provisioningModel = 3;
+                                    break;
+                                case "RESERVATION_BOUND":
+                                case 4:
+                                    message.provisioningModel = 4;
+                                    break;
+                                case "FLEX_START":
+                                case 5:
+                                    message.provisioningModel = 5;
                                     break;
                                 }
                                 if (object.taskPack != null)
@@ -23760,6 +23794,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -23864,6 +23900,14 @@
                                     case "PREEMPTIBLE":
                                     case 3:
                                         message.provisioningModels[i] = 3;
+                                        break;
+                                    case "RESERVATION_BOUND":
+                                    case 4:
+                                        message.provisioningModels[i] = 4;
+                                        break;
+                                    case "FLEX_START":
+                                    case 5:
+                                        message.provisioningModels[i] = 5;
                                         break;
                                     }
                             }
@@ -25437,6 +25481,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.accelerators != null && message.hasOwnProperty("accelerators")) {
@@ -25513,6 +25559,14 @@
                                 case "PREEMPTIBLE":
                                 case 3:
                                     message.provisioningModel = 3;
+                                    break;
+                                case "RESERVATION_BOUND":
+                                case 4:
+                                    message.provisioningModel = 4;
+                                    break;
+                                case "FLEX_START":
+                                case 5:
+                                    message.provisioningModel = 5;
                                     break;
                                 }
                                 if (object.accelerators) {
@@ -26685,6 +26739,8 @@
                          * @property {number} STANDARD=1 STANDARD value
                          * @property {number} SPOT=2 SPOT value
                          * @property {number} PREEMPTIBLE=3 PREEMPTIBLE value
+                         * @property {number} RESERVATION_BOUND=4 RESERVATION_BOUND value
+                         * @property {number} FLEX_START=5 FLEX_START value
                          */
                         AllocationPolicy.ProvisioningModel = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -26692,6 +26748,8 @@
                             values[valuesById[1] = "STANDARD"] = 1;
                             values[valuesById[2] = "SPOT"] = 2;
                             values[valuesById[3] = "PREEMPTIBLE"] = 3;
+                            values[valuesById[4] = "RESERVATION_BOUND"] = 4;
+                            values[valuesById[5] = "FLEX_START"] = 5;
                             return values;
                         })();
     

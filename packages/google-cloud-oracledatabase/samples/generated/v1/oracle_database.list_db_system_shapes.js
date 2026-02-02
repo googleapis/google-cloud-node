@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,6 +43,12 @@ function main(parent) {
    *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. An expression for filtering the results of the request. Only the
+   *  gcp_oracle_zone_id field is supported in this format:
+   *  `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+   */
+  // const filter = 'abc123'
 
   // Imports the Oracledatabase library
   const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;

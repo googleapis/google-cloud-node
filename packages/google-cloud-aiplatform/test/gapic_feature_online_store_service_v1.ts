@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as featureonlinestoreserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -50,6 +52,15 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -445,6 +456,178 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.searchNearestEntities(request), expectedError);
+        });
+    });
+
+    describe('generateFetchAccessToken', () => {
+        it('invokes generateFetchAccessToken without error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse()
+            );
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateFetchAccessToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken without error using callback', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse()
+            );
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateFetchAccessToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken with error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateFetchAccessToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken with closed client', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateFetchAccessToken(request), expectedError);
+        });
+    });
+
+    describe('featureViewDirectWrite', () => {
+        it('invokes featureViewDirectWrite without error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse()
+            );
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(expectedResponse);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+
+        it('invokes featureViewDirectWrite with error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
         });
     });
     describe('getIamPolicy', () => {

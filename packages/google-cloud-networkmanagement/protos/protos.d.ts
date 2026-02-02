@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -246,6 +246,9 @@ export namespace google {
                     /** Endpoint redisCluster */
                     redisCluster?: (string|null);
 
+                    /** Endpoint gkePod */
+                    gkePod?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -309,6 +312,9 @@ export namespace google {
 
                     /** Endpoint redisCluster. */
                     public redisCluster: string;
+
+                    /** Endpoint gkePod. */
+                    public gkePod: string;
 
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1.Endpoint.ICloudFunctionEndpoint|null);
@@ -412,7 +418,8 @@ export namespace google {
                     enum NetworkType {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
-                        NON_GCP_NETWORK = 2
+                        NON_GCP_NETWORK = 2,
+                        INTERNET = 3
                     }
 
                     /** ForwardingRuleTarget enum. */
@@ -623,6 +630,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri */
                         uri?: (string|null);
+
+                        /** CloudRunRevisionEndpoint serviceUri */
+                        serviceUri?: (string|null);
                     }
 
                     /** Represents a CloudRunRevisionEndpoint. */
@@ -636,6 +646,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri. */
                         public uri: string;
+
+                        /** CloudRunRevisionEndpoint serviceUri. */
+                        public serviceUri: string;
 
                         /**
                          * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
@@ -1072,6 +1085,12 @@ export namespace google {
 
                     /** ProbingDetails destinationEgressLocation */
                     destinationEgressLocation?: (google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null);
+
+                    /** ProbingDetails edgeResponses */
+                    edgeResponses?: (google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse[]|null);
+
+                    /** ProbingDetails probedAllDevices */
+                    probedAllDevices?: (boolean|null);
                 }
 
                 /** Represents a ProbingDetails. */
@@ -1109,6 +1128,12 @@ export namespace google {
 
                     /** ProbingDetails destinationEgressLocation. */
                     public destinationEgressLocation?: (google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null);
+
+                    /** ProbingDetails edgeResponses. */
+                    public edgeResponses: google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse[];
+
+                    /** ProbingDetails probedAllDevices. */
+                    public probedAllDevices: boolean;
 
                     /**
                      * Creates a new ProbingDetails instance using the specified properties.
@@ -1302,6 +1327,133 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a SingleEdgeResponse. */
+                    interface ISingleEdgeResponse {
+
+                        /** SingleEdgeResponse result */
+                        result?: (google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult|keyof typeof google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult|null);
+
+                        /** SingleEdgeResponse sentProbeCount */
+                        sentProbeCount?: (number|null);
+
+                        /** SingleEdgeResponse successfulProbeCount */
+                        successfulProbeCount?: (number|null);
+
+                        /** SingleEdgeResponse probingLatency */
+                        probingLatency?: (google.cloud.networkmanagement.v1.ILatencyDistribution|null);
+
+                        /** SingleEdgeResponse destinationEgressLocation */
+                        destinationEgressLocation?: (google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null);
+
+                        /** SingleEdgeResponse destinationRouter */
+                        destinationRouter?: (string|null);
+                    }
+
+                    /** Represents a SingleEdgeResponse. */
+                    class SingleEdgeResponse implements ISingleEdgeResponse {
+
+                        /**
+                         * Constructs a new SingleEdgeResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse);
+
+                        /** SingleEdgeResponse result. */
+                        public result: (google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult|keyof typeof google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult);
+
+                        /** SingleEdgeResponse sentProbeCount. */
+                        public sentProbeCount: number;
+
+                        /** SingleEdgeResponse successfulProbeCount. */
+                        public successfulProbeCount: number;
+
+                        /** SingleEdgeResponse probingLatency. */
+                        public probingLatency?: (google.cloud.networkmanagement.v1.ILatencyDistribution|null);
+
+                        /** SingleEdgeResponse destinationEgressLocation. */
+                        public destinationEgressLocation?: (google.cloud.networkmanagement.v1.ProbingDetails.IEdgeLocation|null);
+
+                        /** SingleEdgeResponse destinationRouter. */
+                        public destinationRouter: string;
+
+                        /**
+                         * Creates a new SingleEdgeResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SingleEdgeResponse instance
+                         */
+                        public static create(properties?: google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse): google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Encodes the specified SingleEdgeResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                         * @param message SingleEdgeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SingleEdgeResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                         * @param message SingleEdgeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkmanagement.v1.ProbingDetails.ISingleEdgeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SingleEdgeResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SingleEdgeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Decodes a SingleEdgeResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SingleEdgeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Verifies a SingleEdgeResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SingleEdgeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SingleEdgeResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Creates a plain object from a SingleEdgeResponse message. Also converts values to other types if specified.
+                         * @param message SingleEdgeResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SingleEdgeResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SingleEdgeResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Trace. */
@@ -1446,11 +1598,17 @@ export namespace google {
                     /** Step forwardingRule */
                     forwardingRule?: (google.cloud.networkmanagement.v1.IForwardingRuleInfo|null);
 
+                    /** Step hybridSubnet */
+                    hybridSubnet?: (google.cloud.networkmanagement.v1.IHybridSubnetInfo|null);
+
                     /** Step vpnGateway */
                     vpnGateway?: (google.cloud.networkmanagement.v1.IVpnGatewayInfo|null);
 
                     /** Step vpnTunnel */
                     vpnTunnel?: (google.cloud.networkmanagement.v1.IVpnTunnelInfo|null);
+
+                    /** Step interconnectAttachment */
+                    interconnectAttachment?: (google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo|null);
 
                     /** Step vpcConnector */
                     vpcConnector?: (google.cloud.networkmanagement.v1.IVpcConnectorInfo|null);
@@ -1481,6 +1639,12 @@ export namespace google {
 
                     /** Step gkeMaster */
                     gkeMaster?: (google.cloud.networkmanagement.v1.IGKEMasterInfo|null);
+
+                    /** Step gkePod */
+                    gkePod?: (google.cloud.networkmanagement.v1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped */
+                    ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null);
 
                     /** Step cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null);
@@ -1555,11 +1719,17 @@ export namespace google {
                     /** Step forwardingRule. */
                     public forwardingRule?: (google.cloud.networkmanagement.v1.IForwardingRuleInfo|null);
 
+                    /** Step hybridSubnet. */
+                    public hybridSubnet?: (google.cloud.networkmanagement.v1.IHybridSubnetInfo|null);
+
                     /** Step vpnGateway. */
                     public vpnGateway?: (google.cloud.networkmanagement.v1.IVpnGatewayInfo|null);
 
                     /** Step vpnTunnel. */
                     public vpnTunnel?: (google.cloud.networkmanagement.v1.IVpnTunnelInfo|null);
+
+                    /** Step interconnectAttachment. */
+                    public interconnectAttachment?: (google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo|null);
 
                     /** Step vpcConnector. */
                     public vpcConnector?: (google.cloud.networkmanagement.v1.IVpcConnectorInfo|null);
@@ -1590,6 +1760,12 @@ export namespace google {
 
                     /** Step gkeMaster. */
                     public gkeMaster?: (google.cloud.networkmanagement.v1.IGKEMasterInfo|null);
+
+                    /** Step gkePod. */
+                    public gkePod?: (google.cloud.networkmanagement.v1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped. */
+                    public ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo|null);
 
                     /** Step cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.networkmanagement.v1.ICloudSQLInstanceInfo|null);
@@ -1625,7 +1801,7 @@ export namespace google {
                     public serverlessNeg?: (google.cloud.networkmanagement.v1.IServerlessNegInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1716,6 +1892,7 @@ export namespace google {
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
+                        START_FROM_GKE_POD = 39,
                         START_FROM_REDIS_INSTANCE = 32,
                         START_FROM_REDIS_CLUSTER = 33,
                         START_FROM_CLOUD_FUNCTION = 23,
@@ -1733,12 +1910,15 @@ export namespace google {
                         ARRIVE_AT_INSTANCE = 9,
                         ARRIVE_AT_INTERNAL_LOAD_BALANCER = 10,
                         ARRIVE_AT_EXTERNAL_LOAD_BALANCER = 11,
+                        ARRIVE_AT_HYBRID_SUBNET = 38,
                         ARRIVE_AT_VPN_GATEWAY = 12,
                         ARRIVE_AT_VPN_TUNNEL = 13,
+                        ARRIVE_AT_INTERCONNECT_ATTACHMENT = 37,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
                         DIRECT_VPC_EGRESS_CONNECTION = 35,
                         SERVERLESS_EXTERNAL_CONNECTION = 36,
                         NAT = 14,
+                        SKIP_GKE_POD_IP_MASQUERADING = 40,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
                         DROP = 17,
@@ -1777,6 +1957,12 @@ export namespace google {
 
                     /** InstanceInfo pscNetworkAttachmentUri */
                     pscNetworkAttachmentUri?: (string|null);
+
+                    /** InstanceInfo running */
+                    running?: (boolean|null);
+
+                    /** InstanceInfo status */
+                    status?: (google.cloud.networkmanagement.v1.InstanceInfo.Status|keyof typeof google.cloud.networkmanagement.v1.InstanceInfo.Status|null);
                 }
 
                 /** Represents an InstanceInfo. */
@@ -1814,6 +2000,12 @@ export namespace google {
 
                     /** InstanceInfo pscNetworkAttachmentUri. */
                     public pscNetworkAttachmentUri: string;
+
+                    /** InstanceInfo running. */
+                    public running: boolean;
+
+                    /** InstanceInfo status. */
+                    public status: (google.cloud.networkmanagement.v1.InstanceInfo.Status|keyof typeof google.cloud.networkmanagement.v1.InstanceInfo.Status);
 
                     /**
                      * Creates a new InstanceInfo instance using the specified properties.
@@ -1891,6 +2083,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InstanceInfo {
+
+                    /** Status enum. */
+                    enum Status {
+                        STATUS_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        NOT_RUNNING = 2
+                    }
                 }
 
                 /** Properties of a NetworkInfo. */
@@ -2049,6 +2251,12 @@ export namespace google {
 
                     /** FirewallInfo firewallRuleType */
                     firewallRuleType?: (google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType|keyof typeof google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType|null);
+
+                    /** FirewallInfo policyPriority */
+                    policyPriority?: (number|null);
+
+                    /** FirewallInfo targetType */
+                    targetType?: (google.cloud.networkmanagement.v1.FirewallInfo.TargetType|keyof typeof google.cloud.networkmanagement.v1.FirewallInfo.TargetType|null);
                 }
 
                 /** Represents a FirewallInfo. */
@@ -2092,6 +2300,12 @@ export namespace google {
 
                     /** FirewallInfo firewallRuleType. */
                     public firewallRuleType: (google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType|keyof typeof google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType);
+
+                    /** FirewallInfo policyPriority. */
+                    public policyPriority: number;
+
+                    /** FirewallInfo targetType. */
+                    public targetType: (google.cloud.networkmanagement.v1.FirewallInfo.TargetType|keyof typeof google.cloud.networkmanagement.v1.FirewallInfo.TargetType);
 
                     /**
                      * Creates a new FirewallInfo instance using the specified properties.
@@ -2182,9 +2396,18 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        SYSTEM_NETWORK_FIREWALL_POLICY_RULE = 7,
+                        SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE = 8,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101,
                         ANALYSIS_SKIPPED = 102
+                    }
+
+                    /** TargetType enum. */
+                    enum TargetType {
+                        TARGET_TYPE_UNSPECIFIED = 0,
+                        INSTANCES = 1,
+                        INTERNAL_MANAGED_LB = 2
                     }
                 }
 
@@ -2452,7 +2675,8 @@ export namespace google {
                         NEXT_HOP_BLACKHOLE = 9,
                         NEXT_HOP_ILB = 10,
                         NEXT_HOP_ROUTER_APPLIANCE = 11,
-                        NEXT_HOP_NCC_HUB = 12
+                        NEXT_HOP_NCC_HUB = 12,
+                        SECURE_WEB_PROXY_GATEWAY = 13
                     }
 
                     /** RouteScope enum. */
@@ -3011,6 +3235,115 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a HybridSubnetInfo. */
+                interface IHybridSubnetInfo {
+
+                    /** HybridSubnetInfo displayName */
+                    displayName?: (string|null);
+
+                    /** HybridSubnetInfo uri */
+                    uri?: (string|null);
+
+                    /** HybridSubnetInfo region */
+                    region?: (string|null);
+                }
+
+                /** Represents a HybridSubnetInfo. */
+                class HybridSubnetInfo implements IHybridSubnetInfo {
+
+                    /**
+                     * Constructs a new HybridSubnetInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IHybridSubnetInfo);
+
+                    /** HybridSubnetInfo displayName. */
+                    public displayName: string;
+
+                    /** HybridSubnetInfo uri. */
+                    public uri: string;
+
+                    /** HybridSubnetInfo region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new HybridSubnetInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridSubnetInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IHybridSubnetInfo): google.cloud.networkmanagement.v1.HybridSubnetInfo;
+
+                    /**
+                     * Encodes the specified HybridSubnetInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.HybridSubnetInfo.verify|verify} messages.
+                     * @param message HybridSubnetInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IHybridSubnetInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridSubnetInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.HybridSubnetInfo.verify|verify} messages.
+                     * @param message HybridSubnetInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IHybridSubnetInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridSubnetInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridSubnetInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.HybridSubnetInfo;
+
+                    /**
+                     * Decodes a HybridSubnetInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridSubnetInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.HybridSubnetInfo;
+
+                    /**
+                     * Verifies a HybridSubnetInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridSubnetInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridSubnetInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.HybridSubnetInfo;
+
+                    /**
+                     * Creates a plain object from a HybridSubnetInfo message. Also converts values to other types if specified.
+                     * @param message HybridSubnetInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.HybridSubnetInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridSubnetInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HybridSubnetInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VpnGatewayInfo. */
                 interface IVpnGatewayInfo {
 
@@ -3294,6 +3627,151 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an InterconnectAttachmentInfo. */
+                interface IInterconnectAttachmentInfo {
+
+                    /** InterconnectAttachmentInfo displayName */
+                    displayName?: (string|null);
+
+                    /** InterconnectAttachmentInfo uri */
+                    uri?: (string|null);
+
+                    /** InterconnectAttachmentInfo interconnectUri */
+                    interconnectUri?: (string|null);
+
+                    /** InterconnectAttachmentInfo region */
+                    region?: (string|null);
+
+                    /** InterconnectAttachmentInfo cloudRouterUri */
+                    cloudRouterUri?: (string|null);
+
+                    /** InterconnectAttachmentInfo type */
+                    type?: (google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type|keyof typeof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type|null);
+
+                    /** InterconnectAttachmentInfo l2AttachmentMatchedIpAddress */
+                    l2AttachmentMatchedIpAddress?: (string|null);
+                }
+
+                /** Represents an InterconnectAttachmentInfo. */
+                class InterconnectAttachmentInfo implements IInterconnectAttachmentInfo {
+
+                    /**
+                     * Constructs a new InterconnectAttachmentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo);
+
+                    /** InterconnectAttachmentInfo displayName. */
+                    public displayName: string;
+
+                    /** InterconnectAttachmentInfo uri. */
+                    public uri: string;
+
+                    /** InterconnectAttachmentInfo interconnectUri. */
+                    public interconnectUri: string;
+
+                    /** InterconnectAttachmentInfo region. */
+                    public region: string;
+
+                    /** InterconnectAttachmentInfo cloudRouterUri. */
+                    public cloudRouterUri: string;
+
+                    /** InterconnectAttachmentInfo type. */
+                    public type: (google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type|keyof typeof google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.Type);
+
+                    /** InterconnectAttachmentInfo l2AttachmentMatchedIpAddress. */
+                    public l2AttachmentMatchedIpAddress: string;
+
+                    /**
+                     * Creates a new InterconnectAttachmentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectAttachmentInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo): google.cloud.networkmanagement.v1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Encodes the specified InterconnectAttachmentInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.verify|verify} messages.
+                     * @param message InterconnectAttachmentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectAttachmentInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.InterconnectAttachmentInfo.verify|verify} messages.
+                     * @param message InterconnectAttachmentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IInterconnectAttachmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectAttachmentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectAttachmentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Verifies an InterconnectAttachmentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectAttachmentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectAttachmentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Creates a plain object from an InterconnectAttachmentInfo message. Also converts values to other types if specified.
+                     * @param message InterconnectAttachmentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.InterconnectAttachmentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectAttachmentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectAttachmentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InterconnectAttachmentInfo {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        DEDICATED = 1,
+                        PARTNER = 2,
+                        PARTNER_PROVIDER = 3,
+                        L2_DEDICATED = 4
+                    }
+                }
+
                 /** Properties of an EndpointInfo. */
                 interface IEndpointInfo {
 
@@ -3450,6 +3928,9 @@ export namespace google {
 
                     /** DeliverInfo pscGoogleApiTarget */
                     pscGoogleApiTarget?: (string|null);
+
+                    /** DeliverInfo googleServiceType */
+                    googleServiceType?: (google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType|null);
                 }
 
                 /** Represents a DeliverInfo. */
@@ -3475,6 +3956,9 @@ export namespace google {
 
                     /** DeliverInfo pscGoogleApiTarget. */
                     public pscGoogleApiTarget: string;
+
+                    /** DeliverInfo googleServiceType. */
+                    public googleServiceType: (google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1.DeliverInfo.GoogleServiceType);
 
                     /**
                      * Creates a new DeliverInfo instance using the specified properties.
@@ -3575,7 +4059,18 @@ export namespace google {
                         CLOUD_RUN_REVISION = 14,
                         GOOGLE_MANAGED_SERVICE = 15,
                         REDIS_INSTANCE = 16,
-                        REDIS_CLUSTER = 17
+                        REDIS_CLUSTER = 17,
+                        GKE_POD = 19
+                    }
+
+                    /** GoogleServiceType enum. */
+                    enum GoogleServiceType {
+                        GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
+                        IAP = 1,
+                        GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
+                        CLOUD_DNS = 3,
+                        PRIVATE_GOOGLE_ACCESS = 4,
+                        SERVERLESS_VPC_ACCESS = 5
                     }
                 }
 
@@ -3701,7 +4196,8 @@ export namespace google {
                         CLOUD_SQL_INSTANCE = 6,
                         ANOTHER_PROJECT = 7,
                         NCC_HUB = 8,
-                        ROUTER_APPLIANCE = 9
+                        ROUTER_APPLIANCE = 9,
+                        SECURE_WEB_PROXY_GATEWAY = 10
                     }
                 }
 
@@ -3841,6 +4337,9 @@ export namespace google {
                         PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
                         PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS = 36,
                         NO_SOURCE_LOCATION = 5,
+                        NO_SOURCE_GCP_NETWORK_LOCATION = 42,
+                        NO_SOURCE_NON_GCP_NETWORK_LOCATION = 43,
+                        NO_SOURCE_INTERNET_LOCATION = 44,
                         INVALID_ARGUMENT = 6,
                         TRACE_TOO_LONG = 9,
                         INTERNAL_ERROR = 10,
@@ -3853,14 +4352,18 @@ export namespace google {
                         FIREWALL_CONFIG_NOT_FOUND = 26,
                         ROUTE_CONFIG_NOT_FOUND = 27,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
+                        GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT = 39,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED = 45,
                         SOURCE_REDIS_CLUSTER_UNSUPPORTED = 34,
                         SOURCE_REDIS_INSTANCE_UNSUPPORTED = 35,
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
                         NON_ROUTABLE_IP_ADDRESS = 22,
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
                         UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
-                        NO_SERVERLESS_IP_RANGES = 37
+                        NO_SERVERLESS_IP_RANGES = 37,
+                        IP_VERSION_PROTOCOL_MISMATCH = 40,
+                        GKE_POD_UNKNOWN_ENDPOINT_LOCATION = 41
                     }
                 }
 
@@ -3881,6 +4384,12 @@ export namespace google {
 
                     /** DropInfo region */
                     region?: (string|null);
+
+                    /** DropInfo sourceGeolocationCode */
+                    sourceGeolocationCode?: (string|null);
+
+                    /** DropInfo destinationGeolocationCode */
+                    destinationGeolocationCode?: (string|null);
                 }
 
                 /** Represents a DropInfo. */
@@ -3906,6 +4415,12 @@ export namespace google {
 
                     /** DropInfo region. */
                     public region: string;
+
+                    /** DropInfo sourceGeolocationCode. */
+                    public sourceGeolocationCode: string;
+
+                    /** DropInfo destinationGeolocationCode. */
+                    public destinationGeolocationCode: string;
 
                     /**
                      * Creates a new DropInfo instance using the specified properties.
@@ -4004,6 +4519,8 @@ export namespace google {
                         ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
                         ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
                         NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS = 109,
+                        NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS = 98,
                         VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
                         VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
                         PRIVATE_TRAFFIC_TO_INTERNET = 7,
@@ -4017,6 +4534,7 @@ export namespace google {
                         INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
+                        GKE_POD_NOT_RUNNING = 103,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         REDIS_INSTANCE_NOT_RUNNING = 68,
                         REDIS_CLUSTER_NOT_RUNNING = 69,
@@ -4076,7 +4594,19 @@ export namespace google {
                         PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83,
                         PSC_PORT_MAPPING_PORT_MISMATCH = 86,
                         PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED = 87,
-                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88
+                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88,
+                        TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED = 89,
+                        NO_MATCHING_NAT64_GATEWAY = 90,
+                        NO_CONFIGURED_PRIVATE_NAT64_RULE = 107,
+                        LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH = 96,
+                        NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION = 97,
+                        CLOUD_NAT_PROTOCOL_UNSUPPORTED = 99,
+                        L2_INTERCONNECT_UNSUPPORTED_PROTOCOL = 100,
+                        L2_INTERCONNECT_UNSUPPORTED_PORT = 101,
+                        L2_INTERCONNECT_DESTINATION_IP_MISMATCH = 102,
+                        NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED = 104,
+                        HYBRID_SUBNET_REGION_MISMATCH = 105,
+                        HYBRID_SUBNET_NO_ROUTE = 106
                     }
                 }
 
@@ -4199,6 +4729,233 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkePodInfo. */
+                interface IGkePodInfo {
+
+                    /** GkePodInfo podUri */
+                    podUri?: (string|null);
+
+                    /** GkePodInfo ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** GkePodInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a GkePodInfo. */
+                class GkePodInfo implements IGkePodInfo {
+
+                    /**
+                     * Constructs a new GkePodInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IGkePodInfo);
+
+                    /** GkePodInfo podUri. */
+                    public podUri: string;
+
+                    /** GkePodInfo ipAddress. */
+                    public ipAddress: string;
+
+                    /** GkePodInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new GkePodInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkePodInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IGkePodInfo): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Verifies a GkePodInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkePodInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.GkePodInfo;
+
+                    /**
+                     * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                     * @param message GkePodInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.GkePodInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkePodInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkePodInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IpMasqueradingSkippedInfo. */
+                interface IIpMasqueradingSkippedInfo {
+
+                    /** IpMasqueradingSkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|null);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange */
+                    nonMasqueradeRange?: (string|null);
+                }
+
+                /** Represents an IpMasqueradingSkippedInfo. */
+                class IpMasqueradingSkippedInfo implements IIpMasqueradingSkippedInfo {
+
+                    /**
+                     * Constructs a new IpMasqueradingSkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo);
+
+                    /** IpMasqueradingSkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.Reason);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange. */
+                    public nonMasqueradeRange: string;
+
+                    /**
+                     * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IpMasqueradingSkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Verifies an IpMasqueradingSkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IpMasqueradingSkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                     * @param message IpMasqueradingSkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.IpMasqueradingSkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IpMasqueradingSkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IpMasqueradingSkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpMasqueradingSkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE = 1,
+                        DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE = 2,
+                        DESTINATION_ON_SAME_NODE = 3,
+                        DEFAULT_SNAT_DISABLED = 4,
+                        NO_MASQUERADING_FOR_IPV6 = 5,
+                        POD_USES_NODE_NETWORK_NAMESPACE = 6,
+                        NO_MASQUERADING_FOR_RETURN_PACKET = 7
+                    }
                 }
 
                 /** Properties of a CloudSQLInstanceInfo. */
@@ -5295,6 +6052,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName */
                     natGatewayName?: (string|null);
+
+                    /** NatInfo cloudNatGatewayType */
+                    cloudNatGatewayType?: (google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|null);
                 }
 
                 /** Represents a NatInfo. */
@@ -5344,6 +6104,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName. */
                     public natGatewayName: string;
+
+                    /** NatInfo cloudNatGatewayType. */
+                    public cloudNatGatewayType: (google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1.NatInfo.CloudNatGatewayType);
 
                     /**
                      * Creates a new NatInfo instance using the specified properties.
@@ -5431,7 +6194,18 @@ export namespace google {
                         INTERNAL_TO_EXTERNAL = 1,
                         EXTERNAL_TO_INTERNAL = 2,
                         CLOUD_NAT = 3,
-                        PRIVATE_SERVICE_CONNECT = 4
+                        PRIVATE_SERVICE_CONNECT = 4,
+                        GKE_POD_IP_MASQUERADING = 5
+                    }
+
+                    /** CloudNatGatewayType enum. */
+                    enum CloudNatGatewayType {
+                        CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED = 0,
+                        PUBLIC_NAT44 = 1,
+                        PUBLIC_NAT64 = 2,
+                        PRIVATE_NAT_NCC = 3,
+                        PRIVATE_NAT_HYBRID = 4,
+                        PRIVATE_NAT64 = 5
                     }
                 }
 
@@ -7069,6 +7843,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls QueryOrgVpcFlowLogsConfigs.
+                     * @param request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    public queryOrgVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1.VpcFlowLogsService.QueryOrgVpcFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls QueryOrgVpcFlowLogsConfigs.
+                     * @param request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryOrgVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse>;
+
+                    /**
+                     * Calls ShowEffectiveFlowLogsConfigs.
+                     * @param request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    public showEffectiveFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1.VpcFlowLogsService.ShowEffectiveFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls ShowEffectiveFlowLogsConfigs.
+                     * @param request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public showEffectiveFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse>;
                 }
 
                 namespace VpcFlowLogsService {
@@ -7103,6 +7905,149 @@ export namespace google {
 
                     /**
                      * Callback as used by {@link google.cloud.networkmanagement.v1.VpcFlowLogsService|deleteVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.VpcFlowLogsService|queryOrgVpcFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    type QueryOrgVpcFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.VpcFlowLogsService|showEffectiveFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    type ShowEffectiveFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse) => void;
+                }
+
+                /** Represents an OrganizationVpcFlowLogsService */
+                class OrganizationVpcFlowLogsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new OrganizationVpcFlowLogsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new OrganizationVpcFlowLogsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrganizationVpcFlowLogsService;
+
+                    /**
+                     * Calls ListVpcFlowLogsConfigs.
+                     * @param request ListVpcFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListVpcFlowLogsConfigsResponse
+                     */
+                    public listVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.ListVpcFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls ListVpcFlowLogsConfigs.
+                     * @param request ListVpcFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsResponse>;
+
+                    /**
+                     * Calls GetVpcFlowLogsConfig.
+                     * @param request GetVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VpcFlowLogsConfig
+                     */
+                    public getVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.GetVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls GetVpcFlowLogsConfig.
+                     * @param request GetVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IGetVpcFlowLogsConfigRequest): Promise<google.cloud.networkmanagement.v1.VpcFlowLogsConfig>;
+
+                    /**
+                     * Calls CreateVpcFlowLogsConfig.
+                     * @param request CreateVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.CreateVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls CreateVpcFlowLogsConfig.
+                     * @param request CreateVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.ICreateVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateVpcFlowLogsConfig.
+                     * @param request UpdateVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.UpdateVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls UpdateVpcFlowLogsConfig.
+                     * @param request UpdateVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IUpdateVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteVpcFlowLogsConfig.
+                     * @param request DeleteVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService.DeleteVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls DeleteVpcFlowLogsConfig.
+                     * @param request DeleteVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1.IDeleteVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace OrganizationVpcFlowLogsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|listVpcFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListVpcFlowLogsConfigsResponse
+                     */
+                    type ListVpcFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1.ListVpcFlowLogsConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|getVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] VpcFlowLogsConfig
+                     */
+                    type GetVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1.VpcFlowLogsConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|createVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|updateVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1.OrganizationVpcFlowLogsService|deleteVpcFlowLogsConfig}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
@@ -7745,6 +8690,460 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a QueryOrgVpcFlowLogsConfigsRequest. */
+                interface IQueryOrgVpcFlowLogsConfigsRequest {
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a QueryOrgVpcFlowLogsConfigsRequest. */
+                class QueryOrgVpcFlowLogsConfigsRequest implements IQueryOrgVpcFlowLogsConfigsRequest {
+
+                    /**
+                     * Constructs a new QueryOrgVpcFlowLogsConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest parent. */
+                    public parent: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new QueryOrgVpcFlowLogsConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Verifies a QueryOrgVpcFlowLogsConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryOrgVpcFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryOrgVpcFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryOrgVpcFlowLogsConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryOrgVpcFlowLogsConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryOrgVpcFlowLogsConfigsResponse. */
+                interface IQueryOrgVpcFlowLogsConfigsResponse {
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs */
+                    vpcFlowLogsConfigs?: (google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[]|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a QueryOrgVpcFlowLogsConfigsResponse. */
+                class QueryOrgVpcFlowLogsConfigsResponse implements IQueryOrgVpcFlowLogsConfigsResponse {
+
+                    /**
+                     * Constructs a new QueryOrgVpcFlowLogsConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs. */
+                    public vpcFlowLogsConfigs: google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[];
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new QueryOrgVpcFlowLogsConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IQueryOrgVpcFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Verifies a QueryOrgVpcFlowLogsConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryOrgVpcFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryOrgVpcFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryOrgVpcFlowLogsConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryOrgVpcFlowLogsConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveFlowLogsConfigsRequest. */
+                interface IShowEffectiveFlowLogsConfigsRequest {
+
+                    /** ShowEffectiveFlowLogsConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest resource */
+                    resource?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ShowEffectiveFlowLogsConfigsRequest. */
+                class ShowEffectiveFlowLogsConfigsRequest implements IShowEffectiveFlowLogsConfigsRequest {
+
+                    /**
+                     * Constructs a new ShowEffectiveFlowLogsConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest resource. */
+                    public resource: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ShowEffectiveFlowLogsConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveFlowLogsConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Verifies a ShowEffectiveFlowLogsConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveFlowLogsConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveFlowLogsConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveFlowLogsConfigsResponse. */
+                interface IShowEffectiveFlowLogsConfigsResponse {
+
+                    /** ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs */
+                    effectiveFlowLogsConfigs?: (google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[]|null);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ShowEffectiveFlowLogsConfigsResponse. */
+                class ShowEffectiveFlowLogsConfigsResponse implements IShowEffectiveFlowLogsConfigsResponse {
+
+                    /**
+                     * Constructs a new ShowEffectiveFlowLogsConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs. */
+                    public effectiveFlowLogsConfigs: google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[];
+
+                    /** ShowEffectiveFlowLogsConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ShowEffectiveFlowLogsConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ShowEffectiveFlowLogsConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveFlowLogsConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IShowEffectiveFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Verifies a ShowEffectiveFlowLogsConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveFlowLogsConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveFlowLogsConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VpcFlowLogsConfig. */
                 interface IVpcFlowLogsConfig {
 
@@ -7772,8 +9171,17 @@ export namespace google {
                     /** VpcFlowLogsConfig filterExpr */
                     filterExpr?: (string|null);
 
+                    /** VpcFlowLogsConfig crossProjectMetadata */
+                    crossProjectMetadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
                     /** VpcFlowLogsConfig targetResourceState */
                     targetResourceState?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|null);
+
+                    /** VpcFlowLogsConfig network */
+                    network?: (string|null);
+
+                    /** VpcFlowLogsConfig subnet */
+                    subnet?: (string|null);
 
                     /** VpcFlowLogsConfig interconnectAttachment */
                     interconnectAttachment?: (string|null);
@@ -7824,8 +9232,17 @@ export namespace google {
                     /** VpcFlowLogsConfig filterExpr. */
                     public filterExpr?: (string|null);
 
+                    /** VpcFlowLogsConfig crossProjectMetadata. */
+                    public crossProjectMetadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
                     /** VpcFlowLogsConfig targetResourceState. */
                     public targetResourceState?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState|null);
+
+                    /** VpcFlowLogsConfig network. */
+                    public network?: (string|null);
+
+                    /** VpcFlowLogsConfig subnet. */
+                    public subnet?: (string|null);
 
                     /** VpcFlowLogsConfig interconnectAttachment. */
                     public interconnectAttachment?: (string|null);
@@ -7843,7 +9260,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VpcFlowLogsConfig targetResource. */
-                    public targetResource?: ("interconnectAttachment"|"vpnTunnel");
+                    public targetResource?: ("network"|"subnet"|"interconnectAttachment"|"vpnTunnel");
 
                     /**
                      * Creates a new VpcFlowLogsConfig instance using the specified properties.
@@ -7951,11 +9368,204 @@ export namespace google {
                         CUSTOM_METADATA = 3
                     }
 
+                    /** CrossProjectMetadata enum. */
+                    enum CrossProjectMetadata {
+                        CROSS_PROJECT_METADATA_UNSPECIFIED = 0,
+                        CROSS_PROJECT_METADATA_ENABLED = 1,
+                        CROSS_PROJECT_METADATA_DISABLED = 2
+                    }
+
                     /** TargetResourceState enum. */
                     enum TargetResourceState {
                         TARGET_RESOURCE_STATE_UNSPECIFIED = 0,
                         TARGET_RESOURCE_EXISTS = 1,
                         TARGET_RESOURCE_DOES_NOT_EXIST = 2
+                    }
+                }
+
+                /** Properties of an EffectiveVpcFlowLogsConfig. */
+                interface IEffectiveVpcFlowLogsConfig {
+
+                    /** EffectiveVpcFlowLogsConfig name */
+                    name?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig state */
+                    state?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|null);
+
+                    /** EffectiveVpcFlowLogsConfig aggregationInterval */
+                    aggregationInterval?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|null);
+
+                    /** EffectiveVpcFlowLogsConfig flowSampling */
+                    flowSampling?: (number|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadata */
+                    metadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadataFields */
+                    metadataFields?: (string[]|null);
+
+                    /** EffectiveVpcFlowLogsConfig filterExpr */
+                    filterExpr?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig crossProjectMetadata */
+                    crossProjectMetadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig network */
+                    network?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig subnet */
+                    subnet?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig interconnectAttachment */
+                    interconnectAttachment?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig vpnTunnel */
+                    vpnTunnel?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig scope */
+                    scope?: (google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|keyof typeof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|null);
+                }
+
+                /** Represents an EffectiveVpcFlowLogsConfig. */
+                class EffectiveVpcFlowLogsConfig implements IEffectiveVpcFlowLogsConfig {
+
+                    /**
+                     * Constructs a new EffectiveVpcFlowLogsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig);
+
+                    /** EffectiveVpcFlowLogsConfig name. */
+                    public name: string;
+
+                    /** EffectiveVpcFlowLogsConfig state. */
+                    public state?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State|null);
+
+                    /** EffectiveVpcFlowLogsConfig aggregationInterval. */
+                    public aggregationInterval?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval|null);
+
+                    /** EffectiveVpcFlowLogsConfig flowSampling. */
+                    public flowSampling?: (number|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadata. */
+                    public metadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadataFields. */
+                    public metadataFields: string[];
+
+                    /** EffectiveVpcFlowLogsConfig filterExpr. */
+                    public filterExpr?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig crossProjectMetadata. */
+                    public crossProjectMetadata?: (google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig network. */
+                    public network?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig subnet. */
+                    public subnet?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig interconnectAttachment. */
+                    public interconnectAttachment?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig vpnTunnel. */
+                    public vpnTunnel?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig scope. */
+                    public scope?: (google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|keyof typeof google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.Scope|null);
+
+                    /** EffectiveVpcFlowLogsConfig targetResource. */
+                    public targetResource?: ("network"|"subnet"|"interconnectAttachment"|"vpnTunnel");
+
+                    /**
+                     * Creates a new EffectiveVpcFlowLogsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EffectiveVpcFlowLogsConfig instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig): google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Encodes the specified EffectiveVpcFlowLogsConfig message. Does not implicitly {@link google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                     * @param message EffectiveVpcFlowLogsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EffectiveVpcFlowLogsConfig message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                     * @param message EffectiveVpcFlowLogsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EffectiveVpcFlowLogsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EffectiveVpcFlowLogsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Verifies an EffectiveVpcFlowLogsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EffectiveVpcFlowLogsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EffectiveVpcFlowLogsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Creates a plain object from an EffectiveVpcFlowLogsConfig message. Also converts values to other types if specified.
+                     * @param message EffectiveVpcFlowLogsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EffectiveVpcFlowLogsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EffectiveVpcFlowLogsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EffectiveVpcFlowLogsConfig {
+
+                    /** Scope enum. */
+                    enum Scope {
+                        SCOPE_UNSPECIFIED = 0,
+                        SUBNET = 1,
+                        COMPUTE_API_SUBNET = 2,
+                        NETWORK = 3,
+                        VPN_TUNNEL = 4,
+                        INTERCONNECT_ATTACHMENT = 5,
+                        ORGANIZATION = 6
                     }
                 }
             }
@@ -8183,6 +9793,9 @@ export namespace google {
                     /** Endpoint redisCluster */
                     redisCluster?: (string|null);
 
+                    /** Endpoint gkePod */
+                    gkePod?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -8246,6 +9859,9 @@ export namespace google {
 
                     /** Endpoint redisCluster. */
                     public redisCluster: string;
+
+                    /** Endpoint gkePod. */
+                    public gkePod: string;
 
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
@@ -8349,7 +9965,8 @@ export namespace google {
                     enum NetworkType {
                         NETWORK_TYPE_UNSPECIFIED = 0,
                         GCP_NETWORK = 1,
-                        NON_GCP_NETWORK = 2
+                        NON_GCP_NETWORK = 2,
+                        INTERNET = 3
                     }
 
                     /** ForwardingRuleTarget enum. */
@@ -8560,6 +10177,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri */
                         uri?: (string|null);
+
+                        /** CloudRunRevisionEndpoint serviceUri */
+                        serviceUri?: (string|null);
                     }
 
                     /** Represents a CloudRunRevisionEndpoint. */
@@ -8573,6 +10193,9 @@ export namespace google {
 
                         /** CloudRunRevisionEndpoint uri. */
                         public uri: string;
+
+                        /** CloudRunRevisionEndpoint serviceUri. */
+                        public serviceUri: string;
 
                         /**
                          * Creates a new CloudRunRevisionEndpoint instance using the specified properties.
@@ -9009,6 +10632,12 @@ export namespace google {
 
                     /** ProbingDetails destinationEgressLocation */
                     destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
+
+                    /** ProbingDetails edgeResponses */
+                    edgeResponses?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse[]|null);
+
+                    /** ProbingDetails probedAllDevices */
+                    probedAllDevices?: (boolean|null);
                 }
 
                 /** Represents a ProbingDetails. */
@@ -9046,6 +10675,12 @@ export namespace google {
 
                     /** ProbingDetails destinationEgressLocation. */
                     public destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
+
+                    /** ProbingDetails edgeResponses. */
+                    public edgeResponses: google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse[];
+
+                    /** ProbingDetails probedAllDevices. */
+                    public probedAllDevices: boolean;
 
                     /**
                      * Creates a new ProbingDetails instance using the specified properties.
@@ -9239,6 +10874,133 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a SingleEdgeResponse. */
+                    interface ISingleEdgeResponse {
+
+                        /** SingleEdgeResponse result */
+                        result?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult|keyof typeof google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult|null);
+
+                        /** SingleEdgeResponse sentProbeCount */
+                        sentProbeCount?: (number|null);
+
+                        /** SingleEdgeResponse successfulProbeCount */
+                        successfulProbeCount?: (number|null);
+
+                        /** SingleEdgeResponse probingLatency */
+                        probingLatency?: (google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null);
+
+                        /** SingleEdgeResponse destinationEgressLocation */
+                        destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
+
+                        /** SingleEdgeResponse destinationRouter */
+                        destinationRouter?: (string|null);
+                    }
+
+                    /** Represents a SingleEdgeResponse. */
+                    class SingleEdgeResponse implements ISingleEdgeResponse {
+
+                        /**
+                         * Constructs a new SingleEdgeResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse);
+
+                        /** SingleEdgeResponse result. */
+                        public result: (google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult|keyof typeof google.cloud.networkmanagement.v1beta1.ProbingDetails.ProbingResult);
+
+                        /** SingleEdgeResponse sentProbeCount. */
+                        public sentProbeCount: number;
+
+                        /** SingleEdgeResponse successfulProbeCount. */
+                        public successfulProbeCount: number;
+
+                        /** SingleEdgeResponse probingLatency. */
+                        public probingLatency?: (google.cloud.networkmanagement.v1beta1.ILatencyDistribution|null);
+
+                        /** SingleEdgeResponse destinationEgressLocation. */
+                        public destinationEgressLocation?: (google.cloud.networkmanagement.v1beta1.ProbingDetails.IEdgeLocation|null);
+
+                        /** SingleEdgeResponse destinationRouter. */
+                        public destinationRouter: string;
+
+                        /**
+                         * Creates a new SingleEdgeResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SingleEdgeResponse instance
+                         */
+                        public static create(properties?: google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse): google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Encodes the specified SingleEdgeResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                         * @param message SingleEdgeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SingleEdgeResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse.verify|verify} messages.
+                         * @param message SingleEdgeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.ISingleEdgeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SingleEdgeResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SingleEdgeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Decodes a SingleEdgeResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SingleEdgeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Verifies a SingleEdgeResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SingleEdgeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SingleEdgeResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse;
+
+                        /**
+                         * Creates a plain object from a SingleEdgeResponse message. Also converts values to other types if specified.
+                         * @param message SingleEdgeResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkmanagement.v1beta1.ProbingDetails.SingleEdgeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SingleEdgeResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SingleEdgeResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Trace. */
@@ -9383,11 +11145,17 @@ export namespace google {
                     /** Step forwardingRule */
                     forwardingRule?: (google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null);
 
+                    /** Step hybridSubnet */
+                    hybridSubnet?: (google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo|null);
+
                     /** Step vpnGateway */
                     vpnGateway?: (google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null);
 
                     /** Step vpnTunnel */
                     vpnTunnel?: (google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null);
+
+                    /** Step interconnectAttachment */
+                    interconnectAttachment?: (google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo|null);
 
                     /** Step vpcConnector */
                     vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
@@ -9418,6 +11186,12 @@ export namespace google {
 
                     /** Step gkeMaster */
                     gkeMaster?: (google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null);
+
+                    /** Step gkePod */
+                    gkePod?: (google.cloud.networkmanagement.v1beta1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped */
+                    ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null);
 
                     /** Step cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
@@ -9492,11 +11266,17 @@ export namespace google {
                     /** Step forwardingRule. */
                     public forwardingRule?: (google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null);
 
+                    /** Step hybridSubnet. */
+                    public hybridSubnet?: (google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo|null);
+
                     /** Step vpnGateway. */
                     public vpnGateway?: (google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null);
 
                     /** Step vpnTunnel. */
                     public vpnTunnel?: (google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null);
+
+                    /** Step interconnectAttachment. */
+                    public interconnectAttachment?: (google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo|null);
 
                     /** Step vpcConnector. */
                     public vpcConnector?: (google.cloud.networkmanagement.v1beta1.IVpcConnectorInfo|null);
@@ -9527,6 +11307,12 @@ export namespace google {
 
                     /** Step gkeMaster. */
                     public gkeMaster?: (google.cloud.networkmanagement.v1beta1.IGKEMasterInfo|null);
+
+                    /** Step gkePod. */
+                    public gkePod?: (google.cloud.networkmanagement.v1beta1.IGkePodInfo|null);
+
+                    /** Step ipMasqueradingSkipped. */
+                    public ipMasqueradingSkipped?: (google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo|null);
 
                     /** Step cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.networkmanagement.v1beta1.ICloudSQLInstanceInfo|null);
@@ -9562,7 +11348,7 @@ export namespace google {
                     public serverlessNeg?: (google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -9653,6 +11439,7 @@ export namespace google {
                         START_FROM_PRIVATE_NETWORK = 3,
                         START_FROM_GKE_MASTER = 21,
                         START_FROM_CLOUD_SQL_INSTANCE = 22,
+                        START_FROM_GKE_POD = 39,
                         START_FROM_REDIS_INSTANCE = 32,
                         START_FROM_REDIS_CLUSTER = 33,
                         START_FROM_CLOUD_FUNCTION = 23,
@@ -9670,12 +11457,15 @@ export namespace google {
                         ARRIVE_AT_INSTANCE = 9,
                         ARRIVE_AT_INTERNAL_LOAD_BALANCER = 10,
                         ARRIVE_AT_EXTERNAL_LOAD_BALANCER = 11,
+                        ARRIVE_AT_HYBRID_SUBNET = 38,
                         ARRIVE_AT_VPN_GATEWAY = 12,
                         ARRIVE_AT_VPN_TUNNEL = 13,
+                        ARRIVE_AT_INTERCONNECT_ATTACHMENT = 37,
                         ARRIVE_AT_VPC_CONNECTOR = 24,
                         DIRECT_VPC_EGRESS_CONNECTION = 35,
                         SERVERLESS_EXTERNAL_CONNECTION = 36,
                         NAT = 14,
+                        SKIP_GKE_POD_IP_MASQUERADING = 40,
                         PROXY_CONNECTION = 15,
                         DELIVER = 16,
                         DROP = 17,
@@ -9714,6 +11504,12 @@ export namespace google {
 
                     /** InstanceInfo pscNetworkAttachmentUri */
                     pscNetworkAttachmentUri?: (string|null);
+
+                    /** InstanceInfo running */
+                    running?: (boolean|null);
+
+                    /** InstanceInfo status */
+                    status?: (google.cloud.networkmanagement.v1beta1.InstanceInfo.Status|keyof typeof google.cloud.networkmanagement.v1beta1.InstanceInfo.Status|null);
                 }
 
                 /** Represents an InstanceInfo. */
@@ -9751,6 +11547,12 @@ export namespace google {
 
                     /** InstanceInfo pscNetworkAttachmentUri. */
                     public pscNetworkAttachmentUri: string;
+
+                    /** InstanceInfo running. */
+                    public running: boolean;
+
+                    /** InstanceInfo status. */
+                    public status: (google.cloud.networkmanagement.v1beta1.InstanceInfo.Status|keyof typeof google.cloud.networkmanagement.v1beta1.InstanceInfo.Status);
 
                     /**
                      * Creates a new InstanceInfo instance using the specified properties.
@@ -9828,6 +11630,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InstanceInfo {
+
+                    /** Status enum. */
+                    enum Status {
+                        STATUS_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        NOT_RUNNING = 2
+                    }
                 }
 
                 /** Properties of a NetworkInfo. */
@@ -9986,6 +11798,12 @@ export namespace google {
 
                     /** FirewallInfo firewallRuleType */
                     firewallRuleType?: (google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType|keyof typeof google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType|null);
+
+                    /** FirewallInfo policyPriority */
+                    policyPriority?: (number|null);
+
+                    /** FirewallInfo targetType */
+                    targetType?: (google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType|keyof typeof google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType|null);
                 }
 
                 /** Represents a FirewallInfo. */
@@ -10029,6 +11847,12 @@ export namespace google {
 
                     /** FirewallInfo firewallRuleType. */
                     public firewallRuleType: (google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType|keyof typeof google.cloud.networkmanagement.v1beta1.FirewallInfo.FirewallRuleType);
+
+                    /** FirewallInfo policyPriority. */
+                    public policyPriority: number;
+
+                    /** FirewallInfo targetType. */
+                    public targetType: (google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType|keyof typeof google.cloud.networkmanagement.v1beta1.FirewallInfo.TargetType);
 
                     /**
                      * Creates a new FirewallInfo instance using the specified properties.
@@ -10119,9 +11943,18 @@ export namespace google {
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
                         NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        SYSTEM_NETWORK_FIREWALL_POLICY_RULE = 7,
+                        SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE = 8,
                         UNSUPPORTED_FIREWALL_POLICY_RULE = 100,
                         TRACKING_STATE = 101,
                         ANALYSIS_SKIPPED = 102
+                    }
+
+                    /** TargetType enum. */
+                    enum TargetType {
+                        TARGET_TYPE_UNSPECIFIED = 0,
+                        INSTANCES = 1,
+                        INTERNAL_MANAGED_LB = 2
                     }
                 }
 
@@ -10389,7 +12222,8 @@ export namespace google {
                         NEXT_HOP_BLACKHOLE = 9,
                         NEXT_HOP_ILB = 10,
                         NEXT_HOP_ROUTER_APPLIANCE = 11,
-                        NEXT_HOP_NCC_HUB = 12
+                        NEXT_HOP_NCC_HUB = 12,
+                        SECURE_WEB_PROXY_GATEWAY = 13
                     }
 
                     /** RouteScope enum. */
@@ -10948,6 +12782,115 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a HybridSubnetInfo. */
+                interface IHybridSubnetInfo {
+
+                    /** HybridSubnetInfo displayName */
+                    displayName?: (string|null);
+
+                    /** HybridSubnetInfo uri */
+                    uri?: (string|null);
+
+                    /** HybridSubnetInfo region */
+                    region?: (string|null);
+                }
+
+                /** Represents a HybridSubnetInfo. */
+                class HybridSubnetInfo implements IHybridSubnetInfo {
+
+                    /**
+                     * Constructs a new HybridSubnetInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo);
+
+                    /** HybridSubnetInfo displayName. */
+                    public displayName: string;
+
+                    /** HybridSubnetInfo uri. */
+                    public uri: string;
+
+                    /** HybridSubnetInfo region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new HybridSubnetInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HybridSubnetInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo): google.cloud.networkmanagement.v1beta1.HybridSubnetInfo;
+
+                    /**
+                     * Encodes the specified HybridSubnetInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.verify|verify} messages.
+                     * @param message HybridSubnetInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HybridSubnetInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.HybridSubnetInfo.verify|verify} messages.
+                     * @param message HybridSubnetInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IHybridSubnetInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HybridSubnetInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HybridSubnetInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.HybridSubnetInfo;
+
+                    /**
+                     * Decodes a HybridSubnetInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HybridSubnetInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.HybridSubnetInfo;
+
+                    /**
+                     * Verifies a HybridSubnetInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HybridSubnetInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HybridSubnetInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.HybridSubnetInfo;
+
+                    /**
+                     * Creates a plain object from a HybridSubnetInfo message. Also converts values to other types if specified.
+                     * @param message HybridSubnetInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.HybridSubnetInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HybridSubnetInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HybridSubnetInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VpnGatewayInfo. */
                 interface IVpnGatewayInfo {
 
@@ -11231,6 +13174,151 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an InterconnectAttachmentInfo. */
+                interface IInterconnectAttachmentInfo {
+
+                    /** InterconnectAttachmentInfo displayName */
+                    displayName?: (string|null);
+
+                    /** InterconnectAttachmentInfo uri */
+                    uri?: (string|null);
+
+                    /** InterconnectAttachmentInfo interconnectUri */
+                    interconnectUri?: (string|null);
+
+                    /** InterconnectAttachmentInfo region */
+                    region?: (string|null);
+
+                    /** InterconnectAttachmentInfo cloudRouterUri */
+                    cloudRouterUri?: (string|null);
+
+                    /** InterconnectAttachmentInfo type */
+                    type?: (google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type|keyof typeof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type|null);
+
+                    /** InterconnectAttachmentInfo l2AttachmentMatchedIpAddress */
+                    l2AttachmentMatchedIpAddress?: (string|null);
+                }
+
+                /** Represents an InterconnectAttachmentInfo. */
+                class InterconnectAttachmentInfo implements IInterconnectAttachmentInfo {
+
+                    /**
+                     * Constructs a new InterconnectAttachmentInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo);
+
+                    /** InterconnectAttachmentInfo displayName. */
+                    public displayName: string;
+
+                    /** InterconnectAttachmentInfo uri. */
+                    public uri: string;
+
+                    /** InterconnectAttachmentInfo interconnectUri. */
+                    public interconnectUri: string;
+
+                    /** InterconnectAttachmentInfo region. */
+                    public region: string;
+
+                    /** InterconnectAttachmentInfo cloudRouterUri. */
+                    public cloudRouterUri: string;
+
+                    /** InterconnectAttachmentInfo type. */
+                    public type: (google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type|keyof typeof google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.Type);
+
+                    /** InterconnectAttachmentInfo l2AttachmentMatchedIpAddress. */
+                    public l2AttachmentMatchedIpAddress: string;
+
+                    /**
+                     * Creates a new InterconnectAttachmentInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InterconnectAttachmentInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo): google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Encodes the specified InterconnectAttachmentInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.verify|verify} messages.
+                     * @param message InterconnectAttachmentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InterconnectAttachmentInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo.verify|verify} messages.
+                     * @param message InterconnectAttachmentInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IInterconnectAttachmentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InterconnectAttachmentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Decodes an InterconnectAttachmentInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InterconnectAttachmentInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Verifies an InterconnectAttachmentInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InterconnectAttachmentInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InterconnectAttachmentInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo;
+
+                    /**
+                     * Creates a plain object from an InterconnectAttachmentInfo message. Also converts values to other types if specified.
+                     * @param message InterconnectAttachmentInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.InterconnectAttachmentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InterconnectAttachmentInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InterconnectAttachmentInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InterconnectAttachmentInfo {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        DEDICATED = 1,
+                        PARTNER = 2,
+                        PARTNER_PROVIDER = 3,
+                        L2_DEDICATED = 4
+                    }
+                }
+
                 /** Properties of an EndpointInfo. */
                 interface IEndpointInfo {
 
@@ -11387,6 +13475,9 @@ export namespace google {
 
                     /** DeliverInfo pscGoogleApiTarget */
                     pscGoogleApiTarget?: (string|null);
+
+                    /** DeliverInfo googleServiceType */
+                    googleServiceType?: (google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType|null);
                 }
 
                 /** Represents a DeliverInfo. */
@@ -11412,6 +13503,9 @@ export namespace google {
 
                     /** DeliverInfo pscGoogleApiTarget. */
                     public pscGoogleApiTarget: string;
+
+                    /** DeliverInfo googleServiceType. */
+                    public googleServiceType: (google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType|keyof typeof google.cloud.networkmanagement.v1beta1.DeliverInfo.GoogleServiceType);
 
                     /**
                      * Creates a new DeliverInfo instance using the specified properties.
@@ -11512,7 +13606,18 @@ export namespace google {
                         CLOUD_RUN_REVISION = 14,
                         GOOGLE_MANAGED_SERVICE = 15,
                         REDIS_INSTANCE = 16,
-                        REDIS_CLUSTER = 17
+                        REDIS_CLUSTER = 17,
+                        GKE_POD = 19
+                    }
+
+                    /** GoogleServiceType enum. */
+                    enum GoogleServiceType {
+                        GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
+                        IAP = 1,
+                        GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
+                        CLOUD_DNS = 3,
+                        PRIVATE_GOOGLE_ACCESS = 4,
+                        SERVERLESS_VPC_ACCESS = 5
                     }
                 }
 
@@ -11638,7 +13743,8 @@ export namespace google {
                         CLOUD_SQL_INSTANCE = 6,
                         ANOTHER_PROJECT = 7,
                         NCC_HUB = 8,
-                        ROUTER_APPLIANCE = 9
+                        ROUTER_APPLIANCE = 9,
+                        SECURE_WEB_PROXY_GATEWAY = 10
                     }
                 }
 
@@ -11778,6 +13884,9 @@ export namespace google {
                         PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
                         PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS = 36,
                         NO_SOURCE_LOCATION = 5,
+                        NO_SOURCE_GCP_NETWORK_LOCATION = 42,
+                        NO_SOURCE_NON_GCP_NETWORK_LOCATION = 43,
+                        NO_SOURCE_INTERNET_LOCATION = 44,
                         INVALID_ARGUMENT = 6,
                         TRACE_TOO_LONG = 9,
                         INTERNAL_ERROR = 10,
@@ -11790,14 +13899,18 @@ export namespace google {
                         FIREWALL_CONFIG_NOT_FOUND = 26,
                         ROUTE_CONFIG_NOT_FOUND = 27,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
+                        GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT = 39,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
+                        SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED = 45,
                         SOURCE_REDIS_CLUSTER_UNSUPPORTED = 34,
                         SOURCE_REDIS_INSTANCE_UNSUPPORTED = 35,
                         SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
                         NON_ROUTABLE_IP_ADDRESS = 22,
                         UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
                         UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31,
-                        NO_SERVERLESS_IP_RANGES = 37
+                        NO_SERVERLESS_IP_RANGES = 37,
+                        IP_VERSION_PROTOCOL_MISMATCH = 40,
+                        GKE_POD_UNKNOWN_ENDPOINT_LOCATION = 41
                     }
                 }
 
@@ -11818,6 +13931,12 @@ export namespace google {
 
                     /** DropInfo region */
                     region?: (string|null);
+
+                    /** DropInfo sourceGeolocationCode */
+                    sourceGeolocationCode?: (string|null);
+
+                    /** DropInfo destinationGeolocationCode */
+                    destinationGeolocationCode?: (string|null);
                 }
 
                 /** Represents a DropInfo. */
@@ -11843,6 +13962,12 @@ export namespace google {
 
                     /** DropInfo region. */
                     public region: string;
+
+                    /** DropInfo sourceGeolocationCode. */
+                    public sourceGeolocationCode: string;
+
+                    /** DropInfo destinationGeolocationCode. */
+                    public destinationGeolocationCode: string;
 
                     /**
                      * Creates a new DropInfo instance using the specified properties.
@@ -11941,6 +14066,8 @@ export namespace google {
                         ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
                         ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
                         NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS = 109,
+                        NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS = 98,
                         VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
                         VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
                         PRIVATE_TRAFFIC_TO_INTERNET = 7,
@@ -11954,6 +14081,7 @@ export namespace google {
                         INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS = 85,
                         INSTANCE_NOT_RUNNING = 14,
                         GKE_CLUSTER_NOT_RUNNING = 27,
+                        GKE_POD_NOT_RUNNING = 103,
                         CLOUD_SQL_INSTANCE_NOT_RUNNING = 28,
                         REDIS_INSTANCE_NOT_RUNNING = 68,
                         REDIS_CLUSTER_NOT_RUNNING = 69,
@@ -12013,7 +14141,19 @@ export namespace google {
                         PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83,
                         PSC_PORT_MAPPING_PORT_MISMATCH = 86,
                         PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED = 87,
-                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88
+                        UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION = 88,
+                        TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED = 89,
+                        NO_MATCHING_NAT64_GATEWAY = 90,
+                        NO_CONFIGURED_PRIVATE_NAT64_RULE = 107,
+                        LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH = 96,
+                        NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION = 97,
+                        CLOUD_NAT_PROTOCOL_UNSUPPORTED = 99,
+                        L2_INTERCONNECT_UNSUPPORTED_PROTOCOL = 100,
+                        L2_INTERCONNECT_UNSUPPORTED_PORT = 101,
+                        L2_INTERCONNECT_DESTINATION_IP_MISMATCH = 102,
+                        NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED = 104,
+                        HYBRID_SUBNET_REGION_MISMATCH = 105,
+                        HYBRID_SUBNET_NO_ROUTE = 106
                     }
                 }
 
@@ -12136,6 +14276,233 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GkePodInfo. */
+                interface IGkePodInfo {
+
+                    /** GkePodInfo podUri */
+                    podUri?: (string|null);
+
+                    /** GkePodInfo ipAddress */
+                    ipAddress?: (string|null);
+
+                    /** GkePodInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a GkePodInfo. */
+                class GkePodInfo implements IGkePodInfo {
+
+                    /**
+                     * Constructs a new GkePodInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IGkePodInfo);
+
+                    /** GkePodInfo podUri. */
+                    public podUri: string;
+
+                    /** GkePodInfo ipAddress. */
+                    public ipAddress: string;
+
+                    /** GkePodInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new GkePodInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GkePodInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IGkePodInfo): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Encodes the specified GkePodInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GkePodInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GkePodInfo.verify|verify} messages.
+                     * @param message GkePodInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IGkePodInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Decodes a GkePodInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GkePodInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Verifies a GkePodInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GkePodInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GkePodInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.GkePodInfo;
+
+                    /**
+                     * Creates a plain object from a GkePodInfo message. Also converts values to other types if specified.
+                     * @param message GkePodInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.GkePodInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GkePodInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GkePodInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IpMasqueradingSkippedInfo. */
+                interface IIpMasqueradingSkippedInfo {
+
+                    /** IpMasqueradingSkippedInfo reason */
+                    reason?: (google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|null);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange */
+                    nonMasqueradeRange?: (string|null);
+                }
+
+                /** Represents an IpMasqueradingSkippedInfo. */
+                class IpMasqueradingSkippedInfo implements IIpMasqueradingSkippedInfo {
+
+                    /**
+                     * Constructs a new IpMasqueradingSkippedInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo);
+
+                    /** IpMasqueradingSkippedInfo reason. */
+                    public reason: (google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason|keyof typeof google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.Reason);
+
+                    /** IpMasqueradingSkippedInfo nonMasqueradeRange. */
+                    public nonMasqueradeRange: string;
+
+                    /**
+                     * Creates a new IpMasqueradingSkippedInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IpMasqueradingSkippedInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IpMasqueradingSkippedInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo.verify|verify} messages.
+                     * @param message IpMasqueradingSkippedInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IIpMasqueradingSkippedInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Decodes an IpMasqueradingSkippedInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IpMasqueradingSkippedInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Verifies an IpMasqueradingSkippedInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IpMasqueradingSkippedInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IpMasqueradingSkippedInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo;
+
+                    /**
+                     * Creates a plain object from an IpMasqueradingSkippedInfo message. Also converts values to other types if specified.
+                     * @param message IpMasqueradingSkippedInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.IpMasqueradingSkippedInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IpMasqueradingSkippedInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IpMasqueradingSkippedInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpMasqueradingSkippedInfo {
+
+                    /** Reason enum. */
+                    enum Reason {
+                        REASON_UNSPECIFIED = 0,
+                        DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE = 1,
+                        DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE = 2,
+                        DESTINATION_ON_SAME_NODE = 3,
+                        DEFAULT_SNAT_DISABLED = 4,
+                        NO_MASQUERADING_FOR_IPV6 = 5,
+                        POD_USES_NODE_NETWORK_NAMESPACE = 6,
+                        NO_MASQUERADING_FOR_RETURN_PACKET = 7
+                    }
                 }
 
                 /** Properties of a CloudSQLInstanceInfo. */
@@ -13232,6 +15599,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName */
                     natGatewayName?: (string|null);
+
+                    /** NatInfo cloudNatGatewayType */
+                    cloudNatGatewayType?: (google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|null);
                 }
 
                 /** Represents a NatInfo. */
@@ -13281,6 +15651,9 @@ export namespace google {
 
                     /** NatInfo natGatewayName. */
                     public natGatewayName: string;
+
+                    /** NatInfo cloudNatGatewayType. */
+                    public cloudNatGatewayType: (google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.CloudNatGatewayType);
 
                     /**
                      * Creates a new NatInfo instance using the specified properties.
@@ -13368,7 +15741,18 @@ export namespace google {
                         INTERNAL_TO_EXTERNAL = 1,
                         EXTERNAL_TO_INTERNAL = 2,
                         CLOUD_NAT = 3,
-                        PRIVATE_SERVICE_CONNECT = 4
+                        PRIVATE_SERVICE_CONNECT = 4,
+                        GKE_POD_IP_MASQUERADING = 5
+                    }
+
+                    /** CloudNatGatewayType enum. */
+                    enum CloudNatGatewayType {
+                        CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED = 0,
+                        PUBLIC_NAT44 = 1,
+                        PUBLIC_NAT64 = 2,
+                        PRIVATE_NAT_NCC = 3,
+                        PRIVATE_NAT_HYBRID = 4,
+                        PRIVATE_NAT64 = 5
                     }
                 }
 
@@ -15006,6 +17390,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls QueryOrgVpcFlowLogsConfigs.
+                     * @param request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    public queryOrgVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.QueryOrgVpcFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls QueryOrgVpcFlowLogsConfigs.
+                     * @param request QueryOrgVpcFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryOrgVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse>;
+
+                    /**
+                     * Calls ShowEffectiveFlowLogsConfigs.
+                     * @param request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    public showEffectiveFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.ShowEffectiveFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls ShowEffectiveFlowLogsConfigs.
+                     * @param request ShowEffectiveFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public showEffectiveFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse>;
                 }
 
                 namespace VpcFlowLogsService {
@@ -15040,6 +17452,149 @@ export namespace google {
 
                     /**
                      * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|deleteVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|queryOrgVpcFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    type QueryOrgVpcFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|showEffectiveFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    type ShowEffectiveFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse) => void;
+                }
+
+                /** Represents an OrganizationVpcFlowLogsService */
+                class OrganizationVpcFlowLogsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new OrganizationVpcFlowLogsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new OrganizationVpcFlowLogsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): OrganizationVpcFlowLogsService;
+
+                    /**
+                     * Calls ListVpcFlowLogsConfigs.
+                     * @param request ListVpcFlowLogsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListVpcFlowLogsConfigsResponse
+                     */
+                    public listVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest, callback: google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.ListVpcFlowLogsConfigsCallback): void;
+
+                    /**
+                     * Calls ListVpcFlowLogsConfigs.
+                     * @param request ListVpcFlowLogsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listVpcFlowLogsConfigs(request: google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest): Promise<google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse>;
+
+                    /**
+                     * Calls GetVpcFlowLogsConfig.
+                     * @param request GetVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VpcFlowLogsConfig
+                     */
+                    public getVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.GetVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls GetVpcFlowLogsConfig.
+                     * @param request GetVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest): Promise<google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig>;
+
+                    /**
+                     * Calls CreateVpcFlowLogsConfig.
+                     * @param request CreateVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.CreateVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls CreateVpcFlowLogsConfig.
+                     * @param request CreateVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateVpcFlowLogsConfig.
+                     * @param request UpdateVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.UpdateVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls UpdateVpcFlowLogsConfig.
+                     * @param request UpdateVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteVpcFlowLogsConfig.
+                     * @param request DeleteVpcFlowLogsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest, callback: google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService.DeleteVpcFlowLogsConfigCallback): void;
+
+                    /**
+                     * Calls DeleteVpcFlowLogsConfig.
+                     * @param request DeleteVpcFlowLogsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteVpcFlowLogsConfig(request: google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace OrganizationVpcFlowLogsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|listVpcFlowLogsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListVpcFlowLogsConfigsResponse
+                     */
+                    type ListVpcFlowLogsConfigsCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|getVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] VpcFlowLogsConfig
+                     */
+                    type GetVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|createVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|updateVpcFlowLogsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateVpcFlowLogsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService|deleteVpcFlowLogsConfig}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
@@ -15682,6 +18237,460 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a QueryOrgVpcFlowLogsConfigsRequest. */
+                interface IQueryOrgVpcFlowLogsConfigsRequest {
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a QueryOrgVpcFlowLogsConfigsRequest. */
+                class QueryOrgVpcFlowLogsConfigsRequest implements IQueryOrgVpcFlowLogsConfigsRequest {
+
+                    /**
+                     * Constructs a new QueryOrgVpcFlowLogsConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest);
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest parent. */
+                    public parent: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new QueryOrgVpcFlowLogsConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Verifies a QueryOrgVpcFlowLogsConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryOrgVpcFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryOrgVpcFlowLogsConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryOrgVpcFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                     * @param message QueryOrgVpcFlowLogsConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryOrgVpcFlowLogsConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryOrgVpcFlowLogsConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryOrgVpcFlowLogsConfigsResponse. */
+                interface IQueryOrgVpcFlowLogsConfigsResponse {
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs */
+                    vpcFlowLogsConfigs?: (google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig[]|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a QueryOrgVpcFlowLogsConfigsResponse. */
+                class QueryOrgVpcFlowLogsConfigsResponse implements IQueryOrgVpcFlowLogsConfigsResponse {
+
+                    /**
+                     * Constructs a new QueryOrgVpcFlowLogsConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse);
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse vpcFlowLogsConfigs. */
+                    public vpcFlowLogsConfigs: google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig[];
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** QueryOrgVpcFlowLogsConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new QueryOrgVpcFlowLogsConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryOrgVpcFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IQueryOrgVpcFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Decodes a QueryOrgVpcFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Verifies a QueryOrgVpcFlowLogsConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryOrgVpcFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryOrgVpcFlowLogsConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryOrgVpcFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                     * @param message QueryOrgVpcFlowLogsConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.QueryOrgVpcFlowLogsConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryOrgVpcFlowLogsConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryOrgVpcFlowLogsConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveFlowLogsConfigsRequest. */
+                interface IShowEffectiveFlowLogsConfigsRequest {
+
+                    /** ShowEffectiveFlowLogsConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest resource */
+                    resource?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ShowEffectiveFlowLogsConfigsRequest. */
+                class ShowEffectiveFlowLogsConfigsRequest implements IShowEffectiveFlowLogsConfigsRequest {
+
+                    /**
+                     * Constructs a new ShowEffectiveFlowLogsConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest);
+
+                    /** ShowEffectiveFlowLogsConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest resource. */
+                    public resource: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ShowEffectiveFlowLogsConfigsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ShowEffectiveFlowLogsConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveFlowLogsConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Verifies a ShowEffectiveFlowLogsConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveFlowLogsConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveFlowLogsConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveFlowLogsConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveFlowLogsConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShowEffectiveFlowLogsConfigsResponse. */
+                interface IShowEffectiveFlowLogsConfigsResponse {
+
+                    /** ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs */
+                    effectiveFlowLogsConfigs?: (google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig[]|null);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ShowEffectiveFlowLogsConfigsResponse. */
+                class ShowEffectiveFlowLogsConfigsResponse implements IShowEffectiveFlowLogsConfigsResponse {
+
+                    /**
+                     * Constructs a new ShowEffectiveFlowLogsConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse);
+
+                    /** ShowEffectiveFlowLogsConfigsResponse effectiveFlowLogsConfigs. */
+                    public effectiveFlowLogsConfigs: google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig[];
+
+                    /** ShowEffectiveFlowLogsConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ShowEffectiveFlowLogsConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ShowEffectiveFlowLogsConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShowEffectiveFlowLogsConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShowEffectiveFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse.verify|verify} messages.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IShowEffectiveFlowLogsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Decodes a ShowEffectiveFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Verifies a ShowEffectiveFlowLogsConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShowEffectiveFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShowEffectiveFlowLogsConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ShowEffectiveFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ShowEffectiveFlowLogsConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.ShowEffectiveFlowLogsConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShowEffectiveFlowLogsConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShowEffectiveFlowLogsConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a VpcFlowLogsConfig. */
                 interface IVpcFlowLogsConfig {
 
@@ -15708,6 +18717,18 @@ export namespace google {
 
                     /** VpcFlowLogsConfig filterExpr */
                     filterExpr?: (string|null);
+
+                    /** VpcFlowLogsConfig crossProjectMetadata */
+                    crossProjectMetadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** VpcFlowLogsConfig targetResourceState */
+                    targetResourceState?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|null);
+
+                    /** VpcFlowLogsConfig network */
+                    network?: (string|null);
+
+                    /** VpcFlowLogsConfig subnet */
+                    subnet?: (string|null);
 
                     /** VpcFlowLogsConfig interconnectAttachment */
                     interconnectAttachment?: (string|null);
@@ -15758,6 +18779,18 @@ export namespace google {
                     /** VpcFlowLogsConfig filterExpr. */
                     public filterExpr?: (string|null);
 
+                    /** VpcFlowLogsConfig crossProjectMetadata. */
+                    public crossProjectMetadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** VpcFlowLogsConfig targetResourceState. */
+                    public targetResourceState?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.TargetResourceState|null);
+
+                    /** VpcFlowLogsConfig network. */
+                    public network?: (string|null);
+
+                    /** VpcFlowLogsConfig subnet. */
+                    public subnet?: (string|null);
+
                     /** VpcFlowLogsConfig interconnectAttachment. */
                     public interconnectAttachment?: (string|null);
 
@@ -15774,7 +18807,7 @@ export namespace google {
                     public updateTime?: (google.protobuf.ITimestamp|null);
 
                     /** VpcFlowLogsConfig targetResource. */
-                    public targetResource?: ("interconnectAttachment"|"vpnTunnel");
+                    public targetResource?: ("network"|"subnet"|"interconnectAttachment"|"vpnTunnel");
 
                     /**
                      * Creates a new VpcFlowLogsConfig instance using the specified properties.
@@ -15880,6 +18913,206 @@ export namespace google {
                         INCLUDE_ALL_METADATA = 1,
                         EXCLUDE_ALL_METADATA = 2,
                         CUSTOM_METADATA = 3
+                    }
+
+                    /** CrossProjectMetadata enum. */
+                    enum CrossProjectMetadata {
+                        CROSS_PROJECT_METADATA_UNSPECIFIED = 0,
+                        CROSS_PROJECT_METADATA_ENABLED = 1,
+                        CROSS_PROJECT_METADATA_DISABLED = 2
+                    }
+
+                    /** TargetResourceState enum. */
+                    enum TargetResourceState {
+                        TARGET_RESOURCE_STATE_UNSPECIFIED = 0,
+                        TARGET_RESOURCE_EXISTS = 1,
+                        TARGET_RESOURCE_DOES_NOT_EXIST = 2
+                    }
+                }
+
+                /** Properties of an EffectiveVpcFlowLogsConfig. */
+                interface IEffectiveVpcFlowLogsConfig {
+
+                    /** EffectiveVpcFlowLogsConfig name */
+                    name?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig state */
+                    state?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null);
+
+                    /** EffectiveVpcFlowLogsConfig aggregationInterval */
+                    aggregationInterval?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null);
+
+                    /** EffectiveVpcFlowLogsConfig flowSampling */
+                    flowSampling?: (number|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadata */
+                    metadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadataFields */
+                    metadataFields?: (string[]|null);
+
+                    /** EffectiveVpcFlowLogsConfig filterExpr */
+                    filterExpr?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig crossProjectMetadata */
+                    crossProjectMetadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig network */
+                    network?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig subnet */
+                    subnet?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig interconnectAttachment */
+                    interconnectAttachment?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig vpnTunnel */
+                    vpnTunnel?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig scope */
+                    scope?: (google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|keyof typeof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|null);
+                }
+
+                /** Represents an EffectiveVpcFlowLogsConfig. */
+                class EffectiveVpcFlowLogsConfig implements IEffectiveVpcFlowLogsConfig {
+
+                    /**
+                     * Constructs a new EffectiveVpcFlowLogsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig);
+
+                    /** EffectiveVpcFlowLogsConfig name. */
+                    public name: string;
+
+                    /** EffectiveVpcFlowLogsConfig state. */
+                    public state?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null);
+
+                    /** EffectiveVpcFlowLogsConfig aggregationInterval. */
+                    public aggregationInterval?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null);
+
+                    /** EffectiveVpcFlowLogsConfig flowSampling. */
+                    public flowSampling?: (number|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadata. */
+                    public metadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig metadataFields. */
+                    public metadataFields: string[];
+
+                    /** EffectiveVpcFlowLogsConfig filterExpr. */
+                    public filterExpr?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig crossProjectMetadata. */
+                    public crossProjectMetadata?: (google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|keyof typeof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.CrossProjectMetadata|null);
+
+                    /** EffectiveVpcFlowLogsConfig network. */
+                    public network?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig subnet. */
+                    public subnet?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig interconnectAttachment. */
+                    public interconnectAttachment?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig vpnTunnel. */
+                    public vpnTunnel?: (string|null);
+
+                    /** EffectiveVpcFlowLogsConfig scope. */
+                    public scope?: (google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|keyof typeof google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.Scope|null);
+
+                    /** EffectiveVpcFlowLogsConfig targetResource. */
+                    public targetResource?: ("network"|"subnet"|"interconnectAttachment"|"vpnTunnel");
+
+                    /**
+                     * Creates a new EffectiveVpcFlowLogsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EffectiveVpcFlowLogsConfig instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig): google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Encodes the specified EffectiveVpcFlowLogsConfig message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                     * @param message EffectiveVpcFlowLogsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EffectiveVpcFlowLogsConfig message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig.verify|verify} messages.
+                     * @param message EffectiveVpcFlowLogsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IEffectiveVpcFlowLogsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EffectiveVpcFlowLogsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Decodes an EffectiveVpcFlowLogsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EffectiveVpcFlowLogsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Verifies an EffectiveVpcFlowLogsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EffectiveVpcFlowLogsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EffectiveVpcFlowLogsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig;
+
+                    /**
+                     * Creates a plain object from an EffectiveVpcFlowLogsConfig message. Also converts values to other types if specified.
+                     * @param message EffectiveVpcFlowLogsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.EffectiveVpcFlowLogsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EffectiveVpcFlowLogsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EffectiveVpcFlowLogsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EffectiveVpcFlowLogsConfig {
+
+                    /** Scope enum. */
+                    enum Scope {
+                        SCOPE_UNSPECIFIED = 0,
+                        SUBNET = 1,
+                        COMPUTE_API_SUBNET = 2,
+                        NETWORK = 3,
+                        VPN_TUNNEL = 4,
+                        INTERCONNECT_ATTACHMENT = 5,
+                        ORGANIZATION = 6
                     }
                 }
             }

@@ -109,7 +109,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Maps.AddressValidation.V1",
                     "go_package": "cloud.google.com/go/maps/addressvalidation/apiv1/addressvalidationpb;addressvalidationpb",
                     "java_multiple_files": true,
@@ -371,6 +370,10 @@
                         "hasReplacedComponents": {
                           "type": "bool",
                           "id": 7
+                        },
+                        "hasSpellCorrectedComponents": {
+                          "type": "bool",
+                          "id": 9
                         }
                       },
                       "nested": {

@@ -120,6 +120,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "fillContentGaps": {
+                              "type": "bool",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -239,6 +246,13 @@
                             "preprocessingConfig": {
                               "type": "PreprocessingConfig",
                               "id": 3
+                            },
+                            "attributes": {
+                              "type": "InputAttributes",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -309,6 +323,13 @@
                           }
                         },
                         "MuxStream": {
+                          "oneofs": {
+                            "containerConfig": {
+                              "oneof": [
+                                "fmp4"
+                              ]
+                            }
+                          },
                           "fields": {
                             "key": {
                               "type": "string",
@@ -334,6 +355,26 @@
                             "encryptionId": {
                               "type": "string",
                               "id": 7
+                            },
+                            "fmp4": {
+                              "type": "Fmp4Config",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Fmp4Config": {
+                              "fields": {
+                                "codecTag": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -779,6 +820,59 @@
                             }
                           }
                         },
+                        "TrackDefinition": {
+                          "oneofs": {
+                            "_inputTrack": {
+                              "oneof": [
+                                "inputTrack"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "inputTrack": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "languages": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detectLanguages": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detectedLanguages": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "InputAttributes": {
+                          "fields": {
+                            "trackDefinitions": {
+                              "rule": "repeated",
+                              "type": "TrackDefinition",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "VideoStream": {
                           "oneofs": {
                             "codecSettings": {
@@ -804,12 +898,31 @@
                             }
                           },
                           "nested": {
+                            "FrameRateConversionStrategy": {
+                              "values": {
+                                "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED": 0,
+                                "DOWNSAMPLE": 1,
+                                "DROP_DUPLICATE": 2
+                              }
+                            },
+                            "H264ColorFormatSDR": {
+                              "fields": {}
+                            },
+                            "H264ColorFormatHLG": {
+                              "fields": {}
+                            },
                             "H264CodecSettings": {
                               "oneofs": {
                                 "gopMode": {
                                   "oneof": [
                                     "gopFrameCount",
                                     "gopDuration"
+                                  ]
+                                },
+                                "colorFormat": {
+                                  "oneof": [
+                                    "sdr",
+                                    "hlg"
                                   ]
                                 }
                               },
@@ -827,6 +940,13 @@
                                   "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "frameRateConversionStrategy": {
+                                  "type": "FrameRateConversionStrategy",
+                                  "id": 23,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
                                 "bitrateBps": {
@@ -899,8 +1019,31 @@
                                 "preset": {
                                   "type": "string",
                                   "id": 20
+                                },
+                                "sdr": {
+                                  "type": "H264ColorFormatSDR",
+                                  "id": 21,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "hlg": {
+                                  "type": "H264ColorFormatHLG",
+                                  "id": 22,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
+                            },
+                            "H265ColorFormatSDR": {
+                              "fields": {}
+                            },
+                            "H265ColorFormatHLG": {
+                              "fields": {}
+                            },
+                            "H265ColorFormatHDR10": {
+                              "fields": {}
                             },
                             "H265CodecSettings": {
                               "oneofs": {
@@ -908,6 +1051,13 @@
                                   "oneof": [
                                     "gopFrameCount",
                                     "gopDuration"
+                                  ]
+                                },
+                                "colorFormat": {
+                                  "oneof": [
+                                    "sdr",
+                                    "hlg",
+                                    "hdr10"
                                   ]
                                 }
                               },
@@ -925,6 +1075,13 @@
                                   "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "frameRateConversionStrategy": {
+                                  "type": "FrameRateConversionStrategy",
+                                  "id": 23,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
                                 "bitrateBps": {
@@ -993,8 +1150,35 @@
                                 "preset": {
                                   "type": "string",
                                   "id": 19
+                                },
+                                "sdr": {
+                                  "type": "H265ColorFormatSDR",
+                                  "id": 20,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "hlg": {
+                                  "type": "H265ColorFormatHLG",
+                                  "id": 21,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "hdr10": {
+                                  "type": "H265ColorFormatHDR10",
+                                  "id": 22,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
+                            },
+                            "Vp9ColorFormatSDR": {
+                              "fields": {}
+                            },
+                            "Vp9ColorFormatHLG": {
+                              "fields": {}
                             },
                             "Vp9CodecSettings": {
                               "oneofs": {
@@ -1002,6 +1186,12 @@
                                   "oneof": [
                                     "gopFrameCount",
                                     "gopDuration"
+                                  ]
+                                },
+                                "colorFormat": {
+                                  "oneof": [
+                                    "sdr",
+                                    "hlg"
                                   ]
                                 }
                               },
@@ -1019,6 +1209,13 @@
                                   "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "frameRateConversionStrategy": {
+                                  "type": "FrameRateConversionStrategy",
+                                  "id": 13,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
                                 "bitrateBps": {
@@ -1051,6 +1248,20 @@
                                 "profile": {
                                   "type": "string",
                                   "id": 10
+                                },
+                                "sdr": {
+                                  "type": "Vp9ColorFormatSDR",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "hlg": {
+                                  "type": "Vp9ColorFormatHLG",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }

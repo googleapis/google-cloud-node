@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -408,6 +408,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.mountPoint != null && message.hasOwnProperty("mountPoint"))
@@ -504,6 +505,10 @@
                             case "STOPPED":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "UPDATING":
+                            case 7:
+                                message.state = 7;
                                 break;
                             }
                             if (object.mountPoint != null)
@@ -651,6 +656,7 @@
                          * @property {number} UPGRADING=4 UPGRADING value
                          * @property {number} REPAIRING=5 REPAIRING value
                          * @property {number} STOPPED=6 STOPPED value
+                         * @property {number} UPDATING=7 UPDATING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -661,6 +667,7 @@
                             values[valuesById[4] = "UPGRADING"] = 4;
                             values[valuesById[5] = "REPAIRING"] = 5;
                             values[valuesById[6] = "STOPPED"] = 6;
+                            values[valuesById[7] = "UPDATING"] = 7;
                             return values;
                         })();
     

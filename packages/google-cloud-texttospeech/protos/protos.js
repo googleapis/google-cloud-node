@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -229,6 +229,7 @@
                      * @property {number} MULAW=5 MULAW value
                      * @property {number} ALAW=6 ALAW value
                      * @property {number} PCM=7 PCM value
+                     * @property {number} M4A=8 M4A value
                      */
                     v1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -239,6 +240,7 @@
                         values[valuesById[5] = "MULAW"] = 5;
                         values[valuesById[6] = "ALAW"] = 6;
                         values[valuesById[7] = "PCM"] = 7;
+                        values[valuesById[8] = "M4A"] = 8;
                         return values;
                     })();
     
@@ -1001,6 +1003,7 @@
                          * @memberof google.cloud.texttospeech.v1
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
+                         * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
                          */
     
                         /**
@@ -1025,6 +1028,14 @@
                          * @instance
                          */
                         AdvancedVoiceOptions.prototype.lowLatencyJourneySynthesis = null;
+    
+                        /**
+                         * AdvancedVoiceOptions relaxSafetyFilters.
+                         * @member {boolean} relaxSafetyFilters
+                         * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -1061,6 +1072,8 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
                             return writer;
                         };
     
@@ -1099,6 +1112,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lowLatencyJourneySynthesis = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.relaxSafetyFilters = reader.bool();
                                         break;
                                     }
                                 default:
@@ -1142,6 +1159,9 @@
                                 if (typeof message.lowLatencyJourneySynthesis !== "boolean")
                                     return "lowLatencyJourneySynthesis: boolean expected";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                if (typeof message.relaxSafetyFilters !== "boolean")
+                                    return "relaxSafetyFilters: boolean expected";
                             return null;
                         };
     
@@ -1159,6 +1179,8 @@
                             var message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions();
                             if (object.lowLatencyJourneySynthesis != null)
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
+                            if (object.relaxSafetyFilters != null)
+                                message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
                             return message;
                         };
     
@@ -1175,11 +1197,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.relaxSafetyFilters = false;
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                object.relaxSafetyFilters = message.relaxSafetyFilters;
                             return object;
                         };
     
@@ -2541,6 +2567,461 @@
                         return MultiSpeakerMarkup;
                     })();
     
+                    v1.MultispeakerPrebuiltVoice = (function() {
+    
+                        /**
+                         * Properties of a MultispeakerPrebuiltVoice.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface IMultispeakerPrebuiltVoice
+                         * @property {string|null} [speakerAlias] MultispeakerPrebuiltVoice speakerAlias
+                         * @property {string|null} [speakerId] MultispeakerPrebuiltVoice speakerId
+                         */
+    
+                        /**
+                         * Constructs a new MultispeakerPrebuiltVoice.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a MultispeakerPrebuiltVoice.
+                         * @implements IMultispeakerPrebuiltVoice
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice=} [properties] Properties to set
+                         */
+                        function MultispeakerPrebuiltVoice(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultispeakerPrebuiltVoice speakerAlias.
+                         * @member {string} speakerAlias
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @instance
+                         */
+                        MultispeakerPrebuiltVoice.prototype.speakerAlias = "";
+    
+                        /**
+                         * MultispeakerPrebuiltVoice speakerId.
+                         * @member {string} speakerId
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @instance
+                         */
+                        MultispeakerPrebuiltVoice.prototype.speakerId = "";
+    
+                        /**
+                         * Creates a new MultispeakerPrebuiltVoice instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice instance
+                         */
+                        MultispeakerPrebuiltVoice.create = function create(properties) {
+                            return new MultispeakerPrebuiltVoice(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultispeakerPrebuiltVoice message. Does not implicitly {@link google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultispeakerPrebuiltVoice.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speakerAlias != null && Object.hasOwnProperty.call(message, "speakerAlias"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.speakerAlias);
+                            if (message.speakerId != null && Object.hasOwnProperty.call(message, "speakerId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.speakerId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultispeakerPrebuiltVoice message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultispeakerPrebuiltVoice.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultispeakerPrebuiltVoice message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultispeakerPrebuiltVoice.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.speakerAlias = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.speakerId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultispeakerPrebuiltVoice message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultispeakerPrebuiltVoice.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultispeakerPrebuiltVoice message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultispeakerPrebuiltVoice.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speakerAlias != null && message.hasOwnProperty("speakerAlias"))
+                                if (!$util.isString(message.speakerAlias))
+                                    return "speakerAlias: string expected";
+                            if (message.speakerId != null && message.hasOwnProperty("speakerId"))
+                                if (!$util.isString(message.speakerId))
+                                    return "speakerId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultispeakerPrebuiltVoice message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         */
+                        MultispeakerPrebuiltVoice.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice();
+                            if (object.speakerAlias != null)
+                                message.speakerAlias = String(object.speakerAlias);
+                            if (object.speakerId != null)
+                                message.speakerId = String(object.speakerId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultispeakerPrebuiltVoice message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultispeakerPrebuiltVoice.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.speakerAlias = "";
+                                object.speakerId = "";
+                            }
+                            if (message.speakerAlias != null && message.hasOwnProperty("speakerAlias"))
+                                object.speakerAlias = message.speakerAlias;
+                            if (message.speakerId != null && message.hasOwnProperty("speakerId"))
+                                object.speakerId = message.speakerId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultispeakerPrebuiltVoice to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultispeakerPrebuiltVoice.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultispeakerPrebuiltVoice
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultispeakerPrebuiltVoice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice";
+                        };
+    
+                        return MultispeakerPrebuiltVoice;
+                    })();
+    
+                    v1.MultiSpeakerVoiceConfig = (function() {
+    
+                        /**
+                         * Properties of a MultiSpeakerVoiceConfig.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @interface IMultiSpeakerVoiceConfig
+                         * @property {Array.<google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice>|null} [speakerVoiceConfigs] MultiSpeakerVoiceConfig speakerVoiceConfigs
+                         */
+    
+                        /**
+                         * Constructs a new MultiSpeakerVoiceConfig.
+                         * @memberof google.cloud.texttospeech.v1
+                         * @classdesc Represents a MultiSpeakerVoiceConfig.
+                         * @implements IMultiSpeakerVoiceConfig
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         */
+                        function MultiSpeakerVoiceConfig(properties) {
+                            this.speakerVoiceConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiSpeakerVoiceConfig speakerVoiceConfigs.
+                         * @member {Array.<google.cloud.texttospeech.v1.IMultispeakerPrebuiltVoice>} speakerVoiceConfigs
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @instance
+                         */
+                        MultiSpeakerVoiceConfig.prototype.speakerVoiceConfigs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MultiSpeakerVoiceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig instance
+                         */
+                        MultiSpeakerVoiceConfig.create = function create(properties) {
+                            return new MultiSpeakerVoiceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message. Does not implicitly {@link google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speakerVoiceConfigs != null && message.speakerVoiceConfigs.length)
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i)
+                                    $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.encode(message.speakerVoiceConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.speakerVoiceConfigs && message.speakerVoiceConfigs.length))
+                                            message.speakerVoiceConfigs = [];
+                                        message.speakerVoiceConfigs.push($root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiSpeakerVoiceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiSpeakerVoiceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speakerVoiceConfigs != null && message.hasOwnProperty("speakerVoiceConfigs")) {
+                                if (!Array.isArray(message.speakerVoiceConfigs))
+                                    return "speakerVoiceConfigs: array expected";
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i) {
+                                    var error = $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.verify(message.speakerVoiceConfigs[i]);
+                                    if (error)
+                                        return "speakerVoiceConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiSpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         */
+                        MultiSpeakerVoiceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig();
+                            if (object.speakerVoiceConfigs) {
+                                if (!Array.isArray(object.speakerVoiceConfigs))
+                                    throw TypeError(".google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.speakerVoiceConfigs: array expected");
+                                message.speakerVoiceConfigs = [];
+                                for (var i = 0; i < object.speakerVoiceConfigs.length; ++i) {
+                                    if (typeof object.speakerVoiceConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.speakerVoiceConfigs: object expected");
+                                    message.speakerVoiceConfigs[i] = $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.fromObject(object.speakerVoiceConfigs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiSpeakerVoiceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiSpeakerVoiceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.speakerVoiceConfigs = [];
+                            if (message.speakerVoiceConfigs && message.speakerVoiceConfigs.length) {
+                                object.speakerVoiceConfigs = [];
+                                for (var j = 0; j < message.speakerVoiceConfigs.length; ++j)
+                                    object.speakerVoiceConfigs[j] = $root.google.cloud.texttospeech.v1.MultispeakerPrebuiltVoice.toObject(message.speakerVoiceConfigs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiSpeakerVoiceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiSpeakerVoiceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiSpeakerVoiceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiSpeakerVoiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig";
+                        };
+    
+                        return MultiSpeakerVoiceConfig;
+                    })();
+    
                     v1.SynthesisInput = (function() {
     
                         /**
@@ -2551,6 +3032,7 @@
                          * @property {string|null} [markup] SynthesisInput markup
                          * @property {string|null} [ssml] SynthesisInput ssml
                          * @property {google.cloud.texttospeech.v1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] SynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] SynthesisInput prompt
                          * @property {google.cloud.texttospeech.v1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
                          */
     
@@ -2602,6 +3084,14 @@
                         SynthesisInput.prototype.multiSpeakerMarkup = null;
     
                         /**
+                         * SynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.prompt = null;
+    
+                        /**
                          * SynthesisInput customPronunciations.
                          * @member {google.cloud.texttospeech.v1.ICustomPronunciations|null|undefined} customPronunciations
                          * @memberof google.cloud.texttospeech.v1.SynthesisInput
@@ -2620,6 +3110,12 @@
                          */
                         Object.defineProperty(SynthesisInput.prototype, "inputSource", {
                             get: $util.oneOfGetter($oneOfFields = ["text", "markup", "ssml", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2657,6 +3153,8 @@
                                 $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
                             return writer;
                         };
     
@@ -2707,6 +3205,10 @@
                                     }
                                 case 4: {
                                         message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -2778,6 +3280,11 @@
                                         return "multiSpeakerMarkup." + error;
                                 }
                             }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
                                 var error = $root.google.cloud.texttospeech.v1.CustomPronunciations.verify(message.customPronunciations);
                                 if (error)
@@ -2809,6 +3316,8 @@
                                     throw TypeError(".google.cloud.texttospeech.v1.SynthesisInput.multiSpeakerMarkup: object expected");
                                 message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
                             }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             if (object.customPronunciations != null) {
                                 if (typeof object.customPronunciations !== "object")
                                     throw TypeError(".google.cloud.texttospeech.v1.SynthesisInput.customPronunciations: object expected");
@@ -2854,6 +3363,11 @@
                                 if (options.oneofs)
                                     object.inputSource = "markup";
                             }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
+                            }
                             return object;
                         };
     
@@ -2897,6 +3411,8 @@
                          * @property {google.cloud.texttospeech.v1.SsmlVoiceGender|null} [ssmlGender] VoiceSelectionParams ssmlGender
                          * @property {google.cloud.texttospeech.v1.ICustomVoiceParams|null} [customVoice] VoiceSelectionParams customVoice
                          * @property {google.cloud.texttospeech.v1.IVoiceCloneParams|null} [voiceClone] VoiceSelectionParams voiceClone
+                         * @property {string|null} [modelName] VoiceSelectionParams modelName
+                         * @property {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig|null} [multiSpeakerVoiceConfig] VoiceSelectionParams multiSpeakerVoiceConfig
                          */
     
                         /**
@@ -2955,6 +3471,22 @@
                         VoiceSelectionParams.prototype.voiceClone = null;
     
                         /**
+                         * VoiceSelectionParams modelName.
+                         * @member {string} modelName
+                         * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.modelName = "";
+    
+                        /**
+                         * VoiceSelectionParams multiSpeakerVoiceConfig.
+                         * @member {google.cloud.texttospeech.v1.IMultiSpeakerVoiceConfig|null|undefined} multiSpeakerVoiceConfig
+                         * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.multiSpeakerVoiceConfig = null;
+    
+                        /**
                          * Creates a new VoiceSelectionParams instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1.VoiceSelectionParams
@@ -2988,6 +3520,10 @@
                                 $root.google.cloud.texttospeech.v1.CustomVoiceParams.encode(message.customVoice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.voiceClone != null && Object.hasOwnProperty.call(message, "voiceClone"))
                                 $root.google.cloud.texttospeech.v1.VoiceCloneParams.encode(message.voiceClone, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.modelName != null && Object.hasOwnProperty.call(message, "modelName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.modelName);
+                            if (message.multiSpeakerVoiceConfig != null && Object.hasOwnProperty.call(message, "multiSpeakerVoiceConfig"))
+                                $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.encode(message.multiSpeakerVoiceConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -3042,6 +3578,14 @@
                                     }
                                 case 5: {
                                         message.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.modelName = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3105,6 +3649,14 @@
                                 if (error)
                                     return "voiceClone." + error;
                             }
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                if (!$util.isString(message.modelName))
+                                    return "modelName: string expected";
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig")) {
+                                var error = $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.verify(message.multiSpeakerVoiceConfig);
+                                if (error)
+                                    return "multiSpeakerVoiceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -3158,6 +3710,13 @@
                                     throw TypeError(".google.cloud.texttospeech.v1.VoiceSelectionParams.voiceClone: object expected");
                                 message.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.fromObject(object.voiceClone);
                             }
+                            if (object.modelName != null)
+                                message.modelName = String(object.modelName);
+                            if (object.multiSpeakerVoiceConfig != null) {
+                                if (typeof object.multiSpeakerVoiceConfig !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.VoiceSelectionParams.multiSpeakerVoiceConfig: object expected");
+                                message.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.fromObject(object.multiSpeakerVoiceConfig);
+                            }
                             return message;
                         };
     
@@ -3180,6 +3739,8 @@
                                 object.ssmlGender = options.enums === String ? "SSML_VOICE_GENDER_UNSPECIFIED" : 0;
                                 object.customVoice = null;
                                 object.voiceClone = null;
+                                object.modelName = "";
+                                object.multiSpeakerVoiceConfig = null;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -3191,6 +3752,10 @@
                                 object.customVoice = $root.google.cloud.texttospeech.v1.CustomVoiceParams.toObject(message.customVoice, options);
                             if (message.voiceClone != null && message.hasOwnProperty("voiceClone"))
                                 object.voiceClone = $root.google.cloud.texttospeech.v1.VoiceCloneParams.toObject(message.voiceClone, options);
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                object.modelName = message.modelName;
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig"))
+                                object.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1.MultiSpeakerVoiceConfig.toObject(message.multiSpeakerVoiceConfig, options);
                             return object;
                         };
     
@@ -3446,6 +4011,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -3516,6 +4082,10 @@
                             case "PCM":
                             case 7:
                                 message.audioEncoding = 7;
+                                break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
                                 break;
                             }
                             if (object.speakingRate != null)
@@ -4467,6 +5037,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
@@ -4524,6 +5095,10 @@
                             case "PCM":
                             case 7:
                                 message.audioEncoding = 7;
+                                break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
                                 break;
                             }
                             if (object.sampleRateHertz != null)
@@ -4864,6 +5439,8 @@
                          * @interface IStreamingSynthesisInput
                          * @property {string|null} [text] StreamingSynthesisInput text
                          * @property {string|null} [markup] StreamingSynthesisInput markup
+                         * @property {google.cloud.texttospeech.v1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] StreamingSynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] StreamingSynthesisInput prompt
                          */
     
                         /**
@@ -4897,17 +5474,39 @@
                          */
                         StreamingSynthesisInput.prototype.markup = null;
     
+                        /**
+                         * StreamingSynthesisInput multiSpeakerMarkup.
+                         * @member {google.cloud.texttospeech.v1.IMultiSpeakerMarkup|null|undefined} multiSpeakerMarkup
+                         * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.multiSpeakerMarkup = null;
+    
+                        /**
+                         * StreamingSynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.prompt = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * StreamingSynthesisInput inputSource.
-                         * @member {"text"|"markup"|undefined} inputSource
+                         * @member {"text"|"markup"|"multiSpeakerMarkup"|undefined} inputSource
                          * @memberof google.cloud.texttospeech.v1.StreamingSynthesisInput
                          * @instance
                          */
                         Object.defineProperty(StreamingSynthesisInput.prototype, "inputSource", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "markup"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "markup", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StreamingSynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4939,6 +5538,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
                             if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
+                            if (message.multiSpeakerMarkup != null && Object.hasOwnProperty.call(message, "multiSpeakerMarkup"))
+                                $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -4981,6 +5584,14 @@
                                     }
                                 case 5: {
                                         message.markup = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 default:
@@ -5031,6 +5642,21 @@
                                 if (!$util.isString(message.markup))
                                     return "markup: string expected";
                             }
+                            if (message.multiSpeakerMarkup != null && message.hasOwnProperty("multiSpeakerMarkup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                {
+                                    var error = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.verify(message.multiSpeakerMarkup);
+                                    if (error)
+                                        return "multiSpeakerMarkup." + error;
+                                }
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             return null;
                         };
     
@@ -5050,6 +5676,13 @@
                                 message.text = String(object.text);
                             if (object.markup != null)
                                 message.markup = String(object.markup);
+                            if (object.multiSpeakerMarkup != null) {
+                                if (typeof object.multiSpeakerMarkup !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.StreamingSynthesisInput.multiSpeakerMarkup: object expected");
+                                message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
+                            }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             return message;
                         };
     
@@ -5075,6 +5708,16 @@
                                 object.markup = message.markup;
                                 if (options.oneofs)
                                     object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
+                            }
+                            if (message.multiSpeakerMarkup != null && message.hasOwnProperty("multiSpeakerMarkup")) {
+                                object.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1.MultiSpeakerMarkup.toObject(message.multiSpeakerMarkup, options);
+                                if (options.oneofs)
+                                    object.inputSource = "multiSpeakerMarkup";
                             }
                             return object;
                         };
@@ -6582,6 +7225,7 @@
                      * @property {number} MULAW=5 MULAW value
                      * @property {number} ALAW=6 ALAW value
                      * @property {number} PCM=7 PCM value
+                     * @property {number} M4A=8 M4A value
                      */
                     v1beta1.AudioEncoding = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -6593,6 +7237,7 @@
                         values[valuesById[5] = "MULAW"] = 5;
                         values[valuesById[6] = "ALAW"] = 6;
                         values[valuesById[7] = "PCM"] = 7;
+                        values[valuesById[8] = "M4A"] = 8;
                         return values;
                     })();
     
@@ -7355,6 +8000,7 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
+                         * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
                          */
     
                         /**
@@ -7379,6 +8025,14 @@
                          * @instance
                          */
                         AdvancedVoiceOptions.prototype.lowLatencyJourneySynthesis = null;
+    
+                        /**
+                         * AdvancedVoiceOptions relaxSafetyFilters.
+                         * @member {boolean} relaxSafetyFilters
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -7415,6 +8069,8 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
                             return writer;
                         };
     
@@ -7453,6 +8109,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lowLatencyJourneySynthesis = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.relaxSafetyFilters = reader.bool();
                                         break;
                                     }
                                 default:
@@ -7496,6 +8156,9 @@
                                 if (typeof message.lowLatencyJourneySynthesis !== "boolean")
                                     return "lowLatencyJourneySynthesis: boolean expected";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                if (typeof message.relaxSafetyFilters !== "boolean")
+                                    return "relaxSafetyFilters: boolean expected";
                             return null;
                         };
     
@@ -7513,6 +8176,8 @@
                             var message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions();
                             if (object.lowLatencyJourneySynthesis != null)
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
+                            if (object.relaxSafetyFilters != null)
+                                message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
                             return message;
                         };
     
@@ -7529,11 +8194,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.relaxSafetyFilters = false;
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
+                                object.relaxSafetyFilters = message.relaxSafetyFilters;
                             return object;
                         };
     
@@ -8155,6 +8824,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             }
@@ -8198,6 +8869,14 @@
                             case "PHONETIC_ENCODING_X_SAMPA":
                             case 2:
                                 message.phoneticEncoding = 2;
+                                break;
+                            case "PHONETIC_ENCODING_JAPANESE_YOMIGANA":
+                            case 3:
+                                message.phoneticEncoding = 3;
+                                break;
+                            case "PHONETIC_ENCODING_PINYIN":
+                            case 4:
+                                message.phoneticEncoding = 4;
                                 break;
                             }
                             if (object.pronunciation != null)
@@ -8269,12 +8948,16 @@
                          * @property {number} PHONETIC_ENCODING_UNSPECIFIED=0 PHONETIC_ENCODING_UNSPECIFIED value
                          * @property {number} PHONETIC_ENCODING_IPA=1 PHONETIC_ENCODING_IPA value
                          * @property {number} PHONETIC_ENCODING_X_SAMPA=2 PHONETIC_ENCODING_X_SAMPA value
+                         * @property {number} PHONETIC_ENCODING_JAPANESE_YOMIGANA=3 PHONETIC_ENCODING_JAPANESE_YOMIGANA value
+                         * @property {number} PHONETIC_ENCODING_PINYIN=4 PHONETIC_ENCODING_PINYIN value
                          */
                         CustomPronunciationParams.PhoneticEncoding = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PHONETIC_ENCODING_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PHONETIC_ENCODING_IPA"] = 1;
                             values[valuesById[2] = "PHONETIC_ENCODING_X_SAMPA"] = 2;
+                            values[valuesById[3] = "PHONETIC_ENCODING_JAPANESE_YOMIGANA"] = 3;
+                            values[valuesById[4] = "PHONETIC_ENCODING_PINYIN"] = 4;
                             return values;
                         })();
     
@@ -8962,6 +9645,461 @@
                         return MultiSpeakerMarkup;
                     })();
     
+                    v1beta1.MultispeakerPrebuiltVoice = (function() {
+    
+                        /**
+                         * Properties of a MultispeakerPrebuiltVoice.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface IMultispeakerPrebuiltVoice
+                         * @property {string|null} [speakerAlias] MultispeakerPrebuiltVoice speakerAlias
+                         * @property {string|null} [speakerId] MultispeakerPrebuiltVoice speakerId
+                         */
+    
+                        /**
+                         * Constructs a new MultispeakerPrebuiltVoice.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a MultispeakerPrebuiltVoice.
+                         * @implements IMultispeakerPrebuiltVoice
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice=} [properties] Properties to set
+                         */
+                        function MultispeakerPrebuiltVoice(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultispeakerPrebuiltVoice speakerAlias.
+                         * @member {string} speakerAlias
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @instance
+                         */
+                        MultispeakerPrebuiltVoice.prototype.speakerAlias = "";
+    
+                        /**
+                         * MultispeakerPrebuiltVoice speakerId.
+                         * @member {string} speakerId
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @instance
+                         */
+                        MultispeakerPrebuiltVoice.prototype.speakerId = "";
+    
+                        /**
+                         * Creates a new MultispeakerPrebuiltVoice instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice instance
+                         */
+                        MultispeakerPrebuiltVoice.create = function create(properties) {
+                            return new MultispeakerPrebuiltVoice(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultispeakerPrebuiltVoice message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultispeakerPrebuiltVoice.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speakerAlias != null && Object.hasOwnProperty.call(message, "speakerAlias"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.speakerAlias);
+                            if (message.speakerId != null && Object.hasOwnProperty.call(message, "speakerId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.speakerId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultispeakerPrebuiltVoice message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultispeakerPrebuiltVoice.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultispeakerPrebuiltVoice message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultispeakerPrebuiltVoice.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.speakerAlias = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.speakerId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultispeakerPrebuiltVoice message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultispeakerPrebuiltVoice.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultispeakerPrebuiltVoice message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultispeakerPrebuiltVoice.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speakerAlias != null && message.hasOwnProperty("speakerAlias"))
+                                if (!$util.isString(message.speakerAlias))
+                                    return "speakerAlias: string expected";
+                            if (message.speakerId != null && message.hasOwnProperty("speakerId"))
+                                if (!$util.isString(message.speakerId))
+                                    return "speakerId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultispeakerPrebuiltVoice message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice} MultispeakerPrebuiltVoice
+                         */
+                        MultispeakerPrebuiltVoice.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice();
+                            if (object.speakerAlias != null)
+                                message.speakerAlias = String(object.speakerAlias);
+                            if (object.speakerId != null)
+                                message.speakerId = String(object.speakerId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultispeakerPrebuiltVoice message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice} message MultispeakerPrebuiltVoice
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultispeakerPrebuiltVoice.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.speakerAlias = "";
+                                object.speakerId = "";
+                            }
+                            if (message.speakerAlias != null && message.hasOwnProperty("speakerAlias"))
+                                object.speakerAlias = message.speakerAlias;
+                            if (message.speakerId != null && message.hasOwnProperty("speakerId"))
+                                object.speakerId = message.speakerId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultispeakerPrebuiltVoice to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultispeakerPrebuiltVoice.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultispeakerPrebuiltVoice
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultispeakerPrebuiltVoice.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice";
+                        };
+    
+                        return MultispeakerPrebuiltVoice;
+                    })();
+    
+                    v1beta1.MultiSpeakerVoiceConfig = (function() {
+    
+                        /**
+                         * Properties of a MultiSpeakerVoiceConfig.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface IMultiSpeakerVoiceConfig
+                         * @property {Array.<google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice>|null} [speakerVoiceConfigs] MultiSpeakerVoiceConfig speakerVoiceConfigs
+                         */
+    
+                        /**
+                         * Constructs a new MultiSpeakerVoiceConfig.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a MultiSpeakerVoiceConfig.
+                         * @implements IMultiSpeakerVoiceConfig
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         */
+                        function MultiSpeakerVoiceConfig(properties) {
+                            this.speakerVoiceConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiSpeakerVoiceConfig speakerVoiceConfigs.
+                         * @member {Array.<google.cloud.texttospeech.v1beta1.IMultispeakerPrebuiltVoice>} speakerVoiceConfigs
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @instance
+                         */
+                        MultiSpeakerVoiceConfig.prototype.speakerVoiceConfigs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MultiSpeakerVoiceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig instance
+                         */
+                        MultiSpeakerVoiceConfig.create = function create(properties) {
+                            return new MultiSpeakerVoiceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speakerVoiceConfigs != null && message.speakerVoiceConfigs.length)
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i)
+                                    $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.encode(message.speakerVoiceConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiSpeakerVoiceConfig message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiSpeakerVoiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.speakerVoiceConfigs && message.speakerVoiceConfigs.length))
+                                            message.speakerVoiceConfigs = [];
+                                        message.speakerVoiceConfigs.push($root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiSpeakerVoiceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiSpeakerVoiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiSpeakerVoiceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiSpeakerVoiceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speakerVoiceConfigs != null && message.hasOwnProperty("speakerVoiceConfigs")) {
+                                if (!Array.isArray(message.speakerVoiceConfigs))
+                                    return "speakerVoiceConfigs: array expected";
+                                for (var i = 0; i < message.speakerVoiceConfigs.length; ++i) {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.verify(message.speakerVoiceConfigs[i]);
+                                    if (error)
+                                        return "speakerVoiceConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiSpeakerVoiceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig} MultiSpeakerVoiceConfig
+                         */
+                        MultiSpeakerVoiceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig();
+                            if (object.speakerVoiceConfigs) {
+                                if (!Array.isArray(object.speakerVoiceConfigs))
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.speakerVoiceConfigs: array expected");
+                                message.speakerVoiceConfigs = [];
+                                for (var i = 0; i < object.speakerVoiceConfigs.length; ++i) {
+                                    if (typeof object.speakerVoiceConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.speakerVoiceConfigs: object expected");
+                                    message.speakerVoiceConfigs[i] = $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.fromObject(object.speakerVoiceConfigs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiSpeakerVoiceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig} message MultiSpeakerVoiceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiSpeakerVoiceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.speakerVoiceConfigs = [];
+                            if (message.speakerVoiceConfigs && message.speakerVoiceConfigs.length) {
+                                object.speakerVoiceConfigs = [];
+                                for (var j = 0; j < message.speakerVoiceConfigs.length; ++j)
+                                    object.speakerVoiceConfigs[j] = $root.google.cloud.texttospeech.v1beta1.MultispeakerPrebuiltVoice.toObject(message.speakerVoiceConfigs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiSpeakerVoiceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiSpeakerVoiceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiSpeakerVoiceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiSpeakerVoiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig";
+                        };
+    
+                        return MultiSpeakerVoiceConfig;
+                    })();
+    
                     v1beta1.SynthesisInput = (function() {
     
                         /**
@@ -8969,8 +10107,10 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface ISynthesisInput
                          * @property {string|null} [text] SynthesisInput text
+                         * @property {string|null} [markup] SynthesisInput markup
                          * @property {string|null} [ssml] SynthesisInput ssml
                          * @property {google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] SynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] SynthesisInput prompt
                          * @property {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
                          */
     
@@ -8998,6 +10138,14 @@
                         SynthesisInput.prototype.text = null;
     
                         /**
+                         * SynthesisInput markup.
+                         * @member {string|null|undefined} markup
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.markup = null;
+    
+                        /**
                          * SynthesisInput ssml.
                          * @member {string|null|undefined} ssml
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
@@ -9014,6 +10162,14 @@
                         SynthesisInput.prototype.multiSpeakerMarkup = null;
     
                         /**
+                         * SynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.prompt = null;
+    
+                        /**
                          * SynthesisInput customPronunciations.
                          * @member {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null|undefined} customPronunciations
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
@@ -9026,12 +10182,18 @@
     
                         /**
                          * SynthesisInput inputSource.
-                         * @member {"text"|"ssml"|"multiSpeakerMarkup"|undefined} inputSource
+                         * @member {"text"|"markup"|"ssml"|"multiSpeakerMarkup"|undefined} inputSource
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
                          * @instance
                          */
                         Object.defineProperty(SynthesisInput.prototype, "inputSource", {
-                            get: $util.oneOfGetter($oneOfFields = ["text", "ssml", "multiSpeakerMarkup"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "markup", "ssml", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9067,6 +10229,10 @@
                                 $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.multiSpeakerMarkup != null && Object.hasOwnProperty.call(message, "multiSpeakerMarkup"))
                                 $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
                             return writer;
                         };
     
@@ -9107,12 +10273,20 @@
                                         message.text = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.markup = reader.string();
+                                        break;
+                                    }
                                 case 2: {
                                         message.ssml = reader.string();
                                         break;
                                     }
                                 case 4: {
                                         message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -9160,6 +10334,13 @@
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
                             }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                if (!$util.isString(message.markup))
+                                    return "markup: string expected";
+                            }
                             if (message.ssml != null && message.hasOwnProperty("ssml")) {
                                 if (properties.inputSource === 1)
                                     return "inputSource: multiple values";
@@ -9176,6 +10357,11 @@
                                     if (error)
                                         return "multiSpeakerMarkup." + error;
                                 }
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
                             }
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
                                 var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.verify(message.customPronunciations);
@@ -9199,6 +10385,8 @@
                             var message = new $root.google.cloud.texttospeech.v1beta1.SynthesisInput();
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.markup != null)
+                                message.markup = String(object.markup);
                             if (object.ssml != null)
                                 message.ssml = String(object.ssml);
                             if (object.multiSpeakerMarkup != null) {
@@ -9206,6 +10394,8 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesisInput.multiSpeakerMarkup: object expected");
                                 message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
                             }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             if (object.customPronunciations != null) {
                                 if (typeof object.customPronunciations !== "object")
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesisInput.customPronunciations: object expected");
@@ -9245,6 +10435,16 @@
                                 object.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.toObject(message.multiSpeakerMarkup, options);
                                 if (options.oneofs)
                                     object.inputSource = "multiSpeakerMarkup";
+                            }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                object.markup = message.markup;
+                                if (options.oneofs)
+                                    object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
                             }
                             return object;
                         };
@@ -9289,6 +10489,8 @@
                          * @property {google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null} [ssmlGender] VoiceSelectionParams ssmlGender
                          * @property {google.cloud.texttospeech.v1beta1.ICustomVoiceParams|null} [customVoice] VoiceSelectionParams customVoice
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceCloneParams|null} [voiceClone] VoiceSelectionParams voiceClone
+                         * @property {string|null} [modelName] VoiceSelectionParams modelName
+                         * @property {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig|null} [multiSpeakerVoiceConfig] VoiceSelectionParams multiSpeakerVoiceConfig
                          */
     
                         /**
@@ -9347,6 +10549,22 @@
                         VoiceSelectionParams.prototype.voiceClone = null;
     
                         /**
+                         * VoiceSelectionParams modelName.
+                         * @member {string} modelName
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.modelName = "";
+    
+                        /**
+                         * VoiceSelectionParams multiSpeakerVoiceConfig.
+                         * @member {google.cloud.texttospeech.v1beta1.IMultiSpeakerVoiceConfig|null|undefined} multiSpeakerVoiceConfig
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.multiSpeakerVoiceConfig = null;
+    
+                        /**
                          * Creates a new VoiceSelectionParams instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.VoiceSelectionParams
@@ -9380,6 +10598,10 @@
                                 $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.encode(message.customVoice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.voiceClone != null && Object.hasOwnProperty.call(message, "voiceClone"))
                                 $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.encode(message.voiceClone, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.modelName != null && Object.hasOwnProperty.call(message, "modelName"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.modelName);
+                            if (message.multiSpeakerVoiceConfig != null && Object.hasOwnProperty.call(message, "multiSpeakerVoiceConfig"))
+                                $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.encode(message.multiSpeakerVoiceConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -9434,6 +10656,14 @@
                                     }
                                 case 5: {
                                         message.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.modelName = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9497,6 +10727,14 @@
                                 if (error)
                                     return "voiceClone." + error;
                             }
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                if (!$util.isString(message.modelName))
+                                    return "modelName: string expected";
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.verify(message.multiSpeakerVoiceConfig);
+                                if (error)
+                                    return "multiSpeakerVoiceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -9550,6 +10788,13 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.VoiceSelectionParams.voiceClone: object expected");
                                 message.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.fromObject(object.voiceClone);
                             }
+                            if (object.modelName != null)
+                                message.modelName = String(object.modelName);
+                            if (object.multiSpeakerVoiceConfig != null) {
+                                if (typeof object.multiSpeakerVoiceConfig !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.VoiceSelectionParams.multiSpeakerVoiceConfig: object expected");
+                                message.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.fromObject(object.multiSpeakerVoiceConfig);
+                            }
                             return message;
                         };
     
@@ -9572,6 +10817,8 @@
                                 object.ssmlGender = options.enums === String ? "SSML_VOICE_GENDER_UNSPECIFIED" : 0;
                                 object.customVoice = null;
                                 object.voiceClone = null;
+                                object.modelName = "";
+                                object.multiSpeakerVoiceConfig = null;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -9583,6 +10830,10 @@
                                 object.customVoice = $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.toObject(message.customVoice, options);
                             if (message.voiceClone != null && message.hasOwnProperty("voiceClone"))
                                 object.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.toObject(message.voiceClone, options);
+                            if (message.modelName != null && message.hasOwnProperty("modelName"))
+                                object.modelName = message.modelName;
+                            if (message.multiSpeakerVoiceConfig != null && message.hasOwnProperty("multiSpeakerVoiceConfig"))
+                                object.multiSpeakerVoiceConfig = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerVoiceConfig.toObject(message.multiSpeakerVoiceConfig, options);
                             return object;
                         };
     
@@ -9839,6 +11090,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
@@ -9913,6 +11165,10 @@
                             case "PCM":
                             case 7:
                                 message.audioEncoding = 7;
+                                break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
                                 break;
                             }
                             if (object.speakingRate != null)
@@ -11001,6 +12257,7 @@
                          * @interface IStreamingAudioConfig
                          * @property {google.cloud.texttospeech.v1beta1.AudioEncoding|null} [audioEncoding] StreamingAudioConfig audioEncoding
                          * @property {number|null} [sampleRateHertz] StreamingAudioConfig sampleRateHertz
+                         * @property {number|null} [speakingRate] StreamingAudioConfig speakingRate
                          */
     
                         /**
@@ -11035,6 +12292,14 @@
                         StreamingAudioConfig.prototype.sampleRateHertz = 0;
     
                         /**
+                         * StreamingAudioConfig speakingRate.
+                         * @member {number} speakingRate
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
+                         * @instance
+                         */
+                        StreamingAudioConfig.prototype.speakingRate = 0;
+    
+                        /**
                          * Creates a new StreamingAudioConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.StreamingAudioConfig
@@ -11062,6 +12327,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.audioEncoding);
                             if (message.sampleRateHertz != null && Object.hasOwnProperty.call(message, "sampleRateHertz"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sampleRateHertz);
+                            if (message.speakingRate != null && Object.hasOwnProperty.call(message, "speakingRate"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.speakingRate);
                             return writer;
                         };
     
@@ -11104,6 +12371,10 @@
                                     }
                                 case 2: {
                                         message.sampleRateHertz = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.speakingRate = reader.double();
                                         break;
                                     }
                                 default:
@@ -11153,11 +12424,15 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                 if (!$util.isInteger(message.sampleRateHertz))
                                     return "sampleRateHertz: integer expected";
+                            if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
+                                if (typeof message.speakingRate !== "number")
+                                    return "speakingRate: number expected";
                             return null;
                         };
     
@@ -11212,9 +12487,15 @@
                             case 7:
                                 message.audioEncoding = 7;
                                 break;
+                            case "M4A":
+                            case 8:
+                                message.audioEncoding = 8;
+                                break;
                             }
                             if (object.sampleRateHertz != null)
                                 message.sampleRateHertz = object.sampleRateHertz | 0;
+                            if (object.speakingRate != null)
+                                message.speakingRate = Number(object.speakingRate);
                             return message;
                         };
     
@@ -11234,11 +12515,14 @@
                             if (options.defaults) {
                                 object.audioEncoding = options.enums === String ? "AUDIO_ENCODING_UNSPECIFIED" : 0;
                                 object.sampleRateHertz = 0;
+                                object.speakingRate = 0;
                             }
                             if (message.audioEncoding != null && message.hasOwnProperty("audioEncoding"))
                                 object.audioEncoding = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.AudioEncoding[message.audioEncoding] === undefined ? message.audioEncoding : $root.google.cloud.texttospeech.v1beta1.AudioEncoding[message.audioEncoding] : message.audioEncoding;
                             if (message.sampleRateHertz != null && message.hasOwnProperty("sampleRateHertz"))
                                 object.sampleRateHertz = message.sampleRateHertz;
+                            if (message.speakingRate != null && message.hasOwnProperty("speakingRate"))
+                                object.speakingRate = options.json && !isFinite(message.speakingRate) ? String(message.speakingRate) : message.speakingRate;
                             return object;
                         };
     
@@ -11279,6 +12563,7 @@
                          * @interface IStreamingSynthesizeConfig
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null} [voice] StreamingSynthesizeConfig voice
                          * @property {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null} [streamingAudioConfig] StreamingSynthesizeConfig streamingAudioConfig
+                         * @property {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null} [customPronunciations] StreamingSynthesizeConfig customPronunciations
                          */
     
                         /**
@@ -11313,6 +12598,14 @@
                         StreamingSynthesizeConfig.prototype.streamingAudioConfig = null;
     
                         /**
+                         * StreamingSynthesizeConfig customPronunciations.
+                         * @member {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null|undefined} customPronunciations
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig
+                         * @instance
+                         */
+                        StreamingSynthesizeConfig.prototype.customPronunciations = null;
+    
+                        /**
                          * Creates a new StreamingSynthesizeConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig
@@ -11340,6 +12633,8 @@
                                 $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.encode(message.voice, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.streamingAudioConfig != null && Object.hasOwnProperty.call(message, "streamingAudioConfig"))
                                 $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.encode(message.streamingAudioConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.customPronunciations != null && Object.hasOwnProperty.call(message, "customPronunciations"))
+                                $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -11382,6 +12677,10 @@
                                     }
                                 case 4: {
                                         message.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11429,6 +12728,11 @@
                                 if (error)
                                     return "streamingAudioConfig." + error;
                             }
+                            if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.verify(message.customPronunciations);
+                                if (error)
+                                    return "customPronunciations." + error;
+                            }
                             return null;
                         };
     
@@ -11454,6 +12758,11 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.streamingAudioConfig: object expected");
                                 message.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.fromObject(object.streamingAudioConfig);
                             }
+                            if (object.customPronunciations != null) {
+                                if (typeof object.customPronunciations !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.customPronunciations: object expected");
+                                message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.fromObject(object.customPronunciations);
+                            }
                             return message;
                         };
     
@@ -11473,11 +12782,14 @@
                             if (options.defaults) {
                                 object.voice = null;
                                 object.streamingAudioConfig = null;
+                                object.customPronunciations = null;
                             }
                             if (message.voice != null && message.hasOwnProperty("voice"))
                                 object.voice = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.toObject(message.voice, options);
                             if (message.streamingAudioConfig != null && message.hasOwnProperty("streamingAudioConfig"))
                                 object.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.toObject(message.streamingAudioConfig, options);
+                            if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations"))
+                                object.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.toObject(message.customPronunciations, options);
                             return object;
                         };
     
@@ -11517,6 +12829,9 @@
                          * @memberof google.cloud.texttospeech.v1beta1
                          * @interface IStreamingSynthesisInput
                          * @property {string|null} [text] StreamingSynthesisInput text
+                         * @property {string|null} [markup] StreamingSynthesisInput markup
+                         * @property {google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null} [multiSpeakerMarkup] StreamingSynthesisInput multiSpeakerMarkup
+                         * @property {string|null} [prompt] StreamingSynthesisInput prompt
                          */
     
                         /**
@@ -11542,17 +12857,47 @@
                          */
                         StreamingSynthesisInput.prototype.text = null;
     
+                        /**
+                         * StreamingSynthesisInput markup.
+                         * @member {string|null|undefined} markup
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.markup = null;
+    
+                        /**
+                         * StreamingSynthesisInput multiSpeakerMarkup.
+                         * @member {google.cloud.texttospeech.v1beta1.IMultiSpeakerMarkup|null|undefined} multiSpeakerMarkup
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.multiSpeakerMarkup = null;
+    
+                        /**
+                         * StreamingSynthesisInput prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesisInput
+                         * @instance
+                         */
+                        StreamingSynthesisInput.prototype.prompt = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * StreamingSynthesisInput inputSource.
-                         * @member {"text"|undefined} inputSource
+                         * @member {"text"|"markup"|"multiSpeakerMarkup"|undefined} inputSource
                          * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesisInput
                          * @instance
                          */
                         Object.defineProperty(StreamingSynthesisInput.prototype, "inputSource", {
-                            get: $util.oneOfGetter($oneOfFields = ["text"]),
+                            get: $util.oneOfGetter($oneOfFields = ["text", "markup", "multiSpeakerMarkup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StreamingSynthesisInput.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11582,6 +12927,12 @@
                                 writer = $Writer.create();
                             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            if (message.markup != null && Object.hasOwnProperty.call(message, "markup"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.markup);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.prompt);
+                            if (message.multiSpeakerMarkup != null && Object.hasOwnProperty.call(message, "multiSpeakerMarkup"))
+                                $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.encode(message.multiSpeakerMarkup, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -11620,6 +12971,18 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.markup = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.prompt = reader.string();
                                         break;
                                     }
                                 default:
@@ -11663,6 +13026,28 @@
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
                             }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                if (!$util.isString(message.markup))
+                                    return "markup: string expected";
+                            }
+                            if (message.multiSpeakerMarkup != null && message.hasOwnProperty("multiSpeakerMarkup")) {
+                                if (properties.inputSource === 1)
+                                    return "inputSource: multiple values";
+                                properties.inputSource = 1;
+                                {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.verify(message.multiSpeakerMarkup);
+                                    if (error)
+                                        return "multiSpeakerMarkup." + error;
+                                }
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
+                            }
                             return null;
                         };
     
@@ -11680,6 +13065,15 @@
                             var message = new $root.google.cloud.texttospeech.v1beta1.StreamingSynthesisInput();
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.markup != null)
+                                message.markup = String(object.markup);
+                            if (object.multiSpeakerMarkup != null) {
+                                if (typeof object.multiSpeakerMarkup !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesisInput.multiSpeakerMarkup: object expected");
+                                message.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.fromObject(object.multiSpeakerMarkup);
+                            }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             return message;
                         };
     
@@ -11700,6 +13094,21 @@
                                 object.text = message.text;
                                 if (options.oneofs)
                                     object.inputSource = "text";
+                            }
+                            if (message.markup != null && message.hasOwnProperty("markup")) {
+                                object.markup = message.markup;
+                                if (options.oneofs)
+                                    object.inputSource = "markup";
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
+                            }
+                            if (message.multiSpeakerMarkup != null && message.hasOwnProperty("multiSpeakerMarkup")) {
+                                object.multiSpeakerMarkup = $root.google.cloud.texttospeech.v1beta1.MultiSpeakerMarkup.toObject(message.multiSpeakerMarkup, options);
+                                if (options.oneofs)
+                                    object.inputSource = "multiSpeakerMarkup";
                             }
                             return object;
                         };

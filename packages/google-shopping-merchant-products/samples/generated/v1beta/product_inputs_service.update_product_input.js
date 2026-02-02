@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,7 +50,8 @@ function main(productInput, dataSource) {
    *  Required. The primary or supplemental product data source where
    *  `data_source` name identifies the product input to be updated.
    *  Only API data sources are supported.
-   *  Format: `accounts/{account}/dataSources/{datasource}`.
+   *  Format: `accounts/{account}/dataSources/{datasource}`. For example,
+   *  `accounts/123456/dataSources/104628`.
    */
   // const dataSource = 'abc123'
 

@@ -19,7 +19,10 @@ package google.cloud.backupdr.v1;
 import "google/api/field_behavior.proto";
 import "google/api/field_info.proto";
 import "google/api/resource.proto";
+import "google/cloud/backupdr/v1/backupvault_alloydb.proto";
 import "google/cloud/backupdr/v1/backupvault_ba.proto";
+import "google/cloud/backupdr/v1/backupvault_cloudsql.proto";
+import "google/cloud/backupdr/v1/backupvault_disk.proto";
 import "google/cloud/backupdr/v1/backupvault_gce.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
@@ -33,6 +36,14 @@ option java_outer_classname = "BackupVaultProto";
 option java_package = "com.google.cloud.backupdr.v1";
 option php_namespace = "Google\\Cloud\\BackupDR\\V1";
 option ruby_package = "Google::Cloud::BackupDR::V1";
+option (google.api.resource_definition) = {
+  type: "cloudkms.googleapis.com/CryptoKey"
+  pattern: "projects/{project}/locations/{location}/keyRings/{ring}/cryptoKeys/{key}"
+};
+option (google.api.resource_definition) = {
+  type: "cloudkms.googleapis.com/CryptoKeyVersion"
+  pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
+};
 
 // Message describing a BackupVault object.
 message BackupVault {
@@ -42,6 +53,28 @@ message BackupVault {
     plural: "backupVaults"
     singular: "backupVault"
   };
+
+  // How a backup's enforced retention end time is inherited.
+  enum BackupRetentionInheritance {
+    // Inheritance behavior not set. This will default to
+    // `INHERIT_VAULT_RETENTION`.
+    BACKUP_RETENTION_INHERITANCE_UNSPECIFIED = 0;
+
+    // The enforced retention end time of a backup will be inherited from the
+    // backup vault's `backup_minimum_enforced_retention_duration` field.
+    //
+    // This is the default behavior.
+    INHERIT_VAULT_RETENTION = 1;
+
+    // The enforced retention end time of a backup will always match the expire
+    // time of the backup.
+    //
+    // If this is set, the backup's enforced retention end time will be set to
+    // match the expire time during creation of the backup. When updating, the
+    // ERET and expire time must be updated together and have the same value.
+    // Invalid update requests will be rejected by the server.
+    MATCH_BACKUP_EXPIRE_TIME = 2;
+  }
 
   // Holds the state of the backup vault resource.
   enum State {
@@ -59,6 +92,9 @@ message BackupVault {
 
     // The backup vault is experiencing an issue and might be unusable.
     ERROR = 4;
+
+    // The backup vault is being updated.
+    UPDATING = 5;
   }
 
   // Holds the access restriction for the backup vault.
@@ -80,6 +116,21 @@ message BackupVault {
     // Access to or from resources outside your current organization will be
     // denied except for backup appliance.
     WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA = 4;
+  }
+
+  // Message describing the EncryptionConfig of backup vault.
+  // This determines how data within the vault is encrypted at rest.
+  message EncryptionConfig {
+    // Optional. The Cloud KMS key name to encrypt backups in this backup vault.
+    // Must be in the same region as the vault. Some workload backups like
+    // compute disk backups may use their inherited source key instead. Format:
+    // projects/{project}/locations/{location}/keyRings/{ring}/cryptoKeys/{key}
+    optional string kms_key_name = 1 [
+      (google.api.field_behavior) = OPTIONAL,
+      (google.api.resource_reference) = {
+        type: "cloudkms.googleapis.com/CryptoKey"
+      }
+    ];
   }
 
   // Output only. Identifier. Name of the backup vault to create. It must have
@@ -112,6 +163,11 @@ message BackupVault {
   // the backup vault.  The enforced retention for each backup can be extended.
   optional google.protobuf.Duration backup_minimum_enforced_retention_duration =
       20 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Setting for how a backup's enforced retention end time is
+  // inherited.
+  optional BackupRetentionInheritance backup_retention_inheritance = 27
+      [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. Set to true when there are no backups nested under this
   // resource.
@@ -155,6 +211,10 @@ message BackupVault {
   // Access restriction for the backup vault.
   // Default value is WITHIN_ORGANIZATION if not provided during creation.
   AccessRestriction access_restriction = 24
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The encryption config of the backup vault.
+  optional EncryptionConfig encryption_config = 29
       [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -243,6 +303,11 @@ message DataSource {
     DataSourceBackupApplianceApplication
         data_source_backup_appliance_application = 27;
   }
+
+  // Output only. This field is set to true if the backup is blocked by vault
+  // access restriction.
+  bool backup_blocked_by_vault_access_restriction = 28
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // BackupConfigInfo has information about how the resource is configured
@@ -310,6 +375,13 @@ message GcpBackupConfig {
 
   // The names of the backup plan rules which point to this backupvault
   repeated string backup_plan_rules = 4;
+
+  // The name of the backup plan revision.
+  string backup_plan_revision_name = 5;
+
+  // The user friendly id of the backup plan revision.
+  // E.g. v0, v1 etc.
+  string backup_plan_revision_id = 6;
 }
 
 // BackupApplianceBackupConfig captures the backup configuration for
@@ -358,6 +430,21 @@ message DataSourceGcpResource {
     // properties that are useful at the Datasource level.
     ComputeInstanceDataSourceProperties compute_instance_datasource_properties =
         4;
+
+    // Output only. CloudSqlInstanceDataSourceProperties has a subset of Cloud
+    // SQL Instance properties that are useful at the Datasource level.
+    CloudSqlInstanceDataSourceProperties
+        cloud_sql_instance_datasource_properties = 5
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. AlloyDBClusterDataSourceProperties has a subset of AlloyDB
+    // cluster properties that are useful at the Datasource level.
+    AlloyDBClusterDataSourceProperties alloy_db_cluster_datasource_properties =
+        6 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // DiskDataSourceProperties has a subset of Disk properties that are useful
+    // at the Datasource level.
+    DiskDataSourceProperties disk_datasource_properties = 7;
   }
 }
 
@@ -467,6 +554,9 @@ message Backup {
 
     // The backup is experiencing an issue and might be unusable.
     ERROR = 4;
+
+    // The backup is being uploaded.
+    UPLOADING = 5;
   }
 
   // Type of the backup, scheduled or ondemand.
@@ -479,6 +569,9 @@ message Backup {
 
     // On demand backup.
     ON_DEMAND = 2;
+
+    // Operational backup.
+    ON_DEMAND_OPERATIONAL = 3;
   }
 
   // GCPBackupPlanInfo captures the plan configuration details of Google Cloud
@@ -495,6 +588,16 @@ message Backup {
     // The rule id of the backup plan which triggered this backup in case of
     // scheduled backup or used for
     string backup_plan_rule_id = 2;
+
+    // Resource name of the backup plan revision which triggered this backup in
+    // case of scheduled backup or used for on demand backup.
+    // Format:
+    // projects/{project}/locations/{location}/backupPlans/{backupPlanId}/revisions/{revisionId}
+    string backup_plan_revision_name = 3;
+
+    // The user friendly id of the backup plan revision which triggered this
+    // backup in case of scheduled backup or used for on demand backup.
+    string backup_plan_revision_id = 4;
   }
 
   // Output only. Identifier. Name of the backup to create. It must have the
@@ -525,6 +628,11 @@ message Backup {
   // Optional. The backup can not be deleted before this time.
   optional google.protobuf.Timestamp enforced_retention_end_time = 6
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Setting for how the enforced retention end time is inherited.
+  // This value is copied from this backup's BackupVault.
+  optional BackupVault.BackupRetentionInheritance backup_retention_inheritance =
+      30 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Optional. When this backup is automatically expired.
   optional google.protobuf.Timestamp expire_time = 7
@@ -557,8 +665,20 @@ message Backup {
     ComputeInstanceBackupProperties compute_instance_backup_properties = 19
         [(google.api.field_behavior) = OUTPUT_ONLY];
 
+    // Output only. Cloud SQL specific backup properties.
+    CloudSqlInstanceBackupProperties cloud_sql_instance_backup_properties = 26
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
     // Output only. Backup Appliance specific backup properties.
     BackupApplianceBackupProperties backup_appliance_backup_properties = 21
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. AlloyDB specific backup properties.
+    AlloyDbClusterBackupProperties alloy_db_backup_properties = 27
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. Disk specific backup properties.
+    DiskBackupProperties disk_backup_properties = 28
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
@@ -574,6 +694,35 @@ message Backup {
 
   // Output only. source resource size in bytes at the time of the backup.
   int64 resource_size_bytes = 23 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Output only. Reserved for future use.
+  optional bool satisfies_pzs = 24 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // Optional. Output only. Reserved for future use.
+  optional bool satisfies_pzi = 25 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // Resource that is being backed up.
+  oneof source_resource {
+    // Output only. Unique identifier of the GCP resource that is being backed
+    // up.
+    BackupGcpResource gcp_resource = 31
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Optional. Output only. The list of KMS key versions used to encrypt the
+  // backup.
+  repeated string kms_key_versions = 33 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "cloudkms.googleapis.com/CryptoKeyVersion"
+    }
+  ];
 }
 
 // Message for creating a BackupVault.
@@ -717,6 +866,62 @@ message FetchUsableBackupVaultsResponse {
   repeated string unreachable = 3;
 }
 
+// Request for the FetchBackupsForResourceType method.
+message FetchBackupsForResourceTypeRequest {
+  // Required. Datasources are the parent resource for the backups.
+  // Format:
+  // projects/{project}/locations/{location}/backupVaults/{backupVaultId}/dataSources/{datasourceId}
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "backupdr.googleapis.com/Backup"
+    }
+  ];
+
+  // Required. The type of the GCP resource.
+  // Ex: sqladmin.googleapis.com/Instance
+  string resource_type = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The maximum number of Backups to return. The service may
+  // return fewer than this value. If unspecified, at most 50
+  // Backups will be returned. The maximum value is 100; values
+  // above 100 will be coerced to 100.
+  int32 page_size = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A page token, received from a previous call of
+  // `FetchBackupsForResourceType`.
+  // Provide this to retrieve the subsequent page.
+  //
+  // When paginating, all other parameters provided to
+  // `FetchBackupsForResourceType` must match
+  // the call that provided the page token.
+  string page_token = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A filter expression that filters the results fetched in the
+  // response. The expression must specify the field name, a comparison
+  // operator, and the value that you want to use for filtering. Supported
+  // fields:
+  string filter = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A comma-separated list of fields to order by, sorted in ascending
+  // order. Use "desc" after a field name for descending.
+  string order_by = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. This parameter is used to specify the view of the backup.
+  // If not specified, the default view is BASIC.
+  BackupView view = 7 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response for the FetchBackupsForResourceType method.
+message FetchBackupsForResourceTypeResponse {
+  // The Backups from the specified parent.
+  repeated Backup backups = 1;
+
+  // A token, which can be sent as `page_token` to retrieve the next page.
+  // If this field is omitted, there are no subsequent pages.
+  string next_page_token = 2;
+}
+
 // Request message for getting a BackupVault.
 message GetBackupVaultRequest {
   // Required. Name of the backupvault store resource name, in the format
@@ -771,6 +976,11 @@ message UpdateBackupVaultRequest {
   // Optional. If set to true, will not check plan duration against backup vault
   // enforcement duration.
   bool force = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, we will force update access restriction even if
+  // some non compliant data sources are present. The default is 'false'.
+  bool force_update_access_restriction = 6
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Message for deleting a BackupVault.
@@ -1075,13 +1285,37 @@ message RestoreBackupRequest {
   oneof target_environment {
     // Compute Engine target environment to be used during restore.
     ComputeInstanceTargetEnvironment compute_instance_target_environment = 3;
+
+    // Disk target environment to be used during restore.
+    DiskTargetEnvironment disk_target_environment = 5;
+
+    // Region disk target environment to be used during restore.
+    RegionDiskTargetEnvironment region_disk_target_environment = 6;
   }
 
   // The property overrides for the instance being restored.
   oneof instance_properties {
     // Compute Engine instance properties to be overridden during restore.
     ComputeInstanceRestoreProperties compute_instance_restore_properties = 4;
+
+    // Disk properties to be overridden during restore.
+    DiskRestoreProperties disk_restore_properties = 7;
   }
+
+  // Optional. A field mask used to clear server-side default values
+  // for fields within the `instance_properties` oneof.
+  //
+  // When a field in this mask is cleared, the server will not apply its
+  // default logic (like inheriting a value from the source) for that field.
+  //
+  // The most common current use case is clearing default encryption keys.
+  //
+  // Examples of field mask paths:
+  // - Compute Instance Disks:
+  // `compute_instance_restore_properties.disks.*.disk_encryption_key`
+  // - Single Disk: `disk_restore_properties.disk_encryption_key`
+  optional google.protobuf.FieldMask clear_overrides_field_mask = 8
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for restoring from a Backup.
@@ -1101,6 +1335,19 @@ message TargetResource {
 
 // Minimum details to identify a Google Cloud resource
 message GcpResource {
+  // Name of the Google Cloud resource.
+  string gcp_resourcename = 1;
+
+  // Location of the resource: <region>/<zone>/"global"/"unspecified".
+  string location = 2;
+
+  // Type of the resource. Use the Unified Resource Type,
+  // eg. compute.googleapis.com/Instance.
+  string type = 3;
+}
+
+// Minimum details to identify a Google Cloud resource for a backup.
+message BackupGcpResource {
   // Name of the Google Cloud resource.
   string gcp_resourcename = 1;
 

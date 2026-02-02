@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BackupDRClient} from '@google-cloud/backupdr';
+import {BackupDRClient, BackupDrProtectionSummaryClient} from '@google-cloud/backupdr';
 
 // check that the client class type name can be used
 function doStuffWithBackupDRClient(client: BackupDRClient) {
+  client.close();
+}
+function doStuffWithBackupDrProtectionSummaryClient(client: BackupDrProtectionSummaryClient) {
   client.close();
 }
 
@@ -27,6 +30,9 @@ function main() {
   // check that the client instance can be created
   const backupDRClient = new BackupDRClient();
   doStuffWithBackupDRClient(backupDRClient);
+  // check that the client instance can be created
+  const backupDrProtectionSummaryClient = new BackupDrProtectionSummaryClient();
+  doStuffWithBackupDrProtectionSummaryClient(backupDrProtectionSummaryClient);
 }
 
 main();

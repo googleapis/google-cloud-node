@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -84573,6 +84573,623 @@
                         return Geolocation;
                     })();
     
+                    v2.AffectedResources = (function() {
+    
+                        /**
+                         * Properties of an AffectedResources.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IAffectedResources
+                         * @property {number|Long|null} [count] AffectedResources count
+                         */
+    
+                        /**
+                         * Constructs a new AffectedResources.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an AffectedResources.
+                         * @implements IAffectedResources
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IAffectedResources=} [properties] Properties to set
+                         */
+                        function AffectedResources(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AffectedResources count.
+                         * @member {number|Long} count
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @instance
+                         */
+                        AffectedResources.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new AffectedResources instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAffectedResources=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.AffectedResources} AffectedResources instance
+                         */
+                        AffectedResources.create = function create(properties) {
+                            return new AffectedResources(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AffectedResources message. Does not implicitly {@link google.cloud.securitycenter.v2.AffectedResources.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAffectedResources} message AffectedResources message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AffectedResources.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.count);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AffectedResources message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.AffectedResources.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAffectedResources} message AffectedResources message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AffectedResources.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AffectedResources message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.AffectedResources} AffectedResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AffectedResources.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.AffectedResources();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.count = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AffectedResources message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.AffectedResources} AffectedResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AffectedResources.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AffectedResources message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AffectedResources.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.count != null && message.hasOwnProperty("count"))
+                                if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                    return "count: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AffectedResources message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.AffectedResources} AffectedResources
+                         */
+                        AffectedResources.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.AffectedResources)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.AffectedResources();
+                            if (object.count != null)
+                                if ($util.Long)
+                                    (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                else if (typeof object.count === "string")
+                                    message.count = parseInt(object.count, 10);
+                                else if (typeof object.count === "number")
+                                    message.count = object.count;
+                                else if (typeof object.count === "object")
+                                    message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AffectedResources message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.AffectedResources} message AffectedResources
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AffectedResources.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.count = options.longs === String ? "0" : 0;
+                            if (message.count != null && message.hasOwnProperty("count"))
+                                if (typeof message.count === "number")
+                                    object.count = options.longs === String ? String(message.count) : message.count;
+                                else
+                                    object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AffectedResources to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AffectedResources.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AffectedResources
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.AffectedResources
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AffectedResources.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.AffectedResources";
+                        };
+    
+                        return AffectedResources;
+                    })();
+    
+                    v2.AiModel = (function() {
+    
+                        /**
+                         * Properties of an AiModel.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IAiModel
+                         * @property {string|null} [name] AiModel name
+                         * @property {string|null} [domain] AiModel domain
+                         * @property {string|null} [library] AiModel library
+                         * @property {string|null} [location] AiModel location
+                         * @property {string|null} [publisher] AiModel publisher
+                         * @property {google.cloud.securitycenter.v2.AiModel.DeploymentPlatform|null} [deploymentPlatform] AiModel deploymentPlatform
+                         * @property {string|null} [displayName] AiModel displayName
+                         */
+    
+                        /**
+                         * Constructs a new AiModel.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an AiModel.
+                         * @implements IAiModel
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IAiModel=} [properties] Properties to set
+                         */
+                        function AiModel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AiModel name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.name = "";
+    
+                        /**
+                         * AiModel domain.
+                         * @member {string} domain
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.domain = "";
+    
+                        /**
+                         * AiModel library.
+                         * @member {string} library
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.library = "";
+    
+                        /**
+                         * AiModel location.
+                         * @member {string} location
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.location = "";
+    
+                        /**
+                         * AiModel publisher.
+                         * @member {string} publisher
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.publisher = "";
+    
+                        /**
+                         * AiModel deploymentPlatform.
+                         * @member {google.cloud.securitycenter.v2.AiModel.DeploymentPlatform} deploymentPlatform
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.deploymentPlatform = 0;
+    
+                        /**
+                         * AiModel displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         */
+                        AiModel.prototype.displayName = "";
+    
+                        /**
+                         * Creates a new AiModel instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAiModel=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.AiModel} AiModel instance
+                         */
+                        AiModel.create = function create(properties) {
+                            return new AiModel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AiModel message. Does not implicitly {@link google.cloud.securitycenter.v2.AiModel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAiModel} message AiModel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiModel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+                            if (message.library != null && Object.hasOwnProperty.call(message, "library"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.library);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                            if (message.publisher != null && Object.hasOwnProperty.call(message, "publisher"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.publisher);
+                            if (message.deploymentPlatform != null && Object.hasOwnProperty.call(message, "deploymentPlatform"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.deploymentPlatform);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.displayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AiModel message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.AiModel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAiModel} message AiModel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AiModel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AiModel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.AiModel} AiModel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiModel.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.AiModel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.domain = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.library = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.publisher = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.deploymentPlatform = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AiModel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.AiModel} AiModel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AiModel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AiModel message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AiModel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.domain != null && message.hasOwnProperty("domain"))
+                                if (!$util.isString(message.domain))
+                                    return "domain: string expected";
+                            if (message.library != null && message.hasOwnProperty("library"))
+                                if (!$util.isString(message.library))
+                                    return "library: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                if (!$util.isString(message.publisher))
+                                    return "publisher: string expected";
+                            if (message.deploymentPlatform != null && message.hasOwnProperty("deploymentPlatform"))
+                                switch (message.deploymentPlatform) {
+                                default:
+                                    return "deploymentPlatform: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AiModel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.AiModel} AiModel
+                         */
+                        AiModel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.AiModel)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.AiModel();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.domain != null)
+                                message.domain = String(object.domain);
+                            if (object.library != null)
+                                message.library = String(object.library);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.publisher != null)
+                                message.publisher = String(object.publisher);
+                            switch (object.deploymentPlatform) {
+                            default:
+                                if (typeof object.deploymentPlatform === "number") {
+                                    message.deploymentPlatform = object.deploymentPlatform;
+                                    break;
+                                }
+                                break;
+                            case "DEPLOYMENT_PLATFORM_UNSPECIFIED":
+                            case 0:
+                                message.deploymentPlatform = 0;
+                                break;
+                            case "VERTEX_AI":
+                            case 1:
+                                message.deploymentPlatform = 1;
+                                break;
+                            case "GKE":
+                            case 2:
+                                message.deploymentPlatform = 2;
+                                break;
+                            case "GCE":
+                            case 3:
+                                message.deploymentPlatform = 3;
+                                break;
+                            case "FINE_TUNED_MODEL":
+                            case 4:
+                                message.deploymentPlatform = 4;
+                                break;
+                            }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AiModel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.AiModel} message AiModel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AiModel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.domain = "";
+                                object.library = "";
+                                object.location = "";
+                                object.publisher = "";
+                                object.deploymentPlatform = options.enums === String ? "DEPLOYMENT_PLATFORM_UNSPECIFIED" : 0;
+                                object.displayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.domain != null && message.hasOwnProperty("domain"))
+                                object.domain = message.domain;
+                            if (message.library != null && message.hasOwnProperty("library"))
+                                object.library = message.library;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                object.publisher = message.publisher;
+                            if (message.deploymentPlatform != null && message.hasOwnProperty("deploymentPlatform"))
+                                object.deploymentPlatform = options.enums === String ? $root.google.cloud.securitycenter.v2.AiModel.DeploymentPlatform[message.deploymentPlatform] === undefined ? message.deploymentPlatform : $root.google.cloud.securitycenter.v2.AiModel.DeploymentPlatform[message.deploymentPlatform] : message.deploymentPlatform;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AiModel to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AiModel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AiModel
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.AiModel
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AiModel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.AiModel";
+                        };
+    
+                        /**
+                         * DeploymentPlatform enum.
+                         * @name google.cloud.securitycenter.v2.AiModel.DeploymentPlatform
+                         * @enum {number}
+                         * @property {number} DEPLOYMENT_PLATFORM_UNSPECIFIED=0 DEPLOYMENT_PLATFORM_UNSPECIFIED value
+                         * @property {number} VERTEX_AI=1 VERTEX_AI value
+                         * @property {number} GKE=2 GKE value
+                         * @property {number} GCE=3 GCE value
+                         * @property {number} FINE_TUNED_MODEL=4 FINE_TUNED_MODEL value
+                         */
+                        AiModel.DeploymentPlatform = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEPLOYMENT_PLATFORM_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VERTEX_AI"] = 1;
+                            values[valuesById[2] = "GKE"] = 2;
+                            values[valuesById[3] = "GCE"] = 3;
+                            values[valuesById[4] = "FINE_TUNED_MODEL"] = 4;
+                            return values;
+                        })();
+    
+                        return AiModel;
+                    })();
+    
                     v2.Application = (function() {
     
                         /**
@@ -87563,6 +88180,227 @@
                         };
     
                         return BigQueryExport;
+                    })();
+    
+                    v2.Chokepoint = (function() {
+    
+                        /**
+                         * Properties of a Chokepoint.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IChokepoint
+                         * @property {Array.<string>|null} [relatedFindings] Chokepoint relatedFindings
+                         */
+    
+                        /**
+                         * Constructs a new Chokepoint.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a Chokepoint.
+                         * @implements IChokepoint
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IChokepoint=} [properties] Properties to set
+                         */
+                        function Chokepoint(properties) {
+                            this.relatedFindings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Chokepoint relatedFindings.
+                         * @member {Array.<string>} relatedFindings
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @instance
+                         */
+                        Chokepoint.prototype.relatedFindings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Chokepoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IChokepoint=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Chokepoint} Chokepoint instance
+                         */
+                        Chokepoint.create = function create(properties) {
+                            return new Chokepoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Chokepoint message. Does not implicitly {@link google.cloud.securitycenter.v2.Chokepoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IChokepoint} message Chokepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chokepoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedFindings != null && message.relatedFindings.length)
+                                for (var i = 0; i < message.relatedFindings.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.relatedFindings[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Chokepoint message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Chokepoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IChokepoint} message Chokepoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chokepoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Chokepoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Chokepoint} Chokepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chokepoint.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Chokepoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.relatedFindings && message.relatedFindings.length))
+                                            message.relatedFindings = [];
+                                        message.relatedFindings.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Chokepoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Chokepoint} Chokepoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chokepoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Chokepoint message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Chokepoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedFindings != null && message.hasOwnProperty("relatedFindings")) {
+                                if (!Array.isArray(message.relatedFindings))
+                                    return "relatedFindings: array expected";
+                                for (var i = 0; i < message.relatedFindings.length; ++i)
+                                    if (!$util.isString(message.relatedFindings[i]))
+                                        return "relatedFindings: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Chokepoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Chokepoint} Chokepoint
+                         */
+                        Chokepoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Chokepoint)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Chokepoint();
+                            if (object.relatedFindings) {
+                                if (!Array.isArray(object.relatedFindings))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Chokepoint.relatedFindings: array expected");
+                                message.relatedFindings = [];
+                                for (var i = 0; i < object.relatedFindings.length; ++i)
+                                    message.relatedFindings[i] = String(object.relatedFindings[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Chokepoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Chokepoint} message Chokepoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Chokepoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedFindings = [];
+                            if (message.relatedFindings && message.relatedFindings.length) {
+                                object.relatedFindings = [];
+                                for (var j = 0; j < message.relatedFindings.length; ++j)
+                                    object.relatedFindings[j] = message.relatedFindings[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Chokepoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Chokepoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Chokepoint
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Chokepoint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Chokepoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Chokepoint";
+                        };
+    
+                        return Chokepoint;
                     })();
     
                     v2.CloudArmor = (function() {
@@ -94063,6 +94901,7 @@
                          * @property {boolean|null} [partiallyHashed] File partiallyHashed
                          * @property {string|null} [contents] File contents
                          * @property {google.cloud.securitycenter.v2.File.IDiskPath|null} [diskPath] File diskPath
+                         * @property {Array.<google.cloud.securitycenter.v2.File.IFileOperation>|null} [operations] File operations
                          */
     
                         /**
@@ -94074,6 +94913,7 @@
                          * @param {google.cloud.securitycenter.v2.IFile=} [properties] Properties to set
                          */
                         function File(properties) {
+                            this.operations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -94137,6 +94977,14 @@
                         File.prototype.diskPath = null;
     
                         /**
+                         * File operations.
+                         * @member {Array.<google.cloud.securitycenter.v2.File.IFileOperation>} operations
+                         * @memberof google.cloud.securitycenter.v2.File
+                         * @instance
+                         */
+                        File.prototype.operations = $util.emptyArray;
+    
+                        /**
                          * Creates a new File instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v2.File
@@ -94174,6 +95022,9 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.contents);
                             if (message.diskPath != null && Object.hasOwnProperty.call(message, "diskPath"))
                                 $root.google.cloud.securitycenter.v2.File.DiskPath.encode(message.diskPath, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.operations != null && message.operations.length)
+                                for (var i = 0; i < message.operations.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.File.FileOperation.encode(message.operations[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -94238,6 +95089,12 @@
                                         message.diskPath = $root.google.cloud.securitycenter.v2.File.DiskPath.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        if (!(message.operations && message.operations.length))
+                                            message.operations = [];
+                                        message.operations.push($root.google.cloud.securitycenter.v2.File.FileOperation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -94296,6 +95153,15 @@
                                 if (error)
                                     return "diskPath." + error;
                             }
+                            if (message.operations != null && message.hasOwnProperty("operations")) {
+                                if (!Array.isArray(message.operations))
+                                    return "operations: array expected";
+                                for (var i = 0; i < message.operations.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.File.FileOperation.verify(message.operations[i]);
+                                    if (error)
+                                        return "operations." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -94342,6 +95208,16 @@
                                     throw TypeError(".google.cloud.securitycenter.v2.File.diskPath: object expected");
                                 message.diskPath = $root.google.cloud.securitycenter.v2.File.DiskPath.fromObject(object.diskPath);
                             }
+                            if (object.operations) {
+                                if (!Array.isArray(object.operations))
+                                    throw TypeError(".google.cloud.securitycenter.v2.File.operations: array expected");
+                                message.operations = [];
+                                for (var i = 0; i < object.operations.length; ++i) {
+                                    if (typeof object.operations[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.File.operations: object expected");
+                                    message.operations[i] = $root.google.cloud.securitycenter.v2.File.FileOperation.fromObject(object.operations[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -94358,6 +95234,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.operations = [];
                             if (options.defaults) {
                                 object.path = "";
                                 if ($util.Long) {
@@ -94395,6 +95273,11 @@
                                 object.contents = message.contents;
                             if (message.diskPath != null && message.hasOwnProperty("diskPath"))
                                 object.diskPath = $root.google.cloud.securitycenter.v2.File.DiskPath.toObject(message.diskPath, options);
+                            if (message.operations && message.operations.length) {
+                                object.operations = [];
+                                for (var j = 0; j < message.operations.length; ++j)
+                                    object.operations[j] = $root.google.cloud.securitycenter.v2.File.FileOperation.toObject(message.operations[j], options);
+                            }
                             return object;
                         };
     
@@ -94653,6 +95536,272 @@
                             return DiskPath;
                         })();
     
+                        File.FileOperation = (function() {
+    
+                            /**
+                             * Properties of a FileOperation.
+                             * @memberof google.cloud.securitycenter.v2.File
+                             * @interface IFileOperation
+                             * @property {google.cloud.securitycenter.v2.File.FileOperation.OperationType|null} [type] FileOperation type
+                             */
+    
+                            /**
+                             * Constructs a new FileOperation.
+                             * @memberof google.cloud.securitycenter.v2.File
+                             * @classdesc Represents a FileOperation.
+                             * @implements IFileOperation
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v2.File.IFileOperation=} [properties] Properties to set
+                             */
+                            function FileOperation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FileOperation type.
+                             * @member {google.cloud.securitycenter.v2.File.FileOperation.OperationType} type
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @instance
+                             */
+                            FileOperation.prototype.type = 0;
+    
+                            /**
+                             * Creates a new FileOperation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.File.IFileOperation=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v2.File.FileOperation} FileOperation instance
+                             */
+                            FileOperation.create = function create(properties) {
+                                return new FileOperation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FileOperation message. Does not implicitly {@link google.cloud.securitycenter.v2.File.FileOperation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.File.IFileOperation} message FileOperation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileOperation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FileOperation message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.File.FileOperation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.File.IFileOperation} message FileOperation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FileOperation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v2.File.FileOperation} FileOperation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileOperation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.File.FileOperation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FileOperation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v2.File.FileOperation} FileOperation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileOperation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FileOperation message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FileOperation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FileOperation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v2.File.FileOperation} FileOperation
+                             */
+                            FileOperation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v2.File.FileOperation)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v2.File.FileOperation();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "OPERATION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "OPEN":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "READ":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "RENAME":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "WRITE":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "EXECUTE":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FileOperation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.File.FileOperation} message FileOperation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FileOperation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.type = options.enums === String ? "OPERATION_TYPE_UNSPECIFIED" : 0;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.securitycenter.v2.File.FileOperation.OperationType[message.type] === undefined ? message.type : $root.google.cloud.securitycenter.v2.File.FileOperation.OperationType[message.type] : message.type;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FileOperation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FileOperation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FileOperation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securitycenter.v2.File.FileOperation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FileOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securitycenter.v2.File.FileOperation";
+                            };
+    
+                            /**
+                             * OperationType enum.
+                             * @name google.cloud.securitycenter.v2.File.FileOperation.OperationType
+                             * @enum {number}
+                             * @property {number} OPERATION_TYPE_UNSPECIFIED=0 OPERATION_TYPE_UNSPECIFIED value
+                             * @property {number} OPEN=1 OPEN value
+                             * @property {number} READ=2 READ value
+                             * @property {number} RENAME=3 RENAME value
+                             * @property {number} WRITE=4 WRITE value
+                             * @property {number} EXECUTE=5 EXECUTE value
+                             */
+                            FileOperation.OperationType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OPERATION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "OPEN"] = 1;
+                                values[valuesById[2] = "READ"] = 2;
+                                values[valuesById[3] = "RENAME"] = 3;
+                                values[valuesById[4] = "WRITE"] = 4;
+                                values[valuesById[5] = "EXECUTE"] = 5;
+                                return values;
+                            })();
+    
+                            return FileOperation;
+                        })();
+    
                         return File;
                     })();
     
@@ -94703,7 +95852,9 @@
                          * @property {google.cloud.securitycenter.v2.ICloudDlpDataProfile|null} [cloudDlpDataProfile] Finding cloudDlpDataProfile
                          * @property {google.cloud.securitycenter.v2.IKernelRootkit|null} [kernelRootkit] Finding kernelRootkit
                          * @property {Array.<google.cloud.securitycenter.v2.IOrgPolicy>|null} [orgPolicies] Finding orgPolicies
+                         * @property {google.cloud.securitycenter.v2.IJob|null} [job] Finding job
                          * @property {google.cloud.securitycenter.v2.IApplication|null} [application] Finding application
+                         * @property {google.cloud.securitycenter.v2.IIpRules|null} [ipRules] Finding ipRules
                          * @property {google.cloud.securitycenter.v2.IBackupDisasterRecovery|null} [backupDisasterRecovery] Finding backupDisasterRecovery
                          * @property {google.cloud.securitycenter.v2.ISecurityPosture|null} [securityPosture] Finding securityPosture
                          * @property {Array.<google.cloud.securitycenter.v2.ILogEntry>|null} [logEntries] Finding logEntries
@@ -94715,7 +95866,12 @@
                          * @property {google.cloud.securitycenter.v2.IDisk|null} [disk] Finding disk
                          * @property {Array.<google.cloud.securitycenter.v2.IDataAccessEvent>|null} [dataAccessEvents] Finding dataAccessEvents
                          * @property {Array.<google.cloud.securitycenter.v2.IDataFlowEvent>|null} [dataFlowEvents] Finding dataFlowEvents
+                         * @property {Array.<google.cloud.securitycenter.v2.INetwork>|null} [networks] Finding networks
                          * @property {Array.<google.cloud.securitycenter.v2.IDataRetentionDeletionEvent>|null} [dataRetentionDeletionEvents] Finding dataRetentionDeletionEvents
+                         * @property {google.cloud.securitycenter.v2.IAffectedResources|null} [affectedResources] Finding affectedResources
+                         * @property {google.cloud.securitycenter.v2.IAiModel|null} [aiModel] Finding aiModel
+                         * @property {google.cloud.securitycenter.v2.IChokepoint|null} [chokepoint] Finding chokepoint
+                         * @property {google.cloud.securitycenter.v2.IVertexAi|null} [vertexAi] Finding vertexAi
                          */
     
                         /**
@@ -94742,6 +95898,7 @@
                             this.groupMemberships = [];
                             this.dataAccessEvents = [];
                             this.dataFlowEvents = [];
+                            this.networks = [];
                             this.dataRetentionDeletionEvents = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -95078,12 +96235,28 @@
                         Finding.prototype.orgPolicies = $util.emptyArray;
     
                         /**
+                         * Finding job.
+                         * @member {google.cloud.securitycenter.v2.IJob|null|undefined} job
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.job = null;
+    
+                        /**
                          * Finding application.
                          * @member {google.cloud.securitycenter.v2.IApplication|null|undefined} application
                          * @memberof google.cloud.securitycenter.v2.Finding
                          * @instance
                          */
                         Finding.prototype.application = null;
+    
+                        /**
+                         * Finding ipRules.
+                         * @member {google.cloud.securitycenter.v2.IIpRules|null|undefined} ipRules
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.ipRules = null;
     
                         /**
                          * Finding backupDisasterRecovery.
@@ -95174,12 +96347,52 @@
                         Finding.prototype.dataFlowEvents = $util.emptyArray;
     
                         /**
+                         * Finding networks.
+                         * @member {Array.<google.cloud.securitycenter.v2.INetwork>} networks
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.networks = $util.emptyArray;
+    
+                        /**
                          * Finding dataRetentionDeletionEvents.
                          * @member {Array.<google.cloud.securitycenter.v2.IDataRetentionDeletionEvent>} dataRetentionDeletionEvents
                          * @memberof google.cloud.securitycenter.v2.Finding
                          * @instance
                          */
                         Finding.prototype.dataRetentionDeletionEvents = $util.emptyArray;
+    
+                        /**
+                         * Finding affectedResources.
+                         * @member {google.cloud.securitycenter.v2.IAffectedResources|null|undefined} affectedResources
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.affectedResources = null;
+    
+                        /**
+                         * Finding aiModel.
+                         * @member {google.cloud.securitycenter.v2.IAiModel|null|undefined} aiModel
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.aiModel = null;
+    
+                        /**
+                         * Finding chokepoint.
+                         * @member {google.cloud.securitycenter.v2.IChokepoint|null|undefined} chokepoint
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.chokepoint = null;
+    
+                        /**
+                         * Finding vertexAi.
+                         * @member {google.cloud.securitycenter.v2.IVertexAi|null|undefined} vertexAi
+                         * @memberof google.cloud.securitycenter.v2.Finding
+                         * @instance
+                         */
+                        Finding.prototype.vertexAi = null;
     
                         /**
                          * Creates a new Finding instance using the specified properties.
@@ -95301,8 +96514,12 @@
                             if (message.orgPolicies != null && message.orgPolicies.length)
                                 for (var i = 0; i < message.orgPolicies.length; ++i)
                                     $root.google.cloud.securitycenter.v2.OrgPolicy.encode(message.orgPolicies[i], writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                            if (message.job != null && Object.hasOwnProperty.call(message, "job"))
+                                $root.google.cloud.securitycenter.v2.Job.encode(message.job, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
                             if (message.application != null && Object.hasOwnProperty.call(message, "application"))
                                 $root.google.cloud.securitycenter.v2.Application.encode(message.application, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
+                            if (message.ipRules != null && Object.hasOwnProperty.call(message, "ipRules"))
+                                $root.google.cloud.securitycenter.v2.IpRules.encode(message.ipRules, writer.uint32(/* id 46, wireType 2 =*/370).fork()).ldelim();
                             if (message.backupDisasterRecovery != null && Object.hasOwnProperty.call(message, "backupDisasterRecovery"))
                                 $root.google.cloud.securitycenter.v2.BackupDisasterRecovery.encode(message.backupDisasterRecovery, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             if (message.securityPosture != null && Object.hasOwnProperty.call(message, "securityPosture"))
@@ -95332,9 +96549,20 @@
                             if (message.dataFlowEvents != null && message.dataFlowEvents.length)
                                 for (var i = 0; i < message.dataFlowEvents.length; ++i)
                                     $root.google.cloud.securitycenter.v2.DataFlowEvent.encode(message.dataFlowEvents[i], writer.uint32(/* id 62, wireType 2 =*/498).fork()).ldelim();
+                            if (message.networks != null && message.networks.length)
+                                for (var i = 0; i < message.networks.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.Network.encode(message.networks[i], writer.uint32(/* id 63, wireType 2 =*/506).fork()).ldelim();
                             if (message.dataRetentionDeletionEvents != null && message.dataRetentionDeletionEvents.length)
                                 for (var i = 0; i < message.dataRetentionDeletionEvents.length; ++i)
                                     $root.google.cloud.securitycenter.v2.DataRetentionDeletionEvent.encode(message.dataRetentionDeletionEvents[i], writer.uint32(/* id 64, wireType 2 =*/514).fork()).ldelim();
+                            if (message.affectedResources != null && Object.hasOwnProperty.call(message, "affectedResources"))
+                                $root.google.cloud.securitycenter.v2.AffectedResources.encode(message.affectedResources, writer.uint32(/* id 65, wireType 2 =*/522).fork()).ldelim();
+                            if (message.aiModel != null && Object.hasOwnProperty.call(message, "aiModel"))
+                                $root.google.cloud.securitycenter.v2.AiModel.encode(message.aiModel, writer.uint32(/* id 66, wireType 2 =*/530).fork()).ldelim();
+                            if (message.chokepoint != null && Object.hasOwnProperty.call(message, "chokepoint"))
+                                $root.google.cloud.securitycenter.v2.Chokepoint.encode(message.chokepoint, writer.uint32(/* id 69, wireType 2 =*/554).fork()).ldelim();
+                            if (message.vertexAi != null && Object.hasOwnProperty.call(message, "vertexAi"))
+                                $root.google.cloud.securitycenter.v2.VertexAi.encode(message.vertexAi, writer.uint32(/* id 72, wireType 2 =*/578).fork()).ldelim();
                             return writer;
                         };
     
@@ -95606,8 +96834,16 @@
                                         message.orgPolicies.push($root.google.cloud.securitycenter.v2.OrgPolicy.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 44: {
+                                        message.job = $root.google.cloud.securitycenter.v2.Job.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 45: {
                                         message.application = $root.google.cloud.securitycenter.v2.Application.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 46: {
+                                        message.ipRules = $root.google.cloud.securitycenter.v2.IpRules.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 47: {
@@ -95664,10 +96900,32 @@
                                         message.dataFlowEvents.push($root.google.cloud.securitycenter.v2.DataFlowEvent.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 63: {
+                                        if (!(message.networks && message.networks.length))
+                                            message.networks = [];
+                                        message.networks.push($root.google.cloud.securitycenter.v2.Network.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 64: {
                                         if (!(message.dataRetentionDeletionEvents && message.dataRetentionDeletionEvents.length))
                                             message.dataRetentionDeletionEvents = [];
                                         message.dataRetentionDeletionEvents.push($root.google.cloud.securitycenter.v2.DataRetentionDeletionEvent.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 65: {
+                                        message.affectedResources = $root.google.cloud.securitycenter.v2.AffectedResources.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 66: {
+                                        message.aiModel = $root.google.cloud.securitycenter.v2.AiModel.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 69: {
+                                        message.chokepoint = $root.google.cloud.securitycenter.v2.Chokepoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 72: {
+                                        message.vertexAi = $root.google.cloud.securitycenter.v2.VertexAi.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -95796,6 +97054,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.indicator != null && message.hasOwnProperty("indicator")) {
@@ -95956,10 +97215,20 @@
                                         return "orgPolicies." + error;
                                 }
                             }
+                            if (message.job != null && message.hasOwnProperty("job")) {
+                                var error = $root.google.cloud.securitycenter.v2.Job.verify(message.job);
+                                if (error)
+                                    return "job." + error;
+                            }
                             if (message.application != null && message.hasOwnProperty("application")) {
                                 var error = $root.google.cloud.securitycenter.v2.Application.verify(message.application);
                                 if (error)
                                     return "application." + error;
+                            }
+                            if (message.ipRules != null && message.hasOwnProperty("ipRules")) {
+                                var error = $root.google.cloud.securitycenter.v2.IpRules.verify(message.ipRules);
+                                if (error)
+                                    return "ipRules." + error;
                             }
                             if (message.backupDisasterRecovery != null && message.hasOwnProperty("backupDisasterRecovery")) {
                                 var error = $root.google.cloud.securitycenter.v2.BackupDisasterRecovery.verify(message.backupDisasterRecovery);
@@ -96036,6 +97305,15 @@
                                         return "dataFlowEvents." + error;
                                 }
                             }
+                            if (message.networks != null && message.hasOwnProperty("networks")) {
+                                if (!Array.isArray(message.networks))
+                                    return "networks: array expected";
+                                for (var i = 0; i < message.networks.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.Network.verify(message.networks[i]);
+                                    if (error)
+                                        return "networks." + error;
+                                }
+                            }
                             if (message.dataRetentionDeletionEvents != null && message.hasOwnProperty("dataRetentionDeletionEvents")) {
                                 if (!Array.isArray(message.dataRetentionDeletionEvents))
                                     return "dataRetentionDeletionEvents: array expected";
@@ -96044,6 +97322,26 @@
                                     if (error)
                                         return "dataRetentionDeletionEvents." + error;
                                 }
+                            }
+                            if (message.affectedResources != null && message.hasOwnProperty("affectedResources")) {
+                                var error = $root.google.cloud.securitycenter.v2.AffectedResources.verify(message.affectedResources);
+                                if (error)
+                                    return "affectedResources." + error;
+                            }
+                            if (message.aiModel != null && message.hasOwnProperty("aiModel")) {
+                                var error = $root.google.cloud.securitycenter.v2.AiModel.verify(message.aiModel);
+                                if (error)
+                                    return "aiModel." + error;
+                            }
+                            if (message.chokepoint != null && message.hasOwnProperty("chokepoint")) {
+                                var error = $root.google.cloud.securitycenter.v2.Chokepoint.verify(message.chokepoint);
+                                if (error)
+                                    return "chokepoint." + error;
+                            }
+                            if (message.vertexAi != null && message.hasOwnProperty("vertexAi")) {
+                                var error = $root.google.cloud.securitycenter.v2.VertexAi.verify(message.vertexAi);
+                                if (error)
+                                    return "vertexAi." + error;
                             }
                             return null;
                         };
@@ -96217,6 +97515,10 @@
                             case 8:
                                 message.findingClass = 8;
                                 break;
+                            case "CHOKEPOINT":
+                            case 9:
+                                message.findingClass = 9;
+                                break;
                             }
                             if (object.indicator != null) {
                                 if (typeof object.indicator !== "object")
@@ -96378,10 +97680,20 @@
                                     message.orgPolicies[i] = $root.google.cloud.securitycenter.v2.OrgPolicy.fromObject(object.orgPolicies[i]);
                                 }
                             }
+                            if (object.job != null) {
+                                if (typeof object.job !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.job: object expected");
+                                message.job = $root.google.cloud.securitycenter.v2.Job.fromObject(object.job);
+                            }
                             if (object.application != null) {
                                 if (typeof object.application !== "object")
                                     throw TypeError(".google.cloud.securitycenter.v2.Finding.application: object expected");
                                 message.application = $root.google.cloud.securitycenter.v2.Application.fromObject(object.application);
+                            }
+                            if (object.ipRules != null) {
+                                if (typeof object.ipRules !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.ipRules: object expected");
+                                message.ipRules = $root.google.cloud.securitycenter.v2.IpRules.fromObject(object.ipRules);
                             }
                             if (object.backupDisasterRecovery != null) {
                                 if (typeof object.backupDisasterRecovery !== "object")
@@ -96463,6 +97775,16 @@
                                     message.dataFlowEvents[i] = $root.google.cloud.securitycenter.v2.DataFlowEvent.fromObject(object.dataFlowEvents[i]);
                                 }
                             }
+                            if (object.networks) {
+                                if (!Array.isArray(object.networks))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.networks: array expected");
+                                message.networks = [];
+                                for (var i = 0; i < object.networks.length; ++i) {
+                                    if (typeof object.networks[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.Finding.networks: object expected");
+                                    message.networks[i] = $root.google.cloud.securitycenter.v2.Network.fromObject(object.networks[i]);
+                                }
+                            }
                             if (object.dataRetentionDeletionEvents) {
                                 if (!Array.isArray(object.dataRetentionDeletionEvents))
                                     throw TypeError(".google.cloud.securitycenter.v2.Finding.dataRetentionDeletionEvents: array expected");
@@ -96472,6 +97794,26 @@
                                         throw TypeError(".google.cloud.securitycenter.v2.Finding.dataRetentionDeletionEvents: object expected");
                                     message.dataRetentionDeletionEvents[i] = $root.google.cloud.securitycenter.v2.DataRetentionDeletionEvent.fromObject(object.dataRetentionDeletionEvents[i]);
                                 }
+                            }
+                            if (object.affectedResources != null) {
+                                if (typeof object.affectedResources !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.affectedResources: object expected");
+                                message.affectedResources = $root.google.cloud.securitycenter.v2.AffectedResources.fromObject(object.affectedResources);
+                            }
+                            if (object.aiModel != null) {
+                                if (typeof object.aiModel !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.aiModel: object expected");
+                                message.aiModel = $root.google.cloud.securitycenter.v2.AiModel.fromObject(object.aiModel);
+                            }
+                            if (object.chokepoint != null) {
+                                if (typeof object.chokepoint !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.chokepoint: object expected");
+                                message.chokepoint = $root.google.cloud.securitycenter.v2.Chokepoint.fromObject(object.chokepoint);
+                            }
+                            if (object.vertexAi != null) {
+                                if (typeof object.vertexAi !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.Finding.vertexAi: object expected");
+                                message.vertexAi = $root.google.cloud.securitycenter.v2.VertexAi.fromObject(object.vertexAi);
                             }
                             return message;
                         };
@@ -96502,6 +97844,7 @@
                                 object.groupMemberships = [];
                                 object.dataAccessEvents = [];
                                 object.dataFlowEvents = [];
+                                object.networks = [];
                                 object.dataRetentionDeletionEvents = [];
                             }
                             if (options.objects || options.defaults) {
@@ -96540,7 +97883,9 @@
                                 object.cloudDlpInspection = null;
                                 object.cloudDlpDataProfile = null;
                                 object.kernelRootkit = null;
+                                object.job = null;
                                 object.application = null;
+                                object.ipRules = null;
                                 object.backupDisasterRecovery = null;
                                 object.securityPosture = null;
                                 object.cloudArmor = null;
@@ -96548,6 +97893,10 @@
                                 object.notebook = null;
                                 object.toxicCombination = null;
                                 object.disk = null;
+                                object.affectedResources = null;
+                                object.aiModel = null;
+                                object.chokepoint = null;
+                                object.vertexAi = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -96660,8 +98009,12 @@
                                 for (var j = 0; j < message.orgPolicies.length; ++j)
                                     object.orgPolicies[j] = $root.google.cloud.securitycenter.v2.OrgPolicy.toObject(message.orgPolicies[j], options);
                             }
+                            if (message.job != null && message.hasOwnProperty("job"))
+                                object.job = $root.google.cloud.securitycenter.v2.Job.toObject(message.job, options);
                             if (message.application != null && message.hasOwnProperty("application"))
                                 object.application = $root.google.cloud.securitycenter.v2.Application.toObject(message.application, options);
+                            if (message.ipRules != null && message.hasOwnProperty("ipRules"))
+                                object.ipRules = $root.google.cloud.securitycenter.v2.IpRules.toObject(message.ipRules, options);
                             if (message.backupDisasterRecovery != null && message.hasOwnProperty("backupDisasterRecovery"))
                                 object.backupDisasterRecovery = $root.google.cloud.securitycenter.v2.BackupDisasterRecovery.toObject(message.backupDisasterRecovery, options);
                             if (message.securityPosture != null && message.hasOwnProperty("securityPosture"))
@@ -96701,11 +98054,24 @@
                                 for (var j = 0; j < message.dataFlowEvents.length; ++j)
                                     object.dataFlowEvents[j] = $root.google.cloud.securitycenter.v2.DataFlowEvent.toObject(message.dataFlowEvents[j], options);
                             }
+                            if (message.networks && message.networks.length) {
+                                object.networks = [];
+                                for (var j = 0; j < message.networks.length; ++j)
+                                    object.networks[j] = $root.google.cloud.securitycenter.v2.Network.toObject(message.networks[j], options);
+                            }
                             if (message.dataRetentionDeletionEvents && message.dataRetentionDeletionEvents.length) {
                                 object.dataRetentionDeletionEvents = [];
                                 for (var j = 0; j < message.dataRetentionDeletionEvents.length; ++j)
                                     object.dataRetentionDeletionEvents[j] = $root.google.cloud.securitycenter.v2.DataRetentionDeletionEvent.toObject(message.dataRetentionDeletionEvents[j], options);
                             }
+                            if (message.affectedResources != null && message.hasOwnProperty("affectedResources"))
+                                object.affectedResources = $root.google.cloud.securitycenter.v2.AffectedResources.toObject(message.affectedResources, options);
+                            if (message.aiModel != null && message.hasOwnProperty("aiModel"))
+                                object.aiModel = $root.google.cloud.securitycenter.v2.AiModel.toObject(message.aiModel, options);
+                            if (message.chokepoint != null && message.hasOwnProperty("chokepoint"))
+                                object.chokepoint = $root.google.cloud.securitycenter.v2.Chokepoint.toObject(message.chokepoint, options);
+                            if (message.vertexAi != null && message.hasOwnProperty("vertexAi"))
+                                object.vertexAi = $root.google.cloud.securitycenter.v2.VertexAi.toObject(message.vertexAi, options);
                             return object;
                         };
     
@@ -97554,6 +98920,7 @@
                          * @property {number} POSTURE_VIOLATION=6 POSTURE_VIOLATION value
                          * @property {number} TOXIC_COMBINATION=7 TOXIC_COMBINATION value
                          * @property {number} SENSITIVE_DATA_RISK=8 SENSITIVE_DATA_RISK value
+                         * @property {number} CHOKEPOINT=9 CHOKEPOINT value
                          */
                         Finding.FindingClass = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -97566,6 +98933,7 @@
                             values[valuesById[6] = "POSTURE_VIOLATION"] = 6;
                             values[valuesById[7] = "TOXIC_COMBINATION"] = 7;
                             values[valuesById[8] = "SENSITIVE_DATA_RISK"] = 8;
+                            values[valuesById[9] = "CHOKEPOINT"] = 9;
                             return values;
                         })();
     
@@ -97726,6 +99094,7 @@
                                     return "groupType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
                                     break;
                                 }
                             if (message.groupId != null && message.hasOwnProperty("groupId"))
@@ -97760,6 +99129,10 @@
                             case "GROUP_TYPE_TOXIC_COMBINATION":
                             case 1:
                                 message.groupType = 1;
+                                break;
+                            case "GROUP_TYPE_CHOKEPOINT":
+                            case 3:
+                                message.groupType = 3;
                                 break;
                             }
                             if (object.groupId != null)
@@ -97823,11 +99196,13 @@
                          * @enum {number}
                          * @property {number} GROUP_TYPE_UNSPECIFIED=0 GROUP_TYPE_UNSPECIFIED value
                          * @property {number} GROUP_TYPE_TOXIC_COMBINATION=1 GROUP_TYPE_TOXIC_COMBINATION value
+                         * @property {number} GROUP_TYPE_CHOKEPOINT=3 GROUP_TYPE_CHOKEPOINT value
                          */
                         GroupMembership.GroupType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "GROUP_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GROUP_TYPE_TOXIC_COMBINATION"] = 1;
+                            values[valuesById[3] = "GROUP_TYPE_CHOKEPOINT"] = 3;
                             return values;
                         })();
     
@@ -99480,6 +100855,1741 @@
                         })();
     
                         return Indicator;
+                    })();
+    
+                    v2.IpRules = (function() {
+    
+                        /**
+                         * Properties of an IpRules.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IIpRules
+                         * @property {google.cloud.securitycenter.v2.IpRules.Direction|null} [direction] IpRules direction
+                         * @property {google.cloud.securitycenter.v2.IAllowed|null} [allowed] IpRules allowed
+                         * @property {google.cloud.securitycenter.v2.IDenied|null} [denied] IpRules denied
+                         * @property {Array.<string>|null} [sourceIpRanges] IpRules sourceIpRanges
+                         * @property {Array.<string>|null} [destinationIpRanges] IpRules destinationIpRanges
+                         * @property {Array.<string>|null} [exposedServices] IpRules exposedServices
+                         */
+    
+                        /**
+                         * Constructs a new IpRules.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an IpRules.
+                         * @implements IIpRules
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IIpRules=} [properties] Properties to set
+                         */
+                        function IpRules(properties) {
+                            this.sourceIpRanges = [];
+                            this.destinationIpRanges = [];
+                            this.exposedServices = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpRules direction.
+                         * @member {google.cloud.securitycenter.v2.IpRules.Direction} direction
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.direction = 0;
+    
+                        /**
+                         * IpRules allowed.
+                         * @member {google.cloud.securitycenter.v2.IAllowed|null|undefined} allowed
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.allowed = null;
+    
+                        /**
+                         * IpRules denied.
+                         * @member {google.cloud.securitycenter.v2.IDenied|null|undefined} denied
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.denied = null;
+    
+                        /**
+                         * IpRules sourceIpRanges.
+                         * @member {Array.<string>} sourceIpRanges
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.sourceIpRanges = $util.emptyArray;
+    
+                        /**
+                         * IpRules destinationIpRanges.
+                         * @member {Array.<string>} destinationIpRanges
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.destinationIpRanges = $util.emptyArray;
+    
+                        /**
+                         * IpRules exposedServices.
+                         * @member {Array.<string>} exposedServices
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        IpRules.prototype.exposedServices = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * IpRules rules.
+                         * @member {"allowed"|"denied"|undefined} rules
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         */
+                        Object.defineProperty(IpRules.prototype, "rules", {
+                            get: $util.oneOfGetter($oneOfFields = ["allowed", "denied"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new IpRules instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRules=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.IpRules} IpRules instance
+                         */
+                        IpRules.create = function create(properties) {
+                            return new IpRules(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpRules message. Does not implicitly {@link google.cloud.securitycenter.v2.IpRules.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRules} message IpRules message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpRules.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.direction);
+                            if (message.allowed != null && Object.hasOwnProperty.call(message, "allowed"))
+                                $root.google.cloud.securitycenter.v2.Allowed.encode(message.allowed, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.denied != null && Object.hasOwnProperty.call(message, "denied"))
+                                $root.google.cloud.securitycenter.v2.Denied.encode(message.denied, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.sourceIpRanges != null && message.sourceIpRanges.length)
+                                for (var i = 0; i < message.sourceIpRanges.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceIpRanges[i]);
+                            if (message.destinationIpRanges != null && message.destinationIpRanges.length)
+                                for (var i = 0; i < message.destinationIpRanges.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.destinationIpRanges[i]);
+                            if (message.exposedServices != null && message.exposedServices.length)
+                                for (var i = 0; i < message.exposedServices.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.exposedServices[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpRules message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.IpRules.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRules} message IpRules message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpRules.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpRules message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.IpRules} IpRules
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpRules.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.IpRules();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.direction = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.allowed = $root.google.cloud.securitycenter.v2.Allowed.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.denied = $root.google.cloud.securitycenter.v2.Denied.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.sourceIpRanges && message.sourceIpRanges.length))
+                                            message.sourceIpRanges = [];
+                                        message.sourceIpRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.destinationIpRanges && message.destinationIpRanges.length))
+                                            message.destinationIpRanges = [];
+                                        message.destinationIpRanges.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.exposedServices && message.exposedServices.length))
+                                            message.exposedServices = [];
+                                        message.exposedServices.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpRules message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.IpRules} IpRules
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpRules.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpRules message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpRules.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                switch (message.direction) {
+                                default:
+                                    return "direction: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.allowed != null && message.hasOwnProperty("allowed")) {
+                                properties.rules = 1;
+                                {
+                                    var error = $root.google.cloud.securitycenter.v2.Allowed.verify(message.allowed);
+                                    if (error)
+                                        return "allowed." + error;
+                                }
+                            }
+                            if (message.denied != null && message.hasOwnProperty("denied")) {
+                                if (properties.rules === 1)
+                                    return "rules: multiple values";
+                                properties.rules = 1;
+                                {
+                                    var error = $root.google.cloud.securitycenter.v2.Denied.verify(message.denied);
+                                    if (error)
+                                        return "denied." + error;
+                                }
+                            }
+                            if (message.sourceIpRanges != null && message.hasOwnProperty("sourceIpRanges")) {
+                                if (!Array.isArray(message.sourceIpRanges))
+                                    return "sourceIpRanges: array expected";
+                                for (var i = 0; i < message.sourceIpRanges.length; ++i)
+                                    if (!$util.isString(message.sourceIpRanges[i]))
+                                        return "sourceIpRanges: string[] expected";
+                            }
+                            if (message.destinationIpRanges != null && message.hasOwnProperty("destinationIpRanges")) {
+                                if (!Array.isArray(message.destinationIpRanges))
+                                    return "destinationIpRanges: array expected";
+                                for (var i = 0; i < message.destinationIpRanges.length; ++i)
+                                    if (!$util.isString(message.destinationIpRanges[i]))
+                                        return "destinationIpRanges: string[] expected";
+                            }
+                            if (message.exposedServices != null && message.hasOwnProperty("exposedServices")) {
+                                if (!Array.isArray(message.exposedServices))
+                                    return "exposedServices: array expected";
+                                for (var i = 0; i < message.exposedServices.length; ++i)
+                                    if (!$util.isString(message.exposedServices[i]))
+                                        return "exposedServices: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpRules message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.IpRules} IpRules
+                         */
+                        IpRules.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.IpRules)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.IpRules();
+                            switch (object.direction) {
+                            default:
+                                if (typeof object.direction === "number") {
+                                    message.direction = object.direction;
+                                    break;
+                                }
+                                break;
+                            case "DIRECTION_UNSPECIFIED":
+                            case 0:
+                                message.direction = 0;
+                                break;
+                            case "INGRESS":
+                            case 1:
+                                message.direction = 1;
+                                break;
+                            case "EGRESS":
+                            case 2:
+                                message.direction = 2;
+                                break;
+                            }
+                            if (object.allowed != null) {
+                                if (typeof object.allowed !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRules.allowed: object expected");
+                                message.allowed = $root.google.cloud.securitycenter.v2.Allowed.fromObject(object.allowed);
+                            }
+                            if (object.denied != null) {
+                                if (typeof object.denied !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRules.denied: object expected");
+                                message.denied = $root.google.cloud.securitycenter.v2.Denied.fromObject(object.denied);
+                            }
+                            if (object.sourceIpRanges) {
+                                if (!Array.isArray(object.sourceIpRanges))
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRules.sourceIpRanges: array expected");
+                                message.sourceIpRanges = [];
+                                for (var i = 0; i < object.sourceIpRanges.length; ++i)
+                                    message.sourceIpRanges[i] = String(object.sourceIpRanges[i]);
+                            }
+                            if (object.destinationIpRanges) {
+                                if (!Array.isArray(object.destinationIpRanges))
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRules.destinationIpRanges: array expected");
+                                message.destinationIpRanges = [];
+                                for (var i = 0; i < object.destinationIpRanges.length; ++i)
+                                    message.destinationIpRanges[i] = String(object.destinationIpRanges[i]);
+                            }
+                            if (object.exposedServices) {
+                                if (!Array.isArray(object.exposedServices))
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRules.exposedServices: array expected");
+                                message.exposedServices = [];
+                                for (var i = 0; i < object.exposedServices.length; ++i)
+                                    message.exposedServices[i] = String(object.exposedServices[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpRules message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IpRules} message IpRules
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpRules.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.sourceIpRanges = [];
+                                object.destinationIpRanges = [];
+                                object.exposedServices = [];
+                            }
+                            if (options.defaults)
+                                object.direction = options.enums === String ? "DIRECTION_UNSPECIFIED" : 0;
+                            if (message.direction != null && message.hasOwnProperty("direction"))
+                                object.direction = options.enums === String ? $root.google.cloud.securitycenter.v2.IpRules.Direction[message.direction] === undefined ? message.direction : $root.google.cloud.securitycenter.v2.IpRules.Direction[message.direction] : message.direction;
+                            if (message.allowed != null && message.hasOwnProperty("allowed")) {
+                                object.allowed = $root.google.cloud.securitycenter.v2.Allowed.toObject(message.allowed, options);
+                                if (options.oneofs)
+                                    object.rules = "allowed";
+                            }
+                            if (message.denied != null && message.hasOwnProperty("denied")) {
+                                object.denied = $root.google.cloud.securitycenter.v2.Denied.toObject(message.denied, options);
+                                if (options.oneofs)
+                                    object.rules = "denied";
+                            }
+                            if (message.sourceIpRanges && message.sourceIpRanges.length) {
+                                object.sourceIpRanges = [];
+                                for (var j = 0; j < message.sourceIpRanges.length; ++j)
+                                    object.sourceIpRanges[j] = message.sourceIpRanges[j];
+                            }
+                            if (message.destinationIpRanges && message.destinationIpRanges.length) {
+                                object.destinationIpRanges = [];
+                                for (var j = 0; j < message.destinationIpRanges.length; ++j)
+                                    object.destinationIpRanges[j] = message.destinationIpRanges[j];
+                            }
+                            if (message.exposedServices && message.exposedServices.length) {
+                                object.exposedServices = [];
+                                for (var j = 0; j < message.exposedServices.length; ++j)
+                                    object.exposedServices[j] = message.exposedServices[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpRules to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpRules.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpRules
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.IpRules
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpRules.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.IpRules";
+                        };
+    
+                        /**
+                         * Direction enum.
+                         * @name google.cloud.securitycenter.v2.IpRules.Direction
+                         * @enum {number}
+                         * @property {number} DIRECTION_UNSPECIFIED=0 DIRECTION_UNSPECIFIED value
+                         * @property {number} INGRESS=1 INGRESS value
+                         * @property {number} EGRESS=2 EGRESS value
+                         */
+                        IpRules.Direction = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DIRECTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INGRESS"] = 1;
+                            values[valuesById[2] = "EGRESS"] = 2;
+                            return values;
+                        })();
+    
+                        return IpRules;
+                    })();
+    
+                    v2.IpRule = (function() {
+    
+                        /**
+                         * Properties of an IpRule.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IIpRule
+                         * @property {string|null} [protocol] IpRule protocol
+                         * @property {Array.<google.cloud.securitycenter.v2.IpRule.IPortRange>|null} [portRanges] IpRule portRanges
+                         */
+    
+                        /**
+                         * Constructs a new IpRule.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an IpRule.
+                         * @implements IIpRule
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IIpRule=} [properties] Properties to set
+                         */
+                        function IpRule(properties) {
+                            this.portRanges = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IpRule protocol.
+                         * @member {string} protocol
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @instance
+                         */
+                        IpRule.prototype.protocol = "";
+    
+                        /**
+                         * IpRule portRanges.
+                         * @member {Array.<google.cloud.securitycenter.v2.IpRule.IPortRange>} portRanges
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @instance
+                         */
+                        IpRule.prototype.portRanges = $util.emptyArray;
+    
+                        /**
+                         * Creates a new IpRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRule=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.IpRule} IpRule instance
+                         */
+                        IpRule.create = function create(properties) {
+                            return new IpRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IpRule message. Does not implicitly {@link google.cloud.securitycenter.v2.IpRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRule} message IpRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.protocol);
+                            if (message.portRanges != null && message.portRanges.length)
+                                for (var i = 0; i < message.portRanges.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.IpRule.PortRange.encode(message.portRanges[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IpRule message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.IpRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IIpRule} message IpRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IpRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IpRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.IpRule} IpRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpRule.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.IpRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.protocol = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.portRanges && message.portRanges.length))
+                                            message.portRanges = [];
+                                        message.portRanges.push($root.google.cloud.securitycenter.v2.IpRule.PortRange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IpRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.IpRule} IpRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IpRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IpRule message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IpRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                if (!$util.isString(message.protocol))
+                                    return "protocol: string expected";
+                            if (message.portRanges != null && message.hasOwnProperty("portRanges")) {
+                                if (!Array.isArray(message.portRanges))
+                                    return "portRanges: array expected";
+                                for (var i = 0; i < message.portRanges.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.IpRule.PortRange.verify(message.portRanges[i]);
+                                    if (error)
+                                        return "portRanges." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IpRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.IpRule} IpRule
+                         */
+                        IpRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.IpRule)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.IpRule();
+                            if (object.protocol != null)
+                                message.protocol = String(object.protocol);
+                            if (object.portRanges) {
+                                if (!Array.isArray(object.portRanges))
+                                    throw TypeError(".google.cloud.securitycenter.v2.IpRule.portRanges: array expected");
+                                message.portRanges = [];
+                                for (var i = 0; i < object.portRanges.length; ++i) {
+                                    if (typeof object.portRanges[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.IpRule.portRanges: object expected");
+                                    message.portRanges[i] = $root.google.cloud.securitycenter.v2.IpRule.PortRange.fromObject(object.portRanges[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IpRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IpRule} message IpRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IpRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.portRanges = [];
+                            if (options.defaults)
+                                object.protocol = "";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = message.protocol;
+                            if (message.portRanges && message.portRanges.length) {
+                                object.portRanges = [];
+                                for (var j = 0; j < message.portRanges.length; ++j)
+                                    object.portRanges[j] = $root.google.cloud.securitycenter.v2.IpRule.PortRange.toObject(message.portRanges[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IpRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IpRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IpRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.IpRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IpRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.IpRule";
+                        };
+    
+                        IpRule.PortRange = (function() {
+    
+                            /**
+                             * Properties of a PortRange.
+                             * @memberof google.cloud.securitycenter.v2.IpRule
+                             * @interface IPortRange
+                             * @property {number|Long|null} [min] PortRange min
+                             * @property {number|Long|null} [max] PortRange max
+                             */
+    
+                            /**
+                             * Constructs a new PortRange.
+                             * @memberof google.cloud.securitycenter.v2.IpRule
+                             * @classdesc Represents a PortRange.
+                             * @implements IPortRange
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v2.IpRule.IPortRange=} [properties] Properties to set
+                             */
+                            function PortRange(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PortRange min.
+                             * @member {number|Long} min
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @instance
+                             */
+                            PortRange.prototype.min = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * PortRange max.
+                             * @member {number|Long} max
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @instance
+                             */
+                            PortRange.prototype.max = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new PortRange instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.IpRule.IPortRange=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v2.IpRule.PortRange} PortRange instance
+                             */
+                            PortRange.create = function create(properties) {
+                                return new PortRange(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PortRange message. Does not implicitly {@link google.cloud.securitycenter.v2.IpRule.PortRange.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.IpRule.IPortRange} message PortRange message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PortRange.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.min != null && Object.hasOwnProperty.call(message, "min"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.min);
+                                if (message.max != null && Object.hasOwnProperty.call(message, "max"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.max);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PortRange message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.IpRule.PortRange.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.IpRule.IPortRange} message PortRange message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PortRange.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PortRange message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v2.IpRule.PortRange} PortRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PortRange.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.IpRule.PortRange();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.min = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.max = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PortRange message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v2.IpRule.PortRange} PortRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PortRange.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PortRange message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PortRange.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.min != null && message.hasOwnProperty("min"))
+                                    if (!$util.isInteger(message.min) && !(message.min && $util.isInteger(message.min.low) && $util.isInteger(message.min.high)))
+                                        return "min: integer|Long expected";
+                                if (message.max != null && message.hasOwnProperty("max"))
+                                    if (!$util.isInteger(message.max) && !(message.max && $util.isInteger(message.max.low) && $util.isInteger(message.max.high)))
+                                        return "max: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PortRange message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v2.IpRule.PortRange} PortRange
+                             */
+                            PortRange.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v2.IpRule.PortRange)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v2.IpRule.PortRange();
+                                if (object.min != null)
+                                    if ($util.Long)
+                                        (message.min = $util.Long.fromValue(object.min)).unsigned = false;
+                                    else if (typeof object.min === "string")
+                                        message.min = parseInt(object.min, 10);
+                                    else if (typeof object.min === "number")
+                                        message.min = object.min;
+                                    else if (typeof object.min === "object")
+                                        message.min = new $util.LongBits(object.min.low >>> 0, object.min.high >>> 0).toNumber();
+                                if (object.max != null)
+                                    if ($util.Long)
+                                        (message.max = $util.Long.fromValue(object.max)).unsigned = false;
+                                    else if (typeof object.max === "string")
+                                        message.max = parseInt(object.max, 10);
+                                    else if (typeof object.max === "number")
+                                        message.max = object.max;
+                                    else if (typeof object.max === "object")
+                                        message.max = new $util.LongBits(object.max.low >>> 0, object.max.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PortRange message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.IpRule.PortRange} message PortRange
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PortRange.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.min = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.min = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.max = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.max = options.longs === String ? "0" : 0;
+                                }
+                                if (message.min != null && message.hasOwnProperty("min"))
+                                    if (typeof message.min === "number")
+                                        object.min = options.longs === String ? String(message.min) : message.min;
+                                    else
+                                        object.min = options.longs === String ? $util.Long.prototype.toString.call(message.min) : options.longs === Number ? new $util.LongBits(message.min.low >>> 0, message.min.high >>> 0).toNumber() : message.min;
+                                if (message.max != null && message.hasOwnProperty("max"))
+                                    if (typeof message.max === "number")
+                                        object.max = options.longs === String ? String(message.max) : message.max;
+                                    else
+                                        object.max = options.longs === String ? $util.Long.prototype.toString.call(message.max) : options.longs === Number ? new $util.LongBits(message.max.low >>> 0, message.max.high >>> 0).toNumber() : message.max;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PortRange to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PortRange.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PortRange
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securitycenter.v2.IpRule.PortRange
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PortRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securitycenter.v2.IpRule.PortRange";
+                            };
+    
+                            return PortRange;
+                        })();
+    
+                        return IpRule;
+                    })();
+    
+                    v2.Allowed = (function() {
+    
+                        /**
+                         * Properties of an Allowed.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IAllowed
+                         * @property {Array.<google.cloud.securitycenter.v2.IIpRule>|null} [ipRules] Allowed ipRules
+                         */
+    
+                        /**
+                         * Constructs a new Allowed.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an Allowed.
+                         * @implements IAllowed
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IAllowed=} [properties] Properties to set
+                         */
+                        function Allowed(properties) {
+                            this.ipRules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Allowed ipRules.
+                         * @member {Array.<google.cloud.securitycenter.v2.IIpRule>} ipRules
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @instance
+                         */
+                        Allowed.prototype.ipRules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Allowed instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAllowed=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Allowed} Allowed instance
+                         */
+                        Allowed.create = function create(properties) {
+                            return new Allowed(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Allowed message. Does not implicitly {@link google.cloud.securitycenter.v2.Allowed.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAllowed} message Allowed message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Allowed.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipRules != null && message.ipRules.length)
+                                for (var i = 0; i < message.ipRules.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.IpRule.encode(message.ipRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Allowed message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Allowed.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IAllowed} message Allowed message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Allowed.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Allowed message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Allowed} Allowed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Allowed.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Allowed();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.ipRules && message.ipRules.length))
+                                            message.ipRules = [];
+                                        message.ipRules.push($root.google.cloud.securitycenter.v2.IpRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Allowed message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Allowed} Allowed
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Allowed.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Allowed message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Allowed.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ipRules != null && message.hasOwnProperty("ipRules")) {
+                                if (!Array.isArray(message.ipRules))
+                                    return "ipRules: array expected";
+                                for (var i = 0; i < message.ipRules.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.IpRule.verify(message.ipRules[i]);
+                                    if (error)
+                                        return "ipRules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Allowed message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Allowed} Allowed
+                         */
+                        Allowed.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Allowed)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Allowed();
+                            if (object.ipRules) {
+                                if (!Array.isArray(object.ipRules))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Allowed.ipRules: array expected");
+                                message.ipRules = [];
+                                for (var i = 0; i < object.ipRules.length; ++i) {
+                                    if (typeof object.ipRules[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.Allowed.ipRules: object expected");
+                                    message.ipRules[i] = $root.google.cloud.securitycenter.v2.IpRule.fromObject(object.ipRules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Allowed message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Allowed} message Allowed
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Allowed.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ipRules = [];
+                            if (message.ipRules && message.ipRules.length) {
+                                object.ipRules = [];
+                                for (var j = 0; j < message.ipRules.length; ++j)
+                                    object.ipRules[j] = $root.google.cloud.securitycenter.v2.IpRule.toObject(message.ipRules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Allowed to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Allowed.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Allowed
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Allowed
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Allowed.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Allowed";
+                        };
+    
+                        return Allowed;
+                    })();
+    
+                    v2.Denied = (function() {
+    
+                        /**
+                         * Properties of a Denied.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IDenied
+                         * @property {Array.<google.cloud.securitycenter.v2.IIpRule>|null} [ipRules] Denied ipRules
+                         */
+    
+                        /**
+                         * Constructs a new Denied.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a Denied.
+                         * @implements IDenied
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IDenied=} [properties] Properties to set
+                         */
+                        function Denied(properties) {
+                            this.ipRules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Denied ipRules.
+                         * @member {Array.<google.cloud.securitycenter.v2.IIpRule>} ipRules
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @instance
+                         */
+                        Denied.prototype.ipRules = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Denied instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IDenied=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Denied} Denied instance
+                         */
+                        Denied.create = function create(properties) {
+                            return new Denied(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Denied message. Does not implicitly {@link google.cloud.securitycenter.v2.Denied.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IDenied} message Denied message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Denied.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipRules != null && message.ipRules.length)
+                                for (var i = 0; i < message.ipRules.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.IpRule.encode(message.ipRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Denied message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Denied.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IDenied} message Denied message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Denied.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Denied message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Denied} Denied
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Denied.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Denied();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.ipRules && message.ipRules.length))
+                                            message.ipRules = [];
+                                        message.ipRules.push($root.google.cloud.securitycenter.v2.IpRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Denied message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Denied} Denied
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Denied.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Denied message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Denied.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ipRules != null && message.hasOwnProperty("ipRules")) {
+                                if (!Array.isArray(message.ipRules))
+                                    return "ipRules: array expected";
+                                for (var i = 0; i < message.ipRules.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.IpRule.verify(message.ipRules[i]);
+                                    if (error)
+                                        return "ipRules." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Denied message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Denied} Denied
+                         */
+                        Denied.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Denied)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Denied();
+                            if (object.ipRules) {
+                                if (!Array.isArray(object.ipRules))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Denied.ipRules: array expected");
+                                message.ipRules = [];
+                                for (var i = 0; i < object.ipRules.length; ++i) {
+                                    if (typeof object.ipRules[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.Denied.ipRules: object expected");
+                                    message.ipRules[i] = $root.google.cloud.securitycenter.v2.IpRule.fromObject(object.ipRules[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Denied message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Denied} message Denied
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Denied.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ipRules = [];
+                            if (message.ipRules && message.ipRules.length) {
+                                object.ipRules = [];
+                                for (var j = 0; j < message.ipRules.length; ++j)
+                                    object.ipRules[j] = $root.google.cloud.securitycenter.v2.IpRule.toObject(message.ipRules[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Denied to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Denied.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Denied
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Denied
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Denied.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Denied";
+                        };
+    
+                        return Denied;
+                    })();
+    
+                    v2.Job = (function() {
+    
+                        /**
+                         * Properties of a Job.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IJob
+                         * @property {string|null} [name] Job name
+                         * @property {google.cloud.securitycenter.v2.JobState|null} [state] Job state
+                         * @property {number|null} [errorCode] Job errorCode
+                         * @property {string|null} [location] Job location
+                         */
+    
+                        /**
+                         * Constructs a new Job.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a Job.
+                         * @implements IJob
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IJob=} [properties] Properties to set
+                         */
+                        function Job(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Job name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @instance
+                         */
+                        Job.prototype.name = "";
+    
+                        /**
+                         * Job state.
+                         * @member {google.cloud.securitycenter.v2.JobState} state
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @instance
+                         */
+                        Job.prototype.state = 0;
+    
+                        /**
+                         * Job errorCode.
+                         * @member {number} errorCode
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @instance
+                         */
+                        Job.prototype.errorCode = 0;
+    
+                        /**
+                         * Job location.
+                         * @member {string} location
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @instance
+                         */
+                        Job.prototype.location = "";
+    
+                        /**
+                         * Creates a new Job instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IJob=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Job} Job instance
+                         */
+                        Job.create = function create(properties) {
+                            return new Job(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Job message. Does not implicitly {@link google.cloud.securitycenter.v2.Job.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IJob} message Job message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Job.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.errorCode != null && Object.hasOwnProperty.call(message, "errorCode"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.errorCode);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Job message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Job.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IJob} message Job message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Job.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Job message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Job} Job
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Job.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Job();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.errorCode = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Job message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Job} Job
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Job.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Job message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Job.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                if (!$util.isInteger(message.errorCode))
+                                    return "errorCode: integer expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Job message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Job} Job
+                         */
+                        Job.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Job)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Job();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "JOB_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "RUNNING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            }
+                            if (object.errorCode != null)
+                                message.errorCode = object.errorCode | 0;
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Job message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Job} message Job
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Job.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.state = options.enums === String ? "JOB_STATE_UNSPECIFIED" : 0;
+                                object.errorCode = 0;
+                                object.location = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.securitycenter.v2.JobState[message.state] === undefined ? message.state : $root.google.cloud.securitycenter.v2.JobState[message.state] : message.state;
+                            if (message.errorCode != null && message.hasOwnProperty("errorCode"))
+                                object.errorCode = message.errorCode;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Job to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Job.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Job
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Job
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Job.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Job";
+                        };
+    
+                        return Job;
+                    })();
+    
+                    /**
+                     * JobState enum.
+                     * @name google.cloud.securitycenter.v2.JobState
+                     * @enum {number}
+                     * @property {number} JOB_STATE_UNSPECIFIED=0 JOB_STATE_UNSPECIFIED value
+                     * @property {number} PENDING=1 PENDING value
+                     * @property {number} RUNNING=2 RUNNING value
+                     * @property {number} SUCCEEDED=3 SUCCEEDED value
+                     * @property {number} FAILED=4 FAILED value
+                     */
+                    v2.JobState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "JOB_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PENDING"] = 1;
+                        values[valuesById[2] = "RUNNING"] = 2;
+                        values[valuesById[3] = "SUCCEEDED"] = 3;
+                        values[valuesById[4] = "FAILED"] = 4;
+                        return values;
                     })();
     
                     v2.KernelRootkit = (function() {
@@ -103666,11 +106776,30 @@
                                     default:
                                         return "primaryTechniques: enum value[] expected";
                                     case 0:
+                                    case 70:
+                                    case 71:
+                                    case 114:
+                                    case 115:
+                                    case 122:
+                                    case 117:
+                                    case 68:
+                                    case 72:
+                                    case 73:
+                                    case 74:
+                                    case 75:
+                                    case 120:
+                                    case 118:
                                     case 49:
                                     case 50:
                                     case 37:
                                     case 38:
                                     case 32:
+                                    case 89:
+                                    case 119:
+                                    case 90:
+                                    case 93:
+                                    case 103:
+                                    case 104:
                                     case 56:
                                     case 6:
                                     case 7:
@@ -103678,7 +106807,12 @@
                                     case 63:
                                     case 18:
                                     case 19:
+                                    case 123:
+                                    case 124:
+                                    case 125:
                                     case 64:
+                                    case 128:
+                                    case 126:
                                     case 45:
                                     case 46:
                                     case 47:
@@ -103686,52 +106820,99 @@
                                     case 35:
                                     case 15:
                                     case 16:
+                                    case 121:
+                                    case 116:
                                     case 9:
                                     case 10:
                                     case 11:
                                     case 22:
                                     case 40:
+                                    case 67:
                                     case 23:
                                     case 58:
+                                    case 76:
                                     case 3:
                                     case 4:
                                     case 44:
+                                    case 94:
                                     case 5:
+                                    case 77:
+                                    case 78:
                                     case 33:
                                     case 39:
+                                    case 79:
+                                    case 80:
+                                    case 95:
                                     case 27:
+                                    case 129:
+                                    case 130:
+                                    case 134:
+                                    case 69:
+                                    case 135:
                                     case 30:
                                     case 29:
+                                    case 132:
                                     case 52:
                                     case 36:
+                                    case 81:
                                     case 8:
                                     case 17:
                                     case 48:
                                     case 42:
                                     case 51:
+                                    case 91:
                                     case 25:
                                     case 24:
                                     case 65:
+                                    case 82:
+                                    case 83:
+                                    case 127:
                                     case 34:
+                                    case 136:
+                                    case 109:
                                     case 13:
+                                    case 105:
+                                    case 96:
+                                    case 97:
+                                    case 106:
+                                    case 107:
+                                    case 84:
+                                    case 98:
                                     case 28:
+                                    case 108:
+                                    case 137:
                                     case 31:
                                     case 55:
+                                    case 110:
+                                    case 111:
+                                    case 85:
+                                    case 86:
+                                    case 87:
                                     case 20:
                                     case 21:
                                     case 12:
                                     case 41:
+                                    case 112:
+                                    case 113:
                                     case 26:
                                     case 54:
                                     case 53:
+                                    case 99:
+                                    case 100:
                                     case 43:
+                                    case 101:
+                                    case 133:
                                     case 1:
                                     case 2:
+                                    case 88:
+                                    case 102:
                                     case 60:
                                     case 66:
                                     case 61:
                                     case 57:
+                                    case 92:
                                     case 62:
+                                    case 131:
                                         break;
                                     }
                             }
@@ -103768,11 +106949,30 @@
                                     default:
                                         return "additionalTechniques: enum value[] expected";
                                     case 0:
+                                    case 70:
+                                    case 71:
+                                    case 114:
+                                    case 115:
+                                    case 122:
+                                    case 117:
+                                    case 68:
+                                    case 72:
+                                    case 73:
+                                    case 74:
+                                    case 75:
+                                    case 120:
+                                    case 118:
                                     case 49:
                                     case 50:
                                     case 37:
                                     case 38:
                                     case 32:
+                                    case 89:
+                                    case 119:
+                                    case 90:
+                                    case 93:
+                                    case 103:
+                                    case 104:
                                     case 56:
                                     case 6:
                                     case 7:
@@ -103780,7 +106980,12 @@
                                     case 63:
                                     case 18:
                                     case 19:
+                                    case 123:
+                                    case 124:
+                                    case 125:
                                     case 64:
+                                    case 128:
+                                    case 126:
                                     case 45:
                                     case 46:
                                     case 47:
@@ -103788,52 +106993,99 @@
                                     case 35:
                                     case 15:
                                     case 16:
+                                    case 121:
+                                    case 116:
                                     case 9:
                                     case 10:
                                     case 11:
                                     case 22:
                                     case 40:
+                                    case 67:
                                     case 23:
                                     case 58:
+                                    case 76:
                                     case 3:
                                     case 4:
                                     case 44:
+                                    case 94:
                                     case 5:
+                                    case 77:
+                                    case 78:
                                     case 33:
                                     case 39:
+                                    case 79:
+                                    case 80:
+                                    case 95:
                                     case 27:
+                                    case 129:
+                                    case 130:
+                                    case 134:
+                                    case 69:
+                                    case 135:
                                     case 30:
                                     case 29:
+                                    case 132:
                                     case 52:
                                     case 36:
+                                    case 81:
                                     case 8:
                                     case 17:
                                     case 48:
                                     case 42:
                                     case 51:
+                                    case 91:
                                     case 25:
                                     case 24:
                                     case 65:
+                                    case 82:
+                                    case 83:
+                                    case 127:
                                     case 34:
+                                    case 136:
+                                    case 109:
                                     case 13:
+                                    case 105:
+                                    case 96:
+                                    case 97:
+                                    case 106:
+                                    case 107:
+                                    case 84:
+                                    case 98:
                                     case 28:
+                                    case 108:
+                                    case 137:
                                     case 31:
                                     case 55:
+                                    case 110:
+                                    case 111:
+                                    case 85:
+                                    case 86:
+                                    case 87:
                                     case 20:
                                     case 21:
                                     case 12:
                                     case 41:
+                                    case 112:
+                                    case 113:
                                     case 26:
                                     case 54:
                                     case 53:
+                                    case 99:
+                                    case 100:
                                     case 43:
+                                    case 101:
+                                    case 133:
                                     case 1:
                                     case 2:
+                                    case 88:
+                                    case 102:
                                     case 60:
                                     case 66:
                                     case 61:
                                     case 57:
+                                    case 92:
                                     case 62:
+                                    case 131:
                                         break;
                                     }
                             }
@@ -103938,6 +107190,58 @@
                                     case 0:
                                         message.primaryTechniques[i] = 0;
                                         break;
+                                    case "DATA_OBFUSCATION":
+                                    case 70:
+                                        message.primaryTechniques[i] = 70;
+                                        break;
+                                    case "DATA_OBFUSCATION_STEGANOGRAPHY":
+                                    case 71:
+                                        message.primaryTechniques[i] = 71;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING":
+                                    case 114:
+                                        message.primaryTechniques[i] = 114;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM":
+                                    case 115:
+                                        message.primaryTechniques[i] = 115;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW":
+                                    case 122:
+                                        message.primaryTechniques[i] = 122;
+                                        break;
+                                    case "DATA_FROM_LOCAL_SYSTEM":
+                                    case 117:
+                                        message.primaryTechniques[i] = 117;
+                                        break;
+                                    case "AUTOMATED_EXFILTRATION":
+                                    case 68:
+                                        message.primaryTechniques[i] = 68;
+                                        break;
+                                    case "OBFUSCATED_FILES_OR_INFO":
+                                    case 72:
+                                        message.primaryTechniques[i] = 72;
+                                        break;
+                                    case "STEGANOGRAPHY":
+                                    case 73:
+                                        message.primaryTechniques[i] = 73;
+                                        break;
+                                    case "COMPILE_AFTER_DELIVERY":
+                                    case 74:
+                                        message.primaryTechniques[i] = 74;
+                                        break;
+                                    case "COMMAND_OBFUSCATION":
+                                    case 75:
+                                        message.primaryTechniques[i] = 75;
+                                        break;
+                                    case "SCHEDULED_TRANSFER":
+                                    case 120:
+                                        message.primaryTechniques[i] = 120;
+                                        break;
+                                    case "SYSTEM_OWNER_USER_DISCOVERY":
+                                    case 118:
+                                        message.primaryTechniques[i] = 118;
+                                        break;
                                     case "MASQUERADING":
                                     case 49:
                                         message.primaryTechniques[i] = 49;
@@ -103957,6 +107261,30 @@
                                     case "NETWORK_SERVICE_DISCOVERY":
                                     case 32:
                                         message.primaryTechniques[i] = 32;
+                                        break;
+                                    case "SCHEDULED_TASK_JOB":
+                                    case 89:
+                                        message.primaryTechniques[i] = 89;
+                                        break;
+                                    case "SCHEDULED_TASK_JOB_CRON":
+                                    case 119:
+                                        message.primaryTechniques[i] = 119;
+                                        break;
+                                    case "CONTAINER_ORCHESTRATION_JOB":
+                                    case 90:
+                                        message.primaryTechniques[i] = 90;
+                                        break;
+                                    case "PROCESS_INJECTION":
+                                    case 93:
+                                        message.primaryTechniques[i] = 93;
+                                        break;
+                                    case "INPUT_CAPTURE":
+                                    case 103:
+                                        message.primaryTechniques[i] = 103;
+                                        break;
+                                    case "INPUT_CAPTURE_KEYLOGGING":
+                                    case 104:
+                                        message.primaryTechniques[i] = 104;
                                         break;
                                     case "PROCESS_DISCOVERY":
                                     case 56:
@@ -103986,9 +107314,29 @@
                                     case 19:
                                         message.primaryTechniques[i] = 19;
                                         break;
+                                    case "INDICATOR_REMOVAL":
+                                    case 123:
+                                        message.primaryTechniques[i] = 123;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS":
+                                    case 124:
+                                        message.primaryTechniques[i] = 124;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY":
+                                    case 125:
+                                        message.primaryTechniques[i] = 125;
+                                        break;
                                     case "INDICATOR_REMOVAL_FILE_DELETION":
                                     case 64:
                                         message.primaryTechniques[i] = 64;
+                                        break;
+                                    case "INDICATOR_REMOVAL_TIMESTOMP":
+                                    case 128:
+                                        message.primaryTechniques[i] = 128;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA":
+                                    case 126:
+                                        message.primaryTechniques[i] = 126;
                                         break;
                                     case "APPLICATION_LAYER_PROTOCOL":
                                     case 45:
@@ -104018,6 +107366,14 @@
                                     case 16:
                                         message.primaryTechniques[i] = 16;
                                         break;
+                                    case "FILE_AND_DIRECTORY_DISCOVERY":
+                                    case 121:
+                                        message.primaryTechniques[i] = 121;
+                                        break;
+                                    case "ACCOUNT_DISCOVERY_LOCAL_ACCOUNT":
+                                    case 116:
+                                        message.primaryTechniques[i] = 116;
+                                        break;
                                     case "PROXY":
                                     case 9:
                                         message.primaryTechniques[i] = 9;
@@ -104038,6 +107394,10 @@
                                     case 40:
                                         message.primaryTechniques[i] = 40;
                                         break;
+                                    case "ADDITIONAL_CLOUD_ROLES":
+                                    case 67:
+                                        message.primaryTechniques[i] = 67;
+                                        break;
                                     case "SSH_AUTHORIZED_KEYS":
                                     case 23:
                                         message.primaryTechniques[i] = 23;
@@ -104045,6 +107405,10 @@
                                     case "ADDITIONAL_CONTAINER_CLUSTER_ROLES":
                                     case 58:
                                         message.primaryTechniques[i] = 58;
+                                        break;
+                                    case "MULTI_STAGE_CHANNELS":
+                                    case 76:
+                                        message.primaryTechniques[i] = 76;
                                         break;
                                     case "INGRESS_TOOL_TRANSFER":
                                     case 3:
@@ -104058,9 +107422,21 @@
                                     case 44:
                                         message.primaryTechniques[i] = 44;
                                         break;
+                                    case "AUTOMATED_COLLECTION":
+                                    case 94:
+                                        message.primaryTechniques[i] = 94;
+                                        break;
                                     case "SHARED_MODULES":
                                     case 5:
                                         message.primaryTechniques[i] = 5;
+                                        break;
+                                    case "DATA_ENCODING":
+                                    case 77:
+                                        message.primaryTechniques[i] = 77;
+                                        break;
+                                    case "STANDARD_ENCODING":
+                                    case 78:
+                                        message.primaryTechniques[i] = 78;
                                         break;
                                     case "ACCESS_TOKEN_MANIPULATION":
                                     case 33:
@@ -104070,9 +107446,41 @@
                                     case 39:
                                         message.primaryTechniques[i] = 39;
                                         break;
+                                    case "CREATE_ACCOUNT":
+                                    case 79:
+                                        message.primaryTechniques[i] = 79;
+                                        break;
+                                    case "LOCAL_ACCOUNT":
+                                    case 80:
+                                        message.primaryTechniques[i] = 80;
+                                        break;
+                                    case "DEOBFUSCATE_DECODE_FILES_OR_INFO":
+                                    case 95:
+                                        message.primaryTechniques[i] = 95;
+                                        break;
                                     case "EXPLOIT_PUBLIC_FACING_APPLICATION":
                                     case 27:
                                         message.primaryTechniques[i] = 27;
+                                        break;
+                                    case "SUPPLY_CHAIN_COMPROMISE":
+                                    case 129:
+                                        message.primaryTechniques[i] = 129;
+                                        break;
+                                    case "COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS":
+                                    case 130:
+                                        message.primaryTechniques[i] = 130;
+                                        break;
+                                    case "EXPLOITATION_FOR_CLIENT_EXECUTION":
+                                    case 134:
+                                        message.primaryTechniques[i] = 134;
+                                        break;
+                                    case "USER_EXECUTION":
+                                    case 69:
+                                        message.primaryTechniques[i] = 69;
+                                        break;
+                                    case "LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION":
+                                    case 135:
+                                        message.primaryTechniques[i] = 135;
                                         break;
                                     case "DOMAIN_POLICY_MODIFICATION":
                                     case 30:
@@ -104082,6 +107490,10 @@
                                     case 29:
                                         message.primaryTechniques[i] = 29;
                                         break;
+                                    case "DATA_ENCRYPTED_FOR_IMPACT":
+                                    case 132:
+                                        message.primaryTechniques[i] = 132;
+                                        break;
                                     case "SERVICE_STOP":
                                     case 52:
                                         message.primaryTechniques[i] = 52;
@@ -104089,6 +107501,10 @@
                                     case "INHIBIT_SYSTEM_RECOVERY":
                                     case 36:
                                         message.primaryTechniques[i] = 36;
+                                        break;
+                                    case "FIRMWARE_CORRUPTION":
+                                    case 81:
+                                        message.primaryTechniques[i] = 81;
                                         break;
                                     case "RESOURCE_HIJACKING":
                                     case 8:
@@ -104110,6 +107526,10 @@
                                     case 51:
                                         message.primaryTechniques[i] = 51;
                                         break;
+                                    case "TRANSFER_DATA_TO_CLOUD_ACCOUNT":
+                                    case 91:
+                                        message.primaryTechniques[i] = 91;
+                                        break;
                                     case "STEAL_WEB_SESSION_COOKIE":
                                     case 25:
                                         message.primaryTechniques[i] = 25;
@@ -104122,17 +107542,73 @@
                                     case 65:
                                         message.primaryTechniques[i] = 65;
                                         break;
+                                    case "BOOT_OR_LOGON_AUTOSTART_EXECUTION":
+                                    case 82:
+                                        message.primaryTechniques[i] = 82;
+                                        break;
+                                    case "KERNEL_MODULES_AND_EXTENSIONS":
+                                    case 83:
+                                        message.primaryTechniques[i] = 83;
+                                        break;
+                                    case "SHORTCUT_MODIFICATION":
+                                    case 127:
+                                        message.primaryTechniques[i] = 127;
+                                        break;
                                     case "ABUSE_ELEVATION_CONTROL_MECHANISM":
                                     case 34:
                                         message.primaryTechniques[i] = 34;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID":
+                                    case 136:
+                                        message.primaryTechniques[i] = 136;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING":
+                                    case 109:
+                                        message.primaryTechniques[i] = 109;
                                         break;
                                     case "UNSECURED_CREDENTIALS":
                                     case 13:
                                         message.primaryTechniques[i] = 13;
                                         break;
+                                    case "CREDENTIALS_IN_FILES":
+                                    case 105:
+                                        message.primaryTechniques[i] = 105;
+                                        break;
+                                    case "BASH_HISTORY":
+                                    case 96:
+                                        message.primaryTechniques[i] = 96;
+                                        break;
+                                    case "PRIVATE_KEYS":
+                                    case 97:
+                                        message.primaryTechniques[i] = 97;
+                                        break;
+                                    case "SUBVERT_TRUST_CONTROL":
+                                    case 106:
+                                        message.primaryTechniques[i] = 106;
+                                        break;
+                                    case "INSTALL_ROOT_CERTIFICATE":
+                                    case 107:
+                                        message.primaryTechniques[i] = 107;
+                                        break;
+                                    case "COMPROMISE_HOST_SOFTWARE_BINARY":
+                                    case 84:
+                                        message.primaryTechniques[i] = 84;
+                                        break;
+                                    case "CREDENTIALS_FROM_PASSWORD_STORES":
+                                    case 98:
+                                        message.primaryTechniques[i] = 98;
+                                        break;
                                     case "MODIFY_AUTHENTICATION_PROCESS":
                                     case 28:
                                         message.primaryTechniques[i] = 28;
+                                        break;
+                                    case "PLUGGABLE_AUTHENTICATION_MODULES":
+                                    case 108:
+                                        message.primaryTechniques[i] = 108;
+                                        break;
+                                    case "MULTI_FACTOR_AUTHENTICATION":
+                                    case 137:
+                                        message.primaryTechniques[i] = 137;
                                         break;
                                     case "IMPAIR_DEFENSES":
                                     case 31:
@@ -104141,6 +107617,26 @@
                                     case "DISABLE_OR_MODIFY_TOOLS":
                                     case 55:
                                         message.primaryTechniques[i] = 55;
+                                        break;
+                                    case "INDICATOR_BLOCKING":
+                                    case 110:
+                                        message.primaryTechniques[i] = 110;
+                                        break;
+                                    case "DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM":
+                                    case 111:
+                                        message.primaryTechniques[i] = 111;
+                                        break;
+                                    case "HIDE_ARTIFACTS":
+                                    case 85:
+                                        message.primaryTechniques[i] = 85;
+                                        break;
+                                    case "HIDDEN_FILES_AND_DIRECTORIES":
+                                    case 86:
+                                        message.primaryTechniques[i] = 86;
+                                        break;
+                                    case "HIDDEN_USERS":
+                                    case 87:
+                                        message.primaryTechniques[i] = 87;
                                         break;
                                     case "EXFILTRATION_OVER_WEB_SERVICE":
                                     case 20:
@@ -104158,6 +107654,14 @@
                                     case 41:
                                         message.primaryTechniques[i] = 41;
                                         break;
+                                    case "HIJACK_EXECUTION_FLOW":
+                                    case 112:
+                                        message.primaryTechniques[i] = 112;
+                                        break;
+                                    case "HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING":
+                                    case 113:
+                                        message.primaryTechniques[i] = 113;
+                                        break;
                                     case "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE":
                                     case 26:
                                         message.primaryTechniques[i] = 26;
@@ -104170,9 +107674,25 @@
                                     case 53:
                                         message.primaryTechniques[i] = 53;
                                         break;
+                                    case "DEVELOP_CAPABILITIES":
+                                    case 99:
+                                        message.primaryTechniques[i] = 99;
+                                        break;
+                                    case "DEVELOP_CAPABILITIES_MALWARE":
+                                    case 100:
+                                        message.primaryTechniques[i] = 100;
+                                        break;
                                     case "OBTAIN_CAPABILITIES":
                                     case 43:
                                         message.primaryTechniques[i] = 43;
+                                        break;
+                                    case "OBTAIN_CAPABILITIES_MALWARE":
+                                    case 101:
+                                        message.primaryTechniques[i] = 101;
+                                        break;
+                                    case "OBTAIN_CAPABILITIES_VULNERABILITIES":
+                                    case 133:
+                                        message.primaryTechniques[i] = 133;
                                         break;
                                     case "ACTIVE_SCANNING":
                                     case 1:
@@ -104181,6 +107701,14 @@
                                     case "SCANNING_IP_BLOCKS":
                                     case 2:
                                         message.primaryTechniques[i] = 2;
+                                        break;
+                                    case "STAGE_CAPABILITIES":
+                                    case 88:
+                                        message.primaryTechniques[i] = 88;
+                                        break;
+                                    case "UPLOAD_MALWARE":
+                                    case 102:
+                                        message.primaryTechniques[i] = 102;
                                         break;
                                     case "CONTAINER_ADMINISTRATION_COMMAND":
                                     case 60:
@@ -104198,9 +107726,17 @@
                                     case 57:
                                         message.primaryTechniques[i] = 57;
                                         break;
+                                    case "REFLECTIVE_CODE_LOADING":
+                                    case 92:
+                                        message.primaryTechniques[i] = 92;
+                                        break;
                                     case "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES":
                                     case 62:
                                         message.primaryTechniques[i] = 62;
+                                        break;
+                                    case "FINANCIAL_THEFT":
+                                    case 131:
+                                        message.primaryTechniques[i] = 131;
                                         break;
                                     }
                             }
@@ -104292,6 +107828,58 @@
                                     case 0:
                                         message.additionalTechniques[i] = 0;
                                         break;
+                                    case "DATA_OBFUSCATION":
+                                    case 70:
+                                        message.additionalTechniques[i] = 70;
+                                        break;
+                                    case "DATA_OBFUSCATION_STEGANOGRAPHY":
+                                    case 71:
+                                        message.additionalTechniques[i] = 71;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING":
+                                    case 114:
+                                        message.additionalTechniques[i] = 114;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM":
+                                    case 115:
+                                        message.additionalTechniques[i] = 115;
+                                        break;
+                                    case "OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW":
+                                    case 122:
+                                        message.additionalTechniques[i] = 122;
+                                        break;
+                                    case "DATA_FROM_LOCAL_SYSTEM":
+                                    case 117:
+                                        message.additionalTechniques[i] = 117;
+                                        break;
+                                    case "AUTOMATED_EXFILTRATION":
+                                    case 68:
+                                        message.additionalTechniques[i] = 68;
+                                        break;
+                                    case "OBFUSCATED_FILES_OR_INFO":
+                                    case 72:
+                                        message.additionalTechniques[i] = 72;
+                                        break;
+                                    case "STEGANOGRAPHY":
+                                    case 73:
+                                        message.additionalTechniques[i] = 73;
+                                        break;
+                                    case "COMPILE_AFTER_DELIVERY":
+                                    case 74:
+                                        message.additionalTechniques[i] = 74;
+                                        break;
+                                    case "COMMAND_OBFUSCATION":
+                                    case 75:
+                                        message.additionalTechniques[i] = 75;
+                                        break;
+                                    case "SCHEDULED_TRANSFER":
+                                    case 120:
+                                        message.additionalTechniques[i] = 120;
+                                        break;
+                                    case "SYSTEM_OWNER_USER_DISCOVERY":
+                                    case 118:
+                                        message.additionalTechniques[i] = 118;
+                                        break;
                                     case "MASQUERADING":
                                     case 49:
                                         message.additionalTechniques[i] = 49;
@@ -104311,6 +107899,30 @@
                                     case "NETWORK_SERVICE_DISCOVERY":
                                     case 32:
                                         message.additionalTechniques[i] = 32;
+                                        break;
+                                    case "SCHEDULED_TASK_JOB":
+                                    case 89:
+                                        message.additionalTechniques[i] = 89;
+                                        break;
+                                    case "SCHEDULED_TASK_JOB_CRON":
+                                    case 119:
+                                        message.additionalTechniques[i] = 119;
+                                        break;
+                                    case "CONTAINER_ORCHESTRATION_JOB":
+                                    case 90:
+                                        message.additionalTechniques[i] = 90;
+                                        break;
+                                    case "PROCESS_INJECTION":
+                                    case 93:
+                                        message.additionalTechniques[i] = 93;
+                                        break;
+                                    case "INPUT_CAPTURE":
+                                    case 103:
+                                        message.additionalTechniques[i] = 103;
+                                        break;
+                                    case "INPUT_CAPTURE_KEYLOGGING":
+                                    case 104:
+                                        message.additionalTechniques[i] = 104;
                                         break;
                                     case "PROCESS_DISCOVERY":
                                     case 56:
@@ -104340,9 +107952,29 @@
                                     case 19:
                                         message.additionalTechniques[i] = 19;
                                         break;
+                                    case "INDICATOR_REMOVAL":
+                                    case 123:
+                                        message.additionalTechniques[i] = 123;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS":
+                                    case 124:
+                                        message.additionalTechniques[i] = 124;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY":
+                                    case 125:
+                                        message.additionalTechniques[i] = 125;
+                                        break;
                                     case "INDICATOR_REMOVAL_FILE_DELETION":
                                     case 64:
                                         message.additionalTechniques[i] = 64;
+                                        break;
+                                    case "INDICATOR_REMOVAL_TIMESTOMP":
+                                    case 128:
+                                        message.additionalTechniques[i] = 128;
+                                        break;
+                                    case "INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA":
+                                    case 126:
+                                        message.additionalTechniques[i] = 126;
                                         break;
                                     case "APPLICATION_LAYER_PROTOCOL":
                                     case 45:
@@ -104372,6 +108004,14 @@
                                     case 16:
                                         message.additionalTechniques[i] = 16;
                                         break;
+                                    case "FILE_AND_DIRECTORY_DISCOVERY":
+                                    case 121:
+                                        message.additionalTechniques[i] = 121;
+                                        break;
+                                    case "ACCOUNT_DISCOVERY_LOCAL_ACCOUNT":
+                                    case 116:
+                                        message.additionalTechniques[i] = 116;
+                                        break;
                                     case "PROXY":
                                     case 9:
                                         message.additionalTechniques[i] = 9;
@@ -104392,6 +108032,10 @@
                                     case 40:
                                         message.additionalTechniques[i] = 40;
                                         break;
+                                    case "ADDITIONAL_CLOUD_ROLES":
+                                    case 67:
+                                        message.additionalTechniques[i] = 67;
+                                        break;
                                     case "SSH_AUTHORIZED_KEYS":
                                     case 23:
                                         message.additionalTechniques[i] = 23;
@@ -104399,6 +108043,10 @@
                                     case "ADDITIONAL_CONTAINER_CLUSTER_ROLES":
                                     case 58:
                                         message.additionalTechniques[i] = 58;
+                                        break;
+                                    case "MULTI_STAGE_CHANNELS":
+                                    case 76:
+                                        message.additionalTechniques[i] = 76;
                                         break;
                                     case "INGRESS_TOOL_TRANSFER":
                                     case 3:
@@ -104412,9 +108060,21 @@
                                     case 44:
                                         message.additionalTechniques[i] = 44;
                                         break;
+                                    case "AUTOMATED_COLLECTION":
+                                    case 94:
+                                        message.additionalTechniques[i] = 94;
+                                        break;
                                     case "SHARED_MODULES":
                                     case 5:
                                         message.additionalTechniques[i] = 5;
+                                        break;
+                                    case "DATA_ENCODING":
+                                    case 77:
+                                        message.additionalTechniques[i] = 77;
+                                        break;
+                                    case "STANDARD_ENCODING":
+                                    case 78:
+                                        message.additionalTechniques[i] = 78;
                                         break;
                                     case "ACCESS_TOKEN_MANIPULATION":
                                     case 33:
@@ -104424,9 +108084,41 @@
                                     case 39:
                                         message.additionalTechniques[i] = 39;
                                         break;
+                                    case "CREATE_ACCOUNT":
+                                    case 79:
+                                        message.additionalTechniques[i] = 79;
+                                        break;
+                                    case "LOCAL_ACCOUNT":
+                                    case 80:
+                                        message.additionalTechniques[i] = 80;
+                                        break;
+                                    case "DEOBFUSCATE_DECODE_FILES_OR_INFO":
+                                    case 95:
+                                        message.additionalTechniques[i] = 95;
+                                        break;
                                     case "EXPLOIT_PUBLIC_FACING_APPLICATION":
                                     case 27:
                                         message.additionalTechniques[i] = 27;
+                                        break;
+                                    case "SUPPLY_CHAIN_COMPROMISE":
+                                    case 129:
+                                        message.additionalTechniques[i] = 129;
+                                        break;
+                                    case "COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS":
+                                    case 130:
+                                        message.additionalTechniques[i] = 130;
+                                        break;
+                                    case "EXPLOITATION_FOR_CLIENT_EXECUTION":
+                                    case 134:
+                                        message.additionalTechniques[i] = 134;
+                                        break;
+                                    case "USER_EXECUTION":
+                                    case 69:
+                                        message.additionalTechniques[i] = 69;
+                                        break;
+                                    case "LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION":
+                                    case 135:
+                                        message.additionalTechniques[i] = 135;
                                         break;
                                     case "DOMAIN_POLICY_MODIFICATION":
                                     case 30:
@@ -104436,6 +108128,10 @@
                                     case 29:
                                         message.additionalTechniques[i] = 29;
                                         break;
+                                    case "DATA_ENCRYPTED_FOR_IMPACT":
+                                    case 132:
+                                        message.additionalTechniques[i] = 132;
+                                        break;
                                     case "SERVICE_STOP":
                                     case 52:
                                         message.additionalTechniques[i] = 52;
@@ -104443,6 +108139,10 @@
                                     case "INHIBIT_SYSTEM_RECOVERY":
                                     case 36:
                                         message.additionalTechniques[i] = 36;
+                                        break;
+                                    case "FIRMWARE_CORRUPTION":
+                                    case 81:
+                                        message.additionalTechniques[i] = 81;
                                         break;
                                     case "RESOURCE_HIJACKING":
                                     case 8:
@@ -104464,6 +108164,10 @@
                                     case 51:
                                         message.additionalTechniques[i] = 51;
                                         break;
+                                    case "TRANSFER_DATA_TO_CLOUD_ACCOUNT":
+                                    case 91:
+                                        message.additionalTechniques[i] = 91;
+                                        break;
                                     case "STEAL_WEB_SESSION_COOKIE":
                                     case 25:
                                         message.additionalTechniques[i] = 25;
@@ -104476,17 +108180,73 @@
                                     case 65:
                                         message.additionalTechniques[i] = 65;
                                         break;
+                                    case "BOOT_OR_LOGON_AUTOSTART_EXECUTION":
+                                    case 82:
+                                        message.additionalTechniques[i] = 82;
+                                        break;
+                                    case "KERNEL_MODULES_AND_EXTENSIONS":
+                                    case 83:
+                                        message.additionalTechniques[i] = 83;
+                                        break;
+                                    case "SHORTCUT_MODIFICATION":
+                                    case 127:
+                                        message.additionalTechniques[i] = 127;
+                                        break;
                                     case "ABUSE_ELEVATION_CONTROL_MECHANISM":
                                     case 34:
                                         message.additionalTechniques[i] = 34;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID":
+                                    case 136:
+                                        message.additionalTechniques[i] = 136;
+                                        break;
+                                    case "ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING":
+                                    case 109:
+                                        message.additionalTechniques[i] = 109;
                                         break;
                                     case "UNSECURED_CREDENTIALS":
                                     case 13:
                                         message.additionalTechniques[i] = 13;
                                         break;
+                                    case "CREDENTIALS_IN_FILES":
+                                    case 105:
+                                        message.additionalTechniques[i] = 105;
+                                        break;
+                                    case "BASH_HISTORY":
+                                    case 96:
+                                        message.additionalTechniques[i] = 96;
+                                        break;
+                                    case "PRIVATE_KEYS":
+                                    case 97:
+                                        message.additionalTechniques[i] = 97;
+                                        break;
+                                    case "SUBVERT_TRUST_CONTROL":
+                                    case 106:
+                                        message.additionalTechniques[i] = 106;
+                                        break;
+                                    case "INSTALL_ROOT_CERTIFICATE":
+                                    case 107:
+                                        message.additionalTechniques[i] = 107;
+                                        break;
+                                    case "COMPROMISE_HOST_SOFTWARE_BINARY":
+                                    case 84:
+                                        message.additionalTechniques[i] = 84;
+                                        break;
+                                    case "CREDENTIALS_FROM_PASSWORD_STORES":
+                                    case 98:
+                                        message.additionalTechniques[i] = 98;
+                                        break;
                                     case "MODIFY_AUTHENTICATION_PROCESS":
                                     case 28:
                                         message.additionalTechniques[i] = 28;
+                                        break;
+                                    case "PLUGGABLE_AUTHENTICATION_MODULES":
+                                    case 108:
+                                        message.additionalTechniques[i] = 108;
+                                        break;
+                                    case "MULTI_FACTOR_AUTHENTICATION":
+                                    case 137:
+                                        message.additionalTechniques[i] = 137;
                                         break;
                                     case "IMPAIR_DEFENSES":
                                     case 31:
@@ -104495,6 +108255,26 @@
                                     case "DISABLE_OR_MODIFY_TOOLS":
                                     case 55:
                                         message.additionalTechniques[i] = 55;
+                                        break;
+                                    case "INDICATOR_BLOCKING":
+                                    case 110:
+                                        message.additionalTechniques[i] = 110;
+                                        break;
+                                    case "DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM":
+                                    case 111:
+                                        message.additionalTechniques[i] = 111;
+                                        break;
+                                    case "HIDE_ARTIFACTS":
+                                    case 85:
+                                        message.additionalTechniques[i] = 85;
+                                        break;
+                                    case "HIDDEN_FILES_AND_DIRECTORIES":
+                                    case 86:
+                                        message.additionalTechniques[i] = 86;
+                                        break;
+                                    case "HIDDEN_USERS":
+                                    case 87:
+                                        message.additionalTechniques[i] = 87;
                                         break;
                                     case "EXFILTRATION_OVER_WEB_SERVICE":
                                     case 20:
@@ -104512,6 +108292,14 @@
                                     case 41:
                                         message.additionalTechniques[i] = 41;
                                         break;
+                                    case "HIJACK_EXECUTION_FLOW":
+                                    case 112:
+                                        message.additionalTechniques[i] = 112;
+                                        break;
+                                    case "HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING":
+                                    case 113:
+                                        message.additionalTechniques[i] = 113;
+                                        break;
                                     case "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE":
                                     case 26:
                                         message.additionalTechniques[i] = 26;
@@ -104524,9 +108312,25 @@
                                     case 53:
                                         message.additionalTechniques[i] = 53;
                                         break;
+                                    case "DEVELOP_CAPABILITIES":
+                                    case 99:
+                                        message.additionalTechniques[i] = 99;
+                                        break;
+                                    case "DEVELOP_CAPABILITIES_MALWARE":
+                                    case 100:
+                                        message.additionalTechniques[i] = 100;
+                                        break;
                                     case "OBTAIN_CAPABILITIES":
                                     case 43:
                                         message.additionalTechniques[i] = 43;
+                                        break;
+                                    case "OBTAIN_CAPABILITIES_MALWARE":
+                                    case 101:
+                                        message.additionalTechniques[i] = 101;
+                                        break;
+                                    case "OBTAIN_CAPABILITIES_VULNERABILITIES":
+                                    case 133:
+                                        message.additionalTechniques[i] = 133;
                                         break;
                                     case "ACTIVE_SCANNING":
                                     case 1:
@@ -104535,6 +108339,14 @@
                                     case "SCANNING_IP_BLOCKS":
                                     case 2:
                                         message.additionalTechniques[i] = 2;
+                                        break;
+                                    case "STAGE_CAPABILITIES":
+                                    case 88:
+                                        message.additionalTechniques[i] = 88;
+                                        break;
+                                    case "UPLOAD_MALWARE":
+                                    case 102:
+                                        message.additionalTechniques[i] = 102;
                                         break;
                                     case "CONTAINER_ADMINISTRATION_COMMAND":
                                     case 60:
@@ -104552,9 +108364,17 @@
                                     case 57:
                                         message.additionalTechniques[i] = 57;
                                         break;
+                                    case "REFLECTIVE_CODE_LOADING":
+                                    case 92:
+                                        message.additionalTechniques[i] = 92;
+                                        break;
                                     case "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES":
                                     case 62:
                                         message.additionalTechniques[i] = 62;
+                                        break;
+                                    case "FINANCIAL_THEFT":
+                                    case 131:
+                                        message.additionalTechniques[i] = 131;
                                         break;
                                     }
                             }
@@ -104678,11 +108498,30 @@
                          * @name google.cloud.securitycenter.v2.MitreAttack.Technique
                          * @enum {number}
                          * @property {number} TECHNIQUE_UNSPECIFIED=0 TECHNIQUE_UNSPECIFIED value
+                         * @property {number} DATA_OBFUSCATION=70 DATA_OBFUSCATION value
+                         * @property {number} DATA_OBFUSCATION_STEGANOGRAPHY=71 DATA_OBFUSCATION_STEGANOGRAPHY value
+                         * @property {number} OS_CREDENTIAL_DUMPING=114 OS_CREDENTIAL_DUMPING value
+                         * @property {number} OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM=115 OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM value
+                         * @property {number} OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW=122 OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW value
+                         * @property {number} DATA_FROM_LOCAL_SYSTEM=117 DATA_FROM_LOCAL_SYSTEM value
+                         * @property {number} AUTOMATED_EXFILTRATION=68 AUTOMATED_EXFILTRATION value
+                         * @property {number} OBFUSCATED_FILES_OR_INFO=72 OBFUSCATED_FILES_OR_INFO value
+                         * @property {number} STEGANOGRAPHY=73 STEGANOGRAPHY value
+                         * @property {number} COMPILE_AFTER_DELIVERY=74 COMPILE_AFTER_DELIVERY value
+                         * @property {number} COMMAND_OBFUSCATION=75 COMMAND_OBFUSCATION value
+                         * @property {number} SCHEDULED_TRANSFER=120 SCHEDULED_TRANSFER value
+                         * @property {number} SYSTEM_OWNER_USER_DISCOVERY=118 SYSTEM_OWNER_USER_DISCOVERY value
                          * @property {number} MASQUERADING=49 MASQUERADING value
                          * @property {number} MATCH_LEGITIMATE_NAME_OR_LOCATION=50 MATCH_LEGITIMATE_NAME_OR_LOCATION value
                          * @property {number} BOOT_OR_LOGON_INITIALIZATION_SCRIPTS=37 BOOT_OR_LOGON_INITIALIZATION_SCRIPTS value
                          * @property {number} STARTUP_ITEMS=38 STARTUP_ITEMS value
                          * @property {number} NETWORK_SERVICE_DISCOVERY=32 NETWORK_SERVICE_DISCOVERY value
+                         * @property {number} SCHEDULED_TASK_JOB=89 SCHEDULED_TASK_JOB value
+                         * @property {number} SCHEDULED_TASK_JOB_CRON=119 SCHEDULED_TASK_JOB_CRON value
+                         * @property {number} CONTAINER_ORCHESTRATION_JOB=90 CONTAINER_ORCHESTRATION_JOB value
+                         * @property {number} PROCESS_INJECTION=93 PROCESS_INJECTION value
+                         * @property {number} INPUT_CAPTURE=103 INPUT_CAPTURE value
+                         * @property {number} INPUT_CAPTURE_KEYLOGGING=104 INPUT_CAPTURE_KEYLOGGING value
                          * @property {number} PROCESS_DISCOVERY=56 PROCESS_DISCOVERY value
                          * @property {number} COMMAND_AND_SCRIPTING_INTERPRETER=6 COMMAND_AND_SCRIPTING_INTERPRETER value
                          * @property {number} UNIX_SHELL=7 UNIX_SHELL value
@@ -104690,7 +108529,12 @@
                          * @property {number} EXPLOITATION_FOR_PRIVILEGE_ESCALATION=63 EXPLOITATION_FOR_PRIVILEGE_ESCALATION value
                          * @property {number} PERMISSION_GROUPS_DISCOVERY=18 PERMISSION_GROUPS_DISCOVERY value
                          * @property {number} CLOUD_GROUPS=19 CLOUD_GROUPS value
+                         * @property {number} INDICATOR_REMOVAL=123 INDICATOR_REMOVAL value
+                         * @property {number} INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS=124 INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS value
+                         * @property {number} INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY=125 INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY value
                          * @property {number} INDICATOR_REMOVAL_FILE_DELETION=64 INDICATOR_REMOVAL_FILE_DELETION value
+                         * @property {number} INDICATOR_REMOVAL_TIMESTOMP=128 INDICATOR_REMOVAL_TIMESTOMP value
+                         * @property {number} INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA=126 INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA value
                          * @property {number} APPLICATION_LAYER_PROTOCOL=45 APPLICATION_LAYER_PROTOCOL value
                          * @property {number} DNS=46 DNS value
                          * @property {number} SOFTWARE_DEPLOYMENT_TOOLS=47 SOFTWARE_DEPLOYMENT_TOOLS value
@@ -104698,61 +108542,127 @@
                          * @property {number} DEFAULT_ACCOUNTS=35 DEFAULT_ACCOUNTS value
                          * @property {number} LOCAL_ACCOUNTS=15 LOCAL_ACCOUNTS value
                          * @property {number} CLOUD_ACCOUNTS=16 CLOUD_ACCOUNTS value
+                         * @property {number} FILE_AND_DIRECTORY_DISCOVERY=121 FILE_AND_DIRECTORY_DISCOVERY value
+                         * @property {number} ACCOUNT_DISCOVERY_LOCAL_ACCOUNT=116 ACCOUNT_DISCOVERY_LOCAL_ACCOUNT value
                          * @property {number} PROXY=9 PROXY value
                          * @property {number} EXTERNAL_PROXY=10 EXTERNAL_PROXY value
                          * @property {number} MULTI_HOP_PROXY=11 MULTI_HOP_PROXY value
                          * @property {number} ACCOUNT_MANIPULATION=22 ACCOUNT_MANIPULATION value
                          * @property {number} ADDITIONAL_CLOUD_CREDENTIALS=40 ADDITIONAL_CLOUD_CREDENTIALS value
+                         * @property {number} ADDITIONAL_CLOUD_ROLES=67 ADDITIONAL_CLOUD_ROLES value
                          * @property {number} SSH_AUTHORIZED_KEYS=23 SSH_AUTHORIZED_KEYS value
                          * @property {number} ADDITIONAL_CONTAINER_CLUSTER_ROLES=58 ADDITIONAL_CONTAINER_CLUSTER_ROLES value
+                         * @property {number} MULTI_STAGE_CHANNELS=76 MULTI_STAGE_CHANNELS value
                          * @property {number} INGRESS_TOOL_TRANSFER=3 INGRESS_TOOL_TRANSFER value
                          * @property {number} NATIVE_API=4 NATIVE_API value
                          * @property {number} BRUTE_FORCE=44 BRUTE_FORCE value
+                         * @property {number} AUTOMATED_COLLECTION=94 AUTOMATED_COLLECTION value
                          * @property {number} SHARED_MODULES=5 SHARED_MODULES value
+                         * @property {number} DATA_ENCODING=77 DATA_ENCODING value
+                         * @property {number} STANDARD_ENCODING=78 STANDARD_ENCODING value
                          * @property {number} ACCESS_TOKEN_MANIPULATION=33 ACCESS_TOKEN_MANIPULATION value
                          * @property {number} TOKEN_IMPERSONATION_OR_THEFT=39 TOKEN_IMPERSONATION_OR_THEFT value
+                         * @property {number} CREATE_ACCOUNT=79 CREATE_ACCOUNT value
+                         * @property {number} LOCAL_ACCOUNT=80 LOCAL_ACCOUNT value
+                         * @property {number} DEOBFUSCATE_DECODE_FILES_OR_INFO=95 DEOBFUSCATE_DECODE_FILES_OR_INFO value
                          * @property {number} EXPLOIT_PUBLIC_FACING_APPLICATION=27 EXPLOIT_PUBLIC_FACING_APPLICATION value
+                         * @property {number} SUPPLY_CHAIN_COMPROMISE=129 SUPPLY_CHAIN_COMPROMISE value
+                         * @property {number} COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS=130 COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS value
+                         * @property {number} EXPLOITATION_FOR_CLIENT_EXECUTION=134 EXPLOITATION_FOR_CLIENT_EXECUTION value
+                         * @property {number} USER_EXECUTION=69 USER_EXECUTION value
+                         * @property {number} LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION=135 LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION value
                          * @property {number} DOMAIN_POLICY_MODIFICATION=30 DOMAIN_POLICY_MODIFICATION value
                          * @property {number} DATA_DESTRUCTION=29 DATA_DESTRUCTION value
+                         * @property {number} DATA_ENCRYPTED_FOR_IMPACT=132 DATA_ENCRYPTED_FOR_IMPACT value
                          * @property {number} SERVICE_STOP=52 SERVICE_STOP value
                          * @property {number} INHIBIT_SYSTEM_RECOVERY=36 INHIBIT_SYSTEM_RECOVERY value
+                         * @property {number} FIRMWARE_CORRUPTION=81 FIRMWARE_CORRUPTION value
                          * @property {number} RESOURCE_HIJACKING=8 RESOURCE_HIJACKING value
                          * @property {number} NETWORK_DENIAL_OF_SERVICE=17 NETWORK_DENIAL_OF_SERVICE value
                          * @property {number} CLOUD_SERVICE_DISCOVERY=48 CLOUD_SERVICE_DISCOVERY value
                          * @property {number} STEAL_APPLICATION_ACCESS_TOKEN=42 STEAL_APPLICATION_ACCESS_TOKEN value
                          * @property {number} ACCOUNT_ACCESS_REMOVAL=51 ACCOUNT_ACCESS_REMOVAL value
+                         * @property {number} TRANSFER_DATA_TO_CLOUD_ACCOUNT=91 TRANSFER_DATA_TO_CLOUD_ACCOUNT value
                          * @property {number} STEAL_WEB_SESSION_COOKIE=25 STEAL_WEB_SESSION_COOKIE value
                          * @property {number} CREATE_OR_MODIFY_SYSTEM_PROCESS=24 CREATE_OR_MODIFY_SYSTEM_PROCESS value
                          * @property {number} EVENT_TRIGGERED_EXECUTION=65 EVENT_TRIGGERED_EXECUTION value
+                         * @property {number} BOOT_OR_LOGON_AUTOSTART_EXECUTION=82 BOOT_OR_LOGON_AUTOSTART_EXECUTION value
+                         * @property {number} KERNEL_MODULES_AND_EXTENSIONS=83 KERNEL_MODULES_AND_EXTENSIONS value
+                         * @property {number} SHORTCUT_MODIFICATION=127 SHORTCUT_MODIFICATION value
                          * @property {number} ABUSE_ELEVATION_CONTROL_MECHANISM=34 ABUSE_ELEVATION_CONTROL_MECHANISM value
+                         * @property {number} ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID=136 ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID value
+                         * @property {number} ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING=109 ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING value
                          * @property {number} UNSECURED_CREDENTIALS=13 UNSECURED_CREDENTIALS value
+                         * @property {number} CREDENTIALS_IN_FILES=105 CREDENTIALS_IN_FILES value
+                         * @property {number} BASH_HISTORY=96 BASH_HISTORY value
+                         * @property {number} PRIVATE_KEYS=97 PRIVATE_KEYS value
+                         * @property {number} SUBVERT_TRUST_CONTROL=106 SUBVERT_TRUST_CONTROL value
+                         * @property {number} INSTALL_ROOT_CERTIFICATE=107 INSTALL_ROOT_CERTIFICATE value
+                         * @property {number} COMPROMISE_HOST_SOFTWARE_BINARY=84 COMPROMISE_HOST_SOFTWARE_BINARY value
+                         * @property {number} CREDENTIALS_FROM_PASSWORD_STORES=98 CREDENTIALS_FROM_PASSWORD_STORES value
                          * @property {number} MODIFY_AUTHENTICATION_PROCESS=28 MODIFY_AUTHENTICATION_PROCESS value
+                         * @property {number} PLUGGABLE_AUTHENTICATION_MODULES=108 PLUGGABLE_AUTHENTICATION_MODULES value
+                         * @property {number} MULTI_FACTOR_AUTHENTICATION=137 MULTI_FACTOR_AUTHENTICATION value
                          * @property {number} IMPAIR_DEFENSES=31 IMPAIR_DEFENSES value
                          * @property {number} DISABLE_OR_MODIFY_TOOLS=55 DISABLE_OR_MODIFY_TOOLS value
+                         * @property {number} INDICATOR_BLOCKING=110 INDICATOR_BLOCKING value
+                         * @property {number} DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM=111 DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM value
+                         * @property {number} HIDE_ARTIFACTS=85 HIDE_ARTIFACTS value
+                         * @property {number} HIDDEN_FILES_AND_DIRECTORIES=86 HIDDEN_FILES_AND_DIRECTORIES value
+                         * @property {number} HIDDEN_USERS=87 HIDDEN_USERS value
                          * @property {number} EXFILTRATION_OVER_WEB_SERVICE=20 EXFILTRATION_OVER_WEB_SERVICE value
                          * @property {number} EXFILTRATION_TO_CLOUD_STORAGE=21 EXFILTRATION_TO_CLOUD_STORAGE value
                          * @property {number} DYNAMIC_RESOLUTION=12 DYNAMIC_RESOLUTION value
                          * @property {number} LATERAL_TOOL_TRANSFER=41 LATERAL_TOOL_TRANSFER value
+                         * @property {number} HIJACK_EXECUTION_FLOW=112 HIJACK_EXECUTION_FLOW value
+                         * @property {number} HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING=113 HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING value
                          * @property {number} MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE=26 MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE value
                          * @property {number} CREATE_SNAPSHOT=54 CREATE_SNAPSHOT value
                          * @property {number} CLOUD_INFRASTRUCTURE_DISCOVERY=53 CLOUD_INFRASTRUCTURE_DISCOVERY value
+                         * @property {number} DEVELOP_CAPABILITIES=99 DEVELOP_CAPABILITIES value
+                         * @property {number} DEVELOP_CAPABILITIES_MALWARE=100 DEVELOP_CAPABILITIES_MALWARE value
                          * @property {number} OBTAIN_CAPABILITIES=43 OBTAIN_CAPABILITIES value
+                         * @property {number} OBTAIN_CAPABILITIES_MALWARE=101 OBTAIN_CAPABILITIES_MALWARE value
+                         * @property {number} OBTAIN_CAPABILITIES_VULNERABILITIES=133 OBTAIN_CAPABILITIES_VULNERABILITIES value
                          * @property {number} ACTIVE_SCANNING=1 ACTIVE_SCANNING value
                          * @property {number} SCANNING_IP_BLOCKS=2 SCANNING_IP_BLOCKS value
+                         * @property {number} STAGE_CAPABILITIES=88 STAGE_CAPABILITIES value
+                         * @property {number} UPLOAD_MALWARE=102 UPLOAD_MALWARE value
                          * @property {number} CONTAINER_ADMINISTRATION_COMMAND=60 CONTAINER_ADMINISTRATION_COMMAND value
                          * @property {number} DEPLOY_CONTAINER=66 DEPLOY_CONTAINER value
                          * @property {number} ESCAPE_TO_HOST=61 ESCAPE_TO_HOST value
                          * @property {number} CONTAINER_AND_RESOURCE_DISCOVERY=57 CONTAINER_AND_RESOURCE_DISCOVERY value
+                         * @property {number} REFLECTIVE_CODE_LOADING=92 REFLECTIVE_CODE_LOADING value
                          * @property {number} STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES=62 STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES value
+                         * @property {number} FINANCIAL_THEFT=131 FINANCIAL_THEFT value
                          */
                         MitreAttack.Technique = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TECHNIQUE_UNSPECIFIED"] = 0;
+                            values[valuesById[70] = "DATA_OBFUSCATION"] = 70;
+                            values[valuesById[71] = "DATA_OBFUSCATION_STEGANOGRAPHY"] = 71;
+                            values[valuesById[114] = "OS_CREDENTIAL_DUMPING"] = 114;
+                            values[valuesById[115] = "OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM"] = 115;
+                            values[valuesById[122] = "OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW"] = 122;
+                            values[valuesById[117] = "DATA_FROM_LOCAL_SYSTEM"] = 117;
+                            values[valuesById[68] = "AUTOMATED_EXFILTRATION"] = 68;
+                            values[valuesById[72] = "OBFUSCATED_FILES_OR_INFO"] = 72;
+                            values[valuesById[73] = "STEGANOGRAPHY"] = 73;
+                            values[valuesById[74] = "COMPILE_AFTER_DELIVERY"] = 74;
+                            values[valuesById[75] = "COMMAND_OBFUSCATION"] = 75;
+                            values[valuesById[120] = "SCHEDULED_TRANSFER"] = 120;
+                            values[valuesById[118] = "SYSTEM_OWNER_USER_DISCOVERY"] = 118;
                             values[valuesById[49] = "MASQUERADING"] = 49;
                             values[valuesById[50] = "MATCH_LEGITIMATE_NAME_OR_LOCATION"] = 50;
                             values[valuesById[37] = "BOOT_OR_LOGON_INITIALIZATION_SCRIPTS"] = 37;
                             values[valuesById[38] = "STARTUP_ITEMS"] = 38;
                             values[valuesById[32] = "NETWORK_SERVICE_DISCOVERY"] = 32;
+                            values[valuesById[89] = "SCHEDULED_TASK_JOB"] = 89;
+                            values[valuesById[119] = "SCHEDULED_TASK_JOB_CRON"] = 119;
+                            values[valuesById[90] = "CONTAINER_ORCHESTRATION_JOB"] = 90;
+                            values[valuesById[93] = "PROCESS_INJECTION"] = 93;
+                            values[valuesById[103] = "INPUT_CAPTURE"] = 103;
+                            values[valuesById[104] = "INPUT_CAPTURE_KEYLOGGING"] = 104;
                             values[valuesById[56] = "PROCESS_DISCOVERY"] = 56;
                             values[valuesById[6] = "COMMAND_AND_SCRIPTING_INTERPRETER"] = 6;
                             values[valuesById[7] = "UNIX_SHELL"] = 7;
@@ -104760,7 +108670,12 @@
                             values[valuesById[63] = "EXPLOITATION_FOR_PRIVILEGE_ESCALATION"] = 63;
                             values[valuesById[18] = "PERMISSION_GROUPS_DISCOVERY"] = 18;
                             values[valuesById[19] = "CLOUD_GROUPS"] = 19;
+                            values[valuesById[123] = "INDICATOR_REMOVAL"] = 123;
+                            values[valuesById[124] = "INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS"] = 124;
+                            values[valuesById[125] = "INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY"] = 125;
                             values[valuesById[64] = "INDICATOR_REMOVAL_FILE_DELETION"] = 64;
+                            values[valuesById[128] = "INDICATOR_REMOVAL_TIMESTOMP"] = 128;
+                            values[valuesById[126] = "INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA"] = 126;
                             values[valuesById[45] = "APPLICATION_LAYER_PROTOCOL"] = 45;
                             values[valuesById[46] = "DNS"] = 46;
                             values[valuesById[47] = "SOFTWARE_DEPLOYMENT_TOOLS"] = 47;
@@ -104768,56 +108683,308 @@
                             values[valuesById[35] = "DEFAULT_ACCOUNTS"] = 35;
                             values[valuesById[15] = "LOCAL_ACCOUNTS"] = 15;
                             values[valuesById[16] = "CLOUD_ACCOUNTS"] = 16;
+                            values[valuesById[121] = "FILE_AND_DIRECTORY_DISCOVERY"] = 121;
+                            values[valuesById[116] = "ACCOUNT_DISCOVERY_LOCAL_ACCOUNT"] = 116;
                             values[valuesById[9] = "PROXY"] = 9;
                             values[valuesById[10] = "EXTERNAL_PROXY"] = 10;
                             values[valuesById[11] = "MULTI_HOP_PROXY"] = 11;
                             values[valuesById[22] = "ACCOUNT_MANIPULATION"] = 22;
                             values[valuesById[40] = "ADDITIONAL_CLOUD_CREDENTIALS"] = 40;
+                            values[valuesById[67] = "ADDITIONAL_CLOUD_ROLES"] = 67;
                             values[valuesById[23] = "SSH_AUTHORIZED_KEYS"] = 23;
                             values[valuesById[58] = "ADDITIONAL_CONTAINER_CLUSTER_ROLES"] = 58;
+                            values[valuesById[76] = "MULTI_STAGE_CHANNELS"] = 76;
                             values[valuesById[3] = "INGRESS_TOOL_TRANSFER"] = 3;
                             values[valuesById[4] = "NATIVE_API"] = 4;
                             values[valuesById[44] = "BRUTE_FORCE"] = 44;
+                            values[valuesById[94] = "AUTOMATED_COLLECTION"] = 94;
                             values[valuesById[5] = "SHARED_MODULES"] = 5;
+                            values[valuesById[77] = "DATA_ENCODING"] = 77;
+                            values[valuesById[78] = "STANDARD_ENCODING"] = 78;
                             values[valuesById[33] = "ACCESS_TOKEN_MANIPULATION"] = 33;
                             values[valuesById[39] = "TOKEN_IMPERSONATION_OR_THEFT"] = 39;
+                            values[valuesById[79] = "CREATE_ACCOUNT"] = 79;
+                            values[valuesById[80] = "LOCAL_ACCOUNT"] = 80;
+                            values[valuesById[95] = "DEOBFUSCATE_DECODE_FILES_OR_INFO"] = 95;
                             values[valuesById[27] = "EXPLOIT_PUBLIC_FACING_APPLICATION"] = 27;
+                            values[valuesById[129] = "SUPPLY_CHAIN_COMPROMISE"] = 129;
+                            values[valuesById[130] = "COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS"] = 130;
+                            values[valuesById[134] = "EXPLOITATION_FOR_CLIENT_EXECUTION"] = 134;
+                            values[valuesById[69] = "USER_EXECUTION"] = 69;
+                            values[valuesById[135] = "LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION"] = 135;
                             values[valuesById[30] = "DOMAIN_POLICY_MODIFICATION"] = 30;
                             values[valuesById[29] = "DATA_DESTRUCTION"] = 29;
+                            values[valuesById[132] = "DATA_ENCRYPTED_FOR_IMPACT"] = 132;
                             values[valuesById[52] = "SERVICE_STOP"] = 52;
                             values[valuesById[36] = "INHIBIT_SYSTEM_RECOVERY"] = 36;
+                            values[valuesById[81] = "FIRMWARE_CORRUPTION"] = 81;
                             values[valuesById[8] = "RESOURCE_HIJACKING"] = 8;
                             values[valuesById[17] = "NETWORK_DENIAL_OF_SERVICE"] = 17;
                             values[valuesById[48] = "CLOUD_SERVICE_DISCOVERY"] = 48;
                             values[valuesById[42] = "STEAL_APPLICATION_ACCESS_TOKEN"] = 42;
                             values[valuesById[51] = "ACCOUNT_ACCESS_REMOVAL"] = 51;
+                            values[valuesById[91] = "TRANSFER_DATA_TO_CLOUD_ACCOUNT"] = 91;
                             values[valuesById[25] = "STEAL_WEB_SESSION_COOKIE"] = 25;
                             values[valuesById[24] = "CREATE_OR_MODIFY_SYSTEM_PROCESS"] = 24;
                             values[valuesById[65] = "EVENT_TRIGGERED_EXECUTION"] = 65;
+                            values[valuesById[82] = "BOOT_OR_LOGON_AUTOSTART_EXECUTION"] = 82;
+                            values[valuesById[83] = "KERNEL_MODULES_AND_EXTENSIONS"] = 83;
+                            values[valuesById[127] = "SHORTCUT_MODIFICATION"] = 127;
                             values[valuesById[34] = "ABUSE_ELEVATION_CONTROL_MECHANISM"] = 34;
+                            values[valuesById[136] = "ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID"] = 136;
+                            values[valuesById[109] = "ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING"] = 109;
                             values[valuesById[13] = "UNSECURED_CREDENTIALS"] = 13;
+                            values[valuesById[105] = "CREDENTIALS_IN_FILES"] = 105;
+                            values[valuesById[96] = "BASH_HISTORY"] = 96;
+                            values[valuesById[97] = "PRIVATE_KEYS"] = 97;
+                            values[valuesById[106] = "SUBVERT_TRUST_CONTROL"] = 106;
+                            values[valuesById[107] = "INSTALL_ROOT_CERTIFICATE"] = 107;
+                            values[valuesById[84] = "COMPROMISE_HOST_SOFTWARE_BINARY"] = 84;
+                            values[valuesById[98] = "CREDENTIALS_FROM_PASSWORD_STORES"] = 98;
                             values[valuesById[28] = "MODIFY_AUTHENTICATION_PROCESS"] = 28;
+                            values[valuesById[108] = "PLUGGABLE_AUTHENTICATION_MODULES"] = 108;
+                            values[valuesById[137] = "MULTI_FACTOR_AUTHENTICATION"] = 137;
                             values[valuesById[31] = "IMPAIR_DEFENSES"] = 31;
                             values[valuesById[55] = "DISABLE_OR_MODIFY_TOOLS"] = 55;
+                            values[valuesById[110] = "INDICATOR_BLOCKING"] = 110;
+                            values[valuesById[111] = "DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM"] = 111;
+                            values[valuesById[85] = "HIDE_ARTIFACTS"] = 85;
+                            values[valuesById[86] = "HIDDEN_FILES_AND_DIRECTORIES"] = 86;
+                            values[valuesById[87] = "HIDDEN_USERS"] = 87;
                             values[valuesById[20] = "EXFILTRATION_OVER_WEB_SERVICE"] = 20;
                             values[valuesById[21] = "EXFILTRATION_TO_CLOUD_STORAGE"] = 21;
                             values[valuesById[12] = "DYNAMIC_RESOLUTION"] = 12;
                             values[valuesById[41] = "LATERAL_TOOL_TRANSFER"] = 41;
+                            values[valuesById[112] = "HIJACK_EXECUTION_FLOW"] = 112;
+                            values[valuesById[113] = "HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING"] = 113;
                             values[valuesById[26] = "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE"] = 26;
                             values[valuesById[54] = "CREATE_SNAPSHOT"] = 54;
                             values[valuesById[53] = "CLOUD_INFRASTRUCTURE_DISCOVERY"] = 53;
+                            values[valuesById[99] = "DEVELOP_CAPABILITIES"] = 99;
+                            values[valuesById[100] = "DEVELOP_CAPABILITIES_MALWARE"] = 100;
                             values[valuesById[43] = "OBTAIN_CAPABILITIES"] = 43;
+                            values[valuesById[101] = "OBTAIN_CAPABILITIES_MALWARE"] = 101;
+                            values[valuesById[133] = "OBTAIN_CAPABILITIES_VULNERABILITIES"] = 133;
                             values[valuesById[1] = "ACTIVE_SCANNING"] = 1;
                             values[valuesById[2] = "SCANNING_IP_BLOCKS"] = 2;
+                            values[valuesById[88] = "STAGE_CAPABILITIES"] = 88;
+                            values[valuesById[102] = "UPLOAD_MALWARE"] = 102;
                             values[valuesById[60] = "CONTAINER_ADMINISTRATION_COMMAND"] = 60;
                             values[valuesById[66] = "DEPLOY_CONTAINER"] = 66;
                             values[valuesById[61] = "ESCAPE_TO_HOST"] = 61;
                             values[valuesById[57] = "CONTAINER_AND_RESOURCE_DISCOVERY"] = 57;
+                            values[valuesById[92] = "REFLECTIVE_CODE_LOADING"] = 92;
                             values[valuesById[62] = "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES"] = 62;
+                            values[valuesById[131] = "FINANCIAL_THEFT"] = 131;
                             return values;
                         })();
     
                         return MitreAttack;
+                    })();
+    
+                    v2.Network = (function() {
+    
+                        /**
+                         * Properties of a Network.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface INetwork
+                         * @property {string|null} [name] Network name
+                         */
+    
+                        /**
+                         * Constructs a new Network.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a Network.
+                         * @implements INetwork
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.INetwork=} [properties] Properties to set
+                         */
+                        function Network(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Network name.
+                         * @member {string} name
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @instance
+                         */
+                        Network.prototype.name = "";
+    
+                        /**
+                         * Creates a new Network instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.INetwork=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Network} Network instance
+                         */
+                        Network.create = function create(properties) {
+                            return new Network(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Network message. Does not implicitly {@link google.cloud.securitycenter.v2.Network.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.INetwork} message Network message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Network.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Network message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Network.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.INetwork} message Network message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Network.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Network message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Network} Network
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Network.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Network();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Network message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Network} Network
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Network.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Network message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Network.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Network message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Network} Network
+                         */
+                        Network.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Network)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Network();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Network message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Network} message Network
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Network.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Network to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Network.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Network
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Network
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Network.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Network";
+                        };
+    
+                        return Network;
                     })();
     
                     v2.Notebook = (function() {
@@ -105321,6 +109488,7 @@
                          * @property {boolean|null} [envVariablesTruncated] Process envVariablesTruncated
                          * @property {number|Long|null} [pid] Process pid
                          * @property {number|Long|null} [parentPid] Process parentPid
+                         * @property {number|Long|null} [userId] Process userId
                          */
     
                         /**
@@ -105422,6 +109590,14 @@
                         Process.prototype.parentPid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * Process userId.
+                         * @member {number|Long} userId
+                         * @memberof google.cloud.securitycenter.v2.Process
+                         * @instance
+                         */
+                        Process.prototype.userId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
                          * Creates a new Process instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v2.Process
@@ -105468,6 +109644,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int64(message.pid);
                             if (message.parentPid != null && Object.hasOwnProperty.call(message, "parentPid"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int64(message.parentPid);
+                            if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int64(message.userId);
                             return writer;
                         };
     
@@ -105548,6 +109726,10 @@
                                     }
                                 case 10: {
                                         message.parentPid = reader.int64();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.userId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -105635,6 +109817,9 @@
                             if (message.parentPid != null && message.hasOwnProperty("parentPid"))
                                 if (!$util.isInteger(message.parentPid) && !(message.parentPid && $util.isInteger(message.parentPid.low) && $util.isInteger(message.parentPid.high)))
                                     return "parentPid: integer|Long expected";
+                            if (message.userId != null && message.hasOwnProperty("userId"))
+                                if (!$util.isInteger(message.userId) && !(message.userId && $util.isInteger(message.userId.low) && $util.isInteger(message.userId.high)))
+                                    return "userId: integer|Long expected";
                             return null;
                         };
     
@@ -105711,6 +109896,15 @@
                                     message.parentPid = object.parentPid;
                                 else if (typeof object.parentPid === "object")
                                     message.parentPid = new $util.LongBits(object.parentPid.low >>> 0, object.parentPid.high >>> 0).toNumber();
+                            if (object.userId != null)
+                                if ($util.Long)
+                                    (message.userId = $util.Long.fromValue(object.userId)).unsigned = false;
+                                else if (typeof object.userId === "string")
+                                    message.userId = parseInt(object.userId, 10);
+                                else if (typeof object.userId === "number")
+                                    message.userId = object.userId;
+                                else if (typeof object.userId === "object")
+                                    message.userId = new $util.LongBits(object.userId.low >>> 0, object.userId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -105748,6 +109942,11 @@
                                     object.parentPid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                                 } else
                                     object.parentPid = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.userId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.userId = options.longs === String ? "0" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -105784,6 +109983,11 @@
                                     object.parentPid = options.longs === String ? String(message.parentPid) : message.parentPid;
                                 else
                                     object.parentPid = options.longs === String ? $util.Long.prototype.toString.call(message.parentPid) : options.longs === Number ? new $util.LongBits(message.parentPid.low >>> 0, message.parentPid.high >>> 0).toNumber() : message.parentPid;
+                            if (message.userId != null && message.hasOwnProperty("userId"))
+                                if (typeof message.userId === "number")
+                                    object.userId = options.longs === String ? String(message.userId) : message.userId;
+                                else
+                                    object.userId = options.longs === String ? $util.Long.prototype.toString.call(message.userId) : options.longs === Number ? new $util.LongBits(message.userId.low >>> 0, message.userId.high >>> 0).toNumber() : message.userId;
                             return object;
                         };
     
@@ -107219,6 +111423,758 @@
                         return ToxicCombination;
                     })();
     
+                    v2.VertexAi = (function() {
+    
+                        /**
+                         * Properties of a VertexAi.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IVertexAi
+                         * @property {Array.<google.cloud.securitycenter.v2.VertexAi.IDataset>|null} [datasets] VertexAi datasets
+                         * @property {Array.<google.cloud.securitycenter.v2.VertexAi.IPipeline>|null} [pipelines] VertexAi pipelines
+                         */
+    
+                        /**
+                         * Constructs a new VertexAi.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a VertexAi.
+                         * @implements IVertexAi
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IVertexAi=} [properties] Properties to set
+                         */
+                        function VertexAi(properties) {
+                            this.datasets = [];
+                            this.pipelines = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VertexAi datasets.
+                         * @member {Array.<google.cloud.securitycenter.v2.VertexAi.IDataset>} datasets
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @instance
+                         */
+                        VertexAi.prototype.datasets = $util.emptyArray;
+    
+                        /**
+                         * VertexAi pipelines.
+                         * @member {Array.<google.cloud.securitycenter.v2.VertexAi.IPipeline>} pipelines
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @instance
+                         */
+                        VertexAi.prototype.pipelines = $util.emptyArray;
+    
+                        /**
+                         * Creates a new VertexAi instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IVertexAi=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.VertexAi} VertexAi instance
+                         */
+                        VertexAi.create = function create(properties) {
+                            return new VertexAi(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VertexAi message. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IVertexAi} message VertexAi message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VertexAi.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasets != null && message.datasets.length)
+                                for (var i = 0; i < message.datasets.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.VertexAi.Dataset.encode(message.datasets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.pipelines != null && message.pipelines.length)
+                                for (var i = 0; i < message.pipelines.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.VertexAi.Pipeline.encode(message.pipelines[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VertexAi message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IVertexAi} message VertexAi message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VertexAi.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VertexAi message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.VertexAi} VertexAi
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VertexAi.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.VertexAi();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.datasets && message.datasets.length))
+                                            message.datasets = [];
+                                        message.datasets.push($root.google.cloud.securitycenter.v2.VertexAi.Dataset.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.pipelines && message.pipelines.length))
+                                            message.pipelines = [];
+                                        message.pipelines.push($root.google.cloud.securitycenter.v2.VertexAi.Pipeline.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VertexAi message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.VertexAi} VertexAi
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VertexAi.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VertexAi message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VertexAi.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasets != null && message.hasOwnProperty("datasets")) {
+                                if (!Array.isArray(message.datasets))
+                                    return "datasets: array expected";
+                                for (var i = 0; i < message.datasets.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.VertexAi.Dataset.verify(message.datasets[i]);
+                                    if (error)
+                                        return "datasets." + error;
+                                }
+                            }
+                            if (message.pipelines != null && message.hasOwnProperty("pipelines")) {
+                                if (!Array.isArray(message.pipelines))
+                                    return "pipelines: array expected";
+                                for (var i = 0; i < message.pipelines.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.VertexAi.Pipeline.verify(message.pipelines[i]);
+                                    if (error)
+                                        return "pipelines." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VertexAi message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.VertexAi} VertexAi
+                         */
+                        VertexAi.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.VertexAi)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.VertexAi();
+                            if (object.datasets) {
+                                if (!Array.isArray(object.datasets))
+                                    throw TypeError(".google.cloud.securitycenter.v2.VertexAi.datasets: array expected");
+                                message.datasets = [];
+                                for (var i = 0; i < object.datasets.length; ++i) {
+                                    if (typeof object.datasets[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.VertexAi.datasets: object expected");
+                                    message.datasets[i] = $root.google.cloud.securitycenter.v2.VertexAi.Dataset.fromObject(object.datasets[i]);
+                                }
+                            }
+                            if (object.pipelines) {
+                                if (!Array.isArray(object.pipelines))
+                                    throw TypeError(".google.cloud.securitycenter.v2.VertexAi.pipelines: array expected");
+                                message.pipelines = [];
+                                for (var i = 0; i < object.pipelines.length; ++i) {
+                                    if (typeof object.pipelines[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.VertexAi.pipelines: object expected");
+                                    message.pipelines[i] = $root.google.cloud.securitycenter.v2.VertexAi.Pipeline.fromObject(object.pipelines[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VertexAi message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.VertexAi} message VertexAi
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VertexAi.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.datasets = [];
+                                object.pipelines = [];
+                            }
+                            if (message.datasets && message.datasets.length) {
+                                object.datasets = [];
+                                for (var j = 0; j < message.datasets.length; ++j)
+                                    object.datasets[j] = $root.google.cloud.securitycenter.v2.VertexAi.Dataset.toObject(message.datasets[j], options);
+                            }
+                            if (message.pipelines && message.pipelines.length) {
+                                object.pipelines = [];
+                                for (var j = 0; j < message.pipelines.length; ++j)
+                                    object.pipelines[j] = $root.google.cloud.securitycenter.v2.VertexAi.Pipeline.toObject(message.pipelines[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VertexAi to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VertexAi.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VertexAi
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.VertexAi
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VertexAi.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.VertexAi";
+                        };
+    
+                        VertexAi.Dataset = (function() {
+    
+                            /**
+                             * Properties of a Dataset.
+                             * @memberof google.cloud.securitycenter.v2.VertexAi
+                             * @interface IDataset
+                             * @property {string|null} [name] Dataset name
+                             * @property {string|null} [displayName] Dataset displayName
+                             * @property {string|null} [source] Dataset source
+                             */
+    
+                            /**
+                             * Constructs a new Dataset.
+                             * @memberof google.cloud.securitycenter.v2.VertexAi
+                             * @classdesc Represents a Dataset.
+                             * @implements IDataset
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IDataset=} [properties] Properties to set
+                             */
+                            function Dataset(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Dataset name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @instance
+                             */
+                            Dataset.prototype.name = "";
+    
+                            /**
+                             * Dataset displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @instance
+                             */
+                            Dataset.prototype.displayName = "";
+    
+                            /**
+                             * Dataset source.
+                             * @member {string} source
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @instance
+                             */
+                            Dataset.prototype.source = "";
+    
+                            /**
+                             * Creates a new Dataset instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IDataset=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Dataset} Dataset instance
+                             */
+                            Dataset.create = function create(properties) {
+                                return new Dataset(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Dataset message. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.Dataset.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IDataset} message Dataset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Dataset.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.source);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.Dataset.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IDataset} message Dataset message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Dataset.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Dataset message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Dataset} Dataset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Dataset.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.VertexAi.Dataset();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.source = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Dataset} Dataset
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Dataset.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Dataset message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Dataset.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    if (!$util.isString(message.source))
+                                        return "source: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Dataset} Dataset
+                             */
+                            Dataset.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v2.VertexAi.Dataset)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v2.VertexAi.Dataset();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.source != null)
+                                    message.source = String(object.source);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.Dataset} message Dataset
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Dataset.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.displayName = "";
+                                    object.source = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    object.source = message.source;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Dataset to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Dataset.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Dataset
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Dataset
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Dataset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securitycenter.v2.VertexAi.Dataset";
+                            };
+    
+                            return Dataset;
+                        })();
+    
+                        VertexAi.Pipeline = (function() {
+    
+                            /**
+                             * Properties of a Pipeline.
+                             * @memberof google.cloud.securitycenter.v2.VertexAi
+                             * @interface IPipeline
+                             * @property {string|null} [name] Pipeline name
+                             * @property {string|null} [displayName] Pipeline displayName
+                             */
+    
+                            /**
+                             * Constructs a new Pipeline.
+                             * @memberof google.cloud.securitycenter.v2.VertexAi
+                             * @classdesc Represents a Pipeline.
+                             * @implements IPipeline
+                             * @constructor
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IPipeline=} [properties] Properties to set
+                             */
+                            function Pipeline(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Pipeline name.
+                             * @member {string} name
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @instance
+                             */
+                            Pipeline.prototype.name = "";
+    
+                            /**
+                             * Pipeline displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @instance
+                             */
+                            Pipeline.prototype.displayName = "";
+    
+                            /**
+                             * Creates a new Pipeline instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IPipeline=} [properties] Properties to set
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Pipeline} Pipeline instance
+                             */
+                            Pipeline.create = function create(properties) {
+                                return new Pipeline(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Pipeline message. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.Pipeline.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IPipeline} message Pipeline message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pipeline.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Pipeline message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.VertexAi.Pipeline.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.IPipeline} message Pipeline message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Pipeline.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Pipeline message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Pipeline} Pipeline
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pipeline.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.VertexAi.Pipeline();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Pipeline message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Pipeline} Pipeline
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Pipeline.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Pipeline message.
+                             * @function verify
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Pipeline.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Pipeline message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securitycenter.v2.VertexAi.Pipeline} Pipeline
+                             */
+                            Pipeline.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securitycenter.v2.VertexAi.Pipeline)
+                                    return object;
+                                var message = new $root.google.cloud.securitycenter.v2.VertexAi.Pipeline();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Pipeline message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {google.cloud.securitycenter.v2.VertexAi.Pipeline} message Pipeline
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Pipeline.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.displayName = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Pipeline to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Pipeline.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Pipeline
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securitycenter.v2.VertexAi.Pipeline
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Pipeline.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securitycenter.v2.VertexAi.Pipeline";
+                            };
+    
+                            return Pipeline;
+                        })();
+    
+                        return VertexAi;
+                    })();
+    
                     v2.Vulnerability = (function() {
     
                         /**
@@ -107229,6 +112185,9 @@
                          * @property {google.cloud.securitycenter.v2.IPackage|null} [offendingPackage] Vulnerability offendingPackage
                          * @property {google.cloud.securitycenter.v2.IPackage|null} [fixedPackage] Vulnerability fixedPackage
                          * @property {google.cloud.securitycenter.v2.ISecurityBulletin|null} [securityBulletin] Vulnerability securityBulletin
+                         * @property {number|Long|null} [providerRiskScore] Vulnerability providerRiskScore
+                         * @property {boolean|null} [reachable] Vulnerability reachable
+                         * @property {Array.<google.cloud.securitycenter.v2.ICwe>|null} [cwes] Vulnerability cwes
                          */
     
                         /**
@@ -107240,6 +112199,7 @@
                          * @param {google.cloud.securitycenter.v2.IVulnerability=} [properties] Properties to set
                          */
                         function Vulnerability(properties) {
+                            this.cwes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -107279,6 +112239,30 @@
                         Vulnerability.prototype.securityBulletin = null;
     
                         /**
+                         * Vulnerability providerRiskScore.
+                         * @member {number|Long} providerRiskScore
+                         * @memberof google.cloud.securitycenter.v2.Vulnerability
+                         * @instance
+                         */
+                        Vulnerability.prototype.providerRiskScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Vulnerability reachable.
+                         * @member {boolean} reachable
+                         * @memberof google.cloud.securitycenter.v2.Vulnerability
+                         * @instance
+                         */
+                        Vulnerability.prototype.reachable = false;
+    
+                        /**
+                         * Vulnerability cwes.
+                         * @member {Array.<google.cloud.securitycenter.v2.ICwe>} cwes
+                         * @memberof google.cloud.securitycenter.v2.Vulnerability
+                         * @instance
+                         */
+                        Vulnerability.prototype.cwes = $util.emptyArray;
+    
+                        /**
                          * Creates a new Vulnerability instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v2.Vulnerability
@@ -107310,6 +112294,13 @@
                                 $root.google.cloud.securitycenter.v2.Package.encode(message.fixedPackage, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.securityBulletin != null && Object.hasOwnProperty.call(message, "securityBulletin"))
                                 $root.google.cloud.securitycenter.v2.SecurityBulletin.encode(message.securityBulletin, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.providerRiskScore != null && Object.hasOwnProperty.call(message, "providerRiskScore"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.providerRiskScore);
+                            if (message.reachable != null && Object.hasOwnProperty.call(message, "reachable"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.reachable);
+                            if (message.cwes != null && message.cwes.length)
+                                for (var i = 0; i < message.cwes.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.Cwe.encode(message.cwes[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -107360,6 +112351,20 @@
                                     }
                                 case 4: {
                                         message.securityBulletin = $root.google.cloud.securitycenter.v2.SecurityBulletin.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.providerRiskScore = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.reachable = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.cwes && message.cwes.length))
+                                            message.cwes = [];
+                                        message.cwes.push($root.google.cloud.securitycenter.v2.Cwe.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -107417,6 +112422,21 @@
                                 if (error)
                                     return "securityBulletin." + error;
                             }
+                            if (message.providerRiskScore != null && message.hasOwnProperty("providerRiskScore"))
+                                if (!$util.isInteger(message.providerRiskScore) && !(message.providerRiskScore && $util.isInteger(message.providerRiskScore.low) && $util.isInteger(message.providerRiskScore.high)))
+                                    return "providerRiskScore: integer|Long expected";
+                            if (message.reachable != null && message.hasOwnProperty("reachable"))
+                                if (typeof message.reachable !== "boolean")
+                                    return "reachable: boolean expected";
+                            if (message.cwes != null && message.hasOwnProperty("cwes")) {
+                                if (!Array.isArray(message.cwes))
+                                    return "cwes: array expected";
+                                for (var i = 0; i < message.cwes.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.Cwe.verify(message.cwes[i]);
+                                    if (error)
+                                        return "cwes." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -107452,6 +112472,27 @@
                                     throw TypeError(".google.cloud.securitycenter.v2.Vulnerability.securityBulletin: object expected");
                                 message.securityBulletin = $root.google.cloud.securitycenter.v2.SecurityBulletin.fromObject(object.securityBulletin);
                             }
+                            if (object.providerRiskScore != null)
+                                if ($util.Long)
+                                    (message.providerRiskScore = $util.Long.fromValue(object.providerRiskScore)).unsigned = false;
+                                else if (typeof object.providerRiskScore === "string")
+                                    message.providerRiskScore = parseInt(object.providerRiskScore, 10);
+                                else if (typeof object.providerRiskScore === "number")
+                                    message.providerRiskScore = object.providerRiskScore;
+                                else if (typeof object.providerRiskScore === "object")
+                                    message.providerRiskScore = new $util.LongBits(object.providerRiskScore.low >>> 0, object.providerRiskScore.high >>> 0).toNumber();
+                            if (object.reachable != null)
+                                message.reachable = Boolean(object.reachable);
+                            if (object.cwes) {
+                                if (!Array.isArray(object.cwes))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Vulnerability.cwes: array expected");
+                                message.cwes = [];
+                                for (var i = 0; i < object.cwes.length; ++i) {
+                                    if (typeof object.cwes[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.Vulnerability.cwes: object expected");
+                                    message.cwes[i] = $root.google.cloud.securitycenter.v2.Cwe.fromObject(object.cwes[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -107468,11 +112509,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.cwes = [];
                             if (options.defaults) {
                                 object.cve = null;
                                 object.offendingPackage = null;
                                 object.fixedPackage = null;
                                 object.securityBulletin = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.providerRiskScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.providerRiskScore = options.longs === String ? "0" : 0;
+                                object.reachable = false;
                             }
                             if (message.cve != null && message.hasOwnProperty("cve"))
                                 object.cve = $root.google.cloud.securitycenter.v2.Cve.toObject(message.cve, options);
@@ -107482,6 +112531,18 @@
                                 object.fixedPackage = $root.google.cloud.securitycenter.v2.Package.toObject(message.fixedPackage, options);
                             if (message.securityBulletin != null && message.hasOwnProperty("securityBulletin"))
                                 object.securityBulletin = $root.google.cloud.securitycenter.v2.SecurityBulletin.toObject(message.securityBulletin, options);
+                            if (message.providerRiskScore != null && message.hasOwnProperty("providerRiskScore"))
+                                if (typeof message.providerRiskScore === "number")
+                                    object.providerRiskScore = options.longs === String ? String(message.providerRiskScore) : message.providerRiskScore;
+                                else
+                                    object.providerRiskScore = options.longs === String ? $util.Long.prototype.toString.call(message.providerRiskScore) : options.longs === Number ? new $util.LongBits(message.providerRiskScore.low >>> 0, message.providerRiskScore.high >>> 0).toNumber() : message.providerRiskScore;
+                            if (message.reachable != null && message.hasOwnProperty("reachable"))
+                                object.reachable = message.reachable;
+                            if (message.cwes && message.cwes.length) {
+                                object.cwes = [];
+                                for (var j = 0; j < message.cwes.length; ++j)
+                                    object.cwes[j] = $root.google.cloud.securitycenter.v2.Cwe.toObject(message.cwes[j], options);
+                            }
                             return object;
                         };
     
@@ -109556,6 +114617,256 @@
                         return SecurityBulletin;
                     })();
     
+                    v2.Cwe = (function() {
+    
+                        /**
+                         * Properties of a Cwe.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface ICwe
+                         * @property {string|null} [id] Cwe id
+                         * @property {Array.<google.cloud.securitycenter.v2.IReference>|null} [references] Cwe references
+                         */
+    
+                        /**
+                         * Constructs a new Cwe.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a Cwe.
+                         * @implements ICwe
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.ICwe=} [properties] Properties to set
+                         */
+                        function Cwe(properties) {
+                            this.references = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Cwe id.
+                         * @member {string} id
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @instance
+                         */
+                        Cwe.prototype.id = "";
+    
+                        /**
+                         * Cwe references.
+                         * @member {Array.<google.cloud.securitycenter.v2.IReference>} references
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @instance
+                         */
+                        Cwe.prototype.references = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Cwe instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.ICwe=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.Cwe} Cwe instance
+                         */
+                        Cwe.create = function create(properties) {
+                            return new Cwe(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Cwe message. Does not implicitly {@link google.cloud.securitycenter.v2.Cwe.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.ICwe} message Cwe message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cwe.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.references != null && message.references.length)
+                                for (var i = 0; i < message.references.length; ++i)
+                                    $root.google.cloud.securitycenter.v2.Reference.encode(message.references[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Cwe message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Cwe.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.ICwe} message Cwe message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Cwe.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Cwe message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.Cwe} Cwe
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cwe.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.Cwe();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.references && message.references.length))
+                                            message.references = [];
+                                        message.references.push($root.google.cloud.securitycenter.v2.Reference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Cwe message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.Cwe} Cwe
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Cwe.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Cwe message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Cwe.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.references != null && message.hasOwnProperty("references")) {
+                                if (!Array.isArray(message.references))
+                                    return "references: array expected";
+                                for (var i = 0; i < message.references.length; ++i) {
+                                    var error = $root.google.cloud.securitycenter.v2.Reference.verify(message.references[i]);
+                                    if (error)
+                                        return "references." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Cwe message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.Cwe} Cwe
+                         */
+                        Cwe.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.Cwe)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.Cwe();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.references) {
+                                if (!Array.isArray(object.references))
+                                    throw TypeError(".google.cloud.securitycenter.v2.Cwe.references: array expected");
+                                message.references = [];
+                                for (var i = 0; i < object.references.length; ++i) {
+                                    if (typeof object.references[i] !== "object")
+                                        throw TypeError(".google.cloud.securitycenter.v2.Cwe.references: object expected");
+                                    message.references[i] = $root.google.cloud.securitycenter.v2.Reference.fromObject(object.references[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Cwe message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.Cwe} message Cwe
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Cwe.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.references = [];
+                            if (options.defaults)
+                                object.id = "";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.references && message.references.length) {
+                                object.references = [];
+                                for (var j = 0; j < message.references.length; ++j)
+                                    object.references[j] = $root.google.cloud.securitycenter.v2.Reference.toObject(message.references[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Cwe to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Cwe.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Cwe
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.Cwe
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Cwe.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.Cwe";
+                        };
+    
+                        return Cwe;
+                    })();
+    
                     v2.Folder = (function() {
     
                         /**
@@ -110218,6 +115529,7 @@
                          * @property {string|null} [pubsubTopic] NotificationConfig pubsubTopic
                          * @property {string|null} [serviceAccount] NotificationConfig serviceAccount
                          * @property {google.cloud.securitycenter.v2.NotificationConfig.IStreamingConfig|null} [streamingConfig] NotificationConfig streamingConfig
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] NotificationConfig updateTime
                          */
     
                         /**
@@ -110275,6 +115587,14 @@
                          */
                         NotificationConfig.prototype.streamingConfig = null;
     
+                        /**
+                         * NotificationConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.securitycenter.v2.NotificationConfig
+                         * @instance
+                         */
+                        NotificationConfig.prototype.updateTime = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -110323,6 +115643,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceAccount);
                             if (message.streamingConfig != null && Object.hasOwnProperty.call(message, "streamingConfig"))
                                 $root.google.cloud.securitycenter.v2.NotificationConfig.StreamingConfig.encode(message.streamingConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -110377,6 +115699,10 @@
                                     }
                                 case 5: {
                                         message.streamingConfig = $root.google.cloud.securitycenter.v2.NotificationConfig.StreamingConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -110435,6 +115761,11 @@
                                         return "streamingConfig." + error;
                                 }
                             }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
                             return null;
                         };
     
@@ -110463,6 +115794,11 @@
                                     throw TypeError(".google.cloud.securitycenter.v2.NotificationConfig.streamingConfig: object expected");
                                 message.streamingConfig = $root.google.cloud.securitycenter.v2.NotificationConfig.StreamingConfig.fromObject(object.streamingConfig);
                             }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.NotificationConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
                             return message;
                         };
     
@@ -110484,6 +115820,7 @@
                                 object.description = "";
                                 object.pubsubTopic = "";
                                 object.serviceAccount = "";
+                                object.updateTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -110498,6 +115835,8 @@
                                 if (options.oneofs)
                                     object.notifyConfig = "streamingConfig";
                             }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             return object;
                         };
     
@@ -120137,6 +125476,646 @@
                         };
     
                         return DeleteResourceValueConfigRequest;
+                    })();
+    
+                    v2.BigQueryDestination = (function() {
+    
+                        /**
+                         * Properties of a BigQueryDestination.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IBigQueryDestination
+                         * @property {string|null} [dataset] BigQueryDestination dataset
+                         */
+    
+                        /**
+                         * Constructs a new BigQueryDestination.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents a BigQueryDestination.
+                         * @implements IBigQueryDestination
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IBigQueryDestination=} [properties] Properties to set
+                         */
+                        function BigQueryDestination(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BigQueryDestination dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @instance
+                         */
+                        BigQueryDestination.prototype.dataset = "";
+    
+                        /**
+                         * Creates a new BigQueryDestination instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IBigQueryDestination=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.BigQueryDestination} BigQueryDestination instance
+                         */
+                        BigQueryDestination.create = function create(properties) {
+                            return new BigQueryDestination(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDestination message. Does not implicitly {@link google.cloud.securitycenter.v2.BigQueryDestination.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IBigQueryDestination} message BigQueryDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDestination.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BigQueryDestination message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.BigQueryDestination.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IBigQueryDestination} message BigQueryDestination message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BigQueryDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.BigQueryDestination} BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDestination.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.BigQueryDestination();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.BigQueryDestination} BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BigQueryDestination.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BigQueryDestination message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BigQueryDestination.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BigQueryDestination message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.BigQueryDestination} BigQueryDestination
+                         */
+                        BigQueryDestination.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.BigQueryDestination)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.BigQueryDestination();
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BigQueryDestination message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.BigQueryDestination} message BigQueryDestination
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BigQueryDestination.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dataset = "";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BigQueryDestination to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BigQueryDestination.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BigQueryDestination
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.BigQueryDestination
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BigQueryDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.BigQueryDestination";
+                        };
+    
+                        return BigQueryDestination;
+                    })();
+    
+                    v2.ExportFindingsMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportFindingsMetadata.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IExportFindingsMetadata
+                         * @property {google.protobuf.ITimestamp|null} [exportStartTime] ExportFindingsMetadata exportStartTime
+                         * @property {google.cloud.securitycenter.v2.IBigQueryDestination|null} [bigQueryDestination] ExportFindingsMetadata bigQueryDestination
+                         */
+    
+                        /**
+                         * Constructs a new ExportFindingsMetadata.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an ExportFindingsMetadata.
+                         * @implements IExportFindingsMetadata
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsMetadata=} [properties] Properties to set
+                         */
+                        function ExportFindingsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportFindingsMetadata exportStartTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} exportStartTime
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @instance
+                         */
+                        ExportFindingsMetadata.prototype.exportStartTime = null;
+    
+                        /**
+                         * ExportFindingsMetadata bigQueryDestination.
+                         * @member {google.cloud.securitycenter.v2.IBigQueryDestination|null|undefined} bigQueryDestination
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @instance
+                         */
+                        ExportFindingsMetadata.prototype.bigQueryDestination = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportFindingsMetadata destination.
+                         * @member {"bigQueryDestination"|undefined} destination
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @instance
+                         */
+                        Object.defineProperty(ExportFindingsMetadata.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["bigQueryDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportFindingsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsMetadata} ExportFindingsMetadata instance
+                         */
+                        ExportFindingsMetadata.create = function create(properties) {
+                            return new ExportFindingsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportFindingsMetadata message. Does not implicitly {@link google.cloud.securitycenter.v2.ExportFindingsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsMetadata} message ExportFindingsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportFindingsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.exportStartTime != null && Object.hasOwnProperty.call(message, "exportStartTime"))
+                                $root.google.protobuf.Timestamp.encode(message.exportStartTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.bigQueryDestination != null && Object.hasOwnProperty.call(message, "bigQueryDestination"))
+                                $root.google.cloud.securitycenter.v2.BigQueryDestination.encode(message.bigQueryDestination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportFindingsMetadata message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.ExportFindingsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsMetadata} message ExportFindingsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportFindingsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportFindingsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsMetadata} ExportFindingsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportFindingsMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.ExportFindingsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.exportStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.bigQueryDestination = $root.google.cloud.securitycenter.v2.BigQueryDestination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportFindingsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsMetadata} ExportFindingsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportFindingsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportFindingsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportFindingsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.exportStartTime != null && message.hasOwnProperty("exportStartTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.exportStartTime);
+                                if (error)
+                                    return "exportStartTime." + error;
+                            }
+                            if (message.bigQueryDestination != null && message.hasOwnProperty("bigQueryDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.securitycenter.v2.BigQueryDestination.verify(message.bigQueryDestination);
+                                    if (error)
+                                        return "bigQueryDestination." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportFindingsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsMetadata} ExportFindingsMetadata
+                         */
+                        ExportFindingsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.ExportFindingsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v2.ExportFindingsMetadata();
+                            if (object.exportStartTime != null) {
+                                if (typeof object.exportStartTime !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.ExportFindingsMetadata.exportStartTime: object expected");
+                                message.exportStartTime = $root.google.protobuf.Timestamp.fromObject(object.exportStartTime);
+                            }
+                            if (object.bigQueryDestination != null) {
+                                if (typeof object.bigQueryDestination !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v2.ExportFindingsMetadata.bigQueryDestination: object expected");
+                                message.bigQueryDestination = $root.google.cloud.securitycenter.v2.BigQueryDestination.fromObject(object.bigQueryDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportFindingsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.ExportFindingsMetadata} message ExportFindingsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportFindingsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.exportStartTime = null;
+                            if (message.exportStartTime != null && message.hasOwnProperty("exportStartTime"))
+                                object.exportStartTime = $root.google.protobuf.Timestamp.toObject(message.exportStartTime, options);
+                            if (message.bigQueryDestination != null && message.hasOwnProperty("bigQueryDestination")) {
+                                object.bigQueryDestination = $root.google.cloud.securitycenter.v2.BigQueryDestination.toObject(message.bigQueryDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "bigQueryDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportFindingsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportFindingsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportFindingsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportFindingsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.ExportFindingsMetadata";
+                        };
+    
+                        return ExportFindingsMetadata;
+                    })();
+    
+                    v2.ExportFindingsResponse = (function() {
+    
+                        /**
+                         * Properties of an ExportFindingsResponse.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @interface IExportFindingsResponse
+                         */
+    
+                        /**
+                         * Constructs a new ExportFindingsResponse.
+                         * @memberof google.cloud.securitycenter.v2
+                         * @classdesc Represents an ExportFindingsResponse.
+                         * @implements IExportFindingsResponse
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsResponse=} [properties] Properties to set
+                         */
+                        function ExportFindingsResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExportFindingsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsResponse} ExportFindingsResponse instance
+                         */
+                        ExportFindingsResponse.create = function create(properties) {
+                            return new ExportFindingsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportFindingsResponse message. Does not implicitly {@link google.cloud.securitycenter.v2.ExportFindingsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsResponse} message ExportFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportFindingsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportFindingsResponse message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.ExportFindingsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.IExportFindingsResponse} message ExportFindingsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportFindingsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportFindingsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsResponse} ExportFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportFindingsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v2.ExportFindingsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportFindingsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsResponse} ExportFindingsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportFindingsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportFindingsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportFindingsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportFindingsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v2.ExportFindingsResponse} ExportFindingsResponse
+                         */
+                        ExportFindingsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v2.ExportFindingsResponse)
+                                return object;
+                            return new $root.google.cloud.securitycenter.v2.ExportFindingsResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportFindingsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {google.cloud.securitycenter.v2.ExportFindingsResponse} message ExportFindingsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportFindingsResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExportFindingsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportFindingsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportFindingsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.securitycenter.v2.ExportFindingsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportFindingsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.securitycenter.v2.ExportFindingsResponse";
+                        };
+    
+                        return ExportFindingsResponse;
                     })();
     
                     v2.GetBigQueryExportRequest = (function() {

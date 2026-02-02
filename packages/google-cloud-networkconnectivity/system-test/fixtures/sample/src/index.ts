@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,13 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CrossNetworkAutomationServiceClient, HubServiceClient, PolicyBasedRoutingServiceClient} from '@google-cloud/network-connectivity';
+import {CrossNetworkAutomationServiceClient, DataTransferServiceClient, HubServiceClient, InternalRangeServiceClient, PolicyBasedRoutingServiceClient} from '@google-cloud/network-connectivity';
 
 // check that the client class type name can be used
 function doStuffWithCrossNetworkAutomationServiceClient(client: CrossNetworkAutomationServiceClient) {
   client.close();
 }
+function doStuffWithDataTransferServiceClient(client: DataTransferServiceClient) {
+  client.close();
+}
 function doStuffWithHubServiceClient(client: HubServiceClient) {
+  client.close();
+}
+function doStuffWithInternalRangeServiceClient(client: InternalRangeServiceClient) {
   client.close();
 }
 function doStuffWithPolicyBasedRoutingServiceClient(client: PolicyBasedRoutingServiceClient) {
@@ -34,8 +40,14 @@ function main() {
   const crossNetworkAutomationServiceClient = new CrossNetworkAutomationServiceClient();
   doStuffWithCrossNetworkAutomationServiceClient(crossNetworkAutomationServiceClient);
   // check that the client instance can be created
+  const dataTransferServiceClient = new DataTransferServiceClient();
+  doStuffWithDataTransferServiceClient(dataTransferServiceClient);
+  // check that the client instance can be created
   const hubServiceClient = new HubServiceClient();
   doStuffWithHubServiceClient(hubServiceClient);
+  // check that the client instance can be created
+  const internalRangeServiceClient = new InternalRangeServiceClient();
+  doStuffWithInternalRangeServiceClient(internalRangeServiceClient);
   // check that the client instance can be created
   const policyBasedRoutingServiceClient = new PolicyBasedRoutingServiceClient();
   doStuffWithPolicyBasedRoutingServiceClient(policyBasedRoutingServiceClient);

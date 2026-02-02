@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7118,6 +7118,8 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 12:
+                                case 13:
                                     break;
                                 }
                             if (message.timeline != null && message.hasOwnProperty("timeline")) {
@@ -7234,6 +7236,14 @@
                             case "ENDED":
                             case 11:
                                 message.state = 11;
+                                break;
+                            case "WITHDRAWING":
+                            case 12:
+                                message.state = 12;
+                                break;
+                            case "WITHDRAWN":
+                            case 13:
+                                message.state = 13;
                                 break;
                             }
                             if (object.timeline != null) {
@@ -7586,6 +7596,7 @@
                                  * @property {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IExpired|null} [expired] Event expired
                                  * @property {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IEnded|null} [ended] Event ended
                                  * @property {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IExternallyModified|null} [externallyModified] Event externallyModified
+                                 * @property {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn|null} [withdrawn] Event withdrawn
                                  * @property {google.protobuf.ITimestamp|null} [eventTime] Event eventTime
                                  */
     
@@ -7685,6 +7696,14 @@
                                 Event.prototype.externallyModified = null;
     
                                 /**
+                                 * Event withdrawn.
+                                 * @member {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn|null|undefined} withdrawn
+                                 * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event
+                                 * @instance
+                                 */
+                                Event.prototype.withdrawn = null;
+    
+                                /**
                                  * Event eventTime.
                                  * @member {google.protobuf.ITimestamp|null|undefined} eventTime
                                  * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event
@@ -7697,12 +7716,12 @@
     
                                 /**
                                  * Event event.
-                                 * @member {"requested"|"approved"|"denied"|"revoked"|"scheduled"|"activated"|"activationFailed"|"expired"|"ended"|"externallyModified"|undefined} event
+                                 * @member {"requested"|"approved"|"denied"|"revoked"|"scheduled"|"activated"|"activationFailed"|"expired"|"ended"|"externallyModified"|"withdrawn"|undefined} event
                                  * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event
                                  * @instance
                                  */
                                 Object.defineProperty(Event.prototype, "event", {
-                                    get: $util.oneOfGetter($oneOfFields = ["requested", "approved", "denied", "revoked", "scheduled", "activated", "activationFailed", "expired", "ended", "externallyModified"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["requested", "approved", "denied", "revoked", "scheduled", "activated", "activationFailed", "expired", "ended", "externallyModified", "withdrawn"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -7752,6 +7771,8 @@
                                         $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Ended.encode(message.ended, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                     if (message.externallyModified != null && Object.hasOwnProperty.call(message, "externallyModified"))
                                         $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.ExternallyModified.encode(message.externallyModified, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    if (message.withdrawn != null && Object.hasOwnProperty.call(message, "withdrawn"))
+                                        $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.encode(message.withdrawn, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -7826,6 +7847,10 @@
                                             }
                                         case 12: {
                                                 message.externallyModified = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.ExternallyModified.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 13: {
+                                                message.withdrawn = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 1: {
@@ -7966,6 +7991,16 @@
                                                 return "externallyModified." + error;
                                         }
                                     }
+                                    if (message.withdrawn != null && message.hasOwnProperty("withdrawn")) {
+                                        if (properties.event === 1)
+                                            return "event: multiple values";
+                                        properties.event = 1;
+                                        {
+                                            var error = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.verify(message.withdrawn);
+                                            if (error)
+                                                return "withdrawn." + error;
+                                        }
+                                    }
                                     if (message.eventTime != null && message.hasOwnProperty("eventTime")) {
                                         var error = $root.google.protobuf.Timestamp.verify(message.eventTime);
                                         if (error)
@@ -8035,6 +8070,11 @@
                                         if (typeof object.externallyModified !== "object")
                                             throw TypeError(".google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.externallyModified: object expected");
                                         message.externallyModified = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.ExternallyModified.fromObject(object.externallyModified);
+                                    }
+                                    if (object.withdrawn != null) {
+                                        if (typeof object.withdrawn !== "object")
+                                            throw TypeError(".google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.withdrawn: object expected");
+                                        message.withdrawn = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.fromObject(object.withdrawn);
                                     }
                                     if (object.eventTime != null) {
                                         if (typeof object.eventTime !== "object")
@@ -8110,6 +8150,11 @@
                                         object.externallyModified = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.ExternallyModified.toObject(message.externallyModified, options);
                                         if (options.oneofs)
                                             object.event = "externallyModified";
+                                    }
+                                    if (message.withdrawn != null && message.hasOwnProperty("withdrawn")) {
+                                        object.withdrawn = $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.toObject(message.withdrawn, options);
+                                        if (options.oneofs)
+                                            object.event = "withdrawn";
                                     }
                                     return object;
                                 };
@@ -9035,6 +9080,183 @@
                                     };
     
                                     return Revoked;
+                                })();
+    
+                                Event.Withdrawn = (function() {
+    
+                                    /**
+                                     * Properties of a Withdrawn.
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event
+                                     * @interface IWithdrawn
+                                     */
+    
+                                    /**
+                                     * Constructs a new Withdrawn.
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event
+                                     * @classdesc Represents a Withdrawn.
+                                     * @implements IWithdrawn
+                                     * @constructor
+                                     * @param {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn=} [properties] Properties to set
+                                     */
+                                    function Withdrawn(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Creates a new Withdrawn instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn=} [properties] Properties to set
+                                     * @returns {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn} Withdrawn instance
+                                     */
+                                    Withdrawn.create = function create(properties) {
+                                        return new Withdrawn(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Withdrawn message. Does not implicitly {@link google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn} message Withdrawn message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Withdrawn.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Withdrawn message, length delimited. Does not implicitly {@link google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn} message Withdrawn message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Withdrawn.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Withdrawn message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn} Withdrawn
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Withdrawn.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Withdrawn message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn} Withdrawn
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Withdrawn.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Withdrawn message.
+                                     * @function verify
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Withdrawn.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Withdrawn message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn} Withdrawn
+                                     */
+                                    Withdrawn.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn)
+                                            return object;
+                                        return new $root.google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn();
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Withdrawn message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn} message Withdrawn
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Withdrawn.toObject = function toObject() {
+                                        return {};
+                                    };
+    
+                                    /**
+                                     * Converts this Withdrawn to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Withdrawn.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Withdrawn
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Withdrawn.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn";
+                                    };
+    
+                                    return Withdrawn;
                                 })();
     
                                 Event.Scheduled = (function() {
@@ -10425,6 +10647,8 @@
                          * @property {number} REVOKING=9 REVOKING value
                          * @property {number} REVOKED=10 REVOKED value
                          * @property {number} ENDED=11 ENDED value
+                         * @property {number} WITHDRAWING=12 WITHDRAWING value
+                         * @property {number} WITHDRAWN=13 WITHDRAWN value
                          */
                         Grant.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -10439,6 +10663,8 @@
                             values[valuesById[9] = "REVOKING"] = 9;
                             values[valuesById[10] = "REVOKED"] = 10;
                             values[valuesById[11] = "ENDED"] = 11;
+                            values[valuesById[12] = "WITHDRAWING"] = 12;
+                            values[valuesById[13] = "WITHDRAWN"] = 13;
                             return values;
                         })();
     

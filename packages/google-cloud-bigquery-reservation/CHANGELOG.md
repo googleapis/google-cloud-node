@@ -1,5 +1,36 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.2.0...bigquery-reservation-v4.3.0) (2025-10-13)
+
+
+### Features
+
+* [bigquery-reservation] Add new `BACKGROUND_CHANGE_DATA_CAPTURE`, `BACKGROUND_COLUMN_METADATA_INDEX`, and `BACKGROUND_SEARCH_INDEX_REFRESH` reservation assignment types ([#6785](https://github.com/googleapis/google-cloud-node/issues/6785)) ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+* Add new reservation IAM policy get/set/test methods ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+* Add support for creation and modification of new reservation groups ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.1.0...bigquery-reservation-v4.2.0) (2025-08-21)
+
+
+### Features
+
+* [bigquery-reservation] Add Reservation.max_slots field to Reservation proto, indicating the total max number of slots this reservation can use up to ([#6606](https://github.com/googleapis/google-cloud-node/issues/6606)) ([d3237dc](https://github.com/googleapis/google-cloud-node/commit/d3237dcc125079b0f08dc454686ebcdc73a7d236))
+* Add Reservation.scaling_mode field and its corresponding enum message ScalingMode. This field should be used together with Reservation.max_slots ([d3237dc](https://github.com/googleapis/google-cloud-node/commit/d3237dcc125079b0f08dc454686ebcdc73a7d236))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.0.1...bigquery-reservation-v4.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6418](https://github.com/googleapis/google-cloud-node/issues/6418)) ([fcfb2c0](https://github.com/googleapis/google-cloud-node/commit/fcfb2c018539983a8ce32205a2ea9e99ef28e88a))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.0.0...bigquery-reservation-v4.0.1) (2025-03-19)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1121,8 +1121,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1240,8 +1241,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1308,8 +1310,9 @@ export class SessionServiceClient {
  *   Optional. The standard list filter.
  *   Supported fields:
  *      * `display_name`
+ *      * `user_id`
  *
- *   Example: `display_name=abc`.
+ *   Example: `display_name="abc"`, `user_id="123"`.
  * @param {string} [request.orderBy]
  *   Optional. A comma-separated list of fields to order by, sorted in ascending
  *   order. Use "desc" after a field name for descending. Supported fields:
@@ -1371,6 +1374,19 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1477,6 +1493,19 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1532,6 +1561,19 @@ export class SessionServiceClient {
  *   value returned from a previous list
  *   {@link protos.google.cloud.aiplatform.v1beta1.SessionService.ListEvents|SessionService.ListEvents}
  *   call.
+ * @param {string} [request.filter]
+ *   Optional. The standard list filter.
+ *   Supported fields:
+ *      * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+ *      the timestamp is in RFC 3339 format)
+ *
+ *   More detail in [AIP-160](https://google.aip.dev/160).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields to order by, sorted in ascending
+ *   order. Use "desc" after a field name for descending. Supported fields:
+ *     * `timestamp`
+ *
+ *   Example: `timestamp desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

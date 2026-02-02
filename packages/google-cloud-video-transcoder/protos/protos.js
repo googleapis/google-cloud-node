@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -96,6 +96,7 @@
                              * @property {google.cloud.video.transcoder.v1.Job.ProcessingMode|null} [mode] Job mode
                              * @property {number|null} [batchModePriority] Job batchModePriority
                              * @property {google.cloud.video.transcoder.v1.Job.OptimizationStrategy|null} [optimization] Job optimization
+                             * @property {boolean|null} [fillContentGaps] Job fillContentGaps
                              */
     
                             /**
@@ -234,6 +235,14 @@
                              */
                             Job.prototype.optimization = 0;
     
+                            /**
+                             * Job fillContentGaps.
+                             * @member {boolean} fillContentGaps
+                             * @memberof google.cloud.video.transcoder.v1.Job
+                             * @instance
+                             */
+                            Job.prototype.fillContentGaps = false;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -303,6 +312,8 @@
                                     writer.uint32(/* id 21, wireType 0 =*/168).int32(message.batchModePriority);
                                 if (message.optimization != null && Object.hasOwnProperty.call(message, "optimization"))
                                     writer.uint32(/* id 22, wireType 0 =*/176).int32(message.optimization);
+                                if (message.fillContentGaps != null && Object.hasOwnProperty.call(message, "fillContentGaps"))
+                                    writer.uint32(/* id 25, wireType 0 =*/200).bool(message.fillContentGaps);
                                 return writer;
                             };
     
@@ -416,6 +427,10 @@
                                         }
                                     case 22: {
                                             message.optimization = reader.int32();
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.fillContentGaps = reader.bool();
                                             break;
                                         }
                                     default:
@@ -541,6 +556,9 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.fillContentGaps != null && message.hasOwnProperty("fillContentGaps"))
+                                    if (typeof message.fillContentGaps !== "boolean")
+                                        return "fillContentGaps: boolean expected";
                                 return null;
                             };
     
@@ -668,6 +686,8 @@
                                     message.optimization = 2;
                                     break;
                                 }
+                                if (object.fillContentGaps != null)
+                                    message.fillContentGaps = Boolean(object.fillContentGaps);
                                 return message;
                             };
     
@@ -699,6 +719,7 @@
                                     object.mode = options.enums === String ? "PROCESSING_MODE_UNSPECIFIED" : 0;
                                     object.batchModePriority = 0;
                                     object.optimization = options.enums === String ? "OPTIMIZATION_STRATEGY_UNSPECIFIED" : 0;
+                                    object.fillContentGaps = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -740,6 +761,8 @@
                                     object.batchModePriority = message.batchModePriority;
                                 if (message.optimization != null && message.hasOwnProperty("optimization"))
                                     object.optimization = options.enums === String ? $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] === undefined ? message.optimization : $root.google.cloud.video.transcoder.v1.Job.OptimizationStrategy[message.optimization] : message.optimization;
+                                if (message.fillContentGaps != null && message.hasOwnProperty("fillContentGaps"))
+                                    object.fillContentGaps = message.fillContentGaps;
                                 return object;
                             };
     
@@ -1763,6 +1786,7 @@
                              * @property {string|null} [key] Input key
                              * @property {string|null} [uri] Input uri
                              * @property {google.cloud.video.transcoder.v1.IPreprocessingConfig|null} [preprocessingConfig] Input preprocessingConfig
+                             * @property {google.cloud.video.transcoder.v1.IInputAttributes|null} [attributes] Input attributes
                              */
     
                             /**
@@ -1805,6 +1829,14 @@
                             Input.prototype.preprocessingConfig = null;
     
                             /**
+                             * Input attributes.
+                             * @member {google.cloud.video.transcoder.v1.IInputAttributes|null|undefined} attributes
+                             * @memberof google.cloud.video.transcoder.v1.Input
+                             * @instance
+                             */
+                            Input.prototype.attributes = null;
+    
+                            /**
                              * Creates a new Input instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.Input
@@ -1834,6 +1866,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
                                 if (message.preprocessingConfig != null && Object.hasOwnProperty.call(message, "preprocessingConfig"))
                                     $root.google.cloud.video.transcoder.v1.PreprocessingConfig.encode(message.preprocessingConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                    $root.google.cloud.video.transcoder.v1.InputAttributes.encode(message.attributes, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1882,6 +1916,10 @@
                                             message.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 4: {
+                                            message.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1928,6 +1966,11 @@
                                     if (error)
                                         return "preprocessingConfig." + error;
                                 }
+                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                    var error = $root.google.cloud.video.transcoder.v1.InputAttributes.verify(message.attributes);
+                                    if (error)
+                                        return "attributes." + error;
+                                }
                                 return null;
                             };
     
@@ -1952,6 +1995,11 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1.Input.preprocessingConfig: object expected");
                                     message.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.fromObject(object.preprocessingConfig);
                                 }
+                                if (object.attributes != null) {
+                                    if (typeof object.attributes !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.Input.attributes: object expected");
+                                    message.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.fromObject(object.attributes);
+                                }
                                 return message;
                             };
     
@@ -1972,6 +2020,7 @@
                                     object.key = "";
                                     object.uri = "";
                                     object.preprocessingConfig = null;
+                                    object.attributes = null;
                                 }
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     object.key = message.key;
@@ -1979,6 +2028,8 @@
                                     object.uri = message.uri;
                                 if (message.preprocessingConfig != null && message.hasOwnProperty("preprocessingConfig"))
                                     object.preprocessingConfig = $root.google.cloud.video.transcoder.v1.PreprocessingConfig.toObject(message.preprocessingConfig, options);
+                                if (message.attributes != null && message.hasOwnProperty("attributes"))
+                                    object.attributes = $root.google.cloud.video.transcoder.v1.InputAttributes.toObject(message.attributes, options);
                                 return object;
                             };
     
@@ -3063,6 +3114,7 @@
                              * @property {Array.<string>|null} [elementaryStreams] MuxStream elementaryStreams
                              * @property {google.cloud.video.transcoder.v1.ISegmentSettings|null} [segmentSettings] MuxStream segmentSettings
                              * @property {string|null} [encryptionId] MuxStream encryptionId
+                             * @property {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null} [fmp4] MuxStream fmp4
                              */
     
                             /**
@@ -3130,6 +3182,28 @@
                             MuxStream.prototype.encryptionId = "";
     
                             /**
+                             * MuxStream fmp4.
+                             * @member {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null|undefined} fmp4
+                             * @memberof google.cloud.video.transcoder.v1.MuxStream
+                             * @instance
+                             */
+                            MuxStream.prototype.fmp4 = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * MuxStream containerConfig.
+                             * @member {"fmp4"|undefined} containerConfig
+                             * @memberof google.cloud.video.transcoder.v1.MuxStream
+                             * @instance
+                             */
+                            Object.defineProperty(MuxStream.prototype, "containerConfig", {
+                                get: $util.oneOfGetter($oneOfFields = ["fmp4"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new MuxStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1.MuxStream
@@ -3166,6 +3240,8 @@
                                     $root.google.cloud.video.transcoder.v1.SegmentSettings.encode(message.segmentSettings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.encryptionId != null && Object.hasOwnProperty.call(message, "encryptionId"))
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.encryptionId);
+                                if (message.fmp4 != null && Object.hasOwnProperty.call(message, "fmp4"))
+                                    $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.encode(message.fmp4, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3228,6 +3304,10 @@
                                             message.encryptionId = reader.string();
                                             break;
                                         }
+                                    case 8: {
+                                            message.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3263,6 +3343,7 @@
                             MuxStream.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.key != null && message.hasOwnProperty("key"))
                                     if (!$util.isString(message.key))
                                         return "key: string expected";
@@ -3287,6 +3368,14 @@
                                 if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
                                     if (!$util.isString(message.encryptionId))
                                         return "encryptionId: string expected";
+                                if (message.fmp4 != null && message.hasOwnProperty("fmp4")) {
+                                    properties.containerConfig = 1;
+                                    {
+                                        var error = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify(message.fmp4);
+                                        if (error)
+                                            return "fmp4." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -3322,6 +3411,11 @@
                                 }
                                 if (object.encryptionId != null)
                                     message.encryptionId = String(object.encryptionId);
+                                if (object.fmp4 != null) {
+                                    if (typeof object.fmp4 !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1.MuxStream.fmp4: object expected");
+                                    message.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.fromObject(object.fmp4);
+                                }
                                 return message;
                             };
     
@@ -3362,6 +3456,11 @@
                                     object.segmentSettings = $root.google.cloud.video.transcoder.v1.SegmentSettings.toObject(message.segmentSettings, options);
                                 if (message.encryptionId != null && message.hasOwnProperty("encryptionId"))
                                     object.encryptionId = message.encryptionId;
+                                if (message.fmp4 != null && message.hasOwnProperty("fmp4")) {
+                                    object.fmp4 = $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.toObject(message.fmp4, options);
+                                    if (options.oneofs)
+                                        object.containerConfig = "fmp4";
+                                }
                                 return object;
                             };
     
@@ -3390,6 +3489,211 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.video.transcoder.v1.MuxStream";
                             };
+    
+                            MuxStream.Fmp4Config = (function() {
+    
+                                /**
+                                 * Properties of a Fmp4Config.
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream
+                                 * @interface IFmp4Config
+                                 * @property {string|null} [codecTag] Fmp4Config codecTag
+                                 */
+    
+                                /**
+                                 * Constructs a new Fmp4Config.
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream
+                                 * @classdesc Represents a Fmp4Config.
+                                 * @implements IFmp4Config
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config=} [properties] Properties to set
+                                 */
+                                function Fmp4Config(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Fmp4Config codecTag.
+                                 * @member {string} codecTag
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @instance
+                                 */
+                                Fmp4Config.prototype.codecTag = "";
+    
+                                /**
+                                 * Creates a new Fmp4Config instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config instance
+                                 */
+                                Fmp4Config.create = function create(properties) {
+                                    return new Fmp4Config(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Fmp4Config message. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config} message Fmp4Config message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fmp4Config.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.codecTag != null && Object.hasOwnProperty.call(message, "codecTag"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.codecTag);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Fmp4Config message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.IFmp4Config} message Fmp4Config message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Fmp4Config.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Fmp4Config message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fmp4Config.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.codecTag = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Fmp4Config message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Fmp4Config.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Fmp4Config message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Fmp4Config.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.codecTag != null && message.hasOwnProperty("codecTag"))
+                                        if (!$util.isString(message.codecTag))
+                                            return "codecTag: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Fmp4Config message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} Fmp4Config
+                                 */
+                                Fmp4Config.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1.MuxStream.Fmp4Config();
+                                    if (object.codecTag != null)
+                                        message.codecTag = String(object.codecTag);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Fmp4Config message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.MuxStream.Fmp4Config} message Fmp4Config
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Fmp4Config.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.codecTag = "";
+                                    if (message.codecTag != null && message.hasOwnProperty("codecTag"))
+                                        object.codecTag = message.codecTag;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Fmp4Config to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Fmp4Config.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Fmp4Config
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.MuxStream.Fmp4Config
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Fmp4Config.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.MuxStream.Fmp4Config";
+                                };
+    
+                                return Fmp4Config;
+                            })();
     
                             return MuxStream;
                         })();
@@ -9179,6 +9483,554 @@
                             return PreprocessingConfig;
                         })();
     
+                        v1.TrackDefinition = (function() {
+    
+                            /**
+                             * Properties of a TrackDefinition.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @interface ITrackDefinition
+                             * @property {number|null} [inputTrack] TrackDefinition inputTrack
+                             * @property {Array.<string>|null} [languages] TrackDefinition languages
+                             * @property {boolean|null} [detectLanguages] TrackDefinition detectLanguages
+                             * @property {Array.<string>|null} [detectedLanguages] TrackDefinition detectedLanguages
+                             */
+    
+                            /**
+                             * Constructs a new TrackDefinition.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @classdesc Represents a TrackDefinition.
+                             * @implements ITrackDefinition
+                             * @constructor
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition=} [properties] Properties to set
+                             */
+                            function TrackDefinition(properties) {
+                                this.languages = [];
+                                this.detectedLanguages = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TrackDefinition inputTrack.
+                             * @member {number|null|undefined} inputTrack
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.inputTrack = null;
+    
+                            /**
+                             * TrackDefinition languages.
+                             * @member {Array.<string>} languages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.languages = $util.emptyArray;
+    
+                            /**
+                             * TrackDefinition detectLanguages.
+                             * @member {boolean} detectLanguages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.detectLanguages = false;
+    
+                            /**
+                             * TrackDefinition detectedLanguages.
+                             * @member {Array.<string>} detectedLanguages
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             */
+                            TrackDefinition.prototype.detectedLanguages = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(TrackDefinition.prototype, "_inputTrack", {
+                                get: $util.oneOfGetter($oneOfFields = ["inputTrack"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new TrackDefinition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition=} [properties] Properties to set
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition instance
+                             */
+                            TrackDefinition.create = function create(properties) {
+                                return new TrackDefinition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TrackDefinition message. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition} message TrackDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrackDefinition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.inputTrack != null && Object.hasOwnProperty.call(message, "inputTrack"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.inputTrack);
+                                if (message.languages != null && message.languages.length)
+                                    for (var i = 0; i < message.languages.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.languages[i]);
+                                if (message.detectLanguages != null && Object.hasOwnProperty.call(message, "detectLanguages"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.detectLanguages);
+                                if (message.detectedLanguages != null && message.detectedLanguages.length)
+                                    for (var i = 0; i < message.detectedLanguages.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.detectedLanguages[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TrackDefinition message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.ITrackDefinition} message TrackDefinition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TrackDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TrackDefinition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrackDefinition.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.TrackDefinition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.inputTrack = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.languages && message.languages.length))
+                                                message.languages = [];
+                                            message.languages.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.detectLanguages = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.detectedLanguages && message.detectedLanguages.length))
+                                                message.detectedLanguages = [];
+                                            message.detectedLanguages.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TrackDefinition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TrackDefinition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TrackDefinition message.
+                             * @function verify
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TrackDefinition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.inputTrack != null && message.hasOwnProperty("inputTrack")) {
+                                    properties._inputTrack = 1;
+                                    if (!$util.isInteger(message.inputTrack))
+                                        return "inputTrack: integer expected";
+                                }
+                                if (message.languages != null && message.hasOwnProperty("languages")) {
+                                    if (!Array.isArray(message.languages))
+                                        return "languages: array expected";
+                                    for (var i = 0; i < message.languages.length; ++i)
+                                        if (!$util.isString(message.languages[i]))
+                                            return "languages: string[] expected";
+                                }
+                                if (message.detectLanguages != null && message.hasOwnProperty("detectLanguages"))
+                                    if (typeof message.detectLanguages !== "boolean")
+                                        return "detectLanguages: boolean expected";
+                                if (message.detectedLanguages != null && message.hasOwnProperty("detectedLanguages")) {
+                                    if (!Array.isArray(message.detectedLanguages))
+                                        return "detectedLanguages: array expected";
+                                    for (var i = 0; i < message.detectedLanguages.length; ++i)
+                                        if (!$util.isString(message.detectedLanguages[i]))
+                                            return "detectedLanguages: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TrackDefinition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.transcoder.v1.TrackDefinition} TrackDefinition
+                             */
+                            TrackDefinition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.transcoder.v1.TrackDefinition)
+                                    return object;
+                                var message = new $root.google.cloud.video.transcoder.v1.TrackDefinition();
+                                if (object.inputTrack != null)
+                                    message.inputTrack = object.inputTrack | 0;
+                                if (object.languages) {
+                                    if (!Array.isArray(object.languages))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.TrackDefinition.languages: array expected");
+                                    message.languages = [];
+                                    for (var i = 0; i < object.languages.length; ++i)
+                                        message.languages[i] = String(object.languages[i]);
+                                }
+                                if (object.detectLanguages != null)
+                                    message.detectLanguages = Boolean(object.detectLanguages);
+                                if (object.detectedLanguages) {
+                                    if (!Array.isArray(object.detectedLanguages))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.TrackDefinition.detectedLanguages: array expected");
+                                    message.detectedLanguages = [];
+                                    for (var i = 0; i < object.detectedLanguages.length; ++i)
+                                        message.detectedLanguages[i] = String(object.detectedLanguages[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TrackDefinition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.TrackDefinition} message TrackDefinition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TrackDefinition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.languages = [];
+                                    object.detectedLanguages = [];
+                                }
+                                if (options.defaults)
+                                    object.detectLanguages = false;
+                                if (message.inputTrack != null && message.hasOwnProperty("inputTrack")) {
+                                    object.inputTrack = message.inputTrack;
+                                    if (options.oneofs)
+                                        object._inputTrack = "inputTrack";
+                                }
+                                if (message.languages && message.languages.length) {
+                                    object.languages = [];
+                                    for (var j = 0; j < message.languages.length; ++j)
+                                        object.languages[j] = message.languages[j];
+                                }
+                                if (message.detectLanguages != null && message.hasOwnProperty("detectLanguages"))
+                                    object.detectLanguages = message.detectLanguages;
+                                if (message.detectedLanguages && message.detectedLanguages.length) {
+                                    object.detectedLanguages = [];
+                                    for (var j = 0; j < message.detectedLanguages.length; ++j)
+                                        object.detectedLanguages[j] = message.detectedLanguages[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TrackDefinition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TrackDefinition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TrackDefinition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.transcoder.v1.TrackDefinition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TrackDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.transcoder.v1.TrackDefinition";
+                            };
+    
+                            return TrackDefinition;
+                        })();
+    
+                        v1.InputAttributes = (function() {
+    
+                            /**
+                             * Properties of an InputAttributes.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @interface IInputAttributes
+                             * @property {Array.<google.cloud.video.transcoder.v1.ITrackDefinition>|null} [trackDefinitions] InputAttributes trackDefinitions
+                             */
+    
+                            /**
+                             * Constructs a new InputAttributes.
+                             * @memberof google.cloud.video.transcoder.v1
+                             * @classdesc Represents an InputAttributes.
+                             * @implements IInputAttributes
+                             * @constructor
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes=} [properties] Properties to set
+                             */
+                            function InputAttributes(properties) {
+                                this.trackDefinitions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputAttributes trackDefinitions.
+                             * @member {Array.<google.cloud.video.transcoder.v1.ITrackDefinition>} trackDefinitions
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @instance
+                             */
+                            InputAttributes.prototype.trackDefinitions = $util.emptyArray;
+    
+                            /**
+                             * Creates a new InputAttributes instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes=} [properties] Properties to set
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes instance
+                             */
+                            InputAttributes.create = function create(properties) {
+                                return new InputAttributes(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputAttributes message. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes} message InputAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputAttributes.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.trackDefinitions != null && message.trackDefinitions.length)
+                                    for (var i = 0; i < message.trackDefinitions.length; ++i)
+                                        $root.google.cloud.video.transcoder.v1.TrackDefinition.encode(message.trackDefinitions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputAttributes message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.IInputAttributes} message InputAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputAttributes message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputAttributes.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.InputAttributes();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.trackDefinitions && message.trackDefinitions.length))
+                                                message.trackDefinitions = [];
+                                            message.trackDefinitions.push($root.google.cloud.video.transcoder.v1.TrackDefinition.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputAttributes message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputAttributes.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputAttributes message.
+                             * @function verify
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputAttributes.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.trackDefinitions != null && message.hasOwnProperty("trackDefinitions")) {
+                                    if (!Array.isArray(message.trackDefinitions))
+                                        return "trackDefinitions: array expected";
+                                    for (var i = 0; i < message.trackDefinitions.length; ++i) {
+                                        var error = $root.google.cloud.video.transcoder.v1.TrackDefinition.verify(message.trackDefinitions[i]);
+                                        if (error)
+                                            return "trackDefinitions." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputAttributes message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.video.transcoder.v1.InputAttributes} InputAttributes
+                             */
+                            InputAttributes.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.video.transcoder.v1.InputAttributes)
+                                    return object;
+                                var message = new $root.google.cloud.video.transcoder.v1.InputAttributes();
+                                if (object.trackDefinitions) {
+                                    if (!Array.isArray(object.trackDefinitions))
+                                        throw TypeError(".google.cloud.video.transcoder.v1.InputAttributes.trackDefinitions: array expected");
+                                    message.trackDefinitions = [];
+                                    for (var i = 0; i < object.trackDefinitions.length; ++i) {
+                                        if (typeof object.trackDefinitions[i] !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.InputAttributes.trackDefinitions: object expected");
+                                        message.trackDefinitions[i] = $root.google.cloud.video.transcoder.v1.TrackDefinition.fromObject(object.trackDefinitions[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputAttributes message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {google.cloud.video.transcoder.v1.InputAttributes} message InputAttributes
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputAttributes.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.trackDefinitions = [];
+                                if (message.trackDefinitions && message.trackDefinitions.length) {
+                                    object.trackDefinitions = [];
+                                    for (var j = 0; j < message.trackDefinitions.length; ++j)
+                                        object.trackDefinitions[j] = $root.google.cloud.video.transcoder.v1.TrackDefinition.toObject(message.trackDefinitions[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputAttributes to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputAttributes.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InputAttributes
+                             * @function getTypeUrl
+                             * @memberof google.cloud.video.transcoder.v1.InputAttributes
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InputAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.video.transcoder.v1.InputAttributes";
+                            };
+    
+                            return InputAttributes;
+                        })();
+    
                         v1.VideoStream = (function() {
     
                             /**
@@ -9475,6 +10327,376 @@
                                 return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream";
                             };
     
+                            /**
+                             * FrameRateConversionStrategy enum.
+                             * @name google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy
+                             * @enum {number}
+                             * @property {number} FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED=0 FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED value
+                             * @property {number} DOWNSAMPLE=1 DOWNSAMPLE value
+                             * @property {number} DROP_DUPLICATE=2 DROP_DUPLICATE value
+                             */
+                            VideoStream.FrameRateConversionStrategy = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DOWNSAMPLE"] = 1;
+                                values[valuesById[2] = "DROP_DUPLICATE"] = 2;
+                                return values;
+                            })();
+    
+                            VideoStream.H264ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a H264ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH264ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new H264ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H264ColorFormatSDR.
+                                 * @implements IH264ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function H264ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H264ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR instance
+                                 */
+                                H264ColorFormatSDR.create = function create(properties) {
+                                    return new H264ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR} message H264ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR} message H264ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H264ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H264ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H264ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} H264ColorFormatSDR
+                                 */
+                                H264ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H264ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR} message H264ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H264ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H264ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H264ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H264ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H264ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR";
+                                };
+    
+                                return H264ColorFormatSDR;
+                            })();
+    
+                            VideoStream.H264ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a H264ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH264ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new H264ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H264ColorFormatHLG.
+                                 * @implements IH264ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function H264ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H264ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG instance
+                                 */
+                                H264ColorFormatHLG.create = function create(properties) {
+                                    return new H264ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG} message H264ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H264ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG} message H264ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H264ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H264ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H264ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H264ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H264ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H264ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} H264ColorFormatHLG
+                                 */
+                                H264ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H264ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG} message H264ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H264ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H264ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H264ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H264ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H264ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG";
+                                };
+    
+                                return H264ColorFormatHLG;
+                            })();
+    
                             VideoStream.H264CodecSettings = (function() {
     
                                 /**
@@ -9484,6 +10706,7 @@
                                  * @property {number|null} [widthPixels] H264CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] H264CodecSettings heightPixels
                                  * @property {number|null} [frameRate] H264CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] H264CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] H264CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] H264CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] H264CodecSettings rateControlMode
@@ -9501,6 +10724,8 @@
                                  * @property {string|null} [profile] H264CodecSettings profile
                                  * @property {string|null} [tune] H264CodecSettings tune
                                  * @property {string|null} [preset] H264CodecSettings preset
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null} [sdr] H264CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null} [hlg] H264CodecSettings hlg
                                  */
     
                                 /**
@@ -9541,6 +10766,14 @@
                                  * @instance
                                  */
                                 H264CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * H264CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * H264CodecSettings bitrateBps.
@@ -9678,6 +10911,22 @@
                                  */
                                 H264CodecSettings.prototype.preset = "";
     
+                                /**
+                                 * H264CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * H264CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                H264CodecSettings.prototype.hlg = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -9689,6 +10938,17 @@
                                  */
                                 Object.defineProperty(H264CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * H264CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(H264CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -9756,6 +11016,12 @@
                                         writer.uint32(/* id 19, wireType 2 =*/154).string(message.tune);
                                     if (message.preset != null && Object.hasOwnProperty.call(message, "preset"))
                                         writer.uint32(/* id 20, wireType 2 =*/162).string(message.preset);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 23, wireType 0 =*/184).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -9802,6 +11068,10 @@
                                             }
                                         case 3: {
                                                 message.frameRate = reader.double();
+                                                break;
+                                            }
+                                        case 23: {
+                                                message.frameRateConversionStrategy = reader.int32();
                                                 break;
                                             }
                                         case 4: {
@@ -9872,6 +11142,14 @@
                                                 message.preset = reader.string();
                                                 break;
                                             }
+                                        case 21: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 22: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -9917,6 +11195,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -9977,6 +11264,24 @@
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         if (!$util.isString(message.preset))
                                             return "preset: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -9998,6 +11303,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -10035,6 +11360,16 @@
                                         message.tune = String(object.tune);
                                     if (object.preset != null)
                                         message.preset = String(object.preset);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.fromObject(object.hlg);
+                                    }
                                     return message;
                                 };
     
@@ -10070,6 +11405,7 @@
                                         object.profile = "";
                                         object.tune = "";
                                         object.preset = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -10117,6 +11453,18 @@
                                         object.tune = message.tune;
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         object.preset = message.preset;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     
@@ -10149,6 +11497,537 @@
                                 return H264CodecSettings;
                             })();
     
+                            VideoStream.H265ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatSDR.
+                                 * @implements IH265ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR instance
+                                 */
+                                H265ColorFormatSDR.create = function create(properties) {
+                                    return new H265ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR} message H265ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR} message H265ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} H265ColorFormatSDR
+                                 */
+                                H265ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR} message H265ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR";
+                                };
+    
+                                return H265ColorFormatSDR;
+                            })();
+    
+                            VideoStream.H265ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatHLG.
+                                 * @implements IH265ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG instance
+                                 */
+                                H265ColorFormatHLG.create = function create(properties) {
+                                    return new H265ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG} message H265ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG} message H265ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} H265ColorFormatHLG
+                                 */
+                                H265ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG} message H265ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG";
+                                };
+    
+                                return H265ColorFormatHLG;
+                            })();
+    
+                            VideoStream.H265ColorFormatHDR10 = (function() {
+    
+                                /**
+                                 * Properties of a H265ColorFormatHDR10.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IH265ColorFormatHDR10
+                                 */
+    
+                                /**
+                                 * Constructs a new H265ColorFormatHDR10.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a H265ColorFormatHDR10.
+                                 * @implements IH265ColorFormatHDR10
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10=} [properties] Properties to set
+                                 */
+                                function H265ColorFormatHDR10(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new H265ColorFormatHDR10 instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10 instance
+                                 */
+                                H265ColorFormatHDR10.create = function create(properties) {
+                                    return new H265ColorFormatHDR10(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHDR10 message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10} message H265ColorFormatHDR10 message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHDR10.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified H265ColorFormatHDR10 message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10} message H265ColorFormatHDR10 message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                H265ColorFormatHDR10.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHDR10.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                H265ColorFormatHDR10.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a H265ColorFormatHDR10 message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                H265ColorFormatHDR10.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a H265ColorFormatHDR10 message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} H265ColorFormatHDR10
+                                 */
+                                H265ColorFormatHDR10.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a H265ColorFormatHDR10 message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10} message H265ColorFormatHDR10
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                H265ColorFormatHDR10.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this H265ColorFormatHDR10 to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                H265ColorFormatHDR10.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for H265ColorFormatHDR10
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                H265ColorFormatHDR10.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10";
+                                };
+    
+                                return H265ColorFormatHDR10;
+                            })();
+    
                             VideoStream.H265CodecSettings = (function() {
     
                                 /**
@@ -10158,6 +12037,7 @@
                                  * @property {number|null} [widthPixels] H265CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] H265CodecSettings heightPixels
                                  * @property {number|null} [frameRate] H265CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] H265CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] H265CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] H265CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] H265CodecSettings rateControlMode
@@ -10174,6 +12054,9 @@
                                  * @property {string|null} [profile] H265CodecSettings profile
                                  * @property {string|null} [tune] H265CodecSettings tune
                                  * @property {string|null} [preset] H265CodecSettings preset
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null} [sdr] H265CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null} [hlg] H265CodecSettings hlg
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null} [hdr10] H265CodecSettings hdr10
                                  */
     
                                 /**
@@ -10214,6 +12097,14 @@
                                  * @instance
                                  */
                                 H265CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * H265CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * H265CodecSettings bitrateBps.
@@ -10343,6 +12234,30 @@
                                  */
                                 H265CodecSettings.prototype.preset = "";
     
+                                /**
+                                 * H265CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * H265CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.hlg = null;
+    
+                                /**
+                                 * H265CodecSettings hdr10.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null|undefined} hdr10
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                H265CodecSettings.prototype.hdr10 = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -10354,6 +12269,17 @@
                                  */
                                 Object.defineProperty(H265CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * H265CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|"hdr10"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(H265CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg", "hdr10"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -10419,6 +12345,14 @@
                                         writer.uint32(/* id 18, wireType 2 =*/146).string(message.tune);
                                     if (message.preset != null && Object.hasOwnProperty.call(message, "preset"))
                                         writer.uint32(/* id 19, wireType 2 =*/154).string(message.preset);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                                    if (message.hdr10 != null && Object.hasOwnProperty.call(message, "hdr10"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.encode(message.hdr10, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 23, wireType 0 =*/184).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -10465,6 +12399,10 @@
                                             }
                                         case 3: {
                                                 message.frameRate = reader.double();
+                                                break;
+                                            }
+                                        case 23: {
+                                                message.frameRateConversionStrategy = reader.int32();
                                                 break;
                                             }
                                         case 4: {
@@ -10531,6 +12469,18 @@
                                                 message.preset = reader.string();
                                                 break;
                                             }
+                                        case 20: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 21: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 22: {
+                                                message.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.decode(reader, reader.uint32());
+                                                break;
+                                            }
                                         default:
                                             reader.skipType(tag & 7);
                                             break;
@@ -10576,6 +12526,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -10633,6 +12592,34 @@
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         if (!$util.isString(message.preset))
                                             return "preset: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
+                                    if (message.hdr10 != null && message.hasOwnProperty("hdr10")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify(message.hdr10);
+                                            if (error)
+                                                return "hdr10." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -10654,6 +12641,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -10689,6 +12696,21 @@
                                         message.tune = String(object.tune);
                                     if (object.preset != null)
                                         message.preset = String(object.preset);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.fromObject(object.hlg);
+                                    }
+                                    if (object.hdr10 != null) {
+                                        if (typeof object.hdr10 !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings.hdr10: object expected");
+                                        message.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.fromObject(object.hdr10);
+                                    }
                                     return message;
                                 };
     
@@ -10723,6 +12745,7 @@
                                         object.profile = "";
                                         object.tune = "";
                                         object.preset = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -10768,6 +12791,23 @@
                                         object.tune = message.tune;
                                     if (message.preset != null && message.hasOwnProperty("preset"))
                                         object.preset = message.preset;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.hdr10 != null && message.hasOwnProperty("hdr10")) {
+                                        object.hdr10 = $root.google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.toObject(message.hdr10, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hdr10";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     
@@ -10800,6 +12840,360 @@
                                 return H265CodecSettings;
                             })();
     
+                            VideoStream.Vp9ColorFormatSDR = (function() {
+    
+                                /**
+                                 * Properties of a Vp9ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IVp9ColorFormatSDR
+                                 */
+    
+                                /**
+                                 * Constructs a new Vp9ColorFormatSDR.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a Vp9ColorFormatSDR.
+                                 * @implements IVp9ColorFormatSDR
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR=} [properties] Properties to set
+                                 */
+                                function Vp9ColorFormatSDR(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Vp9ColorFormatSDR instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR instance
+                                 */
+                                Vp9ColorFormatSDR.create = function create(properties) {
+                                    return new Vp9ColorFormatSDR(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR} message Vp9ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatSDR.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR} message Vp9ColorFormatSDR message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatSDR.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatSDR.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatSDR.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Vp9ColorFormatSDR message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Vp9ColorFormatSDR.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Vp9ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} Vp9ColorFormatSDR
+                                 */
+                                Vp9ColorFormatSDR.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Vp9ColorFormatSDR message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR} message Vp9ColorFormatSDR
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Vp9ColorFormatSDR.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Vp9ColorFormatSDR to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Vp9ColorFormatSDR.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Vp9ColorFormatSDR
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Vp9ColorFormatSDR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR";
+                                };
+    
+                                return Vp9ColorFormatSDR;
+                            })();
+    
+                            VideoStream.Vp9ColorFormatHLG = (function() {
+    
+                                /**
+                                 * Properties of a Vp9ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @interface IVp9ColorFormatHLG
+                                 */
+    
+                                /**
+                                 * Constructs a new Vp9ColorFormatHLG.
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream
+                                 * @classdesc Represents a Vp9ColorFormatHLG.
+                                 * @implements IVp9ColorFormatHLG
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG=} [properties] Properties to set
+                                 */
+                                function Vp9ColorFormatHLG(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new Vp9ColorFormatHLG instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG instance
+                                 */
+                                Vp9ColorFormatHLG.create = function create(properties) {
+                                    return new Vp9ColorFormatHLG(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG} message Vp9ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatHLG.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Vp9ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG} message Vp9ColorFormatHLG message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Vp9ColorFormatHLG.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatHLG.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Vp9ColorFormatHLG.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Vp9ColorFormatHLG message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Vp9ColorFormatHLG.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Vp9ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} Vp9ColorFormatHLG
+                                 */
+                                Vp9ColorFormatHLG.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG)
+                                        return object;
+                                    return new $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Vp9ColorFormatHLG message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG} message Vp9ColorFormatHLG
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Vp9ColorFormatHLG.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this Vp9ColorFormatHLG to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Vp9ColorFormatHLG.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Vp9ColorFormatHLG
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Vp9ColorFormatHLG.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG";
+                                };
+    
+                                return Vp9ColorFormatHLG;
+                            })();
+    
                             VideoStream.Vp9CodecSettings = (function() {
     
                                 /**
@@ -10809,6 +13203,7 @@
                                  * @property {number|null} [widthPixels] Vp9CodecSettings widthPixels
                                  * @property {number|null} [heightPixels] Vp9CodecSettings heightPixels
                                  * @property {number|null} [frameRate] Vp9CodecSettings frameRate
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null} [frameRateConversionStrategy] Vp9CodecSettings frameRateConversionStrategy
                                  * @property {number|null} [bitrateBps] Vp9CodecSettings bitrateBps
                                  * @property {string|null} [pixelFormat] Vp9CodecSettings pixelFormat
                                  * @property {string|null} [rateControlMode] Vp9CodecSettings rateControlMode
@@ -10816,6 +13211,8 @@
                                  * @property {number|null} [gopFrameCount] Vp9CodecSettings gopFrameCount
                                  * @property {google.protobuf.IDuration|null} [gopDuration] Vp9CodecSettings gopDuration
                                  * @property {string|null} [profile] Vp9CodecSettings profile
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null} [sdr] Vp9CodecSettings sdr
+                                 * @property {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null} [hlg] Vp9CodecSettings hlg
                                  */
     
                                 /**
@@ -10856,6 +13253,14 @@
                                  * @instance
                                  */
                                 Vp9CodecSettings.prototype.frameRate = 0;
+    
+                                /**
+                                 * Vp9CodecSettings frameRateConversionStrategy.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy} frameRateConversionStrategy
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.frameRateConversionStrategy = 0;
     
                                 /**
                                  * Vp9CodecSettings bitrateBps.
@@ -10913,6 +13318,22 @@
                                  */
                                 Vp9CodecSettings.prototype.profile = "";
     
+                                /**
+                                 * Vp9CodecSettings sdr.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null|undefined} sdr
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.sdr = null;
+    
+                                /**
+                                 * Vp9CodecSettings hlg.
+                                 * @member {google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null|undefined} hlg
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Vp9CodecSettings.prototype.hlg = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
@@ -10924,6 +13345,17 @@
                                  */
                                 Object.defineProperty(Vp9CodecSettings.prototype, "gopMode", {
                                     get: $util.oneOfGetter($oneOfFields = ["gopFrameCount", "gopDuration"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Vp9CodecSettings colorFormat.
+                                 * @member {"sdr"|"hlg"|undefined} colorFormat
+                                 * @memberof google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(Vp9CodecSettings.prototype, "colorFormat", {
+                                    get: $util.oneOfGetter($oneOfFields = ["sdr", "hlg"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -10971,6 +13403,12 @@
                                         $root.google.protobuf.Duration.encode(message.gopDuration, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                     if (message.profile != null && Object.hasOwnProperty.call(message, "profile"))
                                         writer.uint32(/* id 10, wireType 2 =*/82).string(message.profile);
+                                    if (message.sdr != null && Object.hasOwnProperty.call(message, "sdr"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.encode(message.sdr, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                    if (message.hlg != null && Object.hasOwnProperty.call(message, "hlg"))
+                                        $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.encode(message.hlg, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                    if (message.frameRateConversionStrategy != null && Object.hasOwnProperty.call(message, "frameRateConversionStrategy"))
+                                        writer.uint32(/* id 13, wireType 0 =*/104).int32(message.frameRateConversionStrategy);
                                     return writer;
                                 };
     
@@ -11019,6 +13457,10 @@
                                                 message.frameRate = reader.double();
                                                 break;
                                             }
+                                        case 13: {
+                                                message.frameRateConversionStrategy = reader.int32();
+                                                break;
+                                            }
                                         case 4: {
                                                 message.bitrateBps = reader.int32();
                                                 break;
@@ -11045,6 +13487,14 @@
                                             }
                                         case 10: {
                                                 message.profile = reader.string();
+                                                break;
+                                            }
+                                        case 11: {
+                                                message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 12: {
+                                                message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -11092,6 +13542,15 @@
                                     if (message.frameRate != null && message.hasOwnProperty("frameRate"))
                                         if (typeof message.frameRate !== "number")
                                             return "frameRate: number expected";
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        switch (message.frameRateConversionStrategy) {
+                                        default:
+                                            return "frameRateConversionStrategy: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
                                     if (message.bitrateBps != null && message.hasOwnProperty("bitrateBps"))
                                         if (!$util.isInteger(message.bitrateBps))
                                             return "bitrateBps: integer expected";
@@ -11122,6 +13581,24 @@
                                     if (message.profile != null && message.hasOwnProperty("profile"))
                                         if (!$util.isString(message.profile))
                                             return "profile: string expected";
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify(message.sdr);
+                                            if (error)
+                                                return "sdr." + error;
+                                        }
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        if (properties.colorFormat === 1)
+                                            return "colorFormat: multiple values";
+                                        properties.colorFormat = 1;
+                                        {
+                                            var error = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify(message.hlg);
+                                            if (error)
+                                                return "hlg." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -11143,6 +13620,26 @@
                                         message.heightPixels = object.heightPixels | 0;
                                     if (object.frameRate != null)
                                         message.frameRate = Number(object.frameRate);
+                                    switch (object.frameRateConversionStrategy) {
+                                    default:
+                                        if (typeof object.frameRateConversionStrategy === "number") {
+                                            message.frameRateConversionStrategy = object.frameRateConversionStrategy;
+                                            break;
+                                        }
+                                        break;
+                                    case "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED":
+                                    case 0:
+                                        message.frameRateConversionStrategy = 0;
+                                        break;
+                                    case "DOWNSAMPLE":
+                                    case 1:
+                                        message.frameRateConversionStrategy = 1;
+                                        break;
+                                    case "DROP_DUPLICATE":
+                                    case 2:
+                                        message.frameRateConversionStrategy = 2;
+                                        break;
+                                    }
                                     if (object.bitrateBps != null)
                                         message.bitrateBps = object.bitrateBps | 0;
                                     if (object.pixelFormat != null)
@@ -11160,6 +13657,16 @@
                                     }
                                     if (object.profile != null)
                                         message.profile = String(object.profile);
+                                    if (object.sdr != null) {
+                                        if (typeof object.sdr !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings.sdr: object expected");
+                                        message.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.fromObject(object.sdr);
+                                    }
+                                    if (object.hlg != null) {
+                                        if (typeof object.hlg !== "object")
+                                            throw TypeError(".google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings.hlg: object expected");
+                                        message.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.fromObject(object.hlg);
+                                    }
                                     return message;
                                 };
     
@@ -11185,6 +13692,7 @@
                                         object.rateControlMode = "";
                                         object.crfLevel = 0;
                                         object.profile = "";
+                                        object.frameRateConversionStrategy = options.enums === String ? "FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED" : 0;
                                     }
                                     if (message.widthPixels != null && message.hasOwnProperty("widthPixels"))
                                         object.widthPixels = message.widthPixels;
@@ -11212,6 +13720,18 @@
                                     }
                                     if (message.profile != null && message.hasOwnProperty("profile"))
                                         object.profile = message.profile;
+                                    if (message.sdr != null && message.hasOwnProperty("sdr")) {
+                                        object.sdr = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.toObject(message.sdr, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "sdr";
+                                    }
+                                    if (message.hlg != null && message.hasOwnProperty("hlg")) {
+                                        object.hlg = $root.google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.toObject(message.hlg, options);
+                                        if (options.oneofs)
+                                            object.colorFormat = "hlg";
+                                    }
+                                    if (message.frameRateConversionStrategy != null && message.hasOwnProperty("frameRateConversionStrategy"))
+                                        object.frameRateConversionStrategy = options.enums === String ? $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] === undefined ? message.frameRateConversionStrategy : $root.google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy[message.frameRateConversionStrategy] : message.frameRateConversionStrategy;
                                     return object;
                                 };
     

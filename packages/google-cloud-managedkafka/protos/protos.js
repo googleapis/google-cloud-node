@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7301,6 +7301,7 @@
                          * @property {google.cloud.managedkafka.v1.Cluster.State|null} [state] Cluster state
                          * @property {boolean|null} [satisfiesPzi] Cluster satisfiesPzi
                          * @property {boolean|null} [satisfiesPzs] Cluster satisfiesPzs
+                         * @property {google.cloud.managedkafka.v1.ITlsConfig|null} [tlsConfig] Cluster tlsConfig
                          */
     
                         /**
@@ -7399,6 +7400,14 @@
                          */
                         Cluster.prototype.satisfiesPzs = null;
     
+                        /**
+                         * Cluster tlsConfig.
+                         * @member {google.cloud.managedkafka.v1.ITlsConfig|null|undefined} tlsConfig
+                         * @memberof google.cloud.managedkafka.v1.Cluster
+                         * @instance
+                         */
+                        Cluster.prototype.tlsConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -7470,6 +7479,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.satisfiesPzi);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.satisfiesPzs);
+                            if (message.tlsConfig != null && Object.hasOwnProperty.call(message, "tlsConfig"))
+                                $root.google.cloud.managedkafka.v1.TlsConfig.encode(message.tlsConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -7563,6 +7574,10 @@
                                     }
                                 case 12: {
                                         message.satisfiesPzs = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.tlsConfig = $root.google.cloud.managedkafka.v1.TlsConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7660,6 +7675,11 @@
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
                             }
+                            if (message.tlsConfig != null && message.hasOwnProperty("tlsConfig")) {
+                                var error = $root.google.cloud.managedkafka.v1.TlsConfig.verify(message.tlsConfig);
+                                if (error)
+                                    return "tlsConfig." + error;
+                            }
                             return null;
                         };
     
@@ -7737,6 +7757,11 @@
                                 message.satisfiesPzi = Boolean(object.satisfiesPzi);
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                            if (object.tlsConfig != null) {
+                                if (typeof object.tlsConfig !== "object")
+                                    throw TypeError(".google.cloud.managedkafka.v1.Cluster.tlsConfig: object expected");
+                                message.tlsConfig = $root.google.cloud.managedkafka.v1.TlsConfig.fromObject(object.tlsConfig);
+                            }
                             return message;
                         };
     
@@ -7762,6 +7787,7 @@
                                 object.capacityConfig = null;
                                 object.rebalanceConfig = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.tlsConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7796,6 +7822,8 @@
                                 if (options.oneofs)
                                     object._satisfiesPzs = "satisfiesPzs";
                             }
+                            if (message.tlsConfig != null && message.hasOwnProperty("tlsConfig"))
+                                object.tlsConfig = $root.google.cloud.managedkafka.v1.TlsConfig.toObject(message.tlsConfig, options);
                             return object;
                         };
     
@@ -9011,6 +9039,671 @@
                         };
     
                         return GcpConfig;
+                    })();
+    
+                    v1.TlsConfig = (function() {
+    
+                        /**
+                         * Properties of a TlsConfig.
+                         * @memberof google.cloud.managedkafka.v1
+                         * @interface ITlsConfig
+                         * @property {google.cloud.managedkafka.v1.ITrustConfig|null} [trustConfig] TlsConfig trustConfig
+                         * @property {string|null} [sslPrincipalMappingRules] TlsConfig sslPrincipalMappingRules
+                         */
+    
+                        /**
+                         * Constructs a new TlsConfig.
+                         * @memberof google.cloud.managedkafka.v1
+                         * @classdesc Represents a TlsConfig.
+                         * @implements ITlsConfig
+                         * @constructor
+                         * @param {google.cloud.managedkafka.v1.ITlsConfig=} [properties] Properties to set
+                         */
+                        function TlsConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TlsConfig trustConfig.
+                         * @member {google.cloud.managedkafka.v1.ITrustConfig|null|undefined} trustConfig
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @instance
+                         */
+                        TlsConfig.prototype.trustConfig = null;
+    
+                        /**
+                         * TlsConfig sslPrincipalMappingRules.
+                         * @member {string} sslPrincipalMappingRules
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @instance
+                         */
+                        TlsConfig.prototype.sslPrincipalMappingRules = "";
+    
+                        /**
+                         * Creates a new TlsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITlsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.managedkafka.v1.TlsConfig} TlsConfig instance
+                         */
+                        TlsConfig.create = function create(properties) {
+                            return new TlsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TlsConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TlsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITlsConfig} message TlsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TlsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.trustConfig != null && Object.hasOwnProperty.call(message, "trustConfig"))
+                                $root.google.cloud.managedkafka.v1.TrustConfig.encode(message.trustConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.sslPrincipalMappingRules != null && Object.hasOwnProperty.call(message, "sslPrincipalMappingRules"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sslPrincipalMappingRules);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TlsConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TlsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITlsConfig} message TlsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TlsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TlsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.managedkafka.v1.TlsConfig} TlsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TlsConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.managedkafka.v1.TlsConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.trustConfig = $root.google.cloud.managedkafka.v1.TrustConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sslPrincipalMappingRules = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TlsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.managedkafka.v1.TlsConfig} TlsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TlsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TlsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TlsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.trustConfig != null && message.hasOwnProperty("trustConfig")) {
+                                var error = $root.google.cloud.managedkafka.v1.TrustConfig.verify(message.trustConfig);
+                                if (error)
+                                    return "trustConfig." + error;
+                            }
+                            if (message.sslPrincipalMappingRules != null && message.hasOwnProperty("sslPrincipalMappingRules"))
+                                if (!$util.isString(message.sslPrincipalMappingRules))
+                                    return "sslPrincipalMappingRules: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TlsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.managedkafka.v1.TlsConfig} TlsConfig
+                         */
+                        TlsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.managedkafka.v1.TlsConfig)
+                                return object;
+                            var message = new $root.google.cloud.managedkafka.v1.TlsConfig();
+                            if (object.trustConfig != null) {
+                                if (typeof object.trustConfig !== "object")
+                                    throw TypeError(".google.cloud.managedkafka.v1.TlsConfig.trustConfig: object expected");
+                                message.trustConfig = $root.google.cloud.managedkafka.v1.TrustConfig.fromObject(object.trustConfig);
+                            }
+                            if (object.sslPrincipalMappingRules != null)
+                                message.sslPrincipalMappingRules = String(object.sslPrincipalMappingRules);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TlsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.TlsConfig} message TlsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TlsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.trustConfig = null;
+                                object.sslPrincipalMappingRules = "";
+                            }
+                            if (message.trustConfig != null && message.hasOwnProperty("trustConfig"))
+                                object.trustConfig = $root.google.cloud.managedkafka.v1.TrustConfig.toObject(message.trustConfig, options);
+                            if (message.sslPrincipalMappingRules != null && message.hasOwnProperty("sslPrincipalMappingRules"))
+                                object.sslPrincipalMappingRules = message.sslPrincipalMappingRules;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TlsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TlsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TlsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.managedkafka.v1.TlsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TlsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.managedkafka.v1.TlsConfig";
+                        };
+    
+                        return TlsConfig;
+                    })();
+    
+                    v1.TrustConfig = (function() {
+    
+                        /**
+                         * Properties of a TrustConfig.
+                         * @memberof google.cloud.managedkafka.v1
+                         * @interface ITrustConfig
+                         * @property {Array.<google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig>|null} [casConfigs] TrustConfig casConfigs
+                         */
+    
+                        /**
+                         * Constructs a new TrustConfig.
+                         * @memberof google.cloud.managedkafka.v1
+                         * @classdesc Represents a TrustConfig.
+                         * @implements ITrustConfig
+                         * @constructor
+                         * @param {google.cloud.managedkafka.v1.ITrustConfig=} [properties] Properties to set
+                         */
+                        function TrustConfig(properties) {
+                            this.casConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TrustConfig casConfigs.
+                         * @member {Array.<google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig>} casConfigs
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @instance
+                         */
+                        TrustConfig.prototype.casConfigs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TrustConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITrustConfig=} [properties] Properties to set
+                         * @returns {google.cloud.managedkafka.v1.TrustConfig} TrustConfig instance
+                         */
+                        TrustConfig.create = function create(properties) {
+                            return new TrustConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TrustConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITrustConfig} message TrustConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TrustConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.casConfigs != null && message.casConfigs.length)
+                                for (var i = 0; i < message.casConfigs.length; ++i)
+                                    $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.encode(message.casConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TrustConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.ITrustConfig} message TrustConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TrustConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TrustConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.managedkafka.v1.TrustConfig} TrustConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TrustConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.managedkafka.v1.TrustConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.casConfigs && message.casConfigs.length))
+                                            message.casConfigs = [];
+                                        message.casConfigs.push($root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TrustConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.managedkafka.v1.TrustConfig} TrustConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TrustConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TrustConfig message.
+                         * @function verify
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TrustConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.casConfigs != null && message.hasOwnProperty("casConfigs")) {
+                                if (!Array.isArray(message.casConfigs))
+                                    return "casConfigs: array expected";
+                                for (var i = 0; i < message.casConfigs.length; ++i) {
+                                    var error = $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.verify(message.casConfigs[i]);
+                                    if (error)
+                                        return "casConfigs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TrustConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.managedkafka.v1.TrustConfig} TrustConfig
+                         */
+                        TrustConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.managedkafka.v1.TrustConfig)
+                                return object;
+                            var message = new $root.google.cloud.managedkafka.v1.TrustConfig();
+                            if (object.casConfigs) {
+                                if (!Array.isArray(object.casConfigs))
+                                    throw TypeError(".google.cloud.managedkafka.v1.TrustConfig.casConfigs: array expected");
+                                message.casConfigs = [];
+                                for (var i = 0; i < object.casConfigs.length; ++i) {
+                                    if (typeof object.casConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.managedkafka.v1.TrustConfig.casConfigs: object expected");
+                                    message.casConfigs[i] = $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.fromObject(object.casConfigs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TrustConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {google.cloud.managedkafka.v1.TrustConfig} message TrustConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TrustConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.casConfigs = [];
+                            if (message.casConfigs && message.casConfigs.length) {
+                                object.casConfigs = [];
+                                for (var j = 0; j < message.casConfigs.length; ++j)
+                                    object.casConfigs[j] = $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.toObject(message.casConfigs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TrustConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TrustConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TrustConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.managedkafka.v1.TrustConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TrustConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.managedkafka.v1.TrustConfig";
+                        };
+    
+                        TrustConfig.CertificateAuthorityServiceConfig = (function() {
+    
+                            /**
+                             * Properties of a CertificateAuthorityServiceConfig.
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig
+                             * @interface ICertificateAuthorityServiceConfig
+                             * @property {string|null} [caPool] CertificateAuthorityServiceConfig caPool
+                             */
+    
+                            /**
+                             * Constructs a new CertificateAuthorityServiceConfig.
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig
+                             * @classdesc Represents a CertificateAuthorityServiceConfig.
+                             * @implements ICertificateAuthorityServiceConfig
+                             * @constructor
+                             * @param {google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig=} [properties] Properties to set
+                             */
+                            function CertificateAuthorityServiceConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CertificateAuthorityServiceConfig caPool.
+                             * @member {string} caPool
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @instance
+                             */
+                            CertificateAuthorityServiceConfig.prototype.caPool = "";
+    
+                            /**
+                             * Creates a new CertificateAuthorityServiceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig instance
+                             */
+                            CertificateAuthorityServiceConfig.create = function create(properties) {
+                                return new CertificateAuthorityServiceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthorityServiceConfig message. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthorityServiceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.caPool != null && Object.hasOwnProperty.call(message, "caPool"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.caPool);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CertificateAuthorityServiceConfig message, length delimited. Does not implicitly {@link google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {google.cloud.managedkafka.v1.TrustConfig.ICertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CertificateAuthorityServiceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthorityServiceConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.caPool = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CertificateAuthorityServiceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CertificateAuthorityServiceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CertificateAuthorityServiceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CertificateAuthorityServiceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                    if (!$util.isString(message.caPool))
+                                        return "caPool: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CertificateAuthorityServiceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig} CertificateAuthorityServiceConfig
+                             */
+                            CertificateAuthorityServiceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig();
+                                if (object.caPool != null)
+                                    message.caPool = String(object.caPool);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CertificateAuthorityServiceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig} message CertificateAuthorityServiceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CertificateAuthorityServiceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.caPool = "";
+                                if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                    object.caPool = message.caPool;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CertificateAuthorityServiceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CertificateAuthorityServiceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CertificateAuthorityServiceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CertificateAuthorityServiceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.managedkafka.v1.TrustConfig.CertificateAuthorityServiceConfig";
+                            };
+    
+                            return CertificateAuthorityServiceConfig;
+                        })();
+    
+                        return TrustConfig;
                     })();
     
                     v1.Topic = (function() {

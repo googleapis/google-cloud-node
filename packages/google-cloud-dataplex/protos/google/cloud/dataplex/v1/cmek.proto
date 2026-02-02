@@ -38,7 +38,7 @@ option (google.api.resource_definition) = {
   pattern: "organizations/{organization}/locations/{location}"
 };
 
-// Dataplex Cmek Service
+// Dataplex Universal Catalog Customer Managed Encryption Keys (CMEK) Service
 service CmekService {
   option (google.api.default_host) = "dataplex.googleapis.com";
   option (google.api.oauth_scopes) =
@@ -189,6 +189,9 @@ message EncryptionConfig {
   // Output only. Details of the failure if anything related to Cmek db fails.
   FailureDetails failure_details = 7
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Represent the state of CMEK opt-in for metastore.
+  bool enable_metastore_encryption = 8 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Create EncryptionConfig Request

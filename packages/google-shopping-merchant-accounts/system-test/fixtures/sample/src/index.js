@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,13 +22,15 @@ const accounts = require('@google-shopping/accounts');
 
 function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
+  const accountRelationshipsServiceClient = new accounts.AccountRelationshipsServiceClient();
+  const accountServicesServiceClient = new accounts.AccountServicesServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
-  const accountTaxServiceClient = new accounts.AccountTaxServiceClient();
   const autofeedSettingsServiceClient = new accounts.AutofeedSettingsServiceClient();
   const automaticImprovementsServiceClient = new accounts.AutomaticImprovementsServiceClient();
   const businessIdentityServiceClient = new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();
   const checkoutSettingsServiceClient = new accounts.CheckoutSettingsServiceClient();
+  const developerRegistrationServiceClient = new accounts.DeveloperRegistrationServiceClient();
   const emailPreferencesServiceClient = new accounts.EmailPreferencesServiceClient();
   const gbpAccountsServiceClient = new accounts.GbpAccountsServiceClient();
   const homepageServiceClient = new accounts.HomepageServiceClient();

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29887,6 +29887,7 @@
                          * @property {string|null} [name] VulnerabilityReport name
                          * @property {Array.<google.cloud.osconfig.v1.VulnerabilityReport.IVulnerability>|null} [vulnerabilities] VulnerabilityReport vulnerabilities
                          * @property {google.protobuf.ITimestamp|null} [updateTime] VulnerabilityReport updateTime
+                         * @property {google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel|null} [highestUpgradableCveSeverity] VulnerabilityReport highestUpgradableCveSeverity
                          */
     
                         /**
@@ -29930,6 +29931,14 @@
                         VulnerabilityReport.prototype.updateTime = null;
     
                         /**
+                         * VulnerabilityReport highestUpgradableCveSeverity.
+                         * @member {google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel} highestUpgradableCveSeverity
+                         * @memberof google.cloud.osconfig.v1.VulnerabilityReport
+                         * @instance
+                         */
+                        VulnerabilityReport.prototype.highestUpgradableCveSeverity = 0;
+    
+                        /**
                          * Creates a new VulnerabilityReport instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.osconfig.v1.VulnerabilityReport
@@ -29960,6 +29969,8 @@
                                     $root.google.cloud.osconfig.v1.VulnerabilityReport.Vulnerability.encode(message.vulnerabilities[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.highestUpgradableCveSeverity != null && Object.hasOwnProperty.call(message, "highestUpgradableCveSeverity"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.highestUpgradableCveSeverity);
                             return writer;
                         };
     
@@ -30008,6 +30019,10 @@
                                     }
                                 case 3: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.highestUpgradableCveSeverity = reader.int32();
                                         break;
                                     }
                                 default:
@@ -30062,6 +30077,19 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.highestUpgradableCveSeverity != null && message.hasOwnProperty("highestUpgradableCveSeverity"))
+                                switch (message.highestUpgradableCveSeverity) {
+                                default:
+                                    return "highestUpgradableCveSeverity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -30094,6 +30122,42 @@
                                     throw TypeError(".google.cloud.osconfig.v1.VulnerabilityReport.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            switch (object.highestUpgradableCveSeverity) {
+                            default:
+                                if (typeof object.highestUpgradableCveSeverity === "number") {
+                                    message.highestUpgradableCveSeverity = object.highestUpgradableCveSeverity;
+                                    break;
+                                }
+                                break;
+                            case "VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.highestUpgradableCveSeverity = 0;
+                                break;
+                            case "NONE":
+                            case 1:
+                                message.highestUpgradableCveSeverity = 1;
+                                break;
+                            case "MINIMAL":
+                            case 2:
+                                message.highestUpgradableCveSeverity = 2;
+                                break;
+                            case "LOW":
+                            case 3:
+                                message.highestUpgradableCveSeverity = 3;
+                                break;
+                            case "MEDIUM":
+                            case 4:
+                                message.highestUpgradableCveSeverity = 4;
+                                break;
+                            case "HIGH":
+                            case 5:
+                                message.highestUpgradableCveSeverity = 5;
+                                break;
+                            case "CRITICAL":
+                            case 6:
+                                message.highestUpgradableCveSeverity = 6;
+                                break;
+                            }
                             return message;
                         };
     
@@ -30115,6 +30179,7 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.updateTime = null;
+                                object.highestUpgradableCveSeverity = options.enums === String ? "VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -30125,6 +30190,8 @@
                             }
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.highestUpgradableCveSeverity != null && message.hasOwnProperty("highestUpgradableCveSeverity"))
+                                object.highestUpgradableCveSeverity = options.enums === String ? $root.google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel[message.highestUpgradableCveSeverity] === undefined ? message.highestUpgradableCveSeverity : $root.google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel[message.highestUpgradableCveSeverity] : message.highestUpgradableCveSeverity;
                             return object;
                         };
     
@@ -31395,6 +31462,30 @@
                             })();
     
                             return Vulnerability;
+                        })();
+    
+                        /**
+                         * VulnerabilitySeverityLevel enum.
+                         * @name google.cloud.osconfig.v1.VulnerabilityReport.VulnerabilitySeverityLevel
+                         * @enum {number}
+                         * @property {number} VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED=0 VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED value
+                         * @property {number} NONE=1 NONE value
+                         * @property {number} MINIMAL=2 MINIMAL value
+                         * @property {number} LOW=3 LOW value
+                         * @property {number} MEDIUM=4 MEDIUM value
+                         * @property {number} HIGH=5 HIGH value
+                         * @property {number} CRITICAL=6 CRITICAL value
+                         */
+                        VulnerabilityReport.VulnerabilitySeverityLevel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VULNERABILITY_SEVERITY_LEVEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NONE"] = 1;
+                            values[valuesById[2] = "MINIMAL"] = 2;
+                            values[valuesById[3] = "LOW"] = 3;
+                            values[valuesById[4] = "MEDIUM"] = 4;
+                            values[valuesById[5] = "HIGH"] = 5;
+                            values[valuesById[6] = "CRITICAL"] = 6;
+                            return values;
                         })();
     
                         return VulnerabilityReport;

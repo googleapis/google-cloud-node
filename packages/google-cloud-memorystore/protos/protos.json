@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.memorystore.v1",
                     "php_namespace": "Google\\Cloud\\Memorystore\\V1",
                     "ruby_package": "Google::Cloud::Memorystore::V1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
                   },
                   "nested": {
                     "Memorystore": {
@@ -380,9 +380,24 @@
                             "deletionProtectionEnabled"
                           ]
                         },
+                        "_simulateMaintenanceEvent": {
+                          "oneof": [
+                            "simulateMaintenanceEvent"
+                          ]
+                        },
                         "_ondemandMaintenance": {
                           "oneof": [
                             "ondemandMaintenance"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
                           ]
                         },
                         "_asyncInstanceEndpointsDeletionEnabled": {
@@ -390,9 +405,24 @@
                             "asyncInstanceEndpointsDeletionEnabled"
                           ]
                         },
+                        "_kmsKey": {
+                          "oneof": [
+                            "kmsKey"
+                          ]
+                        },
                         "_backupCollection": {
                           "oneof": [
                             "backupCollection"
+                          ]
+                        },
+                        "_maintenanceVersion": {
+                          "oneof": [
+                            "maintenanceVersion"
+                          ]
+                        },
+                        "_effectiveMaintenanceVersion": {
+                          "oneof": [
+                            "effectiveMaintenanceVersion"
                           ]
                         }
                       },
@@ -583,11 +613,36 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "simulateMaintenanceEvent": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
                         "ondemandMaintenance": {
                           "type": "bool",
                           "id": 28,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "INPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         },
@@ -620,6 +675,22 @@
                             "proto3_optional": true
                           }
                         },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey",
+                            "proto3_optional": true
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "backupCollection": {
                           "type": "string",
                           "id": 47,
@@ -634,6 +705,38 @@
                           "id": 48,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maintenanceVersion": {
+                          "type": "string",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "effectiveMaintenanceVersion": {
+                          "type": "string",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "availableMaintenanceVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 51,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "allowFewerZonesDeployment": {
+                          "type": "bool",
+                          "id": 54,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       },
@@ -926,6 +1029,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "totalBackupSizeBytes": {
+                          "type": "int64",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "totalBackupCount": {
+                          "type": "int64",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastBackupTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -1027,6 +1151,13 @@
                         "state": {
                           "type": "State",
                           "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -2044,6 +2175,62 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EncryptionInfo": {
+                      "fields": {
+                        "encryptionType": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKeyVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "kmsKeyPrimaryState": {
+                          "type": "KmsKeyState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "GOOGLE_DEFAULT_ENCRYPTION": 1,
+                            "CUSTOMER_MANAGED_ENCRYPTION": 2
+                          }
+                        },
+                        "KmsKeyState": {
+                          "values": {
+                            "KMS_KEY_STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "PERMISSION_DENIED": 2,
+                            "DISABLED": 3,
+                            "DESTROYED": 4,
+                            "DESTROY_SCHEDULED": 5,
+                            "EKM_KEY_UNREACHABLE_DETECTED": 6,
+                            "BILLING_DISABLED": 7,
+                            "UNKNOWN_FAILURE": 8
                           }
                         }
                       }

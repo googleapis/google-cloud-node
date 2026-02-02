@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2271,7 +2271,7 @@ export class RegistryClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'api_deployment.name': request.apiDeployment!.name ?? '',
+      'api_deployment.name': request.apiDeployment!.name?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateApiDeployment request %j', request);

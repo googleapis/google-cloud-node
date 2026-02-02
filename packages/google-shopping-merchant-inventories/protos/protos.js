@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,3743 @@
                      * @namespace
                      */
                     var inventories = {};
+    
+                    inventories.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.inventories
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.LocalInventoryAttributes = (function() {
+    
+                            /**
+                             * Properties of a LocalInventoryAttributes.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface ILocalInventoryAttributes
+                             * @property {google.shopping.type.IPrice|null} [price] LocalInventoryAttributes price
+                             * @property {google.shopping.type.IPrice|null} [salePrice] LocalInventoryAttributes salePrice
+                             * @property {google.type.IInterval|null} [salePriceEffectiveDate] LocalInventoryAttributes salePriceEffectiveDate
+                             * @property {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|null} [availability] LocalInventoryAttributes availability
+                             * @property {number|Long|null} [quantity] LocalInventoryAttributes quantity
+                             * @property {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|null} [pickupMethod] LocalInventoryAttributes pickupMethod
+                             * @property {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|null} [pickupSla] LocalInventoryAttributes pickupSla
+                             * @property {string|null} [instoreProductLocation] LocalInventoryAttributes instoreProductLocation
+                             */
+    
+                            /**
+                             * Constructs a new LocalInventoryAttributes.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a LocalInventoryAttributes.
+                             * @implements ILocalInventoryAttributes
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes=} [properties] Properties to set
+                             */
+                            function LocalInventoryAttributes(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocalInventoryAttributes price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.price = null;
+    
+                            /**
+                             * LocalInventoryAttributes salePrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} salePrice
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.salePrice = null;
+    
+                            /**
+                             * LocalInventoryAttributes salePriceEffectiveDate.
+                             * @member {google.type.IInterval|null|undefined} salePriceEffectiveDate
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.salePriceEffectiveDate = null;
+    
+                            /**
+                             * LocalInventoryAttributes availability.
+                             * @member {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|null|undefined} availability
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.availability = null;
+    
+                            /**
+                             * LocalInventoryAttributes quantity.
+                             * @member {number|Long|null|undefined} quantity
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.quantity = null;
+    
+                            /**
+                             * LocalInventoryAttributes pickupMethod.
+                             * @member {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|null|undefined} pickupMethod
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.pickupMethod = null;
+    
+                            /**
+                             * LocalInventoryAttributes pickupSla.
+                             * @member {google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|null|undefined} pickupSla
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.pickupSla = null;
+    
+                            /**
+                             * LocalInventoryAttributes instoreProductLocation.
+                             * @member {string|null|undefined} instoreProductLocation
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             */
+                            LocalInventoryAttributes.prototype.instoreProductLocation = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LocalInventoryAttributes.prototype, "_availability", {
+                                get: $util.oneOfGetter($oneOfFields = ["availability"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LocalInventoryAttributes.prototype, "_quantity", {
+                                get: $util.oneOfGetter($oneOfFields = ["quantity"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LocalInventoryAttributes.prototype, "_pickupMethod", {
+                                get: $util.oneOfGetter($oneOfFields = ["pickupMethod"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LocalInventoryAttributes.prototype, "_pickupSla", {
+                                get: $util.oneOfGetter($oneOfFields = ["pickupSla"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(LocalInventoryAttributes.prototype, "_instoreProductLocation", {
+                                get: $util.oneOfGetter($oneOfFields = ["instoreProductLocation"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LocalInventoryAttributes instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventoryAttributes} LocalInventoryAttributes instance
+                             */
+                            LocalInventoryAttributes.create = function create(properties) {
+                                return new LocalInventoryAttributes(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventoryAttributes message. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventoryAttributes.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes} message LocalInventoryAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventoryAttributes.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.salePrice != null && Object.hasOwnProperty.call(message, "salePrice"))
+                                    $root.google.shopping.type.Price.encode(message.salePrice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.salePriceEffectiveDate != null && Object.hasOwnProperty.call(message, "salePriceEffectiveDate"))
+                                    $root.google.type.Interval.encode(message.salePriceEffectiveDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.availability);
+                                if (message.quantity != null && Object.hasOwnProperty.call(message, "quantity"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.quantity);
+                                if (message.pickupMethod != null && Object.hasOwnProperty.call(message, "pickupMethod"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int32(message.pickupMethod);
+                                if (message.pickupSla != null && Object.hasOwnProperty.call(message, "pickupSla"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pickupSla);
+                                if (message.instoreProductLocation != null && Object.hasOwnProperty.call(message, "instoreProductLocation"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.instoreProductLocation);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventoryAttributes message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventoryAttributes.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes} message LocalInventoryAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventoryAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocalInventoryAttributes message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventoryAttributes} LocalInventoryAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventoryAttributes.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.salePrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.salePriceEffectiveDate = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.availability = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.quantity = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.pickupMethod = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.pickupSla = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.instoreProductLocation = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocalInventoryAttributes message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventoryAttributes} LocalInventoryAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventoryAttributes.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocalInventoryAttributes message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocalInventoryAttributes.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.salePrice != null && message.hasOwnProperty("salePrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.salePrice);
+                                    if (error)
+                                        return "salePrice." + error;
+                                }
+                                if (message.salePriceEffectiveDate != null && message.hasOwnProperty("salePriceEffectiveDate")) {
+                                    var error = $root.google.type.Interval.verify(message.salePriceEffectiveDate);
+                                    if (error)
+                                        return "salePriceEffectiveDate." + error;
+                                }
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    properties._availability = 1;
+                                    switch (message.availability) {
+                                    default:
+                                        return "availability: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                }
+                                if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                    properties._quantity = 1;
+                                    if (!$util.isInteger(message.quantity) && !(message.quantity && $util.isInteger(message.quantity.low) && $util.isInteger(message.quantity.high)))
+                                        return "quantity: integer|Long expected";
+                                }
+                                if (message.pickupMethod != null && message.hasOwnProperty("pickupMethod")) {
+                                    properties._pickupMethod = 1;
+                                    switch (message.pickupMethod) {
+                                    default:
+                                        return "pickupMethod: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                }
+                                if (message.pickupSla != null && message.hasOwnProperty("pickupSla")) {
+                                    properties._pickupSla = 1;
+                                    switch (message.pickupSla) {
+                                    default:
+                                        return "pickupSla: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                        break;
+                                    }
+                                }
+                                if (message.instoreProductLocation != null && message.hasOwnProperty("instoreProductLocation")) {
+                                    properties._instoreProductLocation = 1;
+                                    if (!$util.isString(message.instoreProductLocation))
+                                        return "instoreProductLocation: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocalInventoryAttributes message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventoryAttributes} LocalInventoryAttributes
+                             */
+                            LocalInventoryAttributes.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes();
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventoryAttributes.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.salePrice != null) {
+                                    if (typeof object.salePrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventoryAttributes.salePrice: object expected");
+                                    message.salePrice = $root.google.shopping.type.Price.fromObject(object.salePrice);
+                                }
+                                if (object.salePriceEffectiveDate != null) {
+                                    if (typeof object.salePriceEffectiveDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventoryAttributes.salePriceEffectiveDate: object expected");
+                                    message.salePriceEffectiveDate = $root.google.type.Interval.fromObject(object.salePriceEffectiveDate);
+                                }
+                                switch (object.availability) {
+                                default:
+                                    if (typeof object.availability === "number") {
+                                        message.availability = object.availability;
+                                        break;
+                                    }
+                                    break;
+                                case "LOCAL_INVENTORY_AVAILABILITY_UNSPECIFIED":
+                                case 0:
+                                    message.availability = 0;
+                                    break;
+                                case "IN_STOCK":
+                                case 1:
+                                    message.availability = 1;
+                                    break;
+                                case "LIMITED_AVAILABILITY":
+                                case 2:
+                                    message.availability = 2;
+                                    break;
+                                case "ON_DISPLAY_TO_ORDER":
+                                case 3:
+                                    message.availability = 3;
+                                    break;
+                                case "OUT_OF_STOCK":
+                                case 4:
+                                    message.availability = 4;
+                                    break;
+                                }
+                                if (object.quantity != null)
+                                    if ($util.Long)
+                                        (message.quantity = $util.Long.fromValue(object.quantity)).unsigned = false;
+                                    else if (typeof object.quantity === "string")
+                                        message.quantity = parseInt(object.quantity, 10);
+                                    else if (typeof object.quantity === "number")
+                                        message.quantity = object.quantity;
+                                    else if (typeof object.quantity === "object")
+                                        message.quantity = new $util.LongBits(object.quantity.low >>> 0, object.quantity.high >>> 0).toNumber();
+                                switch (object.pickupMethod) {
+                                default:
+                                    if (typeof object.pickupMethod === "number") {
+                                        message.pickupMethod = object.pickupMethod;
+                                        break;
+                                    }
+                                    break;
+                                case "PICKUP_METHOD_UNSPECIFIED":
+                                case 0:
+                                    message.pickupMethod = 0;
+                                    break;
+                                case "BUY":
+                                case 1:
+                                    message.pickupMethod = 1;
+                                    break;
+                                case "RESERVE":
+                                case 2:
+                                    message.pickupMethod = 2;
+                                    break;
+                                case "SHIP_TO_STORE":
+                                case 3:
+                                    message.pickupMethod = 3;
+                                    break;
+                                case "NOT_SUPPORTED":
+                                case 4:
+                                    message.pickupMethod = 4;
+                                    break;
+                                }
+                                switch (object.pickupSla) {
+                                default:
+                                    if (typeof object.pickupSla === "number") {
+                                        message.pickupSla = object.pickupSla;
+                                        break;
+                                    }
+                                    break;
+                                case "PICKUP_SLA_UNSPECIFIED":
+                                case 0:
+                                    message.pickupSla = 0;
+                                    break;
+                                case "SAME_DAY":
+                                case 1:
+                                    message.pickupSla = 1;
+                                    break;
+                                case "NEXT_DAY":
+                                case 2:
+                                    message.pickupSla = 2;
+                                    break;
+                                case "TWO_DAY":
+                                case 3:
+                                    message.pickupSla = 3;
+                                    break;
+                                case "THREE_DAY":
+                                case 4:
+                                    message.pickupSla = 4;
+                                    break;
+                                case "FOUR_DAY":
+                                case 5:
+                                    message.pickupSla = 5;
+                                    break;
+                                case "FIVE_DAY":
+                                case 6:
+                                    message.pickupSla = 6;
+                                    break;
+                                case "SIX_DAY":
+                                case 7:
+                                    message.pickupSla = 7;
+                                    break;
+                                case "SEVEN_DAY":
+                                case 8:
+                                    message.pickupSla = 8;
+                                    break;
+                                case "MULTI_WEEK":
+                                case 9:
+                                    message.pickupSla = 9;
+                                    break;
+                                }
+                                if (object.instoreProductLocation != null)
+                                    message.instoreProductLocation = String(object.instoreProductLocation);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocalInventoryAttributes message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventoryAttributes} message LocalInventoryAttributes
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocalInventoryAttributes.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.price = null;
+                                    object.salePrice = null;
+                                    object.salePriceEffectiveDate = null;
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.salePrice != null && message.hasOwnProperty("salePrice"))
+                                    object.salePrice = $root.google.shopping.type.Price.toObject(message.salePrice, options);
+                                if (message.salePriceEffectiveDate != null && message.hasOwnProperty("salePriceEffectiveDate"))
+                                    object.salePriceEffectiveDate = $root.google.type.Interval.toObject(message.salePriceEffectiveDate, options);
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    object.availability = options.enums === String ? $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability[message.availability] === undefined ? message.availability : $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability[message.availability] : message.availability;
+                                    if (options.oneofs)
+                                        object._availability = "availability";
+                                }
+                                if (message.quantity != null && message.hasOwnProperty("quantity")) {
+                                    if (typeof message.quantity === "number")
+                                        object.quantity = options.longs === String ? String(message.quantity) : message.quantity;
+                                    else
+                                        object.quantity = options.longs === String ? $util.Long.prototype.toString.call(message.quantity) : options.longs === Number ? new $util.LongBits(message.quantity.low >>> 0, message.quantity.high >>> 0).toNumber() : message.quantity;
+                                    if (options.oneofs)
+                                        object._quantity = "quantity";
+                                }
+                                if (message.pickupMethod != null && message.hasOwnProperty("pickupMethod")) {
+                                    object.pickupMethod = options.enums === String ? $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod[message.pickupMethod] === undefined ? message.pickupMethod : $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod[message.pickupMethod] : message.pickupMethod;
+                                    if (options.oneofs)
+                                        object._pickupMethod = "pickupMethod";
+                                }
+                                if (message.pickupSla != null && message.hasOwnProperty("pickupSla")) {
+                                    object.pickupSla = options.enums === String ? $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla[message.pickupSla] === undefined ? message.pickupSla : $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla[message.pickupSla] : message.pickupSla;
+                                    if (options.oneofs)
+                                        object._pickupSla = "pickupSla";
+                                }
+                                if (message.instoreProductLocation != null && message.hasOwnProperty("instoreProductLocation")) {
+                                    object.instoreProductLocation = message.instoreProductLocation;
+                                    if (options.oneofs)
+                                        object._instoreProductLocation = "instoreProductLocation";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocalInventoryAttributes to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocalInventoryAttributes.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocalInventoryAttributes
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryAttributes
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocalInventoryAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.LocalInventoryAttributes";
+                            };
+    
+                            /**
+                             * Availability enum.
+                             * @name google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability
+                             * @enum {number}
+                             * @property {number} LOCAL_INVENTORY_AVAILABILITY_UNSPECIFIED=0 LOCAL_INVENTORY_AVAILABILITY_UNSPECIFIED value
+                             * @property {number} IN_STOCK=1 IN_STOCK value
+                             * @property {number} LIMITED_AVAILABILITY=2 LIMITED_AVAILABILITY value
+                             * @property {number} ON_DISPLAY_TO_ORDER=3 ON_DISPLAY_TO_ORDER value
+                             * @property {number} OUT_OF_STOCK=4 OUT_OF_STOCK value
+                             */
+                            LocalInventoryAttributes.Availability = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "LOCAL_INVENTORY_AVAILABILITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "IN_STOCK"] = 1;
+                                values[valuesById[2] = "LIMITED_AVAILABILITY"] = 2;
+                                values[valuesById[3] = "ON_DISPLAY_TO_ORDER"] = 3;
+                                values[valuesById[4] = "OUT_OF_STOCK"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * PickupMethod enum.
+                             * @name google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod
+                             * @enum {number}
+                             * @property {number} PICKUP_METHOD_UNSPECIFIED=0 PICKUP_METHOD_UNSPECIFIED value
+                             * @property {number} BUY=1 BUY value
+                             * @property {number} RESERVE=2 RESERVE value
+                             * @property {number} SHIP_TO_STORE=3 SHIP_TO_STORE value
+                             * @property {number} NOT_SUPPORTED=4 NOT_SUPPORTED value
+                             */
+                            LocalInventoryAttributes.PickupMethod = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PICKUP_METHOD_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "BUY"] = 1;
+                                values[valuesById[2] = "RESERVE"] = 2;
+                                values[valuesById[3] = "SHIP_TO_STORE"] = 3;
+                                values[valuesById[4] = "NOT_SUPPORTED"] = 4;
+                                return values;
+                            })();
+    
+                            /**
+                             * PickupSla enum.
+                             * @name google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla
+                             * @enum {number}
+                             * @property {number} PICKUP_SLA_UNSPECIFIED=0 PICKUP_SLA_UNSPECIFIED value
+                             * @property {number} SAME_DAY=1 SAME_DAY value
+                             * @property {number} NEXT_DAY=2 NEXT_DAY value
+                             * @property {number} TWO_DAY=3 TWO_DAY value
+                             * @property {number} THREE_DAY=4 THREE_DAY value
+                             * @property {number} FOUR_DAY=5 FOUR_DAY value
+                             * @property {number} FIVE_DAY=6 FIVE_DAY value
+                             * @property {number} SIX_DAY=7 SIX_DAY value
+                             * @property {number} SEVEN_DAY=8 SEVEN_DAY value
+                             * @property {number} MULTI_WEEK=9 MULTI_WEEK value
+                             */
+                            LocalInventoryAttributes.PickupSla = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PICKUP_SLA_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SAME_DAY"] = 1;
+                                values[valuesById[2] = "NEXT_DAY"] = 2;
+                                values[valuesById[3] = "TWO_DAY"] = 3;
+                                values[valuesById[4] = "THREE_DAY"] = 4;
+                                values[valuesById[5] = "FOUR_DAY"] = 5;
+                                values[valuesById[6] = "FIVE_DAY"] = 6;
+                                values[valuesById[7] = "SIX_DAY"] = 7;
+                                values[valuesById[8] = "SEVEN_DAY"] = 8;
+                                values[valuesById[9] = "MULTI_WEEK"] = 9;
+                                return values;
+                            })();
+    
+                            return LocalInventoryAttributes;
+                        })();
+    
+                        v1.RegionalInventoryAttributes = (function() {
+    
+                            /**
+                             * Properties of a RegionalInventoryAttributes.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IRegionalInventoryAttributes
+                             * @property {google.shopping.type.IPrice|null} [price] RegionalInventoryAttributes price
+                             * @property {google.shopping.type.IPrice|null} [salePrice] RegionalInventoryAttributes salePrice
+                             * @property {google.type.IInterval|null} [salePriceEffectiveDate] RegionalInventoryAttributes salePriceEffectiveDate
+                             * @property {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null} [availability] RegionalInventoryAttributes availability
+                             */
+    
+                            /**
+                             * Constructs a new RegionalInventoryAttributes.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a RegionalInventoryAttributes.
+                             * @implements IRegionalInventoryAttributes
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes=} [properties] Properties to set
+                             */
+                            function RegionalInventoryAttributes(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegionalInventoryAttributes price.
+                             * @member {google.shopping.type.IPrice|null|undefined} price
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             */
+                            RegionalInventoryAttributes.prototype.price = null;
+    
+                            /**
+                             * RegionalInventoryAttributes salePrice.
+                             * @member {google.shopping.type.IPrice|null|undefined} salePrice
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             */
+                            RegionalInventoryAttributes.prototype.salePrice = null;
+    
+                            /**
+                             * RegionalInventoryAttributes salePriceEffectiveDate.
+                             * @member {google.type.IInterval|null|undefined} salePriceEffectiveDate
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             */
+                            RegionalInventoryAttributes.prototype.salePriceEffectiveDate = null;
+    
+                            /**
+                             * RegionalInventoryAttributes availability.
+                             * @member {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null|undefined} availability
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             */
+                            RegionalInventoryAttributes.prototype.availability = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RegionalInventoryAttributes.prototype, "_availability", {
+                                get: $util.oneOfGetter($oneOfFields = ["availability"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new RegionalInventoryAttributes instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes} RegionalInventoryAttributes instance
+                             */
+                            RegionalInventoryAttributes.create = function create(properties) {
+                                return new RegionalInventoryAttributes(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventoryAttributes message. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes} message RegionalInventoryAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventoryAttributes.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.price != null && Object.hasOwnProperty.call(message, "price"))
+                                    $root.google.shopping.type.Price.encode(message.price, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.salePrice != null && Object.hasOwnProperty.call(message, "salePrice"))
+                                    $root.google.shopping.type.Price.encode(message.salePrice, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.salePriceEffectiveDate != null && Object.hasOwnProperty.call(message, "salePriceEffectiveDate"))
+                                    $root.google.type.Interval.encode(message.salePriceEffectiveDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.availability != null && Object.hasOwnProperty.call(message, "availability"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.availability);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventoryAttributes message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes} message RegionalInventoryAttributes message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventoryAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventoryAttributes message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes} RegionalInventoryAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventoryAttributes.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.price = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.salePrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.salePriceEffectiveDate = $root.google.type.Interval.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.availability = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventoryAttributes message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes} RegionalInventoryAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventoryAttributes.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegionalInventoryAttributes message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegionalInventoryAttributes.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.price != null && message.hasOwnProperty("price")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.price);
+                                    if (error)
+                                        return "price." + error;
+                                }
+                                if (message.salePrice != null && message.hasOwnProperty("salePrice")) {
+                                    var error = $root.google.shopping.type.Price.verify(message.salePrice);
+                                    if (error)
+                                        return "salePrice." + error;
+                                }
+                                if (message.salePriceEffectiveDate != null && message.hasOwnProperty("salePriceEffectiveDate")) {
+                                    var error = $root.google.type.Interval.verify(message.salePriceEffectiveDate);
+                                    if (error)
+                                        return "salePriceEffectiveDate." + error;
+                                }
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    properties._availability = 1;
+                                    switch (message.availability) {
+                                    default:
+                                        return "availability: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegionalInventoryAttributes message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes} RegionalInventoryAttributes
+                             */
+                            RegionalInventoryAttributes.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes();
+                                if (object.price != null) {
+                                    if (typeof object.price !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.price: object expected");
+                                    message.price = $root.google.shopping.type.Price.fromObject(object.price);
+                                }
+                                if (object.salePrice != null) {
+                                    if (typeof object.salePrice !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.salePrice: object expected");
+                                    message.salePrice = $root.google.shopping.type.Price.fromObject(object.salePrice);
+                                }
+                                if (object.salePriceEffectiveDate != null) {
+                                    if (typeof object.salePriceEffectiveDate !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.salePriceEffectiveDate: object expected");
+                                    message.salePriceEffectiveDate = $root.google.type.Interval.fromObject(object.salePriceEffectiveDate);
+                                }
+                                switch (object.availability) {
+                                default:
+                                    if (typeof object.availability === "number") {
+                                        message.availability = object.availability;
+                                        break;
+                                    }
+                                    break;
+                                case "REGIONAL_INVENTORY_AVAILABILITY_UNSPECIFIED":
+                                case 0:
+                                    message.availability = 0;
+                                    break;
+                                case "IN_STOCK":
+                                case 1:
+                                    message.availability = 1;
+                                    break;
+                                case "OUT_OF_STOCK":
+                                case 2:
+                                    message.availability = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegionalInventoryAttributes message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventoryAttributes} message RegionalInventoryAttributes
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegionalInventoryAttributes.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.price = null;
+                                    object.salePrice = null;
+                                    object.salePriceEffectiveDate = null;
+                                }
+                                if (message.price != null && message.hasOwnProperty("price"))
+                                    object.price = $root.google.shopping.type.Price.toObject(message.price, options);
+                                if (message.salePrice != null && message.hasOwnProperty("salePrice"))
+                                    object.salePrice = $root.google.shopping.type.Price.toObject(message.salePrice, options);
+                                if (message.salePriceEffectiveDate != null && message.hasOwnProperty("salePriceEffectiveDate"))
+                                    object.salePriceEffectiveDate = $root.google.type.Interval.toObject(message.salePriceEffectiveDate, options);
+                                if (message.availability != null && message.hasOwnProperty("availability")) {
+                                    object.availability = options.enums === String ? $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability[message.availability] === undefined ? message.availability : $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability[message.availability] : message.availability;
+                                    if (options.oneofs)
+                                        object._availability = "availability";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegionalInventoryAttributes to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegionalInventoryAttributes.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegionalInventoryAttributes
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegionalInventoryAttributes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.RegionalInventoryAttributes";
+                            };
+    
+                            /**
+                             * Availability enum.
+                             * @name google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability
+                             * @enum {number}
+                             * @property {number} REGIONAL_INVENTORY_AVAILABILITY_UNSPECIFIED=0 REGIONAL_INVENTORY_AVAILABILITY_UNSPECIFIED value
+                             * @property {number} IN_STOCK=1 IN_STOCK value
+                             * @property {number} OUT_OF_STOCK=2 OUT_OF_STOCK value
+                             */
+                            RegionalInventoryAttributes.Availability = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "REGIONAL_INVENTORY_AVAILABILITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "IN_STOCK"] = 1;
+                                values[valuesById[2] = "OUT_OF_STOCK"] = 2;
+                                return values;
+                            })();
+    
+                            return RegionalInventoryAttributes;
+                        })();
+    
+                        v1.LocalInventoryService = (function() {
+    
+                            /**
+                             * Constructs a new LocalInventoryService service.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a LocalInventoryService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function LocalInventoryService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (LocalInventoryService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = LocalInventoryService;
+    
+                            /**
+                             * Creates new LocalInventoryService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {LocalInventoryService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            LocalInventoryService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|listLocalInventories}.
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @typedef ListLocalInventoriesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} [response] ListLocalInventoriesResponse
+                             */
+    
+                            /**
+                             * Calls ListLocalInventories.
+                             * @function listLocalInventories
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest} request ListLocalInventoriesRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventoryService.ListLocalInventoriesCallback} callback Node-style callback called with the error, if any, and ListLocalInventoriesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LocalInventoryService.prototype.listLocalInventories = function listLocalInventories(request, callback) {
+                                return this.rpcCall(listLocalInventories, $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest, $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse, request, callback);
+                            }, "name", { value: "ListLocalInventories" });
+    
+                            /**
+                             * Calls ListLocalInventories.
+                             * @function listLocalInventories
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest} request ListLocalInventoriesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|insertLocalInventory}.
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @typedef InsertLocalInventoryCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventory} [response] LocalInventory
+                             */
+    
+                            /**
+                             * Calls InsertLocalInventory.
+                             * @function insertLocalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest} request InsertLocalInventoryRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventoryService.InsertLocalInventoryCallback} callback Node-style callback called with the error, if any, and LocalInventory
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LocalInventoryService.prototype.insertLocalInventory = function insertLocalInventory(request, callback) {
+                                return this.rpcCall(insertLocalInventory, $root.google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest, $root.google.shopping.merchant.inventories.v1.LocalInventory, request, callback);
+                            }, "name", { value: "InsertLocalInventory" });
+    
+                            /**
+                             * Calls InsertLocalInventory.
+                             * @function insertLocalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest} request InsertLocalInventoryRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.inventories.v1.LocalInventory>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|deleteLocalInventory}.
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @typedef DeleteLocalInventoryCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteLocalInventory.
+                             * @function deleteLocalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest} request DeleteLocalInventoryRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventoryService.DeleteLocalInventoryCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(LocalInventoryService.prototype.deleteLocalInventory = function deleteLocalInventory(request, callback) {
+                                return this.rpcCall(deleteLocalInventory, $root.google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteLocalInventory" });
+    
+                            /**
+                             * Calls DeleteLocalInventory.
+                             * @function deleteLocalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest} request DeleteLocalInventoryRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            return LocalInventoryService;
+                        })();
+    
+                        v1.LocalInventory = (function() {
+    
+                            /**
+                             * Properties of a LocalInventory.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface ILocalInventory
+                             * @property {string|null} [name] LocalInventory name
+                             * @property {number|Long|null} [account] LocalInventory account
+                             * @property {string|null} [storeCode] LocalInventory storeCode
+                             * @property {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes|null} [localInventoryAttributes] LocalInventory localInventoryAttributes
+                             */
+    
+                            /**
+                             * Constructs a new LocalInventory.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a LocalInventory.
+                             * @implements ILocalInventory
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventory=} [properties] Properties to set
+                             */
+                            function LocalInventory(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocalInventory name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             */
+                            LocalInventory.prototype.name = "";
+    
+                            /**
+                             * LocalInventory account.
+                             * @member {number|Long} account
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             */
+                            LocalInventory.prototype.account = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * LocalInventory storeCode.
+                             * @member {string} storeCode
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             */
+                            LocalInventory.prototype.storeCode = "";
+    
+                            /**
+                             * LocalInventory localInventoryAttributes.
+                             * @member {google.shopping.merchant.inventories.v1.ILocalInventoryAttributes|null|undefined} localInventoryAttributes
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             */
+                            LocalInventory.prototype.localInventoryAttributes = null;
+    
+                            /**
+                             * Creates a new LocalInventory instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventory=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventory} LocalInventory instance
+                             */
+                            LocalInventory.create = function create(properties) {
+                                return new LocalInventory(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventory message. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventory.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventory} message LocalInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventory.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.account);
+                                if (message.storeCode != null && Object.hasOwnProperty.call(message, "storeCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.storeCode);
+                                if (message.localInventoryAttributes != null && Object.hasOwnProperty.call(message, "localInventoryAttributes"))
+                                    $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.encode(message.localInventoryAttributes, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventory message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventory.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ILocalInventory} message LocalInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventory.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocalInventory message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventory} LocalInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventory.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.LocalInventory();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.account = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.storeCode = reader.string();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.localInventoryAttributes = $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocalInventory message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventory} LocalInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventory.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocalInventory message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocalInventory.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    if (!$util.isInteger(message.account) && !(message.account && $util.isInteger(message.account.low) && $util.isInteger(message.account.high)))
+                                        return "account: integer|Long expected";
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    if (!$util.isString(message.storeCode))
+                                        return "storeCode: string expected";
+                                if (message.localInventoryAttributes != null && message.hasOwnProperty("localInventoryAttributes")) {
+                                    var error = $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.verify(message.localInventoryAttributes);
+                                    if (error)
+                                        return "localInventoryAttributes." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocalInventory message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.LocalInventory} LocalInventory
+                             */
+                            LocalInventory.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.LocalInventory)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.LocalInventory();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.account != null)
+                                    if ($util.Long)
+                                        (message.account = $util.Long.fromValue(object.account)).unsigned = false;
+                                    else if (typeof object.account === "string")
+                                        message.account = parseInt(object.account, 10);
+                                    else if (typeof object.account === "number")
+                                        message.account = object.account;
+                                    else if (typeof object.account === "object")
+                                        message.account = new $util.LongBits(object.account.low >>> 0, object.account.high >>> 0).toNumber();
+                                if (object.storeCode != null)
+                                    message.storeCode = String(object.storeCode);
+                                if (object.localInventoryAttributes != null) {
+                                    if (typeof object.localInventoryAttributes !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.LocalInventory.localInventoryAttributes: object expected");
+                                    message.localInventoryAttributes = $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.fromObject(object.localInventoryAttributes);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocalInventory message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.LocalInventory} message LocalInventory
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocalInventory.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.account = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.account = options.longs === String ? "0" : 0;
+                                    object.storeCode = "";
+                                    object.localInventoryAttributes = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    if (typeof message.account === "number")
+                                        object.account = options.longs === String ? String(message.account) : message.account;
+                                    else
+                                        object.account = options.longs === String ? $util.Long.prototype.toString.call(message.account) : options.longs === Number ? new $util.LongBits(message.account.low >>> 0, message.account.high >>> 0).toNumber() : message.account;
+                                if (message.storeCode != null && message.hasOwnProperty("storeCode"))
+                                    object.storeCode = message.storeCode;
+                                if (message.localInventoryAttributes != null && message.hasOwnProperty("localInventoryAttributes"))
+                                    object.localInventoryAttributes = $root.google.shopping.merchant.inventories.v1.LocalInventoryAttributes.toObject(message.localInventoryAttributes, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocalInventory to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocalInventory.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocalInventory
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.LocalInventory
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocalInventory.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.LocalInventory";
+                            };
+    
+                            return LocalInventory;
+                        })();
+    
+                        v1.ListLocalInventoriesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListLocalInventoriesRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IListLocalInventoriesRequest
+                             * @property {string|null} [parent] ListLocalInventoriesRequest parent
+                             * @property {number|null} [pageSize] ListLocalInventoriesRequest pageSize
+                             * @property {string|null} [pageToken] ListLocalInventoriesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListLocalInventoriesRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a ListLocalInventoriesRequest.
+                             * @implements IListLocalInventoriesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest=} [properties] Properties to set
+                             */
+                            function ListLocalInventoriesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLocalInventoriesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @instance
+                             */
+                            ListLocalInventoriesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListLocalInventoriesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @instance
+                             */
+                            ListLocalInventoriesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListLocalInventoriesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @instance
+                             */
+                            ListLocalInventoriesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListLocalInventoriesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest} ListLocalInventoriesRequest instance
+                             */
+                            ListLocalInventoriesRequest.create = function create(properties) {
+                                return new ListLocalInventoriesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLocalInventoriesRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest} message ListLocalInventoriesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLocalInventoriesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLocalInventoriesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest} message ListLocalInventoriesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLocalInventoriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLocalInventoriesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest} ListLocalInventoriesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLocalInventoriesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLocalInventoriesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest} ListLocalInventoriesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLocalInventoriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLocalInventoriesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLocalInventoriesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLocalInventoriesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest} ListLocalInventoriesRequest
+                             */
+                            ListLocalInventoriesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLocalInventoriesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest} message ListLocalInventoriesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLocalInventoriesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLocalInventoriesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLocalInventoriesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLocalInventoriesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLocalInventoriesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest";
+                            };
+    
+                            return ListLocalInventoriesRequest;
+                        })();
+    
+                        v1.ListLocalInventoriesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListLocalInventoriesResponse.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IListLocalInventoriesResponse
+                             * @property {Array.<google.shopping.merchant.inventories.v1.ILocalInventory>|null} [localInventories] ListLocalInventoriesResponse localInventories
+                             * @property {string|null} [nextPageToken] ListLocalInventoriesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListLocalInventoriesResponse.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a ListLocalInventoriesResponse.
+                             * @implements IListLocalInventoriesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse=} [properties] Properties to set
+                             */
+                            function ListLocalInventoriesResponse(properties) {
+                                this.localInventories = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListLocalInventoriesResponse localInventories.
+                             * @member {Array.<google.shopping.merchant.inventories.v1.ILocalInventory>} localInventories
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @instance
+                             */
+                            ListLocalInventoriesResponse.prototype.localInventories = $util.emptyArray;
+    
+                            /**
+                             * ListLocalInventoriesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @instance
+                             */
+                            ListLocalInventoriesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListLocalInventoriesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} ListLocalInventoriesResponse instance
+                             */
+                            ListLocalInventoriesResponse.create = function create(properties) {
+                                return new ListLocalInventoriesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListLocalInventoriesResponse message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse} message ListLocalInventoriesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLocalInventoriesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.localInventories != null && message.localInventories.length)
+                                    for (var i = 0; i < message.localInventories.length; ++i)
+                                        $root.google.shopping.merchant.inventories.v1.LocalInventory.encode(message.localInventories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListLocalInventoriesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse} message ListLocalInventoriesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListLocalInventoriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListLocalInventoriesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} ListLocalInventoriesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLocalInventoriesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.localInventories && message.localInventories.length))
+                                                message.localInventories = [];
+                                            message.localInventories.push($root.google.shopping.merchant.inventories.v1.LocalInventory.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListLocalInventoriesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} ListLocalInventoriesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListLocalInventoriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListLocalInventoriesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListLocalInventoriesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.localInventories != null && message.hasOwnProperty("localInventories")) {
+                                    if (!Array.isArray(message.localInventories))
+                                        return "localInventories: array expected";
+                                    for (var i = 0; i < message.localInventories.length; ++i) {
+                                        var error = $root.google.shopping.merchant.inventories.v1.LocalInventory.verify(message.localInventories[i]);
+                                        if (error)
+                                            return "localInventories." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListLocalInventoriesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} ListLocalInventoriesResponse
+                             */
+                            ListLocalInventoriesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse();
+                                if (object.localInventories) {
+                                    if (!Array.isArray(object.localInventories))
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.localInventories: array expected");
+                                    message.localInventories = [];
+                                    for (var i = 0; i < object.localInventories.length; ++i) {
+                                        if (typeof object.localInventories[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.localInventories: object expected");
+                                        message.localInventories[i] = $root.google.shopping.merchant.inventories.v1.LocalInventory.fromObject(object.localInventories[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListLocalInventoriesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse} message ListLocalInventoriesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListLocalInventoriesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.localInventories = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.localInventories && message.localInventories.length) {
+                                    object.localInventories = [];
+                                    for (var j = 0; j < message.localInventories.length; ++j)
+                                        object.localInventories[j] = $root.google.shopping.merchant.inventories.v1.LocalInventory.toObject(message.localInventories[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListLocalInventoriesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListLocalInventoriesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListLocalInventoriesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListLocalInventoriesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse";
+                            };
+    
+                            return ListLocalInventoriesResponse;
+                        })();
+    
+                        v1.InsertLocalInventoryRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertLocalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IInsertLocalInventoryRequest
+                             * @property {string|null} [parent] InsertLocalInventoryRequest parent
+                             * @property {google.shopping.merchant.inventories.v1.ILocalInventory|null} [localInventory] InsertLocalInventoryRequest localInventory
+                             */
+    
+                            /**
+                             * Constructs a new InsertLocalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents an InsertLocalInventoryRequest.
+                             * @implements IInsertLocalInventoryRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest=} [properties] Properties to set
+                             */
+                            function InsertLocalInventoryRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertLocalInventoryRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @instance
+                             */
+                            InsertLocalInventoryRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertLocalInventoryRequest localInventory.
+                             * @member {google.shopping.merchant.inventories.v1.ILocalInventory|null|undefined} localInventory
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @instance
+                             */
+                            InsertLocalInventoryRequest.prototype.localInventory = null;
+    
+                            /**
+                             * Creates a new InsertLocalInventoryRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest} InsertLocalInventoryRequest instance
+                             */
+                            InsertLocalInventoryRequest.create = function create(properties) {
+                                return new InsertLocalInventoryRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLocalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest} message InsertLocalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLocalInventoryRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.localInventory != null && Object.hasOwnProperty.call(message, "localInventory"))
+                                    $root.google.shopping.merchant.inventories.v1.LocalInventory.encode(message.localInventory, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertLocalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest} message InsertLocalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertLocalInventoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertLocalInventoryRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest} InsertLocalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLocalInventoryRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.localInventory = $root.google.shopping.merchant.inventories.v1.LocalInventory.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertLocalInventoryRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest} InsertLocalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertLocalInventoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertLocalInventoryRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertLocalInventoryRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.localInventory != null && message.hasOwnProperty("localInventory")) {
+                                    var error = $root.google.shopping.merchant.inventories.v1.LocalInventory.verify(message.localInventory);
+                                    if (error)
+                                        return "localInventory." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertLocalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest} InsertLocalInventoryRequest
+                             */
+                            InsertLocalInventoryRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.localInventory != null) {
+                                    if (typeof object.localInventory !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest.localInventory: object expected");
+                                    message.localInventory = $root.google.shopping.merchant.inventories.v1.LocalInventory.fromObject(object.localInventory);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertLocalInventoryRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest} message InsertLocalInventoryRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertLocalInventoryRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.localInventory = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.localInventory != null && message.hasOwnProperty("localInventory"))
+                                    object.localInventory = $root.google.shopping.merchant.inventories.v1.LocalInventory.toObject(message.localInventory, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertLocalInventoryRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertLocalInventoryRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertLocalInventoryRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertLocalInventoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest";
+                            };
+    
+                            return InsertLocalInventoryRequest;
+                        })();
+    
+                        v1.DeleteLocalInventoryRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteLocalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IDeleteLocalInventoryRequest
+                             * @property {string|null} [name] DeleteLocalInventoryRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteLocalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a DeleteLocalInventoryRequest.
+                             * @implements IDeleteLocalInventoryRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest=} [properties] Properties to set
+                             */
+                            function DeleteLocalInventoryRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteLocalInventoryRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @instance
+                             */
+                            DeleteLocalInventoryRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteLocalInventoryRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest} DeleteLocalInventoryRequest instance
+                             */
+                            DeleteLocalInventoryRequest.create = function create(properties) {
+                                return new DeleteLocalInventoryRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLocalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest} message DeleteLocalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLocalInventoryRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteLocalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest} message DeleteLocalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteLocalInventoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteLocalInventoryRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest} DeleteLocalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLocalInventoryRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteLocalInventoryRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest} DeleteLocalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteLocalInventoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteLocalInventoryRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteLocalInventoryRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteLocalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest} DeleteLocalInventoryRequest
+                             */
+                            DeleteLocalInventoryRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteLocalInventoryRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest} message DeleteLocalInventoryRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteLocalInventoryRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteLocalInventoryRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteLocalInventoryRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteLocalInventoryRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteLocalInventoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest";
+                            };
+    
+                            return DeleteLocalInventoryRequest;
+                        })();
+    
+                        v1.RegionalInventoryService = (function() {
+    
+                            /**
+                             * Constructs a new RegionalInventoryService service.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a RegionalInventoryService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function RegionalInventoryService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (RegionalInventoryService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = RegionalInventoryService;
+    
+                            /**
+                             * Creates new RegionalInventoryService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {RegionalInventoryService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            RegionalInventoryService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|listRegionalInventories}.
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @typedef ListRegionalInventoriesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} [response] ListRegionalInventoriesResponse
+                             */
+    
+                            /**
+                             * Calls ListRegionalInventories.
+                             * @function listRegionalInventories
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest} request ListRegionalInventoriesRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventoryService.ListRegionalInventoriesCallback} callback Node-style callback called with the error, if any, and ListRegionalInventoriesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionalInventoryService.prototype.listRegionalInventories = function listRegionalInventories(request, callback) {
+                                return this.rpcCall(listRegionalInventories, $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest, $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse, request, callback);
+                            }, "name", { value: "ListRegionalInventories" });
+    
+                            /**
+                             * Calls ListRegionalInventories.
+                             * @function listRegionalInventories
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest} request ListRegionalInventoriesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|insertRegionalInventory}.
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @typedef InsertRegionalInventoryCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventory} [response] RegionalInventory
+                             */
+    
+                            /**
+                             * Calls InsertRegionalInventory.
+                             * @function insertRegionalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest} request InsertRegionalInventoryRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventoryService.InsertRegionalInventoryCallback} callback Node-style callback called with the error, if any, and RegionalInventory
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionalInventoryService.prototype.insertRegionalInventory = function insertRegionalInventory(request, callback) {
+                                return this.rpcCall(insertRegionalInventory, $root.google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest, $root.google.shopping.merchant.inventories.v1.RegionalInventory, request, callback);
+                            }, "name", { value: "InsertRegionalInventory" });
+    
+                            /**
+                             * Calls InsertRegionalInventory.
+                             * @function insertRegionalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest} request InsertRegionalInventoryRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.inventories.v1.RegionalInventory>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|deleteRegionalInventory}.
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @typedef DeleteRegionalInventoryCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteRegionalInventory.
+                             * @function deleteRegionalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest} request DeleteRegionalInventoryRequest message or plain object
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventoryService.DeleteRegionalInventoryCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(RegionalInventoryService.prototype.deleteRegionalInventory = function deleteRegionalInventory(request, callback) {
+                                return this.rpcCall(deleteRegionalInventory, $root.google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteRegionalInventory" });
+    
+                            /**
+                             * Calls DeleteRegionalInventory.
+                             * @function deleteRegionalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventoryService
+                             * @instance
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest} request DeleteRegionalInventoryRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            return RegionalInventoryService;
+                        })();
+    
+                        v1.RegionalInventory = (function() {
+    
+                            /**
+                             * Properties of a RegionalInventory.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IRegionalInventory
+                             * @property {string|null} [name] RegionalInventory name
+                             * @property {number|Long|null} [account] RegionalInventory account
+                             * @property {string|null} [region] RegionalInventory region
+                             * @property {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes|null} [regionalInventoryAttributes] RegionalInventory regionalInventoryAttributes
+                             */
+    
+                            /**
+                             * Constructs a new RegionalInventory.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a RegionalInventory.
+                             * @implements IRegionalInventory
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventory=} [properties] Properties to set
+                             */
+                            function RegionalInventory(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegionalInventory name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             */
+                            RegionalInventory.prototype.name = "";
+    
+                            /**
+                             * RegionalInventory account.
+                             * @member {number|Long} account
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             */
+                            RegionalInventory.prototype.account = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * RegionalInventory region.
+                             * @member {string} region
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             */
+                            RegionalInventory.prototype.region = "";
+    
+                            /**
+                             * RegionalInventory regionalInventoryAttributes.
+                             * @member {google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes|null|undefined} regionalInventoryAttributes
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             */
+                            RegionalInventory.prototype.regionalInventoryAttributes = null;
+    
+                            /**
+                             * Creates a new RegionalInventory instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventory=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventory} RegionalInventory instance
+                             */
+                            RegionalInventory.create = function create(properties) {
+                                return new RegionalInventory(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventory message. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventory.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventory} message RegionalInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventory.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.account != null && Object.hasOwnProperty.call(message, "account"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.account);
+                                if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.region);
+                                if (message.regionalInventoryAttributes != null && Object.hasOwnProperty.call(message, "regionalInventoryAttributes"))
+                                    $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.encode(message.regionalInventoryAttributes, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventory message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventory.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IRegionalInventory} message RegionalInventory message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventory.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventory message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventory} RegionalInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventory.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.RegionalInventory();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.account = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.region = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.regionalInventoryAttributes = $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventory message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventory} RegionalInventory
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventory.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegionalInventory message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegionalInventory.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    if (!$util.isInteger(message.account) && !(message.account && $util.isInteger(message.account.low) && $util.isInteger(message.account.high)))
+                                        return "account: integer|Long expected";
+                                if (message.region != null && message.hasOwnProperty("region"))
+                                    if (!$util.isString(message.region))
+                                        return "region: string expected";
+                                if (message.regionalInventoryAttributes != null && message.hasOwnProperty("regionalInventoryAttributes")) {
+                                    var error = $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.verify(message.regionalInventoryAttributes);
+                                    if (error)
+                                        return "regionalInventoryAttributes." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegionalInventory message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.RegionalInventory} RegionalInventory
+                             */
+                            RegionalInventory.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.RegionalInventory)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.RegionalInventory();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.account != null)
+                                    if ($util.Long)
+                                        (message.account = $util.Long.fromValue(object.account)).unsigned = false;
+                                    else if (typeof object.account === "string")
+                                        message.account = parseInt(object.account, 10);
+                                    else if (typeof object.account === "number")
+                                        message.account = object.account;
+                                    else if (typeof object.account === "object")
+                                        message.account = new $util.LongBits(object.account.low >>> 0, object.account.high >>> 0).toNumber();
+                                if (object.region != null)
+                                    message.region = String(object.region);
+                                if (object.regionalInventoryAttributes != null) {
+                                    if (typeof object.regionalInventoryAttributes !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.RegionalInventory.regionalInventoryAttributes: object expected");
+                                    message.regionalInventoryAttributes = $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.fromObject(object.regionalInventoryAttributes);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegionalInventory message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.RegionalInventory} message RegionalInventory
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegionalInventory.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.account = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.account = options.longs === String ? "0" : 0;
+                                    object.region = "";
+                                    object.regionalInventoryAttributes = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.account != null && message.hasOwnProperty("account"))
+                                    if (typeof message.account === "number")
+                                        object.account = options.longs === String ? String(message.account) : message.account;
+                                    else
+                                        object.account = options.longs === String ? $util.Long.prototype.toString.call(message.account) : options.longs === Number ? new $util.LongBits(message.account.low >>> 0, message.account.high >>> 0).toNumber() : message.account;
+                                if (message.region != null && message.hasOwnProperty("region"))
+                                    object.region = message.region;
+                                if (message.regionalInventoryAttributes != null && message.hasOwnProperty("regionalInventoryAttributes"))
+                                    object.regionalInventoryAttributes = $root.google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.toObject(message.regionalInventoryAttributes, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegionalInventory to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegionalInventory.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegionalInventory
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.RegionalInventory
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegionalInventory.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.RegionalInventory";
+                            };
+    
+                            return RegionalInventory;
+                        })();
+    
+                        v1.ListRegionalInventoriesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListRegionalInventoriesRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IListRegionalInventoriesRequest
+                             * @property {string|null} [parent] ListRegionalInventoriesRequest parent
+                             * @property {number|null} [pageSize] ListRegionalInventoriesRequest pageSize
+                             * @property {string|null} [pageToken] ListRegionalInventoriesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListRegionalInventoriesRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a ListRegionalInventoriesRequest.
+                             * @implements IListRegionalInventoriesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest=} [properties] Properties to set
+                             */
+                            function ListRegionalInventoriesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListRegionalInventoriesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @instance
+                             */
+                            ListRegionalInventoriesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListRegionalInventoriesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @instance
+                             */
+                            ListRegionalInventoriesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListRegionalInventoriesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @instance
+                             */
+                            ListRegionalInventoriesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListRegionalInventoriesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest} ListRegionalInventoriesRequest instance
+                             */
+                            ListRegionalInventoriesRequest.create = function create(properties) {
+                                return new ListRegionalInventoriesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListRegionalInventoriesRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest} message ListRegionalInventoriesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListRegionalInventoriesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListRegionalInventoriesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest} message ListRegionalInventoriesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListRegionalInventoriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListRegionalInventoriesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest} ListRegionalInventoriesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListRegionalInventoriesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListRegionalInventoriesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest} ListRegionalInventoriesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListRegionalInventoriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListRegionalInventoriesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListRegionalInventoriesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListRegionalInventoriesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest} ListRegionalInventoriesRequest
+                             */
+                            ListRegionalInventoriesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListRegionalInventoriesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest} message ListRegionalInventoriesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListRegionalInventoriesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListRegionalInventoriesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListRegionalInventoriesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListRegionalInventoriesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListRegionalInventoriesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest";
+                            };
+    
+                            return ListRegionalInventoriesRequest;
+                        })();
+    
+                        v1.ListRegionalInventoriesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListRegionalInventoriesResponse.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IListRegionalInventoriesResponse
+                             * @property {Array.<google.shopping.merchant.inventories.v1.IRegionalInventory>|null} [regionalInventories] ListRegionalInventoriesResponse regionalInventories
+                             * @property {string|null} [nextPageToken] ListRegionalInventoriesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListRegionalInventoriesResponse.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a ListRegionalInventoriesResponse.
+                             * @implements IListRegionalInventoriesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse=} [properties] Properties to set
+                             */
+                            function ListRegionalInventoriesResponse(properties) {
+                                this.regionalInventories = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListRegionalInventoriesResponse regionalInventories.
+                             * @member {Array.<google.shopping.merchant.inventories.v1.IRegionalInventory>} regionalInventories
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @instance
+                             */
+                            ListRegionalInventoriesResponse.prototype.regionalInventories = $util.emptyArray;
+    
+                            /**
+                             * ListRegionalInventoriesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @instance
+                             */
+                            ListRegionalInventoriesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListRegionalInventoriesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} ListRegionalInventoriesResponse instance
+                             */
+                            ListRegionalInventoriesResponse.create = function create(properties) {
+                                return new ListRegionalInventoriesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListRegionalInventoriesResponse message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse} message ListRegionalInventoriesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListRegionalInventoriesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.regionalInventories != null && message.regionalInventories.length)
+                                    for (var i = 0; i < message.regionalInventories.length; ++i)
+                                        $root.google.shopping.merchant.inventories.v1.RegionalInventory.encode(message.regionalInventories[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListRegionalInventoriesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse} message ListRegionalInventoriesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListRegionalInventoriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListRegionalInventoriesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} ListRegionalInventoriesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListRegionalInventoriesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.regionalInventories && message.regionalInventories.length))
+                                                message.regionalInventories = [];
+                                            message.regionalInventories.push($root.google.shopping.merchant.inventories.v1.RegionalInventory.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListRegionalInventoriesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} ListRegionalInventoriesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListRegionalInventoriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListRegionalInventoriesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListRegionalInventoriesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.regionalInventories != null && message.hasOwnProperty("regionalInventories")) {
+                                    if (!Array.isArray(message.regionalInventories))
+                                        return "regionalInventories: array expected";
+                                    for (var i = 0; i < message.regionalInventories.length; ++i) {
+                                        var error = $root.google.shopping.merchant.inventories.v1.RegionalInventory.verify(message.regionalInventories[i]);
+                                        if (error)
+                                            return "regionalInventories." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListRegionalInventoriesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} ListRegionalInventoriesResponse
+                             */
+                            ListRegionalInventoriesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse();
+                                if (object.regionalInventories) {
+                                    if (!Array.isArray(object.regionalInventories))
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.regionalInventories: array expected");
+                                    message.regionalInventories = [];
+                                    for (var i = 0; i < object.regionalInventories.length; ++i) {
+                                        if (typeof object.regionalInventories[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.regionalInventories: object expected");
+                                        message.regionalInventories[i] = $root.google.shopping.merchant.inventories.v1.RegionalInventory.fromObject(object.regionalInventories[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListRegionalInventoriesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse} message ListRegionalInventoriesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListRegionalInventoriesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.regionalInventories = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.regionalInventories && message.regionalInventories.length) {
+                                    object.regionalInventories = [];
+                                    for (var j = 0; j < message.regionalInventories.length; ++j)
+                                        object.regionalInventories[j] = $root.google.shopping.merchant.inventories.v1.RegionalInventory.toObject(message.regionalInventories[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListRegionalInventoriesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListRegionalInventoriesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListRegionalInventoriesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListRegionalInventoriesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse";
+                            };
+    
+                            return ListRegionalInventoriesResponse;
+                        })();
+    
+                        v1.InsertRegionalInventoryRequest = (function() {
+    
+                            /**
+                             * Properties of an InsertRegionalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IInsertRegionalInventoryRequest
+                             * @property {string|null} [parent] InsertRegionalInventoryRequest parent
+                             * @property {google.shopping.merchant.inventories.v1.IRegionalInventory|null} [regionalInventory] InsertRegionalInventoryRequest regionalInventory
+                             */
+    
+                            /**
+                             * Constructs a new InsertRegionalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents an InsertRegionalInventoryRequest.
+                             * @implements IInsertRegionalInventoryRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest=} [properties] Properties to set
+                             */
+                            function InsertRegionalInventoryRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InsertRegionalInventoryRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @instance
+                             */
+                            InsertRegionalInventoryRequest.prototype.parent = "";
+    
+                            /**
+                             * InsertRegionalInventoryRequest regionalInventory.
+                             * @member {google.shopping.merchant.inventories.v1.IRegionalInventory|null|undefined} regionalInventory
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @instance
+                             */
+                            InsertRegionalInventoryRequest.prototype.regionalInventory = null;
+    
+                            /**
+                             * Creates a new InsertRegionalInventoryRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest} InsertRegionalInventoryRequest instance
+                             */
+                            InsertRegionalInventoryRequest.create = function create(properties) {
+                                return new InsertRegionalInventoryRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InsertRegionalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest} message InsertRegionalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertRegionalInventoryRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.regionalInventory != null && Object.hasOwnProperty.call(message, "regionalInventory"))
+                                    $root.google.shopping.merchant.inventories.v1.RegionalInventory.encode(message.regionalInventory, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InsertRegionalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest} message InsertRegionalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InsertRegionalInventoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InsertRegionalInventoryRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest} InsertRegionalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertRegionalInventoryRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.regionalInventory = $root.google.shopping.merchant.inventories.v1.RegionalInventory.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InsertRegionalInventoryRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest} InsertRegionalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InsertRegionalInventoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InsertRegionalInventoryRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InsertRegionalInventoryRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.regionalInventory != null && message.hasOwnProperty("regionalInventory")) {
+                                    var error = $root.google.shopping.merchant.inventories.v1.RegionalInventory.verify(message.regionalInventory);
+                                    if (error)
+                                        return "regionalInventory." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InsertRegionalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest} InsertRegionalInventoryRequest
+                             */
+                            InsertRegionalInventoryRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.regionalInventory != null) {
+                                    if (typeof object.regionalInventory !== "object")
+                                        throw TypeError(".google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest.regionalInventory: object expected");
+                                    message.regionalInventory = $root.google.shopping.merchant.inventories.v1.RegionalInventory.fromObject(object.regionalInventory);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InsertRegionalInventoryRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest} message InsertRegionalInventoryRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InsertRegionalInventoryRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.regionalInventory = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.regionalInventory != null && message.hasOwnProperty("regionalInventory"))
+                                    object.regionalInventory = $root.google.shopping.merchant.inventories.v1.RegionalInventory.toObject(message.regionalInventory, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InsertRegionalInventoryRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InsertRegionalInventoryRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InsertRegionalInventoryRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InsertRegionalInventoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest";
+                            };
+    
+                            return InsertRegionalInventoryRequest;
+                        })();
+    
+                        v1.DeleteRegionalInventoryRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteRegionalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @interface IDeleteRegionalInventoryRequest
+                             * @property {string|null} [name] DeleteRegionalInventoryRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteRegionalInventoryRequest.
+                             * @memberof google.shopping.merchant.inventories.v1
+                             * @classdesc Represents a DeleteRegionalInventoryRequest.
+                             * @implements IDeleteRegionalInventoryRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest=} [properties] Properties to set
+                             */
+                            function DeleteRegionalInventoryRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteRegionalInventoryRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @instance
+                             */
+                            DeleteRegionalInventoryRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteRegionalInventoryRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest} DeleteRegionalInventoryRequest instance
+                             */
+                            DeleteRegionalInventoryRequest.create = function create(properties) {
+                                return new DeleteRegionalInventoryRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteRegionalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest} message DeleteRegionalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteRegionalInventoryRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteRegionalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest} message DeleteRegionalInventoryRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteRegionalInventoryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteRegionalInventoryRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest} DeleteRegionalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteRegionalInventoryRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteRegionalInventoryRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest} DeleteRegionalInventoryRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteRegionalInventoryRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteRegionalInventoryRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteRegionalInventoryRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteRegionalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest} DeleteRegionalInventoryRequest
+                             */
+                            DeleteRegionalInventoryRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteRegionalInventoryRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest} message DeleteRegionalInventoryRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteRegionalInventoryRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteRegionalInventoryRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteRegionalInventoryRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteRegionalInventoryRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteRegionalInventoryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest";
+                            };
+    
+                            return DeleteRegionalInventoryRequest;
+                        })();
+    
+                        return v1;
+                    })();
     
                     inventories.v1beta = (function() {
     
@@ -4723,6 +8460,34 @@
              * @namespace
              */
             var api = {};
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
+                return values;
+            })();
     
             api.Http = (function() {
     
@@ -9668,34 +13433,6 @@
                 values[valuesById[3] = "BETA"] = 3;
                 values[valuesById[4] = "GA"] = 4;
                 values[valuesById[5] = "DEPRECATED"] = 5;
-                return values;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             * @property {number} IDENTIFIER=8 IDENTIFIER value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
@@ -22471,6 +26208,249 @@
                 return GeneratedCodeInfo;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.seconds = reader.int64();
+                                break;
+                            }
+                        case 2: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Timestamp
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Timestamp";
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -22889,249 +26869,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.seconds = reader.int64();
-                                break;
-                            }
-                        case 2: {
-                                message.nanos = reader.int32();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Timestamp
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Timestamp.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Timestamp";
-                };
-    
-                return Timestamp;
             })();
     
             return protobuf;

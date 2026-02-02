@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.10.1...edgenetwork-v0.11.0) (2025-10-29)
+
+
+### Features
+
+* [edgenetwork] A new field `remote_peering_network_type` is added to message `google.cloud.edgenetwork.v1.Interconnect` ([#6851](https://github.com/googleapis/google-cloud-node/issues/6851)) ([d904acc](https://github.com/googleapis/google-cloud-node/commit/d904acc7ba1474e5acc9cb8ad4a38033e57f927e))
+
+## [0.10.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.10.0...edgenetwork-v0.10.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.9.0...edgenetwork-v0.10.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.8.0...edgenetwork-v0.9.0) (2025-06-03)
 
 

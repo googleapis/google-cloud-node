@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12642,6 +12642,7 @@
                      * @property {number} HUDI=18 HUDI value
                      * @property {number} ICEBERG=19 ICEBERG value
                      * @property {number} JUPYTER=1 JUPYTER value
+                     * @property {number} JUPYTER_KERNEL_GATEWAY=22 JUPYTER_KERNEL_GATEWAY value
                      * @property {number} PIG=21 PIG value
                      * @property {number} PRESTO=6 PRESTO value
                      * @property {number} TRINO=17 TRINO value
@@ -12663,6 +12664,7 @@
                         values[valuesById[18] = "HUDI"] = 18;
                         values[valuesById[19] = "ICEBERG"] = 19;
                         values[valuesById[1] = "JUPYTER"] = 1;
+                        values[valuesById[22] = "JUPYTER_KERNEL_GATEWAY"] = 22;
                         values[valuesById[21] = "PIG"] = 21;
                         values[valuesById[6] = "PRESTO"] = 6;
                         values[valuesById[17] = "TRINO"] = 17;
@@ -22228,6 +22230,7 @@
                                     case 18:
                                     case 19:
                                     case 1:
+                                    case 22:
                                     case 21:
                                     case 6:
                                     case 17:
@@ -22316,6 +22319,10 @@
                                     case "JUPYTER":
                                     case 1:
                                         message.optionalComponents[i] = 1;
+                                        break;
+                                    case "JUPYTER_KERNEL_GATEWAY":
+                                    case 22:
+                                        message.optionalComponents[i] = 22;
                                         break;
                                     case "PIG":
                                     case 21:

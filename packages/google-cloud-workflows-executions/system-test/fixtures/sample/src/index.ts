@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {WorkflowsClient} from '@google-cloud/workflows';
+import {ExecutionsClient} from '@google-cloud/workflows';
 
 // check that the client class type name can be used
-function doStuffWithWorkflowsClient(client: WorkflowsClient) {
+function doStuffWithExecutionsClient(client: ExecutionsClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const workflowsClient = new WorkflowsClient();
-  doStuffWithWorkflowsClient(workflowsClient);
+  const executionsClient = new ExecutionsClient();
+  doStuffWithExecutionsClient(executionsClient);
 }
 
 main();

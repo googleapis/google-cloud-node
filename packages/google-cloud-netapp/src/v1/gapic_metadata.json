@@ -65,6 +65,11 @@
                 "getQuotaRule"
               ]
             },
+            "GetHostGroup": {
+              "methods": [
+                "getHostGroup"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -260,6 +265,26 @@
                 "deleteQuotaRule"
               ]
             },
+            "RestoreBackupFiles": {
+              "methods": [
+                "restoreBackupFiles"
+              ]
+            },
+            "CreateHostGroup": {
+              "methods": [
+                "createHostGroup"
+              ]
+            },
+            "UpdateHostGroup": {
+              "methods": [
+                "updateHostGroup"
+              ]
+            },
+            "DeleteHostGroup": {
+              "methods": [
+                "deleteHostGroup"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -328,6 +353,13 @@
                 "listQuotaRules",
                 "listQuotaRulesStream",
                 "listQuotaRulesAsync"
+              ]
+            },
+            "ListHostGroups": {
+              "methods": [
+                "listHostGroups",
+                "listHostGroupsStream",
+                "listHostGroupsAsync"
               ]
             }
           }
@@ -390,6 +422,11 @@
                 "getQuotaRule"
               ]
             },
+            "GetHostGroup": {
+              "methods": [
+                "getHostGroup"
+              ]
+            },
             "CreateStoragePool": {
               "methods": [
                 "createStoragePool"
@@ -585,6 +622,26 @@
                 "deleteQuotaRule"
               ]
             },
+            "RestoreBackupFiles": {
+              "methods": [
+                "restoreBackupFiles"
+              ]
+            },
+            "CreateHostGroup": {
+              "methods": [
+                "createHostGroup"
+              ]
+            },
+            "UpdateHostGroup": {
+              "methods": [
+                "updateHostGroup"
+              ]
+            },
+            "DeleteHostGroup": {
+              "methods": [
+                "deleteHostGroup"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -653,6 +710,13 @@
                 "listQuotaRules",
                 "listQuotaRulesStream",
                 "listQuotaRulesAsync"
+              ]
+            },
+            "ListHostGroups": {
+              "methods": [
+                "listHostGroups",
+                "listHostGroupsStream",
+                "listHostGroupsAsync"
               ]
             }
           }

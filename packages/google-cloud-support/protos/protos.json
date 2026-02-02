@@ -917,6 +917,24 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "GetAttachment": {
+                          "requestType": "GetAttachmentRequest",
+                          "responseType": "Attachment",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{name=*/*/cases/*/attachments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{name=*/*/cases/*/attachments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -937,6 +955,18 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "GetAttachmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/Attachment"
+                          }
                         }
                       }
                     },
@@ -1583,6 +1613,24 @@
                               "(google.api.method_signature)": "parent,comment"
                             }
                           ]
+                        },
+                        "GetComment": {
+                          "requestType": "GetCommentRequest",
+                          "responseType": "Comment",
+                          "options": {
+                            "(google.api.http).get": "/v2beta/{name=*/*/cases/*/comments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2beta/{name=*/*/cases/*/comments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1634,6 +1682,18 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetCommentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/Comment"
                           }
                         }
                       }

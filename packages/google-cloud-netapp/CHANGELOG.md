@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.15.0...netapp-v0.16.0) (2026-01-16)
+
+
+### Features
+
+* [netapp] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#6994](https://github.com/googleapis/google-cloud-node/issues/6994)) ([4c3178e](https://github.com/googleapis/google-cloud-node/commit/4c3178eed4f65968383838f0394406dea6d7077f))
+
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.14.1...netapp-v0.15.0) (2025-11-21)
+
+
+### Features
+
+* [netapp] Add Squash Mode to Export Policy ([#6905](https://github.com/googleapis/google-cloud-node/issues/6905)) ([e77b12e](https://github.com/googleapis/google-cloud-node/commit/e77b12e03a97fa7c42df57561af6ab1c3bae3a3f))
+
+## [0.14.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.14.0...netapp-v0.14.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.13.0...netapp-v0.14.0) (2025-09-04)
+
+
+### Features
+
+* [netapp] add new fields for flex auto tiering ([#6670](https://github.com/googleapis/google-cloud-node/issues/6670)) ([ba6a497](https://github.com/googleapis/google-cloud-node/commit/ba6a4977e89c5769d302e1a18d5ad305cae1bfdd))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.12.0...netapp-v0.13.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* [netapp] A new message 'google.cloud.netapp.v1.BackupRetentionPolicy' is added in 'google.cloud.netapp.v1.BackupVault' ([#6315](https://github.com/googleapis/google-cloud-node/issues/6315)) ([943ef98](https://github.com/googleapis/google-cloud-node/commit/943ef98c4d2fc7663f7b74ec0ebde2878aae52fe))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.11.0...netapp-v0.12.0) (2025-06-03)
 
 

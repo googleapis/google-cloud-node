@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -116,6 +116,7 @@
                          * @property {Array.<string>|null} [targetWorkloads] Order targetWorkloads
                          * @property {string|null} [customerMotivation] Order customerMotivation
                          * @property {google.protobuf.ITimestamp|null} [fulfillmentTime] Order fulfillmentTime
+                         * @property {google.type.IDate|null} [customerRequestedInstallationDate] Order customerRequestedInstallationDate
                          * @property {string|null} [regionCode] Order regionCode
                          * @property {string|null} [orderFormUri] Order orderFormUri
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.Order.Type|null} [type] Order type
@@ -125,6 +126,12 @@
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.Order.DeploymentType|null} [deploymentType] Order deploymentType
                          * @property {google.type.IDate|null} [actualInstallationDate] Order actualInstallationDate
                          * @property {google.type.IDate|null} [estimatedInstallationDate] Order estimatedInstallationDate
+                         * @property {google.type.IDate|null} [estimatedDeliveryDate] Order estimatedDeliveryDate
+                         * @property {boolean|null} [migration] Order migration
+                         * @property {google.protobuf.ITimestamp|null} [acceptedTime] Order acceptedTime
+                         * @property {google.type.IDate|null} [requestedDateChange] Order requestedDateChange
+                         * @property {string|null} [vendorNotes] Order vendorNotes
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.IOrganizationContact|null} [vendorContact] Order vendorContact
                          */
     
                         /**
@@ -226,6 +233,14 @@
                         Order.prototype.fulfillmentTime = null;
     
                         /**
+                         * Order customerRequestedInstallationDate.
+                         * @member {google.type.IDate|null|undefined} customerRequestedInstallationDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.customerRequestedInstallationDate = null;
+    
+                        /**
                          * Order regionCode.
                          * @member {string} regionCode
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
@@ -298,6 +313,54 @@
                         Order.prototype.estimatedInstallationDate = null;
     
                         /**
+                         * Order estimatedDeliveryDate.
+                         * @member {google.type.IDate|null|undefined} estimatedDeliveryDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.estimatedDeliveryDate = null;
+    
+                        /**
+                         * Order migration.
+                         * @member {boolean} migration
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.migration = false;
+    
+                        /**
+                         * Order acceptedTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} acceptedTime
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.acceptedTime = null;
+    
+                        /**
+                         * Order requestedDateChange.
+                         * @member {google.type.IDate|null|undefined} requestedDateChange
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.requestedDateChange = null;
+    
+                        /**
+                         * Order vendorNotes.
+                         * @member {string} vendorNotes
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.vendorNotes = "";
+    
+                        /**
+                         * Order vendorContact.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.IOrganizationContact|null|undefined} vendorContact
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
+                         * @instance
+                         */
+                        Order.prototype.vendorContact = null;
+    
+                        /**
                          * Creates a new Order instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Order
@@ -362,6 +425,20 @@
                                 $root.google.type.Date.encode(message.actualInstallationDate, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.estimatedInstallationDate != null && Object.hasOwnProperty.call(message, "estimatedInstallationDate"))
                                 $root.google.type.Date.encode(message.estimatedInstallationDate, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.customerRequestedInstallationDate != null && Object.hasOwnProperty.call(message, "customerRequestedInstallationDate"))
+                                $root.google.type.Date.encode(message.customerRequestedInstallationDate, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.estimatedDeliveryDate != null && Object.hasOwnProperty.call(message, "estimatedDeliveryDate"))
+                                $root.google.type.Date.encode(message.estimatedDeliveryDate, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.migration != null && Object.hasOwnProperty.call(message, "migration"))
+                                writer.uint32(/* id 23, wireType 0 =*/184).bool(message.migration);
+                            if (message.acceptedTime != null && Object.hasOwnProperty.call(message, "acceptedTime"))
+                                $root.google.protobuf.Timestamp.encode(message.acceptedTime, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.requestedDateChange != null && Object.hasOwnProperty.call(message, "requestedDateChange"))
+                                $root.google.type.Date.encode(message.requestedDateChange, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.vendorNotes != null && Object.hasOwnProperty.call(message, "vendorNotes"))
+                                writer.uint32(/* id 26, wireType 2 =*/210).string(message.vendorNotes);
+                            if (message.vendorContact != null && Object.hasOwnProperty.call(message, "vendorContact"))
+                                $root.google.cloud.gdchardwaremanagement.v1alpha.OrganizationContact.encode(message.vendorContact, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             return writer;
                         };
     
@@ -459,6 +536,10 @@
                                         message.fulfillmentTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 21: {
+                                        message.customerRequestedInstallationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 10: {
                                         message.regionCode = reader.string();
                                         break;
@@ -495,6 +576,30 @@
                                     }
                                 case 20: {
                                         message.estimatedInstallationDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        message.estimatedDeliveryDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 23: {
+                                        message.migration = reader.bool();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.acceptedTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.requestedDateChange = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.vendorNotes = reader.string();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.vendorContact = $root.google.cloud.gdchardwaremanagement.v1alpha.OrganizationContact.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -595,6 +700,11 @@
                                 if (error)
                                     return "fulfillmentTime." + error;
                             }
+                            if (message.customerRequestedInstallationDate != null && message.hasOwnProperty("customerRequestedInstallationDate")) {
+                                var error = $root.google.type.Date.verify(message.customerRequestedInstallationDate);
+                                if (error)
+                                    return "customerRequestedInstallationDate." + error;
+                            }
                             if (message.regionCode != null && message.hasOwnProperty("regionCode"))
                                 if (!$util.isString(message.regionCode))
                                     return "regionCode: string expected";
@@ -648,6 +758,32 @@
                                 var error = $root.google.type.Date.verify(message.estimatedInstallationDate);
                                 if (error)
                                     return "estimatedInstallationDate." + error;
+                            }
+                            if (message.estimatedDeliveryDate != null && message.hasOwnProperty("estimatedDeliveryDate")) {
+                                var error = $root.google.type.Date.verify(message.estimatedDeliveryDate);
+                                if (error)
+                                    return "estimatedDeliveryDate." + error;
+                            }
+                            if (message.migration != null && message.hasOwnProperty("migration"))
+                                if (typeof message.migration !== "boolean")
+                                    return "migration: boolean expected";
+                            if (message.acceptedTime != null && message.hasOwnProperty("acceptedTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.acceptedTime);
+                                if (error)
+                                    return "acceptedTime." + error;
+                            }
+                            if (message.requestedDateChange != null && message.hasOwnProperty("requestedDateChange")) {
+                                var error = $root.google.type.Date.verify(message.requestedDateChange);
+                                if (error)
+                                    return "requestedDateChange." + error;
+                            }
+                            if (message.vendorNotes != null && message.hasOwnProperty("vendorNotes"))
+                                if (!$util.isString(message.vendorNotes))
+                                    return "vendorNotes: string expected";
+                            if (message.vendorContact != null && message.hasOwnProperty("vendorContact")) {
+                                var error = $root.google.cloud.gdchardwaremanagement.v1alpha.OrganizationContact.verify(message.vendorContact);
+                                if (error)
+                                    return "vendorContact." + error;
                             }
                             return null;
                         };
@@ -764,6 +900,11 @@
                                     throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.fulfillmentTime: object expected");
                                 message.fulfillmentTime = $root.google.protobuf.Timestamp.fromObject(object.fulfillmentTime);
                             }
+                            if (object.customerRequestedInstallationDate != null) {
+                                if (typeof object.customerRequestedInstallationDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.customerRequestedInstallationDate: object expected");
+                                message.customerRequestedInstallationDate = $root.google.type.Date.fromObject(object.customerRequestedInstallationDate);
+                            }
                             if (object.regionCode != null)
                                 message.regionCode = String(object.regionCode);
                             if (object.orderFormUri != null)
@@ -847,6 +988,30 @@
                                     throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.estimatedInstallationDate: object expected");
                                 message.estimatedInstallationDate = $root.google.type.Date.fromObject(object.estimatedInstallationDate);
                             }
+                            if (object.estimatedDeliveryDate != null) {
+                                if (typeof object.estimatedDeliveryDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.estimatedDeliveryDate: object expected");
+                                message.estimatedDeliveryDate = $root.google.type.Date.fromObject(object.estimatedDeliveryDate);
+                            }
+                            if (object.migration != null)
+                                message.migration = Boolean(object.migration);
+                            if (object.acceptedTime != null) {
+                                if (typeof object.acceptedTime !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.acceptedTime: object expected");
+                                message.acceptedTime = $root.google.protobuf.Timestamp.fromObject(object.acceptedTime);
+                            }
+                            if (object.requestedDateChange != null) {
+                                if (typeof object.requestedDateChange !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.requestedDateChange: object expected");
+                                message.requestedDateChange = $root.google.type.Date.fromObject(object.requestedDateChange);
+                            }
+                            if (object.vendorNotes != null)
+                                message.vendorNotes = String(object.vendorNotes);
+                            if (object.vendorContact != null) {
+                                if (typeof object.vendorContact !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Order.vendorContact: object expected");
+                                message.vendorContact = $root.google.cloud.gdchardwaremanagement.v1alpha.OrganizationContact.fromObject(object.vendorContact);
+                            }
                             return message;
                         };
     
@@ -886,6 +1051,13 @@
                                 object.deploymentType = options.enums === String ? "DEPLOYMENT_TYPE_UNSPECIFIED" : 0;
                                 object.actualInstallationDate = null;
                                 object.estimatedInstallationDate = null;
+                                object.customerRequestedInstallationDate = null;
+                                object.estimatedDeliveryDate = null;
+                                object.migration = false;
+                                object.acceptedTime = null;
+                                object.requestedDateChange = null;
+                                object.vendorNotes = "";
+                                object.vendorContact = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -935,6 +1107,20 @@
                                 object.actualInstallationDate = $root.google.type.Date.toObject(message.actualInstallationDate, options);
                             if (message.estimatedInstallationDate != null && message.hasOwnProperty("estimatedInstallationDate"))
                                 object.estimatedInstallationDate = $root.google.type.Date.toObject(message.estimatedInstallationDate, options);
+                            if (message.customerRequestedInstallationDate != null && message.hasOwnProperty("customerRequestedInstallationDate"))
+                                object.customerRequestedInstallationDate = $root.google.type.Date.toObject(message.customerRequestedInstallationDate, options);
+                            if (message.estimatedDeliveryDate != null && message.hasOwnProperty("estimatedDeliveryDate"))
+                                object.estimatedDeliveryDate = $root.google.type.Date.toObject(message.estimatedDeliveryDate, options);
+                            if (message.migration != null && message.hasOwnProperty("migration"))
+                                object.migration = message.migration;
+                            if (message.acceptedTime != null && message.hasOwnProperty("acceptedTime"))
+                                object.acceptedTime = $root.google.protobuf.Timestamp.toObject(message.acceptedTime, options);
+                            if (message.requestedDateChange != null && message.hasOwnProperty("requestedDateChange"))
+                                object.requestedDateChange = $root.google.type.Date.toObject(message.requestedDateChange, options);
+                            if (message.vendorNotes != null && message.hasOwnProperty("vendorNotes"))
+                                object.vendorNotes = message.vendorNotes;
+                            if (message.vendorContact != null && message.hasOwnProperty("vendorContact"))
+                                object.vendorContact = $root.google.cloud.gdchardwaremanagement.v1alpha.OrganizationContact.toObject(message.vendorContact, options);
                             return object;
                         };
     
@@ -2118,6 +2304,7 @@
                          * @property {google.type.IDate|null} [requestedInstallationDate] Hardware requestedInstallationDate
                          * @property {google.type.IDate|null} [actualInstallationDate] Hardware actualInstallationDate
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo>|null} [machineInfos] Hardware machineInfos
+                         * @property {google.type.IDate|null} [estimatedDeliveryDate] Hardware estimatedDeliveryDate
                          */
     
                         /**
@@ -2282,6 +2469,14 @@
                         Hardware.prototype.machineInfos = $util.emptyArray;
     
                         /**
+                         * Hardware estimatedDeliveryDate.
+                         * @member {google.type.IDate|null|undefined} estimatedDeliveryDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
+                         * @instance
+                         */
+                        Hardware.prototype.estimatedDeliveryDate = null;
+    
+                        /**
                          * Creates a new Hardware instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Hardware
@@ -2343,6 +2538,8 @@
                             if (message.machineInfos != null && message.machineInfos.length)
                                 for (var i = 0; i < message.machineInfos.length; ++i)
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.encode(message.machineInfos[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.estimatedDeliveryDate != null && Object.hasOwnProperty.call(message, "estimatedDeliveryDate"))
+                                $root.google.type.Date.encode(message.estimatedDeliveryDate, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -2472,6 +2669,10 @@
                                         message.machineInfos.push($root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 21: {
+                                        message.estimatedDeliveryDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2598,6 +2799,11 @@
                                         return "machineInfos." + error;
                                 }
                             }
+                            if (message.estimatedDeliveryDate != null && message.hasOwnProperty("estimatedDeliveryDate")) {
+                                var error = $root.google.type.Date.verify(message.estimatedDeliveryDate);
+                                if (error)
+                                    return "estimatedDeliveryDate." + error;
+                            }
                             return null;
                         };
     
@@ -2720,6 +2926,11 @@
                                     message.machineInfos[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.fromObject(object.machineInfos[i]);
                                 }
                             }
+                            if (object.estimatedDeliveryDate != null) {
+                                if (typeof object.estimatedDeliveryDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Hardware.estimatedDeliveryDate: object expected");
+                                message.estimatedDeliveryDate = $root.google.type.Date.fromObject(object.estimatedDeliveryDate);
+                            }
                             return message;
                         };
     
@@ -2757,6 +2968,7 @@
                                 object.zone = "";
                                 object.requestedInstallationDate = null;
                                 object.actualInstallationDate = null;
+                                object.estimatedDeliveryDate = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2801,6 +3013,8 @@
                                 for (var j = 0; j < message.machineInfos.length; ++j)
                                     object.machineInfos[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.toObject(message.machineInfos[j], options);
                             }
+                            if (message.estimatedDeliveryDate != null && message.hasOwnProperty("estimatedDeliveryDate"))
+                                object.estimatedDeliveryDate = $root.google.type.Date.toObject(message.estimatedDeliveryDate, options);
                             return object;
                         };
     
@@ -5336,6 +5550,9 @@
                          * @property {string|null} [globallyUniqueId] Zone globallyUniqueId
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>|null} [subscriptionConfigs] Zone subscriptionConfigs
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|null} [provisioningState] Zone provisioningState
+                         * @property {boolean|null} [skipClusterProvisioning] Zone skipClusterProvisioning
+                         * @property {boolean|null} [clusterIntentRequired] Zone clusterIntentRequired
+                         * @property {boolean|null} [clusterIntentVerified] Zone clusterIntentVerified
                          */
     
                         /**
@@ -5453,6 +5670,30 @@
                         Zone.prototype.provisioningState = 0;
     
                         /**
+                         * Zone skipClusterProvisioning.
+                         * @member {boolean} skipClusterProvisioning
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.skipClusterProvisioning = false;
+    
+                        /**
+                         * Zone clusterIntentRequired.
+                         * @member {boolean} clusterIntentRequired
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.clusterIntentRequired = false;
+    
+                        /**
+                         * Zone clusterIntentVerified.
+                         * @member {boolean} clusterIntentVerified
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.clusterIntentVerified = false;
+    
+                        /**
                          * Creates a new Zone instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
@@ -5503,6 +5744,12 @@
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.encode(message.subscriptionConfigs[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.provisioningState != null && Object.hasOwnProperty.call(message, "provisioningState"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).int32(message.provisioningState);
+                            if (message.skipClusterProvisioning != null && Object.hasOwnProperty.call(message, "skipClusterProvisioning"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).bool(message.skipClusterProvisioning);
+                            if (message.clusterIntentRequired != null && Object.hasOwnProperty.call(message, "clusterIntentRequired"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).bool(message.clusterIntentRequired);
+                            if (message.clusterIntentVerified != null && Object.hasOwnProperty.call(message, "clusterIntentVerified"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.clusterIntentVerified);
                             return writer;
                         };
     
@@ -5608,6 +5855,18 @@
                                     }
                                 case 14: {
                                         message.provisioningState = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.skipClusterProvisioning = reader.bool();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.clusterIntentRequired = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.clusterIntentVerified = reader.bool();
                                         break;
                                     }
                                 default:
@@ -5723,6 +5982,15 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.skipClusterProvisioning != null && message.hasOwnProperty("skipClusterProvisioning"))
+                                if (typeof message.skipClusterProvisioning !== "boolean")
+                                    return "skipClusterProvisioning: boolean expected";
+                            if (message.clusterIntentRequired != null && message.hasOwnProperty("clusterIntentRequired"))
+                                if (typeof message.clusterIntentRequired !== "boolean")
+                                    return "clusterIntentRequired: boolean expected";
+                            if (message.clusterIntentVerified != null && message.hasOwnProperty("clusterIntentVerified"))
+                                if (typeof message.clusterIntentVerified !== "boolean")
+                                    return "clusterIntentVerified: boolean expected";
                             return null;
                         };
     
@@ -5856,6 +6124,12 @@
                                 message.provisioningState = 3;
                                 break;
                             }
+                            if (object.skipClusterProvisioning != null)
+                                message.skipClusterProvisioning = Boolean(object.skipClusterProvisioning);
+                            if (object.clusterIntentRequired != null)
+                                message.clusterIntentRequired = Boolean(object.clusterIntentRequired);
+                            if (object.clusterIntentVerified != null)
+                                message.clusterIntentVerified = Boolean(object.clusterIntentVerified);
                             return message;
                         };
     
@@ -5888,6 +6162,9 @@
                                 object.networkConfig = null;
                                 object.globallyUniqueId = "";
                                 object.provisioningState = options.enums === String ? "PROVISIONING_STATE_UNSPECIFIED" : 0;
+                                object.skipClusterProvisioning = false;
+                                object.clusterIntentRequired = false;
+                                object.clusterIntentVerified = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5923,6 +6200,12 @@
                             }
                             if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
                                 object.provisioningState = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] === undefined ? message.provisioningState : $root.google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState[message.provisioningState] : message.provisioningState;
+                            if (message.skipClusterProvisioning != null && message.hasOwnProperty("skipClusterProvisioning"))
+                                object.skipClusterProvisioning = message.skipClusterProvisioning;
+                            if (message.clusterIntentRequired != null && message.hasOwnProperty("clusterIntentRequired"))
+                                object.clusterIntentRequired = message.clusterIntentRequired;
+                            if (message.clusterIntentVerified != null && message.hasOwnProperty("clusterIntentVerified"))
+                                object.clusterIntentVerified = message.clusterIntentVerified;
                             return object;
                         };
     
@@ -7710,6 +7993,10 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.networkUplink != null && message.hasOwnProperty("networkUplink"))
@@ -7774,6 +8061,22 @@
                             case "STANDARD_EU":
                             case 3:
                                 message.powerReceptacle = 3;
+                                break;
+                            case "TYPE_G_BS1363":
+                            case 4:
+                                message.powerReceptacle = 4;
+                                break;
+                            case "CEE_7_3":
+                            case 5:
+                                message.powerReceptacle = 5;
+                                break;
+                            case "CEE_7_5":
+                            case 6:
+                                message.powerReceptacle = 6;
+                                break;
+                            case "TYPE_F":
+                            case 7:
+                                message.powerReceptacle = 7;
                                 break;
                             }
                             switch (object.networkUplink) {
@@ -7895,6 +8198,10 @@
                          * @property {number} NEMA_5_15=1 NEMA_5_15 value
                          * @property {number} C_13=2 C_13 value
                          * @property {number} STANDARD_EU=3 STANDARD_EU value
+                         * @property {number} TYPE_G_BS1363=4 TYPE_G_BS1363 value
+                         * @property {number} CEE_7_3=5 CEE_7_3 value
+                         * @property {number} CEE_7_5=6 CEE_7_5 value
+                         * @property {number} TYPE_F=7 TYPE_F value
                          */
                         HardwarePhysicalInfo.PowerReceptacleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7902,6 +8209,10 @@
                             values[valuesById[1] = "NEMA_5_15"] = 1;
                             values[valuesById[2] = "C_13"] = 2;
                             values[valuesById[3] = "STANDARD_EU"] = 3;
+                            values[valuesById[4] = "TYPE_G_BS1363"] = 4;
+                            values[valuesById[5] = "CEE_7_3"] = 5;
+                            values[valuesById[6] = "CEE_7_5"] = 6;
+                            values[valuesById[7] = "TYPE_F"] = 7;
                             return values;
                         })();
     
@@ -10558,6 +10869,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|cancelOrder}.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @typedef CancelOrderCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CancelOrder.
+                         * @function cancelOrder
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest} request CancelOrderRequest message or plain object
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrderCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GDCHardwareManagement.prototype.cancelOrder = function cancelOrder(request, callback) {
+                            return this.rpcCall(cancelOrder, $root.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CancelOrder" });
+    
+                        /**
+                         * Calls CancelOrder.
+                         * @function cancelOrder
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest} request CancelOrderRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|listSites}.
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
                          * @typedef ListSitesCallback
@@ -11510,6 +11854,39 @@
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
                          * @instance
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest} request SignalZoneStateRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|requestOrderDateChange}.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @typedef RequestOrderDateChangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RequestOrderDateChange.
+                         * @function requestOrderDateChange
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest} request RequestOrderDateChangeRequest message or plain object
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChangeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GDCHardwareManagement.prototype.requestOrderDateChange = function requestOrderDateChange(request, callback) {
+                            return this.rpcCall(requestOrderDateChange, $root.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RequestOrderDateChange" });
+    
+                        /**
+                         * Calls RequestOrderDateChange.
+                         * @function requestOrderDateChange
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest} request RequestOrderDateChangeRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -13394,6 +13771,235 @@
                         })();
     
                         return SubmitOrderRequest;
+                    })();
+    
+                    v1alpha.CancelOrderRequest = (function() {
+    
+                        /**
+                         * Properties of a CancelOrderRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface ICancelOrderRequest
+                         * @property {string|null} [name] CancelOrderRequest name
+                         * @property {string|null} [requestId] CancelOrderRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CancelOrderRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a CancelOrderRequest.
+                         * @implements ICancelOrderRequest
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest=} [properties] Properties to set
+                         */
+                        function CancelOrderRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CancelOrderRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @instance
+                         */
+                        CancelOrderRequest.prototype.name = "";
+    
+                        /**
+                         * CancelOrderRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @instance
+                         */
+                        CancelOrderRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CancelOrderRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest} CancelOrderRequest instance
+                         */
+                        CancelOrderRequest.create = function create(properties) {
+                            return new CancelOrderRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CancelOrderRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest} message CancelOrderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelOrderRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CancelOrderRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest} message CancelOrderRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CancelOrderRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CancelOrderRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest} CancelOrderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelOrderRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CancelOrderRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest} CancelOrderRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CancelOrderRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CancelOrderRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CancelOrderRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CancelOrderRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest} CancelOrderRequest
+                         */
+                        CancelOrderRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CancelOrderRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest} message CancelOrderRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CancelOrderRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CancelOrderRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CancelOrderRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CancelOrderRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CancelOrderRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest";
+                        };
+    
+                        return CancelOrderRequest;
                     })();
     
                     v1alpha.ListSitesRequest = (function() {
@@ -22780,6 +23386,7 @@
                                 case 1:
                                 case 1:
                                 case 2:
+                                case 4:
                                     break;
                                 }
                             if (message.provisioningStateSignal != null && message.hasOwnProperty("provisioningStateSignal"))
@@ -22842,6 +23449,10 @@
                             case "FACTORY_TURNUP_CHECKS_FAILED":
                             case 2:
                                 message.stateSignal = 2;
+                                break;
+                            case "VERIFY_CLUSTER_INTENT_PRESENCE":
+                            case 4:
+                                message.stateSignal = 4;
                                 break;
                             }
                             switch (object.provisioningStateSignal) {
@@ -22942,6 +23553,7 @@
                          * @property {number} FACTORY_TURNUP_CHECKS_PASSED=1 FACTORY_TURNUP_CHECKS_PASSED value
                          * @property {number} READY_FOR_SITE_TURNUP=1 READY_FOR_SITE_TURNUP value
                          * @property {number} FACTORY_TURNUP_CHECKS_FAILED=2 FACTORY_TURNUP_CHECKS_FAILED value
+                         * @property {number} VERIFY_CLUSTER_INTENT_PRESENCE=4 VERIFY_CLUSTER_INTENT_PRESENCE value
                          */
                         SignalZoneStateRequest.StateSignal = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -22950,6 +23562,7 @@
                             values[valuesById[1] = "FACTORY_TURNUP_CHECKS_PASSED"] = 1;
                             values["READY_FOR_SITE_TURNUP"] = 1;
                             values[valuesById[2] = "FACTORY_TURNUP_CHECKS_FAILED"] = 2;
+                            values[valuesById[4] = "VERIFY_CLUSTER_INTENT_PRESENCE"] = 4;
                             return values;
                         })();
     
@@ -23324,6 +23937,240 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v1alpha.RequestOrderDateChangeRequest = (function() {
+    
+                        /**
+                         * Properties of a RequestOrderDateChangeRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface IRequestOrderDateChangeRequest
+                         * @property {string|null} [name] RequestOrderDateChangeRequest name
+                         * @property {google.type.IDate|null} [requestedDate] RequestOrderDateChangeRequest requestedDate
+                         */
+    
+                        /**
+                         * Constructs a new RequestOrderDateChangeRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a RequestOrderDateChangeRequest.
+                         * @implements IRequestOrderDateChangeRequest
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest=} [properties] Properties to set
+                         */
+                        function RequestOrderDateChangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RequestOrderDateChangeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @instance
+                         */
+                        RequestOrderDateChangeRequest.prototype.name = "";
+    
+                        /**
+                         * RequestOrderDateChangeRequest requestedDate.
+                         * @member {google.type.IDate|null|undefined} requestedDate
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @instance
+                         */
+                        RequestOrderDateChangeRequest.prototype.requestedDate = null;
+    
+                        /**
+                         * Creates a new RequestOrderDateChangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest} RequestOrderDateChangeRequest instance
+                         */
+                        RequestOrderDateChangeRequest.create = function create(properties) {
+                            return new RequestOrderDateChangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RequestOrderDateChangeRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest} message RequestOrderDateChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestOrderDateChangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestedDate != null && Object.hasOwnProperty.call(message, "requestedDate"))
+                                $root.google.type.Date.encode(message.requestedDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RequestOrderDateChangeRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest} message RequestOrderDateChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RequestOrderDateChangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RequestOrderDateChangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest} RequestOrderDateChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestOrderDateChangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestedDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RequestOrderDateChangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest} RequestOrderDateChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RequestOrderDateChangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RequestOrderDateChangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RequestOrderDateChangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestedDate != null && message.hasOwnProperty("requestedDate")) {
+                                var error = $root.google.type.Date.verify(message.requestedDate);
+                                if (error)
+                                    return "requestedDate." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RequestOrderDateChangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest} RequestOrderDateChangeRequest
+                         */
+                        RequestOrderDateChangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestedDate != null) {
+                                if (typeof object.requestedDate !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest.requestedDate: object expected");
+                                message.requestedDate = $root.google.type.Date.fromObject(object.requestedDate);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RequestOrderDateChangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest} message RequestOrderDateChangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RequestOrderDateChangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestedDate = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestedDate != null && message.hasOwnProperty("requestedDate"))
+                                object.requestedDate = $root.google.type.Date.toObject(message.requestedDate, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RequestOrderDateChangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RequestOrderDateChangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RequestOrderDateChangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RequestOrderDateChangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest";
+                        };
+    
+                        return RequestOrderDateChangeRequest;
                     })();
     
                     return v1alpha;

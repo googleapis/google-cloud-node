@@ -109,7 +109,15 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customerRequestedInstallationDate": {
+                          "type": "google.type.Date",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "regionCode": {
@@ -172,6 +180,48 @@
                         "estimatedInstallationDate": {
                           "type": "google.type.Date",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "estimatedDeliveryDate": {
+                          "type": "google.type.Date",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "migration": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "acceptedTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requestedDateChange": {
+                          "type": "google.type.Date",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vendorNotes": {
+                          "type": "string",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vendorContact": {
+                          "type": "OrganizationContact",
+                          "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -384,6 +434,7 @@
                           "type": "google.type.Date",
                           "id": 10,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -539,6 +590,13 @@
                           "rule": "repeated",
                           "type": "MachineInfo",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "estimatedDeliveryDate": {
+                          "type": "google.type.Date",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -984,6 +1042,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "skipClusterProvisioning": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clusterIntentRequired": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clusterIntentVerified": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1193,11 +1272,20 @@
                       },
                       "nested": {
                         "PowerReceptacleType": {
+                          "valuesOptions": {
+                            "STANDARD_EU": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "POWER_RECEPTACLE_TYPE_UNSPECIFIED": 0,
                             "NEMA_5_15": 1,
                             "C_13": 2,
-                            "STANDARD_EU": 3
+                            "STANDARD_EU": 3,
+                            "TYPE_G_BS1363": 4,
+                            "CEE_7_3": 5,
+                            "CEE_7_5": 6,
+                            "TYPE_F": 7
                           }
                         },
                         "NetworkUplinkType": {
@@ -1625,6 +1713,34 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1alpha/{name=projects/*/locations/*/orders/*}:submit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Order",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelOrder": {
+                          "requestType": "CancelOrderRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/orders/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Order",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/orders/*}:cancel",
                                 "body": "*"
                               }
                             },
@@ -2294,6 +2410,34 @@
                               }
                             }
                           ]
+                        },
+                        "RequestOrderDateChange": {
+                          "requestType": "RequestOrderDateChangeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/orders/*}:requestDateChange",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,requested_date",
+                            "(google.longrunning.operation_info).response_type": "Order",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/orders/*}:requestDateChange",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,requested_date"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Order",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2482,6 +2626,26 @@
                             "TYPE_UNSPECIFIED": 0,
                             "INFO_PENDING": 1,
                             "INFO_COMPLETE": 2
+                          }
+                        }
+                      }
+                    },
+                    "CancelOrderRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gdchardwaremanagement.googleapis.com/Order"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3405,7 +3569,8 @@
                             "FACTORY_TURNUP_CHECKS_STARTED": 3,
                             "FACTORY_TURNUP_CHECKS_PASSED": 1,
                             "READY_FOR_SITE_TURNUP": 1,
-                            "FACTORY_TURNUP_CHECKS_FAILED": 2
+                            "FACTORY_TURNUP_CHECKS_FAILED": 2,
+                            "VERIFY_CLUSTER_INTENT_PRESENCE": 4
                           }
                         },
                         "ProvisioningStateSignal": {
@@ -3466,6 +3631,25 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RequestOrderDateChangeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gdchardwaremanagement.googleapis.com/Order"
+                          }
+                        },
+                        "requestedDate": {
+                          "type": "google.type.Date",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

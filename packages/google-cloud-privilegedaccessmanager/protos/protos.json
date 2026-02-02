@@ -1105,7 +1105,8 @@
                                     "activationFailed",
                                     "expired",
                                     "ended",
-                                    "externallyModified"
+                                    "externallyModified",
+                                    "withdrawn"
                                   ]
                                 }
                               },
@@ -1149,6 +1150,10 @@
                                 "externallyModified": {
                                   "type": "ExternallyModified",
                                   "id": 12
+                                },
+                                "withdrawn": {
+                                  "type": "Withdrawn",
+                                  "id": 13
                                 },
                                 "eventTime": {
                                   "type": "google.protobuf.Timestamp",
@@ -1224,6 +1229,9 @@
                                     }
                                   }
                                 },
+                                "Withdrawn": {
+                                  "fields": {}
+                                },
                                 "Scheduled": {
                                   "fields": {
                                     "scheduledActivationTime": {
@@ -1292,7 +1300,9 @@
                             "EXPIRED": 8,
                             "REVOKING": 9,
                             "REVOKED": 10,
-                            "ENDED": 11
+                            "ENDED": 11,
+                            "WITHDRAWING": 12,
+                            "WITHDRAWN": 13
                           }
                         }
                       }

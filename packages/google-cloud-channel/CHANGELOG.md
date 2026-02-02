@@ -1,5 +1,34 @@
 # Changelog
 
+## [4.1.2](https://github.com/googleapis/google-cloud-node/compare/channel-v4.1.1...channel-v4.1.2) (2025-12-09)
+
+
+### Bug Fixes
+
+* [channel] Changed field behavior for an existing field `entitlement_granularity` in message `.google.cloud.channel.v1.RepricingConfig` ([#6915](https://github.com/googleapis/google-cloud-node/issues/6915)) ([8352678](https://github.com/googleapis/google-cloud-node/commit/8352678de4dfdf7cfe8d2a6eb284395983bd9fa3))
+
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/channel-v4.1.0...channel-v4.1.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/channel-v4.0.1...channel-v4.1.0) (2025-07-09)
+
+
+### Features
+
+* [channel] add methods from gax to cache proto root and process custom error details ([#6416](https://github.com/googleapis/google-cloud-node/issues/6416)) ([c28210a](https://github.com/googleapis/google-cloud-node/commit/c28210ad123fabd6032b50a2333056a0714060ee))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency google-auth-library to v10 ([#6409](https://github.com/googleapis/google-cloud-node/issues/6409)) ([152edb5](https://github.com/googleapis/google-cloud-node/commit/152edb50d2db399560d5014f9b61797603b5a4b1))
+* **deps:** Update dependency google-gax to v5 ([#6414](https://github.com/googleapis/google-cloud-node/issues/6414)) ([dca6154](https://github.com/googleapis/google-cloud-node/commit/dca61547fedb1e712389ffd6dce00ec4395865ed))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/channel-v4.0.0...channel-v4.0.1) (2025-03-19)
 
 
