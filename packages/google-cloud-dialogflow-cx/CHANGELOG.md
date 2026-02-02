@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.5.0...dialogflow-cx-v5.6.0) (2026-01-22)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries ([#7005](https://github.com/googleapis/google-cloud-node/issues/7005)) ([abccd1b](https://github.com/googleapis/google-cloud-node/commit/abccd1b4e58cd733ff7416f1e554ceedd84a23c2))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.4.0...dialogflow-cx-v5.5.0) (2025-11-21)
 
 

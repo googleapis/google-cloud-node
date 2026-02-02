@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.2.1...kms-v5.3.0) (2026-01-22)
+
+
+### Features
+
+* [kms] add the SingleTenantHsm functionality including the management API and resource types ([#7014](https://github.com/googleapis/google-cloud-node/issues/7014)) ([f390001](https://github.com/googleapis/google-cloud-node/commit/f390001010c45be6131b04f2127106624f7940fa))
+
 ## [5.2.1](https://github.com/googleapis/google-cloud-node/compare/kms-v5.2.0...kms-v5.2.1) (2025-10-13)
 
 

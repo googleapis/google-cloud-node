@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.21.0...chat-v0.22.0) (2026-01-22)
+
+
+### Features
+
+* [chat] updated v3 dialogflow client libraries ([#7006](https://github.com/googleapis/google-cloud-node/issues/7006)) ([6698e2e](https://github.com/googleapis/google-cloud-node/commit/6698e2ed3c19a577e81843d7c3a5062bfbcd3c6a))
+
 ## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.20.0...chat-v0.21.0) (2025-10-25)
 
 

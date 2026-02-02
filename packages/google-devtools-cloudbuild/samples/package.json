@@ -15,7 +15,7 @@
     "test": "c8 mocha test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/cloudbuild": "^5.4.0"
+    "@google-cloud/cloudbuild": "^5.5.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

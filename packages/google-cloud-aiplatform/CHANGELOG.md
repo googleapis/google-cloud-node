@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.1.0...aiplatform-v6.2.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+* RAG - add mode config to RagEngineConfig with Spanner and Serverless ([#7016](https://github.com/googleapis/google-cloud-node/issues/7016)) ([2273e3c](https://github.com/googleapis/google-cloud-node/commit/2273e3c0a7dc15bcdccd295851272ae75c14180e))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.0.0...aiplatform-v6.1.0) (2026-01-12)
 
 

@@ -2779,6 +2779,11 @@
                       "oneof": [
                         "ifMetagenerationMatch"
                       ]
+                    },
+                    "_deleteSourceObjects": {
+                      "oneof": [
+                        "deleteSourceObjects"
+                      ]
                     }
                   },
                   "fields": {
@@ -2838,6 +2843,13 @@
                       "id": 10,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "deleteSourceObjects": {
+                      "type": "bool",
+                      "id": 11,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   },

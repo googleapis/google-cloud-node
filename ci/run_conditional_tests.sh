@@ -89,6 +89,10 @@ for subdir in ${subdirs[@]}; do
             echo "Skipping ${d} (explicitly ignored in ignore.json)"
             continue
         fi
+        if [[ "${subdir}" == "handwritten" && ("${TEST_TYPE}" == "samples" || "${TEST_TYPE}" == "system") ]]; then
+            echo "Skipping ${TEST_TYPE} test for handwritten package ${d}"
+            continue
+        fi
         should_test=false
         if [ -n "${GIT_DIFF_ARG}" ]; then
             echo "checking changes with 'git diff --quiet ${GIT_DIFF_ARG} ${d}'"

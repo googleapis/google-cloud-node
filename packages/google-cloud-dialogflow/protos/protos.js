@@ -148009,6 +148009,7 @@
                          * @property {string|null} [cxCurrentPage] StreamingAnalyzeContentRequest cxCurrentPage
                          * @property {boolean|null} [enableExtendedStreaming] StreamingAnalyzeContentRequest enableExtendedStreaming
                          * @property {boolean|null} [enablePartialAutomatedAgentReply] StreamingAnalyzeContentRequest enablePartialAutomatedAgentReply
+                         * @property {boolean|null} [outputMultipleUtterances] StreamingAnalyzeContentRequest outputMultipleUtterances
                          * @property {boolean|null} [enableDebuggingInfo] StreamingAnalyzeContentRequest enableDebuggingInfo
                          */
     
@@ -148148,6 +148149,14 @@
                         StreamingAnalyzeContentRequest.prototype.enablePartialAutomatedAgentReply = false;
     
                         /**
+                         * StreamingAnalyzeContentRequest outputMultipleUtterances.
+                         * @member {boolean} outputMultipleUtterances
+                         * @memberof google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest
+                         * @instance
+                         */
+                        StreamingAnalyzeContentRequest.prototype.outputMultipleUtterances = false;
+    
+                        /**
                          * StreamingAnalyzeContentRequest enableDebuggingInfo.
                          * @member {boolean} enableDebuggingInfo
                          * @memberof google.cloud.dialogflow.v2beta1.StreamingAnalyzeContentRequest
@@ -148232,6 +148241,8 @@
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.cxCurrentPage);
                             if (message.inputIntent != null && Object.hasOwnProperty.call(message, "inputIntent"))
                                 writer.uint32(/* id 17, wireType 2 =*/138).string(message.inputIntent);
+                            if (message.outputMultipleUtterances != null && Object.hasOwnProperty.call(message, "outputMultipleUtterances"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.outputMultipleUtterances);
                             if (message.enableDebuggingInfo != null && Object.hasOwnProperty.call(message, "enableDebuggingInfo"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.enableDebuggingInfo);
                             if (message.inputEvent != null && Object.hasOwnProperty.call(message, "inputEvent"))
@@ -148330,6 +148341,10 @@
                                     }
                                 case 12: {
                                         message.enablePartialAutomatedAgentReply = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.outputMultipleUtterances = reader.bool();
                                         break;
                                     }
                                 case 19: {
@@ -148458,6 +148473,9 @@
                             if (message.enablePartialAutomatedAgentReply != null && message.hasOwnProperty("enablePartialAutomatedAgentReply"))
                                 if (typeof message.enablePartialAutomatedAgentReply !== "boolean")
                                     return "enablePartialAutomatedAgentReply: boolean expected";
+                            if (message.outputMultipleUtterances != null && message.hasOwnProperty("outputMultipleUtterances"))
+                                if (typeof message.outputMultipleUtterances !== "boolean")
+                                    return "outputMultipleUtterances: boolean expected";
                             if (message.enableDebuggingInfo != null && message.hasOwnProperty("enableDebuggingInfo"))
                                 if (typeof message.enableDebuggingInfo !== "boolean")
                                     return "enableDebuggingInfo: boolean expected";
@@ -148530,6 +148548,8 @@
                                 message.enableExtendedStreaming = Boolean(object.enableExtendedStreaming);
                             if (object.enablePartialAutomatedAgentReply != null)
                                 message.enablePartialAutomatedAgentReply = Boolean(object.enablePartialAutomatedAgentReply);
+                            if (object.outputMultipleUtterances != null)
+                                message.outputMultipleUtterances = Boolean(object.outputMultipleUtterances);
                             if (object.enableDebuggingInfo != null)
                                 message.enableDebuggingInfo = Boolean(object.enableDebuggingInfo);
                             return message;
@@ -148557,6 +148577,7 @@
                                 object.enablePartialAutomatedAgentReply = false;
                                 object.cxParameters = null;
                                 object.cxCurrentPage = "";
+                                object.outputMultipleUtterances = false;
                                 object.enableDebuggingInfo = false;
                             }
                             if (message.participant != null && message.hasOwnProperty("participant"))
@@ -148605,6 +148626,8 @@
                                 if (options.oneofs)
                                     object.input = "inputIntent";
                             }
+                            if (message.outputMultipleUtterances != null && message.hasOwnProperty("outputMultipleUtterances"))
+                                object.outputMultipleUtterances = message.outputMultipleUtterances;
                             if (message.enableDebuggingInfo != null && message.hasOwnProperty("enableDebuggingInfo"))
                                 object.enableDebuggingInfo = message.enableDebuggingInfo;
                             if (message.inputEvent != null && message.hasOwnProperty("inputEvent")) {

@@ -1507,6 +1507,10 @@
                   "rule": "repeated",
                   "type": "File",
                   "id": 11
+                },
+                "lastVulnerabilityUpdateTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 12
                 }
               },
               "nested": {

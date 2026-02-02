@@ -6771,6 +6771,9 @@ export namespace google {
 
                 /** ComposeObjectRequest objectChecksums */
                 objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** ComposeObjectRequest deleteSourceObjects */
+                deleteSourceObjects?: (boolean|null);
             }
 
             /** Represents a ComposeObjectRequest. */
@@ -6805,6 +6808,9 @@ export namespace google {
 
                 /** ComposeObjectRequest objectChecksums. */
                 public objectChecksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** ComposeObjectRequest deleteSourceObjects. */
+                public deleteSourceObjects?: (boolean|null);
 
                 /**
                  * Creates a new ComposeObjectRequest instance using the specified properties.

@@ -14,6 +14,33 @@
 # limitations under the License.
  
 set -e
+
+# find owner from lower-level CODEOWNERS and add to top-level CODEOWNERS
+LOWER_CODEOWNERS="${PACKAGE_PATH}/.github/CODEOWNERS"
+if [[ -f "${LOWER_CODEOWNERS}" ]]; then
+  echo "Found ${LOWER_CODEOWNERS}, extracting owner..."
+  OWNER=$(grep -v '^#' "${LOWER_CODEOWNERS}" | grep '\*' | head -n 1 | awk '{print $NF}')
+  if [[ ! -z "${OWNER}" ]]; then
+    # check if entry already exists
+    if ! grep -q "^/${PACKAGE_PATH} " ./.github/CODEOWNERS; then
+      echo "Adding /${PACKAGE_PATH} ${OWNER} to ./.github/CODEOWNERS"
+      echo "/${PACKAGE_PATH} ${OWNER}" >> ./.github/CODEOWNERS
+    else
+      echo "Entry for /${PACKAGE_PATH} already exists in ./.github/CODEOWNERS"
+    fi
+  fi
+  echo "Removing ${LOWER_CODEOWNERS}"
+  rm "${LOWER_CODEOWNERS}"
+fi
+
+# move any .github/workflows files to the top-level .github/workflows
+if [[ -d "${PACKAGE_PATH}/.github/workflows" ]]; then
+  if [ -n "$(ls -A "${PACKAGE_PATH}/.github/workflows")" ]; then
+    echo "Moving .github/workflows from ${PACKAGE_PATH} to root..."
+    cp -r "${PACKAGE_PATH}/.github/workflows/"* ./.github/workflows/
+  fi
+fi
+
  
 PACKAGE_NAME=$(basename ${PACKAGE_PATH})
  
@@ -36,25 +63,25 @@ mv "${PACKAGE_PATH}/.github/.OwlBot.yaml" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 echo "Fixing format of ${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `docker:` line
-sed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+gsed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
 # remove `image:` line
-sed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
+gsed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
  
 if grep -q "/owl-bot-staging/\$1/\$2" "${PACKAGE_PATH}/.OwlBot.yaml"
 then
   echo "OwlBot config is copying each folder"
-  sed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
-  sed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
 else
-  sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
+  gsed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
 fi
  
 echo "fixing owlbot.py file"
  
 if test -f "${PACKAGE_PATH}/owlbot.py"; then
-  sed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
-  echo sed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
-  sed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
+  gsed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
+  echo gsed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
+  gsed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
 fi
  
 # update .repo and .issue_tracker in .repo-metadata.json
@@ -79,17 +106,80 @@ echo "updating homepage"
 jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node/tree/main/${PACKAGE_PATH}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
  
-if !(test -f "${PACKAGE_PATH}/owlbot.py"); then
-IMAGE="gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest"
-echo "Running post-processor: ${IMAGE}"
-docker pull "${IMAGE}"
-docker run --rm \
-  --user $(id -u):$(id -g) \
-  -v $(pwd):/workspace/google-cloud-node \
-  -w /workspace/google-cloud-node \
-  -e "DEFAULT_BRANCH=main" \
-  "${IMAGE}"
+
+# remove .github folder from package
+if [[ -d "${PACKAGE_PATH}/.github" ]]; then
+  echo "Removing ${PACKAGE_PATH}/.github"
+  rm -rf "${PACKAGE_PATH}/.github"
 fi
+
+
+# update repo name in .kokoro files from SPLIT_REPO to PACKAGE_PATH
+KOKORO_DIR="${PACKAGE_PATH}/.kokoro"
+PACKAGE_PATH_REPLACEMENT="${SPLIT_REPO}/${PACKAGE_PATH}"
+if [[ -d "${KOKORO_DIR}" ]]; then
+  echo "Updating repo name in .kokoro files..."
+  if [[ -n "${SPLIT_REPO}" ]]; then
+    find "${KOKORO_DIR}" -type f -print0 | while IFS= read -r -d '' file; do
+      echo "Processing ${file}"
+      gsed -i -E "s|${SPLIT_REPO}|${PACKAGE_PATH_REPLACEMENT}|g" "${file}"
+    done
+  fi
+fi
+
+# If migrated package uses kokoro, inject diff check
+if [ -d "${PACKAGE_PATH}/.kokoro" ]; then
+    echo "Found .kokoro directory. Injecting conditional test logic."
+    
+    TRAMPOLINE_SCRIPT=""
+    if [ -f "${PACKAGE_PATH}/.kokoro/trampoline_v2.sh" ]; then
+        TRAMPOLINE_SCRIPT="${PACKAGE_PATH}/.kokoro/trampoline_v2.sh"
+    elif [ -f "${PACKAGE_PATH}/.kokoro/trampoline.sh" ]; then
+        TRAMPOLINE_SCRIPT="${PACKAGE_PATH}/.kokoro/trampoline.sh"
+    fi
+
+    if [ -n "${TRAMPOLINE_SCRIPT}" ]; then
+        echo "Found trampoline script: ${TRAMPOLINE_SCRIPT}. Patching it."
+# Diff check:
+        cat << EOF > conditional_check_logic.sh
+
+# Auto-injected conditional check
+# Check if the package directory has changes. If not, skip tests.
+if [[ "\${RUNNING_IN_CI:-}" == "true" ]]; then
+    # The package path is hardcoded during migration
+    RELATIVE_PKG_PATH="${PACKAGE_PATH}"
+    
+    echo "Checking for changes in \${RELATIVE_PKG_PATH}..."
+    
+    # Determine the diff range based on the CI system/event
+    # Safe default: HEAD~1..HEAD
+    DIFF_RANGE="HEAD~1..HEAD"
+
+    if git diff --quiet "\${DIFF_RANGE}" -- "\${RELATIVE_PKG_PATH}"; then
+        echo "No changes detected in \${RELATIVE_PKG_PATH}. Skipping tests."
+        exit 0
+    else
+        echo "Changes detected in \${RELATIVE_PKG_PATH}. Proceeding with tests."
+    fi
+fi
+EOF
+        # Insert the check after 'cd "${PROJECT_ROOT}"' (standard v2) or at the top of the file (v1/legacy).
+        if grep -q 'cd "${PROJECT_ROOT}"' "${TRAMPOLINE_SCRIPT}"; then
+             sed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+        else
+             sed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+        fi
+        rm conditional_check_logic.sh
+    else
+        echo "No trampoline script found in .kokoro. Skipping test optimization."
+    fi
+else
+    echo "No .kokoro directory found. Skipping test optimization."
+fi
+
+
+echo "Fixing .trampolinerc for populate-secrets.sh"
+gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' "${PACKAGE_PATH}"/.trampolinerc
  
 # add changes to local git directory
 git add .

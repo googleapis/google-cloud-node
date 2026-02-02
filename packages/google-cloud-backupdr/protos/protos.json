@@ -2916,6 +2916,7 @@
                           "oneof": [
                             "computeInstanceDatasourceProperties",
                             "cloudSqlInstanceDatasourceProperties",
+                            "alloyDbClusterDatasourceProperties",
                             "diskDatasourceProperties"
                           ]
                         }
@@ -2943,6 +2944,13 @@
                         "cloudSqlInstanceDatasourceProperties": {
                           "type": "CloudSqlInstanceDataSourceProperties",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "alloyDbClusterDatasourceProperties": {
+                          "type": "AlloyDBClusterDataSourceProperties",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3125,6 +3133,7 @@
                             "computeInstanceBackupProperties",
                             "cloudSqlInstanceBackupProperties",
                             "backupApplianceBackupProperties",
+                            "alloyDbBackupProperties",
                             "diskBackupProperties"
                           ]
                         },
@@ -3269,6 +3278,13 @@
                         "backupApplianceBackupProperties": {
                           "type": "BackupApplianceBackupProperties",
                           "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "alloyDbBackupProperties": {
+                          "type": "AlloyDbClusterBackupProperties",
+                          "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -4102,6 +4118,57 @@
                         "BACKUP_VAULT_VIEW_UNSPECIFIED": 0,
                         "BACKUP_VAULT_VIEW_BASIC": 1,
                         "BACKUP_VAULT_VIEW_FULL": 2
+                      }
+                    },
+                    "AlloyDBClusterDataSourceProperties": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        }
+                      }
+                    },
+                    "AlloyDbClusterBackupProperties": {
+                      "oneofs": {
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "storedBytes": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "chainId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "databaseVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
                       }
                     },
                     "BackupApplianceBackupProperties": {

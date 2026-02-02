@@ -15924,6 +15924,7 @@
                      * @property {string|null} [kmsKey] ComposeObjectRequest kmsKey
                      * @property {google.storage.v2.ICommonObjectRequestParams|null} [commonObjectRequestParams] ComposeObjectRequest commonObjectRequestParams
                      * @property {google.storage.v2.IObjectChecksums|null} [objectChecksums] ComposeObjectRequest objectChecksums
+                     * @property {boolean|null} [deleteSourceObjects] ComposeObjectRequest deleteSourceObjects
                      */
     
                     /**
@@ -16006,6 +16007,14 @@
                      */
                     ComposeObjectRequest.prototype.objectChecksums = null;
     
+                    /**
+                     * ComposeObjectRequest deleteSourceObjects.
+                     * @member {boolean|null|undefined} deleteSourceObjects
+                     * @memberof google.storage.v2.ComposeObjectRequest
+                     * @instance
+                     */
+                    ComposeObjectRequest.prototype.deleteSourceObjects = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -16018,6 +16027,12 @@
                     // Virtual OneOf for proto3 optional field
                     Object.defineProperty(ComposeObjectRequest.prototype, "_ifMetagenerationMatch", {
                         get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationMatch"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(ComposeObjectRequest.prototype, "_deleteSourceObjects", {
+                        get: $util.oneOfGetter($oneOfFields = ["deleteSourceObjects"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -16062,6 +16077,8 @@
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.destinationPredefinedAcl);
                         if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             $root.google.storage.v2.ObjectChecksums.encode(message.objectChecksums, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.deleteSourceObjects != null && Object.hasOwnProperty.call(message, "deleteSourceObjects"))
+                            writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deleteSourceObjects);
                         return writer;
                     };
     
@@ -16130,6 +16147,10 @@
                                 }
                             case 10: {
                                     message.objectChecksums = $root.google.storage.v2.ObjectChecksums.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.deleteSourceObjects = reader.bool();
                                     break;
                                 }
                             default:
@@ -16208,6 +16229,11 @@
                             if (error)
                                 return "objectChecksums." + error;
                         }
+                        if (message.deleteSourceObjects != null && message.hasOwnProperty("deleteSourceObjects")) {
+                            properties._deleteSourceObjects = 1;
+                            if (typeof message.deleteSourceObjects !== "boolean")
+                                return "deleteSourceObjects: boolean expected";
+                        }
                         return null;
                     };
     
@@ -16270,6 +16296,8 @@
                                 throw TypeError(".google.storage.v2.ComposeObjectRequest.objectChecksums: object expected");
                             message.objectChecksums = $root.google.storage.v2.ObjectChecksums.fromObject(object.objectChecksums);
                         }
+                        if (object.deleteSourceObjects != null)
+                            message.deleteSourceObjects = Boolean(object.deleteSourceObjects);
                         return message;
                     };
     
@@ -16326,6 +16354,11 @@
                             object.destinationPredefinedAcl = message.destinationPredefinedAcl;
                         if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options);
+                        if (message.deleteSourceObjects != null && message.hasOwnProperty("deleteSourceObjects")) {
+                            object.deleteSourceObjects = message.deleteSourceObjects;
+                            if (options.oneofs)
+                                object._deleteSourceObjects = "deleteSourceObjects";
+                        }
                         return object;
                     };
     

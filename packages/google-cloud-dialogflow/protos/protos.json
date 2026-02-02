@@ -17799,6 +17799,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "outputMultipleUtterances": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "enableDebuggingInfo": {
                           "type": "bool",
                           "id": 19

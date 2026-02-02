@@ -9,7 +9,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Ads.DataManager.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager",
+                    "go_package": "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "TermsOfServiceProto",
                     "java_package": "com.google.ads.datamanager.v1",

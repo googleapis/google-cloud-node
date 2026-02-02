@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.2.1...retail-v4.3.0) (2026-01-31)
+
+
+### Features
+
+* [retail] add a user_attributes field in SearchRequest that can be used for personalization ([#7041](https://github.com/googleapis/google-cloud-node/issues/7041)) ([f470c6f](https://github.com/googleapis/google-cloud-node/commit/f470c6f96c8a82666a61dd2dfb64c3d95bc4d32f))
+
 ## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/retail-v4.2.0...retail-v4.2.1) (2025-10-13)
 
 
