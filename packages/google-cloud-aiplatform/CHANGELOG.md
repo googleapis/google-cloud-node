@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.2.0...aiplatform-v6.3.0) (2026-02-02)
+
+
+### Features
+
+* Add `fps` to message `VideoMetadata` ([#7074](https://github.com/googleapis/google-cloud-node/issues/7074)) ([779b172](https://github.com/googleapis/google-cloud-node/commit/779b17294b50e3c5ae2403d0a03f5c2704ce93cb))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.1.0...aiplatform-v6.2.0) (2026-01-22)
 
 

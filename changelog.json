@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5d1e2b675cc244c7abf358199327a1f59a3456fe",
+          "message": "[geminidataanalytics] add ClarificationMessage, thought-signature, formatted-data",
+          "issues": [
+            "7076"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "297371d4-dac0-42ed-935d-de35c7f208f7",
+      "createTime": "2026-02-02T17:45:37.112Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "779b17294b50e3c5ae2403d0a03f5c2704ce93cb",
+          "message": "Add `fps` to message `VideoMetadata`",
+          "issues": [
+            "7074"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "1b02ac3d-4794-4378-bfbc-57e84884fb81",
+      "createTime": "2026-02-02T17:45:37.066Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "460c16e6c9a744902cf4a2c3474108e172d17024",
           "message": "[control] Added a new field `ComposeObjectRequest.delete_source_objects` field",
           "issues": [
@@ -68076,5 +68110,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-01-31T00:22:25.104Z"
+  "updateTime": "2026-02-02T17:45:37.112Z"
 }
