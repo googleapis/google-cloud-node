@@ -2944,6 +2944,38 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "mediaResolution": {
+                          "type": "MediaResolution",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "MediaResolution": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "level"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "level": {
+                              "type": "Level",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Level": {
+                              "values": {
+                                "MEDIA_RESOLUTION_UNSPECIFIED": 0,
+                                "MEDIA_RESOLUTION_LOW": 1,
+                                "MEDIA_RESOLUTION_MEDIUM": 2,
+                                "MEDIA_RESOLUTION_HIGH": 3,
+                                "MEDIA_RESOLUTION_ULTRA_HIGH": 4
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -2995,6 +3027,13 @@
                         "endOffset": {
                           "type": "google.protobuf.Duration",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fps": {
+                          "type": "double",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3111,19 +3150,100 @@
                     },
                     "ImageConfig": {
                       "oneofs": {
+                        "_imageOutputOptions": {
+                          "oneof": [
+                            "imageOutputOptions"
+                          ]
+                        },
                         "_aspectRatio": {
                           "oneof": [
                             "aspectRatio"
                           ]
+                        },
+                        "_personGeneration": {
+                          "oneof": [
+                            "personGeneration"
+                          ]
+                        },
+                        "_imageSize": {
+                          "oneof": [
+                            "imageSize"
+                          ]
                         }
                       },
                       "fields": {
+                        "imageOutputOptions": {
+                          "type": "ImageOutputOptions",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "aspectRatio": {
                           "type": "string",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "personGeneration": {
+                          "type": "PersonGeneration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "imageSize": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ImageOutputOptions": {
+                          "oneofs": {
+                            "_mimeType": {
+                              "oneof": [
+                                "mimeType"
+                              ]
+                            },
+                            "_compressionQuality": {
+                              "oneof": [
+                                "compressionQuality"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "mimeType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "compressionQuality": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "PersonGeneration": {
+                          "values": {
+                            "PERSON_GENERATION_UNSPECIFIED": 0,
+                            "ALLOW_ALL": 1,
+                            "ALLOW_ADULT": 2,
+                            "ALLOW_NONE": 3
                           }
                         }
                       }
@@ -3193,6 +3313,16 @@
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
+                          ]
+                        },
+                        "_audioTimestamp": {
+                          "oneof": [
+                            "audioTimestamp"
+                          ]
+                        },
+                        "_mediaResolution": {
+                          "oneof": [
+                            "mediaResolution"
                           ]
                         },
                         "_speechConfig": {
@@ -3326,6 +3456,30 @@
                             "proto3_optional": true
                           }
                         },
+                        "audioTimestamp": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseModalities": {
+                          "rule": "repeated",
+                          "type": "Modality",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaResolution": {
+                          "type": "MediaResolution",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "speechConfig": {
                           "type": "SpeechConfig",
                           "id": 23,
@@ -3430,6 +3584,11 @@
                               "oneof": [
                                 "thinkingBudget"
                               ]
+                            },
+                            "_thinkingLevel": {
+                              "oneof": [
+                                "thinkingLevel"
+                              ]
                             }
                           },
                           "fields": {
@@ -3448,7 +3607,42 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
+                            },
+                            "thinkingLevel": {
+                              "type": "ThinkingLevel",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
+                          },
+                          "nested": {
+                            "ThinkingLevel": {
+                              "values": {
+                                "THINKING_LEVEL_UNSPECIFIED": 0,
+                                "LOW": 1,
+                                "MEDIUM": 2,
+                                "HIGH": 3,
+                                "MINIMAL": 4
+                              }
+                            }
+                          }
+                        },
+                        "Modality": {
+                          "values": {
+                            "MODALITY_UNSPECIFIED": 0,
+                            "TEXT": 1,
+                            "IMAGE": 2,
+                            "AUDIO": 3
+                          }
+                        },
+                        "MediaResolution": {
+                          "values": {
+                            "MEDIA_RESOLUTION_UNSPECIFIED": 0,
+                            "MEDIA_RESOLUTION_LOW": 1,
+                            "MEDIA_RESOLUTION_MEDIUM": 2,
+                            "MEDIA_RESOLUTION_HIGH": 3
                           }
                         }
                       }
