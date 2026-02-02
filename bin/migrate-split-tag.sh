@@ -23,7 +23,7 @@ fi
 
 PATH_NAME=$1
 PUSH_ARG=$2
-PACKAGE_PATH="packages/${PATH_NAME}"
+PACKAGE_PATH="${PATH_NAME}"
 
 LIBRARY_NAME=$(jq -r .name ${PACKAGE_PATH}/package.json)
 COMPONENT=$(echo ${LIBRARY_NAME} | cut -f2 -d/)
