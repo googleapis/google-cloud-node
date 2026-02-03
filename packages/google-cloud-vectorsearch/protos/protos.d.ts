@@ -1175,6 +1175,9 @@ export namespace google {
 
                     /** SemanticSearch topK */
                     topK?: (number|null);
+
+                    /** SemanticSearch searchHint */
+                    searchHint?: (google.cloud.vectorsearch.v1beta.ISearchHint|null);
                 }
 
                 /** Represents a SemanticSearch. */
@@ -1203,6 +1206,9 @@ export namespace google {
 
                     /** SemanticSearch topK. */
                     public topK?: (number|null);
+
+                    /** SemanticSearch searchHint. */
+                    public searchHint?: (google.cloud.vectorsearch.v1beta.ISearchHint|null);
 
                     /**
                      * Creates a new SemanticSearch instance using the specified properties.
@@ -1296,6 +1302,9 @@ export namespace google {
 
                     /** TextSearch topK */
                     topK?: (number|null);
+
+                    /** TextSearch filter */
+                    filter?: (google.protobuf.IStruct|null);
                 }
 
                 /** Represents a TextSearch. */
@@ -1318,6 +1327,9 @@ export namespace google {
 
                     /** TextSearch topK. */
                     public topK?: (number|null);
+
+                    /** TextSearch filter. */
+                    public filter?: (google.protobuf.IStruct|null);
 
                     /**
                      * Creates a new TextSearch instance using the specified properties.
@@ -4366,6 +4378,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public importDataObjects(request: google.cloud.vectorsearch.v1beta.IImportDataObjectsRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportDataObjects.
+                     * @param request ExportDataObjectsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportDataObjects(request: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest, callback: google.cloud.vectorsearch.v1beta.VectorSearchService.ExportDataObjectsCallback): void;
+
+                    /**
+                     * Calls ExportDataObjects.
+                     * @param request ExportDataObjectsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportDataObjects(request: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace VectorSearchService {
@@ -4439,6 +4465,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ImportDataObjectsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.vectorsearch.v1beta.VectorSearchService|exportDataObjects}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportDataObjectsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Collection. */
@@ -6479,6 +6512,9 @@ export namespace google {
 
                         /** GcsImportConfig errorUri */
                         errorUri?: (string|null);
+
+                        /** GcsImportConfig outputUri */
+                        outputUri?: (string|null);
                     }
 
                     /** Represents a GcsImportConfig. */
@@ -6495,6 +6531,9 @@ export namespace google {
 
                         /** GcsImportConfig errorUri. */
                         public errorUri: string;
+
+                        /** GcsImportConfig outputUri. */
+                        public outputUri: string;
 
                         /**
                          * Creates a new GcsImportConfig instance using the specified properties.
@@ -6781,6 +6820,421 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ImportDataObjectsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataObjectsRequest. */
+                interface IExportDataObjectsRequest {
+
+                    /** ExportDataObjectsRequest gcsDestination */
+                    gcsDestination?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination|null);
+
+                    /** ExportDataObjectsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportDataObjectsRequest. */
+                class ExportDataObjectsRequest implements IExportDataObjectsRequest {
+
+                    /**
+                     * Constructs a new ExportDataObjectsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest);
+
+                    /** ExportDataObjectsRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination|null);
+
+                    /** ExportDataObjectsRequest name. */
+                    public name: string;
+
+                    /** ExportDataObjectsRequest destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new ExportDataObjectsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataObjectsRequest instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsRequest message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.verify|verify} messages.
+                     * @param message ExportDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsRequest message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.verify|verify} messages.
+                     * @param message ExportDataObjectsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataObjectsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest;
+
+                    /**
+                     * Decodes an ExportDataObjectsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataObjectsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest;
+
+                    /**
+                     * Verifies an ExportDataObjectsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataObjectsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataObjectsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest;
+
+                    /**
+                     * Creates a plain object from an ExportDataObjectsRequest message. Also converts values to other types if specified.
+                     * @param message ExportDataObjectsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataObjectsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataObjectsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExportDataObjectsRequest {
+
+                    /** Properties of a GcsExportDestination. */
+                    interface IGcsExportDestination {
+
+                        /** GcsExportDestination exportUri */
+                        exportUri?: (string|null);
+
+                        /** GcsExportDestination format */
+                        format?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.Format|keyof typeof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.Format|null);
+                    }
+
+                    /** Represents a GcsExportDestination. */
+                    class GcsExportDestination implements IGcsExportDestination {
+
+                        /**
+                         * Constructs a new GcsExportDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination);
+
+                        /** GcsExportDestination exportUri. */
+                        public exportUri: string;
+
+                        /** GcsExportDestination format. */
+                        public format: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.Format|keyof typeof google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.Format);
+
+                        /**
+                         * Creates a new GcsExportDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsExportDestination instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination;
+
+                        /**
+                         * Encodes the specified GcsExportDestination message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.verify|verify} messages.
+                         * @param message GcsExportDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsExportDestination message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination.verify|verify} messages.
+                         * @param message GcsExportDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IGcsExportDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsExportDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsExportDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination;
+
+                        /**
+                         * Decodes a GcsExportDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsExportDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination;
+
+                        /**
+                         * Verifies a GcsExportDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsExportDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsExportDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination;
+
+                        /**
+                         * Creates a plain object from a GcsExportDestination message. Also converts values to other types if specified.
+                         * @param message GcsExportDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.GcsExportDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsExportDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsExportDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GcsExportDestination {
+
+                        /** Format enum. */
+                        enum Format {
+                            FORMAT_UNSPECIFIED = 0,
+                            JSON = 1
+                        }
+                    }
+                }
+
+                /** Properties of an ExportDataObjectsMetadata. */
+                interface IExportDataObjectsMetadata {
+
+                    /** ExportDataObjectsMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataObjectsMetadata finishTime */
+                    finishTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an ExportDataObjectsMetadata. */
+                class ExportDataObjectsMetadata implements IExportDataObjectsMetadata {
+
+                    /**
+                     * Constructs a new ExportDataObjectsMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata);
+
+                    /** ExportDataObjectsMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataObjectsMetadata finishTime. */
+                    public finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ExportDataObjectsMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataObjectsMetadata instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata): google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsMetadata message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata.verify|verify} messages.
+                     * @param message ExportDataObjectsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsMetadata message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata.verify|verify} messages.
+                     * @param message ExportDataObjectsMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataObjectsMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataObjectsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata;
+
+                    /**
+                     * Decodes an ExportDataObjectsMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataObjectsMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata;
+
+                    /**
+                     * Verifies an ExportDataObjectsMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataObjectsMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataObjectsMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportDataObjectsMetadata message. Also converts values to other types if specified.
+                     * @param message ExportDataObjectsMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataObjectsMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataObjectsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataObjectsResponse. */
+                interface IExportDataObjectsResponse {
+                }
+
+                /** Represents an ExportDataObjectsResponse. */
+                class ExportDataObjectsResponse implements IExportDataObjectsResponse {
+
+                    /**
+                     * Constructs a new ExportDataObjectsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse);
+
+                    /**
+                     * Creates a new ExportDataObjectsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataObjectsResponse instance
+                     */
+                    public static create(properties?: google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse): google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsResponse message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse.verify|verify} messages.
+                     * @param message ExportDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataObjectsResponse message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse.verify|verify} messages.
+                     * @param message ExportDataObjectsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataObjectsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse;
+
+                    /**
+                     * Decodes an ExportDataObjectsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataObjectsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse;
+
+                    /**
+                     * Verifies an ExportDataObjectsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataObjectsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataObjectsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportDataObjectsResponse message. Also converts values to other types if specified.
+                     * @param message ExportDataObjectsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataObjectsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataObjectsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

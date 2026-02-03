@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.1.0...vectorsearch-v0.2.0) (2026-02-03)
+
+
+### Features
+
+* [vectorsearch] add SearchHint to SemanticSearch requests ([#7075](https://github.com/googleapis/google-cloud-node/issues/7075)) ([486644d](https://github.com/googleapis/google-cloud-node/commit/486644d1926db8bf8ab38dd7860383b6e0a48fbd))
+
 ## 0.1.0 (2025-12-03)
 
 

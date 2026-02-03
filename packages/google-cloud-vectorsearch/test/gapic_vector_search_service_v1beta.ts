@@ -1419,6 +1419,160 @@ describe('v1beta.VectorSearchServiceClient', () => {
         });
     });
 
+    describe('exportDataObjects', () => {
+        it('invokes exportDataObjects without error', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportDataObjects = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.exportDataObjects(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportDataObjects without error using callback', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.exportDataObjects = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.exportDataObjects(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsResponse, protos.google.cloud.vectorsearch.v1beta.IExportDataObjectsMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportDataObjects with call error', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportDataObjects = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.exportDataObjects(request), expectedError);
+            const actualRequest = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes exportDataObjects with LRO error', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.exportDataObjects = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.exportDataObjects(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.exportDataObjects as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkExportDataObjectsProgress without error', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkExportDataObjectsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkExportDataObjectsProgress with error', async () => {
+            const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkExportDataObjectsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listCollections', () => {
         it('invokes listCollections without error', async () => {
             const client = new vectorsearchserviceModule.v1beta.VectorSearchServiceClient({

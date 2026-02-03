@@ -11417,6 +11417,9 @@ export namespace google {
 
                     /** Part videoMetadata */
                     videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
+
+                    /** Part mediaResolution */
+                    mediaResolution?: (google.cloud.aiplatform.v1.Part.IMediaResolution|null);
                 }
 
                 /** Represents a Part. */
@@ -11457,6 +11460,9 @@ export namespace google {
 
                     /** Part videoMetadata. */
                     public videoMetadata?: (google.cloud.aiplatform.v1.IVideoMetadata|null);
+
+                    /** Part mediaResolution. */
+                    public mediaResolution?: (google.cloud.aiplatform.v1.Part.IMediaResolution|null);
 
                     /** Part data. */
                     public data?: ("text"|"inlineData"|"fileData"|"functionCall"|"functionResponse"|"executableCode"|"codeExecutionResult");
@@ -11540,6 +11546,121 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Part {
+
+                    /** Properties of a MediaResolution. */
+                    interface IMediaResolution {
+
+                        /** MediaResolution level */
+                        level?: (google.cloud.aiplatform.v1.Part.MediaResolution.Level|keyof typeof google.cloud.aiplatform.v1.Part.MediaResolution.Level|null);
+                    }
+
+                    /** Represents a MediaResolution. */
+                    class MediaResolution implements IMediaResolution {
+
+                        /**
+                         * Constructs a new MediaResolution.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.Part.IMediaResolution);
+
+                        /** MediaResolution level. */
+                        public level?: (google.cloud.aiplatform.v1.Part.MediaResolution.Level|keyof typeof google.cloud.aiplatform.v1.Part.MediaResolution.Level|null);
+
+                        /** MediaResolution value. */
+                        public value?: "level";
+
+                        /**
+                         * Creates a new MediaResolution instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MediaResolution instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.Part.IMediaResolution): google.cloud.aiplatform.v1.Part.MediaResolution;
+
+                        /**
+                         * Encodes the specified MediaResolution message. Does not implicitly {@link google.cloud.aiplatform.v1.Part.MediaResolution.verify|verify} messages.
+                         * @param message MediaResolution message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.Part.IMediaResolution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MediaResolution message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.Part.MediaResolution.verify|verify} messages.
+                         * @param message MediaResolution message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.Part.IMediaResolution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MediaResolution message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MediaResolution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.Part.MediaResolution;
+
+                        /**
+                         * Decodes a MediaResolution message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MediaResolution
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.Part.MediaResolution;
+
+                        /**
+                         * Verifies a MediaResolution message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MediaResolution message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MediaResolution
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.Part.MediaResolution;
+
+                        /**
+                         * Creates a plain object from a MediaResolution message. Also converts values to other types if specified.
+                         * @param message MediaResolution
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.Part.MediaResolution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MediaResolution to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MediaResolution
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MediaResolution {
+
+                        /** Level enum. */
+                        enum Level {
+                            MEDIA_RESOLUTION_UNSPECIFIED = 0,
+                            MEDIA_RESOLUTION_LOW = 1,
+                            MEDIA_RESOLUTION_MEDIUM = 2,
+                            MEDIA_RESOLUTION_HIGH = 3,
+                            MEDIA_RESOLUTION_ULTRA_HIGH = 4
+                        }
+                    }
                 }
 
                 /** Properties of a Blob. */
@@ -11756,6 +11877,9 @@ export namespace google {
 
                     /** VideoMetadata endOffset */
                     endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps */
+                    fps?: (number|null);
                 }
 
                 /** Represents a VideoMetadata. */
@@ -11772,6 +11896,9 @@ export namespace google {
 
                     /** VideoMetadata endOffset. */
                     public endOffset?: (google.protobuf.IDuration|null);
+
+                    /** VideoMetadata fps. */
+                    public fps: number;
 
                     /**
                      * Creates a new VideoMetadata instance using the specified properties.
@@ -12469,8 +12596,17 @@ export namespace google {
                 /** Properties of an ImageConfig. */
                 interface IImageConfig {
 
+                    /** ImageConfig imageOutputOptions */
+                    imageOutputOptions?: (google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions|null);
+
                     /** ImageConfig aspectRatio */
                     aspectRatio?: (string|null);
+
+                    /** ImageConfig personGeneration */
+                    personGeneration?: (google.cloud.aiplatform.v1.ImageConfig.PersonGeneration|keyof typeof google.cloud.aiplatform.v1.ImageConfig.PersonGeneration|null);
+
+                    /** ImageConfig imageSize */
+                    imageSize?: (string|null);
                 }
 
                 /** Represents an ImageConfig. */
@@ -12482,8 +12618,17 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.IImageConfig);
 
+                    /** ImageConfig imageOutputOptions. */
+                    public imageOutputOptions?: (google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions|null);
+
                     /** ImageConfig aspectRatio. */
                     public aspectRatio?: (string|null);
+
+                    /** ImageConfig personGeneration. */
+                    public personGeneration?: (google.cloud.aiplatform.v1.ImageConfig.PersonGeneration|keyof typeof google.cloud.aiplatform.v1.ImageConfig.PersonGeneration|null);
+
+                    /** ImageConfig imageSize. */
+                    public imageSize?: (string|null);
 
                     /**
                      * Creates a new ImageConfig instance using the specified properties.
@@ -12563,6 +12708,120 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace ImageConfig {
+
+                    /** Properties of an ImageOutputOptions. */
+                    interface IImageOutputOptions {
+
+                        /** ImageOutputOptions mimeType */
+                        mimeType?: (string|null);
+
+                        /** ImageOutputOptions compressionQuality */
+                        compressionQuality?: (number|null);
+                    }
+
+                    /** Represents an ImageOutputOptions. */
+                    class ImageOutputOptions implements IImageOutputOptions {
+
+                        /**
+                         * Constructs a new ImageOutputOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions);
+
+                        /** ImageOutputOptions mimeType. */
+                        public mimeType?: (string|null);
+
+                        /** ImageOutputOptions compressionQuality. */
+                        public compressionQuality?: (number|null);
+
+                        /**
+                         * Creates a new ImageOutputOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImageOutputOptions instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions): google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions;
+
+                        /**
+                         * Encodes the specified ImageOutputOptions message. Does not implicitly {@link google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions.verify|verify} messages.
+                         * @param message ImageOutputOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImageOutputOptions message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions.verify|verify} messages.
+                         * @param message ImageOutputOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.ImageConfig.IImageOutputOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImageOutputOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImageOutputOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions;
+
+                        /**
+                         * Decodes an ImageOutputOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImageOutputOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions;
+
+                        /**
+                         * Verifies an ImageOutputOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImageOutputOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImageOutputOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions;
+
+                        /**
+                         * Creates a plain object from an ImageOutputOptions message. Also converts values to other types if specified.
+                         * @param message ImageOutputOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImageOutputOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImageOutputOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** PersonGeneration enum. */
+                    enum PersonGeneration {
+                        PERSON_GENERATION_UNSPECIFIED = 0,
+                        ALLOW_ALL = 1,
+                        ALLOW_ADULT = 2,
+                        ALLOW_NONE = 3
+                    }
+                }
+
                 /** Properties of a GenerationConfig. */
                 interface IGenerationConfig {
 
@@ -12610,6 +12869,15 @@ export namespace google {
 
                     /** GenerationConfig routingConfig */
                     routingConfig?: (google.cloud.aiplatform.v1.GenerationConfig.IRoutingConfig|null);
+
+                    /** GenerationConfig audioTimestamp */
+                    audioTimestamp?: (boolean|null);
+
+                    /** GenerationConfig responseModalities */
+                    responseModalities?: (google.cloud.aiplatform.v1.GenerationConfig.Modality[]|null);
+
+                    /** GenerationConfig mediaResolution */
+                    mediaResolution?: (google.cloud.aiplatform.v1.GenerationConfig.MediaResolution|keyof typeof google.cloud.aiplatform.v1.GenerationConfig.MediaResolution|null);
 
                     /** GenerationConfig speechConfig */
                     speechConfig?: (google.cloud.aiplatform.v1.ISpeechConfig|null);
@@ -12674,6 +12942,15 @@ export namespace google {
 
                     /** GenerationConfig routingConfig. */
                     public routingConfig?: (google.cloud.aiplatform.v1.GenerationConfig.IRoutingConfig|null);
+
+                    /** GenerationConfig audioTimestamp. */
+                    public audioTimestamp?: (boolean|null);
+
+                    /** GenerationConfig responseModalities. */
+                    public responseModalities: google.cloud.aiplatform.v1.GenerationConfig.Modality[];
+
+                    /** GenerationConfig mediaResolution. */
+                    public mediaResolution?: (google.cloud.aiplatform.v1.GenerationConfig.MediaResolution|keyof typeof google.cloud.aiplatform.v1.GenerationConfig.MediaResolution|null);
 
                     /** GenerationConfig speechConfig. */
                     public speechConfig?: (google.cloud.aiplatform.v1.ISpeechConfig|null);
@@ -13086,6 +13363,9 @@ export namespace google {
 
                         /** ThinkingConfig thinkingBudget */
                         thinkingBudget?: (number|null);
+
+                        /** ThinkingConfig thinkingLevel */
+                        thinkingLevel?: (google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig.ThinkingLevel|keyof typeof google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig.ThinkingLevel|null);
                     }
 
                     /** Represents a ThinkingConfig. */
@@ -13102,6 +13382,9 @@ export namespace google {
 
                         /** ThinkingConfig thinkingBudget. */
                         public thinkingBudget?: (number|null);
+
+                        /** ThinkingConfig thinkingLevel. */
+                        public thinkingLevel?: (google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig.ThinkingLevel|keyof typeof google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig.ThinkingLevel|null);
 
                         /**
                          * Creates a new ThinkingConfig instance using the specified properties.
@@ -13179,6 +13462,34 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ThinkingConfig {
+
+                        /** ThinkingLevel enum. */
+                        enum ThinkingLevel {
+                            THINKING_LEVEL_UNSPECIFIED = 0,
+                            LOW = 1,
+                            MEDIUM = 2,
+                            HIGH = 3,
+                            MINIMAL = 4
+                        }
+                    }
+
+                    /** Modality enum. */
+                    enum Modality {
+                        MODALITY_UNSPECIFIED = 0,
+                        TEXT = 1,
+                        IMAGE = 2,
+                        AUDIO = 3
+                    }
+
+                    /** MediaResolution enum. */
+                    enum MediaResolution {
+                        MEDIA_RESOLUTION_UNSPECIFIED = 0,
+                        MEDIA_RESOLUTION_LOW = 1,
+                        MEDIA_RESOLUTION_MEDIUM = 2,
+                        MEDIA_RESOLUTION_HIGH = 3
                     }
                 }
 
@@ -323248,6 +323559,9 @@ export namespace google {
 
                     /** DeleteRagCorpusRequest force */
                     force?: (boolean|null);
+
+                    /** DeleteRagCorpusRequest forceDelete */
+                    forceDelete?: (boolean|null);
                 }
 
                 /** Represents a DeleteRagCorpusRequest. */
@@ -323264,6 +323578,9 @@ export namespace google {
 
                     /** DeleteRagCorpusRequest force. */
                     public force: boolean;
+
+                    /** DeleteRagCorpusRequest forceDelete. */
+                    public forceDelete: boolean;
 
                     /**
                      * Creates a new DeleteRagCorpusRequest instance using the specified properties.

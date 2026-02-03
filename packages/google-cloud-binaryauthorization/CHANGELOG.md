@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.1.1...binary-authorization-v4.2.0) (2026-01-31)
+
+
+### Features
+
+* [binaryauthorization] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#7040](https://github.com/googleapis/google-cloud-node/issues/7040)) ([2dabb7a](https://github.com/googleapis/google-cloud-node/commit/2dabb7ab19e4dd1cc955ea51791ab5c4f4fa80dc))
+
 ## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.1.0...binary-authorization-v4.1.1) (2025-10-13)
 
 

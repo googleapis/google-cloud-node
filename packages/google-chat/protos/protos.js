@@ -42510,6 +42510,9 @@
                      * @interface IQuotedMessageMetadata
                      * @property {string|null} [name] QuotedMessageMetadata name
                      * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] QuotedMessageMetadata lastUpdateTime
+                     * @property {google.chat.v1.QuotedMessageMetadata.QuoteType|null} [quoteType] QuotedMessageMetadata quoteType
+                     * @property {google.chat.v1.IQuotedMessageSnapshot|null} [quotedMessageSnapshot] QuotedMessageMetadata quotedMessageSnapshot
+                     * @property {google.chat.v1.IForwardedMetadata|null} [forwardedMetadata] QuotedMessageMetadata forwardedMetadata
                      */
     
                     /**
@@ -42544,6 +42547,30 @@
                     QuotedMessageMetadata.prototype.lastUpdateTime = null;
     
                     /**
+                     * QuotedMessageMetadata quoteType.
+                     * @member {google.chat.v1.QuotedMessageMetadata.QuoteType} quoteType
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.quoteType = 0;
+    
+                    /**
+                     * QuotedMessageMetadata quotedMessageSnapshot.
+                     * @member {google.chat.v1.IQuotedMessageSnapshot|null|undefined} quotedMessageSnapshot
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.quotedMessageSnapshot = null;
+    
+                    /**
+                     * QuotedMessageMetadata forwardedMetadata.
+                     * @member {google.chat.v1.IForwardedMetadata|null|undefined} forwardedMetadata
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.forwardedMetadata = null;
+    
+                    /**
                      * Creates a new QuotedMessageMetadata instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.QuotedMessageMetadata
@@ -42571,6 +42598,12 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
                             $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.quoteType != null && Object.hasOwnProperty.call(message, "quoteType"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.quoteType);
+                        if (message.quotedMessageSnapshot != null && Object.hasOwnProperty.call(message, "quotedMessageSnapshot"))
+                            $root.google.chat.v1.QuotedMessageSnapshot.encode(message.quotedMessageSnapshot, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.forwardedMetadata != null && Object.hasOwnProperty.call(message, "forwardedMetadata"))
+                            $root.google.chat.v1.ForwardedMetadata.encode(message.forwardedMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -42613,6 +42646,18 @@
                                 }
                             case 2: {
                                     message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.quoteType = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -42658,6 +42703,24 @@
                             if (error)
                                 return "lastUpdateTime." + error;
                         }
+                        if (message.quoteType != null && message.hasOwnProperty("quoteType"))
+                            switch (message.quoteType) {
+                            default:
+                                return "quoteType: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                        if (message.quotedMessageSnapshot != null && message.hasOwnProperty("quotedMessageSnapshot")) {
+                            var error = $root.google.chat.v1.QuotedMessageSnapshot.verify(message.quotedMessageSnapshot);
+                            if (error)
+                                return "quotedMessageSnapshot." + error;
+                        }
+                        if (message.forwardedMetadata != null && message.hasOwnProperty("forwardedMetadata")) {
+                            var error = $root.google.chat.v1.ForwardedMetadata.verify(message.forwardedMetadata);
+                            if (error)
+                                return "forwardedMetadata." + error;
+                        }
                         return null;
                     };
     
@@ -42680,6 +42743,32 @@
                                 throw TypeError(".google.chat.v1.QuotedMessageMetadata.lastUpdateTime: object expected");
                             message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
                         }
+                        switch (object.quoteType) {
+                        default:
+                            if (typeof object.quoteType === "number") {
+                                message.quoteType = object.quoteType;
+                                break;
+                            }
+                            break;
+                        case "QUOTE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.quoteType = 0;
+                            break;
+                        case "REPLY":
+                        case 1:
+                            message.quoteType = 1;
+                            break;
+                        }
+                        if (object.quotedMessageSnapshot != null) {
+                            if (typeof object.quotedMessageSnapshot !== "object")
+                                throw TypeError(".google.chat.v1.QuotedMessageMetadata.quotedMessageSnapshot: object expected");
+                            message.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.fromObject(object.quotedMessageSnapshot);
+                        }
+                        if (object.forwardedMetadata != null) {
+                            if (typeof object.forwardedMetadata !== "object")
+                                throw TypeError(".google.chat.v1.QuotedMessageMetadata.forwardedMetadata: object expected");
+                            message.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.fromObject(object.forwardedMetadata);
+                        }
                         return message;
                     };
     
@@ -42699,11 +42788,20 @@
                         if (options.defaults) {
                             object.name = "";
                             object.lastUpdateTime = null;
+                            object.quoteType = options.enums === String ? "QUOTE_TYPE_UNSPECIFIED" : 0;
+                            object.quotedMessageSnapshot = null;
+                            object.forwardedMetadata = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
                             object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                        if (message.quoteType != null && message.hasOwnProperty("quoteType"))
+                            object.quoteType = options.enums === String ? $root.google.chat.v1.QuotedMessageMetadata.QuoteType[message.quoteType] === undefined ? message.quoteType : $root.google.chat.v1.QuotedMessageMetadata.QuoteType[message.quoteType] : message.quoteType;
+                        if (message.quotedMessageSnapshot != null && message.hasOwnProperty("quotedMessageSnapshot"))
+                            object.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.toObject(message.quotedMessageSnapshot, options);
+                        if (message.forwardedMetadata != null && message.hasOwnProperty("forwardedMetadata"))
+                            object.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.toObject(message.forwardedMetadata, options);
                         return object;
                     };
     
@@ -42733,7 +42831,592 @@
                         return typeUrlPrefix + "/google.chat.v1.QuotedMessageMetadata";
                     };
     
+                    /**
+                     * QuoteType enum.
+                     * @name google.chat.v1.QuotedMessageMetadata.QuoteType
+                     * @enum {number}
+                     * @property {number} QUOTE_TYPE_UNSPECIFIED=0 QUOTE_TYPE_UNSPECIFIED value
+                     * @property {number} REPLY=1 REPLY value
+                     */
+                    QuotedMessageMetadata.QuoteType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "QUOTE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REPLY"] = 1;
+                        return values;
+                    })();
+    
                     return QuotedMessageMetadata;
+                })();
+    
+                v1.QuotedMessageSnapshot = (function() {
+    
+                    /**
+                     * Properties of a QuotedMessageSnapshot.
+                     * @memberof google.chat.v1
+                     * @interface IQuotedMessageSnapshot
+                     * @property {string|null} [sender] QuotedMessageSnapshot sender
+                     * @property {string|null} [text] QuotedMessageSnapshot text
+                     * @property {string|null} [formattedText] QuotedMessageSnapshot formattedText
+                     * @property {Array.<google.chat.v1.IAnnotation>|null} [annotations] QuotedMessageSnapshot annotations
+                     * @property {Array.<google.chat.v1.IAttachment>|null} [attachments] QuotedMessageSnapshot attachments
+                     */
+    
+                    /**
+                     * Constructs a new QuotedMessageSnapshot.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a QuotedMessageSnapshot.
+                     * @implements IQuotedMessageSnapshot
+                     * @constructor
+                     * @param {google.chat.v1.IQuotedMessageSnapshot=} [properties] Properties to set
+                     */
+                    function QuotedMessageSnapshot(properties) {
+                        this.annotations = [];
+                        this.attachments = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QuotedMessageSnapshot sender.
+                     * @member {string} sender
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.sender = "";
+    
+                    /**
+                     * QuotedMessageSnapshot text.
+                     * @member {string} text
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.text = "";
+    
+                    /**
+                     * QuotedMessageSnapshot formattedText.
+                     * @member {string} formattedText
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.formattedText = "";
+    
+                    /**
+                     * QuotedMessageSnapshot annotations.
+                     * @member {Array.<google.chat.v1.IAnnotation>} annotations
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.annotations = $util.emptyArray;
+    
+                    /**
+                     * QuotedMessageSnapshot attachments.
+                     * @member {Array.<google.chat.v1.IAttachment>} attachments
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.attachments = $util.emptyArray;
+    
+                    /**
+                     * Creates a new QuotedMessageSnapshot instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot=} [properties] Properties to set
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot instance
+                     */
+                    QuotedMessageSnapshot.create = function create(properties) {
+                        return new QuotedMessageSnapshot(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QuotedMessageSnapshot message. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot} message QuotedMessageSnapshot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuotedMessageSnapshot.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sender != null && Object.hasOwnProperty.call(message, "sender"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.sender);
+                        if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                        if (message.formattedText != null && Object.hasOwnProperty.call(message, "formattedText"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.formattedText);
+                        if (message.annotations != null && message.annotations.length)
+                            for (var i = 0; i < message.annotations.length; ++i)
+                                $root.google.chat.v1.Annotation.encode(message.annotations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.attachments != null && message.attachments.length)
+                            for (var i = 0; i < message.attachments.length; ++i)
+                                $root.google.chat.v1.Attachment.encode(message.attachments[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QuotedMessageSnapshot message, length delimited. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot} message QuotedMessageSnapshot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuotedMessageSnapshot.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QuotedMessageSnapshot message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuotedMessageSnapshot.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.QuotedMessageSnapshot();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.sender = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.text = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.formattedText = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.annotations && message.annotations.length))
+                                        message.annotations = [];
+                                    message.annotations.push($root.google.chat.v1.Annotation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.attachments && message.attachments.length))
+                                        message.attachments = [];
+                                    message.attachments.push($root.google.chat.v1.Attachment.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QuotedMessageSnapshot message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuotedMessageSnapshot.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QuotedMessageSnapshot message.
+                     * @function verify
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QuotedMessageSnapshot.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sender != null && message.hasOwnProperty("sender"))
+                            if (!$util.isString(message.sender))
+                                return "sender: string expected";
+                        if (message.text != null && message.hasOwnProperty("text"))
+                            if (!$util.isString(message.text))
+                                return "text: string expected";
+                        if (message.formattedText != null && message.hasOwnProperty("formattedText"))
+                            if (!$util.isString(message.formattedText))
+                                return "formattedText: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!Array.isArray(message.annotations))
+                                return "annotations: array expected";
+                            for (var i = 0; i < message.annotations.length; ++i) {
+                                var error = $root.google.chat.v1.Annotation.verify(message.annotations[i]);
+                                if (error)
+                                    return "annotations." + error;
+                            }
+                        }
+                        if (message.attachments != null && message.hasOwnProperty("attachments")) {
+                            if (!Array.isArray(message.attachments))
+                                return "attachments: array expected";
+                            for (var i = 0; i < message.attachments.length; ++i) {
+                                var error = $root.google.chat.v1.Attachment.verify(message.attachments[i]);
+                                if (error)
+                                    return "attachments." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QuotedMessageSnapshot message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     */
+                    QuotedMessageSnapshot.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.QuotedMessageSnapshot)
+                            return object;
+                        var message = new $root.google.chat.v1.QuotedMessageSnapshot();
+                        if (object.sender != null)
+                            message.sender = String(object.sender);
+                        if (object.text != null)
+                            message.text = String(object.text);
+                        if (object.formattedText != null)
+                            message.formattedText = String(object.formattedText);
+                        if (object.annotations) {
+                            if (!Array.isArray(object.annotations))
+                                throw TypeError(".google.chat.v1.QuotedMessageSnapshot.annotations: array expected");
+                            message.annotations = [];
+                            for (var i = 0; i < object.annotations.length; ++i) {
+                                if (typeof object.annotations[i] !== "object")
+                                    throw TypeError(".google.chat.v1.QuotedMessageSnapshot.annotations: object expected");
+                                message.annotations[i] = $root.google.chat.v1.Annotation.fromObject(object.annotations[i]);
+                            }
+                        }
+                        if (object.attachments) {
+                            if (!Array.isArray(object.attachments))
+                                throw TypeError(".google.chat.v1.QuotedMessageSnapshot.attachments: array expected");
+                            message.attachments = [];
+                            for (var i = 0; i < object.attachments.length; ++i) {
+                                if (typeof object.attachments[i] !== "object")
+                                    throw TypeError(".google.chat.v1.QuotedMessageSnapshot.attachments: object expected");
+                                message.attachments[i] = $root.google.chat.v1.Attachment.fromObject(object.attachments[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QuotedMessageSnapshot message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.QuotedMessageSnapshot} message QuotedMessageSnapshot
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QuotedMessageSnapshot.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.annotations = [];
+                            object.attachments = [];
+                        }
+                        if (options.defaults) {
+                            object.sender = "";
+                            object.text = "";
+                            object.formattedText = "";
+                        }
+                        if (message.sender != null && message.hasOwnProperty("sender"))
+                            object.sender = message.sender;
+                        if (message.text != null && message.hasOwnProperty("text"))
+                            object.text = message.text;
+                        if (message.formattedText != null && message.hasOwnProperty("formattedText"))
+                            object.formattedText = message.formattedText;
+                        if (message.annotations && message.annotations.length) {
+                            object.annotations = [];
+                            for (var j = 0; j < message.annotations.length; ++j)
+                                object.annotations[j] = $root.google.chat.v1.Annotation.toObject(message.annotations[j], options);
+                        }
+                        if (message.attachments && message.attachments.length) {
+                            object.attachments = [];
+                            for (var j = 0; j < message.attachments.length; ++j)
+                                object.attachments[j] = $root.google.chat.v1.Attachment.toObject(message.attachments[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QuotedMessageSnapshot to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QuotedMessageSnapshot.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for QuotedMessageSnapshot
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    QuotedMessageSnapshot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.QuotedMessageSnapshot";
+                    };
+    
+                    return QuotedMessageSnapshot;
+                })();
+    
+                v1.ForwardedMetadata = (function() {
+    
+                    /**
+                     * Properties of a ForwardedMetadata.
+                     * @memberof google.chat.v1
+                     * @interface IForwardedMetadata
+                     * @property {string|null} [space] ForwardedMetadata space
+                     * @property {string|null} [spaceDisplayName] ForwardedMetadata spaceDisplayName
+                     */
+    
+                    /**
+                     * Constructs a new ForwardedMetadata.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ForwardedMetadata.
+                     * @implements IForwardedMetadata
+                     * @constructor
+                     * @param {google.chat.v1.IForwardedMetadata=} [properties] Properties to set
+                     */
+                    function ForwardedMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ForwardedMetadata space.
+                     * @member {string} space
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     */
+                    ForwardedMetadata.prototype.space = "";
+    
+                    /**
+                     * ForwardedMetadata spaceDisplayName.
+                     * @member {string} spaceDisplayName
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     */
+                    ForwardedMetadata.prototype.spaceDisplayName = "";
+    
+                    /**
+                     * Creates a new ForwardedMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata=} [properties] Properties to set
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata instance
+                     */
+                    ForwardedMetadata.create = function create(properties) {
+                        return new ForwardedMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ForwardedMetadata message. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata} message ForwardedMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ForwardedMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.space != null && Object.hasOwnProperty.call(message, "space"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.space);
+                        if (message.spaceDisplayName != null && Object.hasOwnProperty.call(message, "spaceDisplayName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.spaceDisplayName);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ForwardedMetadata message, length delimited. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata} message ForwardedMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ForwardedMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ForwardedMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ForwardedMetadata.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ForwardedMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.space = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.spaceDisplayName = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ForwardedMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ForwardedMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ForwardedMetadata message.
+                     * @function verify
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ForwardedMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            if (!$util.isString(message.space))
+                                return "space: string expected";
+                        if (message.spaceDisplayName != null && message.hasOwnProperty("spaceDisplayName"))
+                            if (!$util.isString(message.spaceDisplayName))
+                                return "spaceDisplayName: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ForwardedMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     */
+                    ForwardedMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ForwardedMetadata)
+                            return object;
+                        var message = new $root.google.chat.v1.ForwardedMetadata();
+                        if (object.space != null)
+                            message.space = String(object.space);
+                        if (object.spaceDisplayName != null)
+                            message.spaceDisplayName = String(object.spaceDisplayName);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ForwardedMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.ForwardedMetadata} message ForwardedMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ForwardedMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.space = "";
+                            object.spaceDisplayName = "";
+                        }
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            object.space = message.space;
+                        if (message.spaceDisplayName != null && message.hasOwnProperty("spaceDisplayName"))
+                            object.spaceDisplayName = message.spaceDisplayName;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ForwardedMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ForwardedMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ForwardedMetadata
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ForwardedMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ForwardedMetadata";
+                    };
+    
+                    return ForwardedMetadata;
                 })();
     
                 v1.Thread = (function() {

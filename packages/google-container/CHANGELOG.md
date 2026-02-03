@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.6.0...container-v6.7.0) (2026-01-31)
+
+
+### Features
+
+* [container] Add GPUDirectConfig to configure GPU Direct for node pools ([#7035](https://github.com/googleapis/google-cloud-node/issues/7035)) ([eda043c](https://github.com/googleapis/google-cloud-node/commit/eda043cff45893b011a9c5f7ee157f265dad098b))
+
 ## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.5.0...container-v6.6.0) (2025-10-23)
 
 

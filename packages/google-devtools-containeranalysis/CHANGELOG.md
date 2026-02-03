@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.4.0...containeranalysis-v6.5.0) (2026-01-31)
+
+
+### Features
+
+* [containeranalysis] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#7039](https://github.com/googleapis/google-cloud-node/issues/7039)) ([c56f26b](https://github.com/googleapis/google-cloud-node/commit/c56f26b50db6cfce1183931d19314764423ff0db))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.1...containeranalysis-v6.4.0) (2026-01-16)
 
 
