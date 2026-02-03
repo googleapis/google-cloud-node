@@ -165,9 +165,9 @@ fi
 EOF
         # Insert the check after 'cd "${PROJECT_ROOT}"' (standard v2) or at the top of the file (v1/legacy).
         if grep -q 'cd "${PROJECT_ROOT}"' "${TRAMPOLINE_SCRIPT}"; then
-             sed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+             gsed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
         else
-             sed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+             gsed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
         fi
         rm conditional_check_logic.sh
     else
