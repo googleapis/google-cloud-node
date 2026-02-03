@@ -11124,6 +11124,16 @@
                           "oneof": [
                             "sourceInstanceDeletionTime"
                           ]
+                        },
+                        "_destinationProject": {
+                          "oneof": [
+                            "destinationProject"
+                          ]
+                        },
+                        "_destinationNetwork": {
+                          "oneof": [
+                            "destinationNetwork"
+                          ]
                         }
                       },
                       "fields": {
@@ -11176,6 +11186,23 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 12,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationProject": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationNetwork": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network",
                             "proto3_optional": true
                           }
                         }

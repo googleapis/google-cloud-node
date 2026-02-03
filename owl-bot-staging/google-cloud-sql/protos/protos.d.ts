@@ -39083,6 +39083,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime */
                     sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject */
+                    destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork */
+                    destinationNetwork?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -39123,6 +39129,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime. */
                     public sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject. */
+                    public destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork. */
+                    public destinationNetwork?: (string|null);
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
