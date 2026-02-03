@@ -37,7 +37,7 @@ function main(parent, indexId, index) {
   /**
    *  Required. ID of the Index to create.
    *  The id must be 1-63 characters long, and comply with
-   *  <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+   *  RFC1035 (https://www.ietf.org/rfc/rfc1035.txt).
    *  Specifically, it must be 1-63 characters long and match the regular
    *  expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
    */

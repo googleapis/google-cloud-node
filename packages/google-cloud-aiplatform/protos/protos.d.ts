@@ -323559,6 +323559,9 @@ export namespace google {
 
                     /** DeleteRagCorpusRequest force */
                     force?: (boolean|null);
+
+                    /** DeleteRagCorpusRequest forceDelete */
+                    forceDelete?: (boolean|null);
                 }
 
                 /** Represents a DeleteRagCorpusRequest. */
@@ -323575,6 +323578,9 @@ export namespace google {
 
                     /** DeleteRagCorpusRequest force. */
                     public force: boolean;
+
+                    /** DeleteRagCorpusRequest forceDelete. */
+                    public forceDelete: boolean;
 
                     /**
                      * Creates a new DeleteRagCorpusRequest instance using the specified properties.

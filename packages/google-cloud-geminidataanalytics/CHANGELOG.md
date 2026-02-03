@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.5.0...geminidataanalytics-v0.6.0) (2026-02-02)
+
+
+### Features
+
+* [geminidataanalytics] add ClarificationMessage, thought-signature, formatted-data ([#7076](https://github.com/googleapis/google-cloud-node/issues/7076)) ([5d1e2b6](https://github.com/googleapis/google-cloud-node/commit/5d1e2b675cc244c7abf358199327a1f59a3456fe))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.4.0...geminidataanalytics-v0.5.0) (2026-01-16)
 
 
