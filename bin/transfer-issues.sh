@@ -1,21 +1,19 @@
 #!/bin/bash
 
-# Usage: ./transfer_issues.sh source-owner/repo dest-owner/repo team-slug
+# Usage: ./transfer_issues.sh source-owner/repo dest-owner/repo assignee label
 SOURCE_REPO=$1
 DEST_REPO=$2
-TEAM=$3 # Optional: e.g., "my-org/engineering-team"
+ASSIGNEE=$3
+LABEL=$4
 
-if [ -z "$SOURCE_REPO" ] || [ -z "$DEST_REPO" ]; then
-    echo "Usage: $0 <source-owner/repo> <dest-owner/repo> [team-slug]"
+if [ -z "$SOURCE_REPO" ] || [ -z "$DEST_REPO" ] || [ -z "$ASSIGNEE" ] || [ -z "$LABEL" ]; then
+    echo "Usage: $0 <source-owner/repo> <dest-owner/repo> <assignee> <label>"
     exit 1
 fi
 
-# Prepare the assignee flag if a team is provided
-ASSIGNEE_FLAG=""
-if [ -n "$TEAM" ]; then
-    ASSIGNEE_FLAG="--assignee $TEAM"
-    echo "Assigning issues to team: $TEAM"
-fi
+# Create the label if it doesn't exist
+echo "Checking for label '$LABEL' in $DEST_REPO..."
+gh label list -R "$DEST_REPO" | grep -q "$LABEL" || gh label create "$LABEL" -R "$DEST_REPO" --description "Issues transferred from another repository"
 
 echo "Fetching issues from $SOURCE_REPO..."
 
@@ -32,11 +30,12 @@ for NUMBER in $ISSUE_NUMBERS; do
 
     ENHANCED_BODY=$(printf "%s\n\n---\n*Originally authored in $SOURCE_REPO as Issue #$NUMBER*")
 
-    # Create the issue with the optional assignee flag
+    # Create the issue with the assignee and label
     gh issue create -R "$DEST_REPO" \
         --title "$TITLE" \
         --body "$ENHANCED_BODY" \
-        $ASSIGNEE_FLAG
+        --assignee "$ASSIGNEE" \
+        --label "$LABEL"
     
     echo "Successfully transferred: $TITLE"
 done
