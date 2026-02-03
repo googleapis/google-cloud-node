@@ -17602,6 +17602,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime */
                     sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject */
+                    destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork */
+                    destinationNetwork?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -17642,6 +17648,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime. */
                     public sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject. */
+                    public destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork. */
+                    public destinationNetwork?: (string|null);
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -26718,6 +26730,9 @@ export namespace google {
                     /** SqlUsersUpdateRequest databaseRoles */
                     databaseRoles?: (string[]|null);
 
+                    /** SqlUsersUpdateRequest revokeExistingRoles */
+                    revokeExistingRoles?: (boolean|null);
+
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1.IUser|null);
                 }
@@ -26745,6 +26760,9 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest databaseRoles. */
                     public databaseRoles: string[];
+
+                    /** SqlUsersUpdateRequest revokeExistingRoles. */
+                    public revokeExistingRoles?: (boolean|null);
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IUser|null);
@@ -39065,6 +39083,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime */
                     sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject */
+                    destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork */
+                    destinationNetwork?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -39105,6 +39129,12 @@ export namespace google {
 
                     /** CloneContext sourceInstanceDeletionTime. */
                     public sourceInstanceDeletionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CloneContext destinationProject. */
+                    public destinationProject?: (string|null);
+
+                    /** CloneContext destinationNetwork. */
+                    public destinationNetwork?: (string|null);
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.

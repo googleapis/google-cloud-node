@@ -5073,6 +5073,16 @@
                           "oneof": [
                             "sourceInstanceDeletionTime"
                           ]
+                        },
+                        "_destinationProject": {
+                          "oneof": [
+                            "destinationProject"
+                          ]
+                        },
+                        "_destinationNetwork": {
+                          "oneof": [
+                            "destinationNetwork"
+                          ]
                         }
                       },
                       "fields": {
@@ -5128,6 +5138,23 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 12,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationProject": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationNetwork": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network",
                             "proto3_optional": true
                           }
                         }
@@ -7712,6 +7739,13 @@
                       }
                     },
                     "SqlUsersUpdateRequest": {
+                      "oneofs": {
+                        "_revokeExistingRoles": {
+                          "oneof": [
+                            "revokeExistingRoles"
+                          ]
+                        }
+                      },
                       "fields": {
                         "host": {
                           "type": "string",
@@ -7738,6 +7772,14 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revokeExistingRoles": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "body": {
@@ -11082,6 +11124,16 @@
                           "oneof": [
                             "sourceInstanceDeletionTime"
                           ]
+                        },
+                        "_destinationProject": {
+                          "oneof": [
+                            "destinationProject"
+                          ]
+                        },
+                        "_destinationNetwork": {
+                          "oneof": [
+                            "destinationNetwork"
+                          ]
                         }
                       },
                       "fields": {
@@ -11134,6 +11186,23 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 12,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationProject": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "destinationNetwork": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network",
                             "proto3_optional": true
                           }
                         }

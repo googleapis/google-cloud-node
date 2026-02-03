@@ -45324,6 +45324,8 @@
                          * @property {string|null} [preferredZone] CloneContext preferredZone
                          * @property {string|null} [preferredSecondaryZone] CloneContext preferredSecondaryZone
                          * @property {google.protobuf.ITimestamp|null} [sourceInstanceDeletionTime] CloneContext sourceInstanceDeletionTime
+                         * @property {string|null} [destinationProject] CloneContext destinationProject
+                         * @property {string|null} [destinationNetwork] CloneContext destinationNetwork
                          */
     
                         /**
@@ -45422,6 +45424,22 @@
                          */
                         CloneContext.prototype.sourceInstanceDeletionTime = null;
     
+                        /**
+                         * CloneContext destinationProject.
+                         * @member {string|null|undefined} destinationProject
+                         * @memberof google.cloud.sql.v1.CloneContext
+                         * @instance
+                         */
+                        CloneContext.prototype.destinationProject = null;
+    
+                        /**
+                         * CloneContext destinationNetwork.
+                         * @member {string|null|undefined} destinationNetwork
+                         * @memberof google.cloud.sql.v1.CloneContext
+                         * @instance
+                         */
+                        CloneContext.prototype.destinationNetwork = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -45440,6 +45458,18 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CloneContext.prototype, "_sourceInstanceDeletionTime", {
                             get: $util.oneOfGetter($oneOfFields = ["sourceInstanceDeletionTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CloneContext.prototype, "_destinationProject", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationProject"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CloneContext.prototype, "_destinationNetwork", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationNetwork"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -45488,6 +45518,10 @@
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.preferredSecondaryZone);
                             if (message.sourceInstanceDeletionTime != null && Object.hasOwnProperty.call(message, "sourceInstanceDeletionTime"))
                                 $root.google.protobuf.Timestamp.encode(message.sourceInstanceDeletionTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.destinationProject != null && Object.hasOwnProperty.call(message, "destinationProject"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.destinationProject);
+                            if (message.destinationNetwork != null && Object.hasOwnProperty.call(message, "destinationNetwork"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.destinationNetwork);
                             return writer;
                         };
     
@@ -45564,6 +45598,14 @@
                                     }
                                 case 12: {
                                         message.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.destinationProject = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.destinationNetwork = reader.string();
                                         break;
                                     }
                                 default:
@@ -45649,6 +45691,16 @@
                                         return "sourceInstanceDeletionTime." + error;
                                 }
                             }
+                            if (message.destinationProject != null && message.hasOwnProperty("destinationProject")) {
+                                properties._destinationProject = 1;
+                                if (!$util.isString(message.destinationProject))
+                                    return "destinationProject: string expected";
+                            }
+                            if (message.destinationNetwork != null && message.hasOwnProperty("destinationNetwork")) {
+                                properties._destinationNetwork = 1;
+                                if (!$util.isString(message.destinationNetwork))
+                                    return "destinationNetwork: string expected";
+                            }
                             return null;
                         };
     
@@ -45705,6 +45757,10 @@
                                     throw TypeError(".google.cloud.sql.v1.CloneContext.sourceInstanceDeletionTime: object expected");
                                 message.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.fromObject(object.sourceInstanceDeletionTime);
                             }
+                            if (object.destinationProject != null)
+                                message.destinationProject = String(object.destinationProject);
+                            if (object.destinationNetwork != null)
+                                message.destinationNetwork = String(object.destinationNetwork);
                             return message;
                         };
     
@@ -45769,6 +45825,16 @@
                                 object.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.toObject(message.sourceInstanceDeletionTime, options);
                                 if (options.oneofs)
                                     object._sourceInstanceDeletionTime = "sourceInstanceDeletionTime";
+                            }
+                            if (message.destinationProject != null && message.hasOwnProperty("destinationProject")) {
+                                object.destinationProject = message.destinationProject;
+                                if (options.oneofs)
+                                    object._destinationProject = "destinationProject";
+                            }
+                            if (message.destinationNetwork != null && message.hasOwnProperty("destinationNetwork")) {
+                                object.destinationNetwork = message.destinationNetwork;
+                                if (options.oneofs)
+                                    object._destinationNetwork = "destinationNetwork";
                             }
                             return object;
                         };
@@ -69705,6 +69771,7 @@
                          * @property {string|null} [name] SqlUsersUpdateRequest name
                          * @property {string|null} [project] SqlUsersUpdateRequest project
                          * @property {Array.<string>|null} [databaseRoles] SqlUsersUpdateRequest databaseRoles
+                         * @property {boolean|null} [revokeExistingRoles] SqlUsersUpdateRequest revokeExistingRoles
                          * @property {google.cloud.sql.v1.IUser|null} [body] SqlUsersUpdateRequest body
                          */
     
@@ -69765,12 +69832,29 @@
                         SqlUsersUpdateRequest.prototype.databaseRoles = $util.emptyArray;
     
                         /**
+                         * SqlUsersUpdateRequest revokeExistingRoles.
+                         * @member {boolean|null|undefined} revokeExistingRoles
+                         * @memberof google.cloud.sql.v1.SqlUsersUpdateRequest
+                         * @instance
+                         */
+                        SqlUsersUpdateRequest.prototype.revokeExistingRoles = null;
+    
+                        /**
                          * SqlUsersUpdateRequest body.
                          * @member {google.cloud.sql.v1.IUser|null|undefined} body
                          * @memberof google.cloud.sql.v1.SqlUsersUpdateRequest
                          * @instance
                          */
                         SqlUsersUpdateRequest.prototype.body = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SqlUsersUpdateRequest.prototype, "_revokeExistingRoles", {
+                            get: $util.oneOfGetter($oneOfFields = ["revokeExistingRoles"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new SqlUsersUpdateRequest instance using the specified properties.
@@ -69807,6 +69891,8 @@
                             if (message.databaseRoles != null && message.databaseRoles.length)
                                 for (var i = 0; i < message.databaseRoles.length; ++i)
                                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.databaseRoles[i]);
+                            if (message.revokeExistingRoles != null && Object.hasOwnProperty.call(message, "revokeExistingRoles"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.revokeExistingRoles);
                             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                                 $root.google.cloud.sql.v1.User.encode(message.body, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             return writer;
@@ -69867,6 +69953,10 @@
                                         message.databaseRoles.push(reader.string());
                                         break;
                                     }
+                                case 6: {
+                                        message.revokeExistingRoles = reader.bool();
+                                        break;
+                                    }
                                 case 100: {
                                         message.body = $root.google.cloud.sql.v1.User.decode(reader, reader.uint32());
                                         break;
@@ -69906,6 +69996,7 @@
                         SqlUsersUpdateRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.host != null && message.hasOwnProperty("host"))
                                 if (!$util.isString(message.host))
                                     return "host: string expected";
@@ -69924,6 +70015,11 @@
                                 for (var i = 0; i < message.databaseRoles.length; ++i)
                                     if (!$util.isString(message.databaseRoles[i]))
                                         return "databaseRoles: string[] expected";
+                            }
+                            if (message.revokeExistingRoles != null && message.hasOwnProperty("revokeExistingRoles")) {
+                                properties._revokeExistingRoles = 1;
+                                if (typeof message.revokeExistingRoles !== "boolean")
+                                    return "revokeExistingRoles: boolean expected";
                             }
                             if (message.body != null && message.hasOwnProperty("body")) {
                                 var error = $root.google.cloud.sql.v1.User.verify(message.body);
@@ -69960,6 +70056,8 @@
                                 for (var i = 0; i < object.databaseRoles.length; ++i)
                                     message.databaseRoles[i] = String(object.databaseRoles[i]);
                             }
+                            if (object.revokeExistingRoles != null)
+                                message.revokeExistingRoles = Boolean(object.revokeExistingRoles);
                             if (object.body != null) {
                                 if (typeof object.body !== "object")
                                     throw TypeError(".google.cloud.sql.v1.SqlUsersUpdateRequest.body: object expected");
@@ -70002,6 +70100,11 @@
                                 object.databaseRoles = [];
                                 for (var j = 0; j < message.databaseRoles.length; ++j)
                                     object.databaseRoles[j] = message.databaseRoles[j];
+                            }
+                            if (message.revokeExistingRoles != null && message.hasOwnProperty("revokeExistingRoles")) {
+                                object.revokeExistingRoles = message.revokeExistingRoles;
+                                if (options.oneofs)
+                                    object._revokeExistingRoles = "revokeExistingRoles";
                             }
                             if (message.body != null && message.hasOwnProperty("body"))
                                 object.body = $root.google.cloud.sql.v1.User.toObject(message.body, options);
@@ -99553,6 +99656,8 @@
                          * @property {string|null} [preferredZone] CloneContext preferredZone
                          * @property {string|null} [preferredSecondaryZone] CloneContext preferredSecondaryZone
                          * @property {google.protobuf.ITimestamp|null} [sourceInstanceDeletionTime] CloneContext sourceInstanceDeletionTime
+                         * @property {string|null} [destinationProject] CloneContext destinationProject
+                         * @property {string|null} [destinationNetwork] CloneContext destinationNetwork
                          */
     
                         /**
@@ -99651,6 +99756,22 @@
                          */
                         CloneContext.prototype.sourceInstanceDeletionTime = null;
     
+                        /**
+                         * CloneContext destinationProject.
+                         * @member {string|null|undefined} destinationProject
+                         * @memberof google.cloud.sql.v1beta4.CloneContext
+                         * @instance
+                         */
+                        CloneContext.prototype.destinationProject = null;
+    
+                        /**
+                         * CloneContext destinationNetwork.
+                         * @member {string|null|undefined} destinationNetwork
+                         * @memberof google.cloud.sql.v1beta4.CloneContext
+                         * @instance
+                         */
+                        CloneContext.prototype.destinationNetwork = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -99669,6 +99790,18 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(CloneContext.prototype, "_sourceInstanceDeletionTime", {
                             get: $util.oneOfGetter($oneOfFields = ["sourceInstanceDeletionTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CloneContext.prototype, "_destinationProject", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationProject"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(CloneContext.prototype, "_destinationNetwork", {
+                            get: $util.oneOfGetter($oneOfFields = ["destinationNetwork"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -99717,6 +99850,10 @@
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.preferredSecondaryZone);
                             if (message.sourceInstanceDeletionTime != null && Object.hasOwnProperty.call(message, "sourceInstanceDeletionTime"))
                                 $root.google.protobuf.Timestamp.encode(message.sourceInstanceDeletionTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.destinationProject != null && Object.hasOwnProperty.call(message, "destinationProject"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.destinationProject);
+                            if (message.destinationNetwork != null && Object.hasOwnProperty.call(message, "destinationNetwork"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.destinationNetwork);
                             return writer;
                         };
     
@@ -99793,6 +99930,14 @@
                                     }
                                 case 12: {
                                         message.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.destinationProject = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.destinationNetwork = reader.string();
                                         break;
                                     }
                                 default:
@@ -99878,6 +100023,16 @@
                                         return "sourceInstanceDeletionTime." + error;
                                 }
                             }
+                            if (message.destinationProject != null && message.hasOwnProperty("destinationProject")) {
+                                properties._destinationProject = 1;
+                                if (!$util.isString(message.destinationProject))
+                                    return "destinationProject: string expected";
+                            }
+                            if (message.destinationNetwork != null && message.hasOwnProperty("destinationNetwork")) {
+                                properties._destinationNetwork = 1;
+                                if (!$util.isString(message.destinationNetwork))
+                                    return "destinationNetwork: string expected";
+                            }
                             return null;
                         };
     
@@ -99934,6 +100089,10 @@
                                     throw TypeError(".google.cloud.sql.v1beta4.CloneContext.sourceInstanceDeletionTime: object expected");
                                 message.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.fromObject(object.sourceInstanceDeletionTime);
                             }
+                            if (object.destinationProject != null)
+                                message.destinationProject = String(object.destinationProject);
+                            if (object.destinationNetwork != null)
+                                message.destinationNetwork = String(object.destinationNetwork);
                             return message;
                         };
     
@@ -99998,6 +100157,16 @@
                                 object.sourceInstanceDeletionTime = $root.google.protobuf.Timestamp.toObject(message.sourceInstanceDeletionTime, options);
                                 if (options.oneofs)
                                     object._sourceInstanceDeletionTime = "sourceInstanceDeletionTime";
+                            }
+                            if (message.destinationProject != null && message.hasOwnProperty("destinationProject")) {
+                                object.destinationProject = message.destinationProject;
+                                if (options.oneofs)
+                                    object._destinationProject = "destinationProject";
+                            }
+                            if (message.destinationNetwork != null && message.hasOwnProperty("destinationNetwork")) {
+                                object.destinationNetwork = message.destinationNetwork;
+                                if (options.oneofs)
+                                    object._destinationNetwork = "destinationNetwork";
                             }
                             return object;
                         };
