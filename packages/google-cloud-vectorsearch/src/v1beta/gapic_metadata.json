@@ -196,6 +196,11 @@
                 "importDataObjects"
               ]
             },
+            "ExportDataObjects": {
+              "methods": [
+                "exportDataObjects"
+              ]
+            },
             "ListCollections": {
               "methods": [
                 "listCollections",
@@ -253,6 +258,11 @@
             "ImportDataObjects": {
               "methods": [
                 "importDataObjects"
+              ]
+            },
+            "ExportDataObjects": {
+              "methods": [
+                "exportDataObjects"
               ]
             },
             "ListCollections": {
