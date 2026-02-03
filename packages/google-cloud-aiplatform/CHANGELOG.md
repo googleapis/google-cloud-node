@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.3.0...aiplatform-v6.4.0) (2026-02-03)
+
+
+### Features
+
+* Force-delete for RagCorpora, ignoring any external errors and ensuring deletion of the RagCorpus ([#7085](https://github.com/googleapis/google-cloud-node/issues/7085)) ([b69b8ae](https://github.com/googleapis/google-cloud-node/commit/b69b8aea0fd9e9066f78e86c346a0ab7d8be609a))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.2.0...aiplatform-v6.3.0) (2026-02-02)
 
 

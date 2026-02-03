@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "486644d1926db8bf8ab38dd7860383b6e0a48fbd",
+          "message": "[vectorsearch] add SearchHint to SemanticSearch requests",
+          "issues": [
+            "7075"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "01907a7b-5645-4d8b-9bd4-684e54406136",
+      "createTime": "2026-02-03T16:09:47.415Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b69b8aea0fd9e9066f78e86c346a0ab7d8be609a",
+          "message": "Force-delete for RagCorpora, ignoring any external errors and ensuring deletion of the RagCorpus",
+          "issues": [
+            "7085"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "11fe9e71-b4d2-4877-aa7e-9225977c6682",
+      "createTime": "2026-02-03T16:09:47.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5d1e2b675cc244c7abf358199327a1f59a3456fe",
           "message": "[geminidataanalytics] add ClarificationMessage, thought-signature, formatted-data",
           "issues": [
@@ -68110,5 +68144,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-02-02T17:45:37.112Z"
+  "updateTime": "2026-02-03T16:09:47.415Z"
 }
