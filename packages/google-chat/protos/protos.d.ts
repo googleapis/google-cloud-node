@@ -16252,6 +16252,15 @@ export namespace google {
 
                 /** QuotedMessageMetadata lastUpdateTime */
                 lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** QuotedMessageMetadata quoteType */
+                quoteType?: (google.chat.v1.QuotedMessageMetadata.QuoteType|keyof typeof google.chat.v1.QuotedMessageMetadata.QuoteType|null);
+
+                /** QuotedMessageMetadata quotedMessageSnapshot */
+                quotedMessageSnapshot?: (google.chat.v1.IQuotedMessageSnapshot|null);
+
+                /** QuotedMessageMetadata forwardedMetadata */
+                forwardedMetadata?: (google.chat.v1.IForwardedMetadata|null);
             }
 
             /** Represents a QuotedMessageMetadata. */
@@ -16268,6 +16277,15 @@ export namespace google {
 
                 /** QuotedMessageMetadata lastUpdateTime. */
                 public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** QuotedMessageMetadata quoteType. */
+                public quoteType: (google.chat.v1.QuotedMessageMetadata.QuoteType|keyof typeof google.chat.v1.QuotedMessageMetadata.QuoteType);
+
+                /** QuotedMessageMetadata quotedMessageSnapshot. */
+                public quotedMessageSnapshot?: (google.chat.v1.IQuotedMessageSnapshot|null);
+
+                /** QuotedMessageMetadata forwardedMetadata. */
+                public forwardedMetadata?: (google.chat.v1.IForwardedMetadata|null);
 
                 /**
                  * Creates a new QuotedMessageMetadata instance using the specified properties.
@@ -16341,6 +16359,239 @@ export namespace google {
 
                 /**
                  * Gets the default type url for QuotedMessageMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace QuotedMessageMetadata {
+
+                /** QuoteType enum. */
+                enum QuoteType {
+                    QUOTE_TYPE_UNSPECIFIED = 0,
+                    REPLY = 1
+                }
+            }
+
+            /** Properties of a QuotedMessageSnapshot. */
+            interface IQuotedMessageSnapshot {
+
+                /** QuotedMessageSnapshot sender */
+                sender?: (string|null);
+
+                /** QuotedMessageSnapshot text */
+                text?: (string|null);
+
+                /** QuotedMessageSnapshot formattedText */
+                formattedText?: (string|null);
+
+                /** QuotedMessageSnapshot annotations */
+                annotations?: (google.chat.v1.IAnnotation[]|null);
+
+                /** QuotedMessageSnapshot attachments */
+                attachments?: (google.chat.v1.IAttachment[]|null);
+            }
+
+            /** Represents a QuotedMessageSnapshot. */
+            class QuotedMessageSnapshot implements IQuotedMessageSnapshot {
+
+                /**
+                 * Constructs a new QuotedMessageSnapshot.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IQuotedMessageSnapshot);
+
+                /** QuotedMessageSnapshot sender. */
+                public sender: string;
+
+                /** QuotedMessageSnapshot text. */
+                public text: string;
+
+                /** QuotedMessageSnapshot formattedText. */
+                public formattedText: string;
+
+                /** QuotedMessageSnapshot annotations. */
+                public annotations: google.chat.v1.IAnnotation[];
+
+                /** QuotedMessageSnapshot attachments. */
+                public attachments: google.chat.v1.IAttachment[];
+
+                /**
+                 * Creates a new QuotedMessageSnapshot instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QuotedMessageSnapshot instance
+                 */
+                public static create(properties?: google.chat.v1.IQuotedMessageSnapshot): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Encodes the specified QuotedMessageSnapshot message. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                 * @param message QuotedMessageSnapshot message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IQuotedMessageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuotedMessageSnapshot message, length delimited. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                 * @param message QuotedMessageSnapshot message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IQuotedMessageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuotedMessageSnapshot message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuotedMessageSnapshot
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Decodes a QuotedMessageSnapshot message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuotedMessageSnapshot
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Verifies a QuotedMessageSnapshot message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuotedMessageSnapshot message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuotedMessageSnapshot
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Creates a plain object from a QuotedMessageSnapshot message. Also converts values to other types if specified.
+                 * @param message QuotedMessageSnapshot
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.QuotedMessageSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuotedMessageSnapshot to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for QuotedMessageSnapshot
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ForwardedMetadata. */
+            interface IForwardedMetadata {
+
+                /** ForwardedMetadata space */
+                space?: (string|null);
+
+                /** ForwardedMetadata spaceDisplayName */
+                spaceDisplayName?: (string|null);
+            }
+
+            /** Represents a ForwardedMetadata. */
+            class ForwardedMetadata implements IForwardedMetadata {
+
+                /**
+                 * Constructs a new ForwardedMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IForwardedMetadata);
+
+                /** ForwardedMetadata space. */
+                public space: string;
+
+                /** ForwardedMetadata spaceDisplayName. */
+                public spaceDisplayName: string;
+
+                /**
+                 * Creates a new ForwardedMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ForwardedMetadata instance
+                 */
+                public static create(properties?: google.chat.v1.IForwardedMetadata): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Encodes the specified ForwardedMetadata message. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                 * @param message ForwardedMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IForwardedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ForwardedMetadata message, length delimited. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                 * @param message ForwardedMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IForwardedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ForwardedMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ForwardedMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Decodes a ForwardedMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ForwardedMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Verifies a ForwardedMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ForwardedMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ForwardedMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Creates a plain object from a ForwardedMetadata message. Also converts values to other types if specified.
+                 * @param message ForwardedMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ForwardedMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ForwardedMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ForwardedMetadata
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
