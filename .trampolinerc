@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,4 +49,4 @@ if [[ -z "${TRAMPOLINE_BUILD_FILE:-}" ]]; then
 fi
 
 # Secret Manager secrets.
-source ${PROJECT_ROOT}/handwritten/cloud-profiler/.kokoro/populate-secrets.sh
+source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh

@@ -1,8 +1,0 @@
-.nyc_output
-.vscode
-build
-node_modules
-package-lock.json
-.coverage
-docs
-__pycache__

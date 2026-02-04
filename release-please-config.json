@@ -1,8 +1,6 @@
 {
-  "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "packages": {
-    "handwritten/cloud-profiler": {},
     "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},
@@ -151,11 +149,11 @@
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
     "packages/google-cloud-scheduler": {},
     "packages/google-cloud-secretmanager": {},
-    "packages/google-cloud-securesourcemanager": {},
     "packages/google-cloud-security-privateca": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-cloud-securitycenter": {},
     "packages/google-cloud-securitycentermanagement": {},
+    "packages/google-cloud-securesourcemanager": {},
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-shell": {},
@@ -229,5 +227,6 @@
       "type": "sentence-case"
     }
   ],
+  "bump-minor-pre-major": true,
   "release-type": "node"
 }

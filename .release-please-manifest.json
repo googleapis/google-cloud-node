@@ -1,5 +1,4 @@
 {
-  "handwritten/cloud-profiler": "6.0.3",
   "packages/gapic-node-processing": "0.1.6",
   "packages/google-ads-admanager": "0.5.0",
   "packages/google-ads-datamanager": "0.1.0",
@@ -24,7 +23,6 @@
   "packages/google-cloud-apigeeconnect": "4.2.1",
   "packages/google-cloud-apigeeregistry": "2.2.1",
   "packages/google-cloud-apihub": "0.5.1",
-  "packages/google-cloud-apiregistry": "0.2.0",
   "packages/google-cloud-apphub": "0.6.1",
   "packages/google-cloud-asset": "6.3.1",
   "packages/google-cloud-assuredworkloads": "5.1.1",
@@ -94,7 +92,6 @@
   "packages/google-cloud-gkeconnect-gateway": "5.2.1",
   "packages/google-cloud-gkehub": "6.3.1",
   "packages/google-cloud-gkemulticloud": "2.3.0",
-  "packages/google-cloud-gkerecommender": "0.1.0",
   "packages/google-cloud-gsuiteaddons": "2.2.1",
   "packages/google-cloud-hypercomputecluster": "0.1.0",
   "packages/google-cloud-iap": "4.3.1",
@@ -148,11 +145,11 @@
   "packages/google-cloud-saasplatform-saasservicemgmt": "0.1.1",
   "packages/google-cloud-scheduler": "5.3.1",
   "packages/google-cloud-secretmanager": "6.1.1",
-  "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-cloud-security-privateca": "7.0.1",
   "packages/google-cloud-security-publicca": "2.2.1",
   "packages/google-cloud-securitycenter": "9.2.1",
   "packages/google-cloud-securitycentermanagement": "0.7.1",
+  "packages/google-cloud-securesourcemanager": "0.8.1",
   "packages/google-cloud-servicedirectory": "6.1.1",
   "packages/google-cloud-servicehealth": "0.7.1",
   "packages/google-cloud-shell": "4.1.1",
@@ -219,5 +216,7 @@
   "packages/google-storagetransfer": "4.2.1",
   "packages/google-streetview-publish": "0.4.1",
   "packages/grafeas": "6.1.1",
-  "packages/typeless-sample-bot": "3.1.1"
+  "packages/typeless-sample-bot": "3.1.1",
+  "packages/google-cloud-apiregistry": "0.2.0",
+  "packages/google-cloud-gkerecommender": "0.1.0"
 }
