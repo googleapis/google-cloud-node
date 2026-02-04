@@ -140,6 +140,11 @@ if [ -d "${PACKAGE_PATH}/.kokoro" ]; then
 
     if [ -n "${TRAMPOLINE_SCRIPT}" ]; then
         echo "Found trampoline script: ${TRAMPOLINE_SCRIPT}. Patching it."
+        echo "Adding package path to PROJECT_ROOT in ${TRAMPOLINE_SCRIPT}"
+        # Modify the PROJECT_ROOT definition for CI builds
+        gsed -i "s|PROJECT_ROOT=\"\$(repo_root \"\${PROGRAM_DIR}\")\"|PROJECT_ROOT=\"\$(repo_root \"\${PROGRAM_DIR}\")/${PACKAGE_PATH}\"|g" "${TRAMPOLINE_SCRIPT}"
+        # Modify the PROJECT_ROOT definition for non-CI builds
+        gsed -i "s|PROJECT_ROOT=\"\$(repo_root \$(pwd))\"|PROJECT_ROOT=\"\$(repo_root \$(pwd))/${PACKAGE_PATH}\"|g" "${TRAMPOLINE_SCRIPT}"
 # Diff check:
         cat << EOF > conditional_check_logic.sh
 
