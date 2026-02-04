@@ -599,6 +599,762 @@ describe('v1.GkeHubClient', () => {
         });
     });
 
+    describe('getFleet', () => {
+        it('invokes getFleet without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Fleet()
+            );
+            client.innerApiCalls.getFleet = stubSimpleCall(expectedResponse);
+            const [response] = await client.getFleet(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFleet without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Fleet()
+            );
+            client.innerApiCalls.getFleet = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getFleet(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IFleet|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFleet with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getFleet = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getFleet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getFleet with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getFleet(request), expectedError);
+        });
+    });
+
+    describe('getScopeNamespace', () => {
+        it('invokes getScopeNamespace without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Namespace()
+            );
+            client.innerApiCalls.getScopeNamespace = stubSimpleCall(expectedResponse);
+            const [response] = await client.getScopeNamespace(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeNamespace without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Namespace()
+            );
+            client.innerApiCalls.getScopeNamespace = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getScopeNamespace(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.INamespace|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeNamespace with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getScopeNamespace = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getScopeNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeNamespace with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getScopeNamespace(request), expectedError);
+        });
+    });
+
+    describe('getScopeRBACRoleBinding', () => {
+        it('invokes getScopeRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.RBACRoleBinding()
+            );
+            client.innerApiCalls.getScopeRbacRoleBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getScopeRBACRoleBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.RBACRoleBinding()
+            );
+            client.innerApiCalls.getScopeRbacRoleBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getScopeRBACRoleBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IRBACRoleBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeRBACRoleBinding with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getScopeRbacRoleBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getScopeRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScopeRBACRoleBinding with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getScopeRBACRoleBinding(request), expectedError);
+        });
+    });
+
+    describe('getScope', () => {
+        it('invokes getScope without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Scope()
+            );
+            client.innerApiCalls.getScope = stubSimpleCall(expectedResponse);
+            const [response] = await client.getScope(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScope without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.Scope()
+            );
+            client.innerApiCalls.getScope = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getScope(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IScope|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScope with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getScope = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getScope(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getScope with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getScope(request), expectedError);
+        });
+    });
+
+    describe('getMembershipBinding', () => {
+        it('invokes getMembershipBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.MembershipBinding()
+            );
+            client.innerApiCalls.getMembershipBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMembershipBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.MembershipBinding()
+            );
+            client.innerApiCalls.getMembershipBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMembershipBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IMembershipBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipBinding with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMembershipBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMembershipBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipBinding with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMembershipBinding(request), expectedError);
+        });
+    });
+
+    describe('getMembershipRBACRoleBinding', () => {
+        it('invokes getMembershipRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.RBACRoleBinding()
+            );
+            client.innerApiCalls.getMembershipRbacRoleBinding = stubSimpleCall(expectedResponse);
+            const [response] = await client.getMembershipRBACRoleBinding(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.RBACRoleBinding()
+            );
+            client.innerApiCalls.getMembershipRbacRoleBinding = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getMembershipRBACRoleBinding(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IRBACRoleBinding|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipRBACRoleBinding with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getMembershipRbacRoleBinding = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getMembershipRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getMembershipRBACRoleBinding with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getMembershipRBACRoleBinding(request), expectedError);
+        });
+    });
+
+    describe('generateMembershipRBACRoleBindingYAML', () => {
+        it('invokes generateMembershipRBACRoleBindingYAML without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse()
+            );
+            client.innerApiCalls.generateMembershipRbacRoleBindingYamL = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateMembershipRBACRoleBindingYAML(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateMembershipRBACRoleBindingYAML without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse()
+            );
+            client.innerApiCalls.generateMembershipRbacRoleBindingYamL = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateMembershipRBACRoleBindingYAML(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateMembershipRBACRoleBindingYAML with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateMembershipRbacRoleBindingYamL = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateMembershipRBACRoleBindingYAML(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateMembershipRbacRoleBindingYamL as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateMembershipRBACRoleBindingYAML with closed client', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateMembershipRBACRoleBindingYAML(request), expectedError);
+        });
+    });
+
     describe('createMembership', () => {
         it('invokes createMembership without error', async () => {
             const client = new gkehubModule.v1.GkeHubClient({
@@ -1523,6 +2279,2802 @@ describe('v1.GkeHubClient', () => {
         });
     });
 
+    describe('createFleet', () => {
+        it('invokes createFleet without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateFleetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createFleet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createFleet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFleet without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateFleetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createFleet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createFleet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFleet with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateFleetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createFleet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createFleet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createFleet with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateFleetRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createFleet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createFleet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateFleetProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateFleetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateFleetProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateFleetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateFleet', () => {
+        it('invokes updateFleet without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateFleetRequest()
+            );
+            request.fleet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateFleetRequest', ['fleet', 'name']);
+            request.fleet.name = defaultValue1;
+            const expectedHeaderRequestParams = `fleet.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFleet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateFleet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFleet without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateFleetRequest()
+            );
+            request.fleet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateFleetRequest', ['fleet', 'name']);
+            request.fleet.name = defaultValue1;
+            const expectedHeaderRequestParams = `fleet.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateFleet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateFleet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFleet with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateFleetRequest()
+            );
+            request.fleet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateFleetRequest', ['fleet', 'name']);
+            request.fleet.name = defaultValue1;
+            const expectedHeaderRequestParams = `fleet.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFleet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateFleet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateFleet with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateFleetRequest()
+            );
+            request.fleet ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateFleetRequest', ['fleet', 'name']);
+            request.fleet.name = defaultValue1;
+            const expectedHeaderRequestParams = `fleet.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateFleet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateFleet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateFleetProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateFleetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateFleetProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateFleetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteFleet', () => {
+        it('invokes deleteFleet without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteFleet = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteFleet(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFleet without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteFleet = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteFleet(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFleet with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteFleet = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteFleet(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteFleet with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteFleetRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteFleetRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteFleet = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteFleet(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteFleet as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteFleetProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteFleetProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteFleetProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteFleetProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createScopeNamespace', () => {
+        it('invokes createScopeNamespace without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScopeNamespace = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createScopeNamespace(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeNamespace without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScopeNamespace = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createScopeNamespace(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeNamespace with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScopeNamespace = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createScopeNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeNamespace with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeNamespaceRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScopeNamespace = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createScopeNamespace(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateScopeNamespaceProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateScopeNamespaceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateScopeNamespaceProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateScopeNamespaceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateScopeNamespace', () => {
+        it('invokes updateScopeNamespace without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest()
+            );
+            request.scopeNamespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest', ['scopeNamespace', 'name']);
+            request.scopeNamespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope_namespace.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScopeNamespace = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateScopeNamespace(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeNamespace without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest()
+            );
+            request.scopeNamespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest', ['scopeNamespace', 'name']);
+            request.scopeNamespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope_namespace.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScopeNamespace = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateScopeNamespace(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeNamespace with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest()
+            );
+            request.scopeNamespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest', ['scopeNamespace', 'name']);
+            request.scopeNamespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope_namespace.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScopeNamespace = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateScopeNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeNamespace with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest()
+            );
+            request.scopeNamespace ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeNamespaceRequest', ['scopeNamespace', 'name']);
+            request.scopeNamespace.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope_namespace.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScopeNamespace = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateScopeNamespace(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateScopeNamespaceProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateScopeNamespaceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateScopeNamespaceProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateScopeNamespaceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteScopeNamespace', () => {
+        it('invokes deleteScopeNamespace without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScopeNamespace = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteScopeNamespace(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeNamespace without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScopeNamespace = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteScopeNamespace(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeNamespace with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScopeNamespace = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteScopeNamespace(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeNamespace with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeNamespaceRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScopeNamespace = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteScopeNamespace(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeNamespace as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteScopeNamespaceProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteScopeNamespaceProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteScopeNamespaceProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteScopeNamespaceProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createScopeRBACRoleBinding', () => {
+        it('invokes createScopeRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScopeRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createScopeRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScopeRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createScopeRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScopeRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createScopeRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScopeRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScopeRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createScopeRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateScopeRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateScopeRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateScopeRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateScopeRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateScopeRBACRoleBinding', () => {
+        it('invokes updateScopeRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScopeRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateScopeRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScopeRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateScopeRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScopeRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateScopeRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScopeRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScopeRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateScopeRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateScopeRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateScopeRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateScopeRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateScopeRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteScopeRBACRoleBinding', () => {
+        it('invokes deleteScopeRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScopeRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteScopeRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScopeRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteScopeRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScopeRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteScopeRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScopeRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScopeRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteScopeRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScopeRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteScopeRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteScopeRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteScopeRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteScopeRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createScope', () => {
+        it('invokes createScope without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScope = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createScope(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScope without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createScope = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createScope(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScope with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScope = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createScope(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createScope with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateScopeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createScope = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createScope(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateScopeProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateScopeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateScopeProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateScopeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateScope', () => {
+        it('invokes updateScope without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRequest()
+            );
+            request.scope ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRequest', ['scope', 'name']);
+            request.scope.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScope = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateScope(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScope without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRequest()
+            );
+            request.scope ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRequest', ['scope', 'name']);
+            request.scope.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateScope = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateScope(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScope with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRequest()
+            );
+            request.scope ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRequest', ['scope', 'name']);
+            request.scope.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScope = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateScope(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateScope with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateScopeRequest()
+            );
+            request.scope ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateScopeRequest', ['scope', 'name']);
+            request.scope.name = defaultValue1;
+            const expectedHeaderRequestParams = `scope.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateScope = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateScope(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateScopeProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateScopeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateScopeProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateScopeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteScope', () => {
+        it('invokes deleteScope without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScope = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteScope(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScope without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteScope = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteScope(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScope with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScope = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteScope(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteScope with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteScopeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteScopeRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteScope = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteScope(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteScope as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteScopeProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteScopeProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteScopeProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteScopeProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createMembershipBinding', () => {
+        it('invokes createMembershipBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMembershipBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createMembershipBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMembershipBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMembershipBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMembershipBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createMembershipBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMembershipBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createMembershipBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateMembershipBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateMembershipBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateMembershipBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateMembershipBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateMembershipBinding', () => {
+        it('invokes updateMembershipBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipBindingRequest()
+            );
+            request.membershipBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipBindingRequest', ['membershipBinding', 'name']);
+            request.membershipBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `membership_binding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMembershipBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateMembershipBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipBindingRequest()
+            );
+            request.membershipBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipBindingRequest', ['membershipBinding', 'name']);
+            request.membershipBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `membership_binding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMembershipBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMembershipBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipBindingRequest()
+            );
+            request.membershipBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipBindingRequest', ['membershipBinding', 'name']);
+            request.membershipBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `membership_binding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMembershipBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateMembershipBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipBindingRequest()
+            );
+            request.membershipBinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipBindingRequest', ['membershipBinding', 'name']);
+            request.membershipBinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `membership_binding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMembershipBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateMembershipBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateMembershipBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateMembershipBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateMembershipBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateMembershipBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteMembershipBinding', () => {
+        it('invokes deleteMembershipBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMembershipBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteMembershipBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMembershipBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMembershipBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMembershipBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteMembershipBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMembershipBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteMembershipBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteMembershipBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteMembershipBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteMembershipBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteMembershipBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('createMembershipRBACRoleBinding', () => {
+        it('invokes createMembershipRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMembershipRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.createMembershipRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.createMembershipRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createMembershipRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMembershipRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.createMembershipRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createMembershipRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createMembershipRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.createMembershipRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkCreateMembershipRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkCreateMembershipRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkCreateMembershipRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkCreateMembershipRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('updateMembershipRBACRoleBinding', () => {
+        it('invokes updateMembershipRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMembershipRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.updateMembershipRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.updateMembershipRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.updateMembershipRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMembershipRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.updateMembershipRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes updateMembershipRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest()
+            );
+            request.rbacrolebinding ??= {};
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest', ['rbacrolebinding', 'name']);
+            request.rbacrolebinding.name = defaultValue1;
+            const expectedHeaderRequestParams = `rbacrolebinding.name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.updateMembershipRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.updateMembershipRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.updateMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkUpdateMembershipRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkUpdateMembershipRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkUpdateMembershipRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkUpdateMembershipRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('deleteMembershipRBACRoleBinding', () => {
+        it('invokes deleteMembershipRBACRoleBinding without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMembershipRbacRoleBinding = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.deleteMembershipRBACRoleBinding(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipRBACRoleBinding without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.deleteMembershipRbacRoleBinding = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteMembershipRBACRoleBinding(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipRBACRoleBinding with call error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMembershipRbacRoleBinding = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.deleteMembershipRBACRoleBinding(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteMembershipRBACRoleBinding with LRO error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteMembershipRbacRoleBinding = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.deleteMembershipRBACRoleBinding(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteMembershipRbacRoleBinding as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkDeleteMembershipRBACRoleBindingProgress without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkDeleteMembershipRBACRoleBindingProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkDeleteMembershipRBACRoleBindingProgress with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkDeleteMembershipRBACRoleBindingProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('listMemberships', () => {
         it('invokes listMemberships without error', async () => {
             const client = new gkehubModule.v1.GkeHubClient({
@@ -1761,6 +5313,251 @@ describe('v1.GkeHubClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.listMemberships.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listBoundMemberships', () => {
+        it('invokes listBoundMemberships without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+            ];
+            client.innerApiCalls.listBoundMemberships = stubSimpleCall(expectedResponse);
+            const [response] = await client.listBoundMemberships(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBoundMemberships without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+            ];
+            client.innerApiCalls.listBoundMemberships = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listBoundMemberships(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IMembership[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBoundMemberships with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listBoundMemberships = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listBoundMemberships(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listBoundMemberships as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listBoundMembershipsStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+            ];
+            client.descriptors.page.listBoundMemberships.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listBoundMembershipsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Membership[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Membership) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listBoundMemberships.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBoundMemberships, request));
+            assert(
+                (client.descriptors.page.listBoundMemberships.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listBoundMembershipsStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBoundMemberships.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listBoundMembershipsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Membership[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Membership) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listBoundMemberships.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listBoundMemberships, request));
+            assert(
+                (client.descriptors.page.listBoundMemberships.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listBoundMemberships without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Membership()),
+            ];
+            client.descriptors.page.listBoundMemberships.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IMembership[] = [];
+            const iterable = client.listBoundMembershipsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listBoundMemberships with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListBoundMembershipsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListBoundMembershipsRequest', ['scopeName']);
+            request.scopeName = defaultValue1;
+            const expectedHeaderRequestParams = `scope_name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listBoundMemberships.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listBoundMembershipsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IMembership[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )
@@ -2013,6 +5810,1721 @@ describe('v1.GkeHubClient', () => {
         });
     });
 
+    describe('listFleets', () => {
+        it('invokes listFleets without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+            ];
+            client.innerApiCalls.listFleets = stubSimpleCall(expectedResponse);
+            const [response] = await client.listFleets(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFleets without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+            ];
+            client.innerApiCalls.listFleets = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listFleets(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IFleet[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFleets with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listFleets = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listFleets(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listFleets as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listFleetsStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+            ];
+            client.descriptors.page.listFleets.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listFleetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Fleet[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Fleet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listFleets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFleets, request));
+            assert(
+                (client.descriptors.page.listFleets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listFleetsStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFleets.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listFleetsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Fleet[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Fleet) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listFleets.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listFleets, request));
+            assert(
+                (client.descriptors.page.listFleets.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listFleets without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Fleet()),
+            ];
+            client.descriptors.page.listFleets.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IFleet[] = [];
+            const iterable = client.listFleetsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFleets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFleets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listFleets with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListFleetsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListFleetsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listFleets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listFleetsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IFleet[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listFleets.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listFleets.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listScopeNamespaces', () => {
+        it('invokes listScopeNamespaces without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+            ];
+            client.innerApiCalls.listScopeNamespaces = stubSimpleCall(expectedResponse);
+            const [response] = await client.listScopeNamespaces(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeNamespaces without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+            ];
+            client.innerApiCalls.listScopeNamespaces = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listScopeNamespaces(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.INamespace[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeNamespaces with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listScopeNamespaces = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listScopeNamespaces(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeNamespaces as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeNamespacesStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+            ];
+            client.descriptors.page.listScopeNamespaces.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listScopeNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopeNamespaces, request));
+            assert(
+                (client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listScopeNamespacesStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopeNamespaces.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listScopeNamespacesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Namespace[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Namespace) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopeNamespaces, request));
+            assert(
+                (client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listScopeNamespaces without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Namespace()),
+            ];
+            client.descriptors.page.listScopeNamespaces.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.INamespace[] = [];
+            const iterable = client.listScopeNamespacesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listScopeNamespaces with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeNamespacesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeNamespacesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopeNamespaces.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listScopeNamespacesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.INamespace[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listScopeRBACRoleBindings', () => {
+        it('invokes listScopeRBACRoleBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.innerApiCalls.listScopeRbacRoleBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listScopeRBACRoleBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeRBACRoleBindings without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.innerApiCalls.listScopeRbacRoleBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listScopeRBACRoleBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IRBACRoleBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeRBACRoleBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listScopeRbacRoleBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listScopeRBACRoleBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopeRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopeRBACRoleBindingsStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.descriptors.page.listScopeRBACRoleBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listScopeRBACRoleBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.RBACRoleBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.RBACRoleBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listScopeRBACRoleBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopeRbacRoleBindings, request));
+            assert(
+                (client.descriptors.page.listScopeRBACRoleBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listScopeRBACRoleBindingsStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopeRBACRoleBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listScopeRBACRoleBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.RBACRoleBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.RBACRoleBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listScopeRBACRoleBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopeRbacRoleBindings, request));
+            assert(
+                (client.descriptors.page.listScopeRBACRoleBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listScopeRBACRoleBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.descriptors.page.listScopeRBACRoleBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IRBACRoleBinding[] = [];
+            const iterable = client.listScopeRBACRoleBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopeRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopeRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listScopeRBACRoleBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopeRBACRoleBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listScopeRBACRoleBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IRBACRoleBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopeRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopeRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listScopes', () => {
+        it('invokes listScopes without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.innerApiCalls.listScopes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listScopes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopes without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.innerApiCalls.listScopes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listScopes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IScope[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopes with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listScopes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listScopes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listScopesStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.descriptors.page.listScopes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listScopesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Scope[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Scope) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listScopes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopes, request));
+            assert(
+                (client.descriptors.page.listScopes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listScopesStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listScopesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Scope[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Scope) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listScopes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listScopes, request));
+            assert(
+                (client.descriptors.page.listScopes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listScopes without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.descriptors.page.listScopes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IScope[] = [];
+            const iterable = client.listScopesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listScopes with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listScopes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listScopesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IScope[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listPermittedScopes', () => {
+        it('invokes listPermittedScopes without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.innerApiCalls.listPermittedScopes = stubSimpleCall(expectedResponse);
+            const [response] = await client.listPermittedScopes(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermittedScopes without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.innerApiCalls.listPermittedScopes = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listPermittedScopes(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IScope[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermittedScopes with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listPermittedScopes = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listPermittedScopes(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listPermittedScopes as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listPermittedScopesStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.descriptors.page.listPermittedScopes.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listPermittedScopesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Scope[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Scope) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listPermittedScopes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPermittedScopes, request));
+            assert(
+                (client.descriptors.page.listPermittedScopes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listPermittedScopesStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPermittedScopes.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listPermittedScopesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.Scope[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.Scope) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listPermittedScopes.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listPermittedScopes, request));
+            assert(
+                (client.descriptors.page.listPermittedScopes.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listPermittedScopes without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.Scope()),
+            ];
+            client.descriptors.page.listPermittedScopes.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IScope[] = [];
+            const iterable = client.listPermittedScopesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listPermittedScopes with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListPermittedScopesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListPermittedScopesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listPermittedScopes.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listPermittedScopesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IScope[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listMembershipBindings', () => {
+        it('invokes listMembershipBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+            ];
+            client.innerApiCalls.listMembershipBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMembershipBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipBindings without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+            ];
+            client.innerApiCalls.listMembershipBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMembershipBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IMembershipBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMembershipBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMembershipBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipBindingsStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+            ];
+            client.descriptors.page.listMembershipBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMembershipBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.MembershipBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.MembershipBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMembershipBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMembershipBindings, request));
+            assert(
+                (client.descriptors.page.listMembershipBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMembershipBindingsStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMembershipBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMembershipBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.MembershipBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.MembershipBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMembershipBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMembershipBindings, request));
+            assert(
+                (client.descriptors.page.listMembershipBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMembershipBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.MembershipBinding()),
+            ];
+            client.descriptors.page.listMembershipBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IMembershipBinding[] = [];
+            const iterable = client.listMembershipBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMembershipBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMembershipBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMembershipBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMembershipBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMembershipBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IMembershipBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMembershipBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMembershipBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listMembershipRBACRoleBindings', () => {
+        it('invokes listMembershipRBACRoleBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.innerApiCalls.listMembershipRbacRoleBindings = stubSimpleCall(expectedResponse);
+            const [response] = await client.listMembershipRBACRoleBindings(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipRBACRoleBindings without error using callback', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.innerApiCalls.listMembershipRbacRoleBindings = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listMembershipRBACRoleBindings(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.gkehub.v1.IRBACRoleBinding[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipRBACRoleBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listMembershipRbacRoleBindings = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listMembershipRBACRoleBindings(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listMembershipRbacRoleBindings as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listMembershipRBACRoleBindingsStream without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.descriptors.page.listMembershipRBACRoleBindings.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listMembershipRBACRoleBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.RBACRoleBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.RBACRoleBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listMembershipRBACRoleBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMembershipRbacRoleBindings, request));
+            assert(
+                (client.descriptors.page.listMembershipRBACRoleBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listMembershipRBACRoleBindingsStream with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMembershipRBACRoleBindings.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listMembershipRBACRoleBindingsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.gkehub.v1.RBACRoleBinding[] = [];
+                stream.on('data', (response: protos.google.cloud.gkehub.v1.RBACRoleBinding) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listMembershipRBACRoleBindings.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listMembershipRbacRoleBindings, request));
+            assert(
+                (client.descriptors.page.listMembershipRBACRoleBindings.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listMembershipRBACRoleBindings without error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+              generateSampleMessage(new protos.google.cloud.gkehub.v1.RBACRoleBinding()),
+            ];
+            client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.gkehub.v1.IRBACRoleBinding[] = [];
+            const iterable = client.listMembershipRBACRoleBindingsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listMembershipRBACRoleBindings with error', async () => {
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listMembershipRBACRoleBindingsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.gkehub.v1.IRBACRoleBinding[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listMembershipRBACRoleBindings.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('Path templates', () => {
 
         describe('feature', async () => {
@@ -2145,6 +7657,160 @@ describe('v1.GkeHubClient', () => {
             });
         });
 
+        describe('membershipBinding', async () => {
+            const fakePath = "/rendered/path/membershipBinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                membership: "membershipValue",
+                membershipbinding: "membershipbindingValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.membershipBindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.membershipBindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('membershipBindingPath', () => {
+                const result = client.membershipBindingPath("projectValue", "locationValue", "membershipValue", "membershipbindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.membershipBindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromMembershipBindingName', () => {
+                const result = client.matchProjectFromMembershipBindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.membershipBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromMembershipBindingName', () => {
+                const result = client.matchLocationFromMembershipBindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.membershipBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMembershipFromMembershipBindingName', () => {
+                const result = client.matchMembershipFromMembershipBindingName(fakePath);
+                assert.strictEqual(result, "membershipValue");
+                assert((client.pathTemplates.membershipBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMembershipbindingFromMembershipBindingName', () => {
+                const result = client.matchMembershipbindingFromMembershipBindingName(fakePath);
+                assert.strictEqual(result, "membershipbindingValue");
+                assert((client.pathTemplates.membershipBindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('namespace', async () => {
+            const fakePath = "/rendered/path/namespace";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                scope: "scopeValue",
+                namespace: "namespaceValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.namespacePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.namespacePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('namespacePath', () => {
+                const result = client.namespacePath("projectValue", "locationValue", "scopeValue", "namespaceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.namespacePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromNamespaceName', () => {
+                const result = client.matchProjectFromNamespaceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromNamespaceName', () => {
+                const result = client.matchLocationFromNamespaceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchScopeFromNamespaceName', () => {
+                const result = client.matchScopeFromNamespaceName(fakePath);
+                assert.strictEqual(result, "scopeValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchNamespaceFromNamespaceName', () => {
+                const result = client.matchNamespaceFromNamespaceName(fakePath);
+                assert.strictEqual(result, "namespaceValue");
+                assert((client.pathTemplates.namespacePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('organizationLocationFleet', async () => {
+            const fakePath = "/rendered/path/organizationLocationFleet";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                fleet: "fleetValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationFleetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationFleetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationFleetPath', () => {
+                const result = client.organizationLocationFleetPath("organizationValue", "locationValue", "fleetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationFleetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationFleetName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationFleetName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationFleetName', () => {
+                const result = client.matchLocationFromOrganizationLocationFleetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFleetFromOrganizationLocationFleetName', () => {
+                const result = client.matchFleetFromOrganizationLocationFleetName(fakePath);
+                assert.strictEqual(result, "fleetValue");
+                assert((client.pathTemplates.organizationLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -2171,6 +7837,206 @@ describe('v1.GkeHubClient', () => {
                 const result = client.matchProjectFromProjectName(fakePath);
                 assert.strictEqual(result, "projectValue");
                 assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationFleet', async () => {
+            const fakePath = "/rendered/path/projectLocationFleet";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                fleet: "fleetValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationFleetPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationFleetPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationFleetPath', () => {
+                const result = client.projectLocationFleetPath("projectValue", "locationValue", "fleetValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationFleetPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationFleetName', () => {
+                const result = client.matchProjectFromProjectLocationFleetName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationFleetName', () => {
+                const result = client.matchLocationFromProjectLocationFleetName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchFleetFromProjectLocationFleetName', () => {
+                const result = client.matchFleetFromProjectLocationFleetName(fakePath);
+                assert.strictEqual(result, "fleetValue");
+                assert((client.pathTemplates.projectLocationFleetPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationMembershipRbacrolebinding', async () => {
+            const fakePath = "/rendered/path/projectLocationMembershipRbacrolebinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                membership: "membershipValue",
+                rbacrolebinding: "rbacrolebindingValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationMembershipRbacrolebindingPath', () => {
+                const result = client.projectLocationMembershipRbacrolebindingPath("projectValue", "locationValue", "membershipValue", "rbacrolebindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationMembershipRbacrolebindingName', () => {
+                const result = client.matchProjectFromProjectLocationMembershipRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationMembershipRbacrolebindingName', () => {
+                const result = client.matchLocationFromProjectLocationMembershipRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchMembershipFromProjectLocationMembershipRbacrolebindingName', () => {
+                const result = client.matchMembershipFromProjectLocationMembershipRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "membershipValue");
+                assert((client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRbacrolebindingFromProjectLocationMembershipRbacrolebindingName', () => {
+                const result = client.matchRbacrolebindingFromProjectLocationMembershipRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "rbacrolebindingValue");
+                assert((client.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationScopeRbacrolebinding', async () => {
+            const fakePath = "/rendered/path/projectLocationScopeRbacrolebinding";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                scope: "scopeValue",
+                rbacrolebinding: "rbacrolebindingValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationScopeRbacrolebindingPath', () => {
+                const result = client.projectLocationScopeRbacrolebindingPath("projectValue", "locationValue", "scopeValue", "rbacrolebindingValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationScopeRbacrolebindingName', () => {
+                const result = client.matchProjectFromProjectLocationScopeRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationScopeRbacrolebindingName', () => {
+                const result = client.matchLocationFromProjectLocationScopeRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchScopeFromProjectLocationScopeRbacrolebindingName', () => {
+                const result = client.matchScopeFromProjectLocationScopeRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "scopeValue");
+                assert((client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRbacrolebindingFromProjectLocationScopeRbacrolebindingName', () => {
+                const result = client.matchRbacrolebindingFromProjectLocationScopeRbacrolebindingName(fakePath);
+                assert.strictEqual(result, "rbacrolebindingValue");
+                assert((client.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('scope', async () => {
+            const fakePath = "/rendered/path/scope";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                scope: "scopeValue",
+            };
+            const client = new gkehubModule.v1.GkeHubClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.scopePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.scopePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('scopePath', () => {
+                const result = client.scopePath("projectValue", "locationValue", "scopeValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.scopePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromScopeName', () => {
+                const result = client.matchProjectFromScopeName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.scopePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromScopeName', () => {
+                const result = client.matchLocationFromScopeName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.scopePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchScopeFromScopeName', () => {
+                const result = client.matchScopeFromScopeName(fakePath);
+                assert.strictEqual(result, "scopeValue");
+                assert((client.pathTemplates.scopePathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
