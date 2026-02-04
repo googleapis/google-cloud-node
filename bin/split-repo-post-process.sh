@@ -19,7 +19,7 @@ set -e
 LOWER_CODEOWNERS="${PACKAGE_PATH}/.github/CODEOWNERS"
 if [[ -f "${LOWER_CODEOWNERS}" ]]; then
   echo "Found ${LOWER_CODEOWNERS}, extracting owner..."
-  OWNER=$(grep -v '^#' "${LOWER_CODEOWNERS}" | grep '\*' | head -n 1 | awk '{print $NF}')
+  OWNER=$(grep -v '^#' "${LOWER_CODEOWNERS}" | grep '\*' | head -n 1 | awk '{print $2}')
   if [[ ! -z "${OWNER}" ]]; then
     # check if entry already exists
     if ! grep -q "^/${PACKAGE_PATH} " ./.github/CODEOWNERS; then
