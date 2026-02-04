@@ -8,5 +8,3 @@
 # The yoshi-nodejs team is the default owner for nodejs repositories.
 *     @googleapis/cloud-sdk-nodejs-team
 /handwritten/cloud-profiler @googleapis/jsteam
-
-/handwritten/logging-bunyan @googleapis/yoshi-nodejs
