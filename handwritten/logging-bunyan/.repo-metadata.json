@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-logging-bunyan",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/logging-bunyan",
   "api_id": "logging.googleapis.com",
   "codeowner_team": "@googleapis/yoshi-nodejs",

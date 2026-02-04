@@ -3,6 +3,7 @@
   "initial-version": "0.1.0",
   "packages": {
     "handwritten/cloud-profiler": {},
+    "handwritten/logging-bunyan": {},
     "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},
