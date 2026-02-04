@@ -1,3 +1,0 @@
-handleGHRelease: true
-releaseType: node
-extraFiles: ["src/index.ts"]
