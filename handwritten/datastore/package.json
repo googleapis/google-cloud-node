@@ -74,6 +74,7 @@
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
+    "long": "^5.3.2",
     "mocha": "^11.1.0",
     "null-loader": "^4.0.1",
     "p-queue": "^8.1.0",
