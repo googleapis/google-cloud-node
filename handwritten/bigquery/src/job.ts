@@ -595,10 +595,21 @@ class Job extends Operation {
         let rows: any = [];
 
         if (resp.schema && resp.rows) {
-          rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
-            wrapIntegers,
-            parseJSON,
-          });
+          try {
+            /*
+            Without this try/catch block, calls to getRows will hang indefinitely if
+            a call to mergeSchemaWithRows_ fails because the error never makes it to
+            the callback. Instead, pass the error to the callback the user provides
+            so that the user can see the error.
+             */
+            rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
+              wrapIntegers,
+              parseJSON,
+            });
+          } catch (e) {
+            callback!(e as Error, null, null, resp);
+            return;
+          }
         }
 
         let nextQuery: QueryResultsOptions | null = null;

@@ -3397,7 +3397,7 @@ describe('BigQuery', () => {
         },
         jobCreationMode: 'JOB_CREATION_REQUIRED',
         formatOptions: {
-          useInt64Timestamp: true,
+          timestampOutputFormat: 'ISO8601_STRING',
         },
       };
       assert.deepStrictEqual(req, expectedReq);
@@ -3416,7 +3416,7 @@ describe('BigQuery', () => {
         requestId: req.requestId,
         jobCreationMode: 'JOB_CREATION_OPTIONAL',
         formatOptions: {
-          useInt64Timestamp: true,
+          timestampOutputFormat: 'ISO8601_STRING',
         },
       };
       assert.deepStrictEqual(req, expectedReq);
