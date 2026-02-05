@@ -1099,6 +1099,11 @@ export class BigQuery extends Service {
           };
         }),
       };
+    } else if ((providedType as string).toUpperCase() === 'TIMESTAMP(12)') {
+      return {
+        type: 'TIMESTAMP',
+        timestampPrecision: '12',
+      };
     }
 
     providedType = (providedType as string).toUpperCase();
@@ -2249,11 +2254,30 @@ export class BigQuery extends Service {
       if (res && res.jobComplete) {
         let rows: any = [];
         if (res.schema && res.rows) {
-          rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
-            wrapIntegers: options.wrapIntegers || false,
-            parseJSON: options.parseJSON,
-          });
-          delete res.rows;
+          try {
+            /*
+            Without this try/catch block, calls to getRows will hang indefinitely if
+            a call to mergeSchemaWithRows_ fails because the error never makes it to
+            the callback. Instead, pass the error to the callback the user provides
+            so that the user can see the error.
+             */
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const listParams = {
+              'formatOptions.timestampOutputFormat':
+                queryReq.formatOptions?.timestampOutputFormat,
+              'formatOptions.useInt64Timestamp':
+                queryReq.formatOptions?.useInt64Timestamp,
+            };
+            rows = BigQuery.mergeSchemaWithRows_(res.schema, res.rows, {
+              wrapIntegers: options.wrapIntegers || false,
+              parseJSON: options.parseJSON,
+              listParams,
+            });
+            delete res.rows;
+          } catch (e) {
+            (callback as SimpleQueryRowsCallback)(e as Error, null, job);
+            return;
+          }
         }
         this.trace_('[runJobsQuery] job complete');
         options._cachedRows = rows;
@@ -2334,6 +2358,18 @@ export class BigQuery extends Service {
     if (options.job) {
       return undefined;
     }
+    const hasAnyFormatOpts =
+      options['formatOptions.timestampOutputFormat'] !== undefined ||
+      options['formatOptions.useInt64Timestamp'] !== undefined;
+    const defaultOpts = hasAnyFormatOpts
+      ? {}
+      : {
+          timestampOutputFormat: 'ISO8601_STRING',
+        };
+    const formatOptions = extend(defaultOpts, {
+      timestampOutputFormat: options['formatOptions.timestampOutputFormat'],
+      useInt64Timestamp: options['formatOptions.useInt64Timestamp'],
+    });
     const req: bigquery.IQueryRequest = {
       useQueryCache: queryObj.useQueryCache,
       labels: queryObj.labels,
@@ -2342,9 +2378,7 @@ export class BigQuery extends Service {
       maximumBytesBilled: queryObj.maximumBytesBilled,
       timeoutMs: options.timeoutMs,
       location: queryObj.location || options.location,
-      formatOptions: {
-        useInt64Timestamp: true,
-      },
+      formatOptions,
       maxResults: queryObj.maxResults || options.maxResults,
       query: queryObj.query,
       useLegacySql: false,
@@ -2466,6 +2500,59 @@ promisifyAll(BigQuery, {
   ],
 });
 
+function fromStringValue_(value: string): [start: string, end: string] {
+  /*
+   This method returns start and end values for RANGE typed values returned from
+   the server. It decodes the server RANGE value into start and end values so
+   they can be used to construct a BigQueryRange.
+   */
+  let cleanedValue = value;
+  if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
+    cleanedValue = cleanedValue.substring(1);
+  }
+  if (cleanedValue.endsWith(')') || cleanedValue.endsWith(']')) {
+    cleanedValue = cleanedValue.substring(0, cleanedValue.length - 1);
+  }
+  const parts = cleanedValue.split(',');
+  if (parts.length !== 2) {
+    throw new Error(
+        'invalid RANGE. See RANGE literal format docs for more information.',
+    );
+  }
+
+  const [start, end] = parts.map((s: string) => s.trim());
+  return [start, end];
+}
+
+function fromSchemaValue_(value: string, elementType: string, listParams?:
+    | bigquery.tabledata.IListParams
+    | bigquery.jobs.IGetQueryResultsParams
+) {
+  /*
+  This method is only used by convertSchemaFieldValue and only when range
+  values are passed into convertSchemaFieldValue. It produces a value that is
+  delivered to the user for read calls and it needs to pass along listParams
+  to ensure TIMESTAMP types are converted properly.
+  */
+  const [start, end] = fromStringValue_(value);
+  const convertRangeSchemaValue = (value: string) => {
+    if (value === 'UNBOUNDED' || value === 'NULL') {
+      return null;
+    }
+    return convertSchemaFieldValue({type: elementType}, value, {
+      wrapIntegers: false,
+      listParams
+    });
+  };
+  return BigQuery.range(
+      {
+        start: convertRangeSchemaValue(start),
+        end: convertRangeSchemaValue(end),
+      },
+      elementType,
+  );
+}
+
 function convertSchemaFieldValue(
   schemaField: TableField,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2585,10 +2672,11 @@ function convertSchemaFieldValue(
       break;
     }
     case 'RANGE': {
-      value = BigQueryRange.fromSchemaValue_(
+      value = fromSchemaValue_(
         value,
         schemaField.rangeElementType!.type!,
-      );
+        options.listParams // Required to convert TIMESTAMP values
+      )
       break;
     }
     default:
@@ -2666,41 +2754,23 @@ export class BigQueryRange {
   }
 
   private static fromStringValue_(value: string): [start: string, end: string] {
-    let cleanedValue = value;
-    if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
-      cleanedValue = cleanedValue.substring(1);
-    }
-    if (cleanedValue.endsWith(')') || cleanedValue.endsWith(']')) {
-      cleanedValue = cleanedValue.substring(0, cleanedValue.length - 1);
-    }
-    const parts = cleanedValue.split(',');
-    if (parts.length !== 2) {
-      throw new Error(
-        'invalid RANGE. See RANGE literal format docs for more information.',
-      );
-    }
-
-    const [start, end] = parts.map((s: string) => s.trim());
-    return [start, end];
+    /*
+    We moved the internals of fromSchemaValue_ to a method outside of this
+    class, but fromSchemaValue_ calls fromStringValue_ and this fromStringValue_
+    method is private so we needed a fromStringValue_ method outside of this
+    class so it could be accessed by fromSchemaValue_ function.
+     */
+    return fromStringValue_(value);
   }
 
   static fromSchemaValue_(value: string, elementType: string): BigQueryRange {
-    const [start, end] = BigQueryRange.fromStringValue_(value);
-    const convertRangeSchemaValue = (value: string) => {
-      if (value === 'UNBOUNDED' || value === 'NULL') {
-        return null;
-      }
-      return convertSchemaFieldValue({type: elementType}, value, {
-        wrapIntegers: false,
-      });
-    };
-    return BigQuery.range(
-      {
-        start: convertRangeSchemaValue(start),
-        end: convertRangeSchemaValue(end),
-      },
-      elementType,
-    );
+    /*
+    fromSchemaValue_ functionality needs to pass listParams into
+    convertSchemaFieldValue. But we didn't want to add another parameter to this
+    function because it changes the API so the internals of this method were
+    moved to fromSchemaValue_ which now accepts an extra parameter.
+     */
+    return fromSchemaValue_(value, elementType);
   }
 
   private convertElement_(
