@@ -47085,7 +47085,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                           }
                         },
                         "displayName": {
@@ -48861,7 +48862,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
                           }
                         },
                         "createTime": {
