@@ -1,0 +1,15 @@
+{
+  "name": "profiler",
+  "name_pretty": "Cloud Profiler",
+  "product_documentation": "https://cloud.google.com/profiler/docs",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/profiler/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5116474",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/profiler",
+  "api_id": "cloudprofiler.googleapis.com",
+  "codeowner_team": "@googleapis/api-profiler",
+  "api_shortname": "profiler",
+  "library_type": "AGENT"
+}

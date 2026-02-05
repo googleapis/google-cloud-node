@@ -1,0 +1,90 @@
+{
+  "name": "@google-cloud/profiler",
+  "version": "6.0.3",
+  "description": "Adds support for Cloud Profiler to Node.js applications",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/cloud-profiler",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "scripts": {
+    "test": "echo 'skipping tests for time being'",
+    "system-test": "echo 'skipping tests for time being'",
+    "samples-test": "echo 'no sample tests'",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "lint": "gts check",
+    "docs": "jsdoc -c .jsdoc.js",
+    "prelint": "cd samples; npm link ../; npm install",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "license-check": "jsgl --local .",
+    "docs-test": "echo 'skipping tests for time being'",
+    "predocs-test": "npm run docs",
+    "precompile": "gts clean"
+  },
+  "author": {
+    "name": "Google Inc."
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/common": "^5.0.0",
+    "@google-cloud/logging-min": "^11.0.0",
+    "@google-cloud/promisify": "~4.0.0",
+    "@types/console-log-level": "^1.4.0",
+    "@types/semver": "^7.0.0",
+    "console-log-level": "^1.4.0",
+    "delay": "^5.0.0",
+    "extend": "^3.0.2",
+    "gcp-metadata": "^6.0.0",
+    "ms": "^2.1.3",
+    "pprof": "4.0.0",
+    "pretty-ms": "^7.0.0",
+    "protobufjs": "~7.4.0",
+    "semver": "^7.0.0",
+    "teeny-request": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/extend": "^3.0.0",
+    "@types/long": "^5.0.0",
+    "@types/mocha": "^9.0.0",
+    "@types/ms": "^2.1.0",
+    "@types/nock": "^11.0.0",
+    "@types/node": "^20.0.0",
+    "@types/pretty-ms": "^5.0.0",
+    "@types/sinon": "^17.0.0",
+    "@types/tmp": "0.2.6",
+    "c8": "^9.0.0",
+    "codecov": "^3.0.0",
+    "gts": "^5.0.0",
+    "js-green-licenses": "^4.0.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-region-tag": "^3.0.0",
+    "linkinator": "^5.0.0",
+    "long": "^5.3.2",
+    "mocha": "^9.2.2",
+    "nock": "^13.0.0",
+    "sinon": "^18.0.0",
+    "source-map": "^0.7.0",
+    "tmp": "0.2.3",
+    "typescript": "5.1.6"
+  },
+  "files": [
+    "build/src",
+    "build/third_party/cloud-debug-nodejs"
+  ],
+  "nyc": {
+    "exclude": [
+      "build/test",
+      "build/system-test"
+    ]
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler"
+}

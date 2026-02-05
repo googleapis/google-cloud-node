@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ required_envvars+=(
 pass_down_envvars+=(
     "AUTORELEASE_PR"
     "VERSION"
+    "SECRET_MANAGER_KEYS"
+    "TRAMPOLINE_BUILD_FILE"
 )
 
 # Prevent unintentional override on the default image.
@@ -49,4 +51,4 @@ if [[ -z "${TRAMPOLINE_BUILD_FILE:-}" ]]; then
 fi
 
 # Secret Manager secrets.
-source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh
+source ${PROJECT_ROOT}/handwritten/bigquery/.kokoro/populate-secrets.sh

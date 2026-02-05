@@ -40,6 +40,5 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   ".github/workflows/ci.yaml,.github/workflows/issues-no-repro.yaml,.github/workflows/response.yaml,SECURITY.md,renovate.json" \
   ".github/.OwlBot.yaml,system-test/test/quickstart.js,system-test/test/quickstart.test.js"
  
-# run the script to update the split repo and either delete all the samples or just update the README
-${SCRIPT_DIR}/delete-everything-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"
+
 ${SCRIPT_DIR}/update-readme-only-split-repo.sh "${SPLIT_REPO}" "${ARTIFACT_NAME}"

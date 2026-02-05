@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "characters",
+  "namespace": "com.example.avro.characters",
+  "fields": [
+    {"type":"string","name":"Name"},
+    {"type":"long","name":"Age"},
+    {"type":"double","name":"Weight"},
+    {"type":"boolean","name":"IsMagic"}
+  ],
+  "doc": "A list of fantasy characters."
+}

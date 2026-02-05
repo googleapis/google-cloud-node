@@ -1,0 +1,1 @@
+{"installed":{"client_id":"my_client_id","project_id":"my_project","auth_uri":"my_uri","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"my_url","client_secret":"my_secret","redirect_uris":["http://localhost","http://localhost:3000/oauth2callback"]}}

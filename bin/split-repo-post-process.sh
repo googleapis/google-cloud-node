@@ -19,7 +19,7 @@ set -e
 LOWER_CODEOWNERS="${PACKAGE_PATH}/.github/CODEOWNERS"
 if [[ -f "${LOWER_CODEOWNERS}" ]]; then
   echo "Found ${LOWER_CODEOWNERS}, extracting owner..."
-  OWNER=$(grep -v '^#' "${LOWER_CODEOWNERS}" | grep '\*' | head -n 1 | awk '{print $NF}')
+  OWNER=$(grep -v '^#' "${LOWER_CODEOWNERS}" | grep '\*' | head -n 1 | awk '{print $2}')
   if [[ ! -z "${OWNER}" ]]; then
     # check if entry already exists
     if ! grep -q "^/${PACKAGE_PATH} " ./.github/CODEOWNERS; then
@@ -140,6 +140,11 @@ if [ -d "${PACKAGE_PATH}/.kokoro" ]; then
 
     if [ -n "${TRAMPOLINE_SCRIPT}" ]; then
         echo "Found trampoline script: ${TRAMPOLINE_SCRIPT}. Patching it."
+        echo "Adding package path to PROJECT_ROOT in ${TRAMPOLINE_SCRIPT}"
+        # Modify the PROJECT_ROOT definition for CI builds
+        gsed -i "s|PROJECT_ROOT=\"\$(repo_root \"\${PROGRAM_DIR}\")\"|PROJECT_ROOT=\"\$(repo_root \"\${PROGRAM_DIR}\")/${PACKAGE_PATH}\"|g" "${TRAMPOLINE_SCRIPT}"
+        # Modify the PROJECT_ROOT definition for non-CI builds
+        gsed -i "s|PROJECT_ROOT=\"\$(repo_root \$(pwd))\"|PROJECT_ROOT=\"\$(repo_root \$(pwd))/${PACKAGE_PATH}\"|g" "${TRAMPOLINE_SCRIPT}"
 # Diff check:
         cat << EOF > conditional_check_logic.sh
 
@@ -165,9 +170,9 @@ fi
 EOF
         # Insert the check after 'cd "${PROJECT_ROOT}"' (standard v2) or at the top of the file (v1/legacy).
         if grep -q 'cd "${PROJECT_ROOT}"' "${TRAMPOLINE_SCRIPT}"; then
-             sed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+             gsed -i '/cd "${PROJECT_ROOT}"/r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
         else
-             sed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
+             gsed -i '2r conditional_check_logic.sh' "${TRAMPOLINE_SCRIPT}"
         fi
         rm conditional_check_logic.sh
     else
