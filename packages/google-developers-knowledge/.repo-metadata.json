@@ -1,0 +1,17 @@
+{
+  "name": "developerknowledge",
+  "name_pretty": "Developer Knowledge API",
+  "product_documentation": "https://developers.google.com/knowledge",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/developerknowledge/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/knowledge",
+  "api_id": "developerknowledge.googleapis.com",
+  "default_version": "v1alpha",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "developerknowledge"
+}
+
