@@ -1,0 +1,159 @@
+// Copyright 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import {packNTest} from 'pack-n-play';
+import {describe, it} from 'mocha';
+
+describe('pack-n-play', () => {
+  const TS_CODE_SAMPLES = [
+    {
+      ts: `import * as loggingWinston from '@google-cloud/logging-winston';
+new loggingWinston.LoggingWinston();`,
+      description: 'imports the module using * syntax',
+      dependencies: ['winston'],
+      devDependencies: ['@types/winston', 'typescript@5'],
+    },
+    {
+      ts: `import {LoggingWinston} from '@google-cloud/logging-winston';
+new LoggingWinston();`,
+      description: 'imports the module with {} syntax',
+      dependencies: ['winston'],
+      devDependencies: ['@types/winston', 'typescript@5'],
+    },
+    {
+      ts: `import {LoggingWinston} from '@google-cloud/logging-winston';
+new LoggingWinston({
+  serviceContext: {
+    service: 'some service'
+  }
+});`,
+      description:
+        'imports the module and starts with a partial `serviceContext`',
+      dependencies: ['winston'],
+      devDependencies: ['@types/winston', 'typescript@5'],
+    },
+    {
+      ts: `import {LoggingWinston} from '@google-cloud/logging-winston';
+new LoggingWinston({
+  projectId: 'some-project',
+  serviceContext: {
+    service: 'Some service',
+    version: 'Some version'
+  }
+});`,
+      description:
+        'imports the module and starts with a complete `serviceContext`',
+      dependencies: ['winston'],
+      devDependencies: ['@types/winston', 'typescript@5'],
+    },
+
+    {
+      ts: `import {LoggingWinston} from '@google-cloud/logging-winston';
+    import * as winston from 'winston';
+const loggingWinston = new LoggingWinston({
+  prefix: 'some-prefix',
+  labels: {
+    env: 'local',
+    name: 'some-name',
+    version: 'some-version'
+  }
+});
+
+winston.createLogger({transports:[loggingWinston]})
+`,
+      description: 'imports the module with a prefix and labels specified',
+      dependencies: ['winston'],
+      devDependencies: ['typescript@5'],
+    },
+    {
+      ts: `import { LoggingWinston } from '@google-cloud/logging-winston';
+    import * as winston from 'winston';
+
+    winston.createLogger({
+      transports: [
+        new LoggingWinston(),
+      ],
+    });`,
+      description: 'imports transport-stream correctly',
+      dependencies: ['winston', 'winston-transport'],
+      devDependencies: [],
+    },
+  ];
+
+  const JS_CODE_SAMPLES = [
+    {
+      js: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+new LoggingWinston();`,
+      description: 'requires the module using Node 4+ syntax',
+      dependencies: ['winston'],
+      devDependencies: [],
+    },
+    {
+      js: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+new LoggingWinston({
+  serviceContext: {
+    service: 'some service'
+  }
+});`,
+      description:
+        'requires the module and starts with a partial `serviceContext`',
+      dependencies: ['winston'],
+      devDependencies: [],
+    },
+    {
+      js: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+new LoggingWinston({
+  projectId: 'some-project',
+  serviceContext: {
+    service: 'Some service',
+    version: 'Some version'
+  }
+});`,
+      description:
+        'requires the module and starts with a complete `serviceContext`',
+      dependencies: ['winston'],
+      devDependencies: [],
+    },
+    {
+      js: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+new LoggingWinston({
+  prefix: 'some-prefix',
+  labels: {
+    env: 'local',
+    name: 'some-name',
+    version: 'some-version'
+  }
+});`,
+      description: 'imports the module with a prefix and labels specified',
+      dependencies: ['winston'],
+      devDependencies: [],
+    },
+  ];
+
+  TS_CODE_SAMPLES.forEach(sample => {
+    it(sample.description, async () => {
+      await packNTest({
+        sample,
+      });
+    }).timeout(2 * 60 * 1000);
+  });
+
+  JS_CODE_SAMPLES.forEach(sample => {
+    it(sample.description, async () => {
+      await packNTest({
+        sample,
+      });
+    }).timeout(2 * 60 * 1000);
+  });
+});
