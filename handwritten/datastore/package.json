@@ -14,7 +14,11 @@
     "google datastore",
     "datastore"
   ],
-  "repository": "googleapis/nodejs-datastore",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/datastore",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC.",
   "main": "build/src/index.js",
@@ -82,5 +86,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore"
 }

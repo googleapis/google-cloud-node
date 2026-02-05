@@ -10,3 +10,4 @@
 /handwritten/bigquery @googleapis/api-bigquery
 /handwritten/cloud-profiler @googleapis/api-profiler
 
+/handwritten/datastore @googleapis/cloud-native-db-dpes

@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559768",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-datastore",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/datastore",
   "api_id": "datastore.googleapis.com",
   "codeowner_team": "@googleapis/cloud-native-db-dpes @googleapis/api-datastore-sdk",
