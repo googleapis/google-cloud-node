@@ -246,13 +246,33 @@ function repo_root() {
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     PROGRAM_PATH="$(realpath "$0")"
     PROGRAM_DIR="$(dirname "${PROGRAM_PATH}")"
-    PROJECT_ROOT="$(repo_root "${PROGRAM_DIR}")"
+    PROJECT_ROOT="$(repo_root "${PROGRAM_DIR}")/handwritten/error-reporting"
 else
-    PROJECT_ROOT="$(repo_root $(pwd))"
+    PROJECT_ROOT="$(repo_root $(pwd))/handwritten/error-reporting"
 fi
 
 log_yellow "Changing to the project root: ${PROJECT_ROOT}."
 cd "${PROJECT_ROOT}"
+
+# Auto-injected conditional check
+# Check if the package directory has changes. If not, skip tests.
+if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
+    # The package path is hardcoded during migration
+    RELATIVE_PKG_PATH="handwritten/error-reporting"
+    
+    echo "Checking for changes in ${RELATIVE_PKG_PATH}..."
+    
+    # Determine the diff range based on the CI system/event
+    # Safe default: HEAD~1..HEAD
+    DIFF_RANGE="HEAD~1..HEAD"
+
+    if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
+        echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
+        exit 0
+    else
+        echo "Changes detected in ${RELATIVE_PKG_PATH}. Proceeding with tests."
+    fi
+fi
 
 # To support relative path for `TRAMPOLINE_SERVICE_ACCOUNT`, we need
 # to use this environment variable in `PROJECT_ROOT`.

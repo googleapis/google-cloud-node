@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-error-reporting",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/error-reporting",
   "api_id": "clouderrorreporting.googleapis.com",
   "codeowner_team": "@googleapis/yoshi-nodejs",

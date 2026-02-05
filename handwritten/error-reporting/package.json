@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-error-reporting",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/error-reporting",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "files": [
@@ -68,5 +72,6 @@
   },
   "overrides": {
     "undici": "5.28.4"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/error-reporting"
 }
