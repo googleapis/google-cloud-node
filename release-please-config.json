@@ -6,6 +6,7 @@
     "handwritten/cloud-profiler": {},
     "handwritten/datastore": {},
     "handwritten/logging-winston": {},
+    "handwritten/logging-bunyan": {},
     "packages/gapic-node-processing": {},
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},
