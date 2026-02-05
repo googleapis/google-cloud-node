@@ -17,7 +17,7 @@ Storage Control API client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
-* [Storage Control API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/control/latest)
+* [Storage Control API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/storage-control/latest)
 * [Storage Control API Documentation](https://cloud.google.com/storage/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
