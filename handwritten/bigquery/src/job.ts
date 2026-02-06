@@ -597,10 +597,10 @@ class Job extends Operation {
         if (resp.schema && resp.rows) {
           try {
             /*
-            Without this try/catch block, calls to getRows will hang indefinitely if
-            a call to mergeSchemaWithRows_ fails because the error never makes it to
-            the callback. Instead, pass the error to the callback the user provides
-            so that the user can see the error.
+            Without this try/catch block, calls to /query endpoint will hang
+            indefinitely if a call to mergeSchemaWithRows_ fails because the
+            error never makes it to the callback. Instead, pass the error to the
+            callback the user provides so that the user can see the error.
              */
             rows = BigQuery.mergeSchemaWithRows_(resp.schema, resp.rows, {
               wrapIntegers,
