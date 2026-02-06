@@ -19,7 +19,7 @@ import {BigQuery} from '../src';
 describe('High Precision Query System Tests', () => {
   let bigquery: BigQuery;
   const expectedTsValueMicroseconds = '2023-01-01T12:00:00.123456000Z';
-  const expectedTsValueNanoseconds = '2023-01-01T12:00:00.123456789123Z';
+  const expectedTsValuePicoseconds = '2023-01-01T12:00:00.123456789123Z';
   const expectedErrorMessage =
     'Cannot specify both timestamp_as_int and timestamp_output_format.';
 
@@ -76,13 +76,13 @@ describe('High Precision Query System Tests', () => {
       name: 'TOF: ISO8601_STRING, UI64: false',
       timestampOutputFormat: 'ISO8601_STRING',
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
     {
       name: 'TOF: omitted, UI64: omitted (default INT64)',
       timestampOutputFormat: undefined,
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
     {
       name: 'TOF: omitted, UI64: true',
@@ -118,7 +118,7 @@ describe('High Precision Query System Tests', () => {
       name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
       timestampOutputFormat: 'ISO8601_STRING',
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
   ];
 
