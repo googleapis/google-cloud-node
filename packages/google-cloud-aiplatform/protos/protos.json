@@ -81303,6 +81303,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "maxConcurrentActiveRunCount": {
+                          "type": "int64",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "allowQueueing": {
                           "type": "bool",
                           "id": 12,

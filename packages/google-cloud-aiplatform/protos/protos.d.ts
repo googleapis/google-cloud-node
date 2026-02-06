@@ -301220,6 +301220,9 @@ export namespace google {
                     /** Schedule maxConcurrentRunCount */
                     maxConcurrentRunCount?: (number|Long|string|null);
 
+                    /** Schedule maxConcurrentActiveRunCount */
+                    maxConcurrentActiveRunCount?: (number|Long|string|null);
+
                     /** Schedule allowQueueing */
                     allowQueueing?: (boolean|null);
 
@@ -301289,6 +301292,9 @@ export namespace google {
 
                     /** Schedule maxConcurrentRunCount. */
                     public maxConcurrentRunCount: (number|Long|string);
+
+                    /** Schedule maxConcurrentActiveRunCount. */
+                    public maxConcurrentActiveRunCount: (number|Long|string);
 
                     /** Schedule allowQueueing. */
                     public allowQueueing: boolean;
