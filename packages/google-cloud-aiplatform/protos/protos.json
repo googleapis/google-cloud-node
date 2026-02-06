@@ -39483,7 +39483,8 @@
                             "source": {
                               "oneof": [
                                 "gcsSource",
-                                "bigquerySource"
+                                "bigquerySource",
+                                "vertexMultimodalDatasetSource"
                               ]
                             }
                           },
@@ -39495,6 +39496,10 @@
                             "bigquerySource": {
                               "type": "BigQuerySource",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetSource": {
+                              "type": "VertexMultimodalDatasetSource",
+                              "id": 4
                             },
                             "instancesFormat": {
                               "type": "string",
@@ -39532,7 +39537,8 @@
                             "destination": {
                               "oneof": [
                                 "gcsDestination",
-                                "bigqueryDestination"
+                                "bigqueryDestination",
+                                "vertexMultimodalDatasetDestination"
                               ]
                             }
                           },
@@ -39544,6 +39550,10 @@
                             "bigqueryDestination": {
                               "type": "BigQueryDestination",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetDestination": {
+                              "type": "VertexMultimodalDatasetDestination",
+                              "id": 6
                             },
                             "predictionsFormat": {
                               "type": "string",
@@ -39559,7 +39569,8 @@
                             "outputLocation": {
                               "oneof": [
                                 "gcsOutputDirectory",
-                                "bigqueryOutputDataset"
+                                "bigqueryOutputDataset",
+                                "vertexMultimodalDatasetName"
                               ]
                             }
                           },
@@ -39576,6 +39587,14 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vertexMultimodalDatasetName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                               }
                             },
                             "bigqueryOutputTable": {
@@ -40354,6 +40373,36 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetSource": {
+                      "fields": {
+                        "datasetName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetDestination": {
+                      "fields": {
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
