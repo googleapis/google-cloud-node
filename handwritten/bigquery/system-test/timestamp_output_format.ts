@@ -35,7 +35,7 @@ describe('Timestamp Output Format System Tests', () => {
   const table = dataset.table(tableId);
   const insertedTsValue = '2023-01-01T12:00:00.123456789123Z';
   const expectedTsValueMicroseconds = '2023-01-01T12:00:00.123456000Z';
-  const expectedTsValueNanoseconds = '2023-01-01T12:00:00.123456789123Z';
+  const expectedTsValuePicoseconds = '2023-01-01T12:00:00.123456789123Z';
 
   before(async () => {
     await dataset.create();
@@ -103,14 +103,14 @@ describe('Timestamp Output Format System Tests', () => {
       name: 'should call getRows with ISO8601_STRING and useInt64Timestamp=false',
       timestampOutputFormat: 'ISO8601_STRING',
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
     // Additional test cases for undefined combinations
     {
       name: 'should call getRows with timestampOutputFormat undefined and useInt64Timestamp undefined',
       timestampOutputFormat: undefined,
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
     {
       name: 'should call getRows with timestampOutputFormat undefined and useInt64Timestamp=true',
@@ -146,7 +146,7 @@ describe('Timestamp Output Format System Tests', () => {
       name: 'should call getRows with ISO8601_STRING and useInt64Timestamp undefined (expect error)',
       timestampOutputFormat: 'ISO8601_STRING',
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueNanoseconds,
+      expectedTsValue: expectedTsValuePicoseconds,
     },
   ];
 
