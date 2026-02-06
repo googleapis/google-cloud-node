@@ -37,6 +37,10 @@ function main(challenge, tpmAttestation) {
    */
   // const sevSnpAttestation = {}
   /**
+   *  Optional. An Nvidia attestation report for GPU and NVSwitch devices.
+   */
+  // const nvidiaAttestation = {}
+  /**
    *  Required. The name of the Challenge whose nonce was used to generate the
    *  attestation, in the format `projects/* /locations/* /challenges/*`. The
    *  provided Challenge will be consumed, and cannot be used again.
