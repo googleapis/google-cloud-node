@@ -1070,6 +1070,9 @@ export namespace google {
                         /** InputConfig bigquerySource */
                         bigquerySource?: (google.cloud.aiplatform.v1.IBigQuerySource|null);
 
+                        /** InputConfig vertexMultimodalDatasetSource */
+                        vertexMultimodalDatasetSource?: (google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource|null);
+
                         /** InputConfig instancesFormat */
                         instancesFormat?: (string|null);
                     }
@@ -1089,11 +1092,14 @@ export namespace google {
                         /** InputConfig bigquerySource. */
                         public bigquerySource?: (google.cloud.aiplatform.v1.IBigQuerySource|null);
 
+                        /** InputConfig vertexMultimodalDatasetSource. */
+                        public vertexMultimodalDatasetSource?: (google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource|null);
+
                         /** InputConfig instancesFormat. */
                         public instancesFormat: string;
 
                         /** InputConfig source. */
-                        public source?: ("gcsSource"|"bigquerySource");
+                        public source?: ("gcsSource"|"bigquerySource"|"vertexMultimodalDatasetSource");
 
                         /**
                          * Creates a new InputConfig instance using the specified properties.
@@ -1297,6 +1303,9 @@ export namespace google {
                         /** OutputConfig bigqueryDestination */
                         bigqueryDestination?: (google.cloud.aiplatform.v1.IBigQueryDestination|null);
 
+                        /** OutputConfig vertexMultimodalDatasetDestination */
+                        vertexMultimodalDatasetDestination?: (google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination|null);
+
                         /** OutputConfig predictionsFormat */
                         predictionsFormat?: (string|null);
                     }
@@ -1316,11 +1325,14 @@ export namespace google {
                         /** OutputConfig bigqueryDestination. */
                         public bigqueryDestination?: (google.cloud.aiplatform.v1.IBigQueryDestination|null);
 
+                        /** OutputConfig vertexMultimodalDatasetDestination. */
+                        public vertexMultimodalDatasetDestination?: (google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination|null);
+
                         /** OutputConfig predictionsFormat. */
                         public predictionsFormat: string;
 
                         /** OutputConfig destination. */
-                        public destination?: ("gcsDestination"|"bigqueryDestination");
+                        public destination?: ("gcsDestination"|"bigqueryDestination"|"vertexMultimodalDatasetDestination");
 
                         /**
                          * Creates a new OutputConfig instance using the specified properties.
@@ -1409,6 +1421,9 @@ export namespace google {
                         /** OutputInfo bigqueryOutputDataset */
                         bigqueryOutputDataset?: (string|null);
 
+                        /** OutputInfo vertexMultimodalDatasetName */
+                        vertexMultimodalDatasetName?: (string|null);
+
                         /** OutputInfo bigqueryOutputTable */
                         bigqueryOutputTable?: (string|null);
                     }
@@ -1428,11 +1443,14 @@ export namespace google {
                         /** OutputInfo bigqueryOutputDataset. */
                         public bigqueryOutputDataset?: (string|null);
 
+                        /** OutputInfo vertexMultimodalDatasetName. */
+                        public vertexMultimodalDatasetName?: (string|null);
+
                         /** OutputInfo bigqueryOutputTable. */
                         public bigqueryOutputTable: string;
 
                         /** OutputInfo outputLocation. */
-                        public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset");
+                        public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset"|"vertexMultimodalDatasetName");
 
                         /**
                          * Creates a new OutputInfo instance using the specified properties.
@@ -5286,6 +5304,206 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BigQueryDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexMultimodalDatasetSource. */
+                interface IVertexMultimodalDatasetSource {
+
+                    /** VertexMultimodalDatasetSource datasetName */
+                    datasetName?: (string|null);
+                }
+
+                /** Represents a VertexMultimodalDatasetSource. */
+                class VertexMultimodalDatasetSource implements IVertexMultimodalDatasetSource {
+
+                    /**
+                     * Constructs a new VertexMultimodalDatasetSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource);
+
+                    /** VertexMultimodalDatasetSource datasetName. */
+                    public datasetName: string;
+
+                    /**
+                     * Creates a new VertexMultimodalDatasetSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexMultimodalDatasetSource instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource): google.cloud.aiplatform.v1.VertexMultimodalDatasetSource;
+
+                    /**
+                     * Encodes the specified VertexMultimodalDatasetSource message. Does not implicitly {@link google.cloud.aiplatform.v1.VertexMultimodalDatasetSource.verify|verify} messages.
+                     * @param message VertexMultimodalDatasetSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexMultimodalDatasetSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.VertexMultimodalDatasetSource.verify|verify} messages.
+                     * @param message VertexMultimodalDatasetSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IVertexMultimodalDatasetSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexMultimodalDatasetSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexMultimodalDatasetSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.VertexMultimodalDatasetSource;
+
+                    /**
+                     * Decodes a VertexMultimodalDatasetSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexMultimodalDatasetSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.VertexMultimodalDatasetSource;
+
+                    /**
+                     * Verifies a VertexMultimodalDatasetSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexMultimodalDatasetSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexMultimodalDatasetSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.VertexMultimodalDatasetSource;
+
+                    /**
+                     * Creates a plain object from a VertexMultimodalDatasetSource message. Also converts values to other types if specified.
+                     * @param message VertexMultimodalDatasetSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.VertexMultimodalDatasetSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexMultimodalDatasetSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexMultimodalDatasetSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexMultimodalDatasetDestination. */
+                interface IVertexMultimodalDatasetDestination {
+
+                    /** VertexMultimodalDatasetDestination bigqueryDestination */
+                    bigqueryDestination?: (google.cloud.aiplatform.v1.IBigQueryDestination|null);
+
+                    /** VertexMultimodalDatasetDestination displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a VertexMultimodalDatasetDestination. */
+                class VertexMultimodalDatasetDestination implements IVertexMultimodalDatasetDestination {
+
+                    /**
+                     * Constructs a new VertexMultimodalDatasetDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination);
+
+                    /** VertexMultimodalDatasetDestination bigqueryDestination. */
+                    public bigqueryDestination?: (google.cloud.aiplatform.v1.IBigQueryDestination|null);
+
+                    /** VertexMultimodalDatasetDestination displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new VertexMultimodalDatasetDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexMultimodalDatasetDestination instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination): google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination;
+
+                    /**
+                     * Encodes the specified VertexMultimodalDatasetDestination message. Does not implicitly {@link google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination.verify|verify} messages.
+                     * @param message VertexMultimodalDatasetDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexMultimodalDatasetDestination message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination.verify|verify} messages.
+                     * @param message VertexMultimodalDatasetDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IVertexMultimodalDatasetDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexMultimodalDatasetDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexMultimodalDatasetDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination;
+
+                    /**
+                     * Decodes a VertexMultimodalDatasetDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexMultimodalDatasetDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination;
+
+                    /**
+                     * Verifies a VertexMultimodalDatasetDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexMultimodalDatasetDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexMultimodalDatasetDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination;
+
+                    /**
+                     * Creates a plain object from a VertexMultimodalDatasetDestination message. Also converts values to other types if specified.
+                     * @param message VertexMultimodalDatasetDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.VertexMultimodalDatasetDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexMultimodalDatasetDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexMultimodalDatasetDestination
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
