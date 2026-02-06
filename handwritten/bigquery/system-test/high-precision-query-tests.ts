@@ -18,7 +18,7 @@ import {BigQuery} from '../src';
 
 describe('High Precision Query System Tests', () => {
   let bigquery: BigQuery;
-  const expectedTsValueMicroseconds = '2023-01-01T12:00:00.123456000Z';
+  const expectedTsValueNanoseconds = '2023-01-01T12:00:00.123456000Z';
   const expectedTsValuePicoseconds = '2023-01-01T12:00:00.123456789123Z';
   const expectedErrorMessage =
     'Cannot specify both timestamp_as_int and timestamp_output_format.';
@@ -32,13 +32,13 @@ describe('High Precision Query System Tests', () => {
       name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
       timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
       useInt64Timestamp: true,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
       timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: FLOAT64, UI64: true (error)',
@@ -51,19 +51,19 @@ describe('High Precision Query System Tests', () => {
       name: 'TOF: FLOAT64, UI64: false',
       timestampOutputFormat: 'FLOAT64',
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: INT64, UI64: true',
       timestampOutputFormat: 'INT64',
       useInt64Timestamp: true,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: INT64, UI64: false (error)',
       timestampOutputFormat: 'INT64',
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: ISO8601_STRING, UI64: true (error)',
@@ -88,31 +88,31 @@ describe('High Precision Query System Tests', () => {
       name: 'TOF: omitted, UI64: true',
       timestampOutputFormat: undefined,
       useInt64Timestamp: true,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
       timestampOutputFormat: undefined,
       useInt64Timestamp: false,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default INT64)',
       timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: FLOAT64, UI64: omitted (error)',
       timestampOutputFormat: 'FLOAT64',
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: INT64, UI64: omitted',
       timestampOutputFormat: 'INT64',
       useInt64Timestamp: undefined,
-      expectedTsValue: expectedTsValueMicroseconds,
+      expectedTsValue: expectedTsValueNanoseconds,
     },
     {
       name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
