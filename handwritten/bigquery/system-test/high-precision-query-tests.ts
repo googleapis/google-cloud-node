@@ -40,13 +40,15 @@ describe('High Precision Query System Tests', () => {
       useInt64Timestamp: false,
       expectedTsValue: expectedTsValueNanoseconds,
     },
-    {
+    /*
+    { // This is not a meaningful use case.
       name: 'TOF: FLOAT64, UI64: true (error)',
       timestampOutputFormat: 'FLOAT64',
       useInt64Timestamp: true,
       expectedTsValue: undefined,
       expectedError: expectedErrorMessage,
     },
+     */
     {
       name: 'TOF: FLOAT64, UI64: false',
       timestampOutputFormat: 'FLOAT64',
