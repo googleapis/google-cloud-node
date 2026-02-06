@@ -296,6 +296,58 @@
       }
     },
     {
+      "regionTag": "storage_v2_generated_StorageControl_DeleteFolderRecursive_async",
+      "title": "StorageControl deleteFolderRecursive Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a folder recursively. This operation is only applicable to a hierarchical namespace enabled bucket.",
+      "canonical": true,
+      "file": "storage_control.delete_folder_recursive.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFolderRecursive",
+        "fullName": "google.storage.control.v2.StorageControl.DeleteFolderRecursive",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "if_metageneration_match",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "if_metageneration_not_match",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "StorageControlClient",
+          "fullName": "google.storage.control.v2.StorageControlClient"
+        },
+        "method": {
+          "shortName": "DeleteFolderRecursive",
+          "fullName": "google.storage.control.v2.StorageControl.DeleteFolderRecursive",
+          "service": {
+            "shortName": "StorageControl",
+            "fullName": "google.storage.control.v2.StorageControl"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "storage_v2_generated_StorageControl_GetStorageLayout_async",
       "title": "StorageControl getStorageLayout Sample",
       "origin": "API_DEFINITION",

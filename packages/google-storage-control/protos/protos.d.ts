@@ -117,6 +117,20 @@ export namespace google {
                     public renameFolder(request: google.storage.control.v2.IRenameFolderRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls DeleteFolderRecursive.
+                     * @param request DeleteFolderRecursiveRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteFolderRecursive(request: google.storage.control.v2.IDeleteFolderRecursiveRequest, callback: google.storage.control.v2.StorageControl.DeleteFolderRecursiveCallback): void;
+
+                    /**
+                     * Calls DeleteFolderRecursive.
+                     * @param request DeleteFolderRecursiveRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFolderRecursive(request: google.storage.control.v2.IDeleteFolderRecursiveRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetStorageLayout.
                      * @param request GetStorageLayoutRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and StorageLayout
@@ -447,6 +461,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RenameFolderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.storage.control.v2.StorageControl|deleteFolderRecursive}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteFolderRecursiveCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.storage.control.v2.StorageControl|getStorageLayout}.
@@ -1528,6 +1549,121 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DeleteFolderRecursiveRequest. */
+                interface IDeleteFolderRecursiveRequest {
+
+                    /** DeleteFolderRecursiveRequest name */
+                    name?: (string|null);
+
+                    /** DeleteFolderRecursiveRequest ifMetagenerationMatch */
+                    ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** DeleteFolderRecursiveRequest ifMetagenerationNotMatch */
+                    ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** DeleteFolderRecursiveRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteFolderRecursiveRequest. */
+                class DeleteFolderRecursiveRequest implements IDeleteFolderRecursiveRequest {
+
+                    /**
+                     * Constructs a new DeleteFolderRecursiveRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDeleteFolderRecursiveRequest);
+
+                    /** DeleteFolderRecursiveRequest name. */
+                    public name: string;
+
+                    /** DeleteFolderRecursiveRequest ifMetagenerationMatch. */
+                    public ifMetagenerationMatch?: (number|Long|string|null);
+
+                    /** DeleteFolderRecursiveRequest ifMetagenerationNotMatch. */
+                    public ifMetagenerationNotMatch?: (number|Long|string|null);
+
+                    /** DeleteFolderRecursiveRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteFolderRecursiveRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFolderRecursiveRequest instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDeleteFolderRecursiveRequest): google.storage.control.v2.DeleteFolderRecursiveRequest;
+
+                    /**
+                     * Encodes the specified DeleteFolderRecursiveRequest message. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveRequest.verify|verify} messages.
+                     * @param message DeleteFolderRecursiveRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDeleteFolderRecursiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFolderRecursiveRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveRequest.verify|verify} messages.
+                     * @param message DeleteFolderRecursiveRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDeleteFolderRecursiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFolderRecursiveRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFolderRecursiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DeleteFolderRecursiveRequest;
+
+                    /**
+                     * Decodes a DeleteFolderRecursiveRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFolderRecursiveRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DeleteFolderRecursiveRequest;
+
+                    /**
+                     * Verifies a DeleteFolderRecursiveRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFolderRecursiveRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFolderRecursiveRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DeleteFolderRecursiveRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFolderRecursiveRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFolderRecursiveRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DeleteFolderRecursiveRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFolderRecursiveRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFolderRecursiveRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CommonLongRunningOperationMetadata. */
                 interface ICommonLongRunningOperationMetadata {
 
@@ -1758,6 +1894,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RenameFolderMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFolderRecursiveMetadata. */
+                interface IDeleteFolderRecursiveMetadata {
+
+                    /** DeleteFolderRecursiveMetadata commonMetadata */
+                    commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** DeleteFolderRecursiveMetadata folderId */
+                    folderId?: (string|null);
+                }
+
+                /** Represents a DeleteFolderRecursiveMetadata. */
+                class DeleteFolderRecursiveMetadata implements IDeleteFolderRecursiveMetadata {
+
+                    /**
+                     * Constructs a new DeleteFolderRecursiveMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storage.control.v2.IDeleteFolderRecursiveMetadata);
+
+                    /** DeleteFolderRecursiveMetadata commonMetadata. */
+                    public commonMetadata?: (google.storage.control.v2.ICommonLongRunningOperationMetadata|null);
+
+                    /** DeleteFolderRecursiveMetadata folderId. */
+                    public folderId: string;
+
+                    /**
+                     * Creates a new DeleteFolderRecursiveMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFolderRecursiveMetadata instance
+                     */
+                    public static create(properties?: google.storage.control.v2.IDeleteFolderRecursiveMetadata): google.storage.control.v2.DeleteFolderRecursiveMetadata;
+
+                    /**
+                     * Encodes the specified DeleteFolderRecursiveMetadata message. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveMetadata.verify|verify} messages.
+                     * @param message DeleteFolderRecursiveMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storage.control.v2.IDeleteFolderRecursiveMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFolderRecursiveMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveMetadata.verify|verify} messages.
+                     * @param message DeleteFolderRecursiveMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storage.control.v2.IDeleteFolderRecursiveMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFolderRecursiveMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFolderRecursiveMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.control.v2.DeleteFolderRecursiveMetadata;
+
+                    /**
+                     * Decodes a DeleteFolderRecursiveMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFolderRecursiveMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.control.v2.DeleteFolderRecursiveMetadata;
+
+                    /**
+                     * Verifies a DeleteFolderRecursiveMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFolderRecursiveMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFolderRecursiveMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storage.control.v2.DeleteFolderRecursiveMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteFolderRecursiveMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteFolderRecursiveMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storage.control.v2.DeleteFolderRecursiveMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFolderRecursiveMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFolderRecursiveMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
