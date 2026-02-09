@@ -3403,6 +3403,135 @@ describe('BigQuery', () => {
       assert.deepStrictEqual(req, expectedReq);
     });
 
+    describe('format options', () => {
+      const testCases = [
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
+          timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+          useInt64Timestamp: true,
+        },
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
+          timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+          useInt64Timestamp: false,
+        },
+        {
+          name: 'TOF: FLOAT64, UI64: false',
+          timestampOutputFormat: 'FLOAT64',
+          useInt64Timestamp: false,
+        },
+        {
+          name: 'TOF: INT64, UI64: true',
+          timestampOutputFormat: 'INT64',
+          useInt64Timestamp: true,
+        },
+        {
+          name: 'TOF: INT64, UI64: false (error)',
+          timestampOutputFormat: 'INT64',
+          useInt64Timestamp: false,
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: true (error)',
+          timestampOutputFormat: 'ISO8601_STRING',
+          useInt64Timestamp: true,
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: false',
+          timestampOutputFormat: 'ISO8601_STRING',
+          useInt64Timestamp: false,
+        },
+        {
+          name: 'TOF: omitted, UI64: omitted (default INT64)',
+          timestampOutputFormat: undefined,
+          useInt64Timestamp: undefined,
+        },
+        {
+          name: 'TOF: omitted, UI64: true',
+          timestampOutputFormat: undefined,
+          useInt64Timestamp: true,
+        },
+        {
+          name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
+          timestampOutputFormat: undefined,
+          useInt64Timestamp: false,
+        },
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default INT64)',
+          timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+          useInt64Timestamp: undefined,
+        },
+        {
+          name: 'TOF: FLOAT64, UI64: omitted (error)',
+          timestampOutputFormat: 'FLOAT64',
+          useInt64Timestamp: undefined,
+        },
+        {
+          name: 'TOF: INT64, UI64: omitted',
+          timestampOutputFormat: 'INT64',
+          useInt64Timestamp: undefined,
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
+          timestampOutputFormat: 'ISO8601_STRING',
+          useInt64Timestamp: undefined,
+        },
+      ];
+
+      testCases.forEach(testCase => {
+        it(`should handle ${testCase.name}`, () => {
+          const options: any = {};
+          if (testCase.timestampOutputFormat !== undefined) {
+            options['formatOptions.timestampOutputFormat'] =
+              testCase.timestampOutputFormat;
+          }
+          if (testCase.useInt64Timestamp !== undefined) {
+            options['formatOptions.useInt64Timestamp'] =
+              testCase.useInt64Timestamp;
+          }
+
+          const req = bq.buildQueryRequest_(QUERY_STRING, options);
+          for (const key in req) {
+            if (req[key] === undefined) {
+              delete req[key];
+            }
+          }
+          if (req.formatOptions) {
+            for (const key in req.formatOptions) {
+              if (req.formatOptions[key] === undefined) {
+                delete req.formatOptions[key];
+              }
+            }
+          }
+
+          const expectedFormatOptions: any = {};
+          if (
+            testCase.timestampOutputFormat === undefined &&
+            testCase.useInt64Timestamp === undefined
+          ) {
+            expectedFormatOptions.timestampOutputFormat = 'ISO8601_STRING';
+          } else {
+            if (testCase.timestampOutputFormat !== undefined) {
+              expectedFormatOptions.timestampOutputFormat =
+                testCase.timestampOutputFormat;
+            }
+            if (testCase.useInt64Timestamp !== undefined) {
+              expectedFormatOptions.useInt64Timestamp =
+                testCase.useInt64Timestamp;
+            }
+          }
+
+          const expectedReq = {
+            query: QUERY_STRING,
+            useLegacySql: false,
+            requestId: req.requestId,
+            jobCreationMode: 'JOB_CREATION_OPTIONAL',
+            formatOptions: expectedFormatOptions,
+          };
+          assert.deepStrictEqual(req, expectedReq);
+        });
+      });
+    });
+
     it('should create a QueryRequest from a SQL string', () => {
       const req = bq.buildQueryRequest_(QUERY_STRING, {});
       for (const key in req) {
