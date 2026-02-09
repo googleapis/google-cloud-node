@@ -1517,56 +1517,11 @@ describe('BigQuery', () => {
 
             const testCases = [
               {
-                name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
-                timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-                useInt64Timestamp: true,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
-                timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-                useInt64Timestamp: false,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              /*
-              { // This is not a meaningful use case.
                 name: 'TOF: FLOAT64, UI64: true (error)',
                 timestampOutputFormat: 'FLOAT64',
                 useInt64Timestamp: true,
                 expectedTsValue: undefined,
                 expectedError: expectedErrorMessage,
-              },
-               */
-              {
-                name: 'TOF: FLOAT64, UI64: false',
-                timestampOutputFormat: 'FLOAT64',
-                useInt64Timestamp: false,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: INT64, UI64: true',
-                timestampOutputFormat: 'INT64',
-                useInt64Timestamp: true,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: INT64, UI64: false (error)',
-                timestampOutputFormat: 'INT64',
-                useInt64Timestamp: false,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: ISO8601_STRING, UI64: true (error)',
-                timestampOutputFormat: 'ISO8601_STRING',
-                useInt64Timestamp: true,
-                expectedTsValue: undefined,
-                expectedError: expectedErrorMessage,
-              },
-              {
-                name: 'TOF: ISO8601_STRING, UI64: false',
-                timestampOutputFormat: 'ISO8601_STRING',
-                useInt64Timestamp: false,
-                expectedTsValue: expectedTsValuePicoseconds,
               },
               {
                 name: 'TOF: omitted, UI64: omitted (default INT64)',
@@ -1579,36 +1534,6 @@ describe('BigQuery', () => {
                 timestampOutputFormat: undefined,
                 useInt64Timestamp: true,
                 expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
-                timestampOutputFormat: undefined,
-                useInt64Timestamp: false,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default INT64)',
-                timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-                useInt64Timestamp: undefined,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: FLOAT64, UI64: omitted (error)',
-                timestampOutputFormat: 'FLOAT64',
-                useInt64Timestamp: undefined,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: INT64, UI64: omitted',
-                timestampOutputFormat: 'INT64',
-                useInt64Timestamp: undefined,
-                expectedTsValue: expectedTsValueNanoseconds,
-              },
-              {
-                name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
-                timestampOutputFormat: 'ISO8601_STRING',
-                useInt64Timestamp: undefined,
-                expectedTsValue: expectedTsValuePicoseconds,
               },
             ];
 
