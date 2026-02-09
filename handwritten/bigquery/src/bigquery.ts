@@ -2500,59 +2500,6 @@ promisifyAll(BigQuery, {
   ],
 });
 
-function fromStringValue_(value: string): [start: string, end: string] {
-  /*
-   This method returns start and end values for RANGE typed values returned from
-   the server. It decodes the server RANGE value into start and end values so
-   they can be used to construct a BigQueryRange.
-   */
-  let cleanedValue = value;
-  if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
-    cleanedValue = cleanedValue.substring(1);
-  }
-  if (cleanedValue.endsWith(')') || cleanedValue.endsWith(']')) {
-    cleanedValue = cleanedValue.substring(0, cleanedValue.length - 1);
-  }
-  const parts = cleanedValue.split(',');
-  if (parts.length !== 2) {
-    throw new Error(
-        'invalid RANGE. See RANGE literal format docs for more information.',
-    );
-  }
-
-  const [start, end] = parts.map((s: string) => s.trim());
-  return [start, end];
-}
-
-function fromSchemaValue_(value: string, elementType: string, listParams?:
-    | bigquery.tabledata.IListParams
-    | bigquery.jobs.IGetQueryResultsParams
-) {
-  /*
-  This method is only used by convertSchemaFieldValue and only when range
-  values are passed into convertSchemaFieldValue. It produces a value that is
-  delivered to the user for read calls and it needs to pass along listParams
-  to ensure TIMESTAMP types are converted properly.
-  */
-  const [start, end] = fromStringValue_(value);
-  const convertRangeSchemaValue = (value: string) => {
-    if (value === 'UNBOUNDED' || value === 'NULL') {
-      return null;
-    }
-    return convertSchemaFieldValue({type: elementType}, value, {
-      wrapIntegers: false,
-      listParams
-    });
-  };
-  return BigQuery.range(
-      {
-        start: convertRangeSchemaValue(start),
-        end: convertRangeSchemaValue(end),
-      },
-      elementType,
-  );
-}
-
 function convertSchemaFieldValue(
   schemaField: TableField,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -2672,11 +2619,11 @@ function convertSchemaFieldValue(
       break;
     }
     case 'RANGE': {
-      value = fromSchemaValue_(
+      value = BigQueryRange.fromSchemaValue_(
         value,
         schemaField.rangeElementType!.type!,
-        options.listParams // Required to convert TIMESTAMP values
-      )
+        options.listParams, // Required to convert TIMESTAMP values
+      );
       break;
     }
     default:
@@ -2755,22 +2702,58 @@ export class BigQueryRange {
 
   private static fromStringValue_(value: string): [start: string, end: string] {
     /*
-    We moved the internals of fromSchemaValue_ to a method outside of this
-    class, but fromSchemaValue_ calls fromStringValue_ and this fromStringValue_
-    method is private so we needed a fromStringValue_ method outside of this
-    class so it could be accessed by fromSchemaValue_ function.
-     */
-    return fromStringValue_(value);
+       This method returns start and end values for RANGE typed values returned from
+       the server. It decodes the server RANGE value into start and end values so
+       they can be used to construct a BigQueryRange.
+       */
+    let cleanedValue = value;
+    if (cleanedValue.startsWith('[') || cleanedValue.startsWith('(')) {
+      cleanedValue = cleanedValue.substring(1);
+    }
+    if (cleanedValue.endsWith(')') || cleanedValue.endsWith(']')) {
+      cleanedValue = cleanedValue.substring(0, cleanedValue.length - 1);
+    }
+    const parts = cleanedValue.split(',');
+    if (parts.length !== 2) {
+      throw new Error(
+        'invalid RANGE. See RANGE literal format docs for more information.',
+      );
+    }
+
+    const [start, end] = parts.map((s: string) => s.trim());
+    return [start, end];
   }
 
-  static fromSchemaValue_(value: string, elementType: string): BigQueryRange {
+  static fromSchemaValue_(
+    value: string,
+    elementType: string,
+    listParams?:
+      | bigquery.tabledata.IListParams
+      | bigquery.jobs.IGetQueryResultsParams,
+  ): BigQueryRange {
     /*
-    fromSchemaValue_ functionality needs to pass listParams into
-    convertSchemaFieldValue. But we didn't want to add another parameter to this
-    function because it changes the API so the internals of this method were
-    moved to fromSchemaValue_ which now accepts an extra parameter.
-     */
-    return fromSchemaValue_(value, elementType);
+    This method is only used by convertSchemaFieldValue and only when range
+    values are passed into convertSchemaFieldValue. It produces a value that is
+    delivered to the user for read calls and it needs to pass along listParams
+    to ensure TIMESTAMP types are converted properly.
+    */
+    const [start, end] = BigQueryRange.fromStringValue_(value);
+    const convertRangeSchemaValue = (value: string) => {
+      if (value === 'UNBOUNDED' || value === 'NULL') {
+        return null;
+      }
+      return convertSchemaFieldValue({type: elementType}, value, {
+        wrapIntegers: false,
+        listParams,
+      });
+    };
+    return BigQuery.range(
+      {
+        start: convertRangeSchemaValue(start),
+        end: convertRangeSchemaValue(end),
+      },
+      elementType,
+    );
   }
 
   private convertElement_(
