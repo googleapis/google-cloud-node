@@ -1,0 +1,22 @@
+name: Test-Release-Split
+on:
+  push:
+    branches: [ test-release-please ]
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Run for Bundled packages
+      - uses: google-github-actions/release-please-action@v4
+        with:
+          config-file: release-please-bundled.json
+          manifest-file: .release-please-manifest-bundled.json
+          target-branch: your-test-branch-name
+
+      # Step 2: Run for Separate packages
+      - uses: google-github-actions/release-please-action@v4
+        with:
+          config-file: release-please-separate.json
+          manifest-file: .release-please-manifest-separate.json
+          target-branch: test-release-please

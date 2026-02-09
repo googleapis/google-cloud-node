@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "separate-pull-requests": false,
+  "packages": {
+    "packages/storage": { "release-type": "node" },
+    "packages/logging": { "release-type": "node" }
+  }
+}
