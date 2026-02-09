@@ -48906,6 +48906,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "modelArmorConfig": {
+                          "type": "ModelArmorConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "generationConfig": {
                           "type": "GenerationConfig",
                           "id": 4,

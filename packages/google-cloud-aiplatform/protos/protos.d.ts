@@ -180824,6 +180824,9 @@ export namespace google {
                     /** GeminiExample safetySettings */
                     safetySettings?: (google.cloud.aiplatform.v1beta1.ISafetySetting[]|null);
 
+                    /** GeminiExample modelArmorConfig */
+                    modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
+
                     /** GeminiExample generationConfig */
                     generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
                 }
@@ -180860,6 +180863,9 @@ export namespace google {
 
                     /** GeminiExample safetySettings. */
                     public safetySettings: google.cloud.aiplatform.v1beta1.ISafetySetting[];
+
+                    /** GeminiExample modelArmorConfig. */
+                    public modelArmorConfig?: (google.cloud.aiplatform.v1beta1.IModelArmorConfig|null);
 
                     /** GeminiExample generationConfig. */
                     public generationConfig?: (google.cloud.aiplatform.v1beta1.IGenerationConfig|null);
