@@ -3408,11 +3408,7 @@ describe('BigQuery', () => {
       const testCases: {
         name: string;
         opts: QueryOptions;
-        expected?: Pick<
-          QueryOptions,
-          | 'formatOptions.timestampOutputFormat'
-          | 'formatOptions.useInt64Timestamp'
-        >;
+        expected?: any;
         bail?: boolean;
       }[] = [
         {
@@ -3423,9 +3419,8 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: true,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']:
-              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
-            ['formatOptions.useInt64Timestamp']: true,
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            useInt64Timestamp: true,
           },
         },
         {
@@ -3436,7 +3431,8 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: false,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            useInt64Timestamp: false,
           },
         },
         {
@@ -3446,7 +3442,8 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: false,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+            timestampOutputFormat: 'FLOAT64',
+            useInt64Timestamp: false,
           },
         },
         {
@@ -3456,7 +3453,8 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: true,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'INT64',
+            timestampOutputFormat: 'INT64',
+            useInt64Timestamp: true,
           },
         },
         {
@@ -3465,6 +3463,10 @@ describe('BigQuery', () => {
             ['formatOptions.timestampOutputFormat']: 'INT64',
             ['formatOptions.useInt64Timestamp']: false,
           },
+          expected: {
+            timestampOutputFormat: 'INT64',
+            useInt64Timestamp: false,
+          },
           bail: true,
         },
         {
@@ -3472,6 +3474,10 @@ describe('BigQuery', () => {
           opts: {
             ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
             ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+            useInt64Timestamp: true,
           },
           bail: true,
         },
@@ -3482,14 +3488,15 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: false,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            timestampOutputFormat: 'ISO8601_STRING',
+            useInt64Timestamp: false,
           },
         },
         {
           name: 'TOF: omitted, UI64: omitted (default ISO8601_STRING)',
           opts: {},
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            timestampOutputFormat: 'ISO8601_STRING',
           },
         },
         {
@@ -3498,7 +3505,7 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: true,
           },
           expected: {
-            ['formatOptions.useInt64Timestamp']: true,
+            useInt64Timestamp: true,
           },
         },
         {
@@ -3507,7 +3514,7 @@ describe('BigQuery', () => {
             ['formatOptions.useInt64Timestamp']: false,
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            useInt64Timestamp: false,
           },
         },
         {
@@ -3517,13 +3524,16 @@ describe('BigQuery', () => {
               'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
           },
         },
         {
           name: 'TOF: FLOAT64, UI64: omitted (error)',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+          },
+          expected: {
+            timestampOutputFormat: 'FLOAT64',
           },
           bail: true,
         },
@@ -3533,13 +3543,16 @@ describe('BigQuery', () => {
             ['formatOptions.timestampOutputFormat']: 'INT64',
           },
           expected: {
-            ['formatOptions.timestampOutputFormat']: 'INT64',
+            timestampOutputFormat: 'INT64',
           },
         },
         {
           name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+          },
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
           },
           bail: true,
         },
@@ -3558,6 +3571,20 @@ describe('BigQuery', () => {
             requestId: req.requestId,
             jobCreationMode: 'JOB_CREATION_OPTIONAL',
             formatOptions: testCase.expected,
+            connectionProperties: undefined,
+            continuous: undefined,
+            createSession: undefined,
+            defaultDataset: undefined,
+            destinationEncryptionConfiguration: undefined,
+            labels: undefined,
+            location: undefined,
+            maxResults: undefined,
+            maximumBytesBilled: undefined,
+            preserveNulls: undefined,
+            reservation: undefined,
+            timeoutMs: undefined,
+            useQueryCache: undefined,
+            writeIncrementalResults: undefined,
           };
           assert.deepStrictEqual(req, expectedReq);
         });
