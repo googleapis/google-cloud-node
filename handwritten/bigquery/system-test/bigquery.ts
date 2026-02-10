@@ -1503,7 +1503,7 @@ describe('BigQuery', () => {
               },
             );
           });
-          describe.only('High Precision Query System Tests', () => {
+          describe('High Precision Query System Tests', () => {
             let bigquery: BigQuery;
             const expectedTsValueNanoseconds = '2023-01-01T12:00:00.123456000Z';
             const expectedTsValuePicoseconds =
