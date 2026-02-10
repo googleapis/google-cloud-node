@@ -3403,7 +3403,7 @@ describe('BigQuery', () => {
       assert.deepStrictEqual(req, expectedReq);
     });
 
-    describe('format options', () => {
+    describe('timestamp format options', () => {
       const testCases = [
         {
           name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
