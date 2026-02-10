@@ -3544,7 +3544,7 @@ describe('BigQuery', () => {
           },
         },
         {
-          name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
+          name: 'TOF: ISO8601_STRING, UI64: omitted',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
           },
