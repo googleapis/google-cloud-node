@@ -3556,9 +3556,6 @@ describe('BigQuery', () => {
 
       testCases.forEach(testCase => {
         it(`should handle ${testCase.name}`, () => {
-          // TODO: should buildQueryRequest_ throw an error on a bad combination ?
-          // I don't think so, as showed with b/460198628, we should avoid that kind
-          // of client side validation.
           const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
 
           const expectedReq = {
