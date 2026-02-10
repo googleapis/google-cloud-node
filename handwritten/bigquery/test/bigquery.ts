@@ -3406,7 +3406,158 @@ describe('BigQuery', () => {
     describe('timestamp format options', () => {
       const testCases = [
         {
-          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
+describe('timestamp format options', () => {
+      const testCases: {
+        name: string,
+        opts: QueryOptions,
+        expected?: Pick<QueryOptions, 'formatOptions.timestampOutputFormat' | 'formatOptions.useInt64Timestamp'>,
+        bail?: boolean,
+      }[] = [
+          {
+            name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+          },
+          {
+            name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+              ['formatOptions.useInt64Timestamp']: false,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+          },
+          {
+            name: 'TOF: FLOAT64, UI64: false',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+              ['formatOptions.useInt64Timestamp']: false,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+            },
+          },
+          {
+            name: 'TOF: INT64, UI64: true',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'INT64',
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'INT64',
+            },
+          },
+          {
+            name: 'TOF: INT64, UI64: false (error)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'INT64',
+              ['formatOptions.useInt64Timestamp']: false,
+            },
+            bail: true,
+          },
+          {
+            name: 'TOF: ISO8601_STRING, UI64: true (error)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+            bail: true,
+          },
+          {
+            name: 'TOF: ISO8601_STRING, UI64: false',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+              ['formatOptions.useInt64Timestamp']: false,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+          },
+          {
+            name: 'TOF: omitted, UI64: omitted (default ISO8601_STRING)',
+            opts: {},
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+          },
+          {
+            name: 'TOF: omitted, UI64: true',
+            opts: {
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+            expected: {
+              ['formatOptions.useInt64Timestamp']: true,
+            },
+          },
+          {
+            name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
+            opts: {
+              ['formatOptions.useInt64Timestamp']: false,
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+          },
+          {
+            name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default ISO8601_STRING)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+          },
+          {
+            name: 'TOF: FLOAT64, UI64: omitted (error)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+            },
+            bail: true,
+          },
+          {
+            name: 'TOF: INT64, UI64: omitted',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'INT64',
+            },
+            expected: {
+              ['formatOptions.timestampOutputFormat']: 'INT64',
+            },
+          },
+          {
+            name: 'TOF: ISO8601_STRING, UI64: omitted (error)',
+            opts: {
+              ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            },
+            bail: true,
+          },
+        ];
+
+      testCases.forEach(testCase => {
+        it(`should handle ${testCase.name}`, () => {
+
+          // TODO: should buildQueryRequest_ throw an error on a bad combination ?
+          // I don't think so, as showed with b/460198628, we should avoid that kind
+          // of client side validation.
+          const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
+
+          const expectedReq = {
+            query: QUERY_STRING,
+            useLegacySql: false,
+            requestId: req.requestId,
+            jobCreationMode: 'JOB_CREATION_OPTIONAL',
+            formatOptions: testCase.expected,
+          };
+          assert.deepStrictEqual(req, expectedReq);
+        });
+      });
+    });
           timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
           useInt64Timestamp: true,
         },
