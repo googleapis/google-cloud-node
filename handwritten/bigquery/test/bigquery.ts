@@ -3458,7 +3458,7 @@ describe('BigQuery', () => {
           },
         },
         {
-          name: 'TOF: INT64, UI64: false (error)',
+          name: 'TOF: INT64, UI64: false',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'INT64',
             ['formatOptions.useInt64Timestamp']: false,
@@ -3469,7 +3469,7 @@ describe('BigQuery', () => {
           },
         },
         {
-          name: 'TOF: ISO8601_STRING, UI64: true (error)',
+          name: 'TOF: ISO8601_STRING, UI64: true',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
             ['formatOptions.useInt64Timestamp']: true,
@@ -3526,7 +3526,7 @@ describe('BigQuery', () => {
           },
         },
         {
-          name: 'TOF: FLOAT64, UI64: omitted (error)',
+          name: 'TOF: FLOAT64, UI64: omitted',
           opts: {
             ['formatOptions.timestampOutputFormat']: 'FLOAT64',
           },
