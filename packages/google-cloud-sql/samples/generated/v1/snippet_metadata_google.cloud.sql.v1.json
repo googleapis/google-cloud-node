@@ -3510,7 +3510,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 72,
+          "end": 78,
           "type": "FULL"
         }
       ],
@@ -3538,6 +3538,10 @@
           {
             "name": "database_roles",
             "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "revoke_existing_roles",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "body",

@@ -185,6 +185,9 @@ export class SqlInstancesServiceClient {
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup}'
       ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{network}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -4829,6 +4832,42 @@ export class SqlInstancesServiceClient {
    */
   matchBackupFromBackupName(backupName: string) {
     return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} network
+   * @returns {string} Resource name string.
+   */
+  networkPath(project:string,network:string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      network: network,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the network from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the network.
+   */
+  matchNetworkFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).network;
   }
 
   /**
