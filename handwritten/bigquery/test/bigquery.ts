@@ -42,6 +42,7 @@ import {
   TableField,
   Query,
   QueryResultsOptions,
+  QueryOptions,
 } from '../src';
 import {SinonStub} from 'sinon';
 import {PreciseDate} from '@google-cloud/precise-date';
@@ -3397,12 +3398,191 @@ describe('BigQuery', () => {
         },
         jobCreationMode: 'JOB_CREATION_REQUIRED',
         formatOptions: {
-          useInt64Timestamp: true,
+          timestampOutputFormat: 'ISO8601_STRING',
         },
       };
       assert.deepStrictEqual(req, expectedReq);
     });
 
+    describe('timestamp format options', () => {
+      const testCases: {
+        name: string;
+        opts: QueryOptions;
+        expected?: any;
+        bail?: boolean;
+      }[] = [
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: true',
+          opts: {
+            ['formatOptions.timestampOutputFormat']:
+              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            useInt64Timestamp: true,
+          },
+        },
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: false (default ISO8601_STRING)',
+          opts: {
+            ['formatOptions.timestampOutputFormat']:
+              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+            useInt64Timestamp: false,
+          },
+        },
+        {
+          name: 'TOF: FLOAT64, UI64: false',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            timestampOutputFormat: 'FLOAT64',
+            useInt64Timestamp: false,
+          },
+        },
+        {
+          name: 'TOF: INT64, UI64: true',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'INT64',
+            ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            timestampOutputFormat: 'INT64',
+            useInt64Timestamp: true,
+          },
+        },
+        {
+          name: 'TOF: INT64, UI64: false',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'INT64',
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            timestampOutputFormat: 'INT64',
+            useInt64Timestamp: false,
+          },
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: true',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+            useInt64Timestamp: true,
+          },
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: false',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+            useInt64Timestamp: false,
+          },
+        },
+        {
+          name: 'TOF: omitted, UI64: omitted (default ISO8601_STRING)',
+          opts: {},
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+          },
+        },
+        {
+          name: 'TOF: omitted, UI64: true',
+          opts: {
+            ['formatOptions.useInt64Timestamp']: true,
+          },
+          expected: {
+            useInt64Timestamp: true,
+          },
+        },
+        {
+          name: 'TOF: omitted, UI64: false (default ISO8601_STRING)',
+          opts: {
+            ['formatOptions.useInt64Timestamp']: false,
+          },
+          expected: {
+            useInt64Timestamp: false,
+          },
+        },
+        {
+          name: 'TOF: TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED, UI64: omitted (default ISO8601_STRING)',
+          opts: {
+            ['formatOptions.timestampOutputFormat']:
+              'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+          },
+          expected: {
+            timestampOutputFormat: 'TIMESTAMP_OUTPUT_FORMAT_UNSPECIFIED',
+          },
+        },
+        {
+          name: 'TOF: FLOAT64, UI64: omitted',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'FLOAT64',
+          },
+          expected: {
+            timestampOutputFormat: 'FLOAT64',
+          },
+        },
+        {
+          name: 'TOF: INT64, UI64: omitted',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'INT64',
+          },
+          expected: {
+            timestampOutputFormat: 'INT64',
+          },
+        },
+        {
+          name: 'TOF: ISO8601_STRING, UI64: omitted',
+          opts: {
+            ['formatOptions.timestampOutputFormat']: 'ISO8601_STRING',
+          },
+          expected: {
+            timestampOutputFormat: 'ISO8601_STRING',
+          },
+        },
+      ];
+
+      testCases.forEach(testCase => {
+        it(`should handle ${testCase.name}`, () => {
+          const req = bq.buildQueryRequest_(QUERY_STRING, testCase.opts);
+
+          const expectedReq = {
+            query: QUERY_STRING,
+            useLegacySql: false,
+            requestId: req.requestId,
+            jobCreationMode: 'JOB_CREATION_OPTIONAL',
+            formatOptions: testCase.expected,
+            connectionProperties: undefined,
+            continuous: undefined,
+            createSession: undefined,
+            defaultDataset: undefined,
+            destinationEncryptionConfiguration: undefined,
+            labels: undefined,
+            location: undefined,
+            maxResults: undefined,
+            maximumBytesBilled: undefined,
+            preserveNulls: undefined,
+            reservation: undefined,
+            timeoutMs: undefined,
+            useQueryCache: undefined,
+            writeIncrementalResults: undefined,
+          };
+          assert.deepStrictEqual(req, expectedReq);
+        });
+      });
+    });
     it('should create a QueryRequest from a SQL string', () => {
       const req = bq.buildQueryRequest_(QUERY_STRING, {});
       for (const key in req) {
@@ -3416,7 +3596,7 @@ describe('BigQuery', () => {
         requestId: req.requestId,
         jobCreationMode: 'JOB_CREATION_OPTIONAL',
         formatOptions: {
-          useInt64Timestamp: true,
+          timestampOutputFormat: 'ISO8601_STRING',
         },
       };
       assert.deepStrictEqual(req, expectedReq);
