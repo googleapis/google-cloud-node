@@ -1269,6 +1269,14 @@
                           "type": "string",
                           "id": 3
                         },
+                        "pageCategories": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 63,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "imageQuery": {
                           "type": "ImageQuery",
                           "id": 19
@@ -1338,11 +1346,28 @@
                         },
                         "userPseudoId": {
                           "type": "string",
-                          "id": 15
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "contentSearchSpec": {
                           "type": "ContentSearchSpec",
                           "id": 24
+                        },
+                        "rankingExpression": {
+                          "type": "string",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rankingExpressionBackend": {
+                          "type": "RankingExpressionBackend",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "safeSearch": {
                           "type": "bool",
@@ -1353,6 +1378,13 @@
                           "type": "string",
                           "id": 22
                         },
+                        "naturalLanguageQueryUnderstandingSpec": {
+                          "type": "NaturalLanguageQueryUnderstandingSpec",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "searchAsYouTypeSpec": {
                           "type": "SearchAsYouTypeSpec",
                           "id": 31
@@ -1360,6 +1392,14 @@
                         "displaySpec": {
                           "type": "DisplaySpec",
                           "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "crowdingSpecs": {
+                          "rule": "repeated",
+                          "type": "CrowdingSpec",
+                          "id": 40,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1382,17 +1422,6 @@
                         "relevanceScoreSpec": {
                           "type": "RelevanceScoreSpec",
                           "id": 52,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "rankingExpression": {
-                          "type": "string",
-                          "id": 26
-                        },
-                        "rankingExpressionBackend": {
-                          "type": "RankingExpressionBackend",
-                          "id": 53,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1783,6 +1812,50 @@
                             }
                           }
                         },
+                        "NaturalLanguageQueryUnderstandingSpec": {
+                          "fields": {
+                            "filterExtractionCondition": {
+                              "type": "FilterExtractionCondition",
+                              "id": 1
+                            },
+                            "geoSearchQueryDetectionFieldNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "extractedFilterBehavior": {
+                              "type": "ExtractedFilterBehavior",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "allowedFieldNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "FilterExtractionCondition": {
+                              "values": {
+                                "CONDITION_UNSPECIFIED": 0,
+                                "DISABLED": 1,
+                                "ENABLED": 2
+                              }
+                            },
+                            "ExtractedFilterBehavior": {
+                              "values": {
+                                "EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED": 0,
+                                "HARD_FILTER": 1,
+                                "SOFT_BOOST": 2
+                              }
+                            }
+                          }
+                        },
                         "SearchAsYouTypeSpec": {
                           "fields": {
                             "condition": {
@@ -1814,6 +1887,31 @@
                                 "MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED": 0,
                                 "MATCH_HIGHLIGHTING_DISABLED": 1,
                                 "MATCH_HIGHLIGHTING_ENABLED": 2
+                              }
+                            }
+                          }
+                        },
+                        "CrowdingSpec": {
+                          "fields": {
+                            "field": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "mode": {
+                              "type": "Mode",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "DROP_CROWDED_RESULTS": 1,
+                                "DEMOTE_CROWDED_RESULTS_TO_END": 2
                               }
                             }
                           }
@@ -1851,6 +1949,23 @@
                             }
                           }
                         },
+                        "RankingExpressionBackend": {
+                          "valuesOptions": {
+                            "BYOE": {
+                              "deprecated": true
+                            },
+                            "CLEARBOX": {
+                              "deprecated": true
+                            }
+                          },
+                          "values": {
+                            "RANKING_EXPRESSION_BACKEND_UNSPECIFIED": 0,
+                            "BYOE": 1,
+                            "CLEARBOX": 2,
+                            "RANK_BY_EMBEDDING": 3,
+                            "RANK_BY_FORMULA": 4
+                          }
+                        },
                         "RelevanceThreshold": {
                           "values": {
                             "RELEVANCE_THRESHOLD_UNSPECIFIED": 0,
@@ -1859,23 +1974,6 @@
                             "MEDIUM": 3,
                             "HIGH": 4
                           }
-                        },
-                        "RankingExpressionBackend": {
-                          "values": {
-                            "RANKING_EXPRESSION_BACKEND_UNSPECIFIED": 0,
-                            "RANK_BY_EMBEDDING": 3,
-                            "RANK_BY_FORMULA": 4
-                          },
-                          "reserved": [
-                            [
-                              1,
-                              1
-                            ],
-                            [
-                              2,
-                              2
-                            ]
-                          ]
                         }
                       }
                     },
@@ -1919,6 +2017,13 @@
                           "type": "QueryExpansionInfo",
                           "id": 14
                         },
+                        "naturalLanguageQueryUnderstandingInfo": {
+                          "type": "NaturalLanguageQueryUnderstandingInfo",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sessionInfo": {
                           "type": "SessionInfo",
                           "id": 19
@@ -1927,6 +2032,13 @@
                           "rule": "repeated",
                           "type": "SearchLinkPromotion",
                           "id": 23
+                        },
+                        "semanticState": {
+                          "type": "SemanticState",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2072,12 +2184,6 @@
                                   }
                                 }
                               },
-                              "reserved": [
-                                [
-                                  5,
-                                  5
-                                ]
-                              ],
                               "nested": {
                                 "CustomSignal": {
                                   "fields": {
@@ -2298,6 +2404,165 @@
                             }
                           }
                         },
+                        "NaturalLanguageQueryUnderstandingInfo": {
+                          "fields": {
+                            "extractedFilters": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "rewrittenQuery": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "classifiedIntents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            },
+                            "structuredExtractedFilter": {
+                              "type": "StructuredExtractedFilter",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "StructuredExtractedFilter": {
+                              "fields": {
+                                "expression": {
+                                  "type": "Expression",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "StringConstraint": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "values": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "querySegment": {
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "NumberConstraint": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "comparison": {
+                                      "type": "Comparison",
+                                      "id": 2
+                                    },
+                                    "value": {
+                                      "type": "double",
+                                      "id": 3
+                                    },
+                                    "querySegment": {
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  },
+                                  "nested": {
+                                    "Comparison": {
+                                      "values": {
+                                        "COMPARISON_UNSPECIFIED": 0,
+                                        "EQUALS": 1,
+                                        "LESS_THAN_EQUALS": 2,
+                                        "LESS_THAN": 3,
+                                        "GREATER_THAN_EQUALS": 4,
+                                        "GREATER_THAN": 5
+                                      }
+                                    }
+                                  }
+                                },
+                                "GeolocationConstraint": {
+                                  "fields": {
+                                    "fieldName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "address": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "latitude": {
+                                      "type": "double",
+                                      "id": 4
+                                    },
+                                    "longitude": {
+                                      "type": "double",
+                                      "id": 5
+                                    },
+                                    "radiusInMeters": {
+                                      "type": "float",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "AndExpression": {
+                                  "fields": {
+                                    "expressions": {
+                                      "rule": "repeated",
+                                      "type": "Expression",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "OrExpression": {
+                                  "fields": {
+                                    "expressions": {
+                                      "rule": "repeated",
+                                      "type": "Expression",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "Expression": {
+                                  "oneofs": {
+                                    "expr": {
+                                      "oneof": [
+                                        "stringConstraint",
+                                        "numberConstraint",
+                                        "geolocationConstraint",
+                                        "andExpr",
+                                        "orExpr"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "stringConstraint": {
+                                      "type": "StringConstraint",
+                                      "id": 1
+                                    },
+                                    "numberConstraint": {
+                                      "type": "NumberConstraint",
+                                      "id": 2
+                                    },
+                                    "geolocationConstraint": {
+                                      "type": "GeolocationConstraint",
+                                      "id": 3
+                                    },
+                                    "andExpr": {
+                                      "type": "AndExpression",
+                                      "id": 4
+                                    },
+                                    "orExpr": {
+                                      "type": "OrExpression",
+                                      "id": 5
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
                         "SessionInfo": {
                           "fields": {
                             "name": {
@@ -2308,6 +2573,13 @@
                               "type": "string",
                               "id": 2
                             }
+                          }
+                        },
+                        "SemanticState": {
+                          "values": {
+                            "SEMANTIC_STATE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "ENABLED": 2
                           }
                         }
                       }
@@ -6953,6 +7225,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "naturalLanguageQueryUnderstandingConfig": {
+                          "type": "NaturalLanguageQueryUnderstandingConfig",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "kmsKeyName": {
                           "type": "string",
                           "id": 32,
@@ -7075,6 +7354,23 @@
                           "id": 4,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NaturalLanguageQueryUnderstandingConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "ENABLED": 2
                           }
                         }
                       }
