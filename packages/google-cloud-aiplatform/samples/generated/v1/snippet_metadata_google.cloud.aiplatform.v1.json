@@ -955,7 +955,7 @@
       "regionTag": "aiplatform_v1_generated_DatasetService_ListAnnotations_async",
       "title": "DataFoundryService listAnnotations Sample",
       "origin": "API_DEFINITION",
-      "description": " Lists Annotations belongs to a dataitem This RPC is only available in InternalDatasetService. It is only used for exporting conversation data to CCAI Insights.",
+      "description": " Lists Annotations belongs to a dataitem.",
       "canonical": true,
       "file": "dataset_service.list_annotations.js",
       "language": "JAVASCRIPT",

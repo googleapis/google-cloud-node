@@ -50,6 +50,12 @@ function main() {
    */
   // const databaseRoles = ['abc','def']
   /**
+   *  Optional. Specifies whether to revoke existing roles that are not present
+   *  in the `database_roles` field. If `false` or unset, the database roles
+   *  specified in `database_roles` are added to the user's existing roles.
+   */
+  // const revokeExistingRoles = true
+  /**
    */
   // const body = {}
 
