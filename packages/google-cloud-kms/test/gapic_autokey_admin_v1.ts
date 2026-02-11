@@ -1472,6 +1472,52 @@ describe('v1.AutokeyAdminClient', () => {
             });
         });
 
+        describe('retiredResource', async () => {
+            const fakePath = "/rendered/path/retiredResource";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                retired_resource: "retiredResourceValue",
+            };
+            const client = new autokeyadminModule.v1.AutokeyAdminClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.retiredResourcePathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.retiredResourcePathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('retiredResourcePath', () => {
+                const result = client.retiredResourcePath("projectValue", "locationValue", "retiredResourceValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.retiredResourcePathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRetiredResourceName', () => {
+                const result = client.matchProjectFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRetiredResourceName', () => {
+                const result = client.matchLocationFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRetiredResourceFromRetiredResourceName', () => {
+                const result = client.matchRetiredResourceFromRetiredResourceName(fakePath);
+                assert.strictEqual(result, "retiredResourceValue");
+                assert((client.pathTemplates.retiredResourcePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('singleTenantHsmInstance', async () => {
             const fakePath = "/rendered/path/singleTenantHsmInstance";
             const expectedParameters = {

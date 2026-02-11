@@ -327,6 +327,11 @@
                 "getImportJob"
               ]
             },
+            "GetRetiredResource": {
+              "methods": [
+                "getRetiredResource"
+              ]
+            },
             "CreateKeyRing": {
               "methods": [
                 "createKeyRing"
@@ -427,6 +432,16 @@
                 "generateRandomBytes"
               ]
             },
+            "DeleteCryptoKey": {
+              "methods": [
+                "deleteCryptoKey"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "deleteCryptoKeyVersion"
+              ]
+            },
             "ListKeyRings": {
               "methods": [
                 "listKeyRings",
@@ -453,6 +468,13 @@
                 "listImportJobs",
                 "listImportJobsStream",
                 "listImportJobsAsync"
+              ]
+            },
+            "ListRetiredResources": {
+              "methods": [
+                "listRetiredResources",
+                "listRetiredResourcesStream",
+                "listRetiredResourcesAsync"
               ]
             }
           }
@@ -485,6 +507,11 @@
                 "getImportJob"
               ]
             },
+            "GetRetiredResource": {
+              "methods": [
+                "getRetiredResource"
+              ]
+            },
             "CreateKeyRing": {
               "methods": [
                 "createKeyRing"
@@ -585,6 +612,16 @@
                 "generateRandomBytes"
               ]
             },
+            "DeleteCryptoKey": {
+              "methods": [
+                "deleteCryptoKey"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "deleteCryptoKeyVersion"
+              ]
+            },
             "ListKeyRings": {
               "methods": [
                 "listKeyRings",
@@ -611,6 +648,13 @@
                 "listImportJobs",
                 "listImportJobsStream",
                 "listImportJobsAsync"
+              ]
+            },
+            "ListRetiredResources": {
+              "methods": [
+                "listRetiredResources",
+                "listRetiredResourcesStream",
+                "listRetiredResourcesAsync"
               ]
             }
           }
