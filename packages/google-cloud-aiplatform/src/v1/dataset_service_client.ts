@@ -3276,9 +3276,7 @@ export class DatasetServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ISavedQuery>;
   }
  /**
- * Lists Annotations belongs to a dataitem
- * This RPC is only available in InternalDatasetService. It is only used for
- * exporting conversation data to CCAI Insights.
+ * Lists Annotations belongs to a dataitem.
  *
  * @param {Object} request
  *   The request object that will be sent.

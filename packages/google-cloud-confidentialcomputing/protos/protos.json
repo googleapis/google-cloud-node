@@ -193,6 +193,11 @@
                             "tdCcel",
                             "sevSnpAttestation"
                           ]
+                        },
+                        "deviceAttestation": {
+                          "oneof": [
+                            "nvidiaAttestation"
+                          ]
                         }
                       },
                       "fields": {
@@ -206,6 +211,13 @@
                         "sevSnpAttestation": {
                           "type": "SevSnpAttestation",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nvidiaAttestation": {
+                          "type": "NvidiaAttestation",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -251,6 +263,154 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NvidiaAttestation": {
+                      "oneofs": {
+                        "ccFeature": {
+                          "oneof": [
+                            "spt",
+                            "ppcie",
+                            "mpt"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "spt": {
+                          "type": "SinglePassthroughAttestation",
+                          "id": 1
+                        },
+                        "ppcie": {
+                          "type": "ProtectedPcieAttestation",
+                          "id": 2
+                        },
+                        "mpt": {
+                          "type": "MultiGpuSecurePassthroughAttestation",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "GpuInfo": {
+                          "fields": {
+                            "uuid": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "driverVersion": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "vbiosVersion": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "gpuArchitectureType": {
+                              "type": "GpuArchitectureType",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "attestationCertificateChain": {
+                              "type": "bytes",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "attestationReport": {
+                              "type": "bytes",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SwitchInfo": {
+                          "fields": {
+                            "uuid": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "attestationCertificateChain": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "attestationReport": {
+                              "type": "bytes",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "SinglePassthroughAttestation": {
+                          "fields": {
+                            "gpuQuote": {
+                              "type": "GpuInfo",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ProtectedPcieAttestation": {
+                          "fields": {
+                            "gpuQuotes": {
+                              "rule": "repeated",
+                              "type": "GpuInfo",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "switchQuotes": {
+                              "rule": "repeated",
+                              "type": "SwitchInfo",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "MultiGpuSecurePassthroughAttestation": {
+                          "fields": {
+                            "gpuQuotes": {
+                              "rule": "repeated",
+                              "type": "GpuInfo",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "GpuArchitectureType": {
+                          "values": {
+                            "GPU_ARCHITECTURE_TYPE_UNSPECIFIED": 0,
+                            "GPU_ARCHITECTURE_TYPE_HOPPER": 8,
+                            "GPU_ARCHITECTURE_TYPE_BLACKWELL": 10
                           }
                         }
                       }
@@ -576,6 +736,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "nvidiaAttestation": {
+                          "type": "NvidiaAttestation",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -685,6 +852,41 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "confidentialcomputing.googleapis.com/Challenge"
+                          }
+                        },
+                        "options": {
+                          "type": "ConfidentialGkeOptions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConfidentialGkeOptions": {
+                          "fields": {
+                            "audience": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "nonce": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "signatureType": {
+                              "type": "SignatureType",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

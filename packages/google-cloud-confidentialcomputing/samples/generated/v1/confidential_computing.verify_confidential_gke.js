@@ -39,6 +39,10 @@ function main(challenge) {
    *  provided Challenge will be consumed, and cannot be used again.
    */
   // const challenge = 'abc123'
+  /**
+   *  Optional. A collection of fields that modify the token output.
+   */
+  // const options = {}
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

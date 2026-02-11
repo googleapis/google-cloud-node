@@ -9208,6 +9208,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.value != null && message.hasOwnProperty("value"))
@@ -9246,6 +9247,10 @@
                             case "MD5":
                             case 2:
                                 message.type = 2;
+                                break;
+                            case "DIRSUM_SHA256":
+                            case 3:
+                                message.type = 3;
                                 break;
                             }
                             if (object.value != null)
@@ -9319,12 +9324,14 @@
                          * @property {number} HASH_TYPE_UNSPECIFIED=0 HASH_TYPE_UNSPECIFIED value
                          * @property {number} SHA256=1 SHA256 value
                          * @property {number} MD5=2 MD5 value
+                         * @property {number} DIRSUM_SHA256=3 DIRSUM_SHA256 value
                          */
                         Hash.HashType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "HASH_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "SHA256"] = 1;
                             values[valuesById[2] = "MD5"] = 2;
+                            values[valuesById[3] = "DIRSUM_SHA256"] = 3;
                             return values;
                         })();
     

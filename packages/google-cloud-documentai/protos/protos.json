@@ -3862,11 +3862,6 @@
                             "documentWarehouseConfig",
                             "unmanagedDatasetConfig"
                           ]
-                        },
-                        "indexingSource": {
-                          "oneof": [
-                            "spannerIndexingConfig"
-                          ]
                         }
                       },
                       "fields": {
@@ -3888,13 +3883,6 @@
                         "unmanagedDatasetConfig": {
                           "type": "UnmanagedDatasetConfig",
                           "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "spannerIndexingConfig": {
-                          "type": "SpannerIndexingConfig",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3957,9 +3945,6 @@
                           }
                         },
                         "UnmanagedDatasetConfig": {
-                          "fields": {}
-                        },
-                        "SpannerIndexingConfig": {
                           "fields": {}
                         },
                         "State": {
@@ -5660,6 +5645,13 @@
                             "entityValidationOutput": {
                               "type": "EntityValidationOutput",
                               "id": 3
+                            },
+                            "provenance": {
+                              "type": "Provenance",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -5738,6 +5730,15 @@
                         }
                       }
                     },
+                    "Documents": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "Document",
+                          "id": 1
+                        }
+                      }
+                    },
                     "RawDocument": {
                       "fields": {
                         "content": {
@@ -5779,6 +5780,15 @@
                       "fields": {
                         "gcsUriPrefix": {
                           "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RawDocuments": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "RawDocument",
                           "id": 1
                         }
                       }
@@ -5992,6 +6002,13 @@
                         "metadata": {
                           "type": "Metadata",
                           "id": 4
+                        },
+                        "documentPrompt": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -6543,6 +6560,7 @@
                           "requestType": "ReviewDocumentRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
+                            "deprecated": true,
                             "(google.api.http).post": "/v1beta3/{human_review_config=projects/*/locations/*/processors/*/humanReviewConfig}:reviewDocument",
                             "(google.api.http).body": "*",
                             "(google.api.method_signature)": "human_review_config",
@@ -6550,6 +6568,9 @@
                             "(google.longrunning.operation_info).metadata_type": "ReviewDocumentOperationMetadata"
                           },
                           "parsedOptions": [
+                            {
+                              "deprecated": true
+                            },
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta3/{human_review_config=projects/*/locations/*/processors/*/humanReviewConfig}:reviewDocument",
@@ -6754,6 +6775,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "enableTableSplit": {
+                              "type": "bool",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -6845,7 +6873,10 @@
                         },
                         "skipHumanReview": {
                           "type": "bool",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "fieldMask": {
                           "type": "google.protobuf.FieldMask",
@@ -6953,7 +6984,10 @@
                         },
                         "skipHumanReview": {
                           "type": "bool",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "processOptions": {
                           "type": "ProcessOptions",
@@ -7824,6 +7858,14 @@
                         }
                       }
                     },
+                    "UpdateProcessorVersionMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "EvaluationReference": {
                       "fields": {
                         "operation": {
@@ -7881,6 +7923,11 @@
                         "kmsKeyVersionName": {
                           "type": "string",
                           "id": 7
+                        },
+                        "revisions": {
+                          "rule": "repeated",
+                          "type": "EvaluationRevision",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -8002,6 +8049,39 @@
                               "values": {
                                 "METRICS_TYPE_UNSPECIFIED": 0,
                                 "AGGREGATE": 1
+                              }
+                            }
+                          }
+                        },
+                        "EvaluationRevision": {
+                          "fields": {
+                            "revisionId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "documentCounters": {
+                              "type": "Counters",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "allEntitiesMetrics": {
+                              "type": "MultiConfidenceMetrics",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "entityMetrics": {
+                              "keyType": "string",
+                              "type": "MultiConfidenceMetrics",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -8641,6 +8721,13 @@
                             "batchInputConfig": {
                               "type": "BatchDocumentsInputConfig",
                               "id": 1
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {

@@ -2423,6 +2423,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -2437,6 +2438,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             client.innerApiCalls.reviewDocument = stubLongRunningCall(expectedResponse);
             const [operation] = await client.reviewDocument(request);
             const [response] = await operation.promise();
+            assert(stub.calledOnce);
             assert.deepStrictEqual(response, expectedResponse);
             const actualRequest = (client.innerApiCalls.reviewDocument as SinonStub)
                 .getCall(0).args[0];
@@ -2451,6 +2453,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -2478,6 +2481,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             });
             const operation = await promise as LROperation<protos.google.cloud.documentai.v1beta3.IReviewDocumentResponse, protos.google.cloud.documentai.v1beta3.IReviewDocumentOperationMetadata>;
             const [response] = await operation.promise();
+            assert(stub.calledOnce);
             assert.deepStrictEqual(response, expectedResponse);
             const actualRequest = (client.innerApiCalls.reviewDocument as SinonStub)
                 .getCall(0).args[0];
@@ -2492,6 +2496,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -2503,6 +2508,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             const expectedError = new Error('expected');
             client.innerApiCalls.reviewDocument = stubLongRunningCall(undefined, expectedError);
             await assert.rejects(client.reviewDocument(request), expectedError);
+            assert(stub.calledOnce);
             const actualRequest = (client.innerApiCalls.reviewDocument as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
@@ -2516,6 +2522,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const request = generateSampleMessage(
               new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
@@ -2528,6 +2535,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             client.innerApiCalls.reviewDocument = stubLongRunningCall(undefined, undefined, expectedError);
             const [operation] = await client.reviewDocument(request);
             await assert.rejects(operation.promise(), expectedError);
+            assert(stub.calledOnce);
             const actualRequest = (client.innerApiCalls.reviewDocument as SinonStub)
                 .getCall(0).args[0];
             assert.deepStrictEqual(actualRequest, request);
@@ -2541,6 +2549,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const expectedResponse = generateSampleMessage(
               new operationsProtos.google.longrunning.Operation()
@@ -2551,6 +2560,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
 
             client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
             const decodedOperation = await client.checkReviewDocumentProgress(expectedResponse.name);
+            assert(stub.calledOnce);
             assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
             assert(decodedOperation.metadata);
             assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2561,11 +2571,13 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
+            const stub = sinon.stub(client, 'warn');
             await client.initialize();
             const expectedError = new Error('expected');
 
             client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
             await assert.rejects(client.checkReviewDocumentProgress(''), expectedError);
+            assert(stub.calledOnce);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
         });
