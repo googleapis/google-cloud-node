@@ -7709,6 +7709,286 @@
                         return KeyAccessJustificationsPolicy;
                     })();
     
+                    v1.RetiredResource = (function() {
+    
+                        /**
+                         * Properties of a RetiredResource.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRetiredResource
+                         * @property {string|null} [name] RetiredResource name
+                         * @property {string|null} [originalResource] RetiredResource originalResource
+                         * @property {string|null} [resourceType] RetiredResource resourceType
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] RetiredResource deleteTime
+                         */
+    
+                        /**
+                         * Constructs a new RetiredResource.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RetiredResource.
+                         * @implements IRetiredResource
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRetiredResource=} [properties] Properties to set
+                         */
+                        function RetiredResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetiredResource name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.name = "";
+    
+                        /**
+                         * RetiredResource originalResource.
+                         * @member {string} originalResource
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.originalResource = "";
+    
+                        /**
+                         * RetiredResource resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.resourceType = "";
+    
+                        /**
+                         * RetiredResource deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.deleteTime = null;
+    
+                        /**
+                         * Creates a new RetiredResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource instance
+                         */
+                        RetiredResource.create = function create(properties) {
+                            return new RetiredResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource} message RetiredResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetiredResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.originalResource != null && Object.hasOwnProperty.call(message, "originalResource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.originalResource);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.resourceType);
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource} message RetiredResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetiredResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetiredResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetiredResource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RetiredResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.originalResource = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetiredResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetiredResource message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetiredResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.originalResource != null && message.hasOwnProperty("originalResource"))
+                                if (!$util.isString(message.originalResource))
+                                    return "originalResource: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         */
+                        RetiredResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RetiredResource)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RetiredResource();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.originalResource != null)
+                                message.originalResource = String(object.originalResource);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RetiredResource.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.RetiredResource} message RetiredResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetiredResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.originalResource = "";
+                                object.resourceType = "";
+                                object.deleteTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.originalResource != null && message.hasOwnProperty("originalResource"))
+                                object.originalResource = message.originalResource;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetiredResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetiredResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetiredResource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetiredResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RetiredResource";
+                        };
+    
+                        return RetiredResource;
+                    })();
+    
                     /**
                      * ProtectionLevel enum.
                      * @name google.cloud.kms.v1.ProtectionLevel

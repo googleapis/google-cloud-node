@@ -201,6 +201,9 @@ export class KeyDashboardServiceClient {
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
       ),
+      retiredResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/retiredResources/{retired_resource}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1048,6 +1051,55 @@ export class KeyDashboardServiceClient {
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
     return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified retiredResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} retired_resource
+   * @returns {string} Resource name string.
+   */
+  retiredResourcePath(project:string,location:string,retiredResource:string) {
+    return this.pathTemplates.retiredResourcePathTemplate.render({
+      project: project,
+      location: location,
+      retired_resource: retiredResource,
+    });
+  }
+
+  /**
+   * Parse the project from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).project;
+  }
+
+  /**
+   * Parse the location from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).location;
+  }
+
+  /**
+   * Parse the retired_resource from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the retired_resource.
+   */
+  matchRetiredResourceFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).retired_resource;
   }
 
   /**

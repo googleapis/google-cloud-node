@@ -866,6 +866,44 @@
                         }
                       }
                     },
+                    "RetiredResource": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/RetiredResource",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/retiredResources/{retired_resource}",
+                        "(google.api.resource).plural": "retiredResources",
+                        "(google.api.resource).singular": "retiredResource"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "originalResource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ProtectionLevel": {
                       "values": {
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
