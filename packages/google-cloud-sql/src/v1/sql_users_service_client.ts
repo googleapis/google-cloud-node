@@ -748,6 +748,10 @@ export class SqlUsersServiceClient {
  * @param {string[]} [request.databaseRoles]
  *   Optional. List of database roles to grant to the user. body.database_roles
  *   will be ignored for update request.
+ * @param {boolean} [request.revokeExistingRoles]
+ *   Optional. Specifies whether to revoke existing roles that are not present
+ *   in the `database_roles` field. If `false` or unset, the database roles
+ *   specified in `database_roles` are added to the user's existing roles.
  * @param {google.cloud.sql.v1.User} request.body
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
