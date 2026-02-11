@@ -1472,9 +1472,14 @@ describe('BigQuery', () => {
                 ],
               },
               (err, rows) => {
-                assert.ifError(err);
-                assert.strictEqual(rows!.length, 1);
-                done();
+                try {
+                  // Without this try block the test runner silently fails
+                  assert.ifError(err);
+                  assert.strictEqual(rows!.length, 1);
+                  done();
+                } catch (e) {
+                  done(e);
+                }
               },
             );
           });
@@ -1497,6 +1502,159 @@ describe('BigQuery', () => {
                 done();
               },
             );
+          });
+          describe('High Precision Query System Tests', () => {
+            let bigquery: BigQuery;
+            const expectedTsValueNanoseconds = '2023-01-01T12:00:00.123456000Z';
+            const expectedTsValuePicoseconds =
+              '2023-01-01T12:00:00.123456789123Z';
+            const expectedErrorMessage =
+              'Cannot specify both timestamp_as_int and timestamp_output_format.';
+
+            before(() => {
+              bigquery = new BigQuery();
+            });
+
+            const testCases = [
+              {
+                name: 'TOF: FLOAT64, UI64: true (error)',
+                timestampOutputFormat: 'FLOAT64',
+                useInt64Timestamp: true,
+                expectedTsValue: undefined,
+                expectedError: expectedErrorMessage,
+              },
+              {
+                name: 'TOF: omitted, UI64: omitted (default INT64)',
+                timestampOutputFormat: undefined,
+                useInt64Timestamp: undefined,
+                expectedTsValue: expectedTsValuePicoseconds,
+              },
+              {
+                name: 'TOF: omitted, UI64: true',
+                timestampOutputFormat: undefined,
+                useInt64Timestamp: true,
+                expectedTsValue: expectedTsValueNanoseconds,
+              },
+            ];
+
+            testCases.forEach(testCase => {
+              it(`should handle ${testCase.name}`, async () => {
+                /*
+                The users use the new TIMESTAMP(12) type to indicate they want to
+                opt in to using timestampPrecision=12. The reason is that some queries
+                like `SELECT CAST(? as TIMESTAMP(12))` will fail if we set
+                timestampPrecision=12 and we don't want this code change to affect
+                existing users. Queries using TIMESTAMP_ADD are another example.
+                 */
+                const query = {
+                  query: 'SELECT ? as ts',
+                  params: [
+                    bigquery.timestamp('2023-01-01T12:00:00.123456789123Z'),
+                  ],
+                  types: ['TIMESTAMP(12)'],
+                };
+
+                const options: any = {};
+                if (testCase.timestampOutputFormat !== undefined) {
+                  options['formatOptions.timestampOutputFormat'] =
+                    testCase.timestampOutputFormat;
+                }
+                if (testCase.useInt64Timestamp !== undefined) {
+                  options['formatOptions.useInt64Timestamp'] =
+                    testCase.useInt64Timestamp;
+                }
+
+                try {
+                  const [rows] = await bigquery.query(query, options);
+                  if (testCase.expectedError) {
+                    assert.fail(
+                      `Query should have failed for ${testCase.name}, but succeeded`,
+                    );
+                  }
+                  assert.ok(rows.length > 0);
+                  assert.ok(rows[0].ts.value !== undefined);
+                  assert.strictEqual(
+                    rows[0].ts.value,
+                    testCase.expectedTsValue,
+                  );
+                } catch (err: any) {
+                  if (!testCase.expectedError) {
+                    throw err;
+                  }
+
+                  const message = err.message;
+                  assert.strictEqual(
+                    message,
+                    testCase.expectedError,
+                    `Expected ${testCase.expectedError} error for ${testCase.name}, got ${message} (${err.message})`,
+                  );
+                }
+              });
+              it(`should handle nested ${testCase.name}`, async () => {
+                /*
+                The users use the new TIMESTAMP(12) type to indicate they want to
+                opt in to using timestampPrecision=12. The reason is that some queries
+                like `SELECT CAST(? as TIMESTAMP(12))` will fail if we set
+                timestampPrecision=12 and we don't want this code change to affect
+                existing users.
+                 */
+                const query = {
+                  query: 'SELECT ? obj',
+                  params: [
+                    {
+                      nested: {
+                        a: bigquery.timestamp(
+                          '2023-01-01T12:00:00.123456789123Z',
+                        ),
+                      },
+                    },
+                  ],
+                  types: [
+                    {
+                      nested: {
+                        a: 'TIMESTAMP(12)',
+                      },
+                    },
+                  ],
+                };
+
+                const options: any = {};
+                if (testCase.timestampOutputFormat !== undefined) {
+                  options['formatOptions.timestampOutputFormat'] =
+                    testCase.timestampOutputFormat;
+                }
+                if (testCase.useInt64Timestamp !== undefined) {
+                  options['formatOptions.useInt64Timestamp'] =
+                    testCase.useInt64Timestamp;
+                }
+
+                try {
+                  const [rows] = await bigquery.query(query, options);
+                  if (testCase.expectedError) {
+                    assert.fail(
+                      `Query should have failed for ${testCase.name}, but succeeded`,
+                    );
+                  }
+                  assert.ok(rows.length > 0);
+                  assert.ok(rows[0].obj.nested.a.value !== undefined);
+                  assert.strictEqual(
+                    rows[0].obj.nested.a.value,
+                    testCase.expectedTsValue,
+                  );
+                } catch (err: any) {
+                  if (!testCase.expectedError) {
+                    throw err;
+                  }
+
+                  const message = err.message;
+                  assert.strictEqual(
+                    message,
+                    testCase.expectedError,
+                    `Expected ${testCase.expectedError} error for ${testCase.name}, got ${message} (${err.message})`,
+                  );
+                }
+              });
+            });
           });
         });
 
