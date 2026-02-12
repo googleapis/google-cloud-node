@@ -115,6 +115,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public cancelJob(request: google.cloud.storagebatchoperations.v1.ICancelJobRequest): Promise<google.cloud.storagebatchoperations.v1.CancelJobResponse>;
+
+                    /**
+                     * Calls ListBucketOperations.
+                     * @param request ListBucketOperationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBucketOperationsResponse
+                     */
+                    public listBucketOperations(request: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest, callback: google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListBucketOperationsCallback): void;
+
+                    /**
+                     * Calls ListBucketOperations.
+                     * @param request ListBucketOperationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBucketOperations(request: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest): Promise<google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse>;
+
+                    /**
+                     * Calls GetBucketOperation.
+                     * @param request GetBucketOperationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and BucketOperation
+                     */
+                    public getBucketOperation(request: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest, callback: google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetBucketOperationCallback): void;
+
+                    /**
+                     * Calls GetBucketOperation.
+                     * @param request GetBucketOperationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBucketOperation(request: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest): Promise<google.cloud.storagebatchoperations.v1.BucketOperation>;
                 }
 
                 namespace StorageBatchOperations {
@@ -153,6 +181,20 @@ export namespace google {
                      * @param [response] CancelJobResponse
                      */
                     type CancelJobCallback = (error: (Error|null), response?: google.cloud.storagebatchoperations.v1.CancelJobResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storagebatchoperations.v1.StorageBatchOperations|listBucketOperations}.
+                     * @param error Error, if any
+                     * @param [response] ListBucketOperationsResponse
+                     */
+                    type ListBucketOperationsCallback = (error: (Error|null), response?: google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.storagebatchoperations.v1.StorageBatchOperations|getBucketOperation}.
+                     * @param error Error, if any
+                     * @param [response] BucketOperation
+                     */
+                    type GetBucketOperationCallback = (error: (Error|null), response?: google.cloud.storagebatchoperations.v1.BucketOperation) => void;
                 }
 
                 /** Properties of a ListJobsRequest. */
@@ -708,6 +750,9 @@ export namespace google {
 
                     /** DeleteJobRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteJobRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteJobRequest. */
@@ -724,6 +769,9 @@ export namespace google {
 
                     /** DeleteJobRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteJobRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteJobRequest instance using the specified properties.
@@ -888,6 +936,333 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CancelJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBucketOperationsRequest. */
+                interface IListBucketOperationsRequest {
+
+                    /** ListBucketOperationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBucketOperationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBucketOperationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBucketOperationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBucketOperationsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListBucketOperationsRequest. */
+                class ListBucketOperationsRequest implements IListBucketOperationsRequest {
+
+                    /**
+                     * Constructs a new ListBucketOperationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest);
+
+                    /** ListBucketOperationsRequest parent. */
+                    public parent: string;
+
+                    /** ListBucketOperationsRequest filter. */
+                    public filter: string;
+
+                    /** ListBucketOperationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBucketOperationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBucketOperationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListBucketOperationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBucketOperationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest): google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest;
+
+                    /**
+                     * Encodes the specified ListBucketOperationsRequest message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest.verify|verify} messages.
+                     * @param message ListBucketOperationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBucketOperationsRequest message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest.verify|verify} messages.
+                     * @param message ListBucketOperationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBucketOperationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBucketOperationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest;
+
+                    /**
+                     * Decodes a ListBucketOperationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBucketOperationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest;
+
+                    /**
+                     * Verifies a ListBucketOperationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBucketOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBucketOperationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBucketOperationsRequest message. Also converts values to other types if specified.
+                     * @param message ListBucketOperationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBucketOperationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBucketOperationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBucketOperationsResponse. */
+                interface IListBucketOperationsResponse {
+
+                    /** ListBucketOperationsResponse bucketOperations */
+                    bucketOperations?: (google.cloud.storagebatchoperations.v1.IBucketOperation[]|null);
+
+                    /** ListBucketOperationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBucketOperationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBucketOperationsResponse. */
+                class ListBucketOperationsResponse implements IListBucketOperationsResponse {
+
+                    /**
+                     * Constructs a new ListBucketOperationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse);
+
+                    /** ListBucketOperationsResponse bucketOperations. */
+                    public bucketOperations: google.cloud.storagebatchoperations.v1.IBucketOperation[];
+
+                    /** ListBucketOperationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBucketOperationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBucketOperationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBucketOperationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse): google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse;
+
+                    /**
+                     * Encodes the specified ListBucketOperationsResponse message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.verify|verify} messages.
+                     * @param message ListBucketOperationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBucketOperationsResponse message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.verify|verify} messages.
+                     * @param message ListBucketOperationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBucketOperationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBucketOperationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse;
+
+                    /**
+                     * Decodes a ListBucketOperationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBucketOperationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse;
+
+                    /**
+                     * Verifies a ListBucketOperationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBucketOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBucketOperationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBucketOperationsResponse message. Also converts values to other types if specified.
+                     * @param message ListBucketOperationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBucketOperationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBucketOperationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetBucketOperationRequest. */
+                interface IGetBucketOperationRequest {
+
+                    /** GetBucketOperationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBucketOperationRequest. */
+                class GetBucketOperationRequest implements IGetBucketOperationRequest {
+
+                    /**
+                     * Constructs a new GetBucketOperationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest);
+
+                    /** GetBucketOperationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBucketOperationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBucketOperationRequest instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest): google.cloud.storagebatchoperations.v1.GetBucketOperationRequest;
+
+                    /**
+                     * Encodes the specified GetBucketOperationRequest message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.GetBucketOperationRequest.verify|verify} messages.
+                     * @param message GetBucketOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBucketOperationRequest message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.GetBucketOperationRequest.verify|verify} messages.
+                     * @param message GetBucketOperationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBucketOperationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBucketOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.GetBucketOperationRequest;
+
+                    /**
+                     * Decodes a GetBucketOperationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBucketOperationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.GetBucketOperationRequest;
+
+                    /**
+                     * Verifies a GetBucketOperationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBucketOperationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBucketOperationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.GetBucketOperationRequest;
+
+                    /**
+                     * Creates a plain object from a GetBucketOperationRequest message. Also converts values to other types if specified.
+                     * @param message GetBucketOperationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.GetBucketOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBucketOperationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBucketOperationRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -1068,6 +1443,9 @@ export namespace google {
 
                     /** Job dryRun */
                     dryRun?: (boolean|null);
+
+                    /** Job isMultiBucketJob */
+                    isMultiBucketJob?: (boolean|null);
                 }
 
                 /** Represents a Job. */
@@ -1123,6 +1501,9 @@ export namespace google {
 
                     /** Job dryRun. */
                     public dryRun: boolean;
+
+                    /** Job isMultiBucketJob. */
+                    public isMultiBucketJob: boolean;
 
                     /** Job source. */
                     public source?: "bucketList";
@@ -1216,7 +1597,202 @@ export namespace google {
                         RUNNING = 1,
                         SUCCEEDED = 2,
                         CANCELED = 3,
-                        FAILED = 4
+                        FAILED = 4,
+                        QUEUED = 5
+                    }
+                }
+
+                /** Properties of a BucketOperation. */
+                interface IBucketOperation {
+
+                    /** BucketOperation name */
+                    name?: (string|null);
+
+                    /** BucketOperation bucketName */
+                    bucketName?: (string|null);
+
+                    /** BucketOperation prefixList */
+                    prefixList?: (google.cloud.storagebatchoperations.v1.IPrefixList|null);
+
+                    /** BucketOperation manifest */
+                    manifest?: (google.cloud.storagebatchoperations.v1.IManifest|null);
+
+                    /** BucketOperation putObjectHold */
+                    putObjectHold?: (google.cloud.storagebatchoperations.v1.IPutObjectHold|null);
+
+                    /** BucketOperation deleteObject */
+                    deleteObject?: (google.cloud.storagebatchoperations.v1.IDeleteObject|null);
+
+                    /** BucketOperation putMetadata */
+                    putMetadata?: (google.cloud.storagebatchoperations.v1.IPutMetadata|null);
+
+                    /** BucketOperation rewriteObject */
+                    rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
+
+                    /** BucketOperation createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation completeTime */
+                    completeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation counters */
+                    counters?: (google.cloud.storagebatchoperations.v1.ICounters|null);
+
+                    /** BucketOperation errorSummaries */
+                    errorSummaries?: (google.cloud.storagebatchoperations.v1.IErrorSummary[]|null);
+
+                    /** BucketOperation state */
+                    state?: (google.cloud.storagebatchoperations.v1.BucketOperation.State|keyof typeof google.cloud.storagebatchoperations.v1.BucketOperation.State|null);
+                }
+
+                /** Represents a BucketOperation. */
+                class BucketOperation implements IBucketOperation {
+
+                    /**
+                     * Constructs a new BucketOperation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.storagebatchoperations.v1.IBucketOperation);
+
+                    /** BucketOperation name. */
+                    public name: string;
+
+                    /** BucketOperation bucketName. */
+                    public bucketName: string;
+
+                    /** BucketOperation prefixList. */
+                    public prefixList?: (google.cloud.storagebatchoperations.v1.IPrefixList|null);
+
+                    /** BucketOperation manifest. */
+                    public manifest?: (google.cloud.storagebatchoperations.v1.IManifest|null);
+
+                    /** BucketOperation putObjectHold. */
+                    public putObjectHold?: (google.cloud.storagebatchoperations.v1.IPutObjectHold|null);
+
+                    /** BucketOperation deleteObject. */
+                    public deleteObject?: (google.cloud.storagebatchoperations.v1.IDeleteObject|null);
+
+                    /** BucketOperation putMetadata. */
+                    public putMetadata?: (google.cloud.storagebatchoperations.v1.IPutMetadata|null);
+
+                    /** BucketOperation rewriteObject. */
+                    public rewriteObject?: (google.cloud.storagebatchoperations.v1.IRewriteObject|null);
+
+                    /** BucketOperation createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation completeTime. */
+                    public completeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BucketOperation counters. */
+                    public counters?: (google.cloud.storagebatchoperations.v1.ICounters|null);
+
+                    /** BucketOperation errorSummaries. */
+                    public errorSummaries: google.cloud.storagebatchoperations.v1.IErrorSummary[];
+
+                    /** BucketOperation state. */
+                    public state: (google.cloud.storagebatchoperations.v1.BucketOperation.State|keyof typeof google.cloud.storagebatchoperations.v1.BucketOperation.State);
+
+                    /** BucketOperation objectConfiguration. */
+                    public objectConfiguration?: ("prefixList"|"manifest");
+
+                    /** BucketOperation transformation. */
+                    public transformation?: ("putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject");
+
+                    /**
+                     * Creates a new BucketOperation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BucketOperation instance
+                     */
+                    public static create(properties?: google.cloud.storagebatchoperations.v1.IBucketOperation): google.cloud.storagebatchoperations.v1.BucketOperation;
+
+                    /**
+                     * Encodes the specified BucketOperation message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.BucketOperation.verify|verify} messages.
+                     * @param message BucketOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.storagebatchoperations.v1.IBucketOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BucketOperation message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.BucketOperation.verify|verify} messages.
+                     * @param message BucketOperation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.storagebatchoperations.v1.IBucketOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BucketOperation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BucketOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.storagebatchoperations.v1.BucketOperation;
+
+                    /**
+                     * Decodes a BucketOperation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BucketOperation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.storagebatchoperations.v1.BucketOperation;
+
+                    /**
+                     * Verifies a BucketOperation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BucketOperation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BucketOperation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.storagebatchoperations.v1.BucketOperation;
+
+                    /**
+                     * Creates a plain object from a BucketOperation message. Also converts values to other types if specified.
+                     * @param message BucketOperation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.storagebatchoperations.v1.BucketOperation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BucketOperation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BucketOperation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BucketOperation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        QUEUED = 1,
+                        RUNNING = 2,
+                        SUCCEEDED = 3,
+                        CANCELED = 4,
+                        FAILED = 5
                     }
                 }
 

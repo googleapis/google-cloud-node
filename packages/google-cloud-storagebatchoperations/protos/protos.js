@@ -263,6 +263,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.storagebatchoperations.v1.StorageBatchOperations|listBucketOperations}.
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @typedef ListBucketOperationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} [response] ListBucketOperationsResponse
+                         */
+    
+                        /**
+                         * Calls ListBucketOperations.
+                         * @function listBucketOperations
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @instance
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest} request ListBucketOperationsRequest message or plain object
+                         * @param {google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListBucketOperationsCallback} callback Node-style callback called with the error, if any, and ListBucketOperationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageBatchOperations.prototype.listBucketOperations = function listBucketOperations(request, callback) {
+                            return this.rpcCall(listBucketOperations, $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest, $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse, request, callback);
+                        }, "name", { value: "ListBucketOperations" });
+    
+                        /**
+                         * Calls ListBucketOperations.
+                         * @function listBucketOperations
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @instance
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest} request ListBucketOperationsRequest message or plain object
+                         * @returns {Promise<google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.storagebatchoperations.v1.StorageBatchOperations|getBucketOperation}.
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @typedef GetBucketOperationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.storagebatchoperations.v1.BucketOperation} [response] BucketOperation
+                         */
+    
+                        /**
+                         * Calls GetBucketOperation.
+                         * @function getBucketOperation
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @instance
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest} request GetBucketOperationRequest message or plain object
+                         * @param {google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetBucketOperationCallback} callback Node-style callback called with the error, if any, and BucketOperation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageBatchOperations.prototype.getBucketOperation = function getBucketOperation(request, callback) {
+                            return this.rpcCall(getBucketOperation, $root.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest, $root.google.cloud.storagebatchoperations.v1.BucketOperation, request, callback);
+                        }, "name", { value: "GetBucketOperation" });
+    
+                        /**
+                         * Calls GetBucketOperation.
+                         * @function getBucketOperation
+                         * @memberof google.cloud.storagebatchoperations.v1.StorageBatchOperations
+                         * @instance
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest} request GetBucketOperationRequest message or plain object
+                         * @returns {Promise<google.cloud.storagebatchoperations.v1.BucketOperation>} Promise
+                         * @variation 2
+                         */
+    
                         return StorageBatchOperations;
                     })();
     
@@ -1576,6 +1642,7 @@
                          * @interface IDeleteJobRequest
                          * @property {string|null} [name] DeleteJobRequest name
                          * @property {string|null} [requestId] DeleteJobRequest requestId
+                         * @property {boolean|null} [force] DeleteJobRequest force
                          */
     
                         /**
@@ -1610,6 +1677,14 @@
                         DeleteJobRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteJobRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.storagebatchoperations.v1.DeleteJobRequest
+                         * @instance
+                         */
+                        DeleteJobRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteJobRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.storagebatchoperations.v1.DeleteJobRequest
@@ -1637,6 +1712,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -1681,6 +1758,10 @@
                                         message.requestId = reader.string();
                                         break;
                                     }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1722,6 +1803,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -1741,6 +1825,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -1760,11 +1846,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -1972,6 +2061,799 @@
                         };
     
                         return CancelJobResponse;
+                    })();
+    
+                    v1.ListBucketOperationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBucketOperationsRequest.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IListBucketOperationsRequest
+                         * @property {string|null} [parent] ListBucketOperationsRequest parent
+                         * @property {string|null} [filter] ListBucketOperationsRequest filter
+                         * @property {number|null} [pageSize] ListBucketOperationsRequest pageSize
+                         * @property {string|null} [pageToken] ListBucketOperationsRequest pageToken
+                         * @property {string|null} [orderBy] ListBucketOperationsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListBucketOperationsRequest.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents a ListBucketOperationsRequest.
+                         * @implements IListBucketOperationsRequest
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest=} [properties] Properties to set
+                         */
+                        function ListBucketOperationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBucketOperationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         */
+                        ListBucketOperationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBucketOperationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         */
+                        ListBucketOperationsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListBucketOperationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         */
+                        ListBucketOperationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBucketOperationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         */
+                        ListBucketOperationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListBucketOperationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         */
+                        ListBucketOperationsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListBucketOperationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest} ListBucketOperationsRequest instance
+                         */
+                        ListBucketOperationsRequest.create = function create(properties) {
+                            return new ListBucketOperationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBucketOperationsRequest message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest} message ListBucketOperationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBucketOperationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBucketOperationsRequest message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest} message ListBucketOperationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBucketOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBucketOperationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest} ListBucketOperationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBucketOperationsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBucketOperationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest} ListBucketOperationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBucketOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBucketOperationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBucketOperationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBucketOperationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest} ListBucketOperationsRequest
+                         */
+                        ListBucketOperationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBucketOperationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest} message ListBucketOperationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBucketOperationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBucketOperationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBucketOperationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBucketOperationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBucketOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.ListBucketOperationsRequest";
+                        };
+    
+                        return ListBucketOperationsRequest;
+                    })();
+    
+                    v1.ListBucketOperationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBucketOperationsResponse.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IListBucketOperationsResponse
+                         * @property {Array.<google.cloud.storagebatchoperations.v1.IBucketOperation>|null} [bucketOperations] ListBucketOperationsResponse bucketOperations
+                         * @property {string|null} [nextPageToken] ListBucketOperationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBucketOperationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBucketOperationsResponse.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents a ListBucketOperationsResponse.
+                         * @implements IListBucketOperationsResponse
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse=} [properties] Properties to set
+                         */
+                        function ListBucketOperationsResponse(properties) {
+                            this.bucketOperations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBucketOperationsResponse bucketOperations.
+                         * @member {Array.<google.cloud.storagebatchoperations.v1.IBucketOperation>} bucketOperations
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @instance
+                         */
+                        ListBucketOperationsResponse.prototype.bucketOperations = $util.emptyArray;
+    
+                        /**
+                         * ListBucketOperationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @instance
+                         */
+                        ListBucketOperationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBucketOperationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @instance
+                         */
+                        ListBucketOperationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBucketOperationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} ListBucketOperationsResponse instance
+                         */
+                        ListBucketOperationsResponse.create = function create(properties) {
+                            return new ListBucketOperationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBucketOperationsResponse message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse} message ListBucketOperationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBucketOperationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bucketOperations != null && message.bucketOperations.length)
+                                for (var i = 0; i < message.bucketOperations.length; ++i)
+                                    $root.google.cloud.storagebatchoperations.v1.BucketOperation.encode(message.bucketOperations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBucketOperationsResponse message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse} message ListBucketOperationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBucketOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBucketOperationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} ListBucketOperationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBucketOperationsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.bucketOperations && message.bucketOperations.length))
+                                            message.bucketOperations = [];
+                                        message.bucketOperations.push($root.google.cloud.storagebatchoperations.v1.BucketOperation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBucketOperationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} ListBucketOperationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBucketOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBucketOperationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBucketOperationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bucketOperations != null && message.hasOwnProperty("bucketOperations")) {
+                                if (!Array.isArray(message.bucketOperations))
+                                    return "bucketOperations: array expected";
+                                for (var i = 0; i < message.bucketOperations.length; ++i) {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.BucketOperation.verify(message.bucketOperations[i]);
+                                    if (error)
+                                        return "bucketOperations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBucketOperationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} ListBucketOperationsResponse
+                         */
+                        ListBucketOperationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse();
+                            if (object.bucketOperations) {
+                                if (!Array.isArray(object.bucketOperations))
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.bucketOperations: array expected");
+                                message.bucketOperations = [];
+                                for (var i = 0; i < object.bucketOperations.length; ++i) {
+                                    if (typeof object.bucketOperations[i] !== "object")
+                                        throw TypeError(".google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.bucketOperations: object expected");
+                                    message.bucketOperations[i] = $root.google.cloud.storagebatchoperations.v1.BucketOperation.fromObject(object.bucketOperations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBucketOperationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse} message ListBucketOperationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBucketOperationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.bucketOperations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.bucketOperations && message.bucketOperations.length) {
+                                object.bucketOperations = [];
+                                for (var j = 0; j < message.bucketOperations.length; ++j)
+                                    object.bucketOperations[j] = $root.google.cloud.storagebatchoperations.v1.BucketOperation.toObject(message.bucketOperations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBucketOperationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBucketOperationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBucketOperationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBucketOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.ListBucketOperationsResponse";
+                        };
+    
+                        return ListBucketOperationsResponse;
+                    })();
+    
+                    v1.GetBucketOperationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBucketOperationRequest.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IGetBucketOperationRequest
+                         * @property {string|null} [name] GetBucketOperationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBucketOperationRequest.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents a GetBucketOperationRequest.
+                         * @implements IGetBucketOperationRequest
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest=} [properties] Properties to set
+                         */
+                        function GetBucketOperationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBucketOperationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @instance
+                         */
+                        GetBucketOperationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBucketOperationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.GetBucketOperationRequest} GetBucketOperationRequest instance
+                         */
+                        GetBucketOperationRequest.create = function create(properties) {
+                            return new GetBucketOperationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBucketOperationRequest message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.GetBucketOperationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest} message GetBucketOperationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBucketOperationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBucketOperationRequest message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.GetBucketOperationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest} message GetBucketOperationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBucketOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBucketOperationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.GetBucketOperationRequest} GetBucketOperationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBucketOperationRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBucketOperationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.GetBucketOperationRequest} GetBucketOperationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBucketOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBucketOperationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBucketOperationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBucketOperationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.GetBucketOperationRequest} GetBucketOperationRequest
+                         */
+                        GetBucketOperationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.GetBucketOperationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBucketOperationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.GetBucketOperationRequest} message GetBucketOperationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBucketOperationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBucketOperationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBucketOperationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBucketOperationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.GetBucketOperationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBucketOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.GetBucketOperationRequest";
+                        };
+    
+                        return GetBucketOperationRequest;
                     })();
     
                     v1.OperationMetadata = (function() {
@@ -2331,6 +3213,7 @@
                          * @property {Array.<google.cloud.storagebatchoperations.v1.IErrorSummary>|null} [errorSummaries] Job errorSummaries
                          * @property {google.cloud.storagebatchoperations.v1.Job.State|null} [state] Job state
                          * @property {boolean|null} [dryRun] Job dryRun
+                         * @property {boolean|null} [isMultiBucketJob] Job isMultiBucketJob
                          */
     
                         /**
@@ -2469,6 +3352,14 @@
                          */
                         Job.prototype.dryRun = false;
     
+                        /**
+                         * Job isMultiBucketJob.
+                         * @member {boolean} isMultiBucketJob
+                         * @memberof google.cloud.storagebatchoperations.v1.Job
+                         * @instance
+                         */
+                        Job.prototype.isMultiBucketJob = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -2549,6 +3440,8 @@
                                 $root.google.cloud.storagebatchoperations.v1.RewriteObject.encode(message.rewriteObject, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.dryRun != null && Object.hasOwnProperty.call(message, "dryRun"))
                                 writer.uint32(/* id 22, wireType 0 =*/176).bool(message.dryRun);
+                            if (message.isMultiBucketJob != null && Object.hasOwnProperty.call(message, "isMultiBucketJob"))
+                                writer.uint32(/* id 24, wireType 0 =*/192).bool(message.isMultiBucketJob);
                             return writer;
                         };
     
@@ -2645,6 +3538,10 @@
                                     }
                                 case 22: {
                                         message.dryRun = reader.bool();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.isMultiBucketJob = reader.bool();
                                         break;
                                     }
                                 default:
@@ -2778,11 +3675,15 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.dryRun != null && message.hasOwnProperty("dryRun"))
                                 if (typeof message.dryRun !== "boolean")
                                     return "dryRun: boolean expected";
+                            if (message.isMultiBucketJob != null && message.hasOwnProperty("isMultiBucketJob"))
+                                if (typeof message.isMultiBucketJob !== "boolean")
+                                    return "isMultiBucketJob: boolean expected";
                             return null;
                         };
     
@@ -2889,9 +3790,15 @@
                             case 4:
                                 message.state = 4;
                                 break;
+                            case "QUEUED":
+                            case 5:
+                                message.state = 5;
+                                break;
                             }
                             if (object.dryRun != null)
                                 message.dryRun = Boolean(object.dryRun);
+                            if (object.isMultiBucketJob != null)
+                                message.isMultiBucketJob = Boolean(object.isMultiBucketJob);
                             return message;
                         };
     
@@ -2920,6 +3827,7 @@
                                 object.counters = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.dryRun = false;
+                                object.isMultiBucketJob = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2969,6 +3877,8 @@
                             }
                             if (message.dryRun != null && message.hasOwnProperty("dryRun"))
                                 object.dryRun = message.dryRun;
+                            if (message.isMultiBucketJob != null && message.hasOwnProperty("isMultiBucketJob"))
+                                object.isMultiBucketJob = message.isMultiBucketJob;
                             return object;
                         };
     
@@ -3007,6 +3917,7 @@
                          * @property {number} SUCCEEDED=2 SUCCEEDED value
                          * @property {number} CANCELED=3 CANCELED value
                          * @property {number} FAILED=4 FAILED value
+                         * @property {number} QUEUED=5 QUEUED value
                          */
                         Job.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3015,10 +3926,713 @@
                             values[valuesById[2] = "SUCCEEDED"] = 2;
                             values[valuesById[3] = "CANCELED"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "QUEUED"] = 5;
                             return values;
                         })();
     
                         return Job;
+                    })();
+    
+                    v1.BucketOperation = (function() {
+    
+                        /**
+                         * Properties of a BucketOperation.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @interface IBucketOperation
+                         * @property {string|null} [name] BucketOperation name
+                         * @property {string|null} [bucketName] BucketOperation bucketName
+                         * @property {google.cloud.storagebatchoperations.v1.IPrefixList|null} [prefixList] BucketOperation prefixList
+                         * @property {google.cloud.storagebatchoperations.v1.IManifest|null} [manifest] BucketOperation manifest
+                         * @property {google.cloud.storagebatchoperations.v1.IPutObjectHold|null} [putObjectHold] BucketOperation putObjectHold
+                         * @property {google.cloud.storagebatchoperations.v1.IDeleteObject|null} [deleteObject] BucketOperation deleteObject
+                         * @property {google.cloud.storagebatchoperations.v1.IPutMetadata|null} [putMetadata] BucketOperation putMetadata
+                         * @property {google.cloud.storagebatchoperations.v1.IRewriteObject|null} [rewriteObject] BucketOperation rewriteObject
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BucketOperation createTime
+                         * @property {google.protobuf.ITimestamp|null} [startTime] BucketOperation startTime
+                         * @property {google.protobuf.ITimestamp|null} [completeTime] BucketOperation completeTime
+                         * @property {google.cloud.storagebatchoperations.v1.ICounters|null} [counters] BucketOperation counters
+                         * @property {Array.<google.cloud.storagebatchoperations.v1.IErrorSummary>|null} [errorSummaries] BucketOperation errorSummaries
+                         * @property {google.cloud.storagebatchoperations.v1.BucketOperation.State|null} [state] BucketOperation state
+                         */
+    
+                        /**
+                         * Constructs a new BucketOperation.
+                         * @memberof google.cloud.storagebatchoperations.v1
+                         * @classdesc Represents a BucketOperation.
+                         * @implements IBucketOperation
+                         * @constructor
+                         * @param {google.cloud.storagebatchoperations.v1.IBucketOperation=} [properties] Properties to set
+                         */
+                        function BucketOperation(properties) {
+                            this.errorSummaries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BucketOperation name.
+                         * @member {string} name
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.name = "";
+    
+                        /**
+                         * BucketOperation bucketName.
+                         * @member {string} bucketName
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.bucketName = "";
+    
+                        /**
+                         * BucketOperation prefixList.
+                         * @member {google.cloud.storagebatchoperations.v1.IPrefixList|null|undefined} prefixList
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.prefixList = null;
+    
+                        /**
+                         * BucketOperation manifest.
+                         * @member {google.cloud.storagebatchoperations.v1.IManifest|null|undefined} manifest
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.manifest = null;
+    
+                        /**
+                         * BucketOperation putObjectHold.
+                         * @member {google.cloud.storagebatchoperations.v1.IPutObjectHold|null|undefined} putObjectHold
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.putObjectHold = null;
+    
+                        /**
+                         * BucketOperation deleteObject.
+                         * @member {google.cloud.storagebatchoperations.v1.IDeleteObject|null|undefined} deleteObject
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.deleteObject = null;
+    
+                        /**
+                         * BucketOperation putMetadata.
+                         * @member {google.cloud.storagebatchoperations.v1.IPutMetadata|null|undefined} putMetadata
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.putMetadata = null;
+    
+                        /**
+                         * BucketOperation rewriteObject.
+                         * @member {google.cloud.storagebatchoperations.v1.IRewriteObject|null|undefined} rewriteObject
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.rewriteObject = null;
+    
+                        /**
+                         * BucketOperation createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.createTime = null;
+    
+                        /**
+                         * BucketOperation startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.startTime = null;
+    
+                        /**
+                         * BucketOperation completeTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} completeTime
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.completeTime = null;
+    
+                        /**
+                         * BucketOperation counters.
+                         * @member {google.cloud.storagebatchoperations.v1.ICounters|null|undefined} counters
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.counters = null;
+    
+                        /**
+                         * BucketOperation errorSummaries.
+                         * @member {Array.<google.cloud.storagebatchoperations.v1.IErrorSummary>} errorSummaries
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.errorSummaries = $util.emptyArray;
+    
+                        /**
+                         * BucketOperation state.
+                         * @member {google.cloud.storagebatchoperations.v1.BucketOperation.State} state
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        BucketOperation.prototype.state = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BucketOperation objectConfiguration.
+                         * @member {"prefixList"|"manifest"|undefined} objectConfiguration
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        Object.defineProperty(BucketOperation.prototype, "objectConfiguration", {
+                            get: $util.oneOfGetter($oneOfFields = ["prefixList", "manifest"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BucketOperation transformation.
+                         * @member {"putObjectHold"|"deleteObject"|"putMetadata"|"rewriteObject"|undefined} transformation
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         */
+                        Object.defineProperty(BucketOperation.prototype, "transformation", {
+                            get: $util.oneOfGetter($oneOfFields = ["putObjectHold", "deleteObject", "putMetadata", "rewriteObject"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BucketOperation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IBucketOperation=} [properties] Properties to set
+                         * @returns {google.cloud.storagebatchoperations.v1.BucketOperation} BucketOperation instance
+                         */
+                        BucketOperation.create = function create(properties) {
+                            return new BucketOperation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BucketOperation message. Does not implicitly {@link google.cloud.storagebatchoperations.v1.BucketOperation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IBucketOperation} message BucketOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BucketOperation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.bucketName != null && Object.hasOwnProperty.call(message, "bucketName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.bucketName);
+                            if (message.prefixList != null && Object.hasOwnProperty.call(message, "prefixList"))
+                                $root.google.cloud.storagebatchoperations.v1.PrefixList.encode(message.prefixList, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.manifest != null && Object.hasOwnProperty.call(message, "manifest"))
+                                $root.google.cloud.storagebatchoperations.v1.Manifest.encode(message.manifest, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.completeTime != null && Object.hasOwnProperty.call(message, "completeTime"))
+                                $root.google.protobuf.Timestamp.encode(message.completeTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.counters != null && Object.hasOwnProperty.call(message, "counters"))
+                                $root.google.cloud.storagebatchoperations.v1.Counters.encode(message.counters, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.errorSummaries != null && message.errorSummaries.length)
+                                for (var i = 0; i < message.errorSummaries.length; ++i)
+                                    $root.google.cloud.storagebatchoperations.v1.ErrorSummary.encode(message.errorSummaries[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            if (message.putObjectHold != null && Object.hasOwnProperty.call(message, "putObjectHold"))
+                                $root.google.cloud.storagebatchoperations.v1.PutObjectHold.encode(message.putObjectHold, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.deleteObject != null && Object.hasOwnProperty.call(message, "deleteObject"))
+                                $root.google.cloud.storagebatchoperations.v1.DeleteObject.encode(message.deleteObject, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.putMetadata != null && Object.hasOwnProperty.call(message, "putMetadata"))
+                                $root.google.cloud.storagebatchoperations.v1.PutMetadata.encode(message.putMetadata, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.rewriteObject != null && Object.hasOwnProperty.call(message, "rewriteObject"))
+                                $root.google.cloud.storagebatchoperations.v1.RewriteObject.encode(message.rewriteObject, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BucketOperation message, length delimited. Does not implicitly {@link google.cloud.storagebatchoperations.v1.BucketOperation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.IBucketOperation} message BucketOperation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BucketOperation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BucketOperation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.storagebatchoperations.v1.BucketOperation} BucketOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BucketOperation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.storagebatchoperations.v1.BucketOperation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.bucketName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.prefixList = $root.google.cloud.storagebatchoperations.v1.PrefixList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.manifest = $root.google.cloud.storagebatchoperations.v1.Manifest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.putObjectHold = $root.google.cloud.storagebatchoperations.v1.PutObjectHold.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.deleteObject = $root.google.cloud.storagebatchoperations.v1.DeleteObject.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.putMetadata = $root.google.cloud.storagebatchoperations.v1.PutMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.completeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.counters = $root.google.cloud.storagebatchoperations.v1.Counters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.errorSummaries && message.errorSummaries.length))
+                                            message.errorSummaries = [];
+                                        message.errorSummaries.push($root.google.cloud.storagebatchoperations.v1.ErrorSummary.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BucketOperation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.storagebatchoperations.v1.BucketOperation} BucketOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BucketOperation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BucketOperation message.
+                         * @function verify
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BucketOperation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.bucketName != null && message.hasOwnProperty("bucketName"))
+                                if (!$util.isString(message.bucketName))
+                                    return "bucketName: string expected";
+                            if (message.prefixList != null && message.hasOwnProperty("prefixList")) {
+                                properties.objectConfiguration = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.PrefixList.verify(message.prefixList);
+                                    if (error)
+                                        return "prefixList." + error;
+                                }
+                            }
+                            if (message.manifest != null && message.hasOwnProperty("manifest")) {
+                                if (properties.objectConfiguration === 1)
+                                    return "objectConfiguration: multiple values";
+                                properties.objectConfiguration = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.Manifest.verify(message.manifest);
+                                    if (error)
+                                        return "manifest." + error;
+                                }
+                            }
+                            if (message.putObjectHold != null && message.hasOwnProperty("putObjectHold")) {
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.PutObjectHold.verify(message.putObjectHold);
+                                    if (error)
+                                        return "putObjectHold." + error;
+                                }
+                            }
+                            if (message.deleteObject != null && message.hasOwnProperty("deleteObject")) {
+                                if (properties.transformation === 1)
+                                    return "transformation: multiple values";
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.DeleteObject.verify(message.deleteObject);
+                                    if (error)
+                                        return "deleteObject." + error;
+                                }
+                            }
+                            if (message.putMetadata != null && message.hasOwnProperty("putMetadata")) {
+                                if (properties.transformation === 1)
+                                    return "transformation: multiple values";
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.PutMetadata.verify(message.putMetadata);
+                                    if (error)
+                                        return "putMetadata." + error;
+                                }
+                            }
+                            if (message.rewriteObject != null && message.hasOwnProperty("rewriteObject")) {
+                                if (properties.transformation === 1)
+                                    return "transformation: multiple values";
+                                properties.transformation = 1;
+                                {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.RewriteObject.verify(message.rewriteObject);
+                                    if (error)
+                                        return "rewriteObject." + error;
+                                }
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.completeTime != null && message.hasOwnProperty("completeTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.completeTime);
+                                if (error)
+                                    return "completeTime." + error;
+                            }
+                            if (message.counters != null && message.hasOwnProperty("counters")) {
+                                var error = $root.google.cloud.storagebatchoperations.v1.Counters.verify(message.counters);
+                                if (error)
+                                    return "counters." + error;
+                            }
+                            if (message.errorSummaries != null && message.hasOwnProperty("errorSummaries")) {
+                                if (!Array.isArray(message.errorSummaries))
+                                    return "errorSummaries: array expected";
+                                for (var i = 0; i < message.errorSummaries.length; ++i) {
+                                    var error = $root.google.cloud.storagebatchoperations.v1.ErrorSummary.verify(message.errorSummaries[i]);
+                                    if (error)
+                                        return "errorSummaries." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BucketOperation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.storagebatchoperations.v1.BucketOperation} BucketOperation
+                         */
+                        BucketOperation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.storagebatchoperations.v1.BucketOperation)
+                                return object;
+                            var message = new $root.google.cloud.storagebatchoperations.v1.BucketOperation();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.bucketName != null)
+                                message.bucketName = String(object.bucketName);
+                            if (object.prefixList != null) {
+                                if (typeof object.prefixList !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.prefixList: object expected");
+                                message.prefixList = $root.google.cloud.storagebatchoperations.v1.PrefixList.fromObject(object.prefixList);
+                            }
+                            if (object.manifest != null) {
+                                if (typeof object.manifest !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.manifest: object expected");
+                                message.manifest = $root.google.cloud.storagebatchoperations.v1.Manifest.fromObject(object.manifest);
+                            }
+                            if (object.putObjectHold != null) {
+                                if (typeof object.putObjectHold !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.putObjectHold: object expected");
+                                message.putObjectHold = $root.google.cloud.storagebatchoperations.v1.PutObjectHold.fromObject(object.putObjectHold);
+                            }
+                            if (object.deleteObject != null) {
+                                if (typeof object.deleteObject !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.deleteObject: object expected");
+                                message.deleteObject = $root.google.cloud.storagebatchoperations.v1.DeleteObject.fromObject(object.deleteObject);
+                            }
+                            if (object.putMetadata != null) {
+                                if (typeof object.putMetadata !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.putMetadata: object expected");
+                                message.putMetadata = $root.google.cloud.storagebatchoperations.v1.PutMetadata.fromObject(object.putMetadata);
+                            }
+                            if (object.rewriteObject != null) {
+                                if (typeof object.rewriteObject !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.rewriteObject: object expected");
+                                message.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.fromObject(object.rewriteObject);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.completeTime != null) {
+                                if (typeof object.completeTime !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.completeTime: object expected");
+                                message.completeTime = $root.google.protobuf.Timestamp.fromObject(object.completeTime);
+                            }
+                            if (object.counters != null) {
+                                if (typeof object.counters !== "object")
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.counters: object expected");
+                                message.counters = $root.google.cloud.storagebatchoperations.v1.Counters.fromObject(object.counters);
+                            }
+                            if (object.errorSummaries) {
+                                if (!Array.isArray(object.errorSummaries))
+                                    throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.errorSummaries: array expected");
+                                message.errorSummaries = [];
+                                for (var i = 0; i < object.errorSummaries.length; ++i) {
+                                    if (typeof object.errorSummaries[i] !== "object")
+                                        throw TypeError(".google.cloud.storagebatchoperations.v1.BucketOperation.errorSummaries: object expected");
+                                    message.errorSummaries[i] = $root.google.cloud.storagebatchoperations.v1.ErrorSummary.fromObject(object.errorSummaries[i]);
+                                }
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "QUEUED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "RUNNING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "FAILED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BucketOperation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {google.cloud.storagebatchoperations.v1.BucketOperation} message BucketOperation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BucketOperation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errorSummaries = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.bucketName = "";
+                                object.createTime = null;
+                                object.startTime = null;
+                                object.completeTime = null;
+                                object.counters = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.bucketName != null && message.hasOwnProperty("bucketName"))
+                                object.bucketName = message.bucketName;
+                            if (message.prefixList != null && message.hasOwnProperty("prefixList")) {
+                                object.prefixList = $root.google.cloud.storagebatchoperations.v1.PrefixList.toObject(message.prefixList, options);
+                                if (options.oneofs)
+                                    object.objectConfiguration = "prefixList";
+                            }
+                            if (message.manifest != null && message.hasOwnProperty("manifest")) {
+                                object.manifest = $root.google.cloud.storagebatchoperations.v1.Manifest.toObject(message.manifest, options);
+                                if (options.oneofs)
+                                    object.objectConfiguration = "manifest";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.completeTime != null && message.hasOwnProperty("completeTime"))
+                                object.completeTime = $root.google.protobuf.Timestamp.toObject(message.completeTime, options);
+                            if (message.counters != null && message.hasOwnProperty("counters"))
+                                object.counters = $root.google.cloud.storagebatchoperations.v1.Counters.toObject(message.counters, options);
+                            if (message.errorSummaries && message.errorSummaries.length) {
+                                object.errorSummaries = [];
+                                for (var j = 0; j < message.errorSummaries.length; ++j)
+                                    object.errorSummaries[j] = $root.google.cloud.storagebatchoperations.v1.ErrorSummary.toObject(message.errorSummaries[j], options);
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.storagebatchoperations.v1.BucketOperation.State[message.state] === undefined ? message.state : $root.google.cloud.storagebatchoperations.v1.BucketOperation.State[message.state] : message.state;
+                            if (message.putObjectHold != null && message.hasOwnProperty("putObjectHold")) {
+                                object.putObjectHold = $root.google.cloud.storagebatchoperations.v1.PutObjectHold.toObject(message.putObjectHold, options);
+                                if (options.oneofs)
+                                    object.transformation = "putObjectHold";
+                            }
+                            if (message.deleteObject != null && message.hasOwnProperty("deleteObject")) {
+                                object.deleteObject = $root.google.cloud.storagebatchoperations.v1.DeleteObject.toObject(message.deleteObject, options);
+                                if (options.oneofs)
+                                    object.transformation = "deleteObject";
+                            }
+                            if (message.putMetadata != null && message.hasOwnProperty("putMetadata")) {
+                                object.putMetadata = $root.google.cloud.storagebatchoperations.v1.PutMetadata.toObject(message.putMetadata, options);
+                                if (options.oneofs)
+                                    object.transformation = "putMetadata";
+                            }
+                            if (message.rewriteObject != null && message.hasOwnProperty("rewriteObject")) {
+                                object.rewriteObject = $root.google.cloud.storagebatchoperations.v1.RewriteObject.toObject(message.rewriteObject, options);
+                                if (options.oneofs)
+                                    object.transformation = "rewriteObject";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BucketOperation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BucketOperation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BucketOperation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.storagebatchoperations.v1.BucketOperation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BucketOperation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.storagebatchoperations.v1.BucketOperation";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.storagebatchoperations.v1.BucketOperation.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} QUEUED=1 QUEUED value
+                         * @property {number} RUNNING=2 RUNNING value
+                         * @property {number} SUCCEEDED=3 SUCCEEDED value
+                         * @property {number} CANCELED=4 CANCELED value
+                         * @property {number} FAILED=5 FAILED value
+                         */
+                        BucketOperation.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "QUEUED"] = 1;
+                            values[valuesById[2] = "RUNNING"] = 2;
+                            values[valuesById[3] = "SUCCEEDED"] = 3;
+                            values[valuesById[4] = "CANCELED"] = 4;
+                            values[valuesById[5] = "FAILED"] = 5;
+                            return values;
+                        })();
+    
+                        return BucketOperation;
                     })();
     
                     v1.BucketList = (function() {

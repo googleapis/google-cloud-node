@@ -187,6 +187,9 @@ export class StorageBatchOperationsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      bucketOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/jobs/{job}/bucketOperations/{bucket_operation}'
+      ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
       ),
@@ -203,7 +206,9 @@ export class StorageBatchOperationsClient {
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
       listJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs'),
+      listBucketOperations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'bucketOperations')
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -274,7 +279,7 @@ export class StorageBatchOperationsClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const storageBatchOperationsStubMethods =
-        ['listJobs', 'getJob', 'createJob', 'deleteJob', 'cancelJob'];
+        ['listJobs', 'getJob', 'createJob', 'deleteJob', 'cancelJob', 'listBucketOperations', 'getBucketOperation'];
     for (const methodName of storageBatchOperationsStubMethods) {
       const callPromise = this.storageBatchOperationsStub.then(
         stub => (...args: Array<{}>) => {
@@ -487,6 +492,11 @@ export class StorageBatchOperationsClient {
  *   `request_id` will be ignored for at least 60 minutes since the first
  *   request. The request ID must be a valid UUID with the exception that zero
  *   UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} [request.force]
+ *   Optional. If set to true, any child bucket operations of the job will also
+ *   be deleted. Highly recommended to be set to true by all clients. Users
+ *   cannot mutate bucket operations directly, so only the jobs.delete
+ *   permission is required to delete a job (and its child bucket operations).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -666,6 +676,102 @@ export class StorageBatchOperationsClient {
         {}|undefined
       ]) => {
         this._log.info('cancelJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a BucketOperation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. `name` of the bucket operation to retrieve.
+ *   Format:
+ *   projects/{project_id}/locations/global/jobs/{job_id}/bucketOperations/{bucket_operation_id}.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.storagebatchoperations.v1.BucketOperation|BucketOperation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_batch_operations.get_bucket_operation.js</caption>
+ * region_tag:storagebatchoperations_v1_generated_StorageBatchOperations_GetBucketOperation_async
+ */
+  getBucketOperation(
+      request?: protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+        protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|undefined, {}|undefined
+      ]>;
+  getBucketOperation(
+      request: protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+          protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBucketOperation(
+      request: protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest,
+      callback: Callback<
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+          protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getBucketOperation(
+      request?: protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+          protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+          protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+        protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getBucketOperation request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+        protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBucketOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getBucketOperation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation,
+        protos.google.cloud.storagebatchoperations.v1.IGetBucketOperationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getBucketOperation response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -999,6 +1105,209 @@ export class StorageBatchOperationsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.storagebatchoperations.v1.IJob>;
   }
+ /**
+ * Lists BucketOperations in a given project and job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: projects/{project_id}/locations/global/jobs/{job_id}.
+ * @param {string} [request.filter]
+ *   Optional. Filters results as defined by https://google.aip.dev/160.
+ * @param {number} [request.pageSize]
+ *   Optional. The list page size. Default page size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. The list page token.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to sort by. Supported fields are name, create_time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.storagebatchoperations.v1.BucketOperation|BucketOperation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listBucketOperationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listBucketOperations(
+      request?: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation[],
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest|null,
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse
+      ]>;
+  listBucketOperations(
+      request: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse|null|undefined,
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation>): void;
+  listBucketOperations(
+      request: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse|null|undefined,
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation>): void;
+  listBucketOperations(
+      request?: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse|null|undefined,
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+          protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse|null|undefined,
+          protos.google.cloud.storagebatchoperations.v1.IBucketOperation>):
+      Promise<[
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation[],
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest|null,
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse|null|undefined,
+      protos.google.cloud.storagebatchoperations.v1.IBucketOperation>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBucketOperations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBucketOperations request %j', request);
+    return this.innerApiCalls
+      .listBucketOperations(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.storagebatchoperations.v1.IBucketOperation[],
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest|null,
+        protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsResponse
+      ]) => {
+        this._log.info('listBucketOperations values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listBucketOperations`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: projects/{project_id}/locations/global/jobs/{job_id}.
+ * @param {string} [request.filter]
+ *   Optional. Filters results as defined by https://google.aip.dev/160.
+ * @param {number} [request.pageSize]
+ *   Optional. The list page size. Default page size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. The list page token.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to sort by. Supported fields are name, create_time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.storagebatchoperations.v1.BucketOperation|BucketOperation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listBucketOperationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listBucketOperationsStream(
+      request?: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listBucketOperations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listBucketOperations stream %j', request);
+    return this.descriptors.page.listBucketOperations.createStream(
+      this.innerApiCalls.listBucketOperations as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listBucketOperations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Format: projects/{project_id}/locations/global/jobs/{job_id}.
+ * @param {string} [request.filter]
+ *   Optional. Filters results as defined by https://google.aip.dev/160.
+ * @param {number} [request.pageSize]
+ *   Optional. The list page size. Default page size is 100.
+ * @param {string} [request.pageToken]
+ *   Optional. The list page token.
+ * @param {string} [request.orderBy]
+ *   Optional. Field to sort by. Supported fields are name, create_time.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.storagebatchoperations.v1.BucketOperation|BucketOperation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/storage_batch_operations.list_bucket_operations.js</caption>
+ * region_tag:storagebatchoperations_v1_generated_StorageBatchOperations_ListBucketOperations_async
+ */
+  listBucketOperationsAsync(
+      request?: protos.google.cloud.storagebatchoperations.v1.IListBucketOperationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.storagebatchoperations.v1.IBucketOperation>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listBucketOperations'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listBucketOperations iterate %j', request);
+    return this.descriptors.page.listBucketOperations.asyncIterate(
+      this.innerApiCalls['listBucketOperations'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.storagebatchoperations.v1.IBucketOperation>;
+  }
 /**
    * Gets information about a location.
    *
@@ -1304,6 +1613,68 @@ export class StorageBatchOperationsClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified bucketOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} job
+   * @param {string} bucket_operation
+   * @returns {string} Resource name string.
+   */
+  bucketOperationPath(project:string,location:string,job:string,bucketOperation:string) {
+    return this.pathTemplates.bucketOperationPathTemplate.render({
+      project: project,
+      location: location,
+      job: job,
+      bucket_operation: bucketOperation,
+    });
+  }
+
+  /**
+   * Parse the project from BucketOperation resource.
+   *
+   * @param {string} bucketOperationName
+   *   A fully-qualified path representing BucketOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBucketOperationName(bucketOperationName: string) {
+    return this.pathTemplates.bucketOperationPathTemplate.match(bucketOperationName).project;
+  }
+
+  /**
+   * Parse the location from BucketOperation resource.
+   *
+   * @param {string} bucketOperationName
+   *   A fully-qualified path representing BucketOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBucketOperationName(bucketOperationName: string) {
+    return this.pathTemplates.bucketOperationPathTemplate.match(bucketOperationName).location;
+  }
+
+  /**
+   * Parse the job from BucketOperation resource.
+   *
+   * @param {string} bucketOperationName
+   *   A fully-qualified path representing BucketOperation resource.
+   * @returns {string} A string representing the job.
+   */
+  matchJobFromBucketOperationName(bucketOperationName: string) {
+    return this.pathTemplates.bucketOperationPathTemplate.match(bucketOperationName).job;
+  }
+
+  /**
+   * Parse the bucket_operation from BucketOperation resource.
+   *
+   * @param {string} bucketOperationName
+   *   A fully-qualified path representing BucketOperation resource.
+   * @returns {string} A string representing the bucket_operation.
+   */
+  matchBucketOperationFromBucketOperationName(bucketOperationName: string) {
+    return this.pathTemplates.bucketOperationPathTemplate.match(bucketOperationName).bucket_operation;
+  }
 
   /**
    * Return a fully-qualified job resource name string.

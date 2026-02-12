@@ -41,6 +41,13 @@ function main(name) {
    *  UUID is not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, any child bucket operations of the job will also
+   *  be deleted. Highly recommended to be set to true by all clients. Users
+   *  cannot mutate bucket operations directly, so only the jobs.delete
+   *  permission is required to delete a job (and its child bucket operations).
+   */
+  // const force = true
 
   // Imports the Storagebatchoperations library
   const {StorageBatchOperationsClient} = require('@google-cloud/storagebatchoperations').v1;
