@@ -546,7 +546,9 @@ export namespace google {
                             TYPE_SCHEDULED = 2,
                             TYPE_RUNNING = 3,
                             TYPE_SUCCEEDED = 4,
-                            TYPE_CANCELLED = 5
+                            TYPE_CANCELLED = 5,
+                            TYPE_APP_CREATED = 6,
+                            TYPE_APP_COMPONENTS_REGISTERED = 7
                         }
                     }
 
