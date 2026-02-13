@@ -1464,14 +1464,11 @@ export namespace google {
                 /** Properties of a ContentBlock. */
                 interface IContentBlock {
 
-                    /** ContentBlock topic */
-                    topic?: (string|null);
-
                     /** ContentBlock content */
                     content?: (google.type.ILocalizedText|null);
 
-                    /** ContentBlock references */
-                    references?: (google.maps.places.v1.IReferences|null);
+                    /** ContentBlock referencedPlaces */
+                    referencedPlaces?: (string[]|null);
                 }
 
                 /** Represents a ContentBlock. */
@@ -1483,14 +1480,11 @@ export namespace google {
                      */
                     constructor(properties?: google.maps.places.v1.IContentBlock);
 
-                    /** ContentBlock topic. */
-                    public topic: string;
-
                     /** ContentBlock content. */
                     public content?: (google.type.ILocalizedText|null);
 
-                    /** ContentBlock references. */
-                    public references?: (google.maps.places.v1.IReferences|null);
+                    /** ContentBlock referencedPlaces. */
+                    public referencedPlaces: string[];
 
                     /**
                      * Creates a new ContentBlock instance using the specified properties.
@@ -1564,260 +1558,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ContentBlock
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a References. */
-                interface IReferences {
-
-                    /** References reviews */
-                    reviews?: (google.maps.places.v1.IReview[]|null);
-
-                    /** References places */
-                    places?: (string[]|null);
-                }
-
-                /** Represents a References. */
-                class References implements IReferences {
-
-                    /**
-                     * Constructs a new References.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.maps.places.v1.IReferences);
-
-                    /** References reviews. */
-                    public reviews: google.maps.places.v1.IReview[];
-
-                    /** References places. */
-                    public places: string[];
-
-                    /**
-                     * Creates a new References instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns References instance
-                     */
-                    public static create(properties?: google.maps.places.v1.IReferences): google.maps.places.v1.References;
-
-                    /**
-                     * Encodes the specified References message. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
-                     * @param message References message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified References message, length delimited. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
-                     * @param message References message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a References message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns References
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.References;
-
-                    /**
-                     * Decodes a References message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns References
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.References;
-
-                    /**
-                     * Verifies a References message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a References message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns References
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.References;
-
-                    /**
-                     * Creates a plain object from a References message. Also converts values to other types if specified.
-                     * @param message References
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.maps.places.v1.References, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this References to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for References
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Review. */
-                interface IReview {
-
-                    /** Review name */
-                    name?: (string|null);
-
-                    /** Review relativePublishTimeDescription */
-                    relativePublishTimeDescription?: (string|null);
-
-                    /** Review text */
-                    text?: (google.type.ILocalizedText|null);
-
-                    /** Review originalText */
-                    originalText?: (google.type.ILocalizedText|null);
-
-                    /** Review rating */
-                    rating?: (number|null);
-
-                    /** Review authorAttribution */
-                    authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
-
-                    /** Review publishTime */
-                    publishTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Review flagContentUri */
-                    flagContentUri?: (string|null);
-
-                    /** Review googleMapsUri */
-                    googleMapsUri?: (string|null);
-
-                    /** Review visitDate */
-                    visitDate?: (google.type.IDate|null);
-                }
-
-                /** Represents a Review. */
-                class Review implements IReview {
-
-                    /**
-                     * Constructs a new Review.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.maps.places.v1.IReview);
-
-                    /** Review name. */
-                    public name: string;
-
-                    /** Review relativePublishTimeDescription. */
-                    public relativePublishTimeDescription: string;
-
-                    /** Review text. */
-                    public text?: (google.type.ILocalizedText|null);
-
-                    /** Review originalText. */
-                    public originalText?: (google.type.ILocalizedText|null);
-
-                    /** Review rating. */
-                    public rating: number;
-
-                    /** Review authorAttribution. */
-                    public authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
-
-                    /** Review publishTime. */
-                    public publishTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Review flagContentUri. */
-                    public flagContentUri: string;
-
-                    /** Review googleMapsUri. */
-                    public googleMapsUri: string;
-
-                    /** Review visitDate. */
-                    public visitDate?: (google.type.IDate|null);
-
-                    /**
-                     * Creates a new Review instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Review instance
-                     */
-                    public static create(properties?: google.maps.places.v1.IReview): google.maps.places.v1.Review;
-
-                    /**
-                     * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                     * @param message Review message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
-                     * @param message Review message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Review message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Review
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Review;
-
-                    /**
-                     * Decodes a Review message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Review
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Review;
-
-                    /**
-                     * Verifies a Review message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Review message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Review
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Review;
-
-                    /**
-                     * Creates a plain object from a Review message. Also converts values to other types if specified.
-                     * @param message Review
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.maps.places.v1.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Review to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Review
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2596,6 +2336,157 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Review. */
+                interface IReview {
+
+                    /** Review name */
+                    name?: (string|null);
+
+                    /** Review relativePublishTimeDescription */
+                    relativePublishTimeDescription?: (string|null);
+
+                    /** Review text */
+                    text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText */
+                    originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating */
+                    rating?: (number|null);
+
+                    /** Review authorAttribution */
+                    authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime */
+                    publishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Review flagContentUri */
+                    flagContentUri?: (string|null);
+
+                    /** Review googleMapsUri */
+                    googleMapsUri?: (string|null);
+
+                    /** Review visitDate */
+                    visitDate?: (google.type.IDate|null);
+                }
+
+                /** Represents a Review. */
+                class Review implements IReview {
+
+                    /**
+                     * Constructs a new Review.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IReview);
+
+                    /** Review name. */
+                    public name: string;
+
+                    /** Review relativePublishTimeDescription. */
+                    public relativePublishTimeDescription: string;
+
+                    /** Review text. */
+                    public text?: (google.type.ILocalizedText|null);
+
+                    /** Review originalText. */
+                    public originalText?: (google.type.ILocalizedText|null);
+
+                    /** Review rating. */
+                    public rating: number;
+
+                    /** Review authorAttribution. */
+                    public authorAttribution?: (google.maps.places.v1.IAuthorAttribution|null);
+
+                    /** Review publishTime. */
+                    public publishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Review flagContentUri. */
+                    public flagContentUri: string;
+
+                    /** Review googleMapsUri. */
+                    public googleMapsUri: string;
+
+                    /** Review visitDate. */
+                    public visitDate?: (google.type.IDate|null);
+
+                    /**
+                     * Creates a new Review instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Review instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IReview): google.maps.places.v1.Review;
+
+                    /**
+                     * Encodes the specified Review message. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Review message, length delimited. Does not implicitly {@link google.maps.places.v1.Review.verify|verify} messages.
+                     * @param message Review message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Review;
+
+                    /**
+                     * Decodes a Review message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Review
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Review;
+
+                    /**
+                     * Verifies a Review message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Review message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Review
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Review;
+
+                    /**
+                     * Creates a plain object from a Review message. Also converts values to other types if specified.
+                     * @param message Review
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.Review, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Review to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Review
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a EVChargeOptions. */
                 interface IEVChargeOptions {
 
@@ -3205,6 +3096,9 @@ export namespace google {
                     /** Place primaryTypeDisplayName */
                     primaryTypeDisplayName?: (google.type.ILocalizedText|null);
 
+                    /** Place googleMapsTypeLabel */
+                    googleMapsTypeLabel?: (google.type.ILocalizedText|null);
+
                     /** Place nationalPhoneNumber */
                     nationalPhoneNumber?: (string|null);
 
@@ -3388,6 +3282,9 @@ export namespace google {
                     /** Place addressDescriptor */
                     addressDescriptor?: (google.maps.places.v1.IAddressDescriptor|null);
 
+                    /** Place googleMapsLinks */
+                    googleMapsLinks?: (google.maps.places.v1.Place.IGoogleMapsLinks|null);
+
                     /** Place priceRange */
                     priceRange?: (google.maps.places.v1.IPriceRange|null);
 
@@ -3436,6 +3333,9 @@ export namespace google {
 
                     /** Place primaryTypeDisplayName. */
                     public primaryTypeDisplayName?: (google.type.ILocalizedText|null);
+
+                    /** Place googleMapsTypeLabel. */
+                    public googleMapsTypeLabel?: (google.type.ILocalizedText|null);
 
                     /** Place nationalPhoneNumber. */
                     public nationalPhoneNumber: string;
@@ -3619,6 +3519,9 @@ export namespace google {
 
                     /** Place addressDescriptor. */
                     public addressDescriptor?: (google.maps.places.v1.IAddressDescriptor|null);
+
+                    /** Place googleMapsLinks. */
+                    public googleMapsLinks?: (google.maps.places.v1.Place.IGoogleMapsLinks|null);
 
                     /** Place priceRange. */
                     public priceRange?: (google.maps.places.v1.IPriceRange|null);
@@ -5200,6 +5103,127 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ContainingPlace
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GoogleMapsLinks. */
+                    interface IGoogleMapsLinks {
+
+                        /** GoogleMapsLinks directionsUri */
+                        directionsUri?: (string|null);
+
+                        /** GoogleMapsLinks placeUri */
+                        placeUri?: (string|null);
+
+                        /** GoogleMapsLinks writeAReviewUri */
+                        writeAReviewUri?: (string|null);
+
+                        /** GoogleMapsLinks reviewsUri */
+                        reviewsUri?: (string|null);
+
+                        /** GoogleMapsLinks photosUri */
+                        photosUri?: (string|null);
+                    }
+
+                    /** Represents a GoogleMapsLinks. */
+                    class GoogleMapsLinks implements IGoogleMapsLinks {
+
+                        /**
+                         * Constructs a new GoogleMapsLinks.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IGoogleMapsLinks);
+
+                        /** GoogleMapsLinks directionsUri. */
+                        public directionsUri: string;
+
+                        /** GoogleMapsLinks placeUri. */
+                        public placeUri: string;
+
+                        /** GoogleMapsLinks writeAReviewUri. */
+                        public writeAReviewUri: string;
+
+                        /** GoogleMapsLinks reviewsUri. */
+                        public reviewsUri: string;
+
+                        /** GoogleMapsLinks photosUri. */
+                        public photosUri: string;
+
+                        /**
+                         * Creates a new GoogleMapsLinks instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleMapsLinks instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IGoogleMapsLinks): google.maps.places.v1.Place.GoogleMapsLinks;
+
+                        /**
+                         * Encodes the specified GoogleMapsLinks message. Does not implicitly {@link google.maps.places.v1.Place.GoogleMapsLinks.verify|verify} messages.
+                         * @param message GoogleMapsLinks message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IGoogleMapsLinks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleMapsLinks message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.GoogleMapsLinks.verify|verify} messages.
+                         * @param message GoogleMapsLinks message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IGoogleMapsLinks, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleMapsLinks message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleMapsLinks
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.GoogleMapsLinks;
+
+                        /**
+                         * Decodes a GoogleMapsLinks message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleMapsLinks
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.GoogleMapsLinks;
+
+                        /**
+                         * Verifies a GoogleMapsLinks message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleMapsLinks message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleMapsLinks
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.GoogleMapsLinks;
+
+                        /**
+                         * Creates a plain object from a GoogleMapsLinks message. Also converts values to other types if specified.
+                         * @param message GoogleMapsLinks
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.GoogleMapsLinks, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleMapsLinks to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleMapsLinks
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -9222,6 +9246,109 @@ export namespace google {
                     BICYCLE = 2,
                     WALK = 3,
                     TWO_WHEELER = 4
+                }
+
+                /** Properties of a References. */
+                interface IReferences {
+
+                    /** References reviews */
+                    reviews?: (google.maps.places.v1.IReview[]|null);
+
+                    /** References places */
+                    places?: (string[]|null);
+                }
+
+                /** Represents a References. */
+                class References implements IReferences {
+
+                    /**
+                     * Constructs a new References.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IReferences);
+
+                    /** References reviews. */
+                    public reviews: google.maps.places.v1.IReview[];
+
+                    /** References places. */
+                    public places: string[];
+
+                    /**
+                     * Creates a new References instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns References instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IReferences): google.maps.places.v1.References;
+
+                    /**
+                     * Encodes the specified References message. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                     * @param message References message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified References message, length delimited. Does not implicitly {@link google.maps.places.v1.References.verify|verify} messages.
+                     * @param message References message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IReferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a References message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns References
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.References;
+
+                    /**
+                     * Decodes a References message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns References
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.References;
+
+                    /**
+                     * Verifies a References message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a References message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns References
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.References;
+
+                    /**
+                     * Creates a plain object from a References message. Also converts values to other types if specified.
+                     * @param message References
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.References, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this References to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for References
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
