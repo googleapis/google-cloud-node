@@ -194,6 +194,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "clusterType": {
+                          "type": "ClusterType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ClusterType": {
+                          "values": {
+                            "CLUSTER_TYPE_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "ZERO_SCALE": 2
+                          }
                         }
                       }
                     },
@@ -1822,6 +1838,13 @@
                     },
                     "ClusterConfig": {
                       "fields": {
+                        "clusterType": {
+                          "type": "ClusterType",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "clusterTier": {
                           "type": "ClusterTier",
                           "id": 29,
@@ -1945,6 +1968,14 @@
                         }
                       },
                       "nested": {
+                        "ClusterType": {
+                          "values": {
+                            "CLUSTER_TYPE_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "SINGLE_NODE": 2,
+                            "ZERO_SCALE": 3
+                          }
+                        },
                         "ClusterTier": {
                           "values": {
                             "CLUSTER_TIER_UNSPECIFIED": 0,

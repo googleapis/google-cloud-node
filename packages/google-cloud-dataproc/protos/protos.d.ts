@@ -175,6 +175,9 @@ export namespace google {
 
                     /** AutoscalingPolicy labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** AutoscalingPolicy clusterType */
+                    clusterType?: (google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|keyof typeof google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|null);
                 }
 
                 /** Represents an AutoscalingPolicy. */
@@ -203,6 +206,9 @@ export namespace google {
 
                     /** AutoscalingPolicy labels. */
                     public labels: { [k: string]: string };
+
+                    /** AutoscalingPolicy clusterType. */
+                    public clusterType: (google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|keyof typeof google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType);
 
                     /** AutoscalingPolicy algorithm. */
                     public algorithm?: "basicAlgorithm";
@@ -283,6 +289,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutoscalingPolicy {
+
+                    /** ClusterType enum. */
+                    enum ClusterType {
+                        CLUSTER_TYPE_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        ZERO_SCALE = 2
+                    }
                 }
 
                 /** Properties of a BasicAutoscalingAlgorithm. */
@@ -5298,6 +5314,9 @@ export namespace google {
                 /** Properties of a ClusterConfig. */
                 interface IClusterConfig {
 
+                    /** ClusterConfig clusterType */
+                    clusterType?: (google.cloud.dataproc.v1.ClusterConfig.ClusterType|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterType|null);
+
                     /** ClusterConfig clusterTier */
                     clusterTier?: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null);
 
@@ -5358,6 +5377,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IClusterConfig);
+
+                    /** ClusterConfig clusterType. */
+                    public clusterType: (google.cloud.dataproc.v1.ClusterConfig.ClusterType|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterType);
 
                     /** ClusterConfig clusterTier. */
                     public clusterTier: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier);
@@ -5489,6 +5511,14 @@ export namespace google {
                 }
 
                 namespace ClusterConfig {
+
+                    /** ClusterType enum. */
+                    enum ClusterType {
+                        CLUSTER_TYPE_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        SINGLE_NODE = 2,
+                        ZERO_SCALE = 3
+                    }
 
                     /** ClusterTier enum. */
                     enum ClusterTier {
