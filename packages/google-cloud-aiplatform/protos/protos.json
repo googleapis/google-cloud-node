@@ -471,7 +471,8 @@
                             "source": {
                               "oneof": [
                                 "gcsSource",
-                                "bigquerySource"
+                                "bigquerySource",
+                                "vertexMultimodalDatasetSource"
                               ]
                             }
                           },
@@ -483,6 +484,10 @@
                             "bigquerySource": {
                               "type": "BigQuerySource",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetSource": {
+                              "type": "VertexMultimodalDatasetSource",
+                              "id": 4
                             },
                             "instancesFormat": {
                               "type": "string",
@@ -520,7 +525,8 @@
                             "destination": {
                               "oneof": [
                                 "gcsDestination",
-                                "bigqueryDestination"
+                                "bigqueryDestination",
+                                "vertexMultimodalDatasetDestination"
                               ]
                             }
                           },
@@ -532,6 +538,10 @@
                             "bigqueryDestination": {
                               "type": "BigQueryDestination",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetDestination": {
+                              "type": "VertexMultimodalDatasetDestination",
+                              "id": 6
                             },
                             "predictionsFormat": {
                               "type": "string",
@@ -547,7 +557,8 @@
                             "outputLocation": {
                               "oneof": [
                                 "gcsOutputDirectory",
-                                "bigqueryOutputDataset"
+                                "bigqueryOutputDataset",
+                                "vertexMultimodalDatasetName"
                               ]
                             }
                           },
@@ -564,6 +575,14 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vertexMultimodalDatasetName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                               }
                             },
                             "bigqueryOutputTable": {
@@ -1338,6 +1357,36 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetSource": {
+                      "fields": {
+                        "datasetName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetDestination": {
+                      "fields": {
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -7183,7 +7232,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                           }
                         },
                         "displayName": {
@@ -8597,7 +8647,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
                           }
                         },
                         "createTime": {
@@ -33698,6 +33749,13 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "maxConcurrentActiveRunCount": {
+                          "type": "int64",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "allowQueueing": {
                           "type": "bool",
                           "id": 12,
@@ -39432,7 +39490,8 @@
                             "source": {
                               "oneof": [
                                 "gcsSource",
-                                "bigquerySource"
+                                "bigquerySource",
+                                "vertexMultimodalDatasetSource"
                               ]
                             }
                           },
@@ -39444,6 +39503,10 @@
                             "bigquerySource": {
                               "type": "BigQuerySource",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetSource": {
+                              "type": "VertexMultimodalDatasetSource",
+                              "id": 4
                             },
                             "instancesFormat": {
                               "type": "string",
@@ -39481,7 +39544,8 @@
                             "destination": {
                               "oneof": [
                                 "gcsDestination",
-                                "bigqueryDestination"
+                                "bigqueryDestination",
+                                "vertexMultimodalDatasetDestination"
                               ]
                             }
                           },
@@ -39493,6 +39557,10 @@
                             "bigqueryDestination": {
                               "type": "BigQueryDestination",
                               "id": 3
+                            },
+                            "vertexMultimodalDatasetDestination": {
+                              "type": "VertexMultimodalDatasetDestination",
+                              "id": 6
                             },
                             "predictionsFormat": {
                               "type": "string",
@@ -39508,7 +39576,8 @@
                             "outputLocation": {
                               "oneof": [
                                 "gcsOutputDirectory",
-                                "bigqueryOutputDataset"
+                                "bigqueryOutputDataset",
+                                "vertexMultimodalDatasetName"
                               ]
                             }
                           },
@@ -39525,6 +39594,14 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "vertexMultimodalDatasetName": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                               }
                             },
                             "bigqueryOutputTable": {
@@ -40303,6 +40380,36 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetSource": {
+                      "fields": {
+                        "datasetName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "VertexMultimodalDatasetDestination": {
+                      "fields": {
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -47083,7 +47190,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
                           }
                         },
                         "displayName": {
@@ -48805,6 +48913,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "modelArmorConfig": {
+                          "type": "ModelArmorConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "generationConfig": {
                           "type": "GenerationConfig",
                           "id": 4,
@@ -48859,7 +48974,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
                           }
                         },
                         "createTime": {
@@ -50742,13 +50858,19 @@
                           "responseType": "EvaluateInstancesResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{location=projects/*/locations/*}:evaluateInstances",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1:evaluateInstances",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{location=projects/*/locations/*}:evaluateInstances",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1:evaluateInstances",
+                                  "body": "*"
+                                }
                               }
                             }
                           ]
@@ -50759,6 +50881,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{location=projects/*/locations/*}:evaluateDataset",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1:evaluateDataset",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.longrunning.operation_info).response_type": "EvaluateDatasetResponse",
                             "(google.longrunning.operation_info).metadata_type": "EvaluateDatasetOperationMetadata"
                           },
@@ -50766,7 +50890,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{location=projects/*/locations/*}:evaluateDataset",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1:evaluateDataset",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -50943,6 +51071,9 @@
                       "oneofs": {
                         "metricSpec": {
                           "oneof": [
+                            "predefinedMetricSpec",
+                            "computationBasedMetricSpec",
+                            "llmBasedMetricSpec",
                             "pointwiseMetricSpec",
                             "pairwiseMetricSpec",
                             "exactMatchSpec",
@@ -50952,6 +51083,18 @@
                         }
                       },
                       "fields": {
+                        "predefinedMetricSpec": {
+                          "type": "PredefinedMetricSpec",
+                          "id": 8
+                        },
+                        "computationBasedMetricSpec": {
+                          "type": "ComputationBasedMetricSpec",
+                          "id": 9
+                        },
+                        "llmBasedMetricSpec": {
+                          "type": "LLMBasedMetricSpec",
+                          "id": 10
+                        },
                         "pointwiseMetricSpec": {
                           "type": "PointwiseMetricSpec",
                           "id": 2
@@ -51410,6 +51553,188 @@
                         "rubricBasedInstructionFollowingResult": {
                           "type": "RubricBasedInstructionFollowingResult",
                           "id": 38
+                        },
+                        "metricResults": {
+                          "rule": "repeated",
+                          "type": "MetricResult",
+                          "id": 43
+                        }
+                      }
+                    },
+                    "MetricResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        },
+                        "_explanation": {
+                          "oneof": [
+                            "explanation"
+                          ]
+                        },
+                        "_error": {
+                          "oneof": [
+                            "error"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PredefinedMetricSpec": {
+                      "fields": {
+                        "metricSpecName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metricSpecParameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ComputationBasedMetricSpec": {
+                      "oneofs": {
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        },
+                        "_parameters": {
+                          "oneof": [
+                            "parameters"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "type": {
+                          "type": "ComputationBasedMetricType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ComputationBasedMetricType": {
+                          "values": {
+                            "COMPUTATION_BASED_METRIC_TYPE_UNSPECIFIED": 0,
+                            "EXACT_MATCH": 1,
+                            "BLEU": 2,
+                            "ROUGE": 3
+                          }
+                        }
+                      }
+                    },
+                    "LLMBasedMetricSpec": {
+                      "oneofs": {
+                        "rubricsSource": {
+                          "oneof": [
+                            "rubricGroupKey",
+                            "predefinedRubricGenerationSpec"
+                          ]
+                        },
+                        "_metricPromptTemplate": {
+                          "oneof": [
+                            "metricPromptTemplate"
+                          ]
+                        },
+                        "_systemInstruction": {
+                          "oneof": [
+                            "systemInstruction"
+                          ]
+                        },
+                        "_judgeAutoraterConfig": {
+                          "oneof": [
+                            "judgeAutoraterConfig"
+                          ]
+                        },
+                        "_additionalConfig": {
+                          "oneof": [
+                            "additionalConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rubricGroupKey": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "predefinedRubricGenerationSpec": {
+                          "type": "PredefinedMetricSpec",
+                          "id": 6
+                        },
+                        "metricPromptTemplate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "systemInstruction": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "judgeAutoraterConfig": {
+                          "type": "AutoraterConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "additionalConfig": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -81199,6 +81524,13 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "maxConcurrentActiveRunCount": {
+                          "type": "int64",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "allowQueueing": {
