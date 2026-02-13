@@ -16,7 +16,7 @@ jobs:
           version: ^7.0.0
       - run: node --version
       - run: ci/run_conditional_tests.sh
-        name: Run unit tests
+        name: Run windows unit tests
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
