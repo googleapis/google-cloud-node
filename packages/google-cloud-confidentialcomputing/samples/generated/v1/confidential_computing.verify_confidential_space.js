@@ -63,6 +63,11 @@ function main(tdCcel, tpmAttestation, challenge) {
    *  Optional. A collection of fields that modify the token output.
    */
   // const options = {}
+  /**
+   *  Optional. An optional Nvidia attestation report, used to populate hardware
+   *  rooted claims for Nvidia devices.
+   */
+  // const nvidiaAttestation = {}
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

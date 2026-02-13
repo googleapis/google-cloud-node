@@ -2844,6 +2844,176 @@ export class StorageControlClient {
   }
 
   /**
+   * Deletes a folder recursively. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the folder being deleted, however all of its contents
+   *   will be deleted too. Format:
+   *   `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {number} [request.ifMetagenerationMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration matches the given value.
+   * @param {number} [request.ifMetagenerationNotMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder_recursive.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolderRecursive_async
+   */
+
+  deleteFolderRecursive(
+    request?: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFolderRecursive(
+    request: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderRecursive(
+    request: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  /**
+   * Deletes a folder recursively. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the folder being deleted, however all of its contents
+   *   will be deleted too. Format:
+   *   `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {number} [request.ifMetagenerationMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration matches the given value.
+   * @param {number} [request.ifMetagenerationNotMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder_recursive.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolderRecursive_async
+   */
+  deleteFolderRecursive(
+    request?: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: any;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as any;
+    }
+    if (callback === undefined) {
+      return this.storageControlInternal.deleteFolderRecursive(
+        request,
+        options,
+      );
+    }
+    return this.storageControlInternal.deleteFolderRecursive(
+      request,
+      options,
+      callback,
+    );
+  }
+
+  /**
+   * Check the status of the long running operation returned by `deleteFolderRecursive()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder_recursive.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolderRecursive_async
+   */
+  checkDeleteFolderRecursiveProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.storage.control.v2.DeleteFolderRecursiveMetadata
+    >
+  > {
+    return this.storageControlInternal.checkDeleteFolderRecursiveProgress(name);
+  }
+
+  /**
    * Creates an Anywhere Cache instance.
    *
    * @param {Object} request

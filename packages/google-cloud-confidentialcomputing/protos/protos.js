@@ -853,6 +853,7 @@
                          * @interface IVerifyAttestationRequest
                          * @property {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation|null} [tdCcel] VerifyAttestationRequest tdCcel
                          * @property {google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null} [sevSnpAttestation] VerifyAttestationRequest sevSnpAttestation
+                         * @property {google.cloud.confidentialcomputing.v1.INvidiaAttestation|null} [nvidiaAttestation] VerifyAttestationRequest nvidiaAttestation
                          * @property {string|null} [challenge] VerifyAttestationRequest challenge
                          * @property {google.cloud.confidentialcomputing.v1.IGcpCredentials|null} [gcpCredentials] VerifyAttestationRequest gcpCredentials
                          * @property {google.cloud.confidentialcomputing.v1.ITpmAttestation|null} [tpmAttestation] VerifyAttestationRequest tpmAttestation
@@ -891,6 +892,14 @@
                          * @instance
                          */
                         VerifyAttestationRequest.prototype.sevSnpAttestation = null;
+    
+                        /**
+                         * VerifyAttestationRequest nvidiaAttestation.
+                         * @member {google.cloud.confidentialcomputing.v1.INvidiaAttestation|null|undefined} nvidiaAttestation
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.nvidiaAttestation = null;
     
                         /**
                          * VerifyAttestationRequest challenge.
@@ -955,6 +964,17 @@
                         });
     
                         /**
+                         * VerifyAttestationRequest deviceAttestation.
+                         * @member {"nvidiaAttestation"|undefined} deviceAttestation
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        Object.defineProperty(VerifyAttestationRequest.prototype, "deviceAttestation", {
+                            get: $util.oneOfGetter($oneOfFields = ["nvidiaAttestation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new VerifyAttestationRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
@@ -994,6 +1014,8 @@
                                 $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.encode(message.sevSnpAttestation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.attester != null && Object.hasOwnProperty.call(message, "attester"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.attester);
+                            if (message.nvidiaAttestation != null && Object.hasOwnProperty.call(message, "nvidiaAttestation"))
+                                $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.encode(message.nvidiaAttestation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -1036,6 +1058,10 @@
                                     }
                                 case 7: {
                                         message.sevSnpAttestation = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -1116,6 +1142,14 @@
                                         return "sevSnpAttestation." + error;
                                 }
                             }
+                            if (message.nvidiaAttestation != null && message.hasOwnProperty("nvidiaAttestation")) {
+                                properties.deviceAttestation = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify(message.nvidiaAttestation);
+                                    if (error)
+                                        return "nvidiaAttestation." + error;
+                                }
+                            }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 if (!$util.isString(message.challenge))
                                     return "challenge: string expected";
@@ -1166,6 +1200,11 @@
                                 if (typeof object.sevSnpAttestation !== "object")
                                     throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.sevSnpAttestation: object expected");
                                 message.sevSnpAttestation = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.fromObject(object.sevSnpAttestation);
+                            }
+                            if (object.nvidiaAttestation != null) {
+                                if (typeof object.nvidiaAttestation !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.nvidiaAttestation: object expected");
+                                message.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.fromObject(object.nvidiaAttestation);
                             }
                             if (object.challenge != null)
                                 message.challenge = String(object.challenge);
@@ -1237,6 +1276,11 @@
                             }
                             if (message.attester != null && message.hasOwnProperty("attester"))
                                 object.attester = message.attester;
+                            if (message.nvidiaAttestation != null && message.hasOwnProperty("nvidiaAttestation")) {
+                                object.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.toObject(message.nvidiaAttestation, options);
+                                if (options.oneofs)
+                                    object.deviceAttestation = "nvidiaAttestation";
+                            }
                             return object;
                         };
     
@@ -1267,6 +1311,1661 @@
                         };
     
                         return VerifyAttestationRequest;
+                    })();
+    
+                    v1.NvidiaAttestation = (function() {
+    
+                        /**
+                         * Properties of a NvidiaAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface INvidiaAttestation
+                         * @property {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation|null} [spt] NvidiaAttestation spt
+                         * @property {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation|null} [ppcie] NvidiaAttestation ppcie
+                         * @property {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation|null} [mpt] NvidiaAttestation mpt
+                         */
+    
+                        /**
+                         * Constructs a new NvidiaAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a NvidiaAttestation.
+                         * @implements INvidiaAttestation
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.INvidiaAttestation=} [properties] Properties to set
+                         */
+                        function NvidiaAttestation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NvidiaAttestation spt.
+                         * @member {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation|null|undefined} spt
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @instance
+                         */
+                        NvidiaAttestation.prototype.spt = null;
+    
+                        /**
+                         * NvidiaAttestation ppcie.
+                         * @member {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation|null|undefined} ppcie
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @instance
+                         */
+                        NvidiaAttestation.prototype.ppcie = null;
+    
+                        /**
+                         * NvidiaAttestation mpt.
+                         * @member {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation|null|undefined} mpt
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @instance
+                         */
+                        NvidiaAttestation.prototype.mpt = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * NvidiaAttestation ccFeature.
+                         * @member {"spt"|"ppcie"|"mpt"|undefined} ccFeature
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @instance
+                         */
+                        Object.defineProperty(NvidiaAttestation.prototype, "ccFeature", {
+                            get: $util.oneOfGetter($oneOfFields = ["spt", "ppcie", "mpt"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NvidiaAttestation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.INvidiaAttestation=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation} NvidiaAttestation instance
+                         */
+                        NvidiaAttestation.create = function create(properties) {
+                            return new NvidiaAttestation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NvidiaAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.INvidiaAttestation} message NvidiaAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NvidiaAttestation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spt != null && Object.hasOwnProperty.call(message, "spt"))
+                                $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.encode(message.spt, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.ppcie != null && Object.hasOwnProperty.call(message, "ppcie"))
+                                $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.encode(message.ppcie, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.mpt != null && Object.hasOwnProperty.call(message, "mpt"))
+                                $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.encode(message.mpt, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NvidiaAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.INvidiaAttestation} message NvidiaAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NvidiaAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NvidiaAttestation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation} NvidiaAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NvidiaAttestation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.spt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ppcie = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.mpt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NvidiaAttestation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation} NvidiaAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NvidiaAttestation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NvidiaAttestation message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NvidiaAttestation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.spt != null && message.hasOwnProperty("spt")) {
+                                properties.ccFeature = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.verify(message.spt);
+                                    if (error)
+                                        return "spt." + error;
+                                }
+                            }
+                            if (message.ppcie != null && message.hasOwnProperty("ppcie")) {
+                                if (properties.ccFeature === 1)
+                                    return "ccFeature: multiple values";
+                                properties.ccFeature = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.verify(message.ppcie);
+                                    if (error)
+                                        return "ppcie." + error;
+                                }
+                            }
+                            if (message.mpt != null && message.hasOwnProperty("mpt")) {
+                                if (properties.ccFeature === 1)
+                                    return "ccFeature: multiple values";
+                                properties.ccFeature = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.verify(message.mpt);
+                                    if (error)
+                                        return "mpt." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NvidiaAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation} NvidiaAttestation
+                         */
+                        NvidiaAttestation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation();
+                            if (object.spt != null) {
+                                if (typeof object.spt !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.spt: object expected");
+                                message.spt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.fromObject(object.spt);
+                            }
+                            if (object.ppcie != null) {
+                                if (typeof object.ppcie !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.ppcie: object expected");
+                                message.ppcie = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.fromObject(object.ppcie);
+                            }
+                            if (object.mpt != null) {
+                                if (typeof object.mpt !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.mpt: object expected");
+                                message.mpt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.fromObject(object.mpt);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NvidiaAttestation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation} message NvidiaAttestation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NvidiaAttestation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.spt != null && message.hasOwnProperty("spt")) {
+                                object.spt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.toObject(message.spt, options);
+                                if (options.oneofs)
+                                    object.ccFeature = "spt";
+                            }
+                            if (message.ppcie != null && message.hasOwnProperty("ppcie")) {
+                                object.ppcie = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.toObject(message.ppcie, options);
+                                if (options.oneofs)
+                                    object.ccFeature = "ppcie";
+                            }
+                            if (message.mpt != null && message.hasOwnProperty("mpt")) {
+                                object.mpt = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.toObject(message.mpt, options);
+                                if (options.oneofs)
+                                    object.ccFeature = "mpt";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NvidiaAttestation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NvidiaAttestation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NvidiaAttestation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NvidiaAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation";
+                        };
+    
+                        NvidiaAttestation.GpuInfo = (function() {
+    
+                            /**
+                             * Properties of a GpuInfo.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @interface IGpuInfo
+                             * @property {string|null} [uuid] GpuInfo uuid
+                             * @property {string|null} [driverVersion] GpuInfo driverVersion
+                             * @property {string|null} [vbiosVersion] GpuInfo vbiosVersion
+                             * @property {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType|null} [gpuArchitectureType] GpuInfo gpuArchitectureType
+                             * @property {Uint8Array|null} [attestationCertificateChain] GpuInfo attestationCertificateChain
+                             * @property {Uint8Array|null} [attestationReport] GpuInfo attestationReport
+                             */
+    
+                            /**
+                             * Constructs a new GpuInfo.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @classdesc Represents a GpuInfo.
+                             * @implements IGpuInfo
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo=} [properties] Properties to set
+                             */
+                            function GpuInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GpuInfo uuid.
+                             * @member {string} uuid
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.uuid = "";
+    
+                            /**
+                             * GpuInfo driverVersion.
+                             * @member {string} driverVersion
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.driverVersion = "";
+    
+                            /**
+                             * GpuInfo vbiosVersion.
+                             * @member {string} vbiosVersion
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.vbiosVersion = "";
+    
+                            /**
+                             * GpuInfo gpuArchitectureType.
+                             * @member {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType} gpuArchitectureType
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.gpuArchitectureType = 0;
+    
+                            /**
+                             * GpuInfo attestationCertificateChain.
+                             * @member {Uint8Array} attestationCertificateChain
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.attestationCertificateChain = $util.newBuffer([]);
+    
+                            /**
+                             * GpuInfo attestationReport.
+                             * @member {Uint8Array} attestationReport
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             */
+                            GpuInfo.prototype.attestationReport = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new GpuInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo} GpuInfo instance
+                             */
+                            GpuInfo.create = function create(properties) {
+                                return new GpuInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GpuInfo message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo} message GpuInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GpuInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uuid);
+                                if (message.driverVersion != null && Object.hasOwnProperty.call(message, "driverVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.driverVersion);
+                                if (message.vbiosVersion != null && Object.hasOwnProperty.call(message, "vbiosVersion"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.vbiosVersion);
+                                if (message.gpuArchitectureType != null && Object.hasOwnProperty.call(message, "gpuArchitectureType"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.gpuArchitectureType);
+                                if (message.attestationCertificateChain != null && Object.hasOwnProperty.call(message, "attestationCertificateChain"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.attestationCertificateChain);
+                                if (message.attestationReport != null && Object.hasOwnProperty.call(message, "attestationReport"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).bytes(message.attestationReport);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GpuInfo message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo} message GpuInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GpuInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GpuInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo} GpuInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GpuInfo.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uuid = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.driverVersion = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.vbiosVersion = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.gpuArchitectureType = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.attestationCertificateChain = reader.bytes();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.attestationReport = reader.bytes();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GpuInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo} GpuInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GpuInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GpuInfo message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GpuInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uuid != null && message.hasOwnProperty("uuid"))
+                                    if (!$util.isString(message.uuid))
+                                        return "uuid: string expected";
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    if (!$util.isString(message.driverVersion))
+                                        return "driverVersion: string expected";
+                                if (message.vbiosVersion != null && message.hasOwnProperty("vbiosVersion"))
+                                    if (!$util.isString(message.vbiosVersion))
+                                        return "vbiosVersion: string expected";
+                                if (message.gpuArchitectureType != null && message.hasOwnProperty("gpuArchitectureType"))
+                                    switch (message.gpuArchitectureType) {
+                                    default:
+                                        return "gpuArchitectureType: enum value expected";
+                                    case 0:
+                                    case 8:
+                                    case 10:
+                                        break;
+                                    }
+                                if (message.attestationCertificateChain != null && message.hasOwnProperty("attestationCertificateChain"))
+                                    if (!(message.attestationCertificateChain && typeof message.attestationCertificateChain.length === "number" || $util.isString(message.attestationCertificateChain)))
+                                        return "attestationCertificateChain: buffer expected";
+                                if (message.attestationReport != null && message.hasOwnProperty("attestationReport"))
+                                    if (!(message.attestationReport && typeof message.attestationReport.length === "number" || $util.isString(message.attestationReport)))
+                                        return "attestationReport: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GpuInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo} GpuInfo
+                             */
+                            GpuInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo();
+                                if (object.uuid != null)
+                                    message.uuid = String(object.uuid);
+                                if (object.driverVersion != null)
+                                    message.driverVersion = String(object.driverVersion);
+                                if (object.vbiosVersion != null)
+                                    message.vbiosVersion = String(object.vbiosVersion);
+                                switch (object.gpuArchitectureType) {
+                                default:
+                                    if (typeof object.gpuArchitectureType === "number") {
+                                        message.gpuArchitectureType = object.gpuArchitectureType;
+                                        break;
+                                    }
+                                    break;
+                                case "GPU_ARCHITECTURE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.gpuArchitectureType = 0;
+                                    break;
+                                case "GPU_ARCHITECTURE_TYPE_HOPPER":
+                                case 8:
+                                    message.gpuArchitectureType = 8;
+                                    break;
+                                case "GPU_ARCHITECTURE_TYPE_BLACKWELL":
+                                case 10:
+                                    message.gpuArchitectureType = 10;
+                                    break;
+                                }
+                                if (object.attestationCertificateChain != null)
+                                    if (typeof object.attestationCertificateChain === "string")
+                                        $util.base64.decode(object.attestationCertificateChain, message.attestationCertificateChain = $util.newBuffer($util.base64.length(object.attestationCertificateChain)), 0);
+                                    else if (object.attestationCertificateChain.length >= 0)
+                                        message.attestationCertificateChain = object.attestationCertificateChain;
+                                if (object.attestationReport != null)
+                                    if (typeof object.attestationReport === "string")
+                                        $util.base64.decode(object.attestationReport, message.attestationReport = $util.newBuffer($util.base64.length(object.attestationReport)), 0);
+                                    else if (object.attestationReport.length >= 0)
+                                        message.attestationReport = object.attestationReport;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GpuInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo} message GpuInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GpuInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uuid = "";
+                                    object.driverVersion = "";
+                                    object.vbiosVersion = "";
+                                    object.gpuArchitectureType = options.enums === String ? "GPU_ARCHITECTURE_TYPE_UNSPECIFIED" : 0;
+                                    if (options.bytes === String)
+                                        object.attestationCertificateChain = "";
+                                    else {
+                                        object.attestationCertificateChain = [];
+                                        if (options.bytes !== Array)
+                                            object.attestationCertificateChain = $util.newBuffer(object.attestationCertificateChain);
+                                    }
+                                    if (options.bytes === String)
+                                        object.attestationReport = "";
+                                    else {
+                                        object.attestationReport = [];
+                                        if (options.bytes !== Array)
+                                            object.attestationReport = $util.newBuffer(object.attestationReport);
+                                    }
+                                }
+                                if (message.uuid != null && message.hasOwnProperty("uuid"))
+                                    object.uuid = message.uuid;
+                                if (message.driverVersion != null && message.hasOwnProperty("driverVersion"))
+                                    object.driverVersion = message.driverVersion;
+                                if (message.vbiosVersion != null && message.hasOwnProperty("vbiosVersion"))
+                                    object.vbiosVersion = message.vbiosVersion;
+                                if (message.gpuArchitectureType != null && message.hasOwnProperty("gpuArchitectureType"))
+                                    object.gpuArchitectureType = options.enums === String ? $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType[message.gpuArchitectureType] === undefined ? message.gpuArchitectureType : $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType[message.gpuArchitectureType] : message.gpuArchitectureType;
+                                if (message.attestationCertificateChain != null && message.hasOwnProperty("attestationCertificateChain"))
+                                    object.attestationCertificateChain = options.bytes === String ? $util.base64.encode(message.attestationCertificateChain, 0, message.attestationCertificateChain.length) : options.bytes === Array ? Array.prototype.slice.call(message.attestationCertificateChain) : message.attestationCertificateChain;
+                                if (message.attestationReport != null && message.hasOwnProperty("attestationReport"))
+                                    object.attestationReport = options.bytes === String ? $util.base64.encode(message.attestationReport, 0, message.attestationReport.length) : options.bytes === Array ? Array.prototype.slice.call(message.attestationReport) : message.attestationReport;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GpuInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GpuInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GpuInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GpuInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo";
+                            };
+    
+                            return GpuInfo;
+                        })();
+    
+                        NvidiaAttestation.SwitchInfo = (function() {
+    
+                            /**
+                             * Properties of a SwitchInfo.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @interface ISwitchInfo
+                             * @property {string|null} [uuid] SwitchInfo uuid
+                             * @property {Uint8Array|null} [attestationCertificateChain] SwitchInfo attestationCertificateChain
+                             * @property {Uint8Array|null} [attestationReport] SwitchInfo attestationReport
+                             */
+    
+                            /**
+                             * Constructs a new SwitchInfo.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @classdesc Represents a SwitchInfo.
+                             * @implements ISwitchInfo
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo=} [properties] Properties to set
+                             */
+                            function SwitchInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SwitchInfo uuid.
+                             * @member {string} uuid
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @instance
+                             */
+                            SwitchInfo.prototype.uuid = "";
+    
+                            /**
+                             * SwitchInfo attestationCertificateChain.
+                             * @member {Uint8Array} attestationCertificateChain
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @instance
+                             */
+                            SwitchInfo.prototype.attestationCertificateChain = $util.newBuffer([]);
+    
+                            /**
+                             * SwitchInfo attestationReport.
+                             * @member {Uint8Array} attestationReport
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @instance
+                             */
+                            SwitchInfo.prototype.attestationReport = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new SwitchInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo} SwitchInfo instance
+                             */
+                            SwitchInfo.create = function create(properties) {
+                                return new SwitchInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SwitchInfo message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo} message SwitchInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SwitchInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uuid);
+                                if (message.attestationCertificateChain != null && Object.hasOwnProperty.call(message, "attestationCertificateChain"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.attestationCertificateChain);
+                                if (message.attestationReport != null && Object.hasOwnProperty.call(message, "attestationReport"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.attestationReport);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SwitchInfo message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo} message SwitchInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SwitchInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SwitchInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo} SwitchInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SwitchInfo.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.uuid = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.attestationCertificateChain = reader.bytes();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.attestationReport = reader.bytes();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SwitchInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo} SwitchInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SwitchInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SwitchInfo message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SwitchInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.uuid != null && message.hasOwnProperty("uuid"))
+                                    if (!$util.isString(message.uuid))
+                                        return "uuid: string expected";
+                                if (message.attestationCertificateChain != null && message.hasOwnProperty("attestationCertificateChain"))
+                                    if (!(message.attestationCertificateChain && typeof message.attestationCertificateChain.length === "number" || $util.isString(message.attestationCertificateChain)))
+                                        return "attestationCertificateChain: buffer expected";
+                                if (message.attestationReport != null && message.hasOwnProperty("attestationReport"))
+                                    if (!(message.attestationReport && typeof message.attestationReport.length === "number" || $util.isString(message.attestationReport)))
+                                        return "attestationReport: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SwitchInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo} SwitchInfo
+                             */
+                            SwitchInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo();
+                                if (object.uuid != null)
+                                    message.uuid = String(object.uuid);
+                                if (object.attestationCertificateChain != null)
+                                    if (typeof object.attestationCertificateChain === "string")
+                                        $util.base64.decode(object.attestationCertificateChain, message.attestationCertificateChain = $util.newBuffer($util.base64.length(object.attestationCertificateChain)), 0);
+                                    else if (object.attestationCertificateChain.length >= 0)
+                                        message.attestationCertificateChain = object.attestationCertificateChain;
+                                if (object.attestationReport != null)
+                                    if (typeof object.attestationReport === "string")
+                                        $util.base64.decode(object.attestationReport, message.attestationReport = $util.newBuffer($util.base64.length(object.attestationReport)), 0);
+                                    else if (object.attestationReport.length >= 0)
+                                        message.attestationReport = object.attestationReport;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SwitchInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo} message SwitchInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SwitchInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.uuid = "";
+                                    if (options.bytes === String)
+                                        object.attestationCertificateChain = "";
+                                    else {
+                                        object.attestationCertificateChain = [];
+                                        if (options.bytes !== Array)
+                                            object.attestationCertificateChain = $util.newBuffer(object.attestationCertificateChain);
+                                    }
+                                    if (options.bytes === String)
+                                        object.attestationReport = "";
+                                    else {
+                                        object.attestationReport = [];
+                                        if (options.bytes !== Array)
+                                            object.attestationReport = $util.newBuffer(object.attestationReport);
+                                    }
+                                }
+                                if (message.uuid != null && message.hasOwnProperty("uuid"))
+                                    object.uuid = message.uuid;
+                                if (message.attestationCertificateChain != null && message.hasOwnProperty("attestationCertificateChain"))
+                                    object.attestationCertificateChain = options.bytes === String ? $util.base64.encode(message.attestationCertificateChain, 0, message.attestationCertificateChain.length) : options.bytes === Array ? Array.prototype.slice.call(message.attestationCertificateChain) : message.attestationCertificateChain;
+                                if (message.attestationReport != null && message.hasOwnProperty("attestationReport"))
+                                    object.attestationReport = options.bytes === String ? $util.base64.encode(message.attestationReport, 0, message.attestationReport.length) : options.bytes === Array ? Array.prototype.slice.call(message.attestationReport) : message.attestationReport;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SwitchInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SwitchInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SwitchInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SwitchInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo";
+                            };
+    
+                            return SwitchInfo;
+                        })();
+    
+                        NvidiaAttestation.SinglePassthroughAttestation = (function() {
+    
+                            /**
+                             * Properties of a SinglePassthroughAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @interface ISinglePassthroughAttestation
+                             * @property {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo|null} [gpuQuote] SinglePassthroughAttestation gpuQuote
+                             */
+    
+                            /**
+                             * Constructs a new SinglePassthroughAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @classdesc Represents a SinglePassthroughAttestation.
+                             * @implements ISinglePassthroughAttestation
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation=} [properties] Properties to set
+                             */
+                            function SinglePassthroughAttestation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SinglePassthroughAttestation gpuQuote.
+                             * @member {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo|null|undefined} gpuQuote
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @instance
+                             */
+                            SinglePassthroughAttestation.prototype.gpuQuote = null;
+    
+                            /**
+                             * Creates a new SinglePassthroughAttestation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation} SinglePassthroughAttestation instance
+                             */
+                            SinglePassthroughAttestation.create = function create(properties) {
+                                return new SinglePassthroughAttestation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SinglePassthroughAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation} message SinglePassthroughAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SinglePassthroughAttestation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gpuQuote != null && Object.hasOwnProperty.call(message, "gpuQuote"))
+                                    $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.encode(message.gpuQuote, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SinglePassthroughAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation} message SinglePassthroughAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SinglePassthroughAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SinglePassthroughAttestation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation} SinglePassthroughAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SinglePassthroughAttestation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.gpuQuote = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SinglePassthroughAttestation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation} SinglePassthroughAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SinglePassthroughAttestation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SinglePassthroughAttestation message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SinglePassthroughAttestation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.gpuQuote != null && message.hasOwnProperty("gpuQuote")) {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify(message.gpuQuote);
+                                    if (error)
+                                        return "gpuQuote." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SinglePassthroughAttestation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation} SinglePassthroughAttestation
+                             */
+                            SinglePassthroughAttestation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation();
+                                if (object.gpuQuote != null) {
+                                    if (typeof object.gpuQuote !== "object")
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.gpuQuote: object expected");
+                                    message.gpuQuote = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.fromObject(object.gpuQuote);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SinglePassthroughAttestation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation} message SinglePassthroughAttestation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SinglePassthroughAttestation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.gpuQuote = null;
+                                if (message.gpuQuote != null && message.hasOwnProperty("gpuQuote"))
+                                    object.gpuQuote = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.toObject(message.gpuQuote, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SinglePassthroughAttestation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SinglePassthroughAttestation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SinglePassthroughAttestation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SinglePassthroughAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation";
+                            };
+    
+                            return SinglePassthroughAttestation;
+                        })();
+    
+                        NvidiaAttestation.ProtectedPcieAttestation = (function() {
+    
+                            /**
+                             * Properties of a ProtectedPcieAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @interface IProtectedPcieAttestation
+                             * @property {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo>|null} [gpuQuotes] ProtectedPcieAttestation gpuQuotes
+                             * @property {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo>|null} [switchQuotes] ProtectedPcieAttestation switchQuotes
+                             */
+    
+                            /**
+                             * Constructs a new ProtectedPcieAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @classdesc Represents a ProtectedPcieAttestation.
+                             * @implements IProtectedPcieAttestation
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation=} [properties] Properties to set
+                             */
+                            function ProtectedPcieAttestation(properties) {
+                                this.gpuQuotes = [];
+                                this.switchQuotes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProtectedPcieAttestation gpuQuotes.
+                             * @member {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo>} gpuQuotes
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @instance
+                             */
+                            ProtectedPcieAttestation.prototype.gpuQuotes = $util.emptyArray;
+    
+                            /**
+                             * ProtectedPcieAttestation switchQuotes.
+                             * @member {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo>} switchQuotes
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @instance
+                             */
+                            ProtectedPcieAttestation.prototype.switchQuotes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ProtectedPcieAttestation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation} ProtectedPcieAttestation instance
+                             */
+                            ProtectedPcieAttestation.create = function create(properties) {
+                                return new ProtectedPcieAttestation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProtectedPcieAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation} message ProtectedPcieAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProtectedPcieAttestation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gpuQuotes != null && message.gpuQuotes.length)
+                                    for (var i = 0; i < message.gpuQuotes.length; ++i)
+                                        $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.encode(message.gpuQuotes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.switchQuotes != null && message.switchQuotes.length)
+                                    for (var i = 0; i < message.switchQuotes.length; ++i)
+                                        $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.encode(message.switchQuotes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProtectedPcieAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation} message ProtectedPcieAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProtectedPcieAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProtectedPcieAttestation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation} ProtectedPcieAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProtectedPcieAttestation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.gpuQuotes && message.gpuQuotes.length))
+                                                message.gpuQuotes = [];
+                                            message.gpuQuotes.push($root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.switchQuotes && message.switchQuotes.length))
+                                                message.switchQuotes = [];
+                                            message.switchQuotes.push($root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProtectedPcieAttestation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation} ProtectedPcieAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProtectedPcieAttestation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProtectedPcieAttestation message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProtectedPcieAttestation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.gpuQuotes != null && message.hasOwnProperty("gpuQuotes")) {
+                                    if (!Array.isArray(message.gpuQuotes))
+                                        return "gpuQuotes: array expected";
+                                    for (var i = 0; i < message.gpuQuotes.length; ++i) {
+                                        var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify(message.gpuQuotes[i]);
+                                        if (error)
+                                            return "gpuQuotes." + error;
+                                    }
+                                }
+                                if (message.switchQuotes != null && message.hasOwnProperty("switchQuotes")) {
+                                    if (!Array.isArray(message.switchQuotes))
+                                        return "switchQuotes: array expected";
+                                    for (var i = 0; i < message.switchQuotes.length; ++i) {
+                                        var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.verify(message.switchQuotes[i]);
+                                        if (error)
+                                            return "switchQuotes." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProtectedPcieAttestation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation} ProtectedPcieAttestation
+                             */
+                            ProtectedPcieAttestation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation();
+                                if (object.gpuQuotes) {
+                                    if (!Array.isArray(object.gpuQuotes))
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.gpuQuotes: array expected");
+                                    message.gpuQuotes = [];
+                                    for (var i = 0; i < object.gpuQuotes.length; ++i) {
+                                        if (typeof object.gpuQuotes[i] !== "object")
+                                            throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.gpuQuotes: object expected");
+                                        message.gpuQuotes[i] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.fromObject(object.gpuQuotes[i]);
+                                    }
+                                }
+                                if (object.switchQuotes) {
+                                    if (!Array.isArray(object.switchQuotes))
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.switchQuotes: array expected");
+                                    message.switchQuotes = [];
+                                    for (var i = 0; i < object.switchQuotes.length; ++i) {
+                                        if (typeof object.switchQuotes[i] !== "object")
+                                            throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.switchQuotes: object expected");
+                                        message.switchQuotes[i] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.fromObject(object.switchQuotes[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProtectedPcieAttestation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation} message ProtectedPcieAttestation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProtectedPcieAttestation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.gpuQuotes = [];
+                                    object.switchQuotes = [];
+                                }
+                                if (message.gpuQuotes && message.gpuQuotes.length) {
+                                    object.gpuQuotes = [];
+                                    for (var j = 0; j < message.gpuQuotes.length; ++j)
+                                        object.gpuQuotes[j] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.toObject(message.gpuQuotes[j], options);
+                                }
+                                if (message.switchQuotes && message.switchQuotes.length) {
+                                    object.switchQuotes = [];
+                                    for (var j = 0; j < message.switchQuotes.length; ++j)
+                                        object.switchQuotes[j] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.toObject(message.switchQuotes[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProtectedPcieAttestation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProtectedPcieAttestation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProtectedPcieAttestation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProtectedPcieAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation";
+                            };
+    
+                            return ProtectedPcieAttestation;
+                        })();
+    
+                        NvidiaAttestation.MultiGpuSecurePassthroughAttestation = (function() {
+    
+                            /**
+                             * Properties of a MultiGpuSecurePassthroughAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @interface IMultiGpuSecurePassthroughAttestation
+                             * @property {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo>|null} [gpuQuotes] MultiGpuSecurePassthroughAttestation gpuQuotes
+                             */
+    
+                            /**
+                             * Constructs a new MultiGpuSecurePassthroughAttestation.
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation
+                             * @classdesc Represents a MultiGpuSecurePassthroughAttestation.
+                             * @implements IMultiGpuSecurePassthroughAttestation
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation=} [properties] Properties to set
+                             */
+                            function MultiGpuSecurePassthroughAttestation(properties) {
+                                this.gpuQuotes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MultiGpuSecurePassthroughAttestation gpuQuotes.
+                             * @member {Array.<google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo>} gpuQuotes
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @instance
+                             */
+                            MultiGpuSecurePassthroughAttestation.prototype.gpuQuotes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MultiGpuSecurePassthroughAttestation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation} MultiGpuSecurePassthroughAttestation instance
+                             */
+                            MultiGpuSecurePassthroughAttestation.create = function create(properties) {
+                                return new MultiGpuSecurePassthroughAttestation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MultiGpuSecurePassthroughAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation} message MultiGpuSecurePassthroughAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultiGpuSecurePassthroughAttestation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.gpuQuotes != null && message.gpuQuotes.length)
+                                    for (var i = 0; i < message.gpuQuotes.length; ++i)
+                                        $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.encode(message.gpuQuotes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MultiGpuSecurePassthroughAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation} message MultiGpuSecurePassthroughAttestation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultiGpuSecurePassthroughAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MultiGpuSecurePassthroughAttestation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation} MultiGpuSecurePassthroughAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultiGpuSecurePassthroughAttestation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.gpuQuotes && message.gpuQuotes.length))
+                                                message.gpuQuotes = [];
+                                            message.gpuQuotes.push($root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MultiGpuSecurePassthroughAttestation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation} MultiGpuSecurePassthroughAttestation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultiGpuSecurePassthroughAttestation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MultiGpuSecurePassthroughAttestation message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MultiGpuSecurePassthroughAttestation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.gpuQuotes != null && message.hasOwnProperty("gpuQuotes")) {
+                                    if (!Array.isArray(message.gpuQuotes))
+                                        return "gpuQuotes: array expected";
+                                    for (var i = 0; i < message.gpuQuotes.length; ++i) {
+                                        var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify(message.gpuQuotes[i]);
+                                        if (error)
+                                            return "gpuQuotes." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MultiGpuSecurePassthroughAttestation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation} MultiGpuSecurePassthroughAttestation
+                             */
+                            MultiGpuSecurePassthroughAttestation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation();
+                                if (object.gpuQuotes) {
+                                    if (!Array.isArray(object.gpuQuotes))
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.gpuQuotes: array expected");
+                                    message.gpuQuotes = [];
+                                    for (var i = 0; i < object.gpuQuotes.length; ++i) {
+                                        if (typeof object.gpuQuotes[i] !== "object")
+                                            throw TypeError(".google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.gpuQuotes: object expected");
+                                        message.gpuQuotes[i] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.fromObject(object.gpuQuotes[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MultiGpuSecurePassthroughAttestation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation} message MultiGpuSecurePassthroughAttestation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MultiGpuSecurePassthroughAttestation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.gpuQuotes = [];
+                                if (message.gpuQuotes && message.gpuQuotes.length) {
+                                    object.gpuQuotes = [];
+                                    for (var j = 0; j < message.gpuQuotes.length; ++j)
+                                        object.gpuQuotes[j] = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.toObject(message.gpuQuotes[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MultiGpuSecurePassthroughAttestation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MultiGpuSecurePassthroughAttestation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MultiGpuSecurePassthroughAttestation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MultiGpuSecurePassthroughAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation";
+                            };
+    
+                            return MultiGpuSecurePassthroughAttestation;
+                        })();
+    
+                        /**
+                         * GpuArchitectureType enum.
+                         * @name google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType
+                         * @enum {number}
+                         * @property {number} GPU_ARCHITECTURE_TYPE_UNSPECIFIED=0 GPU_ARCHITECTURE_TYPE_UNSPECIFIED value
+                         * @property {number} GPU_ARCHITECTURE_TYPE_HOPPER=8 GPU_ARCHITECTURE_TYPE_HOPPER value
+                         * @property {number} GPU_ARCHITECTURE_TYPE_BLACKWELL=10 GPU_ARCHITECTURE_TYPE_BLACKWELL value
+                         */
+                        NvidiaAttestation.GpuArchitectureType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GPU_ARCHITECTURE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[8] = "GPU_ARCHITECTURE_TYPE_HOPPER"] = 8;
+                            values[valuesById[10] = "GPU_ARCHITECTURE_TYPE_BLACKWELL"] = 10;
+                            return values;
+                        })();
+    
+                        return NvidiaAttestation;
                     })();
     
                     v1.TdxCcelAttestation = (function() {
@@ -4788,6 +6487,7 @@
                          * @property {Array.<google.cloud.confidentialcomputing.v1.ISignedEntity>|null} [signedEntities] VerifyConfidentialSpaceRequest signedEntities
                          * @property {google.cloud.confidentialcomputing.v1.IGceShieldedIdentity|null} [gceShieldedIdentity] VerifyConfidentialSpaceRequest gceShieldedIdentity
                          * @property {google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.IConfidentialSpaceOptions|null} [options] VerifyConfidentialSpaceRequest options
+                         * @property {google.cloud.confidentialcomputing.v1.INvidiaAttestation|null} [nvidiaAttestation] VerifyConfidentialSpaceRequest nvidiaAttestation
                          */
     
                         /**
@@ -4862,6 +6562,14 @@
                          */
                         VerifyConfidentialSpaceRequest.prototype.options = null;
     
+                        /**
+                         * VerifyConfidentialSpaceRequest nvidiaAttestation.
+                         * @member {google.cloud.confidentialcomputing.v1.INvidiaAttestation|null|undefined} nvidiaAttestation
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest
+                         * @instance
+                         */
+                        VerifyConfidentialSpaceRequest.prototype.nvidiaAttestation = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -4915,6 +6623,8 @@
                                 $root.google.cloud.confidentialcomputing.v1.GceShieldedIdentity.encode(message.gceShieldedIdentity, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                                 $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions.encode(message.options, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.nvidiaAttestation != null && Object.hasOwnProperty.call(message, "nvidiaAttestation"))
+                                $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.encode(message.nvidiaAttestation, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -4979,6 +6689,10 @@
                                     }
                                 case 7: {
                                         message.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5062,6 +6776,11 @@
                                 if (error)
                                     return "options." + error;
                             }
+                            if (message.nvidiaAttestation != null && message.hasOwnProperty("nvidiaAttestation")) {
+                                var error = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify(message.nvidiaAttestation);
+                                if (error)
+                                    return "nvidiaAttestation." + error;
+                            }
                             return null;
                         };
     
@@ -5114,6 +6833,11 @@
                                     throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.options: object expected");
                                 message.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions.fromObject(object.options);
                             }
+                            if (object.nvidiaAttestation != null) {
+                                if (typeof object.nvidiaAttestation !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.nvidiaAttestation: object expected");
+                                message.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.fromObject(object.nvidiaAttestation);
+                            }
                             return message;
                         };
     
@@ -5137,6 +6861,7 @@
                                 object.gcpCredentials = null;
                                 object.gceShieldedIdentity = null;
                                 object.options = null;
+                                object.nvidiaAttestation = null;
                             }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 object.challenge = message.challenge;
@@ -5161,6 +6886,8 @@
                                 object.gceShieldedIdentity = $root.google.cloud.confidentialcomputing.v1.GceShieldedIdentity.toObject(message.gceShieldedIdentity, options);
                             if (message.options != null && message.hasOwnProperty("options"))
                                 object.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions.toObject(message.options, options);
+                            if (message.nvidiaAttestation != null && message.hasOwnProperty("nvidiaAttestation"))
+                                object.nvidiaAttestation = $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.toObject(message.nvidiaAttestation, options);
                             return object;
                         };
     
@@ -6096,6 +7823,7 @@
                          * @interface IVerifyConfidentialGkeRequest
                          * @property {google.cloud.confidentialcomputing.v1.ITpmAttestation|null} [tpmAttestation] VerifyConfidentialGkeRequest tpmAttestation
                          * @property {string|null} [challenge] VerifyConfidentialGkeRequest challenge
+                         * @property {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null} [options] VerifyConfidentialGkeRequest options
                          */
     
                         /**
@@ -6128,6 +7856,14 @@
                          * @instance
                          */
                         VerifyConfidentialGkeRequest.prototype.challenge = "";
+    
+                        /**
+                         * VerifyConfidentialGkeRequest options.
+                         * @member {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null|undefined} options
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest
+                         * @instance
+                         */
+                        VerifyConfidentialGkeRequest.prototype.options = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -6171,6 +7907,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.challenge);
                             if (message.tpmAttestation != null && Object.hasOwnProperty.call(message, "tpmAttestation"))
                                 $root.google.cloud.confidentialcomputing.v1.TpmAttestation.encode(message.tpmAttestation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                                $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.encode(message.options, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -6213,6 +7951,10 @@
                                     }
                                 case 1: {
                                         message.challenge = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6262,6 +8004,11 @@
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 if (!$util.isString(message.challenge))
                                     return "challenge: string expected";
+                            if (message.options != null && message.hasOwnProperty("options")) {
+                                var error = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.verify(message.options);
+                                if (error)
+                                    return "options." + error;
+                            }
                             return null;
                         };
     
@@ -6284,6 +8031,11 @@
                             }
                             if (object.challenge != null)
                                 message.challenge = String(object.challenge);
+                            if (object.options != null) {
+                                if (typeof object.options !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.options: object expected");
+                                message.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.fromObject(object.options);
+                            }
                             return message;
                         };
     
@@ -6300,8 +8052,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.challenge = "";
+                                object.options = null;
+                            }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 object.challenge = message.challenge;
                             if (message.tpmAttestation != null && message.hasOwnProperty("tpmAttestation")) {
@@ -6309,6 +8063,8 @@
                                 if (options.oneofs)
                                     object.teeAttestation = "tpmAttestation";
                             }
+                            if (message.options != null && message.hasOwnProperty("options"))
+                                object.options = $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.toObject(message.options, options);
                             return object;
                         };
     
@@ -6337,6 +8093,299 @@
                             }
                             return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest";
                         };
+    
+                        VerifyConfidentialGkeRequest.ConfidentialGkeOptions = (function() {
+    
+                            /**
+                             * Properties of a ConfidentialGkeOptions.
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest
+                             * @interface IConfidentialGkeOptions
+                             * @property {string|null} [audience] ConfidentialGkeOptions audience
+                             * @property {Array.<string>|null} [nonce] ConfidentialGkeOptions nonce
+                             * @property {google.cloud.confidentialcomputing.v1.SignatureType|null} [signatureType] ConfidentialGkeOptions signatureType
+                             */
+    
+                            /**
+                             * Constructs a new ConfidentialGkeOptions.
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest
+                             * @classdesc Represents a ConfidentialGkeOptions.
+                             * @implements IConfidentialGkeOptions
+                             * @constructor
+                             * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions=} [properties] Properties to set
+                             */
+                            function ConfidentialGkeOptions(properties) {
+                                this.nonce = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConfidentialGkeOptions audience.
+                             * @member {string} audience
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @instance
+                             */
+                            ConfidentialGkeOptions.prototype.audience = "";
+    
+                            /**
+                             * ConfidentialGkeOptions nonce.
+                             * @member {Array.<string>} nonce
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @instance
+                             */
+                            ConfidentialGkeOptions.prototype.nonce = $util.emptyArray;
+    
+                            /**
+                             * ConfidentialGkeOptions signatureType.
+                             * @member {google.cloud.confidentialcomputing.v1.SignatureType} signatureType
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @instance
+                             */
+                            ConfidentialGkeOptions.prototype.signatureType = 0;
+    
+                            /**
+                             * Creates a new ConfidentialGkeOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions=} [properties] Properties to set
+                             * @returns {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} ConfidentialGkeOptions instance
+                             */
+                            ConfidentialGkeOptions.create = function create(properties) {
+                                return new ConfidentialGkeOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConfidentialGkeOptions message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions} message ConfidentialGkeOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConfidentialGkeOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.audience);
+                                if (message.nonce != null && message.nonce.length)
+                                    for (var i = 0; i < message.nonce.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nonce[i]);
+                                if (message.signatureType != null && Object.hasOwnProperty.call(message, "signatureType"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.signatureType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConfidentialGkeOptions message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions} message ConfidentialGkeOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConfidentialGkeOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConfidentialGkeOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} ConfidentialGkeOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConfidentialGkeOptions.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.audience = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.nonce && message.nonce.length))
+                                                message.nonce = [];
+                                            message.nonce.push(reader.string());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.signatureType = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConfidentialGkeOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} ConfidentialGkeOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConfidentialGkeOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConfidentialGkeOptions message.
+                             * @function verify
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConfidentialGkeOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.audience != null && message.hasOwnProperty("audience"))
+                                    if (!$util.isString(message.audience))
+                                        return "audience: string expected";
+                                if (message.nonce != null && message.hasOwnProperty("nonce")) {
+                                    if (!Array.isArray(message.nonce))
+                                        return "nonce: array expected";
+                                    for (var i = 0; i < message.nonce.length; ++i)
+                                        if (!$util.isString(message.nonce[i]))
+                                            return "nonce: string[] expected";
+                                }
+                                if (message.signatureType != null && message.hasOwnProperty("signatureType"))
+                                    switch (message.signatureType) {
+                                    default:
+                                        return "signatureType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConfidentialGkeOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} ConfidentialGkeOptions
+                             */
+                            ConfidentialGkeOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions)
+                                    return object;
+                                var message = new $root.google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions();
+                                if (object.audience != null)
+                                    message.audience = String(object.audience);
+                                if (object.nonce) {
+                                    if (!Array.isArray(object.nonce))
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.nonce: array expected");
+                                    message.nonce = [];
+                                    for (var i = 0; i < object.nonce.length; ++i)
+                                        message.nonce[i] = String(object.nonce[i]);
+                                }
+                                switch (object.signatureType) {
+                                default:
+                                    if (typeof object.signatureType === "number") {
+                                        message.signatureType = object.signatureType;
+                                        break;
+                                    }
+                                    break;
+                                case "SIGNATURE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.signatureType = 0;
+                                    break;
+                                case "SIGNATURE_TYPE_OIDC":
+                                case 1:
+                                    message.signatureType = 1;
+                                    break;
+                                case "SIGNATURE_TYPE_PKI":
+                                case 2:
+                                    message.signatureType = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConfidentialGkeOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} message ConfidentialGkeOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConfidentialGkeOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.nonce = [];
+                                if (options.defaults) {
+                                    object.audience = "";
+                                    object.signatureType = options.enums === String ? "SIGNATURE_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.audience != null && message.hasOwnProperty("audience"))
+                                    object.audience = message.audience;
+                                if (message.nonce && message.nonce.length) {
+                                    object.nonce = [];
+                                    for (var j = 0; j < message.nonce.length; ++j)
+                                        object.nonce[j] = message.nonce[j];
+                                }
+                                if (message.signatureType != null && message.hasOwnProperty("signatureType"))
+                                    object.signatureType = options.enums === String ? $root.google.cloud.confidentialcomputing.v1.SignatureType[message.signatureType] === undefined ? message.signatureType : $root.google.cloud.confidentialcomputing.v1.SignatureType[message.signatureType] : message.signatureType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConfidentialGkeOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConfidentialGkeOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConfidentialGkeOptions
+                             * @function getTypeUrl
+                             * @memberof google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConfidentialGkeOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions";
+                            };
+    
+                            return ConfidentialGkeOptions;
+                        })();
     
                         return VerifyConfidentialGkeRequest;
                     })();

@@ -398,6 +398,9 @@ export namespace google {
                     /** VerifyAttestationRequest sevSnpAttestation */
                     sevSnpAttestation?: (google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null);
 
+                    /** VerifyAttestationRequest nvidiaAttestation */
+                    nvidiaAttestation?: (google.cloud.confidentialcomputing.v1.INvidiaAttestation|null);
+
                     /** VerifyAttestationRequest challenge */
                     challenge?: (string|null);
 
@@ -432,6 +435,9 @@ export namespace google {
                     /** VerifyAttestationRequest sevSnpAttestation. */
                     public sevSnpAttestation?: (google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null);
 
+                    /** VerifyAttestationRequest nvidiaAttestation. */
+                    public nvidiaAttestation?: (google.cloud.confidentialcomputing.v1.INvidiaAttestation|null);
+
                     /** VerifyAttestationRequest challenge. */
                     public challenge: string;
 
@@ -452,6 +458,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest teeAttestation. */
                     public teeAttestation?: ("tdCcel"|"sevSnpAttestation");
+
+                    /** VerifyAttestationRequest deviceAttestation. */
+                    public deviceAttestation?: "nvidiaAttestation";
 
                     /**
                      * Creates a new VerifyAttestationRequest instance using the specified properties.
@@ -529,6 +538,661 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NvidiaAttestation. */
+                interface INvidiaAttestation {
+
+                    /** NvidiaAttestation spt */
+                    spt?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation|null);
+
+                    /** NvidiaAttestation ppcie */
+                    ppcie?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation|null);
+
+                    /** NvidiaAttestation mpt */
+                    mpt?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation|null);
+                }
+
+                /** Represents a NvidiaAttestation. */
+                class NvidiaAttestation implements INvidiaAttestation {
+
+                    /**
+                     * Constructs a new NvidiaAttestation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.confidentialcomputing.v1.INvidiaAttestation);
+
+                    /** NvidiaAttestation spt. */
+                    public spt?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation|null);
+
+                    /** NvidiaAttestation ppcie. */
+                    public ppcie?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation|null);
+
+                    /** NvidiaAttestation mpt. */
+                    public mpt?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation|null);
+
+                    /** NvidiaAttestation ccFeature. */
+                    public ccFeature?: ("spt"|"ppcie"|"mpt");
+
+                    /**
+                     * Creates a new NvidiaAttestation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NvidiaAttestation instance
+                     */
+                    public static create(properties?: google.cloud.confidentialcomputing.v1.INvidiaAttestation): google.cloud.confidentialcomputing.v1.NvidiaAttestation;
+
+                    /**
+                     * Encodes the specified NvidiaAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify|verify} messages.
+                     * @param message NvidiaAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.confidentialcomputing.v1.INvidiaAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NvidiaAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.verify|verify} messages.
+                     * @param message NvidiaAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.INvidiaAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NvidiaAttestation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NvidiaAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation;
+
+                    /**
+                     * Decodes a NvidiaAttestation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NvidiaAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation;
+
+                    /**
+                     * Verifies a NvidiaAttestation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NvidiaAttestation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NvidiaAttestation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation;
+
+                    /**
+                     * Creates a plain object from a NvidiaAttestation message. Also converts values to other types if specified.
+                     * @param message NvidiaAttestation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NvidiaAttestation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NvidiaAttestation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NvidiaAttestation {
+
+                    /** Properties of a GpuInfo. */
+                    interface IGpuInfo {
+
+                        /** GpuInfo uuid */
+                        uuid?: (string|null);
+
+                        /** GpuInfo driverVersion */
+                        driverVersion?: (string|null);
+
+                        /** GpuInfo vbiosVersion */
+                        vbiosVersion?: (string|null);
+
+                        /** GpuInfo gpuArchitectureType */
+                        gpuArchitectureType?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType|keyof typeof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType|null);
+
+                        /** GpuInfo attestationCertificateChain */
+                        attestationCertificateChain?: (Uint8Array|Buffer|string|null);
+
+                        /** GpuInfo attestationReport */
+                        attestationReport?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents a GpuInfo. */
+                    class GpuInfo implements IGpuInfo {
+
+                        /**
+                         * Constructs a new GpuInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo);
+
+                        /** GpuInfo uuid. */
+                        public uuid: string;
+
+                        /** GpuInfo driverVersion. */
+                        public driverVersion: string;
+
+                        /** GpuInfo vbiosVersion. */
+                        public vbiosVersion: string;
+
+                        /** GpuInfo gpuArchitectureType. */
+                        public gpuArchitectureType: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType|keyof typeof google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuArchitectureType);
+
+                        /** GpuInfo attestationCertificateChain. */
+                        public attestationCertificateChain: (Uint8Array|Buffer|string);
+
+                        /** GpuInfo attestationReport. */
+                        public attestationReport: (Uint8Array|Buffer|string);
+
+                        /**
+                         * Creates a new GpuInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GpuInfo instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo): google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo;
+
+                        /**
+                         * Encodes the specified GpuInfo message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify|verify} messages.
+                         * @param message GpuInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GpuInfo message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo.verify|verify} messages.
+                         * @param message GpuInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GpuInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GpuInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo;
+
+                        /**
+                         * Decodes a GpuInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GpuInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo;
+
+                        /**
+                         * Verifies a GpuInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GpuInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GpuInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo;
+
+                        /**
+                         * Creates a plain object from a GpuInfo message. Also converts values to other types if specified.
+                         * @param message GpuInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.GpuInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GpuInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GpuInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SwitchInfo. */
+                    interface ISwitchInfo {
+
+                        /** SwitchInfo uuid */
+                        uuid?: (string|null);
+
+                        /** SwitchInfo attestationCertificateChain */
+                        attestationCertificateChain?: (Uint8Array|Buffer|string|null);
+
+                        /** SwitchInfo attestationReport */
+                        attestationReport?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents a SwitchInfo. */
+                    class SwitchInfo implements ISwitchInfo {
+
+                        /**
+                         * Constructs a new SwitchInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo);
+
+                        /** SwitchInfo uuid. */
+                        public uuid: string;
+
+                        /** SwitchInfo attestationCertificateChain. */
+                        public attestationCertificateChain: (Uint8Array|Buffer|string);
+
+                        /** SwitchInfo attestationReport. */
+                        public attestationReport: (Uint8Array|Buffer|string);
+
+                        /**
+                         * Creates a new SwitchInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SwitchInfo instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo;
+
+                        /**
+                         * Encodes the specified SwitchInfo message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.verify|verify} messages.
+                         * @param message SwitchInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SwitchInfo message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo.verify|verify} messages.
+                         * @param message SwitchInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SwitchInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SwitchInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo;
+
+                        /**
+                         * Decodes a SwitchInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SwitchInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo;
+
+                        /**
+                         * Verifies a SwitchInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SwitchInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SwitchInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo;
+
+                        /**
+                         * Creates a plain object from a SwitchInfo message. Also converts values to other types if specified.
+                         * @param message SwitchInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.SwitchInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SwitchInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SwitchInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SinglePassthroughAttestation. */
+                    interface ISinglePassthroughAttestation {
+
+                        /** SinglePassthroughAttestation gpuQuote */
+                        gpuQuote?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo|null);
+                    }
+
+                    /** Represents a SinglePassthroughAttestation. */
+                    class SinglePassthroughAttestation implements ISinglePassthroughAttestation {
+
+                        /**
+                         * Constructs a new SinglePassthroughAttestation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation);
+
+                        /** SinglePassthroughAttestation gpuQuote. */
+                        public gpuQuote?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo|null);
+
+                        /**
+                         * Creates a new SinglePassthroughAttestation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SinglePassthroughAttestation instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation;
+
+                        /**
+                         * Encodes the specified SinglePassthroughAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.verify|verify} messages.
+                         * @param message SinglePassthroughAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SinglePassthroughAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation.verify|verify} messages.
+                         * @param message SinglePassthroughAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISinglePassthroughAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SinglePassthroughAttestation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SinglePassthroughAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation;
+
+                        /**
+                         * Decodes a SinglePassthroughAttestation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SinglePassthroughAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation;
+
+                        /**
+                         * Verifies a SinglePassthroughAttestation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SinglePassthroughAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SinglePassthroughAttestation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation;
+
+                        /**
+                         * Creates a plain object from a SinglePassthroughAttestation message. Also converts values to other types if specified.
+                         * @param message SinglePassthroughAttestation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.SinglePassthroughAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SinglePassthroughAttestation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SinglePassthroughAttestation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProtectedPcieAttestation. */
+                    interface IProtectedPcieAttestation {
+
+                        /** ProtectedPcieAttestation gpuQuotes */
+                        gpuQuotes?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo[]|null);
+
+                        /** ProtectedPcieAttestation switchQuotes */
+                        switchQuotes?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo[]|null);
+                    }
+
+                    /** Represents a ProtectedPcieAttestation. */
+                    class ProtectedPcieAttestation implements IProtectedPcieAttestation {
+
+                        /**
+                         * Constructs a new ProtectedPcieAttestation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation);
+
+                        /** ProtectedPcieAttestation gpuQuotes. */
+                        public gpuQuotes: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo[];
+
+                        /** ProtectedPcieAttestation switchQuotes. */
+                        public switchQuotes: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ISwitchInfo[];
+
+                        /**
+                         * Creates a new ProtectedPcieAttestation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProtectedPcieAttestation instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation): google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation;
+
+                        /**
+                         * Encodes the specified ProtectedPcieAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.verify|verify} messages.
+                         * @param message ProtectedPcieAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProtectedPcieAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation.verify|verify} messages.
+                         * @param message ProtectedPcieAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IProtectedPcieAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProtectedPcieAttestation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProtectedPcieAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation;
+
+                        /**
+                         * Decodes a ProtectedPcieAttestation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProtectedPcieAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation;
+
+                        /**
+                         * Verifies a ProtectedPcieAttestation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProtectedPcieAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProtectedPcieAttestation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation;
+
+                        /**
+                         * Creates a plain object from a ProtectedPcieAttestation message. Also converts values to other types if specified.
+                         * @param message ProtectedPcieAttestation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.ProtectedPcieAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProtectedPcieAttestation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProtectedPcieAttestation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MultiGpuSecurePassthroughAttestation. */
+                    interface IMultiGpuSecurePassthroughAttestation {
+
+                        /** MultiGpuSecurePassthroughAttestation gpuQuotes */
+                        gpuQuotes?: (google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo[]|null);
+                    }
+
+                    /** Represents a MultiGpuSecurePassthroughAttestation. */
+                    class MultiGpuSecurePassthroughAttestation implements IMultiGpuSecurePassthroughAttestation {
+
+                        /**
+                         * Constructs a new MultiGpuSecurePassthroughAttestation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation);
+
+                        /** MultiGpuSecurePassthroughAttestation gpuQuotes. */
+                        public gpuQuotes: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IGpuInfo[];
+
+                        /**
+                         * Creates a new MultiGpuSecurePassthroughAttestation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultiGpuSecurePassthroughAttestation instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation): google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation;
+
+                        /**
+                         * Encodes the specified MultiGpuSecurePassthroughAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.verify|verify} messages.
+                         * @param message MultiGpuSecurePassthroughAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultiGpuSecurePassthroughAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation.verify|verify} messages.
+                         * @param message MultiGpuSecurePassthroughAttestation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.IMultiGpuSecurePassthroughAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultiGpuSecurePassthroughAttestation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultiGpuSecurePassthroughAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation;
+
+                        /**
+                         * Decodes a MultiGpuSecurePassthroughAttestation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultiGpuSecurePassthroughAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation;
+
+                        /**
+                         * Verifies a MultiGpuSecurePassthroughAttestation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultiGpuSecurePassthroughAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultiGpuSecurePassthroughAttestation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation;
+
+                        /**
+                         * Creates a plain object from a MultiGpuSecurePassthroughAttestation message. Also converts values to other types if specified.
+                         * @param message MultiGpuSecurePassthroughAttestation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.NvidiaAttestation.MultiGpuSecurePassthroughAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultiGpuSecurePassthroughAttestation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultiGpuSecurePassthroughAttestation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** GpuArchitectureType enum. */
+                    enum GpuArchitectureType {
+                        GPU_ARCHITECTURE_TYPE_UNSPECIFIED = 0,
+                        GPU_ARCHITECTURE_TYPE_HOPPER = 8,
+                        GPU_ARCHITECTURE_TYPE_BLACKWELL = 10
+                    }
                 }
 
                 /** Properties of a TdxCcelAttestation. */
@@ -1935,6 +2599,9 @@ export namespace google {
 
                     /** VerifyConfidentialSpaceRequest options */
                     options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.IConfidentialSpaceOptions|null);
+
+                    /** VerifyConfidentialSpaceRequest nvidiaAttestation */
+                    nvidiaAttestation?: (google.cloud.confidentialcomputing.v1.INvidiaAttestation|null);
                 }
 
                 /** Represents a VerifyConfidentialSpaceRequest. */
@@ -1966,6 +2633,9 @@ export namespace google {
 
                     /** VerifyConfidentialSpaceRequest options. */
                     public options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.IConfidentialSpaceOptions|null);
+
+                    /** VerifyConfidentialSpaceRequest nvidiaAttestation. */
+                    public nvidiaAttestation?: (google.cloud.confidentialcomputing.v1.INvidiaAttestation|null);
 
                     /** VerifyConfidentialSpaceRequest teeAttestation. */
                     public teeAttestation?: ("tdCcel"|"tpmAttestation");
@@ -2389,6 +3059,9 @@ export namespace google {
 
                     /** VerifyConfidentialGkeRequest challenge */
                     challenge?: (string|null);
+
+                    /** VerifyConfidentialGkeRequest options */
+                    options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null);
                 }
 
                 /** Represents a VerifyConfidentialGkeRequest. */
@@ -2405,6 +3078,9 @@ export namespace google {
 
                     /** VerifyConfidentialGkeRequest challenge. */
                     public challenge: string;
+
+                    /** VerifyConfidentialGkeRequest options. */
+                    public options?: (google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions|null);
 
                     /** VerifyConfidentialGkeRequest teeAttestation. */
                     public teeAttestation?: "tpmAttestation";
@@ -2485,6 +3161,118 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VerifyConfidentialGkeRequest {
+
+                    /** Properties of a ConfidentialGkeOptions. */
+                    interface IConfidentialGkeOptions {
+
+                        /** ConfidentialGkeOptions audience */
+                        audience?: (string|null);
+
+                        /** ConfidentialGkeOptions nonce */
+                        nonce?: (string[]|null);
+
+                        /** ConfidentialGkeOptions signatureType */
+                        signatureType?: (google.cloud.confidentialcomputing.v1.SignatureType|keyof typeof google.cloud.confidentialcomputing.v1.SignatureType|null);
+                    }
+
+                    /** Represents a ConfidentialGkeOptions. */
+                    class ConfidentialGkeOptions implements IConfidentialGkeOptions {
+
+                        /**
+                         * Constructs a new ConfidentialGkeOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions);
+
+                        /** ConfidentialGkeOptions audience. */
+                        public audience: string;
+
+                        /** ConfidentialGkeOptions nonce. */
+                        public nonce: string[];
+
+                        /** ConfidentialGkeOptions signatureType. */
+                        public signatureType: (google.cloud.confidentialcomputing.v1.SignatureType|keyof typeof google.cloud.confidentialcomputing.v1.SignatureType);
+
+                        /**
+                         * Creates a new ConfidentialGkeOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConfidentialGkeOptions instance
+                         */
+                        public static create(properties?: google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions): google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions;
+
+                        /**
+                         * Encodes the specified ConfidentialGkeOptions message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.verify|verify} messages.
+                         * @param message ConfidentialGkeOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConfidentialGkeOptions message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions.verify|verify} messages.
+                         * @param message ConfidentialGkeOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.IConfidentialGkeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConfidentialGkeOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConfidentialGkeOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions;
+
+                        /**
+                         * Decodes a ConfidentialGkeOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConfidentialGkeOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions;
+
+                        /**
+                         * Verifies a ConfidentialGkeOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConfidentialGkeOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConfidentialGkeOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions;
+
+                        /**
+                         * Creates a plain object from a ConfidentialGkeOptions message. Also converts values to other types if specified.
+                         * @param message ConfidentialGkeOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConfidentialGkeOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConfidentialGkeOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a VerifyConfidentialGkeResponse. */

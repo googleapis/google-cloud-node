@@ -17,7 +17,7 @@ Storage Control API client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
-* [Storage Control API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/control/latest)
+* [Storage Control API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/storage-control/latest)
 * [Storage Control API Documentation](https://cloud.google.com/storage/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -69,6 +69,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.create_folder.js) |
 | create managed folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.create_managed_folder.js) |
 | delete folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.delete_folder.js) |
+| delete folder recursive | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.delete_folder_recursive.js) |
 | delete managed folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.delete_managed_folder.js) |
 | disable anywhere cache | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.disable_anywhere_cache.js) |
 | get anywhere cache | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/generated/v2/storage_control.get_anywhere_cache.js) |

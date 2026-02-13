@@ -3790,7 +3790,8 @@ export namespace google {
                     enum HashType {
                         HASH_TYPE_UNSPECIFIED = 0,
                         SHA256 = 1,
-                        MD5 = 2
+                        MD5 = 2,
+                        DIRSUM_SHA256 = 3
                     }
                 }
 

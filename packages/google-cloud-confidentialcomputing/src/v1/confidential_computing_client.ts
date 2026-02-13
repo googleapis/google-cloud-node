@@ -444,6 +444,8 @@ export class ConfidentialComputingClient {
  *   Optional. A TDX with CCEL and RTMR Attestation Quote.
  * @param {google.cloud.confidentialcomputing.v1.SevSnpAttestation} [request.sevSnpAttestation]
  *   Optional. An SEV-SNP Attestation Report.
+ * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation} [request.nvidiaAttestation]
+ *   Optional. An Nvidia attestation report for GPU and NVSwitch devices.
  * @param {string} request.challenge
  *   Required. The name of the Challenge whose nonce was used to generate the
  *   attestation, in the format `projects/* /locations/* /challenges/*`. The
@@ -576,6 +578,9 @@ export class ConfidentialComputingClient {
  *   this information in the attestation.
  * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions} [request.options]
  *   Optional. A collection of fields that modify the token output.
+ * @param {google.cloud.confidentialcomputing.v1.NvidiaAttestation} [request.nvidiaAttestation]
+ *   Optional. An optional Nvidia attestation report, used to populate hardware
+ *   rooted claims for Nvidia devices.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -676,6 +681,8 @@ export class ConfidentialComputingClient {
  *   Required. The name of the Challenge whose nonce was used to generate the
  *   attestation, in the format projects/* /locations/* /challenges/*. The
  *   provided Challenge will be consumed, and cannot be used again.
+ * @param {google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions} [request.options]
+ *   Optional. A collection of fields that modify the token output.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

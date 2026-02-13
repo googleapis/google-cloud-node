@@ -264,6 +264,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.storage.control.v2.StorageControl|deleteFolderRecursive}.
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @typedef DeleteFolderRecursiveCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteFolderRecursive.
+                         * @function deleteFolderRecursive
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest} request DeleteFolderRecursiveRequest message or plain object
+                         * @param {google.storage.control.v2.StorageControl.DeleteFolderRecursiveCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(StorageControl.prototype.deleteFolderRecursive = function deleteFolderRecursive(request, callback) {
+                            return this.rpcCall(deleteFolderRecursive, $root.google.storage.control.v2.DeleteFolderRecursiveRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteFolderRecursive" });
+    
+                        /**
+                         * Calls DeleteFolderRecursive.
+                         * @function deleteFolderRecursive
+                         * @memberof google.storage.control.v2.StorageControl
+                         * @instance
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest} request DeleteFolderRecursiveRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.storage.control.v2.StorageControl|getStorageLayout}.
                          * @memberof google.storage.control.v2.StorageControl
                          * @typedef GetStorageLayoutCallback
@@ -3391,6 +3424,325 @@
                         return RenameFolderRequest;
                     })();
     
+                    v2.DeleteFolderRecursiveRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteFolderRecursiveRequest.
+                         * @memberof google.storage.control.v2
+                         * @interface IDeleteFolderRecursiveRequest
+                         * @property {string|null} [name] DeleteFolderRecursiveRequest name
+                         * @property {number|Long|null} [ifMetagenerationMatch] DeleteFolderRecursiveRequest ifMetagenerationMatch
+                         * @property {number|Long|null} [ifMetagenerationNotMatch] DeleteFolderRecursiveRequest ifMetagenerationNotMatch
+                         * @property {string|null} [requestId] DeleteFolderRecursiveRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFolderRecursiveRequest.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DeleteFolderRecursiveRequest.
+                         * @implements IDeleteFolderRecursiveRequest
+                         * @constructor
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest=} [properties] Properties to set
+                         */
+                        function DeleteFolderRecursiveRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFolderRecursiveRequest name.
+                         * @member {string} name
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @instance
+                         */
+                        DeleteFolderRecursiveRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteFolderRecursiveRequest ifMetagenerationMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationMatch
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @instance
+                         */
+                        DeleteFolderRecursiveRequest.prototype.ifMetagenerationMatch = null;
+    
+                        /**
+                         * DeleteFolderRecursiveRequest ifMetagenerationNotMatch.
+                         * @member {number|Long|null|undefined} ifMetagenerationNotMatch
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @instance
+                         */
+                        DeleteFolderRecursiveRequest.prototype.ifMetagenerationNotMatch = null;
+    
+                        /**
+                         * DeleteFolderRecursiveRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @instance
+                         */
+                        DeleteFolderRecursiveRequest.prototype.requestId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DeleteFolderRecursiveRequest.prototype, "_ifMetagenerationMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DeleteFolderRecursiveRequest.prototype, "_ifMetagenerationNotMatch", {
+                            get: $util.oneOfGetter($oneOfFields = ["ifMetagenerationNotMatch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DeleteFolderRecursiveRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveRequest} DeleteFolderRecursiveRequest instance
+                         */
+                        DeleteFolderRecursiveRequest.create = function create(properties) {
+                            return new DeleteFolderRecursiveRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderRecursiveRequest message. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest} message DeleteFolderRecursiveRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderRecursiveRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.ifMetagenerationMatch);
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.ifMetagenerationNotMatch);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderRecursiveRequest message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveRequest} message DeleteFolderRecursiveRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderRecursiveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderRecursiveRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveRequest} DeleteFolderRecursiveRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderRecursiveRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteFolderRecursiveRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ifMetagenerationMatch = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ifMetagenerationNotMatch = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderRecursiveRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveRequest} DeleteFolderRecursiveRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderRecursiveRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFolderRecursiveRequest message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFolderRecursiveRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                properties._ifMetagenerationMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
+                                    return "ifMetagenerationMatch: integer|Long expected";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                properties._ifMetagenerationNotMatch = 1;
+                                if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
+                                    return "ifMetagenerationNotMatch: integer|Long expected";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFolderRecursiveRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveRequest} DeleteFolderRecursiveRequest
+                         */
+                        DeleteFolderRecursiveRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.DeleteFolderRecursiveRequest)
+                                return object;
+                            var message = new $root.google.storage.control.v2.DeleteFolderRecursiveRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ifMetagenerationMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationMatch = $util.Long.fromValue(object.ifMetagenerationMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationMatch === "string")
+                                    message.ifMetagenerationMatch = parseInt(object.ifMetagenerationMatch, 10);
+                                else if (typeof object.ifMetagenerationMatch === "number")
+                                    message.ifMetagenerationMatch = object.ifMetagenerationMatch;
+                                else if (typeof object.ifMetagenerationMatch === "object")
+                                    message.ifMetagenerationMatch = new $util.LongBits(object.ifMetagenerationMatch.low >>> 0, object.ifMetagenerationMatch.high >>> 0).toNumber();
+                            if (object.ifMetagenerationNotMatch != null)
+                                if ($util.Long)
+                                    (message.ifMetagenerationNotMatch = $util.Long.fromValue(object.ifMetagenerationNotMatch)).unsigned = false;
+                                else if (typeof object.ifMetagenerationNotMatch === "string")
+                                    message.ifMetagenerationNotMatch = parseInt(object.ifMetagenerationNotMatch, 10);
+                                else if (typeof object.ifMetagenerationNotMatch === "number")
+                                    message.ifMetagenerationNotMatch = object.ifMetagenerationNotMatch;
+                                else if (typeof object.ifMetagenerationNotMatch === "object")
+                                    message.ifMetagenerationNotMatch = new $util.LongBits(object.ifMetagenerationNotMatch.low >>> 0, object.ifMetagenerationNotMatch.high >>> 0).toNumber();
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFolderRecursiveRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {google.storage.control.v2.DeleteFolderRecursiveRequest} message DeleteFolderRecursiveRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFolderRecursiveRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                                if (typeof message.ifMetagenerationMatch === "number")
+                                    object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
+                                else
+                                    object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationMatch = "ifMetagenerationMatch";
+                            }
+                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                    object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
+                                else
+                                    object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
+                                if (options.oneofs)
+                                    object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFolderRecursiveRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFolderRecursiveRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteFolderRecursiveRequest
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteFolderRecursiveRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DeleteFolderRecursiveRequest";
+                        };
+    
+                        return DeleteFolderRecursiveRequest;
+                    })();
+    
                     v2.CommonLongRunningOperationMetadata = (function() {
     
                         /**
@@ -3982,6 +4334,240 @@
                         };
     
                         return RenameFolderMetadata;
+                    })();
+    
+                    v2.DeleteFolderRecursiveMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteFolderRecursiveMetadata.
+                         * @memberof google.storage.control.v2
+                         * @interface IDeleteFolderRecursiveMetadata
+                         * @property {google.storage.control.v2.ICommonLongRunningOperationMetadata|null} [commonMetadata] DeleteFolderRecursiveMetadata commonMetadata
+                         * @property {string|null} [folderId] DeleteFolderRecursiveMetadata folderId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteFolderRecursiveMetadata.
+                         * @memberof google.storage.control.v2
+                         * @classdesc Represents a DeleteFolderRecursiveMetadata.
+                         * @implements IDeleteFolderRecursiveMetadata
+                         * @constructor
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveMetadata=} [properties] Properties to set
+                         */
+                        function DeleteFolderRecursiveMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteFolderRecursiveMetadata commonMetadata.
+                         * @member {google.storage.control.v2.ICommonLongRunningOperationMetadata|null|undefined} commonMetadata
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @instance
+                         */
+                        DeleteFolderRecursiveMetadata.prototype.commonMetadata = null;
+    
+                        /**
+                         * DeleteFolderRecursiveMetadata folderId.
+                         * @member {string} folderId
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @instance
+                         */
+                        DeleteFolderRecursiveMetadata.prototype.folderId = "";
+    
+                        /**
+                         * Creates a new DeleteFolderRecursiveMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveMetadata=} [properties] Properties to set
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveMetadata} DeleteFolderRecursiveMetadata instance
+                         */
+                        DeleteFolderRecursiveMetadata.create = function create(properties) {
+                            return new DeleteFolderRecursiveMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderRecursiveMetadata message. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveMetadata} message DeleteFolderRecursiveMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderRecursiveMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
+                                $root.google.storage.control.v2.CommonLongRunningOperationMetadata.encode(message.commonMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.folderId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteFolderRecursiveMetadata message, length delimited. Does not implicitly {@link google.storage.control.v2.DeleteFolderRecursiveMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {google.storage.control.v2.IDeleteFolderRecursiveMetadata} message DeleteFolderRecursiveMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteFolderRecursiveMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderRecursiveMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveMetadata} DeleteFolderRecursiveMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderRecursiveMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storage.control.v2.DeleteFolderRecursiveMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.folderId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteFolderRecursiveMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveMetadata} DeleteFolderRecursiveMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteFolderRecursiveMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteFolderRecursiveMetadata message.
+                         * @function verify
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteFolderRecursiveMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                                var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata);
+                                if (error)
+                                    return "commonMetadata." + error;
+                            }
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                if (!$util.isString(message.folderId))
+                                    return "folderId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteFolderRecursiveMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.storage.control.v2.DeleteFolderRecursiveMetadata} DeleteFolderRecursiveMetadata
+                         */
+                        DeleteFolderRecursiveMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.storage.control.v2.DeleteFolderRecursiveMetadata)
+                                return object;
+                            var message = new $root.google.storage.control.v2.DeleteFolderRecursiveMetadata();
+                            if (object.commonMetadata != null) {
+                                if (typeof object.commonMetadata !== "object")
+                                    throw TypeError(".google.storage.control.v2.DeleteFolderRecursiveMetadata.commonMetadata: object expected");
+                                message.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.fromObject(object.commonMetadata);
+                            }
+                            if (object.folderId != null)
+                                message.folderId = String(object.folderId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteFolderRecursiveMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {google.storage.control.v2.DeleteFolderRecursiveMetadata} message DeleteFolderRecursiveMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteFolderRecursiveMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.commonMetadata = null;
+                                object.folderId = "";
+                            }
+                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                                object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options);
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                object.folderId = message.folderId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteFolderRecursiveMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteFolderRecursiveMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteFolderRecursiveMetadata
+                         * @function getTypeUrl
+                         * @memberof google.storage.control.v2.DeleteFolderRecursiveMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteFolderRecursiveMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.storage.control.v2.DeleteFolderRecursiveMetadata";
+                        };
+    
+                        return DeleteFolderRecursiveMetadata;
                     })();
     
                     v2.StorageLayout = (function() {

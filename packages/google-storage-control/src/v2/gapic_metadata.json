@@ -115,6 +115,11 @@
                 "renameFolder"
               ]
             },
+            "DeleteFolderRecursive": {
+              "methods": [
+                "deleteFolderRecursive"
+              ]
+            },
             "CreateAnywhereCache": {
               "methods": [
                 "createAnywhereCache"
@@ -254,6 +259,11 @@
             "RenameFolder": {
               "methods": [
                 "renameFolder"
+              ]
+            },
+            "DeleteFolderRecursive": {
+              "methods": [
+                "deleteFolderRecursive"
               ]
             },
             "CreateAnywhereCache": {

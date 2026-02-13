@@ -2264,6 +2264,7 @@ export class DocumentProcessorServiceClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta3/document_processor_service.review_document.js</caption>
  * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ReviewDocument_async
+ * @deprecated ReviewDocument is deprecated and may be removed in a future version.
  */
   reviewDocument(
       request?: protos.google.cloud.documentai.v1beta3.IReviewDocumentRequest,
@@ -2317,6 +2318,7 @@ export class DocumentProcessorServiceClient {
       'human_review_config': request.humanReviewConfig ?? '',
     });
     this.initialize().catch(err => {throw err});
+    this.warn('DEP$DocumentProcessorService-$ReviewDocument','ReviewDocument is deprecated and may be removed in a future version.', 'DeprecationWarning');
     const wrappedCallback: Callback<
           LROperation<protos.google.cloud.documentai.v1beta3.IReviewDocumentResponse, protos.google.cloud.documentai.v1beta3.IReviewDocumentOperationMetadata>,
           protos.google.longrunning.IOperation|null|undefined,
@@ -2346,8 +2348,10 @@ export class DocumentProcessorServiceClient {
  *   for more details and examples.
  * @example <caption>include:samples/generated/v1beta3/document_processor_service.review_document.js</caption>
  * region_tag:documentai_v1beta3_generated_DocumentProcessorService_ReviewDocument_async
+ * @deprecated ReviewDocument is deprecated and may be removed in a future version.
  */
   async checkReviewDocumentProgress(name: string): Promise<LROperation<protos.google.cloud.documentai.v1beta3.ReviewDocumentResponse, protos.google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata>>{
+    this.warn('DEP$DocumentProcessorService-$checkReviewDocumentProgress','checkReviewDocumentProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
     this._log.info('reviewDocument long-running');
     const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);

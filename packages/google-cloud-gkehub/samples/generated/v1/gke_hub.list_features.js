@@ -62,6 +62,13 @@ function main() {
    *  See https://google.aip.dev/132#ordering.
    */
   // const orderBy = 'abc123'
+  /**
+   *  Optional. If set to true, the response will return partial results when
+   *  some regions are unreachable and the unreachable field in Feature proto
+   *  will be populated. If set to false, the request will fail when some regions
+   *  are unreachable.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Gkehub library
   const {GkeHubClient} = require('@google-cloud/gke-hub').v1;
