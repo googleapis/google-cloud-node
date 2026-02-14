@@ -2263,6 +2263,7 @@
                  * @property {string|null} [name] BaseImage name
                  * @property {string|null} [repository] BaseImage repository
                  * @property {number|null} [layerCount] BaseImage layerCount
+                 * @property {string|null} [registry] BaseImage registry
                  */
     
                 /**
@@ -2305,6 +2306,14 @@
                 BaseImage.prototype.layerCount = 0;
     
                 /**
+                 * BaseImage registry.
+                 * @member {string} registry
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.registry = "";
+    
+                /**
                  * Creates a new BaseImage instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.BaseImage
@@ -2334,6 +2343,8 @@
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.repository);
                     if (message.layerCount != null && Object.hasOwnProperty.call(message, "layerCount"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.layerCount);
+                    if (message.registry != null && Object.hasOwnProperty.call(message, "registry"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.registry);
                     return writer;
                 };
     
@@ -2382,6 +2393,10 @@
                                 message.layerCount = reader.int32();
                                 break;
                             }
+                        case 4: {
+                                message.registry = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -2426,6 +2441,9 @@
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         if (!$util.isInteger(message.layerCount))
                             return "layerCount: integer expected";
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        if (!$util.isString(message.registry))
+                            return "registry: string expected";
                     return null;
                 };
     
@@ -2447,6 +2465,8 @@
                         message.repository = String(object.repository);
                     if (object.layerCount != null)
                         message.layerCount = object.layerCount | 0;
+                    if (object.registry != null)
+                        message.registry = String(object.registry);
                     return message;
                 };
     
@@ -2467,6 +2487,7 @@
                         object.name = "";
                         object.repository = "";
                         object.layerCount = 0;
+                        object.registry = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -2474,6 +2495,8 @@
                         object.repository = message.repository;
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         object.layerCount = message.layerCount;
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        object.registry = message.registry;
                     return object;
                 };
     
@@ -38217,6 +38240,7 @@
                  * @property {google.protobuf.ITimestamp|null} [sourceUpdateTime] VulnerabilityNote sourceUpdateTime
                  * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityNote cvssVersion
                  * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityNote cvssV2
+                 * @property {google.protobuf.ITimestamp|null} [advisoryPublishTime] VulnerabilityNote advisoryPublishTime
                  */
     
                 /**
@@ -38301,6 +38325,14 @@
                 VulnerabilityNote.prototype.cvssV2 = null;
     
                 /**
+                 * VulnerabilityNote advisoryPublishTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} advisoryPublishTime
+                 * @memberof grafeas.v1.VulnerabilityNote
+                 * @instance
+                 */
+                VulnerabilityNote.prototype.advisoryPublishTime = null;
+    
+                /**
                  * Creates a new VulnerabilityNote instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityNote
@@ -38342,6 +38374,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cvssVersion);
                     if (message.cvssV2 != null && Object.hasOwnProperty.call(message, "cvssV2"))
                         $root.grafeas.v1.CVSS.encode(message.cvssV2, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.advisoryPublishTime != null && Object.hasOwnProperty.call(message, "advisoryPublishTime"))
+                        $root.google.protobuf.Timestamp.encode(message.advisoryPublishTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     return writer;
                 };
     
@@ -38412,6 +38446,10 @@
                             }
                         case 8: {
                                 message.cvssV2 = $root.grafeas.v1.CVSS.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.advisoryPublishTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -38505,6 +38543,11 @@
                         var error = $root.grafeas.v1.CVSS.verify(message.cvssV2);
                         if (error)
                             return "cvssV2." + error;
+                    }
+                    if (message.advisoryPublishTime != null && message.hasOwnProperty("advisoryPublishTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.advisoryPublishTime);
+                        if (error)
+                            return "advisoryPublishTime." + error;
                     }
                     return null;
                 };
@@ -38610,6 +38653,11 @@
                             throw TypeError(".grafeas.v1.VulnerabilityNote.cvssV2: object expected");
                         message.cvssV2 = $root.grafeas.v1.CVSS.fromObject(object.cvssV2);
                     }
+                    if (object.advisoryPublishTime != null) {
+                        if (typeof object.advisoryPublishTime !== "object")
+                            throw TypeError(".grafeas.v1.VulnerabilityNote.advisoryPublishTime: object expected");
+                        message.advisoryPublishTime = $root.google.protobuf.Timestamp.fromObject(object.advisoryPublishTime);
+                    }
                     return message;
                 };
     
@@ -38637,6 +38685,7 @@
                         object.sourceUpdateTime = null;
                         object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
                         object.cvssV2 = null;
+                        object.advisoryPublishTime = null;
                     }
                     if (message.cvssScore != null && message.hasOwnProperty("cvssScore"))
                         object.cvssScore = options.json && !isFinite(message.cvssScore) ? String(message.cvssScore) : message.cvssScore;
@@ -38660,6 +38709,8 @@
                         object.cvssVersion = options.enums === String ? $root.grafeas.v1.CVSSVersion[message.cvssVersion] === undefined ? message.cvssVersion : $root.grafeas.v1.CVSSVersion[message.cvssVersion] : message.cvssVersion;
                     if (message.cvssV2 != null && message.hasOwnProperty("cvssV2"))
                         object.cvssV2 = $root.grafeas.v1.CVSS.toObject(message.cvssV2, options);
+                    if (message.advisoryPublishTime != null && message.hasOwnProperty("advisoryPublishTime"))
+                        object.advisoryPublishTime = $root.google.protobuf.Timestamp.toObject(message.advisoryPublishTime, options);
                     return object;
                 };
     
