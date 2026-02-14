@@ -3431,6 +3431,10 @@
                 "layerCount": {
                   "type": "int32",
                   "id": 3
+                },
+                "registry": {
+                  "type": "string",
+                  "id": 4
                 }
               }
             },

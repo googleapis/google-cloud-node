@@ -32873,6 +32873,7 @@
                  * @property {string|null} [name] BaseImage name
                  * @property {string|null} [repository] BaseImage repository
                  * @property {number|null} [layerCount] BaseImage layerCount
+                 * @property {string|null} [registry] BaseImage registry
                  */
     
                 /**
@@ -32915,6 +32916,14 @@
                 BaseImage.prototype.layerCount = 0;
     
                 /**
+                 * BaseImage registry.
+                 * @member {string} registry
+                 * @memberof grafeas.v1.BaseImage
+                 * @instance
+                 */
+                BaseImage.prototype.registry = "";
+    
+                /**
                  * Creates a new BaseImage instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.BaseImage
@@ -32944,6 +32953,8 @@
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.repository);
                     if (message.layerCount != null && Object.hasOwnProperty.call(message, "layerCount"))
                         writer.uint32(/* id 3, wireType 0 =*/24).int32(message.layerCount);
+                    if (message.registry != null && Object.hasOwnProperty.call(message, "registry"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.registry);
                     return writer;
                 };
     
@@ -32992,6 +33003,10 @@
                                 message.layerCount = reader.int32();
                                 break;
                             }
+                        case 4: {
+                                message.registry = reader.string();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -33036,6 +33051,9 @@
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         if (!$util.isInteger(message.layerCount))
                             return "layerCount: integer expected";
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        if (!$util.isString(message.registry))
+                            return "registry: string expected";
                     return null;
                 };
     
@@ -33057,6 +33075,8 @@
                         message.repository = String(object.repository);
                     if (object.layerCount != null)
                         message.layerCount = object.layerCount | 0;
+                    if (object.registry != null)
+                        message.registry = String(object.registry);
                     return message;
                 };
     
@@ -33077,6 +33097,7 @@
                         object.name = "";
                         object.repository = "";
                         object.layerCount = 0;
+                        object.registry = "";
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -33084,6 +33105,8 @@
                         object.repository = message.repository;
                     if (message.layerCount != null && message.hasOwnProperty("layerCount"))
                         object.layerCount = message.layerCount;
+                    if (message.registry != null && message.hasOwnProperty("registry"))
+                        object.registry = message.registry;
                     return object;
                 };
     

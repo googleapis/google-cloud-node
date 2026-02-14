@@ -12489,6 +12489,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount */
             layerCount?: (number|null);
+
+            /** BaseImage registry */
+            registry?: (string|null);
         }
 
         /** Represents a BaseImage. */
@@ -12508,6 +12511,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount. */
             public layerCount: number;
+
+            /** BaseImage registry. */
+            public registry: string;
 
             /**
              * Creates a new BaseImage instance using the specified properties.
