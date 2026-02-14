@@ -1,0 +1,23 @@
+on:
+  pull_request:
+name: presubmit-windows
+jobs:
+  units:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 300
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ^7.0.0
+      - run: node --version
+      - run: bash ci/run_conditional_tests.sh
+        name: Run windows unit tests
+        shell: bash
+        env:
+          BUILD_TYPE: presubmit
+          TEST_TYPE: units
