@@ -246,9 +246,9 @@ function repo_root() {
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     PROGRAM_PATH="$(realpath "$0")"
     PROGRAM_DIR="$(dirname "${PROGRAM_PATH}")"
-    PROJECT_ROOT="$(repo_root "${PROGRAM_DIR}")"
+    PROJECT_ROOT="$(repo_root "${PROGRAM_DIR}")"/handwritten/logging-winston
 else
-    PROJECT_ROOT="$(repo_root $(pwd))"
+    PROJECT_ROOT="$(repo_root $(pwd))"/handwritten/logging-winston
 fi
 
 log_yellow "Changing to the project root: ${PROJECT_ROOT}."
