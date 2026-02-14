@@ -5012,6 +5012,9 @@ export namespace google {
                     /** SearchRequest query */
                     query?: (string|null);
 
+                    /** SearchRequest pageCategories */
+                    pageCategories?: (string[]|null);
+
                     /** SearchRequest imageQuery */
                     imageQuery?: (google.cloud.discoveryengine.v1.SearchRequest.IImageQuery|null);
 
@@ -5066,17 +5069,29 @@ export namespace google {
                     /** SearchRequest contentSearchSpec */
                     contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
 
+                    /** SearchRequest rankingExpression */
+                    rankingExpression?: (string|null);
+
+                    /** SearchRequest rankingExpressionBackend */
+                    rankingExpressionBackend?: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|null);
+
                     /** SearchRequest safeSearch */
                     safeSearch?: (boolean|null);
 
                     /** SearchRequest userLabels */
                     userLabels?: ({ [k: string]: string }|null);
 
+                    /** SearchRequest naturalLanguageQueryUnderstandingSpec */
+                    naturalLanguageQueryUnderstandingSpec?: (google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec|null);
+
                     /** SearchRequest searchAsYouTypeSpec */
                     searchAsYouTypeSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISearchAsYouTypeSpec|null);
 
                     /** SearchRequest displaySpec */
                     displaySpec?: (google.cloud.discoveryengine.v1.SearchRequest.IDisplaySpec|null);
+
+                    /** SearchRequest crowdingSpecs */
+                    crowdingSpecs?: (google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec[]|null);
 
                     /** SearchRequest session */
                     session?: (string|null);
@@ -5089,12 +5104,6 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec */
                     relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
-
-                    /** SearchRequest rankingExpression */
-                    rankingExpression?: (string|null);
-
-                    /** SearchRequest rankingExpressionBackend */
-                    rankingExpressionBackend?: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|null);
                 }
 
                 /** Represents a SearchRequest. */
@@ -5114,6 +5123,9 @@ export namespace google {
 
                     /** SearchRequest query. */
                     public query: string;
+
+                    /** SearchRequest pageCategories. */
+                    public pageCategories: string[];
 
                     /** SearchRequest imageQuery. */
                     public imageQuery?: (google.cloud.discoveryengine.v1.SearchRequest.IImageQuery|null);
@@ -5169,17 +5181,29 @@ export namespace google {
                     /** SearchRequest contentSearchSpec. */
                     public contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
 
+                    /** SearchRequest rankingExpression. */
+                    public rankingExpression: string;
+
+                    /** SearchRequest rankingExpressionBackend. */
+                    public rankingExpressionBackend: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend);
+
                     /** SearchRequest safeSearch. */
                     public safeSearch: boolean;
 
                     /** SearchRequest userLabels. */
                     public userLabels: { [k: string]: string };
 
+                    /** SearchRequest naturalLanguageQueryUnderstandingSpec. */
+                    public naturalLanguageQueryUnderstandingSpec?: (google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec|null);
+
                     /** SearchRequest searchAsYouTypeSpec. */
                     public searchAsYouTypeSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISearchAsYouTypeSpec|null);
 
                     /** SearchRequest displaySpec. */
                     public displaySpec?: (google.cloud.discoveryengine.v1.SearchRequest.IDisplaySpec|null);
+
+                    /** SearchRequest crowdingSpecs. */
+                    public crowdingSpecs: google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec[];
 
                     /** SearchRequest session. */
                     public session: string;
@@ -5192,12 +5216,6 @@ export namespace google {
 
                     /** SearchRequest relevanceScoreSpec. */
                     public relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
-
-                    /** SearchRequest rankingExpression. */
-                    public rankingExpression: string;
-
-                    /** SearchRequest rankingExpressionBackend. */
-                    public rankingExpressionBackend: (google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend);
 
                     /**
                      * Creates a new SearchRequest instance using the specified properties.
@@ -7223,6 +7241,138 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a NaturalLanguageQueryUnderstandingSpec. */
+                    interface INaturalLanguageQueryUnderstandingSpec {
+
+                        /** NaturalLanguageQueryUnderstandingSpec filterExtractionCondition */
+                        filterExtractionCondition?: (google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition|null);
+
+                        /** NaturalLanguageQueryUnderstandingSpec geoSearchQueryDetectionFieldNames */
+                        geoSearchQueryDetectionFieldNames?: (string[]|null);
+
+                        /** NaturalLanguageQueryUnderstandingSpec extractedFilterBehavior */
+                        extractedFilterBehavior?: (google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.ExtractedFilterBehavior|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.ExtractedFilterBehavior|null);
+
+                        /** NaturalLanguageQueryUnderstandingSpec allowedFieldNames */
+                        allowedFieldNames?: (string[]|null);
+                    }
+
+                    /** Represents a NaturalLanguageQueryUnderstandingSpec. */
+                    class NaturalLanguageQueryUnderstandingSpec implements INaturalLanguageQueryUnderstandingSpec {
+
+                        /**
+                         * Constructs a new NaturalLanguageQueryUnderstandingSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec);
+
+                        /** NaturalLanguageQueryUnderstandingSpec filterExtractionCondition. */
+                        public filterExtractionCondition: (google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition);
+
+                        /** NaturalLanguageQueryUnderstandingSpec geoSearchQueryDetectionFieldNames. */
+                        public geoSearchQueryDetectionFieldNames: string[];
+
+                        /** NaturalLanguageQueryUnderstandingSpec extractedFilterBehavior. */
+                        public extractedFilterBehavior: (google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.ExtractedFilterBehavior|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.ExtractedFilterBehavior);
+
+                        /** NaturalLanguageQueryUnderstandingSpec allowedFieldNames. */
+                        public allowedFieldNames: string[];
+
+                        /**
+                         * Creates a new NaturalLanguageQueryUnderstandingSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NaturalLanguageQueryUnderstandingSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec): google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec;
+
+                        /**
+                         * Encodes the specified NaturalLanguageQueryUnderstandingSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.verify|verify} messages.
+                         * @param message NaturalLanguageQueryUnderstandingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NaturalLanguageQueryUnderstandingSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec.verify|verify} messages.
+                         * @param message NaturalLanguageQueryUnderstandingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.INaturalLanguageQueryUnderstandingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NaturalLanguageQueryUnderstandingSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NaturalLanguageQueryUnderstandingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec;
+
+                        /**
+                         * Decodes a NaturalLanguageQueryUnderstandingSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NaturalLanguageQueryUnderstandingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec;
+
+                        /**
+                         * Verifies a NaturalLanguageQueryUnderstandingSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NaturalLanguageQueryUnderstandingSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NaturalLanguageQueryUnderstandingSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec;
+
+                        /**
+                         * Creates a plain object from a NaturalLanguageQueryUnderstandingSpec message. Also converts values to other types if specified.
+                         * @param message NaturalLanguageQueryUnderstandingSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NaturalLanguageQueryUnderstandingSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NaturalLanguageQueryUnderstandingSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NaturalLanguageQueryUnderstandingSpec {
+
+                        /** FilterExtractionCondition enum. */
+                        enum FilterExtractionCondition {
+                            CONDITION_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            ENABLED = 2
+                        }
+
+                        /** ExtractedFilterBehavior enum. */
+                        enum ExtractedFilterBehavior {
+                            EXTRACTED_FILTER_BEHAVIOR_UNSPECIFIED = 0,
+                            HARD_FILTER = 1,
+                            SOFT_BOOST = 2
+                        }
+                    }
+
                     /** Properties of a SearchAsYouTypeSpec. */
                     interface ISearchAsYouTypeSpec {
 
@@ -7438,6 +7588,125 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a CrowdingSpec. */
+                    interface ICrowdingSpec {
+
+                        /** CrowdingSpec field */
+                        field?: (string|null);
+
+                        /** CrowdingSpec maxCount */
+                        maxCount?: (number|null);
+
+                        /** CrowdingSpec mode */
+                        mode?: (google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.Mode|null);
+                    }
+
+                    /** Represents a CrowdingSpec. */
+                    class CrowdingSpec implements ICrowdingSpec {
+
+                        /**
+                         * Constructs a new CrowdingSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec);
+
+                        /** CrowdingSpec field. */
+                        public field: string;
+
+                        /** CrowdingSpec maxCount. */
+                        public maxCount: number;
+
+                        /** CrowdingSpec mode. */
+                        public mode: (google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.Mode);
+
+                        /**
+                         * Creates a new CrowdingSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CrowdingSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec): google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec;
+
+                        /**
+                         * Encodes the specified CrowdingSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.verify|verify} messages.
+                         * @param message CrowdingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CrowdingSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec.verify|verify} messages.
+                         * @param message CrowdingSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ICrowdingSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CrowdingSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CrowdingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec;
+
+                        /**
+                         * Decodes a CrowdingSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CrowdingSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec;
+
+                        /**
+                         * Verifies a CrowdingSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CrowdingSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CrowdingSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec;
+
+                        /**
+                         * Creates a plain object from a CrowdingSpec message. Also converts values to other types if specified.
+                         * @param message CrowdingSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.CrowdingSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CrowdingSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CrowdingSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CrowdingSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            DROP_CROWDED_RESULTS = 1,
+                            DEMOTE_CROWDED_RESULTS_TO_END = 2
+                        }
+                    }
+
                     /** Properties of a SessionSpec. */
                     interface ISessionSpec {
 
@@ -7638,6 +7907,15 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** RankingExpressionBackend enum. */
+                    enum RankingExpressionBackend {
+                        RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
+                        BYOE = 1,
+                        CLEARBOX = 2,
+                        RANK_BY_EMBEDDING = 3,
+                        RANK_BY_FORMULA = 4
+                    }
+
                     /** RelevanceThreshold enum. */
                     enum RelevanceThreshold {
                         RELEVANCE_THRESHOLD_UNSPECIFIED = 0,
@@ -7645,13 +7923,6 @@ export namespace google {
                         LOW = 2,
                         MEDIUM = 3,
                         HIGH = 4
-                    }
-
-                    /** RankingExpressionBackend enum. */
-                    enum RankingExpressionBackend {
-                        RANKING_EXPRESSION_BACKEND_UNSPECIFIED = 0,
-                        RANK_BY_EMBEDDING = 3,
-                        RANK_BY_FORMULA = 4
                     }
                 }
 
@@ -7685,11 +7956,17 @@ export namespace google {
                     /** SearchResponse queryExpansionInfo */
                     queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
 
+                    /** SearchResponse naturalLanguageQueryUnderstandingInfo */
+                    naturalLanguageQueryUnderstandingInfo?: (google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo|null);
+
                     /** SearchResponse sessionInfo */
                     sessionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.ISessionInfo|null);
 
                     /** SearchResponse searchLinkPromotions */
                     searchLinkPromotions?: (google.cloud.discoveryengine.v1.ISearchLinkPromotion[]|null);
+
+                    /** SearchResponse semanticState */
+                    semanticState?: (google.cloud.discoveryengine.v1.SearchResponse.SemanticState|keyof typeof google.cloud.discoveryengine.v1.SearchResponse.SemanticState|null);
                 }
 
                 /** Represents a SearchResponse. */
@@ -7728,11 +8005,17 @@ export namespace google {
                     /** SearchResponse queryExpansionInfo. */
                     public queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
 
+                    /** SearchResponse naturalLanguageQueryUnderstandingInfo. */
+                    public naturalLanguageQueryUnderstandingInfo?: (google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo|null);
+
                     /** SearchResponse sessionInfo. */
                     public sessionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.ISessionInfo|null);
 
                     /** SearchResponse searchLinkPromotions. */
                     public searchLinkPromotions: google.cloud.discoveryengine.v1.ISearchLinkPromotion[];
+
+                    /** SearchResponse semanticState. */
+                    public semanticState: (google.cloud.discoveryengine.v1.SearchResponse.SemanticState|keyof typeof google.cloud.discoveryengine.v1.SearchResponse.SemanticState);
 
                     /**
                      * Creates a new SearchResponse instance using the specified properties.
@@ -9385,6 +9668,900 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a NaturalLanguageQueryUnderstandingInfo. */
+                    interface INaturalLanguageQueryUnderstandingInfo {
+
+                        /** NaturalLanguageQueryUnderstandingInfo extractedFilters */
+                        extractedFilters?: (string|null);
+
+                        /** NaturalLanguageQueryUnderstandingInfo rewrittenQuery */
+                        rewrittenQuery?: (string|null);
+
+                        /** NaturalLanguageQueryUnderstandingInfo classifiedIntents */
+                        classifiedIntents?: (string[]|null);
+
+                        /** NaturalLanguageQueryUnderstandingInfo structuredExtractedFilter */
+                        structuredExtractedFilter?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter|null);
+                    }
+
+                    /** Represents a NaturalLanguageQueryUnderstandingInfo. */
+                    class NaturalLanguageQueryUnderstandingInfo implements INaturalLanguageQueryUnderstandingInfo {
+
+                        /**
+                         * Constructs a new NaturalLanguageQueryUnderstandingInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo);
+
+                        /** NaturalLanguageQueryUnderstandingInfo extractedFilters. */
+                        public extractedFilters: string;
+
+                        /** NaturalLanguageQueryUnderstandingInfo rewrittenQuery. */
+                        public rewrittenQuery: string;
+
+                        /** NaturalLanguageQueryUnderstandingInfo classifiedIntents. */
+                        public classifiedIntents: string[];
+
+                        /** NaturalLanguageQueryUnderstandingInfo structuredExtractedFilter. */
+                        public structuredExtractedFilter?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter|null);
+
+                        /**
+                         * Creates a new NaturalLanguageQueryUnderstandingInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NaturalLanguageQueryUnderstandingInfo instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo;
+
+                        /**
+                         * Encodes the specified NaturalLanguageQueryUnderstandingInfo message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.verify|verify} messages.
+                         * @param message NaturalLanguageQueryUnderstandingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NaturalLanguageQueryUnderstandingInfo message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.verify|verify} messages.
+                         * @param message NaturalLanguageQueryUnderstandingInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.INaturalLanguageQueryUnderstandingInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NaturalLanguageQueryUnderstandingInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NaturalLanguageQueryUnderstandingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo;
+
+                        /**
+                         * Decodes a NaturalLanguageQueryUnderstandingInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NaturalLanguageQueryUnderstandingInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo;
+
+                        /**
+                         * Verifies a NaturalLanguageQueryUnderstandingInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NaturalLanguageQueryUnderstandingInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NaturalLanguageQueryUnderstandingInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo;
+
+                        /**
+                         * Creates a plain object from a NaturalLanguageQueryUnderstandingInfo message. Also converts values to other types if specified.
+                         * @param message NaturalLanguageQueryUnderstandingInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NaturalLanguageQueryUnderstandingInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NaturalLanguageQueryUnderstandingInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NaturalLanguageQueryUnderstandingInfo {
+
+                        /** Properties of a StructuredExtractedFilter. */
+                        interface IStructuredExtractedFilter {
+
+                            /** StructuredExtractedFilter expression */
+                            expression?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression|null);
+                        }
+
+                        /** Represents a StructuredExtractedFilter. */
+                        class StructuredExtractedFilter implements IStructuredExtractedFilter {
+
+                            /**
+                             * Constructs a new StructuredExtractedFilter.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter);
+
+                            /** StructuredExtractedFilter expression. */
+                            public expression?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression|null);
+
+                            /**
+                             * Creates a new StructuredExtractedFilter instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StructuredExtractedFilter instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter;
+
+                            /**
+                             * Encodes the specified StructuredExtractedFilter message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.verify|verify} messages.
+                             * @param message StructuredExtractedFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StructuredExtractedFilter message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.verify|verify} messages.
+                             * @param message StructuredExtractedFilter message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.IStructuredExtractedFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StructuredExtractedFilter message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StructuredExtractedFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter;
+
+                            /**
+                             * Decodes a StructuredExtractedFilter message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StructuredExtractedFilter
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter;
+
+                            /**
+                             * Verifies a StructuredExtractedFilter message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StructuredExtractedFilter message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StructuredExtractedFilter
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter;
+
+                            /**
+                             * Creates a plain object from a StructuredExtractedFilter message. Also converts values to other types if specified.
+                             * @param message StructuredExtractedFilter
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StructuredExtractedFilter to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StructuredExtractedFilter
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace StructuredExtractedFilter {
+
+                            /** Properties of a StringConstraint. */
+                            interface IStringConstraint {
+
+                                /** StringConstraint fieldName */
+                                fieldName?: (string|null);
+
+                                /** StringConstraint values */
+                                values?: (string[]|null);
+
+                                /** StringConstraint querySegment */
+                                querySegment?: (string|null);
+                            }
+
+                            /** Represents a StringConstraint. */
+                            class StringConstraint implements IStringConstraint {
+
+                                /**
+                                 * Constructs a new StringConstraint.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint);
+
+                                /** StringConstraint fieldName. */
+                                public fieldName: string;
+
+                                /** StringConstraint values. */
+                                public values: string[];
+
+                                /** StringConstraint querySegment. */
+                                public querySegment: string;
+
+                                /**
+                                 * Creates a new StringConstraint instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns StringConstraint instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint;
+
+                                /**
+                                 * Encodes the specified StringConstraint message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint.verify|verify} messages.
+                                 * @param message StringConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified StringConstraint message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint.verify|verify} messages.
+                                 * @param message StringConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a StringConstraint message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns StringConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint;
+
+                                /**
+                                 * Decodes a StringConstraint message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns StringConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint;
+
+                                /**
+                                 * Verifies a StringConstraint message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a StringConstraint message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns StringConstraint
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint;
+
+                                /**
+                                 * Creates a plain object from a StringConstraint message. Also converts values to other types if specified.
+                                 * @param message StringConstraint
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.StringConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this StringConstraint to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for StringConstraint
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a NumberConstraint. */
+                            interface INumberConstraint {
+
+                                /** NumberConstraint fieldName */
+                                fieldName?: (string|null);
+
+                                /** NumberConstraint comparison */
+                                comparison?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.Comparison|keyof typeof google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.Comparison|null);
+
+                                /** NumberConstraint value */
+                                value?: (number|null);
+
+                                /** NumberConstraint querySegment */
+                                querySegment?: (string|null);
+                            }
+
+                            /** Represents a NumberConstraint. */
+                            class NumberConstraint implements INumberConstraint {
+
+                                /**
+                                 * Constructs a new NumberConstraint.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint);
+
+                                /** NumberConstraint fieldName. */
+                                public fieldName: string;
+
+                                /** NumberConstraint comparison. */
+                                public comparison: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.Comparison|keyof typeof google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.Comparison);
+
+                                /** NumberConstraint value. */
+                                public value: number;
+
+                                /** NumberConstraint querySegment. */
+                                public querySegment: string;
+
+                                /**
+                                 * Creates a new NumberConstraint instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns NumberConstraint instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint;
+
+                                /**
+                                 * Encodes the specified NumberConstraint message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.verify|verify} messages.
+                                 * @param message NumberConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified NumberConstraint message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint.verify|verify} messages.
+                                 * @param message NumberConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a NumberConstraint message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns NumberConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint;
+
+                                /**
+                                 * Decodes a NumberConstraint message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns NumberConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint;
+
+                                /**
+                                 * Verifies a NumberConstraint message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a NumberConstraint message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns NumberConstraint
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint;
+
+                                /**
+                                 * Creates a plain object from a NumberConstraint message. Also converts values to other types if specified.
+                                 * @param message NumberConstraint
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.NumberConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this NumberConstraint to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for NumberConstraint
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace NumberConstraint {
+
+                                /** Comparison enum. */
+                                enum Comparison {
+                                    COMPARISON_UNSPECIFIED = 0,
+                                    EQUALS = 1,
+                                    LESS_THAN_EQUALS = 2,
+                                    LESS_THAN = 3,
+                                    GREATER_THAN_EQUALS = 4,
+                                    GREATER_THAN = 5
+                                }
+                            }
+
+                            /** Properties of a GeolocationConstraint. */
+                            interface IGeolocationConstraint {
+
+                                /** GeolocationConstraint fieldName */
+                                fieldName?: (string|null);
+
+                                /** GeolocationConstraint address */
+                                address?: (string|null);
+
+                                /** GeolocationConstraint latitude */
+                                latitude?: (number|null);
+
+                                /** GeolocationConstraint longitude */
+                                longitude?: (number|null);
+
+                                /** GeolocationConstraint radiusInMeters */
+                                radiusInMeters?: (number|null);
+                            }
+
+                            /** Represents a GeolocationConstraint. */
+                            class GeolocationConstraint implements IGeolocationConstraint {
+
+                                /**
+                                 * Constructs a new GeolocationConstraint.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint);
+
+                                /** GeolocationConstraint fieldName. */
+                                public fieldName: string;
+
+                                /** GeolocationConstraint address. */
+                                public address: string;
+
+                                /** GeolocationConstraint latitude. */
+                                public latitude: number;
+
+                                /** GeolocationConstraint longitude. */
+                                public longitude: number;
+
+                                /** GeolocationConstraint radiusInMeters. */
+                                public radiusInMeters: number;
+
+                                /**
+                                 * Creates a new GeolocationConstraint instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns GeolocationConstraint instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint;
+
+                                /**
+                                 * Encodes the specified GeolocationConstraint message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint.verify|verify} messages.
+                                 * @param message GeolocationConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified GeolocationConstraint message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint.verify|verify} messages.
+                                 * @param message GeolocationConstraint message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a GeolocationConstraint message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns GeolocationConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint;
+
+                                /**
+                                 * Decodes a GeolocationConstraint message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns GeolocationConstraint
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint;
+
+                                /**
+                                 * Verifies a GeolocationConstraint message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a GeolocationConstraint message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns GeolocationConstraint
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint;
+
+                                /**
+                                 * Creates a plain object from a GeolocationConstraint message. Also converts values to other types if specified.
+                                 * @param message GeolocationConstraint
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.GeolocationConstraint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this GeolocationConstraint to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for GeolocationConstraint
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an AndExpression. */
+                            interface IAndExpression {
+
+                                /** AndExpression expressions */
+                                expressions?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression[]|null);
+                            }
+
+                            /** Represents an AndExpression. */
+                            class AndExpression implements IAndExpression {
+
+                                /**
+                                 * Constructs a new AndExpression.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression);
+
+                                /** AndExpression expressions. */
+                                public expressions: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression[];
+
+                                /**
+                                 * Creates a new AndExpression instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns AndExpression instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression;
+
+                                /**
+                                 * Encodes the specified AndExpression message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression.verify|verify} messages.
+                                 * @param message AndExpression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified AndExpression message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression.verify|verify} messages.
+                                 * @param message AndExpression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an AndExpression message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns AndExpression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression;
+
+                                /**
+                                 * Decodes an AndExpression message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns AndExpression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression;
+
+                                /**
+                                 * Verifies an AndExpression message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an AndExpression message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns AndExpression
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression;
+
+                                /**
+                                 * Creates a plain object from an AndExpression message. Also converts values to other types if specified.
+                                 * @param message AndExpression
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.AndExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this AndExpression to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for AndExpression
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an OrExpression. */
+                            interface IOrExpression {
+
+                                /** OrExpression expressions */
+                                expressions?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression[]|null);
+                            }
+
+                            /** Represents an OrExpression. */
+                            class OrExpression implements IOrExpression {
+
+                                /**
+                                 * Constructs a new OrExpression.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression);
+
+                                /** OrExpression expressions. */
+                                public expressions: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression[];
+
+                                /**
+                                 * Creates a new OrExpression instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns OrExpression instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression;
+
+                                /**
+                                 * Encodes the specified OrExpression message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression.verify|verify} messages.
+                                 * @param message OrExpression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified OrExpression message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression.verify|verify} messages.
+                                 * @param message OrExpression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an OrExpression message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns OrExpression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression;
+
+                                /**
+                                 * Decodes an OrExpression message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns OrExpression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression;
+
+                                /**
+                                 * Verifies an OrExpression message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an OrExpression message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns OrExpression
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression;
+
+                                /**
+                                 * Creates a plain object from an OrExpression message. Also converts values to other types if specified.
+                                 * @param message OrExpression
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.OrExpression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this OrExpression to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for OrExpression
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an Expression. */
+                            interface IExpression {
+
+                                /** Expression stringConstraint */
+                                stringConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint|null);
+
+                                /** Expression numberConstraint */
+                                numberConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint|null);
+
+                                /** Expression geolocationConstraint */
+                                geolocationConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint|null);
+
+                                /** Expression andExpr */
+                                andExpr?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression|null);
+
+                                /** Expression orExpr */
+                                orExpr?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression|null);
+                            }
+
+                            /** Represents an Expression. */
+                            class Expression implements IExpression {
+
+                                /**
+                                 * Constructs a new Expression.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression);
+
+                                /** Expression stringConstraint. */
+                                public stringConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IStringConstraint|null);
+
+                                /** Expression numberConstraint. */
+                                public numberConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.INumberConstraint|null);
+
+                                /** Expression geolocationConstraint. */
+                                public geolocationConstraint?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IGeolocationConstraint|null);
+
+                                /** Expression andExpr. */
+                                public andExpr?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IAndExpression|null);
+
+                                /** Expression orExpr. */
+                                public orExpr?: (google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IOrExpression|null);
+
+                                /** Expression expr. */
+                                public expr?: ("stringConstraint"|"numberConstraint"|"geolocationConstraint"|"andExpr"|"orExpr");
+
+                                /**
+                                 * Creates a new Expression instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Expression instance
+                                 */
+                                public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression;
+
+                                /**
+                                 * Encodes the specified Expression message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression.verify|verify} messages.
+                                 * @param message Expression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Expression message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression.verify|verify} messages.
+                                 * @param message Expression message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.IExpression, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an Expression message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Expression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression;
+
+                                /**
+                                 * Decodes an Expression message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Expression
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression;
+
+                                /**
+                                 * Verifies an Expression message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an Expression message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Expression
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression;
+
+                                /**
+                                 * Creates a plain object from an Expression message. Also converts values to other types if specified.
+                                 * @param message Expression
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.NaturalLanguageQueryUnderstandingInfo.StructuredExtractedFilter.Expression, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Expression to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Expression
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
                     /** Properties of a SessionInfo. */
                     interface ISessionInfo {
 
@@ -9486,6 +10663,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SemanticState enum. */
+                    enum SemanticState {
+                        SEMANTIC_STATE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        ENABLED = 2
                     }
                 }
 
@@ -27141,6 +28325,9 @@ export namespace google {
                     /** DataStore advancedSiteSearchConfig */
                     advancedSiteSearchConfig?: (google.cloud.discoveryengine.v1.IAdvancedSiteSearchConfig|null);
 
+                    /** DataStore naturalLanguageQueryUnderstandingConfig */
+                    naturalLanguageQueryUnderstandingConfig?: (google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig|null);
+
                     /** DataStore kmsKeyName */
                     kmsKeyName?: (string|null);
 
@@ -27201,6 +28388,9 @@ export namespace google {
 
                     /** DataStore advancedSiteSearchConfig. */
                     public advancedSiteSearchConfig?: (google.cloud.discoveryengine.v1.IAdvancedSiteSearchConfig|null);
+
+                    /** DataStore naturalLanguageQueryUnderstandingConfig. */
+                    public naturalLanguageQueryUnderstandingConfig?: (google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig|null);
 
                     /** DataStore kmsKeyName. */
                     public kmsKeyName: string;
@@ -27547,6 +28737,113 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NaturalLanguageQueryUnderstandingConfig. */
+                interface INaturalLanguageQueryUnderstandingConfig {
+
+                    /** NaturalLanguageQueryUnderstandingConfig mode */
+                    mode?: (google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.Mode|keyof typeof google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.Mode|null);
+                }
+
+                /** Represents a NaturalLanguageQueryUnderstandingConfig. */
+                class NaturalLanguageQueryUnderstandingConfig implements INaturalLanguageQueryUnderstandingConfig {
+
+                    /**
+                     * Constructs a new NaturalLanguageQueryUnderstandingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig);
+
+                    /** NaturalLanguageQueryUnderstandingConfig mode. */
+                    public mode: (google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.Mode|keyof typeof google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.Mode);
+
+                    /**
+                     * Creates a new NaturalLanguageQueryUnderstandingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NaturalLanguageQueryUnderstandingConfig instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig): google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig;
+
+                    /**
+                     * Encodes the specified NaturalLanguageQueryUnderstandingConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.verify|verify} messages.
+                     * @param message NaturalLanguageQueryUnderstandingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NaturalLanguageQueryUnderstandingConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig.verify|verify} messages.
+                     * @param message NaturalLanguageQueryUnderstandingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.INaturalLanguageQueryUnderstandingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NaturalLanguageQueryUnderstandingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NaturalLanguageQueryUnderstandingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig;
+
+                    /**
+                     * Decodes a NaturalLanguageQueryUnderstandingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NaturalLanguageQueryUnderstandingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig;
+
+                    /**
+                     * Verifies a NaturalLanguageQueryUnderstandingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NaturalLanguageQueryUnderstandingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NaturalLanguageQueryUnderstandingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig;
+
+                    /**
+                     * Creates a plain object from a NaturalLanguageQueryUnderstandingConfig message. Also converts values to other types if specified.
+                     * @param message NaturalLanguageQueryUnderstandingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.NaturalLanguageQueryUnderstandingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NaturalLanguageQueryUnderstandingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NaturalLanguageQueryUnderstandingConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NaturalLanguageQueryUnderstandingConfig {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        ENABLED = 2
+                    }
                 }
 
                 /** Properties of a WorkspaceConfig. */

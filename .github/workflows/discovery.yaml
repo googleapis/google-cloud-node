@@ -12,13 +12,11 @@ jobs:
         with:
           node-version: 16
       # Install all deps, including dev dependencies.
-      - run: npm install
+      - run: cd handwritten/bigquery && npm install
       # Generate types
-      - run: npm run types
-      # Install samples deps
-      - run: cd samples/ && npm install && cd ../
+      - run: cd handwritten/bigquery && npm run types
       # Fix formatting
-      - run: npm run fix
+      - run: cd handwritten/bigquery && npm run fix
       # Submit pull request
       - uses: googleapis/code-suggester@v5
         env:
@@ -26,11 +24,11 @@ jobs:
         with:
           command: pr
           upstream_owner: googleapis
-          upstream_repo: nodejs-bigquery
+          upstream_repo: google-cloud-node
           description: 'Automated pull-request to keep BigQuery Discovery types up-to-date.'
           title: 'chore: update types from Discovery'
           message: 'chore: update types from Discovery'
           branch: update-discovery-patch
-          git_dir: '.'
+          git_dir: 'handwritten/bigquery'
           fork: true
           force: true

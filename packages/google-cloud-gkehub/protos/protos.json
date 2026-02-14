@@ -3407,6 +3407,30 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "scopeSpecs": {
+                          "keyType": "string",
+                          "type": "ScopeFeatureSpec",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scopeStates": {
+                          "keyType": "string",
+                          "type": "ScopeFeatureState",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3472,6 +3496,31 @@
                       }
                     },
                     "CommonFeatureState": {
+                      "oneofs": {
+                        "featureState": {
+                          "oneof": [
+                            "rbacrolebindingactuation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rbacrolebindingactuation": {
+                          "type": "google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState",
+                          "id": 120
+                        },
+                        "state": {
+                          "type": "FeatureState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ScopeFeatureSpec": {
+                      "fields": {}
+                    },
+                    "ScopeFeatureState": {
                       "fields": {
                         "state": {
                           "type": "FeatureState",
@@ -3513,6 +3562,615 @@
                         "state": {
                           "type": "FeatureState",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Fleet": {
+                      "options": {
+                        "(google.api.resource).type": "gkehub.googleapis.com/Fleet",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/fleets/{fleet}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "FleetLifecycleState",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "defaultClusterConfig": {
+                          "type": "DefaultClusterConfig",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DefaultClusterConfig": {
+                      "fields": {
+                        "securityPostureConfig": {
+                          "type": "SecurityPostureConfig",
+                          "id": 1
+                        },
+                        "binaryAuthorizationConfig": {
+                          "type": "BinaryAuthorizationConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "compliancePostureConfig": {
+                          "type": "CompliancePostureConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SecurityPostureConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "vulnerabilityMode": {
+                          "type": "VulnerabilityMode",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "BASIC": 2,
+                            "ENTERPRISE": 3
+                          }
+                        },
+                        "VulnerabilityMode": {
+                          "values": {
+                            "VULNERABILITY_MODE_UNSPECIFIED": 0,
+                            "VULNERABILITY_DISABLED": 1,
+                            "VULNERABILITY_BASIC": 2,
+                            "VULNERABILITY_ENTERPRISE": 3
+                          }
+                        }
+                      }
+                    },
+                    "BinaryAuthorizationConfig": {
+                      "fields": {
+                        "evaluationMode": {
+                          "type": "EvaluationMode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "policyBindings": {
+                          "rule": "repeated",
+                          "type": "PolicyBinding",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PolicyBinding": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "EvaluationMode": {
+                          "values": {
+                            "EVALUATION_MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "POLICY_BINDINGS": 2
+                          }
+                        }
+                      }
+                    },
+                    "CompliancePostureConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "complianceStandards": {
+                          "rule": "repeated",
+                          "type": "ComplianceStandard",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ComplianceStandard": {
+                          "fields": {
+                            "standard": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "DISABLED": 1,
+                            "ENABLED": 2
+                          }
+                        }
+                      }
+                    },
+                    "FleetLifecycleState": {
+                      "fields": {
+                        "code": {
+                          "type": "Code",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4
+                          }
+                        }
+                      }
+                    },
+                    "Namespace": {
+                      "options": {
+                        "(google.api.resource).type": "gkehub.googleapis.com/Namespace",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/scopes/{scope}/namespaces/{namespace}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "NamespaceLifecycleState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "namespaceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NamespaceLifecycleState": {
+                      "fields": {
+                        "code": {
+                          "type": "Code",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4
+                          }
+                        }
+                      }
+                    },
+                    "RBACRoleBinding": {
+                      "options": {
+                        "(google.api.resource).type": "gkehub.googleapis.com/RBACRoleBinding",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}"
+                      },
+                      "oneofs": {
+                        "principal": {
+                          "oneof": [
+                            "user",
+                            "group"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "user": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "group": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "RBACRoleBindingLifecycleState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "role": {
+                          "type": "Role",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "fields": {
+                            "predefinedRole": {
+                              "type": "PredefinedRoles",
+                              "id": 1
+                            },
+                            "customRole": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PredefinedRoles": {
+                              "values": {
+                                "UNKNOWN": 0,
+                                "ADMIN": 1,
+                                "EDIT": 2,
+                                "VIEW": 3,
+                                "ANTHOS_SUPPORT": 4
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RBACRoleBindingLifecycleState": {
+                      "fields": {
+                        "code": {
+                          "type": "Code",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4
+                          }
+                        }
+                      }
+                    },
+                    "Scope": {
+                      "options": {
+                        "(google.api.resource).type": "gkehub.googleapis.com/Scope",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/scopes/{scope}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "ScopeLifecycleState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "namespaceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ScopeLifecycleState": {
+                      "fields": {
+                        "code": {
+                          "type": "Code",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4
+                          }
+                        }
+                      }
+                    },
+                    "MembershipBinding": {
+                      "options": {
+                        "(google.api.resource).type": "gkehub.googleapis.com/MembershipBinding",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/memberships/{membership}/bindings/{membershipbinding}"
+                      },
+                      "oneofs": {
+                        "target": {
+                          "oneof": [
+                            "scope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "MembershipBindingLifecycleState",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "MembershipBindingLifecycleState": {
+                      "fields": {
+                        "code": {
+                          "type": "Code",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Code": {
+                          "values": {
+                            "CODE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "DELETING": 3,
+                            "UPDATING": 4
+                          }
                         }
                       }
                     },
@@ -3912,6 +4570,24 @@
                             }
                           ]
                         },
+                        "ListBoundMemberships": {
+                          "requestType": "ListBoundMembershipsRequest",
+                          "responseType": "ListBoundMembershipsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{scope_name=projects/*/locations/*/scopes/*}:listMemberships",
+                            "(google.api.method_signature)": "scope_name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{scope_name=projects/*/locations/*/scopes/*}:listMemberships"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope_name"
+                            }
+                          ]
+                        },
                         "ListFeatures": {
                           "requestType": "ListFeaturesRequest",
                           "responseType": "ListFeaturesResponse",
@@ -4143,6 +4819,1231 @@
                               }
                             }
                           ]
+                        },
+                        "CreateFleet": {
+                          "requestType": "CreateFleetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/fleets",
+                            "(google.api.http).body": "fleet",
+                            "(google.api.method_signature)": "parent,fleet",
+                            "(google.longrunning.operation_info).response_type": "Fleet",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/fleets",
+                                "body": "fleet"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,fleet"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Fleet",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetFleet": {
+                          "requestType": "GetFleetRequest",
+                          "responseType": "Fleet",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/fleets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/fleets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFleet": {
+                          "requestType": "UpdateFleetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{fleet.name=projects/*/locations/*/fleets/*}",
+                            "(google.api.http).body": "fleet",
+                            "(google.api.method_signature)": "fleet,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Fleet",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{fleet.name=projects/*/locations/*/fleets/*}",
+                                "body": "fleet"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "fleet,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Fleet",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteFleet": {
+                          "requestType": "DeleteFleetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/fleets/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/fleets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListFleets": {
+                          "requestType": "ListFleetsRequest",
+                          "responseType": "ListFleetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/fleets",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*/locations/*}/fleets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/fleets",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=organizations/*/locations/*}/fleets"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetScopeNamespace": {
+                          "requestType": "GetScopeNamespaceRequest",
+                          "responseType": "Namespace",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/scopes/*/namespaces/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/scopes/*/namespaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateScopeNamespace": {
+                          "requestType": "CreateScopeNamespaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/scopes/*}/namespaces",
+                            "(google.api.http).body": "scope_namespace",
+                            "(google.api.method_signature)": "parent,scope_namespace,scope_namespace_id",
+                            "(google.longrunning.operation_info).response_type": "Namespace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/scopes/*}/namespaces",
+                                "body": "scope_namespace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,scope_namespace,scope_namespace_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Namespace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateScopeNamespace": {
+                          "requestType": "UpdateScopeNamespaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{scope_namespace.name=projects/*/locations/*/scopes/*/namespaces/*}",
+                            "(google.api.http).body": "scope_namespace",
+                            "(google.api.method_signature)": "scope_namespace,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Namespace",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{scope_namespace.name=projects/*/locations/*/scopes/*/namespaces/*}",
+                                "body": "scope_namespace"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope_namespace,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Namespace",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteScopeNamespace": {
+                          "requestType": "DeleteScopeNamespaceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/scopes/*/namespaces/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/scopes/*/namespaces/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListScopeNamespaces": {
+                          "requestType": "ListScopeNamespacesRequest",
+                          "responseType": "ListScopeNamespacesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/scopes/*}/namespaces",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/scopes/*}/namespaces"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetScopeRBACRoleBinding": {
+                          "requestType": "GetScopeRBACRoleBindingRequest",
+                          "responseType": "RBACRoleBinding",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/scopes/*/rbacrolebindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/scopes/*/rbacrolebindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateScopeRBACRoleBinding": {
+                          "requestType": "CreateScopeRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/scopes/*}/rbacrolebindings",
+                            "(google.api.http).body": "rbacrolebinding",
+                            "(google.api.method_signature)": "parent,rbacrolebinding,rbacrolebinding_id",
+                            "(google.longrunning.operation_info).response_type": "RBACRoleBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/scopes/*}/rbacrolebindings",
+                                "body": "rbacrolebinding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,rbacrolebinding,rbacrolebinding_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RBACRoleBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateScopeRBACRoleBinding": {
+                          "requestType": "UpdateScopeRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{rbacrolebinding.name=projects/*/locations/*/scopes/*/rbacrolebindings/*}",
+                            "(google.api.http).body": "rbacrolebinding",
+                            "(google.api.method_signature)": "rbacrolebinding,update_mask",
+                            "(google.longrunning.operation_info).response_type": "RBACRoleBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{rbacrolebinding.name=projects/*/locations/*/scopes/*/rbacrolebindings/*}",
+                                "body": "rbacrolebinding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rbacrolebinding,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RBACRoleBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteScopeRBACRoleBinding": {
+                          "requestType": "DeleteScopeRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/scopes/*/rbacrolebindings/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/scopes/*/rbacrolebindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListScopeRBACRoleBindings": {
+                          "requestType": "ListScopeRBACRoleBindingsRequest",
+                          "responseType": "ListScopeRBACRoleBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/scopes/*}/rbacrolebindings",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/scopes/*}/rbacrolebindings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetScope": {
+                          "requestType": "GetScopeRequest",
+                          "responseType": "Scope",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/scopes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/scopes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateScope": {
+                          "requestType": "CreateScopeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/scopes",
+                            "(google.api.http).body": "scope",
+                            "(google.api.method_signature)": "parent,scope,scope_id",
+                            "(google.longrunning.operation_info).response_type": "Scope",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/scopes",
+                                "body": "scope"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,scope,scope_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Scope",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateScope": {
+                          "requestType": "UpdateScopeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{scope.name=projects/*/locations/*/scopes/*}",
+                            "(google.api.http).body": "scope",
+                            "(google.api.method_signature)": "scope,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Scope",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{scope.name=projects/*/locations/*/scopes/*}",
+                                "body": "scope"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Scope",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteScope": {
+                          "requestType": "DeleteScopeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/scopes/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/scopes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListScopes": {
+                          "requestType": "ListScopesRequest",
+                          "responseType": "ListScopesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/scopes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/scopes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListPermittedScopes": {
+                          "requestType": "ListPermittedScopesRequest",
+                          "responseType": "ListPermittedScopesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/scopes:listPermitted",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/scopes:listPermitted"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMembershipBinding": {
+                          "requestType": "GetMembershipBindingRequest",
+                          "responseType": "MembershipBinding",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/memberships/*/bindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/memberships/*/bindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateMembershipBinding": {
+                          "requestType": "CreateMembershipBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/memberships/*}/bindings",
+                            "(google.api.http).body": "membership_binding",
+                            "(google.api.method_signature)": "parent,membership_binding,membership_binding_id",
+                            "(google.longrunning.operation_info).response_type": "MembershipBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/memberships/*}/bindings",
+                                "body": "membership_binding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,membership_binding,membership_binding_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MembershipBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateMembershipBinding": {
+                          "requestType": "UpdateMembershipBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{membership_binding.name=projects/*/locations/*/memberships/*/bindings/*}",
+                            "(google.api.http).body": "membership_binding",
+                            "(google.api.method_signature)": "membership_binding,update_mask",
+                            "(google.longrunning.operation_info).response_type": "MembershipBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{membership_binding.name=projects/*/locations/*/memberships/*/bindings/*}",
+                                "body": "membership_binding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "membership_binding,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "MembershipBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMembershipBinding": {
+                          "requestType": "DeleteMembershipBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/memberships/*/bindings/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/memberships/*/bindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListMembershipBindings": {
+                          "requestType": "ListMembershipBindingsRequest",
+                          "responseType": "ListMembershipBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/memberships/*}/bindings",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/memberships/*}/bindings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetMembershipRBACRoleBinding": {
+                          "requestType": "GetMembershipRBACRoleBindingRequest",
+                          "responseType": "RBACRoleBinding",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/memberships/*/rbacrolebindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/memberships/*/rbacrolebindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateMembershipRBACRoleBinding": {
+                          "requestType": "CreateMembershipRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings",
+                            "(google.api.http).body": "rbacrolebinding",
+                            "(google.api.method_signature)": "parent,rbacrolebinding,rbacrolebinding_id",
+                            "(google.longrunning.operation_info).response_type": "RBACRoleBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings",
+                                "body": "rbacrolebinding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,rbacrolebinding,rbacrolebinding_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RBACRoleBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateMembershipRBACRoleBinding": {
+                          "requestType": "UpdateMembershipRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{rbacrolebinding.name=projects/*/locations/*/memberships/*/rbacrolebindings/*}",
+                            "(google.api.http).body": "rbacrolebinding",
+                            "(google.api.method_signature)": "rbacrolebinding,update_mask",
+                            "(google.longrunning.operation_info).response_type": "RBACRoleBinding",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{rbacrolebinding.name=projects/*/locations/*/memberships/*/rbacrolebindings/*}",
+                                "body": "rbacrolebinding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rbacrolebinding,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RBACRoleBinding",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteMembershipRBACRoleBinding": {
+                          "requestType": "DeleteMembershipRBACRoleBindingRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/memberships/*/rbacrolebindings/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/memberships/*/rbacrolebindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListMembershipRBACRoleBindings": {
+                          "requestType": "ListMembershipRBACRoleBindingsRequest",
+                          "responseType": "ListMembershipRBACRoleBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GenerateMembershipRBACRoleBindingYAML": {
+                          "requestType": "GenerateMembershipRBACRoleBindingYAMLRequest",
+                          "responseType": "GenerateMembershipRBACRoleBindingYAMLResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings:generateMembershipRBACRoleBindingYAML",
+                            "(google.api.http).body": "rbacrolebinding"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/memberships/*}/rbacrolebindings:generateMembershipRBACRoleBindingYAML",
+                                "body": "rbacrolebinding"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetScopeNamespaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Namespace"
+                          }
+                        }
+                      }
+                    },
+                    "CreateScopeNamespaceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Namespace"
+                          }
+                        },
+                        "scopeNamespaceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scopeNamespace": {
+                          "type": "Namespace",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateScopeNamespaceRequest": {
+                      "fields": {
+                        "scopeNamespace": {
+                          "type": "Namespace",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteScopeNamespaceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Namespace"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopeNamespacesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Namespace"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopeNamespacesResponse": {
+                      "fields": {
+                        "scopeNamespaces": {
+                          "rule": "repeated",
+                          "type": "Namespace",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetScopeRBACRoleBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        }
+                      }
+                    },
+                    "CreateScopeRBACRoleBindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        },
+                        "rbacrolebindingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rbacrolebinding": {
+                          "type": "RBACRoleBinding",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateScopeRBACRoleBindingRequest": {
+                      "fields": {
+                        "rbacrolebinding": {
+                          "type": "RBACRoleBinding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteScopeRBACRoleBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopeRBACRoleBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopeRBACRoleBindingsResponse": {
+                      "fields": {
+                        "rbacrolebindings": {
+                          "rule": "repeated",
+                          "type": "RBACRoleBinding",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetScopeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Scope"
+                          }
+                        }
+                      }
+                    },
+                    "CreateScopeRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "scopeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateScopeRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "Scope",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteScopeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Scope"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListScopesResponse": {
+                      "fields": {
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "Scope",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListPermittedScopesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListPermittedScopesResponse": {
+                      "fields": {
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "Scope",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetMembershipBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/MembershipBinding"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMembershipBindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/MembershipBinding"
+                          }
+                        },
+                        "membershipBinding": {
+                          "type": "MembershipBinding",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "membershipBindingId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMembershipBindingRequest": {
+                      "fields": {
+                        "membershipBinding": {
+                          "type": "MembershipBinding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMembershipBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/MembershipBinding"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembershipBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/MembershipBinding"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembershipBindingsResponse": {
+                      "fields": {
+                        "membershipBindings": {
+                          "rule": "repeated",
+                          "type": "MembershipBinding",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -4186,6 +6087,152 @@
                         }
                       }
                     },
+                    "GetMembershipRBACRoleBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMembershipRBACRoleBindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        },
+                        "rbacrolebindingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rbacrolebinding": {
+                          "type": "RBACRoleBinding",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMembershipRBACRoleBindingRequest": {
+                      "fields": {
+                        "rbacrolebinding": {
+                          "type": "RBACRoleBinding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMembershipRBACRoleBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembershipRBACRoleBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "gkehub.googleapis.com/RBACRoleBinding"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListMembershipRBACRoleBindingsResponse": {
+                      "fields": {
+                        "rbacrolebindings": {
+                          "rule": "repeated",
+                          "type": "RBACRoleBinding",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GenerateMembershipRBACRoleBindingYAMLRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
+                          }
+                        },
+                        "rbacrolebindingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rbacrolebinding": {
+                          "type": "RBACRoleBinding",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateMembershipRBACRoleBindingYAMLResponse": {
+                      "fields": {
+                        "roleBindingsYaml": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ListMembershipsResponse": {
                       "fields": {
                         "resources": {
@@ -4213,6 +6260,57 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "gkehub.googleapis.com/Membership"
                           }
+                        }
+                      }
+                    },
+                    "ListBoundMembershipsRequest": {
+                      "fields": {
+                        "scopeName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Scope"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListBoundMembershipsResponse": {
+                      "fields": {
+                        "memberships": {
+                          "rule": "repeated",
+                          "type": "Membership",
+                          "id": 1
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -4419,6 +6517,13 @@
                         "orderBy": {
                           "type": "string",
                           "id": 5
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4442,6 +6547,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.resource_reference).type": "gkehub.googleapis.com/Feature"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4511,6 +6623,106 @@
                         "requestId": {
                           "type": "string",
                           "id": 4
+                        }
+                      }
+                    },
+                    "CreateFleetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "fleet": {
+                          "type": "Fleet",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetFleetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Fleet"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFleetRequest": {
+                      "fields": {
+                        "fleet": {
+                          "type": "Fleet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFleetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gkehub.googleapis.com/Fleet"
+                          }
+                        }
+                      }
+                    },
+                    "ListFleetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFleetsResponse": {
+                      "fields": {
+                        "fleets": {
+                          "rule": "repeated",
+                          "type": "Fleet",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -4653,6 +6865,35 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    }
+                  }
+                },
+                "rbacrolebindingactuation": {
+                  "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.GkeHub.RbacRoleBindingActuation.V1",
+                        "go_package": "cloud.google.com/go/gkehub/rbacrolebindingactuation/apiv1/rbacrolebindingactuationpb;rbacrolebindingactuationpb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "RBACRoleBindingActuationProto",
+                        "java_package": "com.google.cloud.gkehub.rbacrolebindingactuation.v1",
+                        "php_namespace": "Google\\Cloud\\GkeHub\\RbacRoleBindingActuation\\V1",
+                        "ruby_package": "Google::Cloud::GkeHub::RbacRoleBindingActuation::V1"
+                      },
+                      "nested": {
+                        "FeatureSpec": {
+                          "fields": {
+                            "allowedCustomRoles": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "FeatureState": {
+                          "fields": {}
                         }
                       }
                     }

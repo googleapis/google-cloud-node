@@ -488,6 +488,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -518,6 +536,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -614,11 +634,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -631,72 +651,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -786,7 +743,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -894,6 +934,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -924,6 +982,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -1020,11 +1080,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -1037,72 +1097,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -1192,7 +1189,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1249,6 +1329,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -1279,6 +1377,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -1375,11 +1475,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -1392,72 +1492,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -1547,7 +1584,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1615,6 +1735,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -1645,6 +1783,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -1741,11 +1881,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -1758,72 +1898,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -1913,7 +1990,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2021,6 +2181,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -2051,6 +2229,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -2147,11 +2327,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -2164,72 +2344,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -2319,7 +2436,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -2376,6 +2576,24 @@ export class SearchServiceClient {
  *   documents under the default branch.
  * @param {string} request.query
  *   Raw search query.
+ * @param {string[]} [request.pageCategories]
+ *   Optional. The categories associated with a category page. Must be set for
+ *   category navigation queries to achieve good search quality. The format
+ *   should be the same as
+ *   {@link protos.google.cloud.discoveryengine.v1.PageInfo.page_category|PageInfo.page_category}.
+ *   This field is the equivalent of the query for browse (navigation) queries.
+ *   It's used by the browse model when the query is empty.
+ *
+ *   If the field is empty, it will not be used by the browse model.
+ *   If the field contains more than one element, only the first element will
+ *   be used.
+ *
+ *   To represent full path of a category, use '>' character to separate
+ *   different hierarchies. If '>' is part of the category name, replace it with
+ *   other character(s).
+ *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+ *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+ *   > Founders Edition`
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
  *   Raw image query.
  * @param {number} request.pageSize
@@ -2406,6 +2624,8 @@ export class SearchServiceClient {
  *   unset.
  *
  *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+ *
+ *   A large offset may be capped to a reasonable threshold.
  * @param {number} request.oneBoxPageSize
  *   The maximum number of results to return for OneBox.
  *   This applies to each OneBox type individually.
@@ -2502,11 +2722,11 @@ export class SearchServiceClient {
  * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
  *   The spell correction specification that specifies the mode under
  *   which spell correction takes effect.
- * @param {string} request.userPseudoId
- *   A unique identifier for tracking visitors. For example, this could be
- *   implemented with an HTTP cookie, which should be able to uniquely identify
- *   a visitor on a single device. This unique identifier should not change if
- *   the visitor logs in or out of the website.
+ * @param {string} [request.userPseudoId]
+ *   Optional. A unique identifier for tracking visitors. For example, this
+ *   could be implemented with an HTTP cookie, which should be able to uniquely
+ *   identify a visitor on a single device. This unique identifier should not
+ *   change if the visitor logs in or out of the website.
  *
  *   This field should NOT have a fixed value such as `unknown_visitor`.
  *
@@ -2519,72 +2739,9 @@ export class SearchServiceClient {
  *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
  * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
  *   A specification for configuring the behavior of content search.
- * @param {boolean} request.safeSearch
- *   Whether to turn on safe search. This is only supported for
- *   website search.
- * @param {number[]} request.userLabels
- *   The user labels applied to a resource must meet the following requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
- *   Search as you type configuration. Only supported for the
- *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
- *   vertical.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
- *   Optional. Config for display feature, like match highlighting on search
- *   results.
- * @param {string} request.session
- *   The session resource name. Optional.
- *
- *   Session allows users to do multi-turn /search API calls or coordination
- *   between /search API calls and /answer API calls.
- *
- *   Example #1 (multi-turn /search API calls):
- *     Call /search API with the session ID generated in the first call.
- *     Here, the previous search query gets considered in query
- *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
- *     and the current query is "How about 2023?", the current query will
- *     be interpreted as "How did Alphabet do in 2023?".
- *
- *   Example #2 (coordination between /search API calls and /answer API calls):
- *     Call /answer API with the session ID generated in the first call.
- *     Here, the answer generation happens in the context of the search
- *     results from the first search call.
- *
- *   Multi-turn Search feature is currently at private GA stage. Please use
- *   v1alpha or v1beta version instead before we launch this feature to public
- *   GA. Or ask for allowlisting through Google Support team.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
- *   Session specification.
- *
- *   Can be used only when `session` is set.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
- *   The relevance threshold of the search results.
- *
- *   Default to Google defined threshold, leveraging a balance of
- *   precision and recall to deliver both highly accurate results and
- *   comprehensive coverage of relevant information.
- *
- *   This feature is not supported for healthcare search.
- * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
- *   Optional. The specification for returning the relevance score.
- * @param {string} request.rankingExpression
- *   The ranking expression controls the customized ranking on retrieval
- *   documents. This overrides
+ * @param {string} [request.rankingExpression]
+ *   Optional. The ranking expression controls the customized ranking on
+ *   retrieval documents. This overrides
  *   {@link protos.google.cloud.discoveryengine.v1.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
  *   The syntax and supported features depend on the
  *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -2674,7 +2831,90 @@ export class SearchServiceClient {
  *     the document.
  *     * `base_rank`: the default rank of the result
  * @param {google.cloud.discoveryengine.v1.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
- *   The backend to use for the ranking expression evaluation.
+ *   Optional. The backend to use for the ranking expression evaluation.
+ * @param {boolean} request.safeSearch
+ *   Whether to turn on safe search. This is only supported for
+ *   website search.
+ * @param {number[]} request.userLabels
+ *   The user labels applied to a resource must meet the following requirements:
+ *
+ *   * Each resource can have multiple labels, up to a maximum of 64.
+ *   * Each label must be a key-value pair.
+ *   * Keys have a minimum length of 1 character and a maximum length of 63
+ *     characters and cannot be empty. Values can be empty and have a maximum
+ *     length of 63 characters.
+ *   * Keys and values can contain only lowercase letters, numeric characters,
+ *     underscores, and dashes. All characters must use UTF-8 encoding, and
+ *     international characters are allowed.
+ *   * The key portion of a label must be unique. However, you can use the same
+ *     key with multiple resources.
+ *   * Keys must start with a lowercase letter or international character.
+ *
+ *   See [Google Cloud
+ *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+ *   for more details.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+ *   Optional. Config for natural language query understanding capabilities,
+ *   such as extracting structured field filters from the query. Refer to [this
+ *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+ *   for more information.
+ *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+ *   natural language query understanding will be done.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+ *   Search as you type configuration. Only supported for the
+ *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+ *   vertical.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+ *   Optional. Config for display feature, like match highlighting on search
+ *   results.
+ * @param {number[]} [request.crowdingSpecs]
+ *   Optional. Crowding specifications for improving result diversity.
+ *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+ *   each unique combination of the `field` values, and max_count will be the
+ *   maximum value of `max_count` across all CrowdingSpecs.
+ *   For example, if the first CrowdingSpec has `field` = "color" and
+ *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+ *   `max_count` = 2, then after 3 documents that share the same color AND size
+ *   have been returned, subsequent ones should be
+ *   removed or demoted.
+ * @param {string} request.session
+ *   The session resource name. Optional.
+ *
+ *   Session allows users to do multi-turn /search API calls or coordination
+ *   between /search API calls and /answer API calls.
+ *
+ *   Example #1 (multi-turn /search API calls):
+ *     Call /search API with the session ID generated in the first call.
+ *     Here, the previous search query gets considered in query
+ *     standing. I.e., if the first query is "How did Alphabet do in 2022?"
+ *     and the current query is "How about 2023?", the current query will
+ *     be interpreted as "How did Alphabet do in 2023?".
+ *
+ *   Example #2 (coordination between /search API calls and /answer API calls):
+ *     Call /answer API with the session ID generated in the first call.
+ *     Here, the answer generation happens in the context of the search
+ *     results from the first search call.
+ *
+ *   Multi-turn Search feature is currently at private GA stage. Please use
+ *   v1alpha or v1beta version instead before we launch this feature to public
+ *   GA. Or ask for allowlisting through Google Support team.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.SessionSpec} request.sessionSpec
+ *   Session specification.
+ *
+ *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The global relevance threshold of the search results.
+ *
+ *   Defaults to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
+ *
+ *   If more granular relevance filtering is required, use the
+ *   `relevance_filter_spec` instead.
+ *
+ *   This feature is not supported for healthcare search.
+ * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+ *   Optional. The specification for returning the relevance score.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

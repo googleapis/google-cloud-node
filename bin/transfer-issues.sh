@@ -1,15 +1,17 @@
 #!/bin/bash
 
-# Usage: ./transfer_issues.sh source-owner/repo dest-owner/repo assignee label
+# Usage: ./transfer_issues.sh source-owner/repo dest-owner/repo label
 SOURCE_REPO=$1
 DEST_REPO=$2
 LABEL=$3
-ASSIGNEE=$4
 
 if [ -z "$SOURCE_REPO" ] || [ -z "$DEST_REPO" ] || [ -z "$LABEL" ]; then
-    echo "Usage: $0 <source-owner/repo> <dest-owner/repo> <label> [assignee]"
+    echo "Usage: $0 <source-owner/repo> <dest-owner/repo> <label>"
     exit 1
 fi
+
+
+
 
 # Create the label if it doesn't exist
 echo "Checking for label '$LABEL' in $DEST_REPO..."
@@ -23,30 +25,18 @@ ISSUE_NUMBERS=$(gh issue list -R "$SOURCE_REPO" --state open --json number --jq 
 for NUMBER in $ISSUE_NUMBERS; do
     echo "Processing Issue #$NUMBER..."
 
-    # Extract title and body
-    DATA=$(gh issue view "$NUMBER" -R "$SOURCE_REPO" --json title,body)
-    TITLE=$(echo "$DATA" | jq -r '.title')
-    BODY=$(echo "$DATA" | jq -r '.body')
+    TRANSFER_OUTPUT=$(gh issue transfer "$NUMBER" -R "$SOURCE_REPO" "$DEST_REPO")
+    NEW_ISSUE_NUMBER=$(echo "$TRANSFER_OUTPUT" | grep -o -E '\/issues\/[0-9]+' | tail -1 | grep -o -E '[0-9]+')
 
-    ENHANCED_BODY=$(printf "%s\n\n---\n*Originally authored in $SOURCE_REPO as Issue #$NUMBER*")
-
-    # Create the issue with the assignee and label
-    # Build arguments for gh issue create
-    CREATE_ARGS=(
-        -R "$DEST_REPO"
-        --title "$TITLE" \
-        --body "$ENHANCED_BODY" \
-        --label "$LABEL" \
-    )
-    if [ -n "$ASSIGNEE" ]; then
-        CREATE_ARGS+=(--assignee "$ASSIGNEE")
+    if [ -z "$NEW_ISSUE_NUMBER" ]; then
+        echo "Error: Could not determine new issue number after transfer for Issue #$NUMBER. Skipping labeling."
+        echo "$TRANSFER_OUTPUT"
+        continue
     fi
 
-    # Create the issue
-    gh issue create "${CREATE_ARGS[@]}"
-        
-    
-    echo "Successfully transferred: $TITLE"
+    echo "Issue #$NUMBER transferred to $DEST_REPO as #$NEW_ISSUE_NUMBER. Adding label '$LABEL'..."
+    gh issue edit "$NEW_ISSUE_NUMBER" -R "$DEST_REPO" --add-label "$LABEL"
+    echo "Successfully transferred and labeled Issue #$NUMBER (new #$NEW_ISSUE_NUMBER) with '$LABEL'"
 done
 
 echo "Transfer complete."

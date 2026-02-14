@@ -66,7 +66,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 88,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -82,6 +82,10 @@
           {
             "name": "sev_snp_attestation",
             "type": ".google.cloud.confidentialcomputing.v1.SevSnpAttestation"
+          },
+          {
+            "name": "nvidia_attestation",
+            "type": ".google.cloud.confidentialcomputing.v1.NvidiaAttestation"
           },
           {
             "name": "challenge",
@@ -134,7 +138,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -170,6 +174,10 @@
           {
             "name": "options",
             "type": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions"
+          },
+          {
+            "name": "nvidia_attestation",
+            "type": ".google.cloud.confidentialcomputing.v1.NvidiaAttestation"
           }
         ],
         "resultType": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse",
@@ -198,7 +206,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 64,
           "type": "FULL"
         }
       ],
@@ -214,6 +222,10 @@
           {
             "name": "challenge",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeRequest.ConfidentialGkeOptions"
           }
         ],
         "resultType": ".google.cloud.confidentialcomputing.v1.VerifyConfidentialGkeResponse",

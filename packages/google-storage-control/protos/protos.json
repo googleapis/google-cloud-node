@@ -143,6 +143,36 @@
                             }
                           ]
                         },
+                        "DeleteFolderRecursive": {
+                          "requestType": "DeleteFolderRecursiveRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{bucket=projects/*/buckets/*}/**",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteFolderRecursiveMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{bucket=projects/*/buckets/*}/**"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteFolderRecursiveMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetStorageLayout": {
                           "requestType": "GetStorageLayoutRequest",
                           "responseType": "StorageLayout",
@@ -944,6 +974,54 @@
                         }
                       }
                     },
+                    "DeleteFolderRecursiveRequest": {
+                      "oneofs": {
+                        "_ifMetagenerationMatch": {
+                          "oneof": [
+                            "ifMetagenerationMatch"
+                          ]
+                        },
+                        "_ifMetagenerationNotMatch": {
+                          "oneof": [
+                            "ifMetagenerationNotMatch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "storage.googleapis.com/Folder"
+                          }
+                        },
+                        "ifMetagenerationMatch": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "ifMetagenerationNotMatch": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "CommonLongRunningOperationMetadata": {
                       "fields": {
                         "createTime": {
@@ -1003,6 +1081,18 @@
                         "destinationFolderId": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "DeleteFolderRecursiveMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonLongRunningOperationMetadata",
+                          "id": 1
+                        },
+                        "folderId": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
