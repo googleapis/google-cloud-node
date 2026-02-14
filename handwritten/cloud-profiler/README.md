@@ -32,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -53,16 +53,6 @@ npm install @google-cloud/profiler
 ```
 
 
-
-
-## Samples
-
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler/samples) directory. Each sample's `README.md` has instructions for running its sample.
-
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| App | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/cloud-profiler/samples/app.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/cloud-profiler/samples/app.js,handwritten/cloud-profiler/samples/README.md) |
-| Snippets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/cloud-profiler/samples/snippets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/cloud-profiler/samples/snippets.js,handwritten/cloud-profiler/samples/README.md) |
 
 
 
