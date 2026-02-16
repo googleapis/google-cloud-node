@@ -3527,8 +3527,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             return null;
@@ -3741,13 +3747,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             return message;
@@ -4845,8 +4875,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
@@ -5163,13 +5199,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.attestation != null) {
@@ -5355,8 +5415,14 @@
                          * @property {number} ML_KEM_768=47 ML_KEM_768 value
                          * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
                          * @property {number} KEM_XWING=63 KEM_XWING value
+                         * @property {number} PQ_SIGN_ML_DSA_44=68 PQ_SIGN_ML_DSA_44 value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
+                         * @property {number} PQ_SIGN_ML_DSA_87=69 PQ_SIGN_ML_DSA_87 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
+                         * @property {number} PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256=60 PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 value
+                         * @property {number} PQ_SIGN_ML_DSA_44_EXTERNAL_MU=70 PQ_SIGN_ML_DSA_44_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_65_EXTERNAL_MU=67 PQ_SIGN_ML_DSA_65_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_87_EXTERNAL_MU=71 PQ_SIGN_ML_DSA_87_EXTERNAL_MU value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5399,8 +5465,14 @@
                             values[valuesById[47] = "ML_KEM_768"] = 47;
                             values[valuesById[48] = "ML_KEM_1024"] = 48;
                             values[valuesById[63] = "KEM_XWING"] = 63;
+                            values[valuesById[68] = "PQ_SIGN_ML_DSA_44"] = 68;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
+                            values[valuesById[69] = "PQ_SIGN_ML_DSA_87"] = 69;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
+                            values[valuesById[60] = "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256"] = 60;
+                            values[valuesById[70] = "PQ_SIGN_ML_DSA_44_EXTERNAL_MU"] = 70;
+                            values[valuesById[67] = "PQ_SIGN_ML_DSA_65_EXTERNAL_MU"] = 67;
+                            values[valuesById[71] = "PQ_SIGN_ML_DSA_87_EXTERNAL_MU"] = 71;
                             return values;
                         })();
     
@@ -5965,8 +6037,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.pemCrc32c != null && message.hasOwnProperty("pemCrc32c")) {
@@ -6185,13 +6263,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.pemCrc32c != null) {

@@ -1800,8 +1800,14 @@ export namespace google {
                         ML_KEM_768 = 47,
                         ML_KEM_1024 = 48,
                         KEM_XWING = 63,
+                        PQ_SIGN_ML_DSA_44 = 68,
                         PQ_SIGN_ML_DSA_65 = 56,
-                        PQ_SIGN_SLH_DSA_SHA2_128S = 57
+                        PQ_SIGN_ML_DSA_87 = 69,
+                        PQ_SIGN_SLH_DSA_SHA2_128S = 57,
+                        PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
+                        PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
+                        PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
                     }
 
                     /** CryptoKeyVersionState enum. */
