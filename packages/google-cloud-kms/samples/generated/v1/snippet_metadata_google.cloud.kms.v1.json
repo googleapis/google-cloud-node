@@ -155,7 +155,7 @@
       "regionTag": "cloudkms_v1_generated_AutokeyAdmin_UpdateAutokeyConfig_async",
       "title": "Autokey updateAutokeyConfig Sample",
       "origin": "API_DEFINITION",
-      "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder or a project. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
       "canonical": true,
       "file": "autokey_admin.update_autokey_config.js",
       "language": "JAVASCRIPT",
@@ -199,14 +199,14 @@
       "regionTag": "cloudkms_v1_generated_AutokeyAdmin_GetAutokeyConfig_async",
       "title": "Autokey getAutokeyConfig Sample",
       "origin": "API_DEFINITION",
-      "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder.",
+      "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder or project.",
       "canonical": true,
       "file": "autokey_admin.get_autokey_config.js",
       "language": "JAVASCRIPT",
       "segments": [
         {
           "start": 25,
-          "end": 54,
+          "end": 55,
           "type": "FULL"
         }
       ],

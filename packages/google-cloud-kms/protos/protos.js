@@ -2204,6 +2204,7 @@
                          * @property {string|null} [keyProject] AutokeyConfig keyProject
                          * @property {google.cloud.kms.v1.AutokeyConfig.State|null} [state] AutokeyConfig state
                          * @property {string|null} [etag] AutokeyConfig etag
+                         * @property {google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|null} [keyProjectResolutionMode] AutokeyConfig keyProjectResolutionMode
                          */
     
                         /**
@@ -2254,6 +2255,14 @@
                         AutokeyConfig.prototype.etag = "";
     
                         /**
+                         * AutokeyConfig keyProjectResolutionMode.
+                         * @member {google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode} keyProjectResolutionMode
+                         * @memberof google.cloud.kms.v1.AutokeyConfig
+                         * @instance
+                         */
+                        AutokeyConfig.prototype.keyProjectResolutionMode = 0;
+    
+                        /**
                          * Creates a new AutokeyConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AutokeyConfig
@@ -2285,6 +2294,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            if (message.keyProjectResolutionMode != null && Object.hasOwnProperty.call(message, "keyProjectResolutionMode"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.keyProjectResolutionMode);
                             return writer;
                         };
     
@@ -2337,6 +2348,10 @@
                                         message.etag = reader.string();
                                         break;
                                     }
+                                case 8: {
+                                        message.keyProjectResolutionMode = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2386,11 +2401,22 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.keyProjectResolutionMode != null && message.hasOwnProperty("keyProjectResolutionMode"))
+                                switch (message.keyProjectResolutionMode) {
+                                default:
+                                    return "keyProjectResolutionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2433,9 +2459,37 @@
                             case 3:
                                 message.state = 3;
                                 break;
+                            case "KEY_PROJECT_PERMISSION_DENIED":
+                            case 4:
+                                message.state = 4;
+                                break;
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.keyProjectResolutionMode) {
+                            default:
+                                if (typeof object.keyProjectResolutionMode === "number") {
+                                    message.keyProjectResolutionMode = object.keyProjectResolutionMode;
+                                    break;
+                                }
+                                break;
+                            case "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.keyProjectResolutionMode = 0;
+                                break;
+                            case "DEDICATED_KEY_PROJECT":
+                            case 1:
+                                message.keyProjectResolutionMode = 1;
+                                break;
+                            case "RESOURCE_PROJECT":
+                            case 2:
+                                message.keyProjectResolutionMode = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.keyProjectResolutionMode = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2457,6 +2511,7 @@
                                 object.keyProject = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.etag = "";
+                                object.keyProjectResolutionMode = options.enums === String ? "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2466,6 +2521,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] : message.state;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.keyProjectResolutionMode != null && message.hasOwnProperty("keyProjectResolutionMode"))
+                                object.keyProjectResolutionMode = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode[message.keyProjectResolutionMode] === undefined ? message.keyProjectResolutionMode : $root.google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode[message.keyProjectResolutionMode] : message.keyProjectResolutionMode;
                             return object;
                         };
     
@@ -2503,6 +2560,7 @@
                          * @property {number} ACTIVE=1 ACTIVE value
                          * @property {number} KEY_PROJECT_DELETED=2 KEY_PROJECT_DELETED value
                          * @property {number} UNINITIALIZED=3 UNINITIALIZED value
+                         * @property {number} KEY_PROJECT_PERMISSION_DENIED=4 KEY_PROJECT_PERMISSION_DENIED value
                          */
                         AutokeyConfig.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2510,6 +2568,25 @@
                             values[valuesById[1] = "ACTIVE"] = 1;
                             values[valuesById[2] = "KEY_PROJECT_DELETED"] = 2;
                             values[valuesById[3] = "UNINITIALIZED"] = 3;
+                            values[valuesById[4] = "KEY_PROJECT_PERMISSION_DENIED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * KeyProjectResolutionMode enum.
+                         * @name google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode
+                         * @enum {number}
+                         * @property {number} KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED=0 KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED value
+                         * @property {number} DEDICATED_KEY_PROJECT=1 DEDICATED_KEY_PROJECT value
+                         * @property {number} RESOURCE_PROJECT=2 RESOURCE_PROJECT value
+                         * @property {number} DISABLED=3 DISABLED value
+                         */
+                        AutokeyConfig.KeyProjectResolutionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEDICATED_KEY_PROJECT"] = 1;
+                            values[valuesById[2] = "RESOURCE_PROJECT"] = 2;
+                            values[valuesById[3] = "DISABLED"] = 3;
                             return values;
                         })();
     
@@ -16222,8 +16299,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             return null;
@@ -16436,13 +16519,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             return message;
@@ -17540,8 +17647,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
@@ -17858,13 +17971,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.attestation != null) {
@@ -18050,8 +18187,14 @@
                          * @property {number} ML_KEM_768=47 ML_KEM_768 value
                          * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
                          * @property {number} KEM_XWING=63 KEM_XWING value
+                         * @property {number} PQ_SIGN_ML_DSA_44=68 PQ_SIGN_ML_DSA_44 value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
+                         * @property {number} PQ_SIGN_ML_DSA_87=69 PQ_SIGN_ML_DSA_87 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
+                         * @property {number} PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256=60 PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 value
+                         * @property {number} PQ_SIGN_ML_DSA_44_EXTERNAL_MU=70 PQ_SIGN_ML_DSA_44_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_65_EXTERNAL_MU=67 PQ_SIGN_ML_DSA_65_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_87_EXTERNAL_MU=71 PQ_SIGN_ML_DSA_87_EXTERNAL_MU value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -18094,8 +18237,14 @@
                             values[valuesById[47] = "ML_KEM_768"] = 47;
                             values[valuesById[48] = "ML_KEM_1024"] = 48;
                             values[valuesById[63] = "KEM_XWING"] = 63;
+                            values[valuesById[68] = "PQ_SIGN_ML_DSA_44"] = 68;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
+                            values[valuesById[69] = "PQ_SIGN_ML_DSA_87"] = 69;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
+                            values[valuesById[60] = "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256"] = 60;
+                            values[valuesById[70] = "PQ_SIGN_ML_DSA_44_EXTERNAL_MU"] = 70;
+                            values[valuesById[67] = "PQ_SIGN_ML_DSA_65_EXTERNAL_MU"] = 67;
+                            values[valuesById[71] = "PQ_SIGN_ML_DSA_87_EXTERNAL_MU"] = 71;
                             return values;
                         })();
     
@@ -18660,8 +18809,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.pemCrc32c != null && message.hasOwnProperty("pemCrc32c")) {
@@ -18880,13 +19035,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.pemCrc32c != null) {
@@ -27517,8 +27696,14 @@
                                 case 47:
                                 case 48:
                                 case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.importJob != null && message.hasOwnProperty("importJob"))
@@ -27714,13 +27899,37 @@
                             case 63:
                                 message.algorithm = 63;
                                 break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.importJob != null)

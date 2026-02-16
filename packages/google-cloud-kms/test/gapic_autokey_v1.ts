@@ -1481,36 +1481,6 @@ describe('v1.AutokeyClient', () => {
 
     describe('Path templates', () => {
 
-        describe('autokeyConfig', async () => {
-            const fakePath = "/rendered/path/autokeyConfig";
-            const expectedParameters = {
-                folder: "folderValue",
-            };
-            const client = new autokeyModule.v1.AutokeyClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.autokeyConfigPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.autokeyConfigPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('autokeyConfigPath', () => {
-                const result = client.autokeyConfigPath("folderValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.autokeyConfigPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchFolderFromAutokeyConfigName', () => {
-                const result = client.matchFolderFromAutokeyConfigName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.autokeyConfigPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
         describe('cryptoKey', async () => {
             const fakePath = "/rendered/path/cryptoKey";
             const expectedParameters = {
@@ -1711,6 +1681,36 @@ describe('v1.AutokeyClient', () => {
             });
         });
 
+        describe('folderAutokeyConfig', async () => {
+            const fakePath = "/rendered/path/folderAutokeyConfig";
+            const expectedParameters = {
+                folder: "folderValue",
+            };
+            const client = new autokeyModule.v1.AutokeyClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.folderAutokeyConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.folderAutokeyConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('folderAutokeyConfigPath', () => {
+                const result = client.folderAutokeyConfigPath("folderValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.folderAutokeyConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchFolderFromFolderAutokeyConfigName', () => {
+                const result = client.matchFolderFromFolderAutokeyConfigName(fakePath);
+                assert.strictEqual(result, "folderValue");
+                assert((client.pathTemplates.folderAutokeyConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('importJob', async () => {
             const fakePath = "/rendered/path/importJob";
             const expectedParameters = {
@@ -1891,6 +1891,36 @@ describe('v1.AutokeyClient', () => {
                 const result = client.matchLocationFromLocationName(fakePath);
                 assert.strictEqual(result, "locationValue");
                 assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectAutokeyConfig', async () => {
+            const fakePath = "/rendered/path/projectAutokeyConfig";
+            const expectedParameters = {
+                project: "projectValue",
+            };
+            const client = new autokeyModule.v1.AutokeyClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.projectAutokeyConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectAutokeyConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectAutokeyConfigPath', () => {
+                const result = client.projectAutokeyConfigPath("projectValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectAutokeyConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectAutokeyConfigName', () => {
+                const result = client.matchProjectFromProjectAutokeyConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectAutokeyConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
