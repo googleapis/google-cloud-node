@@ -179860,7 +179860,6 @@
                                     case 0:
                                     case 1:
                                     case 2:
-                                    case 3:
                                         break;
                                     }
                                 return null;
@@ -179913,10 +179912,6 @@
                                 case "DETECT_INTENT_RESPONSE_VIEW_BASIC":
                                 case 2:
                                     message.responseView = 2;
-                                    break;
-                                case "DETECT_INTENT_RESPONSE_VIEW_DEFAULT":
-                                case 3:
-                                    message.responseView = 3;
                                     break;
                                 }
                                 return message;
@@ -180618,7 +180613,6 @@
                                     case 0:
                                     case 1:
                                     case 2:
-                                    case 3:
                                         break;
                                     }
                                 return null;
@@ -180675,10 +180669,6 @@
                                 case "DETECT_INTENT_RESPONSE_VIEW_BASIC":
                                 case 2:
                                     message.responseView = 2;
-                                    break;
-                                case "DETECT_INTENT_RESPONSE_VIEW_DEFAULT":
-                                case 3:
-                                    message.responseView = 3;
                                     break;
                                 }
                                 return message;
@@ -189403,14 +189393,12 @@
                          * @property {number} DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED=0 DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED value
                          * @property {number} DETECT_INTENT_RESPONSE_VIEW_FULL=1 DETECT_INTENT_RESPONSE_VIEW_FULL value
                          * @property {number} DETECT_INTENT_RESPONSE_VIEW_BASIC=2 DETECT_INTENT_RESPONSE_VIEW_BASIC value
-                         * @property {number} DETECT_INTENT_RESPONSE_VIEW_DEFAULT=3 DETECT_INTENT_RESPONSE_VIEW_DEFAULT value
                          */
                         v3beta1.DetectIntentResponseView = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DETECT_INTENT_RESPONSE_VIEW_FULL"] = 1;
                             values[valuesById[2] = "DETECT_INTENT_RESPONSE_VIEW_BASIC"] = 2;
-                            values[valuesById[3] = "DETECT_INTENT_RESPONSE_VIEW_DEFAULT"] = 3;
                             return values;
                         })();
     

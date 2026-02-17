@@ -77721,8 +77721,7 @@ export namespace google {
                     enum DetectIntentResponseView {
                         DETECT_INTENT_RESPONSE_VIEW_UNSPECIFIED = 0,
                         DETECT_INTENT_RESPONSE_VIEW_FULL = 1,
-                        DETECT_INTENT_RESPONSE_VIEW_BASIC = 2,
-                        DETECT_INTENT_RESPONSE_VIEW_DEFAULT = 3
+                        DETECT_INTENT_RESPONSE_VIEW_BASIC = 2
                     }
 
                     /** Represents an Examples */
