@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.2.1...dataproc-v6.3.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+* [dataproc] Add `ClusterType` to support creating Zero-Scale clusters ([#7252](https://github.com/googleapis/google-cloud-node/issues/7252)) ([d0d345d](https://github.com/googleapis/google-cloud-node/commit/d0d345d819685831cbb5ca8854147c1486224038))
+
 ## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.2.0...dataproc-v6.2.1) (2025-10-13)
 
 

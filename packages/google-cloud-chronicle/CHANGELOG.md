@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.1...chronicle-v0.3.0) (2026-02-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20251031 ([#6920](https://github.com/googleapis/google-cloud-node/issues/6920)) ([95f3adb](https://github.com/googleapis/google-cloud-node/commit/95f3adb6308c65eb000f841cc05460a8979a9d4f))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.0...chronicle-v0.2.1) (2025-10-13)
 
 
